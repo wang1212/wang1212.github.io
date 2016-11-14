@@ -3,7 +3,7 @@ $(function() {
 	$('body')
 		.prepend($('<div id="progress-bar"></div>'))
 		.append($('<footer class="page-footer"><div class="container"><div class="row"><div class="col-md-4 visible-md-block visible-lg-block"><img class ="img-rounded img-responsive pull-right" src="/source/images/head.png" alt="head" /></div><div class="col-md-6 text-center"><p class="lead">越努力，越幸运！</p><p>Mr.Wang（不如怀念）</p><p>E-Mail：wangyuan230@163.com</p></div></div></div></footer>'))
-		.append($('<div id="to-top"><span class="fa fa-arrow-up"></span></div>'));
+		.append($('<nav id="foot-nav"><div id="to-top" style="display:none"><a href="#" class="fa fa-arrow-up"></a></div><div><a href="##" class="fa fa-home"></a></div></nav>'));
 	// 自动添加右侧导航框架
 	$('<div id="side-bar" class="col-md-3 visible-md-block visible-lg-block"></div>').appendTo($('body>.container>.row'));
 
@@ -85,14 +85,8 @@ $(function() {
 			'top': Math.max(w_scrollTop + 10, $('#side-bar').parent().offset().top + 10)
 		});
 
-		// 回到顶部
+		// 回到顶部自动隐藏
 		w_scrollTop > $self.height() ? $top.show(1000) : $top.hide(1000)
 
 	});
-
-	// 回到顶部
-	$top.on('click', function() {
-		$(window).scrollTop("0");
-	});
-
 });
