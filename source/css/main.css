@@ -74,6 +74,10 @@ footer img {
 	float: right;
 	margin-left: 10px;
 	cursor: pointer;
+	opacity: 0.5;
+}
+#foot-nav  div:hover {
+	opacity: 1;
 }
 #foot-nav a,#foot-nav a:hover {
 	color: white;
