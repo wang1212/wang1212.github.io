@@ -2,7 +2,7 @@ $(function() {
 	// 自动添加顶部进度条、footer、TOP
 	$('body')
 		.prepend($('<div id="progress-bar"></div>'))
-		.append($('<footer class="page-footer"><div class="container"><div class="row"><div class="col-md-4 visible-md-block visible-lg-block"><img class ="img-rounded img-responsive pull-right" src="/source/images/head.png" alt="" /></div><div class="col-md-6 text-center"><p class="lead">越努力，越幸运！</p><p>Mr.Wang（不如怀念）</p><p>E-Mail：wangyuan230@163.com</p></div></div></div></footer>'))
+		.append($('<footer class="page-footer"><div class="container"><div class="row"><div class="col-md-4 visible-md-block visible-lg-block"><img class ="img-rounded img-responsive pull-right" src="/source/images/head.png" alt="head" /></div><div class="col-md-6 text-center"><p class="lead">越努力，越幸运！</p><p>Mr.Wang（不如怀念）</p><p>E-Mail：wangyuan230@163.com</p></div></div></div></footer>'))
 		.append($('<div id="to-top">Top</div>'));
 	// 自动添加右侧导航框架
 	$('<div id="side-bar" class="col-md-3 visible-md-block visible-lg-block"></div>').appendTo($('body>.container>.row'));
