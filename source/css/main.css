@@ -9,15 +9,18 @@ footer img {
 	height: 120px;
 	margin-bottom: 20px;
 }
+pre {
+	font-size: 80%;
+}
 
 .head-indent {
 	text-indent: 2em;
 }
 
-.page-header {
-	color: white;
-	background-color: black;
+.jumbotron {
+	padding-bottom: 1rem;
 }
+
 .page-footer {
 	border-top: 1px solid gray;
 	padding: 19px 0px 20px;

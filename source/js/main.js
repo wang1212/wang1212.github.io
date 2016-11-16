@@ -2,10 +2,10 @@ $(function() {
 	// 自动添加顶部进度条、footer、TOP
 	$('body')
 		.prepend($('<div id="progress-bar"></div>'))
-		.append($('<footer class="page-footer"><div class="container"><div class="row"><div class="col-sm-2 col-sm-offset-2"><img class ="img-rounded img-responsive center-block" src="/source/images/head.png" alt="head" /></div><div class="col-sm-4 text-center"><p class="lead">越努力，越幸运！</p><p>Mr.Wang（不如怀念）</p><p>E-mail：wangyuan230@163.com</p></div></div></div></footer>'))
+		.append($('<footer class="page-footer"><div class="container"><div class="row"><div class="col-sm-2 offset-sm-2 text-xs-center"><img class = "rounded img-responsive" src="/source/images/head.png" alt="head" /></div><div class="col-sm-4 text-center"><p class="lead">越努力，越幸运！</p><p>Mr.Wang（不如怀念）</p><p>E-mail：wangyuan230@163.com</p></div></div></div></footer>'))
 		.append($('<nav id="foot-nav"><div id="to-top" style="display:none"><a href="#" class="fa fa-arrow-up"></a></div><div><a href="/" class="fa fa-home"></a></div><div><a href="/categories/" class="fa fa-list"></a></div><div><a href="./" class="fa fa-navicon"></a></div></nav>'));
 	// 自动添加右侧导航框架
-	$('<div id="side-bar" class="col-md-3 visible-md-block visible-lg-block"></div>').appendTo($('body>.container>.row'));
+	$('<div id="side-bar" class="col-md-3 hidden-sm-down"></div>').appendTo($('body>.container>.row'));
 
 	var $p_bar = $('#progress-bar'),
 		$s_bar = $('#side-bar'),
