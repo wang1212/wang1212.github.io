@@ -9,21 +9,23 @@
 	<link rel="stylesheet" href="/source/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/source/css/font-awesome.min.css">
 	<style>
+		html {
+			height: 100%;
+		}
 		body {
 			font-family: "FontAwesome", Helvetica,Tahoma,Arial,"Microsoft YaHei","华文细黑",sans-serif;
+			height: 100%;
+			background: url(/source/images/bg.jpg) no-repeat;
+			background-position: top center;
+			background-attachment: fixed;
+			background-size: cover cover;
+			padding-bottom: 2.5rem;			
 		}
 		.head-indent {
 			text-indent: 2rem;
 		}
 		.row {
 			margin-bottom: 4rem;
-		}
-		#bg {
-			background: url(/source/images/bg.jpg) no-repeat;
-			background-position: top center;
-			background-attachment: fixed;
-			background-size: cover cover;
-			padding-bottom: 2.5rem;
 		}
 		#info {
 			font-size: 1.25rem;
@@ -41,7 +43,7 @@
 		}
 	</style>
 </head>
-<body id="bg" class="text-xs-center text-white">
+<body class="text-xs-center text-white">
 	<div class="container">
 		<div class="hidden-sm-down" style="height: 5rem;"></div>
 		<div class="hidden-md-up" style="height: 2rem;"></div>
