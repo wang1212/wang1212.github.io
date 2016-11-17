@@ -3,7 +3,7 @@ $(function() {
 	$('body')
 		.prepend($('<div id="progress-bar"></div>'))
 		.append($('<footer class="page-footer"><div class="container"><div class="row"><div class="col-sm-2 offset-sm-2 text-xs-center"><img class = "rounded" src="/source/images/head.jpg" alt="head" /></div><div class="col-sm-4 text-xs-center"><p class="lead">越努力，越幸运！</p><p>Mr.Wang（不如怀念）</p><p>E-mail：wangyuan230@163.com</p></div></div></div></footer>'))
-		.append($('<nav id="foot-nav"><div id="to-top" style="display:none"><a href="#" class="fa fa-arrow-up"></a></div><div><a href="/" class="fa fa-home"></a></div><div><a href="/categories/" class="fa fa-list"></a></div><div><a href="./" class="fa fa-navicon"></a></div></nav>'));
+		.append($('<nav id="foot-nav"><div id="to-top" style="display:none"><a href="#" class="fa fa-arrow-up"></a></div><div><a href="/" class="fa fa-home"></a></div><div><a href="/categories/" class="fa fa-list-alt"></a></div><div><a href="./" class="fa fa-th-list"></a></div></nav>'));
 	// 自动添加右侧导航框架
 	$('<div id="side-bar" class="col-md-3 hidden-sm-down"></div>').appendTo($('body>.container>.row'));
 
