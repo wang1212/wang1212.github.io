@@ -23,7 +23,10 @@
 				Linux 是一个优秀的开发环境，大多数服务器都在上面部署。作为一个程序员，熟悉Linux 系统的常用操作也是很必要的。在 linux 内核外，shell 提供了我们程序员（用户）与内核之间的交互媒介，shell 可以说是一个命令解释器，当然它也负责将内核输出信息翻译给程序员。
 			</p>
 			<hr />
-			<p><span class="tag tag-pill tag-success">发表于 2016-11-11</span></p>
+			<p>
+				<span id="time" class="tag tag-pill tag-success">发表于 2016-11-11</span>
+				<span id="categories" class="tag tag-pill tag-success">分类 Linux</span>
+			</p>
 		</div>
 	</header>
 	<div class="container">
@@ -450,6 +453,11 @@ lsmod  // 查看加载的模块（驱动）</code></pre>
 
 	<script src="/source/js/jquery-3.1.0.min.js"></script>
 	<script src="/source/js/prism.js"></script>
-	<script src="/source/js/main.js"></script>	
+	<script src="/source/js/main.js"></script>
+	<script>
+		$.getJSON('/source/json/categories.json',function(data){
+			console.log(data);
+		});
+	</script>
 </body>
 </html>

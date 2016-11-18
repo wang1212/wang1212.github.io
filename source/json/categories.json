@@ -1,0 +1,20 @@
+{
+	"Linux": [{
+		"time": "2016-11-19",
+		"title": "命令-Linux-shell",
+		"path": "/categories/linux/命令-Linux-shell.txt"
+	}, {
+		"time": "2016-11-11",
+		"title": "Linux-常用Shell命令",
+		"path": "/categories/linux/cmd-linux.html"
+	}, {
+		"time": "2016-11-08",
+		"title": "Linux-Vim编辑器命令",
+		"path": "/categories/linux/cmd-vim.html"
+	}],
+	"Ruby": [{
+		"time": "2016-11-19",
+		"title": "ruby",
+		"path": "/categories/ruby/ruby.html"
+	}]
+}
