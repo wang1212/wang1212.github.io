@@ -3,7 +3,7 @@ $(function() {
 	$('body')
 		.prepend($('<div id="progress-bar"></div>'))
 		.append($('<footer class="page-footer"><div class="container"><div class="row text-xs-center"><div class="col-md-2 offset-md-2"><img class="rounded" src="/source/images/head.jpg" alt="head" /></div><div class="col-md-4"><p class="lead">越努力，越幸运！</p><p>Mr.Wang（不如怀念）</p><p>E-mail：wangyuan230@163.com</p></div></div></div></footer>'))
-		.append($('<nav id="foot-nav"><div id="to-top" style="display:none"><a href="#" class="fa fa-arrow-up"></a></div><div><a href="/" class="fa fa-home"></a></div><div><a href="/categories/" class="fa fa-list-alt"></a></div><div><a href="./" class="fa fa-th-list"></a></div></nav>'));
+		.append($('<nav id="foot-nav"><div id="to-top" style="display:none"><a href="#" class="fa fa-arrow-up"></a></div><div><a href="/" class="fa fa-home"></a></div><div><a href="/categories/" class="fa fa-list-alt"></a></div></nav>'));
 	// 自动添加右侧导航框架
 	$('<div id="side-bar" class="col-md-3 hidden-sm-down"></div>').appendTo($('body>.container>.row'));
 
@@ -11,8 +11,35 @@ $(function() {
 		$s_bar = $('#side-bar'),
 		$top = $('#to-top');
 
-	// 自动遍历生成目录导航
+	// 自动添加分页
+	$.getJSON('/source/json/categories.json', function(data) {
+		var title = $('h1').text(),
+			cate = $('#categories').text().match(/[\w-]+/).join(),
+			temp;
 
+		if (temp = data[cate]) {
+			var prev, next;
+			for (var i in temp) {
+				if (temp[i].title === title) {
+					prev = +(i > 0 ? i - 1 : 'null');
+					next = +(i < temp.length - 1 ? +i + 1 : 'null');
+					break
+				}
+			}
+
+			var str = '<nav aria-label="Page navigation clearfix"><ul class="pagination pagination-sm mt-3 clearfix" style="display:block">';
+			if (!isNaN(prev)) {
+				str += '<li class="page-item float-xs-left"><a class="page-link" href="' + temp[prev].path + '" aria-label="Previous"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span> ' + temp[prev].title + '</a></li>';
+			}
+			if (!isNaN(next)) {
+				str += '<li class="page-item float-xs-right"><a class="page-link" href="' + temp[next].path + '" aria-label="Previous">' + temp[next].title + ' <span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span></a></li > ';
+			}
+			str += '</ul></nav>';
+			$('body > .container .col-md-9').append($(str));
+		}
+	});
+
+	// 自动遍历生成目录导航
 	$('section').each(function() {
 		var $self = $(this),
 			$parent = $self.parent('section'),

@@ -15,6 +15,9 @@
 		.jumbotron {
 			padding-bottom: 1rem;
 		}
+		li[id*="cate-"] {
+			border-color: #fff;
+		}
 		li[id*="cate-"] .list-group-item-heading {
 			cursor: pointer;
 		}
@@ -27,7 +30,34 @@
 			width: 7.5rem;
 			height: 7.5rem;
 			margin-bottom: 1.25rem;
-		}	
+		}
+		#foot-nav {
+			font-size: 1.75rem;
+			text-align: center;
+			color: white;
+			height: 2.5rem;
+			line-height: 2.5rem;
+			position: fixed;
+			right: 2.25rem;
+			bottom: 1.25rem;
+			z-index: 20;
+		}
+		#foot-nav > div {
+			width: 2.5rem;
+			border-radius: 2.5rem;
+			background-color: black;
+			float: right;
+			margin-left: 0.75rem;
+			cursor: pointer;
+			opacity: 0.5;
+		}		
+		#foot-nav  div:hover {
+			opacity: 1;
+		}
+		#foot-nav a,#foot-nav a:hover {
+			color: white;
+			text-decoration: none;
+		}		
 	</style>
 </head>
 <body>
@@ -40,7 +70,9 @@
 		</div>
 	</header>
 	<div class="container">
-		<ul class="list-group"></ul>
+		<ul class="list-group">
+			<li class="list-group-item" style="border-color: #fff"></li>
+		</ul>
 	</div>
 	<footer class="page-footer">
 		<div class="container">
@@ -56,44 +88,66 @@
 			</div>
 		</div>
 	</footer>
+	<nav id="foot-nav">
+		<div id="to-top" style="display:none">
+			<a href="#" class="fa fa-arrow-up"></a>
+		</div>
+		<div>
+			<a href="/" class="fa fa-home"></a>
+		</div>
+	</nav>
 
 	<script src="/source/js/jquery-3.1.0.min.js"></script>
 	<script>
-		$.getJSON('/source/json/categories.json',function(data){
-			var str = '';
-			for (var i in data) {
-				str += '<li id="cate-' + i + '" class="list-group-item">';
-				str += '<h5 class="list-group-item list-group-item-heading list-group-item-action">' + i;
-				str += '<div class="float-xs-right"><span class="hidden-md-down tag tag-pill tag-danger">最新：&nbsp;&nbsp;&nbsp;' + data[i][0].title + '</span>&nbsp;';
-				str += '<span class="hidden-xs-down tag tag-pill tag-success">最后发表于&nbsp;&nbsp;&nbsp;' + data[i][0].time + '</span>&nbsp;';
-				str += '<span class="tag tag-pill tag-primary">' + data[i].length + '&nbsp;&nbsp;&nbsp;articles</span></div></h5>';
-				str += '<ul style="display:none" class="list-group"></ul>';
-				str += '</li>';
-			}
-			$('.container > .list-group').append($(str));
-		});
+		$(function(){
+			$.getJSON('/source/json/categories.json',function(data){
+				var str = '',
+					num = 0,
+					articles = 0;
+				for (var i in data) {
+					str += '<li id="cate-' + i + '" class="list-group-item">';
+					str += '<h5 class="list-group-item list-group-item-heading list-group-item-action">' + i;
+					str += '<div class="float-xs-right"><span class="hidden-md-down tag tag-pill tag-danger">最新：&nbsp;&nbsp;&nbsp;' + data[i][0].title + '</span>&nbsp;';
+					str += '<span class="hidden-xs-down tag tag-pill tag-success">最后发表于&nbsp;&nbsp;&nbsp;' + data[i][0].time + '</span>&nbsp;';
+					str += '<span class="tag tag-pill tag-primary">' + data[i].length + '&nbsp;&nbsp;&nbsp;articles</span></div></h5>';
+					str += '<ul style="display:none" class="list-group"></ul>';
+					str += '</li>';
+					num++;
+					articles += data[i].length;
+				}
+				$('.container > .list-group').append($(str)).children().first().html('有 ' + num + ' 个类别，共 ' + articles + ' 篇文章。加油喔！<small class="hidden-sm-down text-muted">There are ' + num + ' categories, ' + articles + ' articles. Come on!</small>');
+			});
 
-		$('body > .container').on('click','li[id*="cate-"] .list-group-item-heading',function(){
-			var $self = $(this),
-			 	key = $self.parent().attr('id').substr(5),
-			 	$ul = $self.next('ul');
+			$('body > .container').on('click','li[id*="cate-"] .list-group-item-heading',function(){
+				var $self = $(this),
+				 	key = $self.parent().attr('id').substr(5),
+				 	$ul = $self.next('ul');
 
-			if ($ul.children().length === 0) {
+				if ($ul.children().length === 0) {
 
-				$.getJSON('/source/json/categories.json',function(data){
-					var str = '';
-					for (var i in data[key]){
-						console.log(i)
-						str += '<a href="' + data[key][i].path + '" class="list-group-item list-group-item-action list-group-item-success">' + data[key][i].title;
-						str += '<span class="hidden-sm-down float-xs-right">' + data[key][i].time + '</span></a>';
-					}
-					$ul.append($(str)).slideToggle();
-				});
+					$.getJSON('/source/json/categories.json',function(data){
+						var str = '';
+						for (var i in data[key]){
+							console.log(i)
+							str += '<a href="' + data[key][i].path + '" class="list-group-item list-group-item-action list-group-item-success">' + data[key][i].title;
+							str += '<span class="hidden-sm-down float-xs-right">' + data[key][i].time + '</span></a>';
+						}
+						$ul.append($(str)).slideToggle();
+					});
 
-			} else {
-				$ul.slideToggle();
-			}
+				} else {
+					$ul.slideToggle();
+				}
 
+			});
+
+			$(window).on('scroll', function() {
+				var $self = $(this),
+					w_scrollTop = $self.scrollTop(),
+					$top = $('#to-top');		
+
+				w_scrollTop > $self.height() ? $top.show(1000) : $top.hide(1000)	
+			});
 		});
 	</script>	
 </body>
