@@ -47,10 +47,12 @@ Find.find("./categories/") do |path|
 	end
 end
 
-# 根据时间降序排列
-temp.each_key do |key|
-	if temp[key].size > 1
+# 删除空文件夹，根据时间降序排列
+temp.keys.each do |key|
+	if temp[key].size > 0
 		temp[key].sort! { |a,b| b[:time] <=> a[:time] }
+	else
+		temp.delete(key)
 	end
 end
 

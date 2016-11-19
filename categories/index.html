@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no">	
-	<title>Cotegories</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no">
+	<title>博文分类Cotegories</title>
 	<link rel="icon" href="/favicon.ico">
 	<link rel="stylesheet" href="/source/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/source/css/font-awesome.min.css">
@@ -14,7 +14,20 @@
 		}
 		.jumbotron {
 			padding-bottom: 1rem;
-		}		
+		}
+		li[id*="cate-"] .list-group-item-heading {
+			cursor: pointer;
+		}
+		.page-footer {
+			border-top: 1px solid gray;
+			padding: 1rem 0 2rem;
+			margin: 2.25rem 0 0.75rem;
+		}
+		.page-footer img {
+			width: 7.5rem;
+			height: 7.5rem;
+			margin-bottom: 1.25rem;
+		}	
 	</style>
 </head>
 <body>
@@ -27,8 +40,61 @@
 		</div>
 	</header>
 	<div class="container">
+		<ul class="list-group"></ul>
 	</div>
+	<footer class="page-footer">
+		<div class="container">
+			<div class="row text-xs-center">
+				<div class="col-md-2 offset-md-2">
+					<img class="rounded" src="/source/images/head.jpg" alt="head">
+				</div>
+				<div class="col-md-6">
+					<p class="lead">用心对待每一个人、每一件事</p>
+					<p>Mr.Wang（不如怀念）</p>
+					<p>E-mail：wangyuan230@163.com</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 
 	<script src="/source/js/jquery-3.1.0.min.js"></script>
+	<script>
+		$.getJSON('/source/json/categories.json',function(data){
+			var str = '';
+			for (var i in data) {
+				str += '<li id="cate-' + i + '" class="list-group-item">';
+				str += '<h5 class="list-group-item list-group-item-heading list-group-item-action">' + i;
+				str += '<div class="float-xs-right"><span class="hidden-md-down tag tag-pill tag-danger">最新：&nbsp;&nbsp;&nbsp;' + data[i][0].title + '</span>&nbsp;';
+				str += '<span class="hidden-xs-down tag tag-pill tag-success">最后发表于&nbsp;&nbsp;&nbsp;' + data[i][0].time + '</span>&nbsp;';
+				str += '<span class="tag tag-pill tag-primary">' + data[i].length + '&nbsp;&nbsp;&nbsp;articles</span></div></h5>';
+				str += '<ul style="display:none" class="list-group"></ul>';
+				str += '</li>';
+			}
+			$('.container > .list-group').append($(str));
+		});
+
+		$('body > .container').on('click','li[id*="cate-"] .list-group-item-heading',function(){
+			var $self = $(this),
+			 	key = $self.parent().attr('id').substr(5),
+			 	$ul = $self.next('ul');
+
+			if ($ul.children().length === 0) {
+
+				$.getJSON('/source/json/categories.json',function(data){
+					var str = '';
+					for (var i in data[key]){
+						console.log(i)
+						str += '<a href="' + data[key][i].path + '" class="list-group-item list-group-item-action list-group-item-success">' + data[key][i].title;
+						str += '<span class="hidden-sm-down float-xs-right">' + data[key][i].time + '</span></a>';
+					}
+					$ul.append($(str)).slideToggle();
+				});
+
+			} else {
+				$ul.slideToggle();
+			}
+
+		});
+	</script>	
 </body>
 </html>
