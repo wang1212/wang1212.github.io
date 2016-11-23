@@ -410,6 +410,34 @@ du [选项] [路径]
 -s  // 指定统计路径（默认是当前路径）</code></pre>
 					</section>
 					<section>
+						<h3>文件系统</h3>
+						<p class="head-indent">仅仅分区之后，磁盘还是不能使用的，必须创建文件系统才能使用，此时也会首先格式化硬盘。</p>
+						<pre class="language-bash"><code># 创建文件系统
+mke2fs [选项] [文件系统格式] [磁盘目录]
+-t  // 指定文件系统格式
+-b  // 指定文件系统块大小
+-L  // 指定卷标
+-j  // 建立文件系统日志
+# 命令示例
+mke2fs -t ext4 /dev/sda3</code></pre>
+						<pre class="language-bash"><code># 简写操作命令
+mkfs.[文件系统格式] [磁盘目录]
+# 命令示例
+mkfs.ext4 /dev/sda3</code></pre>
+						<pre class="language-bash"><code># 查看文件系统的详细信息
+dumpe2fs [磁盘目录]
+# 命令示例
+dumpe2fs /dev/sda2</code></pre>
+						<pre class="language-bash"><code># 查看文件系统标签
+e2label [磁盘目录]
+# 设置文件系统标签
+e2label [磁盘目录] [标签名]</code></pre>
+						<pre class="language-bash"><code># 检查目标磁盘文件系统是否损坏（已卸载）
+fsck [磁盘目录]
+-y  // 不提示直接修复
+-t  // 指定修复的文件系统格式</code></pre>
+					</section>
+					<section>
 						<h3>挂载、卸载</h3>
 						<pre class="language-bash"><code>mount  // 查看系统中已经挂载的设备
 mount -a   // 按配置文件 /etc/fstab 的内容，自动挂载
