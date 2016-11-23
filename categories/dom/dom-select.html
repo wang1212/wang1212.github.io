@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no">
+	<title>DOM-选取元素节点</title>
+	<link rel="stylesheet" href="/source/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/source/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/source/css/prism.css">
+	<link rel="stylesheet" href="/source/css/main.css">
+</head>
+<body>
+	<header class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">DOM-选取元素节点</h1>
+			<p>
+				<span class="tag tag-danger">Web</span>&nbsp;&nbsp;&nbsp;
+				<span class="tag tag-warning">DOM</span>&nbsp;&nbsp;&nbsp;
+				<span class="tag tag-info">Element node</span>&nbsp;&nbsp;&nbsp;
+				<span class="tag tag-primary">Selector</span>
+			</p>
+			<p class="head-indent lead">
+				DOM 操作都是通过对文档树中节点的访问来实现的，如何选取特定的元素节点是关键，进而才能访问该元素节点实现修改、查看、移除、替换等操作。
+			</p>
+			<hr />
+			<p>
+				<span id="time" class="tag tag-pill tag-success">发表于 2016-5-17</span>&nbsp;
+				<span id="categories" class="tag tag-pill tag-success">分类 Dom</span>
+			</p>
+		</div>
+	</header>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<section>
+					<h2>选取特定单一元素节点</h2>
+					<p class="head-indent">取得某一特定单一元素节点的引用最常用的方式如下：</p>
+					<ul>
+						<li>querySelector()</li>
+						<li>getElementById()</li>
+					</ul>
+					<pre class="language-markup"><code>&lt;body&gt;
+  	&lt;ul id="animal"&gt;
+	    &lt;li	id="Dog"&gt;Dog&lt;/li&gt;
+	    &lt;li id="Cat"&gt;Cat&lt;/li&gt;
+	    &lt;li id="Pig"&gt;Pig&lt;/li&gt;
+  	&lt;/ul&gt;
+&lt;/body&gt;
+&lt;script&gt;
+  	// querySecletor()方法可通过多种途径获取第一个&lt;li&gt;
+  	console.log(document.querySelector("li"));
+  	console.log(document.querySelector("ul&gt;li"));
+  	console.log(document.querySelector("#Dog"));
+  	console.log(document.querySelector("#animal&gt;#Dog"));
+
+  	// getElementById()通过ID属性获取
+  	console.log(document.getElementById("Dog"));
+&lt;/script&gt;</code></pre>
+					<p class="head-indent"><b><code>getElementById()</code>方法仅能通过节点的 id 属性获取目标节点的引用；而<code>querySelector()</code>方法更强大，它可以接受一个 CSS 选择器语法格式（例如 ul&gt;li）的参数，而且它只会返回第一个符合条件的节点的引用。</b></p>
+				</section>
+				<section>
+					<h2>选取特定元素节点集合</h2>
+					<p class="head-indent">取得某一特定元素节点集合最常用的方式如下：</p>
+					<ul>
+						<li>querySelectorAll()</li>
+						<li>getElementsByTagName()</li>
+						<li>getElementsByClassName()</li>
+						<li>getElementsByName()</li>
+					</ul>
+					<pre class="language-markup"><code>&lt;body&gt;
+  	&lt;ul id="animals"&gt;
+	    &lt;li class="animal"&gt;Dog&lt;/li&gt;
+	    &lt;li class="animal"&gt;Cat&lt;/li&gt;
+	    &lt;li class="animal"&gt;Pig&lt;/li&gt;
+  	&lt;/ul&gt;
+&lt;/body&gt;
+&lt;script&gt;
+  	// querySecletorAll()方法可通过多种途径获取第三个&lt;li&gt;集合
+  	console.log(document.querySelectorAll("li"));
+  	console.log(document.querySelectorAll("ul&gt;li"));
+  	console.log(document.querySelectorAll("#animals&gt;.animal"));
+
+  	// getElementsByTagName()通过标签名称获取
+  	console.log(document.getElementsByTagName("li"));
+
+  	// getElementsByClassName()通过class属性获取
+  	console.log(document.getElementsByClassName("animal"));
+&lt;/script&gt;</code></pre>
+					<p class="head-indent">同样地，<code>querySelectorAll()</code>方法更强大一些，它可以接受一个CSS选择器语法格式（例如 ul&gt;li）的参数。<code>getElementsByName()</code>方法可以通过节点的<code>name</code>属性获取特定节点集合的引用，但是它并不常用。</p>
+					<p class="head-indent"><b><code>querySelectorAll()</code>方法获取的节点集合是静态的，也就是说是非实时的，它只是创建该节点集合时文档的快照；而其他的方法获取的节点集合都是实时的，会及时反映文档的当前状态。</b></p>
+				</section>
+				<section>
+					<h2>选取所有的直属子元素节点</h2>
+					<p class="head-indent">使用<b>元素节点</b>上的<code>children</code>属性，我们可以获取该元素节点的所有直属（第一代）子元素节点。</p>
+					<pre class="language-markup"><code>&lt;body&gt;
+  	&lt;ul&gt;
+	    &lt;li&gt;Dog&lt;/li&gt;
+	    &lt;li&gt;Cat&lt;/li&gt;
+	    &lt;li&gt;Pig&lt;/li&gt;
+  	&lt;/ul&gt;
+&lt;/body&gt;
+&lt;script&gt;
+  	// 获取&lt;ul&gt;元素内的所有&lt;li&gt;子元素
+  	console.log(document.querySelector("ul").children);
+&lt;/script&gt;</code></pre>
+					<p class="head-indent"><b>获取的该节点集合是实时的，文档中任何改动都将会动态反映到集合中。</b></p>
+				</section>
+				<section>
+					<h2>选取与上下文有关的元素节点</h2>
+					<p class="head-indent">虽然<code>querySelector()</code>、<code>querySelectorAll()</code>、<code>getElementsByTagName()</code>、<code>getElementsByClassName()</code>这些方法一般都通过<code>document</code>对象访问，其实在元素节点上也有定义。这样我们可以将这些方法的查找范围缩小到文档树中某一特定分支（或者分支集）。</p>
+					<pre class="language-markup"><code>&lt;body&gt;
+  	&lt;ul id="fruits"&gt;
+	    &lt;li&gt;Apple&lt;/li&gt;
+	    &lt;li&gt;Banana&lt;/li&gt;
+	    &lt;li&gt;Pear&lt;/li&gt;
+  	&lt;/ul&gt;
+
+  	&lt;ul id="animals"&gt;
+	    &lt;li&gt;Dog&lt;/li&gt;
+	    &lt;li&gt;Cat&lt;/li&gt;
+	    &lt;li&gt;Pig&lt;/li&gt;
+  	&lt;/ul&gt;
+&lt;/body&gt;
+&lt;script&gt;
+  	// 获取第二个&lt;ul&gt;元素中的所有&lt;li&gt;子元素
+  	console.log(document.querySelectorAll("#animals&gt;li"));
+
+  	// 这样也可以
+  	var li_animals=document.querySelector("#animals"); 
+  	console.log(li_animals.querySelectorAll("li"));
+&lt;/script&gt;</code></pre>
+				</section>
+				<section>
+					<h2>预定义的元素节点选取</h2>
+					<p class="head-indent">有一些很方便的预定义的元素集合，如下所示：</p>
+					<dl>
+						<dt>document.all</dt>
+						<dd>获取HTML文档中所有元素节点的集合。</dd>
+						<dt>document.forms</dt>
+						<dd>获取HTML文档中所有（from）元素。</dd>
+						<dt>document.images</dt>
+						<dd>获取HTML文档中所有（img）元素。</dd>
+						<dt>document.links</dt>
+						<dd>获取HTML文档中所有（a）元素。</dd>
+						<dt>document.scripts</dt>
+						<dd>获取HTML文档中所有（script）元素。</dd>
+						<dt>document.styleSheets</dt>
+						<dd>获取HTML文档中所有（link、style）元素。</dd>
+					</dl>
+					<p class="head-indent">以上类数组列表中，<code>document.all</code>构建自 HTMLAllCollection；<code>styleSheets</code>构建自 StyleSheetList；其他的均构建自 HTMLCollection，并且都是实时的。</p>
+				</section>
+				<section>
+					<h2>验证特定元素节点</h2>
+					<p class="head-indent">使用<code>matchesSelector()</code>方法，我们可以判断一个元素是否匹配某个选择器字符串。但是该方法在不同内核的浏览器中实现不一样，分别加了前缀：</p>
+					<ul>
+						<li>mozMatchesSelector()</li>
+						<li>webkitMatchesSelector()</li>
+						<li>msMatchesSelector()</li>
+						<li>oMatchesSelector()</li>
+					</ul>
+					<pre class="language-markup"><code>&lt;body&gt;
+  	&lt;ul id="fruits"&gt;
+    	&lt;li&gt;Apple&lt;/li&gt;
+    	&lt;li&gt;Banana&lt;/li&gt;
+    	&lt;li&gt;Pear&lt;/li&gt;
+  	&lt;/ul&gt;
+
+  	&lt;ul id="animals"&gt;
+    	&lt;li id="Dog"&gt;Dog&lt;/li&gt;
+    	&lt;li&gt;Cat&lt;/li&gt;
+    	&lt;li&gt;Pig&lt;/li&gt;
+  	&lt;/ul&gt;
+&lt;/body&gt;
+&lt;script&gt;
+  	// 验证id为Dog的&lt;li&gt;元素是否是第二个&lt;ul&gt;元素的子元素节点
+  	var a=document.querySelector("#Dog").webkitMatchesSelector("#animals&gt;li");
+  	console.log(a);
+  	// 输出true
+&lt;/script&gt;</code></pre>
+				</section>
+				<section>
+					<h2>结语</h2>
+					<p class="head-indent"><code>querySelector()</code>与<code>querySelectorAll()</code>方法相对来说要功能强大一些，但要特别注意的是后者获取的节点集合不是实时的。</p>
+				</section>
+				<section>
+					<h2>参考</h2>
+					<p>《DOM启蒙》，Cody Lindley，陈养剑 译</p>
+				</section>
+			</div>			
+		</div>		
+	</div>
+	
+	<script src="/source/js/jquery-3.1.0.min.js"></script>
+	<script src="/source/js/prism.js"></script>
+	<script src="/source/js/main.js"></script>
+</body>
+</html>
