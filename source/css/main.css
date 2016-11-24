@@ -1,5 +1,13 @@
 body {
 	font-family: "FontAwesome",Helvetica,Tahoma,Arial,"Microsoft YaHei","华文细黑",sans-serif;
+	text-align: left;
+}
+p {
+	text-align: justify;
+}
+blockquote {
+	padding-left: 1rem;
+	border-left: 3px solid gray;
 }
 footer img {
 	width: 7.5rem;
