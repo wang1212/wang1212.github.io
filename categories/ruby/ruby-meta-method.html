@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no">
+	<title>Ruby-元编程之方法</title>
+	<link rel="stylesheet" href="/source/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/source/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/source/css/prism.css">
+	<link rel="stylesheet" href="/source/css/main.css">
+</head>
+<body>
+	<header class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">Ruby-元编程之方法</h1>
+			<p>
+				<span class="tag tag-danger">Ruby</span>&nbsp;&nbsp;&nbsp;
+				<span class="tag tag-warning">元编程</span>&nbsp;&nbsp;&nbsp;
+				<span class="tag tag-info">方法</span>
+			</p>
+			<p class="head-indent lead">
+				事实上，有很多编程语言都具备元编程的能力，而 Ruby 则是将元编程发挥到极致的语言。元编程这个概念是模糊的，很多人都说是用代码生成代码的方式，不过我们不用去纠结这个概念。元编程最具有魅力的地方就是，原来我们还可以在程序运行时去操控代码。
+			</p>
+			<hr />
+			<p>
+				<span id="time" class="tag tag-pill tag-success">发表于 2016-8-8</span>&nbsp;
+				<span id="categories" class="tag tag-pill tag-success">分类 Ruby</span>
+			</p>
+		</div>
+	</header>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<p class="head-indent"><u>本文的代码均在 Ruby 2.3.0 环境下测试通过。</u></p>
+				<section>
+					<h2>方法（method）</h2>
+					<p class="head-indent">在 OOP（面向对象编程）思想中，对象之间通过消息传递来进行交互，其实所谓的消息就是方法。当我们调用了一个对象的某个方法时，意味着当前对象给目标对象发送了一条消息。所以说，方法也是一个很重要的概念。</p>
+					<p class="head-indent">下面有一个这样的场景：我们从图书馆办卡、借书、还书的时候都需要机器或者图书管理员作为中介帮助我们进行这些操作，而不能自己直接去操作图书馆数据库。</p>
+					<pre class="language-ruby line-numbers"><code>class Library
+  def get_card(name,book_id=nil)
+    ...
+    puts "#{name}办卡"
+  end
+  def check_out(name,book_id)
+    ...
+    puts "#{name}借书#{book_id}"
+  end
+  def return_book(name,book_id)
+    ...
+    puts "#{name}还书#{book_id}"
+  end
+end
+class Manager
+  def initialize
+    @library = Library.new
+    puts "现在受理业务"
+  end
+  def controller(type,name,book_id=nil)
+    ...
+    case type
+    when "get_card"
+      @library.get_card(name)
+    when "check_out"
+      @library.check_out(name,book_id)
+    when "return_book"
+      @library.return_book(name,book_id)
+    else
+      return puts "操作失败"
+    end
+    puts "操作失败"
+  end
+end
+
+# 模拟管理员业务
+manager = Manager.new
+# => 现在受理业务
+manager.controller("get_card","小王")
+# => 小王办卡
+# => 操作成功
+manager.controller("check_out","小明",222)
+# => 小明借书222
+# => 操作成功
+manager.controller("return_book","小李",111)
+# => 小李还书111
+# => 操作成功</code></pre>
+					<section>
+						<h3>动态派发</h3>
+						<p class="head-indent">Manager 类代理了读者的各种业务操作，并在其中可以进行相应过滤，保证图书馆数据安全。不过，我们可以看到<code>Manager</code>中<code>controller()</code>方法是通过<code>case...when</code>来代理读者业务的，如果<code>Library</code>增加了新业务，那么该方法似乎又要添加新的<code>when</code>子句，业务如果很多呢？<code>controller()</code>方法似乎会变得臃肿，却实际上都在进行无聊的重复。</p>
+						<p class="head-indent">下面我们要介绍的就是<kbd>动态派发</kbd>技术。</p>
+						<pre class="language-ruby line-numbers"><code>class Manager
+  def controller(type,name,book_id=nil)
+    ...
+    # 动态派发
+    @library.send(type,name,book_id)
+    puts "操作成功"
+  end
+end</code></pre>
+						<p class="head-indent">所有的<code>case...when</code>只需要一句<code>send()</code>方法代替即可实现同样的业务，并且不再担心<code>Library</code>增加业务的情况，是不是很强大呢。</p>
+						<p class="head-indent"><b>动态派发：我们可以使用目标对象的<code>send()</code>方法来给其发送一条消息，也就是实现方法调用，该方法第一个参数为方法名称（可以是字符串或者符号），后续参数为传入方法的参数，最后一个参数为方法的块。不过，我们需要强调一下动态的意义，所谓动态就是我们只有在运行时才会知道调用哪个方法，另一个角度来说我们根本不需要在乎调用哪个方法。</b></p>
+						<p class="head-indent"><b>注意：<code>send()</code>方法会无视<code>private</code>权限而调用私有方法，如果有需要可以这么做；否则请用<code>public_send()</code>方法代替，从而避免调用目标对象的私有方法。</b></p>
+					</section>
+					<section>
+						<h3>动态定义</h3>
+						<p class="head-indent">现在图书馆外面引进了大量的机器，无需办卡就可以免费阅览部分书籍，并定期更新。</p>
+						<pre class="language-ruby line-numbers"><code>class Machine
+  def initialize
+	puts "今天可以免费阅览部分书籍了"
+  end
+  def book11
+    puts "欢迎阅览本书，编号11"
+    #...
+    #return content
+  end
+  def book22
+    puts "欢迎阅览本书，编号22"
+    #...
+    #return content
+  end
+  def book33
+    puts "欢迎阅览本书，编号33"
+    #...
+    #return content
+  end
+end
+
+# 模拟免费阅览业务
+machine = Machine.new
+machine.book11
+machine.book22
+machine.book33</code></pre>
+						<p class="head-indent">该机器提供了具体的方法让读者免费阅览相应的书籍，而且<code>book11()</code>、<code>book22()</code>、<code>book33()</code>方法内部业务逻辑相似，更重要的这些可供免费阅览的书籍是定期更新的，那么这些相似的方法也就需要重新去写，这是一个多么枯燥的造轮子的过程。</p>
+						<p class="head-indent">下面我们要介绍的就是<kbd>动态定义</kbd>技术。</p>
+						<pre class="language-ruby line-numbers"><code>class Machine
+  @@free_id = [11,22,33]
+  def initialize
+    @@free_id.each do |id|
+      # 动态定义
+      define_singleton_method("book#{id}") do 
+        puts "欢迎阅览本书，编号#{id}"
+        #...
+        #return content
+      end
+    end
+    puts "部分书籍今天可以免费阅览了"
+  end
+end</code></pre>
+						<p class="head-indent">我们将提供免费阅览的书籍的编号存进一个类变量，然后在实例化时通过<code>define_singleton_method()</code>方法动态的定义该对象的单例方法，以后定期更新类变量中的编号即可，不用手动去删除类中原来的实例方法，也不用手动去定义新添加的实例方法。</p>
+						<p class="head-indent"><b>动态定义：使用<code>define_singleton_method()</code>方法即可为当前对象定义一个单例方法(singleton_method)，也就是该对象独有的方法；该方法接受一个参数也就是方法名，块中也可以指定多个参数作为将被定义的方法的参数。<code>define_method()</code>方法类似的可以用来在类、模块或者类方法内部用来动态定义当前类、模块的实例方法。</b></p>
+						<p class="head-indent"><b>注意：<code>define_singleton_method()</code>方法定义的是当前对象的单例方法；而<code>define_method()</code>方法定义的是当前类、模块的实例方法。</b></p>
+					</section>
+					<section>
+						<h3>幽灵方法</h3>
+						<p class="head-indent">当我们调用一个不存在的方法时，Ruby 会报错，而报错之前 Ruby 都干了些什么呢？这是一个神秘的过程。我们都知道首先会沿对象的继承链去寻找这个方法，当没有找到时就会报错吗？其实不是的，Ruby 的 Kernel 模块中定义了一个私有实例方法<code>method_missing()</code>，在没有找到对象的方法时，会将方法名转换成符号类型作为参数传进该方法进一步处理，然后才会报错。</p>
+						<p class="head-indent"><b>我们将<code>method_missing()</code>方法称为幽灵方法，因为它只有在找不到我们定义的方法时才出现，借助它我们可以做很多原来不可能完成的事情；它的首个参数就是符号类型方法名，其余参数捕获的则是传入该方法的参数。</b></p>
+						<pre class="language-ruby line-numbers"><code>class Test
+  def method_missing(name, *args)
+    puts "#{name} 方法没有找到，参数为#{args}"
+  end
+end</code></pre>
+						<p class="head-indent">这是个空类，我们调用该类实例对象的任何方法都不会报错。</p>
+						<pre class="language-ruby line-numbers"><code>class TestObject
+  def initialize
+    @collect = {}
+  end
+  def method_missing(key, value=nil)
+    key = key.to_s
+    if key =~ /=$/
+      @collect.store(key.chop, value)
+    else
+      @collect[key]
+    end
+  end
+end
+
+obj = TestObject.new
+obj.a = 123
+obj.a # => 123
+obj.b # => nil</code></pre>
+						<p class="head-indent">这样我们就创建了一个可自由设置和访问属性的对象，是不是有点像 javascript 中的对象呢。</p>
+						<p class="head-indent"><b>注意：<code>method_missing()</code>实例方法是非常耗性能的，因为要查找整个继承链该方法才会起作用。类似的，在一个类、模块中，<code>const_missing()</code>类方法用来处理引用一个不存在的常量时的情况。前者为实例方法，后者为类方法。</b></p>
+					</section>
+					<section>
+						<h3>响应询问</h3>
+						<p class="head-indent">我们说了方法就是一个消息，在发送消息之前我们可以询问目标是否会有响应，也就是说要调用的方法是否存在，可以通过<code>respond_to?()</code>方法来完成。</p>
+						<pre class="language-ruby language-ruby"><code>class Test
+  def test1
+  end
+  public
+  def test2
+  end
+  private
+  def test3
+  end
+end
+
+t = Test.new
+t.respond_to?(:test1) # => true
+t.respond_to?(:test2) # => true
+t.respond_to?(:test3) # => false</code></pre>
+						<p class="head-indent"><b>注意：无论在对象内部还是外部，私有方法都是不能响应的（false），而且私有方法调用时是不需要显式指出接受者的，否则会报错。</b></p>
+					</section>
+				</section>
+				<section>
+					<h2>方法参数</h2>
+					<p class="head-indent">Ruby 中的方法目前支持<kbd>常规参数</kbd>、<kbd>默认值参数</kbd>、<kbd>关键字参数</kbd>、<kbd>数组参数（可变参数）</kbd>、<kbd>Hash参数（可变参数）</kbd>。</p>
+					<section>
+						<h3>常规参数</h3>
+						<p class="head-indent">特点：数量固定，必须传入值。</p>
+						<pre class="language-ruby line-numbers"><code>def test(a)
+  p a
+end
+
+test(1) # => 1</code></pre>
+					</section>
+					<section>
+						<h3>默认值参数</h3>
+						<p class="head-indent">特点：数量固定，不传入值时采用默认值，否则覆盖默认值。</p>
+						<pre class="language-ruby line-numbers"><code>def test(a=1)
+  p a
+end
+
+test() # => 1
+test(2) # => 2</code></pre>
+					</section>
+					<section>
+						<h3>关键字参数</h3>
+						<p class="head-indent">特点：数量固定，必须对应，不传入值时采用默认值，否则覆盖默认值。</p>
+						<pre class="language-ruby line-numbers"><code>def test(a: ,b: 2,c: )
+  p "#{a} #{b} #{c}"
+end
+
+test(a:1, c:3) # => "1 2 3"
+test(a:1, b:22, c:3) # => "1 22 3"</code></pre>
+					</section>
+					<section>
+						<h3>数组参数</h3>
+						<p class="head-indent">特点；数量可变，方法内部通过数组索引访问。</p>
+						<pre class="language-ruby line-numbers"><code>def test(*a)
+  p a
+end
+
+test() # => []
+test(1) # => [1]
+test(1,2) # => [1,2]</code></pre>
+					</section>
+					<section>
+						<h3>Hash参数</h3>
+						<p class="head-indent">特点：数量可变，方法内部直接通过 key 访问。</p>
+						<pre class="language-ruby line-numbers"><code>def test(**a)
+  p a
+end
+
+test() # => {}
+test(a:1) # => {:a=>1}
+test(a:1,b:2) # => {:a=>1, :b=>2}</code></pre>
+					</section>
+					<p class="head-indent">要注意的是，这几种参数可组合在一起，但应符合：</p>
+					<ul>
+						<li>常规参数是按传入顺序匹配，无论有没有默认值；</li>
+						<li>关键字参数是按关键字匹配，与顺序无关，但必须指定关键字；</li>
+						<li>可变参数（数组或Hash）应该放在参数表末尾。</li>
+					</ul>
+				</section>
+				<section>
+					<h2>结语</h2>
+					<p class="head-indent">这下是不是见识到了元编程的能力呢？用你写的代码来动态生成更多的代码供我们所使用，也许这就是所谓的生成代码的代码。</p>
+				</section>
+				<section>
+					<h2>参考</h2>
+					<p>《Ruby元编程》，[意] Paolo Perrotta，廖志刚 译</p>
+					<p>《Ruby基础教程》，[日] 高桥征义 后藤裕藏，何文斯 译</p>
+				</section>
+			</div>			
+		</div>		
+	</div>
+	
+	<script src="/source/js/jquery-3.1.0.min.js"></script>
+	<script src="/source/js/prism.js"></script>
+	<script src="/source/js/main.js"></script>
+</body>
+</html>
