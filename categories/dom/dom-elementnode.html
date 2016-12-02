@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no">
+	<title>DOM-元素节点</title>
+	<link rel="stylesheet" href="/source/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/source/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/source/css/prism.css">
+	<link rel="stylesheet" href="/source/css/main.css">
+</head>
+<body>
+	<header class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">DOM-元素节点</h1>
+			<p>
+				<span class="tag tag-danger">Web</span>&nbsp;&nbsp;&nbsp;
+				<span class="tag tag-warning">DOM</span>&nbsp;&nbsp;&nbsp;
+				<span class="tag tag-info">元素节点</span>
+			</p>
+			<p class="head-indent lead">
+				可以说，元素节点是 DOM 树中的核心部分，我们进行文档的操作通常都是建立在元素节点上的。
+			</p>
+			<hr />
+			<p>
+				<span id="time" class="tag tag-pill tag-success">发表于 2016-5-17</span>&nbsp;
+				<span id="categories" class="tag tag-pill tag-success">分类 Dom</span>
+			</p>
+		</div>
+	</header>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<section>
+					<h2>元素节点</h2>
+					<p class="head-indent">元素节点（Element Node）是我们最常用的 DOM 节点，不同类型的节点都有其自己的构造方法，并且它们身上还有许多属性和方法（包括继承的）来帮助我们完成 DOM 操作。</p>
+					<pre class="language-markup"><code>&lt;body&gt;
+  	&lt;div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+  	console.log(document.querySelector('div').constructor);
+  	// 输出 function HTMLDivElement() { [native code] }
+&lt;/script&gt;</code></pre>
+						<p class="head-indent">DOM中每一个元素节点都是从唯一的 Javascript 接口/构造器构建的。<b>对于任何节点（不仅是元素节点），我们可以通过<code>constructor</code>属性来获知它们的构造方法。</b></p>
+				</section>
+				<section>
+					<h2>元素节点DOM操作</h2>
+					<p class="head-indent">前面在介绍 DOM 时元素节点（Element Node）的部分属性与方法已做过示例，在此仅简单的提及。</p>
+					<section>
+						<h3>创建节点</h3>
+						<ul>
+							<li>document.createElement()</li>
+						</ul>
+						<pre class="language-markup"><code>&lt;script&gt;
+  	// 创建一个DIV节点
+  	var new_div=document.createElement('div');
+&lt;/script&gt;</code></pre>
+					</section>
+					<section>
+						<h3>获取标签名</h3>
+						<ul>
+							<li>tagName</li>
+							<li>nodeName</li>
+						</ul>
+						<pre class="language-markup"><code>&lt;script&gt;
+	// 获取DIV元素的标签名
+	console.log(document.querySelector('div').tagName);  // 输出 "DIV"
+	console.log(document.querySelector('div').nodeName);  // 输出 "DIV"  
+&lt;/script&gt;</code></pre>
+					</section>
+					<section>
+						<h3>获取属性列表/集合</h3>
+						<p class="head-indent">每个元素节点身上都有很多属性（包括继承自 Node），我们可以取得一个由当前元素定义的 Attr（属性）节点组成的集合。</p>
+						<ul>
+							<li>attributes</li>
+						</ul>
+						<pre class="language-markup"><code>&lt;body&gt;
+  	&lt;input type="text" id="id" class="class" title="input" data-foo="dataFoo" value="123"/&gt;
+&lt;/body&gt;
+&lt;script&gt;
+	// 获取属性列表/集合
+	var attr=document.querySelector('input').attributes;
+	console.log(attr);  // 输出 NamedNodeMap{...}
+	// 遍历取得属性名与值
+	for (var i in attr) {
+		console.log(attr[i].nodeName+':'+attr[i].nodeValue);
+	}
+&lt;/script&gt;</code></pre>
+						<p class="head-indent">我们使用元素节点的<code>attributes</code>属性获取的是一个包含其所有属性与相应值的属性节点对象集合（NamedNodeMap），因为每一个属性事实上也是一个属性节点对象（Attr 节点）。<b>我们要知道的是，<code>NamedNodeMap</code>是一个实时数组，会随元素节点属性的变化而变化。</b></p>
+					</section>
+					<section>
+						<h3>属性操作</h3>
+						<ul>
+							<li>setAttribute()</li>
+							<li>getAttribute()</li>
+							<li>removeAttribute()</li>
+						</ul>
+						<pre class="language-markup"><code>&lt;script&gt;
+	// 设置属性
+	document.querySelector('img').setAttribute('src','123.png');
+	// 获取属性
+	console.log(document.querySelector('img').getAttribute('src'));  // 输出 123.png  
+	// 移除属性
+	document.querySelector('img').removeAttribute('src');
+&lt;/script&gt;</code></pre>
+					</section>
+					<section>
+						<h3>属性检测</h3>
+						<p class="head-indent">有时候，我们可能想知道一个元素节点身上是否有某个特定属性时，我们也可以通过下面的方法获知。</p>
+						<ul>
+							<li>hasAttributes</li>
+						</ul>
+						<pre class="language-markup"><code>&lt;body&gt;
+  	&lt;input type="text" title="" checked&gt;
+&lt;body&gt;
+&lt;script&gt;
+  	// 查看input元素是否有title属性
+  	console.log(document.querySelector('input').hasAttribute('title'));  // 输出 true
+  	// 查看input元素是否有checked属性
+  	console.log(document.querySelector('input').hasAttribute('checked'));  // 输出 true
+&lt;script&gt;</code></pre>
+						<p class="head-indent"><b>从上述示例可以看出，当元素节点具有该属性，即使该属性值为空也是存在的。</b></p>
+					</section>
+					<section>
+						<h3>class属性</h3>
+						<p class="head-indent">一个元素节点可以包含多个定义的类样式，这些<code>className</code>均被放在<code>class</code>属性中用空格分割，而我们可以对它们进行单独操作。</p>
+						<section>
+							<h4>获取class列表</h4>
+							<ul>
+								<li>classList</li>
+							</ul>
+							<pre class="language-markup"><code>&lt;body&gt;
+  	&lt;div class="a b c"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+  	// 获取div元素的class属性列表
+  	console.log(document.querySelector('div').classList);  // 输出 ['a','b','c']
+  	// 获取div元素的class属性值
+  	console.log(document.querySelector('div').className);  // 输出 a b c
+&lt;/script&gt;</code></pre>
+							<p class="head-indent"><b>因为<code>class</code>是 Javascript 的关键字，所以获取 class 属性的值时使用<code>className</code>代替。</b></p>
+						</section>
+						<section>
+							<h4>class值操作</h4>
+							<p class="head-indent">我们可以对<code>class</code>属性列表中的值进行单独修改，添加或者移除某一个 class 值。</p>
+							<ul>
+								<li>add()</li>
+								<li>remove()</li>
+							</ul>
+							<pre class="language-markup"><code>&lt;body&gt;
+  	&lt;div class="a b"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+	// 给class属性列表中添加c
+	document.querySelector('div').classList.add('c');
+	console.log(document.querySelector('div').className);  // 输出 a b c
+	// 从class属性列表中移除b
+	document.querySelector('div').classList.remove('b');
+	console.log(document.querySelector('div').className);  // 输出 a c
+&lt;/script&gt;</code></pre>
+						</section>
+						<section>
+							<h4>class值检测</h4>
+							<p class="head-indent">当然，我们也可以检测<code>classList</code>中是否包含某一特定的 class 值。</p>
+							<pre class="language-markup"><code>&lt;body&gt;
+  	&lt;div class="a b"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+	// 查看class属性列表中是否包含b
+	console.log(document.querySelector('div').classList.contains('b'));  // 输出 true
+	// 查看class属性列表中是否包含c
+	console.log(document.querySelector('div').classList.contains('c'));  // 输出 false
+&lt;/script&gt;</code></pre>
+						</section>
+						<section>
+							<h4>toggle自动化</h4>
+							<p class="head-indent">当我们要实现特效时，可能要经历查看某个<code>class</code>样式是否存在，不存在时添加，存在时移除这个过程。然而，我们可以自动地一步来完成这三个过程。</p>
+							<ul>
+								<li>toggle()</li>
+							</ul>
+							<pre class="language-markup"><code>&lt;body&gt;
+  	&lt;div class="a b"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+	document.querySelector('div').classList.toggle('b');
+	document.querySelector('div').classList.toggle('c');
+	// 查看class属性值
+	console.log(document.querySelector('div').className);  // 输出 a c  
+&lt;/script&gt;</code></pre>
+						</section>
+					</section>
+					<section>
+						<h3>data-*属性</h3>
+						<p class="head-indent">元素节点上经常会出现一些类似<code>data-*</code>形式的属性，这些属性是为了让我们实现某些目的而进行数据保存的属性。</p>
+						<ul>
+							<li>dataset</li>
+						</ul>
+						<pre class="language-markup"><code>&lt;body&gt;
+  	&lt;div data-foo-foo="foo" data-bar-bar="bar"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+	// 获取DIV元素上的数据集合
+	console.log(document.querySelector('div').dataset);  // 输出 DOMStringMap {...}
+	// 获取一个数据
+	console.log(document.querySelector('div').dataset.fooFoo);  // 输出foo
+	// 设置一个数据
+	document.querySelector('div').dataset.gooGoo='goo';
+	// 删除一个数据
+	delete document.querySelector('div').dataset.barBar
+&lt;/script&gt;</code></pre>
+						<p class="head-indent"><b>要注意的是，对单个数据引用时不需要加<code>data</code>前缀，并且当属性名中有<code>-</code>时应采用驼峰式命名方式书写（例如foo-foo ==> fooFoo）。</b></p>
+					</section>
+				</section>
+				<section>
+					<h2>结语</h2>
+					<p class="head-indent">除此之外，元素节点的插入、替换、遍历等等我们在 DOM 介绍时均已经说过，它们适用于任何类型的节点对象，我们不在此赘述。</p>
+				</section>
+				<section>
+					<h2>参考</h2>
+					<p>《DOM启蒙》，Cody Lindley，陈养剑 译</p>
+				</section>
+			</div>			
+		</div>		
+	</div>
+	
+	<script src="/source/js/jquery-3.1.0.min.js"></script>
+	<script src="/source/js/prism.js"></script>
+	<script src="/source/js/main.js"></script>
+</body>
+</html>

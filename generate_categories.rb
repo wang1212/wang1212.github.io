@@ -36,7 +36,7 @@ Find.find("./categories/") do |path|
 			File.open(path) do |io|
 				buffer = io.read
 				file_time = buffer.scan(/span.+id=\"time\".+(\d{4}-\d{1,2}-\d{1,2})/).join
-				file_title = buffer.scan(/h1.*>(.+)</).join
+				file_title = buffer.scan(/title.*>(.+)</).join
 			end
 			# 处理空数据
 			file_time = file_time == '' ? Date.today.to_s : Date.parse(file_time).to_s
