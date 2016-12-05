@@ -114,7 +114,7 @@
 					str += '<div class="float-xs-right"><span class="hidden-md-down tag tag-pill tag-danger">最新：&nbsp;&nbsp;&nbsp;' + data[i][0].title + '</span>&nbsp;';
 					str += '<span class="hidden-xs-down tag tag-pill tag-success">最后发表于&nbsp;&nbsp;&nbsp;' + data[i][0].time + '</span>&nbsp;';
 					str += '<span class="tag tag-pill tag-primary">' + data[i].length + '&nbsp;&nbsp;&nbsp;articles</span></div></h5>';
-					str += '<ul style="display:none" class="list-group"></ul>';
+					str += '<ul style="display:none" class="list-group"><p class="text-xs-center">正在奋力加载哟...</p></ul>';
 					str += '</li>';
 					num++;
 					articles += data[i].length;
@@ -135,10 +135,9 @@
 				 	key = $self.parent().attr('id').substr(5),
 				 	$ul = $self.next('ul');
 
+				$ul.slideToggle();
+
 				if ($ul.children().length === 0) {
-
-					$ul.html('<p class="text-xs-center">正在奋力加载哟...</p>').slideDown();
-
 					$.getJSON('/source/json/categories.json',function(data){
 						var str = '';
 						for (var i in data[key]){
@@ -147,9 +146,6 @@
 						}
 						$ul.css('display', 'none').html(str).slideToggle();
 					});
-
-				} else {
-					$ul.slideToggle();
 				}
 
 			});
