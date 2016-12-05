@@ -137,7 +137,7 @@
 
 				$ul.slideToggle();
 
-				if ($ul.children().length === 0) {
+				if (!$ul.data('hasData')) {
 					$.getJSON('/source/json/categories.json',function(data){
 						var str = '';
 						for (var i in data[key]){
@@ -146,6 +146,7 @@
 						}
 						$ul.css('display', 'none').html(str).slideToggle();
 					});
+					$ul.data('hasData', true);
 				}
 
 			});
