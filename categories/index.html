@@ -64,15 +64,17 @@
 <body>
 	<header class="jumbotron jumbotron-fluid">
 		<div class="container">
-			<h1 class="display-3">博文分类 <small class="text-muted">Categories</small></h1>
+			<h1 class="display-3">博文分类 <small class="text-muted hidden-sm-down">Categories</small></h1>
 			<hr />
 			<p class="lead">分享与交流是让我获得提升的最佳途径<br />
-			Sharing and communication is the best way to get my promotion</p>
+			<span class="hidden-xs-down">Sharing and communication is the best way to get my promotion</span></p>
 		</div>
 	</header>
 	<div class="container">
 		<ul class="list-group">
-			<li class="list-group-item" style="border-color: #fff"></li>
+			<li class="list-group-item" style="border-color: #fff">
+				<p class="text-xs-center">正在奋力加载哟...</p>
+			</li>
 		</ul>
 	</div>
 	<footer class="page-footer">
@@ -117,8 +119,15 @@
 					num++;
 					articles += data[i].length;
 				}
-				
-				$('.container > .list-group').append($(str)).children().first().html('有 ' + num + ' 个类别，共 ' + articles + ' 篇文章。加油喔！<small class="hidden-sm-down text-muted">There are ' + num + ' categories, ' + articles + ' articles. Come on!</small>');
+
+				$('.container > .list-group')
+					.css('display', 'none')
+					.html(str)
+					.children()
+					.first()
+					.html('有 ' + num + ' 个类别，共 ' + articles + ' 篇文章。加油喔！<small class="hidden-sm-down text-muted">There are ' + num + ' categories, ' + articles + ' articles. Come on!</small>')
+					.end().end()
+					.slideDown();
 			});
 
 			$('body > .container').on('click','li[id*="cate-"] .list-group-item-heading',function(){
@@ -128,16 +137,15 @@
 
 				if ($ul.children().length === 0) {
 
-					$ul.html('<p class="text-xs-center">资源正在加载</p>').slideToggle();
+					$ul.html('<p class="text-xs-center">正在奋力加在哟...</p>').slideDown();
 
 					$.getJSON('/source/json/categories.json',function(data){
 						var str = '';
 						for (var i in data[key]){
-
 							str += '<a href="' + data[key][i].path + '" class="list-group-item list-group-item-action list-group-item-success">' + data[key][i].title;
 							str += '<span class="hidden-sm-down float-xs-right">' + data[key][i].time + '</span></a>';
 						}
-						$ul.html(str);
+						$ul.css('display', 'none').html(str).slideToggle();
 					});
 
 				} else {
