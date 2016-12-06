@@ -74,21 +74,21 @@ end
 
 # 模拟管理员业务
 manager = Manager.new
-# => 现在受理业务
+# ==> 现在受理业务
 manager.controller("get_card","小王")
-# => 小王办卡
-# => 操作成功
+# ==> 小王办卡
+# ==> 操作成功
 manager.controller("check_out","小明",222)
-# => 小明借书222
-# => 操作成功
+# ==> 小明借书222
+# ==> 操作成功
 manager.controller("return_book","小李",111)
-# => 小李还书111
-# => 操作成功</code></pre>
+# ==> 小李还书111
+# ==> 操作成功</code></pre>
 					<section>
 						<h3>动态派发</h3>
 						<p class="head-indent">Manager 类代理了读者的各种业务操作，并在其中可以进行相应过滤，保证图书馆数据安全。不过，我们可以看到<code>Manager</code>中<code>controller()</code>方法是通过<code>case...when</code>来代理读者业务的，如果<code>Library</code>增加了新业务，那么该方法似乎又要添加新的<code>when</code>子句，业务如果很多呢？<code>controller()</code>方法似乎会变得臃肿，却实际上都在进行无聊的重复。</p>
 						<p class="head-indent">下面我们要介绍的就是<kbd>动态派发</kbd>技术。</p>
-						<pre class="language-ruby line-numbers"><code>class Manager
+						<pre class="language-ruby line-numbers" data-line="5"><code>class Manager
   def controller(type,name,book_id=nil)
     ...
     # 动态派发
@@ -131,7 +131,7 @@ machine.book22
 machine.book33</code></pre>
 						<p class="head-indent">该机器提供了具体的方法让读者免费阅览相应的书籍，而且<code>book11()</code>、<code>book22()</code>、<code>book33()</code>方法内部业务逻辑相似，更重要的这些可供免费阅览的书籍是定期更新的，那么这些相似的方法也就需要重新去写，这是一个多么枯燥的造轮子的过程。</p>
 						<p class="head-indent">下面我们要介绍的就是<kbd>动态定义</kbd>技术。</p>
-						<pre class="language-ruby line-numbers"><code>class Machine
+						<pre class="language-ruby line-numbers" data-line="5-10"><code>class Machine
   @@free_id = [11,22,33]
   def initialize
     @@free_id.each do |id|
@@ -153,13 +153,13 @@ end</code></pre>
 						<h3>幽灵方法</h3>
 						<p class="head-indent">当我们调用一个不存在的方法时，Ruby 会报错，而报错之前 Ruby 都干了些什么呢？这是一个神秘的过程。我们都知道首先会沿对象的继承链去寻找这个方法，当没有找到时就会报错吗？其实不是的，Ruby 的 Kernel 模块中定义了一个私有实例方法<code>method_missing()</code>，在没有找到对象的方法时，会将方法名转换成符号类型作为参数传进该方法进一步处理，然后才会报错。</p>
 						<p class="head-indent"><b>我们将<code>method_missing()</code>方法称为幽灵方法，因为它只有在找不到我们定义的方法时才出现，借助它我们可以做很多原来不可能完成的事情；它的首个参数就是符号类型方法名，其余参数捕获的则是传入该方法的参数。</b></p>
-						<pre class="language-ruby line-numbers"><code>class Test
+						<pre class="language-ruby line-numbers" data-line="2-4"><code>class Test
   def method_missing(name, *args)
     puts "#{name} 方法没有找到，参数为#{args}"
   end
 end</code></pre>
 						<p class="head-indent">这是个空类，我们调用该类实例对象的任何方法都不会报错。</p>
-						<pre class="language-ruby line-numbers"><code>class TestObject
+						<pre class="language-ruby line-numbers" data-line="5-12"><code>class TestObject
   def initialize
     @collect = {}
   end
@@ -175,8 +175,8 @@ end
 
 obj = TestObject.new
 obj.a = 123
-obj.a # => 123
-obj.b # => nil</code></pre>
+obj.a  # ==> 123
+obj.b  # ==> nil</code></pre>
 						<p class="head-indent">这样我们就创建了一个可自由设置和访问属性的对象，是不是有点像 javascript 中的对象呢。</p>
 						<p class="head-indent"><b>注意：<code>method_missing()</code>实例方法是非常耗性能的，因为要查找整个继承链该方法才会起作用。类似的，在一个类、模块中，<code>const_missing()</code>类方法用来处理引用一个不存在的常量时的情况。前者为实例方法，后者为类方法。</b></p>
 					</section>
@@ -195,9 +195,9 @@ obj.b # => nil</code></pre>
 end
 
 t = Test.new
-t.respond_to?(:test1) # => true
-t.respond_to?(:test2) # => true
-t.respond_to?(:test3) # => false</code></pre>
+t.respond_to?(:test1)  # ==> true
+t.respond_to?(:test2)  # ==> true
+t.respond_to?(:test3)  # ==> false</code></pre>
 						<p class="head-indent"><b>注意：无论在对象内部还是外部，私有方法都是不能响应的（false），而且私有方法调用时是不需要显式指出接受者的，否则会报错。</b></p>
 					</section>
 				</section>
@@ -211,7 +211,7 @@ t.respond_to?(:test3) # => false</code></pre>
   p a
 end
 
-test(1) # => 1</code></pre>
+test(1)  # ==> 1</code></pre>
 					</section>
 					<section>
 						<h3>默认值参数</h3>
@@ -220,8 +220,8 @@ test(1) # => 1</code></pre>
   p a
 end
 
-test() # => 1
-test(2) # => 2</code></pre>
+test()  # ==> 1
+test(2)  # ==> 2</code></pre>
 					</section>
 					<section>
 						<h3>关键字参数</h3>
@@ -230,8 +230,8 @@ test(2) # => 2</code></pre>
   p "#{a} #{b} #{c}"
 end
 
-test(a:1, c:3) # => "1 2 3"
-test(a:1, b:22, c:3) # => "1 22 3"</code></pre>
+test(a:1, c:3)  # ==> "1 2 3"
+test(a:1, b:22, c:3)  # ==> "1 22 3"</code></pre>
 					</section>
 					<section>
 						<h3>数组参数</h3>
@@ -240,9 +240,9 @@ test(a:1, b:22, c:3) # => "1 22 3"</code></pre>
   p a
 end
 
-test() # => []
-test(1) # => [1]
-test(1,2) # => [1,2]</code></pre>
+test()  # ==> []
+test(1)  # ==> [1]
+test(1,2)  # ==> [1,2]</code></pre>
 					</section>
 					<section>
 						<h3>Hash参数</h3>
@@ -251,9 +251,9 @@ test(1,2) # => [1,2]</code></pre>
   p a
 end
 
-test() # => {}
-test(a:1) # => {:a=>1}
-test(a:1,b:2) # => {:a=>1, :b=>2}</code></pre>
+test()  # ==> {}
+test(a:1)  # ==> {:a=>1}
+test(a:1,b:2)  # ==> {:a=>1, :b=>2}</code></pre>
 					</section>
 					<p class="head-indent">要注意的是，这几种参数可组合在一起，但应符合：</p>
 					<ul>
