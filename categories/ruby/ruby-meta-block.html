@@ -262,7 +262,7 @@ puts inc.class  # ==> Proc</code></pre>
 					<h2>闭包</h2>
 					<p class="head-indent">当一个方法执行完毕后，该方法的独立作用域会销毁，方法里面的局部变量自然也会随之销毁；但是基于块作用域的特性，我们可以实现闭包。</p>
 					<p class="head-indent"><b>若方法中存在一个独立于方法的块（非关联块），该独立块具备块作用域特性，可访问定义时上下文（单次方法调用）的外部作用域，该块被外部引用后，即便是所在方法执行完毕后，因为块的存在绑定了方法中的局部变量，因而不会随方法销毁，这就是闭包。</b></p>
-					<pre class="language-ruby line-numbers" data-line="3,6,7"><code>def closure(n)
+					<pre class="language-ruby line-numbers" data-line="3,6-8"><code>def closure(n)
   x = n
   return -> {x *= 10; puts "block_local_x=#{x}"}
 end
