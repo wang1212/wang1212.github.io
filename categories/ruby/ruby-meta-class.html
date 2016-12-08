@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no">
+	<title>Ruby-元编程之类</title>
+	<link rel="stylesheet" href="/source/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/source/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/source/css/prism.css">
+	<link rel="stylesheet" href="/source/css/main.css">
+</head>
+<body>
+	<header class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">Ruby-元编程之类</h1>
+			<p>
+				<span class="tag tag-danger">Ruby</span>&nbsp;&nbsp;&nbsp;
+				<span class="tag tag-warning">元编程</span>&nbsp;&nbsp;&nbsp;
+				<span class="tag tag-info">类</span>
+			</p>
+			<p class="head-indent lead">
+				事实上，有很多编程语言都具备元编程的能力，而 Ruby 则是将元编程发挥到极致的语言。元编程这个概念是模糊的，很多人都说是用代码生成代码的方式，不过我们不用去纠结这个概念。元编程最具有魅力的地方就是，原来我们还可以在程序运行时去操控代码。
+			</p>
+			<hr />
+			<p>
+				<span id="time" class="tag tag-pill tag-success">发表于 2016-12-8</span>&nbsp;
+				<span id="categories" class="tag tag-pill tag-success">分类 Ruby</span>
+			</p>
+		</div>
+	</header>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<section>
+					<h2>类</h2>
+					<p class="head-indent">我们都知道在面向对象编程中，我们大多数时候都是用类（class）在封装方法和变量，而 Ruby 中的类继承自模块（Module），接下来应该深入到类（模块）中去了解对象模型。</p>
+					<section>
+						<h3>当前类</h3>
+						<p class="head-indent">无论我们的程序运行到哪里，总会存在一个当前对象<code>self</code>，而对象是所属类的实例，所以也就存在一个当前类。</p>
+						<pre class="language-ruby line-numbers"><code>result = class A
+  self
+end
+
+p result  # ==> A</code></pre>
+						<p class="head-indent"><b>特别的是，类也是一个对象，它是<code>Class</code>类的实例，充当当前对象<code>self</code>；但此时的当前类我们更愿意定义为该<code>self</code>指向的类，而不是<code>Class</code>，因为前者是有意义的。</b></p>
+						<pre class="language-ruby line-numbers" data-start="6"><code>result.class_eval do
+  def speak
+  end
+end
+
+p result.instance_methods(false)
+# ==> [:speak]</code></pre>
+						<p class="head-indent"><b>除过使用<code>class</code>关键字打开一个类外，我们也可以使用类调用<code>class_eval()</code>方法打开一个类，不过后者并没有创建一个独立的作用域，而是块作用域，块中<code>self</code>指向类自身；它和<code>instance_eval()</code>方法是相似的。</b></p>
+						<pre class="language-ruby line-numbers" data-start="6"><code>result.class_exec(:speak) do |name|
+  define_method(name) do
+  end
+end
+
+p result.instance_methods(false)
+# ==> [:speak]</code></pre>
+						<p class="head-indent"><code>class_eval()</code>方法不允许传递块参数，而<code>class_exec()</code>方法会将方法参数传递给块参数。</p>
+						<p class="head-indent"><b>在类（类方法）定义中，<code>self</code>指向当前对象，当前对象也是当前类；而在实例方法定义中，<code>self</code>指向当前对象，当前类则是当前对象的所属类。</b></p>
+					</section>
+					<section>
+						<h3>类实例变量</h3>
+						<p class="head-indent">类本身也是一个对象，所以我们可以在类中定义类实例变量，这和对象实例变量是一样的，是该类独有的。</p>
+						<pre class="language-ruby line-numbers"><code>class A
+  @var1 = "class_instance_variable"
+  def initialize
+  	@var2 = "instance_variable"
+  end
+end
+
+p A.instance_variables
+# ==> [:@var1]
+p A.new.instance_variables
+# ==> [:@var2]</code></pre>
+						<p class="head-indent">也就是说，<b>实例变量定义时是绑定在<code>self</code>指向的当前对象身上的，它是该对象独有的变量。</b></p>
+					</section>
+					<section>
+						<h3>类变量</h3>
+						<p class="head-indent">Ruby 中还有一种变量叫做类变量，它不是属于某个类（对象）的变量。</p>
+						<pre class="language-ruby line-numbers"><code>class A
+  @@var = "class_variable"
+end
+class B < A
+end
+
+p A.class_variables
+# ==> [:@@var]
+p B.class_variables
+# ==> [:@@var]</code></pre>
+						<p class="head-indent">从该示例可以看出，我们定义在父类中的类变量被子类继承了，<b>所以类变量不是单独属于某个类的变量，而是被类继承链共享的变量。</b></p>
+						<p class="head-indent">所以在选择上来说，如果不希望子类继承父类的变量，我们应该选择类实例变量，这样大多时候更安全一些。</p>
+					</section>
+					<section>
+						<h3>删除方法定义</h3>
+						<p class="head-indent">有时候，我们可能不想让一个子类继承父类的某些方法，但不能直接删除父类中的方法，否则会影响父类的其他子类继承该方法。</p>
+					</section>
+				</section>
+				<section>
+					<h2>第二章</h2>
+				</section>
+				<section>
+					<h2>第三章</h2>
+				</section>
+				<section>
+					<h2>参考</h2>
+					<p>《Ruby元编程》，[意] Paolo Perrotta，廖志刚 译</p>
+					<p>《Ruby基础教程》，[日] 高桥征义 后藤裕藏，何文斯 译</p>
+				</section>				
+			</div>			
+		</div>		
+	</div>
+	
+	<script src="/source/js/jquery-3.1.0.min.js"></script>
+	<script src="/source/js/prism.js"></script>
+	<script src="/source/js/main.js"></script>
+</body>
+</html>

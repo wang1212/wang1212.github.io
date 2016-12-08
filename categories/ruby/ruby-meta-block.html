@@ -211,7 +211,7 @@ end
   puts "#{@name} #{@age} 岁"
 end</code></pre>						
 					</section>
-					<p class="head-indent"><code>instance_eval()</code>方法是不允许传递参数的，而<code>instance_exec()</code>却是可以传递参数的，不过它们的作用是一样的。</p>
+					<p class="head-indent"><code>instance_eval()</code>方法是不允许传递块参数的，而<code>instance_exec()</code>会将方法的参数传递给块参数。</p>
 					<p class="head-indent">这么做看起来像是破坏了对象的封装性，不过这些方法我认为是为程序员服务的，而不是用户。</p>
 				</section>
 				<section>
