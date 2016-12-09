@@ -32,6 +32,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
+				<p class="head-indent"><u>本文的代码均在 Ruby 2.3.0 环境下测试通过。</u></p>
 				<section>
 					<h2>类</h2>
 					<p class="head-indent">我们都知道在面向对象编程中，我们大多数时候都是用类（class）在封装方法和变量，而 Ruby 中的类继承自模块（Module），接下来应该深入到类（模块）中去了解对象模型。</p>
@@ -95,15 +96,223 @@ p B.class_variables
 						<p class="head-indent">所以在选择上来说，如果不希望子类继承父类的变量，我们应该选择类实例变量，这样大多时候更安全一些。</p>
 					</section>
 					<section>
-						<h3>删除方法定义</h3>
-						<p class="head-indent">有时候，我们可能不想让一个子类继承父类的某些方法，但不能直接删除父类中的方法，否则会影响父类的其他子类继承该方法。</p>
+						<h3>类方法</h3>
+						<p class="head-indent">类方法事实上是一种特殊的方法，Ruby 把它命名为单例方法（singleton_method）。</p>
+						<pre class="language-ruby line-numbers"><code>class A
+  def self.new_method
+  end
+end
+
+p A.singleton_methods
+# ==> [:new_method]</code></pre>
+						<p class="head-indent"><b>单例方法定义时通常直接指定接受者，这样就会将该方法的调用权限限制在该接受者上，其他对象是无法调用该方法的。</b>其实，所谓的单例也就是这个意思，即单个实例对象的方法；而这区别于一个类的所有实例化对象共同拥有类中实例方法。</p>
+						<pre class="language-ruby line-numbers" data-start="8"><code>class A
+  def one_method
+  end
+end
+
+a = A.new
+b = A.new
+def b.other_method
+end
+
+p a.public_methods(false)
+# ==> [:one_method]
+p b.public_methods(false)
+# ==> [:other_method, :one_method]</code></pre>
+						<p class="head-indent">该示例说明了类中的实例方法<code>one_method()</code>是该类的所有实例对象共有的，而我们给其中一个对象定义了单例方法<code>other_method()</code>，该方法则是该单个实例所有的。</p>
+						<p class="head-indent">单例方法是相当有用的，当我们要单独给某个对象增加一些方法时，就不需要去另外创建一个类了。</p>
+					</section>
+					<section>
+						<h3>类宏</h3>
+						<p class="head-indent">Ruby 的对象默认是封装的，不允许外部直接访问对象的实例变量，所以就需要去定义<code>getter()</code>和<code>setter()</code>方法。</p>
+						<pre class="language-ruby line-numbers"><code>class Person
+  def name
+  	return @name
+  end
+  def name=(new_name)
+  	@name = new_name
+  end
+end</code></pre>
+						<p class="head-indent">其实，这一组读、写方法是没什么技术含量的，尤其是有多个需要外部访问的实例变量时，这样的写法反而使代码显得冗余。所以，我们需要更优雅的方式来解决这个问题。</p>
+						<pre class="language-ruby line-numbers"><code>class Person
+  attr_accessor :name
+end</code></pre>
+						<p class="head-indent">这就是 Ruby 给我们提供的解决方案，这显得优雅多了。<code>attr_accessor()</code>可接受多个参数，这些参数被作为实例变量的名称各创建一组读、写方法；同样地，<code>attr_reader()</code>用来创建实例变量的读方法，<code>attr_writer()</code>则用来创建实例变量的写方法。</p>
+						<p class="head-indent">对于多个实例变量我们只需使用同一个方法声明式地动态创建它们各自的读、写方法，这样的技术称之为类宏。<b>类宏的意义在于，对于业务逻辑非常相似的行为，我们不需要自己去一个个实现，我们可以写一个通用的模版然后提供一个方法接口来动态实现。</b></p>
+						<pre class="language-ruby line-numbers"><code>class Person
+  def self.attr_my_method(*variables)
+  	variables.each do |var|
+  	  define_method(var) { eval("@#{var}") }
+  	  define_method("#{var}=") { |value| eval("@#{var}=value") }
+  	end
+  end
+  attr_my_method :name
+end
+
+p Person.instance_methods(false)
+# ==> [:name, :name=]
+
+a = Person.new
+p a.instance_variables  # ==> []
+a.name = "MrWang"
+p a.name  # ==> "MrWang"
+p a.instance_variables  # ==> [:@name]</code></pre>
+						<p class="head-indent">看吧，其实我们自己也可以实现一个类似的定义实例变量读、写方法的统一接口方法<code>attr_my_method()</code>，类宏完美的诠释了动态生成代码的元编程能力。</p>
 					</section>
 				</section>
 				<section>
-					<h2>第二章</h2>
+					<h2>单例类</h2>
+					<p class="head-indent">前面刚说过类方法其实是个单例方法（singleton_method），作为一个实例对象独有的方法，它肯定是不存在于该对象所属类中的，同时它也不可能存在于该对象身上，因为对象自身只存在实例变量，实例方法只不过是个引用而已。</p>
+					<pre class="language-ruby line-numbers" data-line="6-9"><code>class Test
+  def self.new_method
+  end
+  p self.class
+
+  class << self
+  	p self.class
+  	p self.instance_methods(false)
+  end
+end
+# ==> Class
+# ==> Class
+# ==> [:new_method]</code></pre>
+					<p class="head-indent"><code>Test</code>是<code>Class</code>类的实例对象，我们通过<code>class</code>关键字又创建了一个独立作用域，然后我们发现这也是个类，是一个匿名类，而且<code>new_method()</code>方法竟然是该类的实例方法。于是，我们大胆的想象 Test 真正的所属类并不是 Class 类，而是这个匿名类。</p>
+					<p class="head-indent">其实，对象的<code>class()</code>方法骗了我们，该方法刻意隐藏了对象真正的所属类，它返回的是我们期望的结果，但不是正确的结果。<b>对象真正的所属类是一个单例类（singleton_class），它只有一个实例也就是该对象，单例方法是存在于该类中的，这也就解释了为什么单例方法只有该对象独有了。</b>我们有时候也称之为特征类（eigenclass）、匿名类、元类（metaclass）。</p>
+					<pre class="language-ruby line-numbers" data-start="14"><code>p Test.singleton_class.instance_methods(false)
+# ==> [:new_method]</code></pre>
+					<p class="head-indent">我们可以调用对象的<code>singleton_class()</code>方法来获取到单例类的引用。</p>
+					<section>
+						<h3>继承链</h3>
+						<p class="head-indent">单例类的存在似乎让 Ruby 的继承链变得更复杂了，现在我们深入到继承链中去看看。</p>
+						<pre class="language-ruby line-numbers" data-start="16"><code>p Test.ancestors
+# ==> [Test, Object, Kernel, BasicObject]
+p Test.singleton_class.ancestors
+# ==> [#&lt;Class:Test&gt;, #&lt;Class:Object&gt;, #&lt;Class:BasicObject&gt;, Class, Module, Object, Kernel, BasicObject]</code></pre>
+						<p class="head-indent"><code>ancestors()</code>方法可以获取类的继承链，我们发现<code>Test</code>的继承链正是我们期望的，而<code>Test.singleton_class</code>的继承链也并没有与前者发生冲突，它们像是两条平行线。<b>也就是说，一个类依次继承自超类，而该类的单例类也依次继承自超类的单例类，前者与后者的继承链是平行的。</b></p>
+						<p class="head-indent">类方法是单例方法，但是子类却可以调用父类的类方法，从单例类的继承链可以很好的理解这是为什么。<b>单例方法是单例类的实例方法，会随单例类继承链依次继承下来，所以子类可以调用父类的类方法也就不奇怪了。</b></p>
+						<pre class="language-ruby line-numbers" data-start="20"><code>p Test.new.singleton_class.ancestors
+# ==> [#&lt;Class:#&lt;Test:0x00000002766d60&gt;&gt;, Test, Object, Kernel, BasicObject]</code></pre>
+						<p class="head-indent"><b>而对于一个类的实例化对象来说，该实例的单例类继承自所属类的继承链，所以说实例对象的方法调用过程中，方法查找的起点并不是所属类而是单例类。</b>因此，单例方法是会覆盖所属类中同名实例方法的。</p>
+					</section>
+					<section>
+						<h3>单例方法</h3>
+						<p class="head-indent">下面，我们就来看看如何定义单例方法。大致的方法就两种，打开单例类定义与不打开单例类定义，但最终单例方法都是存在于单例类中的。</p>
+						<pre class="language-ruby line-numbers"><code># 打开单例类定义单例方法
+class << obj
+  def new_singleton_method
+  end
+end</code></pre>
+						<p class="head-indent">可以使用<code>class &lt;&lt; 对象引用</code>的方式打开单例类，在其中定义单例方法，这种方式会创建一个独立作用域。</p>
+						<pre class="language-ruby line-numbers"><code># 直接在对象上定义单例方法
+def obj.new_singleton_method
+end</code></pre>
+						<p class="head-indent">也可以使用<code>对象引用.方法名</code>的方式直接定义对象的单例方法，前面一直演示的类方法就采用的这种方式。</p>
+						<pre class="language-ruby line-numbers"><code># 在对象上下文中定义单例方法
+obj.instance_eval do
+  def new_sinleton_method
+  end
+end</code></pre>
+						<p class="head-indent"><code>instance_eval()</code>与<code>instance_exec()</code>方法都会获取对象的上下文（作用域），在其中也可以定义单例方法。事实上，这也是打开了对象的单例类，我们打印块中的<code>self</code>就能明白。</p>
+					</section>
 				</section>
 				<section>
-					<h2>第三章</h2>
+					<h2>方法</h2>
+					<p class="head-indent">我们通过对类（模块）深入的理解，了解了单例类和单例方法，对对象模型有了更深刻的认识。而方法又是类（模块）中的主角，下面来了解一下有关方法的新技术。</p>
+					<section>
+						<h3>对象扩展</h3>
+						<p class="head-indent">Ruby 的类是不支持多继承的，但提供了 MixIn 这种优雅的解决方案，通过<code>include()</code>与<code>prepend()</code>方法就可以将模块中的实例方法包含进目标类中，实现多重继承。</p>
+						<pre class="language-ruby line-numbers"><code>module MyModule
+  def other_method
+  end
+end
+
+class MyClass1
+  include MyModule
+
+  extend MyModule
+
+  def original_method
+  end
+end
+
+class MyClass2
+  prepend MyModule
+
+  def original_method
+  end
+end
+
+p MyClass1.ancestors
+# ==> [MyClass1, MyModule, Object, Kernel, BasicObject]
+p MyClass1.instance_methods.include?(:other_method)
+# ==> true
+p MyClass2.ancestors
+# ==> [MyModule, MyClass2, Object, Kernel, BasicObject]
+p MyClass2.instance_methods.include?(:other_method)
+# ==> true</code></pre>
+						<p class="head-indent"><b>可以看出两个方法都是将模块加入了继承链中，不过<code>include()</code>方法将模块作为该类的超类，意味着该类中的方法则会覆盖掉模块中的同名方法；而<code>prepend()</code>方法将模块作为该类的子类，意味着模块中的方法会覆盖掉该类中的同名方法。</b></p>
+						<p class="head-indent">不过，它实际上是将模块中的实例方法添加到了该类中，扩展了类的实例方法，因为类也是对象所以称为对象扩展，但为了区分实例对象，我们称之为<kbd>类扩展</kbd>。</p>
+						<p class="head-indent">类扩展是添加了实例方法，并没有扩展类对象本身；我们如果把类看做一个对象的话，在单例类中使用<code>include()</code>与<code>prepend()</code>方法，则会为类自身添加单例方法，我们称为<kbd>对象扩展</kbd>。</p>
+						<pre class="language-ruby line-numbers" data-start="30"><code>class MyClass1
+  class << self
+  	include MyModule
+  end
+end
+
+p MyClass1.singleton_class.ancestors
+# ==> [#&lt;Class:MyClass1&gt;, MyModule, #&lt;Class:Object&gt;, #&lt;Class:BasicObject&gt;, Class, ...]
+p MyClass1.singleton_class.instance_methods.include?(:other_method)
+# ==> true</code></pre>
+						<p class="head-indent">打开单例类反而显得繁琐，我们可以使用<code>extend()</code>方法实现同样的对象扩展的效果，它适用任何对象。</p>
+						<pre class="language-ruby line-numbers" data-start="30"><code>class MyClass1
+  extend MyModule
+end</code></pre>
+					</section>
+					<section>
+						<h3>方法别名</h3>
+						<p class="head-indent">如果我们的项目依赖于一个库，而该库中某个方法我们正好需要部分修改，但是我们又无法直接访问该库源文件，我们并不想直接覆盖重写，因为我们发现我们对该方法的内部实现细节并不知道。</p>
+						<pre class="language-ruby line-numbers"><code>class Object
+  # 方法别名
+  alias :original_to_s :to_s
+  
+  def to_s
+    "I will be changed to string --> " + original_to_s
+  end
+end
+
+p Object.new.to_s
+# ==> "I will be changed to string --> #&lt;Object:0x0000000283c320&gt;"</code></pre>
+						<p class="head-indent">使用<code>alias</code>关键字，以<code>alias :new_name :old_name</code>的形式即可将一个方法指定给两个不同的方法签名，然后我们可以重新定义旧的方法签名的实现，同时依然可以使用新方法签名去调用原来的方法。这样就解决了我们不清楚旧方法内部实现细节又想进行微修改的目的。</p>
+						<p class="head-indent"><code>alias_method()</code>方法具有相同的作用。</p>
+					</section>
+					<section>
+						<h3>删除方法</h3>
+						<p class="head-indent">Ruby 中父类的所有实例方法都会被子类继承，使用<code>public、protected、private</code>关键字只不过是修改了方法调用权限而已。有时候，我们可能不想让一个子类继承父类的某些方法，但不能直接删除父类中的方法，否则会影响父类的其他子类继承该方法。</p>
+						<pre class="language-ruby line-numbers" data-line="8"><code>class A
+  def a_method
+  end
+end
+
+class B < A
+  # 删除继承自A的方法
+  undef :a_method
+
+  def b_method
+  end
+end
+
+class C < A
+  def c_method
+  end
+end
+
+p B.instance_methods.include?(:a_method)
+# ==> false
+p C.instance_methods.include?(:a_method)
+# ==> true</code></pre>
+						<p class="head-indent">使用<code>undef()</code>或者<code>undef_method()</code>方法都可以将多个实例方法从类中删除。</p>
+					</section>					
 				</section>
 				<section>
 					<h2>参考</h2>
