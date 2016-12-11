@@ -141,7 +141,7 @@ end</code></pre>
 					</section>
 					<section>
 						<h3>块的作用域</h3>
-						<p class="head-indent"><b>一个代码块并不会创建独立作用域，它可以穿透（访问）自身定义时所处上下文的外部作用域，但是自身对外部作用域却是单向封闭的。</b></p>
+						<p class="head-indent"><b>一个代码块并不会创建独立作用域，它可以穿透（访问）自身定义时所处上下文的作用域，但是自身对外部作用域却是单向封闭的。</b></p>
 						<pre class="language-ruby line-numbers" data-line="10-13"><code>def test
   x = 100
   puts "method_local_x=#{x}"
@@ -215,8 +215,8 @@ end</code></pre>
 					<p class="head-indent">这么做看起来像是破坏了对象的封装性，不过这些方法我认为是为程序员服务的，而不是用户。</p>
 				</section>
 				<section>
-					<h2>独立块（Proc对象）</h2>
-					<p class="head-indent">我们一直说块是依赖于方法的，其实我们可以创建独立于方法的<code>Proc</code>可调用对象，也就是独立块。</p>
+					<h2>Proc对象</h2>
+					<p class="head-indent">我们一直说块是依赖于方法的，其实我们可以创建独立于方法的<code>Proc</code>可调用对象。</p>
 					<section>
 						<h3>Proc.new</h3>
 						<p class="head-indent">我们可以创建不依赖于特定方法的块，并存储下来供合适的时候多次重复利用，而<code>Proc</code>对象就是一种可调用对象，事实上我们已经见过它了。</p>
@@ -237,7 +237,7 @@ puts p.class  # ==> Proc</code></pre>
 						<p class="head-indent">其实与方法关联的块在使用尾部参数捕获后，去掉<code>&</code>操作符就是一个<code>Proc</code>对象，加上<code>&</code>又是一个块（可以传递给其他方法），这样可以相互转换。</p>
 					</section>
 					<section>
-						<h3>lambda表达式（匿名函数）</h3>
+						<h3>lambda表达式（匿名方法）</h3>
 						<p class="head-indent">还有一种方式可以创建<code>Proc</code>对象，也就是<code>lambda()</code>方法或者<code>-&gt;()</code>（箭头方法）。</p>
 						<pre class="language-ruby line-numbers" data-line="1,2"><code>inc = lambda { |x| x + 1 }
 add = ->(a,b) { puts a+b }

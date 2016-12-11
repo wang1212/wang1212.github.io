@@ -143,8 +143,8 @@ end</code></pre>
 						<pre class="language-ruby line-numbers"><code>class Person
   def self.attr_my_method(*variables)
   	variables.each do |var|
-  	  define_method(var) { eval("@#{var}") }
-  	  define_method("#{var}=") { |value| eval("@#{var}=value") }
+  	  define_method(var) { instance_variable_get("@#{var}") }
+  	  define_method("#{var}=") { |value| instance_variable_set("@#{var}", value) }
   	end
   end
   attr_my_method :name
@@ -229,18 +229,10 @@ end
 
 class MyClass1
   include MyModule
-
-  extend MyModule
-
-  def original_method
-  end
 end
 
 class MyClass2
   prepend MyModule
-
-  def original_method
-  end
 end
 
 p MyClass1.ancestors
@@ -268,6 +260,31 @@ p MyClass1.singleton_class.instance_methods.include?(:other_method)
 						<pre class="language-ruby line-numbers" data-start="30"><code>class MyClass1
   extend MyModule
 end</code></pre>
+					</section>
+					<section>
+						<h3>钩子方法</h3>
+						<p class="head-indent">我们知道调用方法其实是一个消息传递的过程，如果这个消息被传送给接受者时同时也被另一个方法捕获，那么这样的场景就是运行了钩子方法。</p>
+						<pre class="language-ruby line-numbers"><code>module MyModule
+  def self.included(mixIn_class)
+    p "Me was mixed into #{mixIn_class}"
+  end
+end
+
+class MyClass
+  include MyModule
+
+  def self.inherited(sub_class)
+    p "Me was inherited by #{sub_class}"
+  end
+end
+# ==> "Me was mixed into MyClass"
+
+class SubClass < MyClass
+end
+# ==> "Me was inherited by SubClass" 
+</code></pre>
+						<p class="head-indent">这里的<code>included()</code>与<code>inherited()</code>方法就是两个钩子函数，它们在模块自身被混入的时候捕获混入类的信息，以及在类自身被子类继承的时候捕获子类信息。其实只要得到混入类和子类的引用可以干很多事，在这里只是简单的打印了一行消息。</p>
+						<p class="head-indent">当然，Ruby 里的钩子方法远不止这些，像我们定义一个方法时其实就是在给类添加方法，这时的钩子方法就为<code>method_added()</code>，类似的还有很多，我们可以合理的运用钩子方法做一些特殊的处理。</p>
 					</section>
 					<section>
 						<h3>方法别名</h3>
