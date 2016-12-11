@@ -193,7 +193,7 @@ p Test.singleton_class.ancestors
 						<p class="head-indent">类方法是单例方法，但是子类却可以调用父类的类方法，从单例类的继承链可以很好的理解这是为什么。<b>单例方法是单例类的实例方法，会随单例类继承链依次继承下来，所以子类可以调用父类的类方法也就不奇怪了。</b></p>
 						<pre class="language-ruby line-numbers" data-start="20"><code>p Test.new.singleton_class.ancestors
 # ==> [#&lt;Class:#&lt;Test:0x00000002766d60&gt;&gt;, Test, Object, Kernel, BasicObject]</code></pre>
-						<p class="head-indent"><b>而对于一个类的实例化对象来说，该实例的单例类继承自所属类的继承链，所以说实例对象的方法调用过程中，方法查找的起点并不是所属类而是单例类。</b>因此，单例方法是会覆盖所属类中同名实例方法的。</p>
+						<p class="head-indent"><b>而对于一个类的实例化对象来说，该实例的单例类继承自所属类的继承链，所以说实例对象的方法调用过程中，方法查找（Method Lookup）的起点并不是所属类而是单例类。</b>因此，单例方法是会覆盖所属类中同名实例方法的。</p>
 					</section>
 					<section>
 						<h3>单例方法</h3>
