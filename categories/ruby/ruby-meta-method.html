@@ -36,7 +36,52 @@
 				<section>
 					<h2>方法（method）</h2>
 					<p class="head-indent">在 OOP（面向对象编程）思想中，对象之间通过消息传递来进行交互，其实所谓的消息就是方法。当我们调用了一个对象的某个方法时，意味着当前对象给目标对象发送了一条消息。所以说，方法也是一个很重要的概念。</p>
-					<p class="head-indent">下面有一个这样的场景：我们从图书馆办卡、借书、还书的时候都需要机器或者图书管理员作为中介帮助我们进行这些操作，而不能自己直接去操作图书馆数据库。</p>
+					<section>
+						<h3>修饰符</h3>
+						<p class="head-indent"><b>Ruby 中的实例方法有三种修饰符，<code>public</code>、<code>protected</code>、<code>private</code>，修饰符只是限制了实例方法的调用权限，并不影响继承，所有的超类方法都会被子类继承。</b></p>
+						<pre class="language-ruby line-numbers"><code># 声明形式修饰方法
+class Test
+  public
+  # 这里定义公共方法
+  protected
+  # 这里定义保护方法
+  private
+  # 这里定义私有方法
+end
+
+# 标记形式修饰方法
+class Test
+  def method1 ; end
+  def method2 ; end
+  def method3 ; end
+  # 标记，可接受多个方法名参数
+  protected :method2
+  private :method3
+end</code></pre>
+						<p class="head-indent">其中<code>public</code>是默认的修饰符，代表方法是允许外部调用的；而<code>private</code>修饰的方法是不允许外部调用的，只允许在对象内部调用且不需要显式指出接受者，默认为<code>self</code>，否则会报错。</p>
+						<p class="head-indent">另外需要注意的是，<code>protected</code>修饰的方法比较特殊，必须遵循：<b>接受者与发送者均为同一个类或者具有继承关系的两个类的实例。</b>其实，就是说保护方法只能在实例方法中调用，在其它地方是不能调用的。</p>
+						<pre class="language-ruby line-numbers"><code>class SuperClass
+  def m1(obj)
+  	# 保护方法只能在实例方法中调用
+    obj.m
+  end
+  protected
+  def m
+  	p "1"
+  end
+end
+
+class SubClass < SuperClass
+end
+
+# 同一个类的不同实例
+SuperClass.new.m1(SuperClass.new)  # ==> 1
+# 超类与子类实例
+SuperClass.new.m1(SubClass.new)  # ==> 1
+SubClass.new.m1(SuperClass.new)  # ==> 1</code></pre>
+					</section>
+					<p class="head-indent">用 Ruby 来编程的话，我们大多数时候写的都是公共方法，只要能分辨出不同方法的调用权限即可，而且无论什么方法都是会被子类继承的。</p>
+					<p class="head-indent">现在可以学习一些元编程的技巧了。下面有一个这样的场景：我们从图书馆办卡、借书、还书的时候都需要机器或者图书管理员作为中介帮助我们进行这些操作，而不能自己直接去操作图书馆数据库。</p>
 					<pre class="language-ruby line-numbers"><code>class Library
   def get_card(name,book_id=nil)
     ...
@@ -51,6 +96,7 @@
     puts "#{name}还书#{book_id}"
   end
 end
+
 class Manager
   def initialize
     @library = Library.new
@@ -205,7 +251,7 @@ t.respond_to?(:test3)  # ==> false</code></pre>
 				</section>
 				<section>
 					<h2>方法参数</h2>
-					<p class="head-indent">Ruby 中的方法目前支持<kbd>常规参数</kbd>、<kbd>默认值参数</kbd>、<kbd>关键字参数</kbd>、<kbd>数组参数（可变参数）</kbd>、<kbd>Hash参数（可变参数）</kbd>。</p>
+					<p class="head-indent">Ruby 中的方法参数目前支持<b>常规参数</b>、<b>默认值参数</b>、<b>关键字参数</b>、<b>Array/Hash参数（可变参数）</b>、<b>块参数</b>。</p>
 					<section>
 						<h3>常规参数</h3>
 						<p class="head-indent">特点：数量固定，必须传入值。</p>
@@ -217,38 +263,41 @@ test(1)  # ==> 1</code></pre>
 					</section>
 					<section>
 						<h3>默认值参数</h3>
-						<p class="head-indent">特点：数量固定，不传入值时采用默认值，否则覆盖默认值。</p>
-						<pre class="language-ruby line-numbers"><code>def test(a=1)
-  p a
+						<p class="head-indent">特点：数量固定，不传入值时采用默认值，否则覆盖默认值；多个默认值参数位置必须连续。</p>
+						<pre class="language-ruby line-numbers"><code>def test(a, b='b', c='c', d)
+  p a: a, b: b, c: c, d: d
 end
 
-test()  # ==> 1
-test(2)  # ==> 2</code></pre>
+test(1, 2)
+# ==> {:a=>1, :b=>"b", :c=>"c", :d=>2}
+test(1, 2, 3)
+# ==> {:a=>1, :b=>2, :c=>"c", :d=>3}
+test(1, 2, 3, 4)
+# ==> {:a=>1, :b=>2, :c=>3, :d=>4}</code></pre>
 					</section>
 					<section>
 						<h3>关键字参数</h3>
 						<p class="head-indent">特点：数量固定，必须对应，不传入值时采用默认值，否则覆盖默认值。</p>
-						<pre class="language-ruby line-numbers"><code>def test(a: ,b: 2,c: )
+						<pre class="language-ruby line-numbers"><code>def test(a:, b:'b', c:)
   p "#{a} #{b} #{c}"
 end
 
-test(a:1, c:3)  # ==> "1 2 3"
-test(a:1, b:22, c:3)  # ==> "1 22 3"</code></pre>
+test(a:1, c:3)  # ==> "1 b 3"
+test(a:1, b:2, c:3)  # ==> "1 2 3"</code></pre>
 					</section>
 					<section>
-						<h3>数组参数</h3>
-						<p class="head-indent">特点；数量可变，方法内部通过数组索引访问。</p>
-						<pre class="language-ruby line-numbers"><code>def test(*a)
-  p a
+						<h3>Array/Hash参数</h3>
+						<p class="head-indent">特点：数量可变，方法内部通过数组索引和键值访问；必须位于参数表末尾。</p>
+						<pre class="language-ruby line-numbers"><code>def test(a, *b)
+  p a: a, b: b
 end
 
-test()  # ==> []
-test(1)  # ==> [1]
-test(1,2)  # ==> [1,2]</code></pre>
-					</section>
-					<section>
-						<h3>Hash参数</h3>
-						<p class="head-indent">特点：数量可变，方法内部直接通过 key 访问。</p>
+test(1)
+# ==> {:a=>1, :b=>[]}
+test(1, 2)
+# ==> {:a=>1, :b=>[2]}
+test(1, 2, 3)
+# ==> {:a=>1, :b=>[2, 3]}</code></pre>
 						<pre class="language-ruby line-numbers"><code>def test(**a)
   p a
 end
@@ -256,13 +305,41 @@ end
 test()  # ==> {}
 test(a:1)  # ==> {:a=>1}
 test(a:1,b:2)  # ==> {:a=>1, :b=>2}</code></pre>
+						<p class="head-indent">属于数组参数的还有一种对应赋值参数，就是把多个参数看为一个整体参数进行对应赋值。</p>
+						<pre class="language-ruby line-numbers"><code>class A
+  def a(a, (b, c), d)
+	p a: a, b: b, c: c, d: d
+  end
+end
+
+A.new.a(1, 2, 3)
+# ==> {:a=>1, :b=>2, :c=>nil, :d=>3}
+A.new.a(1, [2, 3], 4)
+# ==> {:a=>1, :b=>2, :c=>3, :d=>4}
+A.new.a(1, [2, 3, 4], 5)
+# ==> {:a=>1, :b=>2, :c=>3, :d=>5}</code></pre>
 					</section>
 					<p class="head-indent">要注意的是，这几种参数可组合在一起，但应符合：</p>
 					<ul>
-						<li>常规参数是按传入顺序匹配，无论有没有默认值；</li>
-						<li>关键字参数是按关键字匹配，与顺序无关，但必须指定关键字；</li>
-						<li>可变参数（数组或Hash）应该放在参数表末尾。</li>
+						<li>常规参数是按传入顺序匹配；关键字参数是按关键字匹配，与顺序无关，但必须指定关键字；</li>
+						<li>当常规参数与关键字混合使用时，所有常规参数必须在任意关键字参数前传入；</li>
+						<li>可变参数（Array 或 Hash）应该放在参数表末尾。</li>
 					</ul>
+					<section>
+						<h3>块参数</h3>
+						<p class="head-indent">事实上，每个方法还有一个隐藏的块参数，默认在参数表末尾，并用<code>&</code>操作符表示，用来捕获该方法的块。</p>
+						<pre class="language-ruby line-numbers"><code>class Array
+  def every(&block)
+    self.each(&block)
+  end
+end
+
+[1, 2, 3].every { |value| puts value }
+# ==> 1
+# ==> 2
+# ==> 3</code></pre>
+						<p class="head-indent">我们捕获到块之后就可以将块传入另一个方法，如果不需要将块传给其它方法则直接采用<code>yield</code>关键字调用块更方便，性能更好。</p>
+					</section>
 				</section>
 				<section>
 					<h2>结语</h2>
