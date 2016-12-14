@@ -251,19 +251,17 @@ t.respond_to?(:test3)  # ==> false</code></pre>
 				</section>
 				<section>
 					<h2>方法参数</h2>
-					<p class="head-indent">Ruby 中的方法参数目前支持<b>常规参数</b>、<b>默认值参数</b>、<b>关键字参数</b>、<b>Array/Hash参数（可变参数）</b>、<b>块参数</b>。</p>
+					<p class="head-indent">Ruby 中的方法参数目前支持<b>位置参数</b>、<b>关键字参数</b>、<b>Array/Hash参数（可变参数）</b>、<b>块参数</b>。</p>
 					<section>
-						<h3>常规参数</h3>
-						<p class="head-indent">特点：数量固定，必须传入值。</p>
-						<pre class="language-ruby line-numbers"><code>def test(a)
-  p a
+						<h3>位置参数</h3>
+						<p class="head-indent">特点：数量固定，必须按顺序传入值，可以有默认值。</p>
+						<pre class="language-ruby line-numbers"><code>def test(a, b)
+  p a: a, b: b
 end
 
-test(1)  # ==> 1</code></pre>
-					</section>
-					<section>
-						<h3>默认值参数</h3>
-						<p class="head-indent">特点：数量固定，不传入值时采用默认值，否则覆盖默认值；多个默认值参数位置必须连续。</p>
+test(1, 2)
+# ==> {:a=>1, :b=>2}</code></pre>
+						<p class="head-indent">位置参数可以带有默认值，不传入值时采用默认值，否则覆盖默认值；多个默认值参数位置必须连续，Ruby 会首先填充没有默认值的参数。</p>
 						<pre class="language-ruby line-numbers"><code>def test(a, b='b', c='c', d)
   p a: a, b: b, c: c, d: d
 end
@@ -277,7 +275,7 @@ test(1, 2, 3, 4)
 					</section>
 					<section>
 						<h3>关键字参数</h3>
-						<p class="head-indent">特点：数量固定，必须对应，不传入值时采用默认值，否则覆盖默认值。</p>
+						<p class="head-indent">特点：数量固定，必须显式指出关键字，不传入值时采用默认值，否则覆盖默认值。</p>
 						<pre class="language-ruby line-numbers"><code>def test(a:, b:'b', c:)
   p "#{a} #{b} #{c}"
 end
@@ -321,8 +319,8 @@ A.new.a(1, [2, 3, 4], 5)
 					</section>
 					<p class="head-indent">要注意的是，这几种参数可组合在一起，但应符合：</p>
 					<ul>
-						<li>常规参数是按传入顺序匹配；关键字参数是按关键字匹配，与顺序无关，但必须指定关键字；</li>
-						<li>当常规参数与关键字混合使用时，所有常规参数必须在任意关键字参数前传入；</li>
+						<li>位置参数是按传入顺序匹配；关键字参数是按关键字匹配，与顺序无关，但必须指定关键字；</li>
+						<li>当位置参数与关键字混合使用时，所有位置参数必须放在任意关键字参数前面；</li>
 						<li>可变参数（Array 或 Hash）应该放在参数表末尾。</li>
 					</ul>
 					<section>
