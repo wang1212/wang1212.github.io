@@ -133,7 +133,7 @@ manager.controller("return_book","小李",111)
 					<section>
 						<h3>动态派发</h3>
 						<p class="head-indent">Manager 类代理了读者的各种业务操作，并在其中可以进行相应过滤，保证图书馆数据安全。不过，我们可以看到<code>Manager</code>中<code>controller()</code>方法是通过<code>case...when</code>来代理读者业务的，如果<code>Library</code>增加了新业务，那么该方法似乎又要添加新的<code>when</code>子句，业务如果很多呢？<code>controller()</code>方法似乎会变得臃肿，却实际上都在进行无聊的重复。</p>
-						<p class="head-indent">下面我们要介绍的就是<kbd>动态派发</kbd>技术。</p>
+						<p class="head-indent">下面我们要介绍的就是<strong>动态派发</strong>技术。</p>
 						<pre class="language-ruby line-numbers" data-line="5"><code>class Manager
   def controller(type,name,book_id=nil)
     ...
@@ -176,7 +176,7 @@ machine.book11
 machine.book22
 machine.book33</code></pre>
 						<p class="head-indent">该机器提供了具体的方法让读者免费阅览相应的书籍，而且<code>book11()</code>、<code>book22()</code>、<code>book33()</code>方法内部业务逻辑相似，更重要的这些可供免费阅览的书籍是定期更新的，那么这些相似的方法也就需要重新去写，这是一个多么枯燥的造轮子的过程。</p>
-						<p class="head-indent">下面我们要介绍的就是<kbd>动态定义</kbd>技术。</p>
+						<p class="head-indent">下面我们要介绍的就是<strong>动态定义</strong>技术。</p>
 						<pre class="language-ruby line-numbers" data-line="5-10"><code>class Machine
   @@free_id = [11,22,33]
   def initialize

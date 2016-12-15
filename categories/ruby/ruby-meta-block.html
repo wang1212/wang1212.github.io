@@ -183,7 +183,7 @@ end
 Inner.new.func()
 # ==> method->main:a</code></pre>
 						<p class="head-indent">看见了吧，Ruby 严格的作用域机制被完全打破，整个作用域由里向外依次透明化，但块作用域是单向封闭的，所以由外向里又是封闭的。</p>
-						<p class="head-indent">也许你会觉得不可思议，这被称为扁平化作用域，官方名称则为<kbd>嵌套文法作用域</kbd>，我们可以利用该技术来共享作用域。</p>
+						<p class="head-indent">也许你会觉得不可思议，这被称为扁平化作用域，官方名称则为<strong>嵌套文法作用域</strong>，我们可以利用该技术来共享作用域。</p>
 						<p class="head-indent">这里需要说明一下，方法也是一个<code>Method</code>对象，可以通过<code>unbind()</code>方法与所属对象解绑，再用<code>bind()</code>方法与其它所属同类的对象重新绑定。同时，方法可以调用<code>to_proc()</code>方法转化成一个 Proc 对象，也可以使用<code>define_method()</code>方法将块转化为一个方法，如示例中所示。<b>方法绑定的作用域是所属对象的作用域，而块绑定的是定义块的作用域。</b></p>
 					</section>
 					<section>
@@ -255,7 +255,7 @@ puts inc.class  # ==> Proc</code></pre>
 							<dt>参数检查</dt>
 							<dd>前者创建的 Proc 对象调用时参数可多可少，多的忽略，少的赋为<code>nil</code>；而使用<code>lambda()</code>创建的 Proc 对象调用时会进行参数个数检查，必须对应，传入的参数不能多也不能少。</dd>
 						</dl>
-						<p class="head-indent">看起来，<code>lambda()</code>创建的 Proc 对象更像方法，我们称之为<kbd>匿名方法</kbd>。</p>
+						<p class="head-indent">看起来，<code>lambda()</code>创建的 Proc 对象更像方法，我们称之为<strong>匿名方法</strong>。</p>
 					</section>
 				</section>
 				<section>

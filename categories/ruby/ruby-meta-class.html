@@ -244,8 +244,8 @@ p MyClass2.ancestors
 p MyClass2.instance_methods.include?(:other_method)
 # ==> true</code></pre>
 						<p class="head-indent"><b>可以看出两个方法都是将模块加入了继承链中，不过<code>include()</code>方法将模块作为该类的超类，意味着该类中的方法则会覆盖掉模块中的同名方法；而<code>prepend()</code>方法将模块作为该类的子类，意味着模块中的方法会覆盖掉该类中的同名方法。</b></p>
-						<p class="head-indent">不过，它实际上是将模块中的实例方法添加到了该类中，扩展了类的实例方法，因为类也是对象所以称为对象扩展，但为了区分实例对象，我们称之为<kbd>类扩展</kbd>。</p>
-						<p class="head-indent">类扩展是添加了实例方法，并没有扩展类对象本身；我们如果把类看做一个对象的话，在单例类中使用<code>include()</code>与<code>prepend()</code>方法，则会为类自身添加单例方法，我们称为<kbd>对象扩展</kbd>。</p>
+						<p class="head-indent">不过，它实际上是将模块中的实例方法添加到了该类中，扩展了类的实例方法，因为类也是对象所以称为对象扩展，但为了区分实例对象，我们称之为<strong>类扩展</strong>。</p>
+						<p class="head-indent">类扩展是添加了实例方法，并没有扩展类对象本身；我们如果把类看做一个对象的话，在单例类中使用<code>include()</code>与<code>prepend()</code>方法，则会为类自身添加单例方法，我们称为<strong>对象扩展</strong>。</p>
 						<pre class="language-ruby line-numbers" data-start="30"><code>class MyClass1
   class << self
   	include MyModule

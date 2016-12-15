@@ -20,6 +20,11 @@ li > pre {
 section[id*="paragraph"] p, header p {
 	text-align: justify;
 }
+strong { 
+	background-color: #f7f7f9;
+	padding: 0.2rem 0.4rem;
+	border-radius: 0.25rem;
+}
 
 .head-indent {
 	text-indent: 2em;
