@@ -12,17 +12,27 @@
 	<link rel="stylesheet" href="/source/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/source/css/font-awesome.min.css">
 	<style>
+		button {
+			outline: none !important;
+		}	
 		body {
 			font-family: "FontAwesome", Helvetica,Tahoma,Arial,"Microsoft YaHei","华文细黑",sans-serif;
+			color: white;
+			text-align: center;
 			background: url(/source/images/bg.jpg) no-repeat;
 			background-position: top center;
 			background-attachment: fixed;
 			background-size: cover cover;
+			padding-top: 6rem;
 			padding-bottom: 2.5rem;			
 		}
 		@media (min-width: 768px){
 			body {
 				background-size: 100% 100%;
+			}
+			#top-navbar {
+				display: block !important;
+				height: auto !important;
 			}
 		}
 		.head-indent {
@@ -38,19 +48,49 @@
 		#info, #contact, #about{
 			background-color: rgba(10, 10, 10, 0.35);
 		}
-		#foot-nav {
-			font-size: 1.5rem;
-			position: fixed;
-			right: 2rem;
-			bottom: 0;
-			z-index: 20;
+		#home-page, .navbar-toggler {
+			color: orange;
+			font-size: 1.25rem;
+			text-decoration: none;
+			padding-top: .425rem;
+    		padding-bottom: .425rem;
+		}
+		.navbar {
+			background-color: rgba(20,20,20, .4);
+		}
+		.navbar-nav .nav-item {
+			color: white;
+			font-size: 1.25rem;
+			border: 1px solid rgba(188,188,188, .0);
+			border-radius: .35rem;
+			float: none;
+			margin: 0 1rem;
+			padding: .425rem .8rem;
+		}
+		.navbar-nav .nav-item:hover {
+			color: orange;
+			border: 1px solid rgba(188,188,188, .3);
+			box-shadow: 1px 1px 5px rgba(188,188,188, .6);
+		}
+		#top-navbar {
+			overflow: hidden;
 		}
 	</style>
 </head>
-<body class="text-xs-center text-white">
+<body>
+	<nav class="navbar navbar-fixed-top">
+		<div class="container">
+			<a id="home-page" class="nav float-xs-left" href="/"><span class="fa fa-home"></span>&nbsp;不如怀念</a>
+			<div class="clearfix hidden-md-up">
+				<button class="navbar-toggler float-xs-right fa fa-bars" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation"></button>
+			</div>
+			<ul id="top-navbar" class="nav navbar-nav collapse navbar-toggleable-sm">
+				<a href="/book_of_ruby/" class="nav-item nav-link float-md-right">Book Of Ruby</a>
+				<a href="/categories/" class="nav-item nav-link float-md-right">博文 Categories</a>
+			</ul>
+		</div>
+	</nav>
 	<div class="container">
-		<div class="hidden-sm-down" style="height: 5rem;"></div>
-		<div class="hidden-md-up" style="height: 2rem;"></div>
 		<div class="row">
 			<div class="col-lg-8 offset-lg-2">
 				<div id="info" class="card card-block mx-auto">
@@ -130,10 +170,47 @@
 		</div>
 	</div>
 	<footer>All Images and Contents <span class="fa fa-copyright"></span> 2016</footer>
-	<nav id="foot-nav">
-		<ul class="list-inline">
-			<a class="fa fa-list-alt btn btn-outline-info" href="/categories/"></a>
-		</ul>
-	</nav>
+
+	<script>
+		(function(){
+			var button = document.getElementsByClassName('navbar-toggler')[0],
+				top_navbar = document.getElementById('top-navbar'),
+				height;
+
+			top_navbar.style.display = 'block';				
+			height = top_navbar.offsetHeight+5,
+			top_navbar.style.height = '0px';
+
+			function slideToggle(ele, height, up){
+				var h = +ele.style.height.match(/\d+/)[0];
+
+				window.ele = ele;
+				window.height = height;
+				window.up = up;
+
+				if(up == true && h > 0){
+					ele.style.height = h - 1 + 'px';
+					return setTimeout('slideToggle(ele, height, up)', Math.ceil(300/height));
+				}else if(up == false && h < height){
+					ele.style.height = h + 1 + 'px';
+					return setTimeout('slideToggle(ele, height, up)', Math.ceil(300/height));
+				}
+
+				window.ele = null;
+				window.height = null;
+				window.up = null;
+			}
+
+			button.onclick = function(){
+				if(+top_navbar.style.height.match(/\d+/)[0] <= 0){
+					slideToggle(top_navbar, height, false);
+				}else{
+					slideToggle(top_navbar, height, true);
+				}
+			}
+
+			window.slideToggle = slideToggle;
+		})();
+	</script>
 </body>
 </html>

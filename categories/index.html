@@ -123,13 +123,13 @@
 				}
 
 				$('.container > .list-group')
-					.css('display', 'none')
+					.fadeOut(0)
 					.append($(str))
 					.children()
 					.first()
 					.html('有 ' + num + ' 个类别，共 ' + articles + ' 篇文章。加油喔！<small class="hidden-sm-down text-muted">There are ' + num + ' categories, ' + articles + ' articles. Come on!</small>')
 					.end().end()
-					.slideDown();
+					.fadeIn(1000);
 			});
 
 			$('body > .container').on('click','li[id*="cate-"] .list-group-item-heading',function(){
@@ -145,7 +145,7 @@
 						for (var i in data[key]){
 							str += '<a href="' + data[key][i].path + '" class="list-group-item list-group-item-action list-group-item-success">' + data[key][i].title + '<span class="hidden-sm-down float-xs-right">' + data[key][i].time + '</span></a>';
 						}
-						$ul.css('display', 'none').html(str).slideToggle();
+						$ul.slideUp(0).html(str).slideDown(1000);
 					});
 					$ul.data('hasData', true);
 				}

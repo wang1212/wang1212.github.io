@@ -51,13 +51,6 @@
 		#side-bar a:hover, #side-bar .on-scroll {
 			color: orange;
 		}
-		.loading, .error {
-			height: 100%;
-			text-align: center;
-			position: fixed;
-			top: 45%;
-			left: 50%;
-		}
 		#foot-nav {
 			font-size: 1.75rem;
 			text-align: center;
@@ -85,7 +78,24 @@
 		#foot-nav a,#foot-nav a:hover {
 			color: white;
 			text-decoration: none;
-		}		
+		}
+		#content {
+			text-align: justify;
+			padding-top: 2rem;
+			padding-bottom: 4rem;
+		}
+		#content h1, #content h2 {
+			text-align: center;
+		}
+		.head-indent {
+			text-indent: 2em;
+		}
+		.note {
+			border: 1px solid rgba(88, 88, 88, .3);
+			border-radius: 5px;
+			box-shadow: 3px 3px 8px rgba(88, 88, 88, .8);
+			padding: 1rem;
+		}
 	</style>
 </head>
 <body>
@@ -146,7 +156,7 @@
 				var $content = $("#content"),
 					$side_bar = $('#side-bar');
 
-				$content.html("<p class='loading'>正在奋力加载哟...</p>");
+				$content.html("<h1>正在奋力加载哟...</h1>");
 				$('#progress-bar').width(0);
 				$side_bar.find('a').removeClass('on-scroll').siblings('ul').css('display', 'none');
 
@@ -159,12 +169,12 @@
 							var $a = $side_bar.find('a[href="#'+url+'"]');
 							document.title = $a.text();
 							$a.addClass('on-scroll').siblings('ul').css('display', 'block');
-							$content.hide(0).html(html).show(1000).append($('<script src="/source/js/prism.js">'));
+							$content.fadeOut(0).html(html).fadeIn(1000).append($('<script src="/source/js/prism.js">'));
 							generateCatelog($a);
 					})
 					.fail(function(){
 							document.title = "错误，页面不存在";
-							$content.html("<p class='error'>加载失败了，请求的页面不存在</p>")
+							$content.html("<h1>加载失败了，请求的页面不存在</h1>")
 					});
 				}else{
 					location.hash = '#homepage';
@@ -247,11 +257,9 @@
 				w_scrollTop > $self.height() ? $top.show(1000) : $top.hide(1000);
 			});
 
-			$('#to-top').click = function(){
-				$('html,body').animate({
-					scrollTop:0
-				}, 'slow');
-			};
+			$('#to-top').on('click', function(){
+				$(window).scrollTop(0);
+			});
 
 			showContent(url);
 		});
