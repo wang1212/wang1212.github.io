@@ -246,7 +246,7 @@ t = Test.new
 t.respond_to?(:test1)  # ==> true
 t.respond_to?(:test2)  # ==> true
 t.respond_to?(:test3)  # ==> false</code></pre>
-						<p class="head-indent"><b>注意：无论在对象内部还是外部，私有方法都是不能响应的（false），而且私有方法调用时是不需要显式指出接受者的，否则会报错。</b></p>
+						<p class="head-indent"><b>注意：该方法默认只询问<code>public</code>公有方法，若同时要询问保护方法和私有方法，需给定第二个参数为<code>true</code>；而且私有方法调用时是不需要显式指出接受者的，否则会报错。</b></p>
 					</section>
 				</section>
 				<section>

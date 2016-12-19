@@ -52,9 +52,7 @@ $(function() {
 			$target = $s_bar.children('ul');
 
 			if ($target.length === 0) {
-				$target = $s_bar
-					.append($('<ul>'))
-					.children('ul');
+				$target = $s_bar.append($('<ul>')).children('ul');
 			}
 
 		} else {

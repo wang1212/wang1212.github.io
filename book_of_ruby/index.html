@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no">	
+	<title>Book Of Ruby</title>
+	<meta name="keywords" content="Ruby,编程" />
+	<meta name="description" content="这是一本关于Ruby的书籍，带领读者深入Ruby的编程世界，感受编程的乐趣" />	
+	<link rel="stylesheet" href="/source/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/source/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/source/css/prism.css">
+	<style>
+		body {
+			font-family: "FontAwesome", Helvetica,Tahoma,Arial,"Microsoft YaHei","华文细黑",sans-serif;		
+		}
+		#progress-bar {
+			height: 3px;
+			background-color: orange;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 21;
+		}		
+		#side-bar {
+			color: white;
+			background-color: black;
+			padding: 2rem 0 2rem 2rem;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 20;
+			height: 100%;
+			overflow-y: auto;
+		}
+		#side-bar ul {
+			font-size: 0.9em;
+			list-style-type: none;
+			padding-left: 1rem;
+		}		
+		#side-bar > ul {
+			font-size: 1rem;
+			list-style-type: disc;
+			padding-left: 2rem;
+			display: block !important;
+		}		
+		#side-bar a {
+			color: white;
+			text-decoration: none;
+		}
+		#side-bar a:hover, #side-bar .on-scroll {
+			color: orange;
+		}
+		.loading, .error {
+			height: 100%;
+			text-align: center;
+			position: fixed;
+			top: 45%;
+			left: 50%;
+		}
+		#foot-nav {
+			font-size: 1.75rem;
+			text-align: center;
+			color: white;
+			height: 2.5rem;
+			line-height: 2.5rem;
+			position: fixed;
+			right: 2.25rem;
+			bottom: 1.25rem;
+			z-index: 20;
+		}
+		#foot-nav > div {
+			width: 2.5rem;
+			border-radius: 2.5rem;
+			background-color: black;
+			float: right;
+			margin-left: 0.75rem;
+			cursor: pointer;
+			opacity: 0.5;
+			transition: opacity .8s,0s linear;
+		}		
+		#foot-nav  div:hover {
+			opacity: 1;
+		}
+		#foot-nav a,#foot-nav a:hover {
+			color: white;
+			text-decoration: none;
+		}		
+	</style>
+</head>
+<body>
+	<div id="progress-bar"></div>
+	<div class="container">
+		<div class="row">
+			<nav id="side-bar" class="col-xl-3 col-md-4 hidden-sm-down">
+				<p class="h1">Book Of Ruby</p>
+				<p>作者：Huw Collingbourne</p>
+				<p>翻译：<a href="https://wang1212.github.io/">不如怀念</a></p>
+				<p>目录：</p>
+				<ul>
+					<li><a href="#homepage">主页</a></li>
+					<li><a href="#author">关于作者</a></li>
+					<li><a href="#introduction">前言</a></li>
+					<li><a href="#chapter1">第一章</a></li>
+					<li><a href="#chapter2">第二章</a></li>
+					<li><a href="#chapter3">第三章</a></li>
+					<li><a href="#chapter4">第四章</a></li>
+					<li><a href="#chapter5">第五章</a></li>
+					<li><a href="#chapter6">第六章</a></li>
+					<li><a href="#chapter7">第七章</a></li>
+					<li><a href="#chapter8">第八章</a></li>
+					<li><a href="#chapter9">第九章</a></li>
+					<li><a href="#chapter10">第十章</a></li>
+					<li><a href="#chapter11">第十一章</a></li>
+					<li><a href="#chapter12">第十二章</a></li>
+					<li><a href="#chapter13">第十三章</a></li>
+					<li><a href="#chapter14">第十四章</a></li>
+					<li><a href="#chapter15">第十五章</a></li>
+					<li><a href="#chapter16">第十六章</a></li>
+					<li><a href="#chapter17">第十七章</a></li>
+					<li><a href="#chapter18">第十八章</a></li>
+					<li><a href="#chapter19">第十九章</a></li>
+					<li><a href="#chapter20">第二十章</a></li>
+					<li><a href="#appendices">附录</a></li>
+					<li><a href="#indexes">索引</a></li>
+				</ul>
+			</nav>
+			<div id="content" class="col-xl-9 offset-xl-3 col-md-8 offset-md-4"></div>	
+		</div>
+	</div>
+	<nav id="foot-nav">
+		<div id="to-top" style="display:none">
+			<span class="fa fa-arrow-up"></span>
+		</div>
+		<div>
+			<a href="/" class="fa fa-home"></a>
+		</div>
+	</nav>	
+
+	<script src="/source/js/jquery-3.1.0.min.js"></script>
+	<script>
+		$(function(){
+			var url = location.hash.match(/\w+(?=-)?/) + '';
+
+			function showContent(url){
+				var $content = $("#content"),
+					$side_bar = $('#side-bar');
+
+				$content.html("<p class='loading'>正在奋力加载哟...</p>");
+				$('#progress-bar').width(0);
+				$side_bar.find('a').removeClass('on-scroll').siblings('ul').css('display', 'none');
+
+				if (url) {
+					$.ajax({
+						url: url + '.html',
+						dataType: 'html',
+					})
+					.done(function(html){
+							var $a = $side_bar.find('a[href="#'+url+'"]');
+							document.title = $a.text();
+							$a.addClass('on-scroll').siblings('ul').css('display', 'block');
+							$content.hide(0).html(html).show(1000).append($('<script src="/source/js/prism.js">'));
+							generateCatelog($a);
+					})
+					.fail(function(){
+							document.title = "错误，页面不存在";
+							$content.html("<p class='error'>加载失败了，请求的页面不存在</p>")
+					});
+				}else{
+					location.hash = '#homepage';
+					showContent(url = 'homepage');
+				}
+			}
+
+			function generateCatelog($a){
+				$('#content section').each(function() {
+					var $self = $(this),
+						$parent = $self.parent('section'),
+						$prev = $self.prevAll('section'),
+						$_target = $a.closest('li'),
+						$target,
+						id = $a.attr('href').substr(1) + '-';
+
+					if ($parent.length === 0) {
+						id += 'paragraph' + $prev.length;
+						$target = $_target.children('ul');
+
+						if ($target.length === 0) {
+							$target = $_target.append($('<ul>')).children('ul');
+						}
+
+					} else {
+						id = $parent.attr('id') + '-' + $prev.length;
+
+						if ($prev.length === 0) {
+							$target = $_target
+								.find('a[href="#' + $parent.attr('id') + '"]')
+								.closest('li')
+								.append($('<ul>'))
+								.children('ul');
+						} else {
+							$target = $_target
+								.find('a[href="#' + $prev.attr('id') + '"]')
+								.closest('ul');
+						}
+					}
+
+					$self.attr('id', id);
+
+					if ($target && $target.find('a[href="#'+id+'"]').length === 0) {
+						$('<li>')
+							.append($('<a>')
+								.attr('href', '#' + id)
+								.text($self.children('h2,h3,h4,h5,h6').text())
+							).appendTo($target);
+					}
+				});					
+			}		
+			// Auto loading
+			$(window).on("hashchange", function(){
+				var newUrl = location.hash.match(/\w+(?=-)?/) + '';
+
+				if(url != newUrl){
+					showContent(url = newUrl);
+				}
+			});
+
+			$(window).on('scroll', function(){
+				var $self = $(window),
+					$body = $('body'),
+					w_scrollTop = $self.scrollTop(),
+					$top = $('#to-top');
+				// Reading progress
+				$('#progress-bar').width((w_scrollTop + $self.height()) / $body.height() * $self.width());
+				// Auto merge
+				$('section').each(function() {
+					var $self = $(this),
+						$a = $('a[href="#' + $self.attr('id') + '"]'),
+						dif = w_scrollTop - $self.offset().top;
+					if (dif >= -20 && dif <= $self.outerHeight(true)) {
+						$a.addClass('on-scroll').siblings('ul').css('display', 'block');
+					} else {
+						$a.removeClass('on-scroll').siblings('ul').css('display', 'none');
+					}
+				});
+				// To top
+				w_scrollTop > $self.height() ? $top.show(1000) : $top.hide(1000);
+			});
+
+			$('#to-top').click = function(){
+				$('html,body').animate({
+					scrollTop:0
+				}, 'slow');
+			};
+
+			showContent(url);
+		});
+	</script>
+</body>
+</html>
