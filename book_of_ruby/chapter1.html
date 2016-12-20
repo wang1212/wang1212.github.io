@@ -3,59 +3,76 @@
 <head>
 </head>
 <body>
+	<header class="hidden-sm-down text-xs-left">
+		<h1>Chapter One</h1>
+		<h2>Strings, Numbers, Classes and Objects</h2>
+		<ul>
+			<li class="h3">Getting And Putting Input</li>
+			<li class="h3">Strings And  Embedded  Evaluation</li>
+			<li class="h3">Numbers</li>
+			<li class="h3">Testing A Condition: if…then</li>
+			<li class="h3">Local And Global Variables</li>
+			<li class="h3">Classes and Objects</li>
+			<li class="h3">Instance Variables</li>
+			<li class="h3">Messages, Methods And Polymorphism</li>
+			<li class="h3">Constructors-New And Iniatialize</li>
+			<li class="h3">Inspecting Objects</li>
+		</ul>
+	</header>
 	<h1>第一章</h1>
 	<section>
 		<h2>字符串、数字、类和对象</h2>
+		<p class="head-indent">
+			关于 Ruby 语言，首先要知道的是它是易于使用的。为了证明这一点，让我们来看一看经典的 "Hello world" 程序代码。
+		</p>
+		<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;1helloworld.rb</div>
+		<pre class="language-ruby line-numbers"><code>puts 'hello world'</code></pre>
+		<p class="head-indent">
+			这就是完整的代码。用到了一个<code>puts</code>方法和一个<code>'Hello world'</code>字符串。没有文件头或者类定义，也不需要导入其他代码和<code>main</code>方法。这真的就是那么简单。（自己）加载这段代码，<strong>1helloworld.rb</strong>，试着运行一下。
+		</p>
+		<section>
+			<h3>获取并保存输入信息</h3>
 			<p class="head-indent">
-				关于 Ruby 语言，首先要知道的是它是易于使用的。为了证明这一点，让我们来看一看经典的 "Hello world" 程序代码。
+				将一个提示字符串输出后（这里是命令行窗口），显然下一步就是获取一个字符串。正如你可能猜到的，Ruby 为此提供的是<code>gets</code>方法。<strong>2helloname.rb</strong> 这段程序提示用户输入他们的名字，假设输入的是 'Fred'，随后将显示一句问候语："Hello Fred"。
 			</p>
-			<pre class="language-ruby line-numbers"><code># 1helloworld.rb
-puts 'hello world'</code></pre>
-			<p class="head-indent">
-				这就是完整的代码。用到了一个<code>puts</code>方法和一个<code>'Hello world'</code>字符串。没有文件头或者类定义，也不需要导入其他代码和<code>main</code>方法。这真的就是那么简单。（自己）加载这段代码，<strong>1helloworld.rb</strong>，试着运行一下。
-			</p>
-			<section>
-				<h3></h3>
-				<p class="head-indent">
-					将一个字符串输出后（这里是命令行窗口），显然下一步就是获取一个字符串。正如你可能猜到的，Ruby 为此提供的是<code>gets</code>方法。<strong>2helloname.rb</strong> 这段程序提示用户输入他们的名字，假设输入的是 "Fred"，随后将显示一句问候语："Hello Fred"。
-				</p>
-				<pre class="language-ruby line-numbers"><code># 2helloname.rb
-print( 'Enter your name: ' )
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;2helloname.rb</div>
+			<pre class="language-ruby line-numbers"><code>print( 'Enter your name: ' )
 name = gets()
 puts( "Hello #{name}" )</code></pre>
-				<p class="head-indent">
-					虽然说这仍然非常地简单，但有一些重要的细节需要说明。首先，注意我输出提示的时候使用的是<code>print</code>方法而不是<code>puts</code>方法。这是因为<code>puts</code>方法会在末尾自动添加一个换行符，但<code>print</code>方法则不会；而当前我希望光标和提示能在同一行显示。
-				</p>
-				<p class="head-indent">
-					在下一行，当用户按下<kbd>Enter</kbd>键时，我使用<code>gets()</code>方法读取用户的输入并以字符串类型保存。该字符串会被赋值给<code>name</code>变量（variable）。我没有预先声明该变量，也没有指定它的类型。在 Ruby 中，你可以根据需要去创建变量，并且 Ruby 会自动去推断该变量的类型。现在我将一个字符串赋值给了<code>name</code>，因此 Ruby 推断<code>name</code>变量的类型一定是字符串（String）。
-				</p>
-				<div class="note head-indent">
-					<strong>注意：Ruby 是大小写敏感的。</strong>一个名为<code>myvar</code>的变量和名为<code>myVar</code>的变量是不同的。一个和示例程序中<code>name</code>一样的变量，它的名字必须以小写子母开头（如果以大写字母开头，Ruby 会认为它是一个常量（constant），关于常量在后面的章节我会详细说明。）
-				</div>
-			</section>
+			<p class="head-indent">
+				虽然说这仍然非常地简单，但有一些重要的细节需要说明。首先，注意我输出提示的时候使用的是<code>print</code>方法而不是<code>puts</code>方法。这是因为<code>puts</code>方法会在末尾自动添加一个换行符，但<code>print</code>方法则不会；而当前我希望光标和提示能在同一行显示。
+			</p>
+			<p class="head-indent">
+				在下一行，当用户按下<kbd>Enter</kbd>键时，我使用<code>gets()</code>方法读取用户的输入并以字符串类型保存。该字符串会被赋值给<code>name</code>变量（variable）。我没有预先声明该变量，也没有指定它的类型。在 Ruby 中，你可以根据需要去创建变量，并且 Ruby 会自动去推断该变量的类型。现在我将一个字符串赋值给了<code>name</code>，因此 Ruby 推断<code>name</code>变量的类型一定是字符串（String）。
+			</p>
+			<div class="note head-indent">
+				<strong>注意：Ruby 是大小写敏感的。</strong>一个名为<code>myvar</code>的变量和名为<code>myVar</code>的变量是不同的。一个和示例程序中<code>name</code>一样的变量，它的名字必须以小写字母开头（如果以大写字母开头，Ruby 会认为它是一个常量（constant），关于常量在后面的章节我会详细说明。）
+			</div>
+			<p class="head-indent">
+				顺便说一下，<code>gets()</code>方法的括号是可选的，它与<code>print</code>和<code>puts</code>方法用来包围字符串的括号是一样的，如果你移除了括号，仍然会得到相同的结果。但是，括号可以帮助你解决某些语义冲突，并且在某些情况下，如果你省略它们，解释器将会发出警告。
+			</p>
+		</section>
 		<section>
-			<h3>对象</h3>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
-			<p>1111111111111111111111111</p>
+			<h3>字符串和内嵌表达式</h3>
+			<p class="head-indent">在我们的示例代码中，最后一行是相当有趣的。</p>
+			<pre class="language-ruby line-numbers"><code>puts( "Hello #{name}" )</code></pre>
+			<p class="head-indent">
+				这里的<code>name</code>变量被嵌入到字符串（String）本身中。这是通过将变量放置于两个花括号中并在花括号前面加一个哈希字符实现，也就是<code>#{}</code>。这种嵌入式表达式仅限于使用双引号分隔的字符串中起作用。如果你尝试在单引号分隔的字符串中使用它，该变量将不会被执行（解释），恰恰显示的将会是字符串 <strong>'Hello #{name}'</strong>。
+			</p>
+			<p class="head-indent">不仅仅只有变量可以嵌入到双引号分隔的字符串中。你也可以嵌入非打印（转义）字符，例如换行符<code>\n</code>和制表符<code>\t</code>。你甚至也可以嵌入程序代码和数学表达式。让我们假设你拥有一个方法<code>showname</code>，它的返回值为字符串 'Fred'。
+			</p>
+			<p class="head-indent">
+				下面这个字符串在执行过程在将会调用<code>showname</code>方法，因此，最终结果将会显示为 "Hello Fred"。
+			</p>
+			<pre class="language-ruby line-numbers"><code>puts "Hello #{showname}"</code></pre>
+			<p class="head-indent">看你是否能弄清楚下面这段程序将会显示什么结果。</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;3string_eval.rb</div>
+			<pre class="language-ruby line-numbers"><code>puts("\n\t#{(1 + 2) * 3}\nGoodbye")</code></pre>
+			<p class="head-indent">运行一下 <strong>3string_eval.rb</strong> 程序看看你对了吗。</p>
+		</section>
+		<section>
+			<h3>数字</h3>
+
 		</section>
 	</section>
 </body>

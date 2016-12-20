@@ -25,21 +25,32 @@ strong {
 	padding: 0.2rem 0.4rem;
 	border-radius: 0.25rem;
 }
-
+.my-nav-item {
+	font-size: 1.75rem;
+	color: black;
+	text-align: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	line-height: 2.5rem;
+	border: 1px solid rgba(10,10,10, .6);
+	border-radius: 2.5rem;
+	cursor: pointer;
+}
+.my-nav-item a {
+	color: black;
+	text-decoration: none;
+}
 .head-indent {
 	text-indent: 2em;
 }
-
 .jumbotron {
 	padding-bottom: 1rem;
 }
-
 .page-footer {
 	border-top: 1px solid gray;
 	padding: 1rem 0 2rem;
 	margin: 2.25rem 0 0.75rem;
 }
-
 #progress-bar {
 	height: 3px;
 	background-color: orange;
@@ -48,7 +59,6 @@ strong {
 	left: 0;
 	z-index: 20;
 }
-
 #side-bar {
 	font-size: 1.25rem;
 	padding: 0.75rem 0 0.75rem 1.25rem;
@@ -71,32 +81,30 @@ strong {
 #side-bar .on-scroll {
 	color: orange;
 }
-
 #foot-nav {
-	font-size: 1.75rem;
-	text-align: center;
-	color: white;
-	height: 2.5rem;
-	line-height: 2.5rem;
 	position: fixed;
 	right: 2.25rem;
 	bottom: 1.25rem;
 	z-index: 20;
 }
-#foot-nav > div {
-	width: 2.5rem;
-	border-radius: 2.5rem;
-	background-color: black;
+#foot-nav .my-nav-item {
 	float: right;
+}
+#foot-nav .my-nav-item:not(:last-child) {
 	margin-left: 0.75rem;
-	cursor: pointer;
-	opacity: 0.5;
-	transition: opacity .8s,0s linear;
 }
-#foot-nav  div:hover {
-	opacity: 1;
-}
-#foot-nav a,#foot-nav a:hover {
-	color: white;
-	text-decoration: none;
+
+@media (min-width: 768px) {
+	.my-nav-item {
+		color: white;
+		background-color: black;
+		opacity: 0.5;
+		transition: opacity .8s,0s linear;
+	}			
+	.my-nav-item:hover {
+		opacity: 1;
+	}
+	.my-nav-item a {
+		color: white;
+	}
 }
