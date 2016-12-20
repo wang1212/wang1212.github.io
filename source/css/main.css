@@ -107,7 +107,7 @@ strong {
 	left: 1.25rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 	#side-bar {
 		top: 0 !important;
 	}
@@ -126,6 +126,7 @@ strong {
 		color: white;
 	}
 	#side-bar {
+		color: black;
 		background-color: transparent;
 		position: relative;
 		left: 0 !important;

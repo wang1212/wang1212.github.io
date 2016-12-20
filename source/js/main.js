@@ -7,7 +7,7 @@ $(function() {
 		.append($('<nav id="foot-nav"><div id="to-top" style="display:none" class="my-nav-item"><a href="#" class="fa fa-arrow-up"></a></div><div class="my-nav-item"><a href="/" class="fa fa-home"></a></div><div class="my-nav-item"><a href="/categories/" class="fa fa-list-alt"></a></div><div id="open-sidebar" class="my-nav-item hidden-md-up"><span class="fa fa-angle-double-right"></span></div></nav>'))
 		// 自动添加右侧导航框架
 		.children('.container').children('.row')
-		.append($('<div id="side-bar" class="col-md-3 col-sm-8 col-xs-10 text-xs-left"><div id="close-sidebar" style="display:none" class="my-nav-item hidden-md-up"><span class="fa fa-angle-double-left"></span></div></div>'));
+		.append($('<div id="side-bar" class="col-md-3 col-sm-8 col-xs-10 text-xs-left"><p class="h1"></p><div id="close-sidebar" style="display:none" class="my-nav-item hidden-md-up"><span class="fa fa-angle-double-left"></span></div></div>'));
 
 	var $progress_bar = $('#progress-bar'),
 		$side_bar = $('#side-bar'),
@@ -114,7 +114,7 @@ $(function() {
 		// 右侧导航自动浮动
 		if ($side_bar.css('position') == 'relative') {
 			$side_bar.offset({
-				'top': Math.max(w_scrollTop + 10, $side_bar.parent().offset().top + 10)
+				'top': Math.max(w_scrollTop, $side_bar.parent().offset().top)
 			});
 		}
 
@@ -146,4 +146,7 @@ $(function() {
 
 		$foot_nav.show(500);
 	});
+
+	// Set title
+	$side_bar.children('.h1').text(document.title);
 });
