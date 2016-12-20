@@ -20,10 +20,53 @@ li > pre {
 section[id*="paragraph"] p, header p {
 	text-align: justify;
 }
-strong { 
-	background-color: #f7f7f9;
-	padding: 0.2rem 0.4rem;
-	border-radius: 0.25rem;
+strong {
+	font-weight: normal;
+	color: orange;
+	padding: 0 0.2rem;
+}
+.head-indent {
+	text-indent: 2em;
+}
+.jumbotron {
+	padding-bottom: 1rem;
+}
+.page-footer {
+	border-top: 1px solid gray;
+	padding: 1rem 0 2rem;
+	margin: 2.25rem 0 0.75rem;
+}
+#progress-bar {
+	height: 3px;
+	background-color: orange;
+}
+#side-bar {
+	color: white;
+	background-color: rgba(0,0,0, .75);	
+	padding: 2rem 1rem 1rem 1.5rem;
+	position: fixed;
+	left: -100%;
+	z-index: 1020;
+	height: 100%;
+	overflow:  auto;	
+}
+#side-bar ul {
+	font-size: 0.9em;
+	list-style-type: none;
+	padding-left: 1rem;
+}
+#side-bar > ul {
+	font-size: 1rem;
+	list-style-type: disc;
+	padding-left: 2rem;	
+	display: block !important;
+}
+#side-bar a {
+	color: white;
+	text-decoration: none;
+}
+#side-bar .on-scroll {
+	color: orange;
 }
 .my-nav-item {
 	font-size: 1.75rem;
@@ -40,47 +83,6 @@ strong {
 	color: black;
 	text-decoration: none;
 }
-.head-indent {
-	text-indent: 2em;
-}
-.jumbotron {
-	padding-bottom: 1rem;
-}
-.page-footer {
-	border-top: 1px solid gray;
-	padding: 1rem 0 2rem;
-	margin: 2.25rem 0 0.75rem;
-}
-#progress-bar {
-	height: 3px;
-	background-color: orange;
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 20;
-}
-#side-bar {
-	font-size: 1.25rem;
-	padding: 0.75rem 0 0.75rem 1.25rem;
-}
-#side-bar ul {
-	font-size: 0.9em;
-	list-style-type: none;
-	padding-left: 1rem;
-}
-#side-bar > ul {
-	display: block !important;
-}
-#side-bar a {
-	color: gray;
-}
-#side-bar a:hover {
-	color: black;
-	text-decoration: none;
-}
-#side-bar .on-scroll {
-	color: orange;
-}
 #foot-nav {
 	position: fixed;
 	right: 2.25rem;
@@ -93,7 +95,23 @@ strong {
 #foot-nav .my-nav-item:not(:last-child) {
 	margin-left: 0.75rem;
 }
+#open-sidebar, #close-sidebar {
+	color: orange;
+	border: none;
+	border-radius: 0;
+	position: fixed;
+	bottom: 1.25rem;
+	z-index: 1050;
+}		
+#open-sidebar {
+	left: 1.25rem;
+}
 
+@media (max-width: 768px) {
+	#side-bar {
+		top: 0 !important;
+	}
+}
 @media (min-width: 768px) {
 	.my-nav-item {
 		color: white;
@@ -106,5 +124,16 @@ strong {
 	}
 	.my-nav-item a {
 		color: white;
+	}
+	#side-bar {
+		background-color: transparent;
+		position: relative;
+		left: 0 !important;
+	}
+	#side-bar a {
+		color: gray;
+	}	
+	#side-bar a:hover {
+		color: orange;
 	}
 }

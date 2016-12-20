@@ -1,15 +1,20 @@
 $(function() {
-	// 自动添加顶部进度条、footer、TOP
-	$('body')
-		.prepend($('<div id="progress-bar"></div>'))
-		.append($('<footer class="page-footer"><div class="container"><div class="row text-xs-center"><div class="col-md-2 offset-md-2"><img class="rounded" src="/source/images/head.jpg" alt="head" /></div><div class="col-md-4"><p class="lead">越努力，越幸运！</p><p>Mr.Wang（不如怀念）</p><p>E-mail：wangyuan230@163.com</p></div></div></div></footer>'))
-		.append($('<nav id="foot-nav"><div id="to-top" style="display:none" class="my-nav-item"><a href="#" class="fa fa-arrow-up"></a></div><div class="my-nav-item"><a href="/" class="fa fa-home"></a></div><div class="my-nav-item"><a href="/categories/" class="fa fa-list-alt"></a></div></nav>'));
-	// 自动添加右侧导航框架
-	$('<div id="side-bar" class="col-md-3 hidden-sm-down"></div>').appendTo($('body>.container>.row'));
+	var $body = $('body');
 
-	var $p_bar = $('#progress-bar'),
-		$s_bar = $('#side-bar'),
-		$top = $('#to-top');
+	// 自动添加顶部进度条、footer、TOP
+	$body.prepend($('<div id="progress-bar" class="pos-f-t"></div>'))
+		.append($('<footer class="page-footer"><div class="container"><div class="row text-xs-center"><div class="col-md-2 offset-md-2"><img class="rounded" src="/source/images/head.jpg" alt="head" /></div><div class="col-md-4"><p class="lead">越努力，越幸运！</p><p>Mr.Wang（不如怀念）</p><p>E-mail：wangyuan230@163.com</p></div></div></div></footer>'))
+		.append($('<nav id="foot-nav"><div id="to-top" style="display:none" class="my-nav-item"><a href="#" class="fa fa-arrow-up"></a></div><div class="my-nav-item"><a href="/" class="fa fa-home"></a></div><div class="my-nav-item"><a href="/categories/" class="fa fa-list-alt"></a></div><div id="open-sidebar" class="my-nav-item hidden-md-up"><span class="fa fa-angle-double-right"></span></div></nav>'))
+		// 自动添加右侧导航框架
+		.children('.container').children('.row')
+		.append($('<div id="side-bar" class="col-md-3 col-sm-8 col-xs-10 text-xs-left"><div id="close-sidebar" style="display:none" class="my-nav-item hidden-md-up"><span class="fa fa-angle-double-left"></span></div></div>'));
+
+	var $progress_bar = $('#progress-bar'),
+		$side_bar = $('#side-bar'),
+		$close_sidebar = $('#close-sidebar'),
+		$open_sidebar = $('#open-sidebar'),
+		$to_top = $('#to-top'),
+		$foot_nav = $('#foot-nav');
 
 	// 自动添加分页
 	$.getJSON('/source/json/categories.json', function(data) {
@@ -19,6 +24,7 @@ $(function() {
 
 		if (temp = data[cate]) {
 			var prev, next;
+
 			for (var i in temp) {
 				if (temp[i].title === title) {
 					prev = +(i > 0 ? i - 1 : 'null');
@@ -35,7 +41,7 @@ $(function() {
 				str += '<li class="page-item float-xs-right"><a class="page-link" href="' + temp[next].path + '" aria-label="Previous">' + temp[next].title + ' <span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span></a></li > ';
 			}
 			str += '</ul></nav>';
-			$('body > .container .col-md-9').append($(str));
+			$body.children('.container').find('.col-md-9').append($(str));
 		}
 	});
 
@@ -49,36 +55,36 @@ $(function() {
 
 		if ($parent.length === 0) {
 			id = 'paragraph' + $prev.length;
-			$target = $s_bar.children('ul');
+			$target = $side_bar.children('ul');
 
 			if ($target.length === 0) {
-				$target = $s_bar.append($('<ul>')).children('ul');
+				$target = $side_bar.append($('<ul>')).children('ul:last-of-type');
+			} else {
+				$target = $target.last();
 			}
 
 		} else {
+			$parent = $parent.last();
 			id = $parent.attr('id') + '-' + $prev.length;
 
 			if ($prev.length === 0) {
-				$target = $s_bar
+				$target = $side_bar
 					.find('a[href="#' + $parent.attr('id') + '"]')
-					.closest('li')
+					.parent('li')
 					.append($('<ul>'))
-					.children('ul');
+					.children('ul:last-of-type');
 			} else {
-				$target = $s_bar
-					.find('a[href="#' + $prev.attr('id') + '"]')
-					.closest('ul');
+				$target = $side_bar.find('a[href="#' + $prev.attr('id') + '"]').parent('li').parent('ul');
 			}
 		}
 
 		$self.attr('id', id);
 
-		// 生成目录导航
 		if ($target) {
 			$('<li>')
 				.append($('<a>')
 					.attr('href', '#' + id)
-					.text($self.children('h2,h3,h4,h5,h6').text())
+					.text($self.children('h2,h3,h4,h5,h6').first().text())
 				).appendTo($target);
 		}
 
@@ -87,10 +93,10 @@ $(function() {
 	// 滚动监听
 	$(window).on('scroll', function() {
 		var $self = $(this),
-			$body = $('body'),
 			w_scrollTop = $self.scrollTop();
+
 		// 顶部进度条
-		$p_bar.width((w_scrollTop + $self.height()) / $body.height() * $self.width());
+		$progress_bar.width((w_scrollTop + $self.height()) / $body.height() * $self.width());
 
 		// 右侧导航监测着色、展开、合并
 		$('section').each(function() {
@@ -99,19 +105,45 @@ $(function() {
 				dif = w_scrollTop - $self.offset().top;
 
 			if (dif >= -20 && dif <= $self.outerHeight(true)) {
-				$a.addClass('on-scroll').siblings('ul').css('display', 'block');
+				$a.addClass('on-scroll').siblings('ul').slideDown(1000);
 			} else {
-				$a.removeClass('on-scroll').siblings('ul').css('display', 'none');
+				$a.removeClass('on-scroll').siblings('ul').slideUp(500);
 			}
 		});
 
 		// 右侧导航自动浮动
-		$('#side-bar').offset({
-			'top': Math.max(w_scrollTop + 10, $('#side-bar').parent().offset().top + 10)
-		});
+		if ($side_bar.css('position') == 'relative') {
+			$side_bar.offset({
+				'top': Math.max(w_scrollTop + 10, $side_bar.parent().offset().top + 10)
+			});
+		}
 
 		// 回到顶部自动隐藏
-		w_scrollTop > $self.height() ? $top.show(1000) : $top.hide(1000)
+		w_scrollTop > $self.height() ? $to_top.show(1000) : $to_top.hide(1000)
 
+	});
+
+	// Open sidebar
+	$open_sidebar.on('click', function() {
+		$foot_nav.hide(1000);
+
+		$side_bar.animate({
+			left: '0px'
+		}, 1000);
+
+		$close_sidebar.offset({
+			left: $side_bar.outerWidth() - 56
+		}).show(2000);
+	});
+
+	// Close sidebar
+	$close_sidebar.on('click', function() {
+		$(this).hide(500);
+
+		$side_bar.animate({
+			left: -$side_bar.outerWidth()
+		}, 1000);
+
+		$foot_nav.show(500);
 	});
 });
