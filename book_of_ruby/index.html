@@ -166,7 +166,7 @@
 					<li><a href="#appendices">附录</a></li>
 					<li><a href="#indexes">索引</a></li>
 				</ul>
-				<div id="close-sidebar" class="my-nav-item hidden-md-up">
+				<div id="close-sidebar" style="display:none" class="my-nav-item hidden-md-up">
 					<span class="fa fa-angle-double-left"></span>
 				</div>
 			</nav>
@@ -308,11 +308,11 @@
 				$(this).hide(1000);
 				$foot_nav.hide(500);
 				$side_bar.animate({ left: '0px' }, 1000);
-				$close_sidebar.offset({ left: sidebar_width - 56 }).show(1000);
+				$close_sidebar.offset({ left: sidebar_width - 56 }).show(2000);
 			});
 
 			$close_sidebar.on('click', function(){
-				$(this).hide(1000);
+				$(this).hide(500);
 				$side_bar.animate({ left: -sidebar_width }, 1000);
 				$open_sidebar.show(1000);
 				$foot_nav.show(500);
