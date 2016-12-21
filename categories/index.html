@@ -119,7 +119,7 @@
 	<script src="/source/js/jquery-3.1.0.min.js"></script>
 	<script>
 		$(function(){
-			$.getJSON('/source/json/categories.json',function(data){
+			$.getJSON('/source/json/categories.json', function(data){
 				var str = '',
 					num = 0,
 					articles = 0;
@@ -135,14 +135,9 @@
 					articles += data[i].length;
 				}
 
-				$('.container > .list-group')
-					.fadeOut(0)
-					.append($(str))
-					.children()
-					.first()
-					.html('有 ' + num + ' 个类别，共 ' + articles + ' 篇文章。加油喔！<small class="hidden-sm-down text-muted">There are ' + num + ' categories, ' + articles + ' articles. Come on!</small>')
-					.end().end()
-					.fadeIn(1000);
+				$('.container > .list-group').fadeOut(300, function(){
+					$(this).append($(str)).children(':first-child').html('有 ' + num + ' 个类别，共 ' + articles + ' 篇文章。加油喔！<small class="hidden-sm-down text-muted">There are ' + num + ' categories, ' + articles + ' articles. Come on!</small>').end().fadeIn(1000);
+				});
 			});
 
 			$('body > .container').on('click','li[id*="cate-"] .list-group-item-heading',function(){
@@ -150,16 +145,21 @@
 				 	key = $self.parent().attr('id').substr(5),
 				 	$ul = $self.next('ul');
 
-				$ul.slideToggle();
+				$ul.slideToggle(1000);
 
 				if (!$ul.data('hasData')) {
 					$.getJSON('/source/json/categories.json',function(data){
 						var str = '';
+
 						for (var i in data[key]){
 							str += '<a href="' + data[key][i].path + '" class="list-group-item list-group-item-action list-group-item-success">' + data[key][i].title + '<span class="hidden-sm-down float-xs-right">' + data[key][i].time + '</span></a>';
 						}
-						$ul.slideUp(0).html(str).slideDown(1000);
+
+						$ul.hide(300, function(){
+							$(this).html(str).slideDown(1000);
+						});
 					});
+					
 					$ul.data('hasData', true);
 				}
 

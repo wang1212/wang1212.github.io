@@ -17,7 +17,7 @@
 		#content {
 			text-align: justify;
 			padding-top: 2rem;
-			padding-bottom: 4rem;
+			padding-bottom: 2rem;
 		}
 		#content h1, #content h2 {
 			text-align: center;
@@ -196,41 +196,54 @@
 				$to_top = $('#to-top'),
 				$foot_nav = $('#foot-nav');
 
-			function showContent(url){
-				$content.html("<h1>正在奋力加载哟...</h1>");
+			function showContent(newUrl){
+				url = newUrl;
 				$progress_bar.width(0);
 				$side_bar.find('a').removeClass('on-scroll').siblings('ul').slideUp(500);
 
-				if (url) {
-					$.ajax({
-						url: url + '.html',
-						dataType: 'html',
-					})
-					.done(function(html){
-						var $a = $side_bar.find('a[href="#'+url+'"]');
+				$content.fadeOut(300, function(){
+					$content.html("<h1>正在奋力加载哟...</h1>").fadeIn(300, function(){
+						if (url != 'null' && url != false) {
+							$.ajax({
+								type: 'GET',
+								url: './' + url + '.html',
+								dataType: 'html',
+								async: true
+							})
+							.done(function(html){
+								var $a = $side_bar.find('a[href="#'+url+'"]');
 
-						$a.addClass('on-scroll');
-						$content.fadeOut(0).html(html).fadeIn(1000).append($('<script src="/source/js/prism.js">'));
-						// Generate Catelog
-						generateCatelog($a.parent('li'));
-						document.title = $a.text() + ' : ' + $content.find('section > h2').first().text();
-					})
-					.fail(function(){
-						$content.html("<h1>加载失败了，请求的页面不存在</h1>")
-						document.title = "错误，页面不存在";
+								$a.addClass('on-scroll');
+
+								$content.fadeOut(300, function(){
+									if (url == 'homepage') {
+										$content.html(html).fadeIn(1000);
+									}else{
+										$content.html(html).append($('<script src="/source/js/prism.js">')).fadeIn(1000);
+									}
+									// Generate Catelog
+									generateCatelog($a.parent('li'));
+									document.title = $a.text() + ' : ' + $content.find('#page-title').text();
+								});
+							})
+							.fail(function(){
+								$content.fadeOut(300, function(){
+									$content.html("<h1>加载失败了，请求的页面不存在</h1>").fadeIn(500);
+									document.title = "错误，页面不存在";
+								});
+							});
+						}else{
+							location.hash = '#homepage';
+						}
 					});
-				}else{
-					location.hash = '#homepage';
-					showContent(url = 'homepage');
-				}
+				});
 			}
 
 			function generateCatelog($_target){
 				var _id = url + '-',
-					$_newCate = $_target.children('ul'),
-					$_sections = $('#content section');
+					$_newCate = $_target.children('ul');
 
-				$_sections.each(function() {
+				$('#content section').each(function() {
 					var $self = $(this),
 						$parent = $self.parent('section'),
 						$prev = $self.prevAll('section'),
@@ -289,7 +302,7 @@
 				var newUrl = location.hash.match(/\w+(?=-)?/) + '';
 
 				if(url != newUrl){
-					showContent(url = newUrl);
+					showContent(newUrl);
 				}
 			});
 
@@ -323,19 +336,25 @@
 
 			// Open sidebar
 			$open_sidebar.on('click', function(){
-				$foot_nav.hide(1000);
-				$side_bar.animate({ left: '0px' }, 1000);
-				$close_sidebar.offset({ left: sidebar_width - 56 }).show(2000);
+				$foot_nav.hide(300, function(){
+					$side_bar.animate({ left: '0px' }, 1000, function(){
+						$close_sidebar.offset({ left: sidebar_width - 56 }).show(800);
+					});
+				});
 			});
 
 			// Close sidebar
 			$close_sidebar.on('click', function(){
-				$(this).hide(500);
-				$side_bar.animate({ left: -sidebar_width }, 1000);
-				$foot_nav.show(500);
+				$(this).hide(300, function(){
+					$side_bar.animate({ left: -sidebar_width }, 1000, function(){
+						$foot_nav.show(800);
+					});
+				});
 			});
 
-			showContent(url);
+			if (url == 'null' || url == false) {
+				location.hash = '#homepage';
+			}
 		});
 	</script>
 </body>

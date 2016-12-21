@@ -125,26 +125,26 @@ $(function() {
 
 	// Open sidebar
 	$open_sidebar.on('click', function() {
-		$foot_nav.hide(1000);
-
-		$side_bar.animate({
-			left: '0px'
-		}, 1000);
-
-		$close_sidebar.offset({
-			left: $side_bar.outerWidth() - 56
-		}).show(2000);
+		$foot_nav.hide(300, function() {
+			$side_bar.animate({
+				left: '0px'
+			}, 1000, function() {
+				$close_sidebar.offset({
+					left: $side_bar.outerWidth() - 56
+				}).show(800);
+			});
+		});
 	});
 
 	// Close sidebar
 	$close_sidebar.on('click', function() {
-		$(this).hide(500);
-
-		$side_bar.animate({
-			left: -$side_bar.outerWidth()
-		}, 1000);
-
-		$foot_nav.show(500);
+		$(this).hide(300, function() {
+			$side_bar.animate({
+				left: -$side_bar.outerWidth()
+			}, 1000, function() {
+				$foot_nav.show(800);
+			});
+		});
 	});
 
 	// Set title
