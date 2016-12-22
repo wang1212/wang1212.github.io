@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no">	
-	<title>Book Of Ruby</title>
+	<title>The Book Of Ruby</title>
 	<meta name="keywords" content="Ruby,编程" />
 	<meta name="description" content="这是一本关于Ruby的书籍，带领读者深入Ruby的编程世界，感受编程的乐趣" />	
 	<link rel="stylesheet" href="/source/css/bootstrap.min.css">
@@ -132,7 +132,7 @@
 	<div class="container">
 		<div class="row">
 			<nav id="side-bar" class="col-xl-3 col-md-4 col-sm-8 col-xs-10 text-xs-left">
-				<p class="h1">Book Of Ruby</p>
+				<p class="h2">The Book Of Ruby</p>
 				<p>作者：Huw Collingbourne</p>
 				<p>翻译：<a href="https://wang1212.github.io/">不如怀念</a></p>
 				<p>目录：</p>
@@ -354,6 +354,8 @@
 
 			if (url == 'null' || url == false) {
 				location.hash = '#homepage';
+			}else{
+				showContent(url);
 			}
 		});
 	</script>
