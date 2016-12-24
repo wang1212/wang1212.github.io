@@ -139,7 +139,7 @@
 				<ul>
 					<li><a href="#homepage">主页</a></li>
 					<li><a href="#author">关于作者</a></li>
-					<li><a href="#introduction">前言</a></li>
+					<li><a href="#introduction">序言</a></li>
 					<li><a href="#chapter1">第一章</a></li>
 					<li><a href="#chapter2">第二章</a></li>
 					<li><a href="#chapter3">第三章</a></li>
@@ -208,7 +208,6 @@
 								type: 'GET',
 								url: './' + url + '.html',
 								dataType: 'html',
-								async: true
 							})
 							.done(function(html){
 								var $a = $side_bar.find('a[href="#'+url+'"]');
@@ -216,7 +215,7 @@
 								$a.addClass('on-scroll');
 
 								$content.fadeOut(300, function(){
-									if (url == 'homepage') {
+									if (url == 'homepage' || url == 'author') {
 										$content.html(html).fadeIn(1000);
 									}else{
 										$content.html(html).append($('<script src="/source/js/prism.js">')).fadeIn(1000);

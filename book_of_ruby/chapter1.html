@@ -3,7 +3,7 @@
 <body>
 	<header class="hidden-sm-down text-xs-left">
 		<h1>Chapter One</h1><hr />
-		<h2 id="page-title">Strings, Numbers, Classes and Objects</h2>
+		<h2>Strings, Numbers, Classes and Objects</h2>
 		<ul>
 			<li class="h3">Getting And Putting Input</li>
 			<li class="h3">Strings And  Embedded  Evaluation</li>
@@ -19,7 +19,7 @@
 	</header>
 	<h1>第一章</h1><hr />
 	<section>
-		<h2>字符串、数字、类和对象</h2>
+		<h2 id="page-title">字符串、数字、类和对象</h2>
 		<p class="head-indent">
 			关于 Ruby 语言，首先要知道的是它是易于使用的。为了证明这一点，让我们来看一看经典的 "Hello world" 程序代码。
 		</p>
@@ -60,7 +60,7 @@ puts( "Hello #{name}" )</code></pre>
 			<p class="head-indent">不仅仅只有变量可以嵌入到双引号分隔的字符串中。你也可以嵌入非打印（转义）字符，例如换行符<code>\n</code>和制表符<code>\t</code>。你甚至也可以嵌入程序代码和数学表达式。让我们假设你拥有一个方法<code>showname</code>，它的返回值为字符串 'Fred'。
 			</p>
 			<p class="head-indent">
-				下面这个字符串在执行过程在将会调用<code>showname</code>方法，因此，最终结果将会显示为 "Hello Fred"。
+				下面这个字符串在执行过程中将会调用<code>showname</code>方法，因此，最终结果将会显示为 "Hello Fred"。
 			</p>
 			<pre class="language-ruby line-numbers"><code>puts "Hello #{showname}"</code></pre>
 			<p class="head-indent">看你是否能弄清楚下面这段程序将会显示什么结果。</p>
