@@ -5,15 +5,15 @@
 		<h1>Chapter One</h1><hr />
 		<h2>Strings, Numbers, Classes and Objects</h2>
 		<ul>
-			<li class="h3">Getting And Putting Input</li>
-			<li class="h3">Strings And  Embedded  Evaluation</li>
+			<li class="h3">Getting and Putting Input</li>
+			<li class="h3">Strings and  Embedded  Evaluation</li>
 			<li class="h3">Numbers</li>
-			<li class="h3">Testing A Condition: if…then</li>
-			<li class="h3">Local And Global Variables</li>
+			<li class="h3">Testing a Condition: if…then</li>
+			<li class="h3">Local and Global Variables</li>
 			<li class="h3">Classes and Objects</li>
 			<li class="h3">Instance Variables</li>
-			<li class="h3">Messages, Methods And Polymorphism</li>
-			<li class="h3">Constructors-New And Iniatialize</li>
+			<li class="h3">Messages, Methods and Polymorphism</li>
+			<li class="h3">Constructors-new and Iniatialize</li>
 			<li class="h3">Inspecting Objects</li>
 		</ul>
 	</header>
@@ -21,7 +21,7 @@
 	<section>
 		<h2 id="page-title">字符串、数字、类和对象</h2>
 		<p class="head-indent">
-			关于 Ruby 语言，首先要知道的是它是易于使用的。为了证明这一点，让我们来看一看经典的 "Hello world" 程序代码。
+			关于 Ruby 语言，首先要知道的是它是易于使用的。为了证明这一点，让我们来看一看经典的 "Hello world" 程序代码：
 		</p>
 		<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;1helloworld.rb</div>
 		<pre class="language-ruby line-numbers"><code>puts 'hello world'</code></pre>
@@ -31,7 +31,7 @@
 		<section>
 			<h3>获取并保存输入信息</h3>
 			<p class="head-indent">
-				将一个提示字符串输出后（这里是命令行窗口），显然下一步就是获取一个字符串。正如你可能猜到的，Ruby 为此提供的是<code>gets</code>方法。<strong>2helloname.rb</strong> 这段程序提示用户输入他们的名字，假设输入的是 'Fred'，随后将显示一句问候语："Hello Fred"。
+				首先将一个提示字符串输出后（这里是命令行窗口），显然下一步就是获取一个字符串。正如你可能猜到的，Ruby 为此提供的是<code>gets</code>方法。<strong>2helloname.rb</strong> 这段程序提示用户输入他们的名字，假设输入的是 'Fred'，随后将显示一句问候语："Hello Fred"。
 			</p>
 			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;2helloname.rb</div>
 			<pre class="language-ruby line-numbers"><code>print( 'Enter your name: ' )
@@ -55,22 +55,82 @@ puts( "Hello #{name}" )</code></pre>
 			<p class="head-indent">在我们的示例代码中，最后一行是相当有趣的。</p>
 			<pre class="language-ruby line-numbers"><code>puts( "Hello #{name}" )</code></pre>
 			<p class="head-indent">
-				这里的<code>name</code>变量被嵌入到字符串（String）本身中。这是通过将变量放置于两个花括号中并在花括号前面加一个哈希字符实现，也就是<code>#{}</code>。这种嵌入式表达式仅限于使用双引号分隔的字符串中起作用。如果你尝试在单引号分隔的字符串中使用它，该变量将不会被执行（解释），恰恰显示的将会是字符串 <strong>'Hello #{name}'</strong>。
+				这里的<code>name</code>变量被嵌入到字符串（String）本身中。这是通过将变量放置于两个花括号中并在花括号前面加一个 # 字符实现，也就是<code>#{}</code>。这种嵌入式表达式仅限于使用双引号分隔的字符串中起作用。如果你尝试在单引号分隔的字符串中使用它，该变量将不会被执行（解释），恰恰显示的将会是字符串 <strong>'Hello #{name}'</strong>。
 			</p>
 			<p class="head-indent">不仅仅只有变量可以嵌入到双引号分隔的字符串中。你也可以嵌入非打印（转义）字符，例如换行符<code>\n</code>和制表符<code>\t</code>。你甚至也可以嵌入程序代码和数学表达式。让我们假设你拥有一个方法<code>showname</code>，它的返回值为字符串 'Fred'。
 			</p>
 			<p class="head-indent">
-				下面这个字符串在执行过程中将会调用<code>showname</code>方法，因此，最终结果将会显示为 "Hello Fred"。
+				下面这个字符串在执行过程中将会调用<code>showname</code>方法，因此，最终结果将会显示为 "Hello Fred"：
 			</p>
 			<pre class="language-ruby line-numbers"><code>puts "Hello #{showname}"</code></pre>
-			<p class="head-indent">看你是否能弄清楚下面这段程序将会显示什么结果。</p>
+			<p class="head-indent">看你是否能弄清楚下面这段程序将会显示什么结果：</p>
 			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;3string_eval.rb</div>
 			<pre class="language-ruby line-numbers"><code>puts("\n\t#{(1 + 2) * 3}\nGoodbye")</code></pre>
 			<p class="head-indent">运行一下 <strong>3string_eval.rb</strong> 程序看看你对了吗。</p>
 		</section>
 		<section>
 			<h3>数字</h3>
+			<p class="head-indent">
+				数字（Numbers）和字符串一样容易使用。例如，你想基于税率值和合计值来计算一些东西的销售价格或者总的合计值。为此，你需要将合计值乘以合适的税率并将结果加上合计值。假设合计值为 100 美元，税率为 17.5% ，这个 Ruby 程序会进行计算并显示结果：
+			</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;4calctax.rb</div>
+			<pre class="language-ruby line-numbers"><code>subtotal = 100.00
+taxrate = 0.175
+tax = subtotal * taxrate
+puts "Tax on $#{subtotal} is $#{tax}, so grand total is $#{subtotal+tax}"</code></pre>
+			<p class="head-indent">
+				显然，如果这个程序可以计算不同的合计值的话，相比于计算相同的合计值是更有用的。这是一个简单的可以提示用户输入合计值的计算程序：
+			</p>
+			<pre class="language-ruby line-numbers"><code>taxrate = 0.175
+print "Enter price (ex tax): "
+s = gets
+subtotal = s.to_f
+tax = subtotal * taxrate
+puts "Tax on $#{subtotal} is $#{tax}, so grand total is $#{subtotal+tax}"</code></pre>
+			<p class="head-indent">
+				这里的<code>s.to_f</code>是 String 类的一个方法，它会尝试将该字符串转换成一个浮点数。例如，字符串 "145.45" 将被转换成浮点数 145.45 。如果字符串不能被转换，将会返回 0.0 。所以，对于 <strong>"Hello world".to_f</strong> 将会返回 0.0 。
+			</p>
+			<div class="note">
+				<dl>
+					<dt>注释</dt>
+					<dd class="head-indent">本书附带的许多示例源代码都有会被 Ruby 解释器忽略的注释。注释可以放置于 <strong>#</strong> 字符之后，该字符之后的一行文本都将会被视为注释：</dd>
+				</dl>
+				<pre class="language-ruby line-numbers"><code># this is a comment
+puts( "hello" ) # this is also a comment</code></pre>
+				<p class="head-indent">
+					如果你想注释掉多行文本你可以在文本的首行添加 <strong>=begin</strong> 以及在末行添加 <strong>=end</strong>（<strong>=begin</strong> 与 <strong>=end</strong> 必须左对齐顶格写）：
+				</p>
+				<pre class="language-ruby line-numbers"><code>=begin
+This is a
+multiline
+comment
+=end</code></pre>
+			</div>
+		</section>
+		<section>
+			<h3>测试条件语句：if ... then</h3>
+			<p class="head-indent">
+				上面的税率值计算代码的问题是允许负的合计值和税率，这种情况在政府看来可能是不利的。因此，我需要测试负数，如果出现负数将其置为 0 。这是我的新版代码：
+			</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;5taxcalculator.rb</div>
+			<pre class="language-ruby line-numbers"><code>taxrate = 0.175
+print "Enter price (ex tax): "
+s = gets
+subtotal = s.to_f
 
+if (subtotal < 0.0) then
+  subtotal = 0.0
+end
+
+tax = subtotal * taxrate
+puts "Tax on $#{subtotal} is $#{tax}, so grand total is $#{subtotal+tax}"</code></pre>
+			<p class="head-indent">
+				Ruby 中的 <strong>if</strong> 测试语句与其他编程语言中的 <strong>if</strong> 相似。注意，这里的括号也是可选的，<strong>then</strong> 也一样。但是，你如果在测试条件之后没有换行符的情况下继续写代码，那么 <strong>then</strong> 不能省略：
+			</p>
+			<pre class="language-ruby line-numbers"><code>if (subtotal < 0.0) then subtotal = 0.0 end</code></pre>
+			<p class="head-indent">
+				将所有代码写在同一行不会增加代码的清晰度，我会避免这么写。我长期习惯于 Pascal 书写风格所以导致我经常在 <strong>if</strong> 条件之后添加 <strong>then</strong>，然而这真的是不需要的，你可以将其看成我的一个癖好。<strong>if</strong> 代码块末尾的 <strong>end</strong> 关键字不是可选的，忘记添加它的话你的代码将不会运行。
+			</p>
 		</section>
 	</section>
 </body>
