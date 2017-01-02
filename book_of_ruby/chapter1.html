@@ -51,7 +51,7 @@ puts( "Hello #{name}" )</code></pre>
 			</p>
 		</section>
 		<section>
-			<h3>字符串和内嵌表达式</h3>
+			<h3>字符串与内嵌表达式</h3>
 			<p class="head-indent">在我们的示例代码中，最后一行是相当有趣的。</p>
 			<pre class="language-ruby line-numbers"><code>puts( "Hello #{name}" )</code></pre>
 			<p class="head-indent">
@@ -125,11 +125,71 @@ end
 tax = subtotal * taxrate
 puts "Tax on $#{subtotal} is $#{tax}, so grand total is $#{subtotal+tax}"</code></pre>
 			<p class="head-indent">
-				Ruby 中的 <strong>if</strong> 测试语句与其他编程语言中的 <strong>if</strong> 相似。注意，这里的括号也是可选的，<strong>then</strong> 也一样。但是，你如果在测试条件之后没有换行符的情况下继续写代码，那么 <strong>then</strong> 不能省略：
+				Ruby 中的<code>if</code>测试语句与其他编程语言中的<code>if</code>相似。注意，这里的括号也是可选的，<code>then</code>也一样。但是，你如果在测试条件之后没有换行符的情况下继续写代码，那么<code>then</code>不能省略：
 			</p>
 			<pre class="language-ruby line-numbers"><code>if (subtotal < 0.0) then subtotal = 0.0 end</code></pre>
 			<p class="head-indent">
-				将所有代码写在同一行不会增加代码的清晰度，我会避免这么写。我长期习惯于 Pascal 书写风格所以导致我经常在 <strong>if</strong> 条件之后添加 <strong>then</strong>，然而这真的是不需要的，你可以将其看成我的一个癖好。<strong>if</strong> 代码块末尾的 <strong>end</strong> 关键字不是可选的，忘记添加它的话你的代码将不会运行。
+				将所有代码写在同一行不会增加代码的清晰度，我会避免这么写。我长期习惯于 Pascal 书写风格所以导致我经常在<code>if</code>条件之后添加<code>then</code>，然而这真的是不需要的，你可以将其看成我的一个癖好。<code>if</code>代码块末尾的<code>end</code>关键字不是可选的，忘记添加它的话你的代码将不会运行。
+			</p>
+		</section>
+		<section>
+			<h3>局部变量与全局变量</h3>
+			<p class="head-indent">
+				在前面的示例中，我将值赋给了变量，例如<code>subtotal</code>、<code>tax</code>和<code>taxrate</code>。这些以小写字母开头的变量都是局部变量（Local variables），这意味着它们只存在于程序的特定部分。换句话说，它们被限制一个定义明确的作用域（scope）内。这是一个实例：
+			</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;variables.rb</div>
+			<pre class="language-ruby line-numbers"><code>localvar = "hello"
+$globalvar = "goodbye"
+
+def amethod
+  localvar = 10
+  puts(localvar)
+  puts($globalvar)
+end
+
+def anotherMethod
+  localvar = 500
+  $globalvar = "bonjour"
+  puts(localvar)
+  puts($globalvar)
+end</code></pre>
+			<p class="head-indent">
+				这里有三个名为<code>localvar</code>的局部变量，一个在 main 作用域内被赋值为 "hello" ;其它的两个分别在独立的方法作用域内被赋值为整数（Integers）：因为每一个局部变量都有不同的作用域，赋值并不影响在其它作用域中同名的局部变量。你可以通过调用方法来验证：
+			</p>
+			<pre class="language-ruby line-numbers"><code>amethod  #=> localvar = 10
+anotherMethod  #=> localvar = 500
+amethod  #=> localvar = 10
+puts( localvar )  #=> localvar = "hello"</code></pre>
+			<p class="head-indent">
+				另一方面，一个以 <strong>$</strong> 字符开头的全局变量拥有全局作用域。当在一个方法中对一个全局变量进行赋值，同时也会影响程序中其它任意作用域中的同名全局变量：
+			</p>
+			<pre class="language-ruby line-numbers"><code>amethod  #=> $globalvar = "goodbye"
+anotherMethod  #=> $globalvar = "bonjour"
+amethod  #=> $globalvar = "bonjour"
+puts($globalvar) #=> $globalvar = "bonjour"</code></pre>
+		</section>
+		<section>
+			<h3>类与对象</h3>
+			<p class="head-indent">
+				现在先跳过其余的 Ruby 语法，例如类型（type）、循环（loops）、模块（modules）等等（不要怕，我们会很快回过头来），让我们迅速去看看如何创建类（class）和对象（object）。
+			</p>
+			<div class="note">
+				<dl>
+					<dt>类、对象和方法</dt>
+					<dd class="head-indent">
+						类是对象的大纲蓝图，它定义对象包含的数据以及行为方式。许多不同的对象可以从单一的类创建，所以你可能有一个 Cat 类（<code>class</code>），但是有三个 cat 对象（<code>objects</code>）：<em>tiddles</em>、<em>cuddles</em> 和 <em>flossy</em>。一个方法（<code>method</code>）就像一个定义在类中的函数或子例程。
+					</dd>
+				</dl>
+			</div>
+			<p class="head-indent">
+				Ruby 是面向对象（object oriented）的似乎没什么特别可说的，现代所有的语言不是如此吗？好吧，说一点。大多数现代的“面向对象”语言（Java、C++、C#、Object  Pascal 等等）或多或少都具有面向对象编程（OOP）的特性。另一方面，Ruby 是纯粹面向对象的。事实上，除非你使用过 Smalltalk 或  Eiffel （比 Ruby 更纯粹的面向对象的语言），否则 Ruby 就是你曾经使用过的语言中最面向对象的语言。从简单的数字和字符串到复杂的文件和模块，每一块数据都被视为一个对象。并且你用对象做的每一件事都是通过方法来完成，甚至“运算符”（operators）也是一个方法，例如加 + 和减 - 。看下面这个程序：
+			</p>
+			<pre class="language-ruby line-numbers"><code>x = 1 + 2</code></pre>
+			<p class="head-indent">
+				这里的<code>+</code>是 Fixnum (Integer) 对象 1 的一个方法，值 2 被传入该方法；结果 3 被返回并赋值给 x 对象。顺便地说一下，运算符<code>=</code>是“使用对象做任何事情都是通过方法来完成”这条规则的罕见例外。赋值运算符是一个内置的东西（这不是一个术语，我没有添加）并且它不是用来完成任何事情的一个方法。
+			</p>
+			<p class="head-indent">
+				现在
 			</p>
 		</section>
 	</section>
