@@ -37,11 +37,11 @@
 						Git 是一个非常强大的版本控制工具，所谓的版本控制即就是对一个项目的更改进行记录，随后可以进行撤销、查看等功能。对于大型的开源项目，版本控制工具提供了非常大的便利，可以多人同时协作开发。Github 则提供了这样一个平台，使用 git 进行项目维护，世界上大多数的开源项目都在 github 仓库中进行展示。而 github 对程序员也是友好的，因为我们个人也可以使用免费的仓库，来维护自己的项目。
 					</p>
 					<p class="head-indent">
-						Git 源于 Linux ，但不仅仅限于 Linux 平台下的使用， git for windows 就是最好的选择：
-						<blockquote>
-							<b>Git：</b><a href="https://git-scm.com/" target="_blank">https://git-scm.com/</a>
-						</blockquote>
+						Git 源于 Linux ，但不仅仅限于 Linux 平台下的使用， Git for Windows 就是最好的选择：
 					</p>
+					<blockquote>
+						<b>Git for Windows：</b><a href="https://git-scm.com/" target="_blank">https://git-scm.com/</a>
+					</blockquote>
 				</section>
 				<section>
 					<h2>Git Bash</h2>
@@ -67,9 +67,29 @@ git config --global user.email "wangyuan230@163.com"</code></pre>
 						<section>
 							<h4>SSH 密钥</h4>
 							<p class="head-indent">
-								安装 SSH 密钥可以在我们进行项目提交时避免重复输入用户名密码，也更安全。
+								安装 SSH 密钥可以在我们进行项目提交时避免重复输入用户名密码，也更安全。可以直接查看 GitHub 官方文档：
 							</p>
-
+							<blockquote>
+								<b>Help：</b><a href="https://help.github.com/articles/generating-an-ssh-key/" target="_blank">https://help.github.com/articles/generating-an-ssh-key/</a>
+							</blockquote>
+							<p class="head-indent">检查是否已有 SSH 密钥文件：</p>
+							<pre class="language-bash"><code>ls -al ~/.ssh</code></pre>
+							<p class="head-indent">如果不存在（或者想覆盖），可以生成一个新的 SSH 密钥文件：</p>
+							<pre class="language-bash"><code>ssh-keygen -t rsa -b 4096 -C "wangyuan230@163.com"</code></pre>
+							<p class="head-indent">这里使用你的邮箱作为 SSH 密钥标签，该过程中直接全按回车即可。</p>
+							<p class="head-indent">得到 SSH 密钥文件后，接下来应该将该密钥添加到 ssh-agent ：</p>
+							<pre class="language-bash"><code># 启动 ssh-agent
+eval $(ssh-agent -s)
+# 添加 SSH
+ssh-add ~/.ssh/id_rsa</code></pre>
+							<p class="head-indent">
+								最后将 SSH 添加到你的 GitHub 账户即可，先将密钥文件复制到剪切板：
+							</p>
+							<pre class="language-bash"><code>clip < ~/.ssh/id_rsa.pub</code></pre>
+							<p class="head-indent">然后，打开 GitHub 网站登录你的帐户，右上角头像进入<code>Settings</code>，左边导航选择<code>SSH and GPG keys</code>，点击<code>New SSH key</code>，自己命名一个 title，然后将 SSH 文件复制到 key 框中，然后需要输入你的 github 账户密码。</p>
+							<p class="head-indent">最后，可以测试一下：</p>
+							<pre class="language-bash"><code>ssh -T git@github.com</code></pre>
+							<p class="head-indent">回车后输入<strong>yes</strong>，如果看到 <b>Hi 你的用户名</b> 一串信息，就说明添加 SSH 密钥成功了。</p>
 						</section>
 					</section>
 				</section>		
