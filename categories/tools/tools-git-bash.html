@@ -46,7 +46,7 @@
 				<section>
 					<h2>Git Bash</h2>
 					<p class="head-indent">
-						Git 在 Windows 下提供了图形用户界面（Git GUI）和命令行（Git Bash）的两种操作方式，不过我更推荐使用后者，命令行更快速、简单一些。
+						Git 在 Windows 下提供了图形用户界面（Git GUI）和命令行（Git Bash）两种操作方式，不过我更推荐使用后者，命令行更快速、简单一些。
 					</p>
 					<p class="head-indent">
 						安装好后，我们打开 Bash 终端，可以在界面上<code>右键-->Options-->Text</code>，更改字体大小和字符编码，推荐将字符编码改为<strong>UTF-8</strong>。
@@ -86,7 +86,9 @@ ssh-add ~/.ssh/id_rsa</code></pre>
 								最后将 SSH 添加到你的 GitHub 账户即可，先将密钥文件复制到剪切板：
 							</p>
 							<pre class="language-bash"><code>clip < ~/.ssh/id_rsa.pub</code></pre>
-							<p class="head-indent">然后，打开 GitHub 网站登录你的帐户，右上角头像进入<code>Settings</code>，左边导航选择<code>SSH and GPG keys</code>，点击<code>New SSH key</code>，自己命名一个 title，然后将 SSH 文件复制到 key 框中，然后需要输入你的 github 账户密码。</p>
+							<p class="head-indent">
+								然后，打开 <a href="https://github.com/login" target="_blank">GitHub</a> 网站登录你的帐户，右上角头像进入<code>Settings</code>，左边导航选择<code>SSH and GPG keys</code>，点击<code>New SSH key</code>，自己命名一个 title，然后将 SSH 文件复制到 key 框中，然后需要输入你的 github 账户密码。
+							</p>
 							<p class="head-indent">最后，可以测试一下：</p>
 							<pre class="language-bash"><code>ssh -T git@github.com</code></pre>
 							<p class="head-indent">回车后输入<strong>yes</strong>，如果看到 <b>Hi 你的用户名</b> 一串信息，就说明添加 SSH 密钥成功了。</p>

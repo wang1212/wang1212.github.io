@@ -189,7 +189,116 @@ puts($globalvar) #=> $globalvar = "bonjour"</code></pre>
 				这里的<code>+</code>是 Fixnum (Integer) 对象 1 的一个方法，值 2 被传入该方法；结果 3 被返回并赋值给 x 对象。顺便地说一下，运算符<code>=</code>是“使用对象做任何事情都是通过方法来完成”这条规则的罕见例外。赋值运算符是一个内置的东西（这不是一个术语，我没有添加）并且它不是用来完成任何事情的一个方法。
 			</p>
 			<p class="head-indent">
-				现在
+				现在让我们来看看如何创建我们自己的对象。和大多数其它 OOP（面向对象编程）的语言一样，一个 Ruby 对象由类来定义，这个类就像一个从中构建多个单个对象的蓝图。例如，这个类定一只狗：
+			</p>
+			<pre class="language-ruby line-numbers"><code>class Dog
+  def set_name( aName )
+    @myname = aName
+  end
+end</code></pre>
+			<p class="head-indent">
+				注意，类的定义以关键字<code>class</code>（全部小写）和类名开始，并且类名必须以大写字母开头。这个类包含一个<code>set_name</code>方法，它需要传入一个参数<code>aName</code>，方法体则是将<code>aName</code>赋值给一个<code>@myname</code>变量。
+			</p>
+		</section>
+		<section>
+			<h3>实例变量</h3>
+			<p class="head-indent">
+				以<code>@</code>符号开头的变量就是“实例变量”——这意味着它们属于单独的对象或者类的实例。实例变量不需要提前声明。我可以通过调用类的<code>new</code>方法来创建 Dog 类的实例（即 dog 对象）。在这里我创建两个两个 dog 对象（注意，虽然类名是以大写字母开头的，而实例对象名则是以小写字母开头的）：
+			</p>
+			<pre class="language-ruby line-numbers"><code>mydog = Dog.new
+yourdog = Dog.new</code></pre>
+			<p class="head-indent">
+				目前，这两只狗还没有名字。所以，接下来我将要做的是调用<code>set_name</code>方法来给它们起个名字：
+			</p>
+			<pre class="language-ruby line-numbers"><code>mydog.set_name( 'Fido' )
+yourdog.set_name( 'Bonzo' )</code></pre>
+			<p class="head-indent">
+				现在每只狗都有了名字，但是我以后需要通过某些途径能获知它们的名字。我该怎么办？我不能在对象内部获取<code>@name</code>变量，因为每个对象的内部细节只能被它自己所知道。这是纯粹的面向对象的根本：每个对象内部的数据是私有的。每个对象都有其对应的被定义的输入（例如，<code>set_name</code>方法）和输出接口。只有对象自身才能让它的内部状态变得混乱，外部世界是不能做到的。这被称为“数据隐藏”，并且它是“封装”（encapsulation）原理的一部分。
+			</p>
+			<div class="note">
+				<dl>
+					<dt>封装（Encapsulation）</dt>
+					<dd class="head-indent">
+						在 Ruby 中，封装并不像最初它出现时的那么严格地被遵守，有一些不好的技巧可以让你使一个对象内部变得混乱。为了清楚起见（并确保你和我不会有恶梦），现在我们默默的了解下面这些语言的特性。
+					</dd>
+				</dl>
+			</div>
+			<p class="head-indent">
+				因为我们需要每一只狗都能知道它的名字，让我们给 Dog 类提供一个<code>get_name</code>方法：
+			</p>
+			<pre class="language-ruby line-numbers"><code>def get_name
+  return @myname
+end</code></pre>
+			<p class="head-indent">
+				这里的<code>return</code>关键字是可选的。当它被省略时，Ruby 会返回最后一个表达式的值。
+			</p>
+			<p class="head-indent">为了清楚起见（并为了避免发生意外的结果），我习惯于明确的返回我所期望的值。</p>
+			<p class="head-indent">最后，我们可以让狗拥有说话的能力。这是最终的类定义：</p>
+			<pre class="language-ruby line-numbers"><code>class Dog
+  def set_name( aName )
+	@myname = aName
+  end
+  def get_name
+	return @myname
+  end
+  def talk
+	return 'woof!'
+  end
+end</code></pre>
+			<p class="head-indent">现在，我们可以创建一个 dog 对象，给它命名、显示它的名字并且让它说话：</p>
+			<pre class="language-ruby line-numbers"><code>mydog = Dog.new
+mydog.set_name( 'Fido' )
+puts(mydog.get_name)
+puts(mydog.talk)</code></pre>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;6dogs.rb</div>
+			<p class="head-indent">
+				我已经在 <strong>6dogs.rb</strong> 这个文件中编写了这个代码的扩展版本。这个文件也包含了一个类似于 Dog 类的 Cat 类，除过<code>talk</code>方法不同，很自然的它的返回值是 miaow 而不是 woof 。
+			</p>
+			<div class="note">
+				<p class="head-indent"><b>糟糕！</b>这个程序似乎包含一个错误。</p>
+				<p class="head-indent">
+					名为<code>someotherdog</code>的对象从未给它的<code>@name</code>变量赋值。幸运的是，在我们要显示这只狗的名字时 Ruby 并不会发生错误，而只会打印“nil”。我们将很快看到一个简单的方式来确保这样的错误不再发生...
+				</p>
+			</div>
+		</section>
+		<section>
+			<h3>消息、方法与多态</h3>
+			<p class="head-indent">
+				顺便的说一句，这是一个基于经典的 Smalltalk 示例程序的例子，说明了如何将相同的“消息”（例如<code>talk</code>）发送给不同的对象（例如 cats 和 dogs），并且每个不同的对象会对相同的消息使用它们自己特有的方法（这里是<code>talk</code>方法）产生不同的响应。这种不同的类拥有相同的方法的能力有一个面向对象的名字“多态”——这个词可以不用记住。
+			</p>
+			<p class="head-indent">
+				当你运行一个程序，例如 <strong>6dogs.rb</strong> ，它的代码是顺序执行的。但是，直到类的实例（即对象）被后面的代码创建类的代码本身不会被执行。你会发现，我经常将类定义与程序运行时就会被执行的独立自由地代码混合着写。这可能不是你想写一个应用程序的主要方式，但这仅仅是尝试，而且它非常方便。
+			</p>
+			<div class="note">
+				<p class="head-indent"><strong>什么是自由独立的代码？</strong></p>
+				<p class="head-indent">
+					如果 Ruby 真的是一个面向对象的语言，你可能会因为我们可以写“自由浮动”的方法而感到奇怪。事实上被证明的是，当你运行一个程序时，Ruby 会创建一个<code>main</code>对象并且任何出现在其内部的代码不是自由浮动的，实际上是在<code>main</code>对象内部运行。你可以很容易的验证这一点，创建一个新的源文件，添加这些代码然后运行它来查看输出信息：
+					<pre class="language-ruby line-numbers"><code>puts self
+puts self.class</code></pre>
+				</p>
+			</div>
+			<p class="head-indent">
+				我的程序有一个明显的缺陷就是 Cat 和 Dog 类是高度重复的。也许更有意义的做法是，创建一个包含<code>get_name</code>和<code>set_name</code>方法的 Animal 类，并且它有两个仅仅包含特定行为——woofing 或 miaowing——的后代类 Cat 和 Dog。我们将在下一章中找到如何做到这一点。
+			</p>
+		</section>
+		<section>
+			<h3>构造器——new 与 initialize</h3>
+			<p class="head-indent">
+				现在，来看看另一个用户自定义类的例子。加载 <strong>7treasure.rb</strong> ，这是制作了一个冒险游戏。它包含两个类 Thing（东西） 和 Treasure（宝藏），Thing 类与 Cat 和 Dog 类特别的相似，除了它不包含 woof 或者 miaow。
+			</p>
+			<p class="head-indent">
+				Treasure 类没有<code>get_name</code>和<code>set_name</code>方法，相反地它包含一个名为<code>initialize</code>的方法，这个方法接受两个参数并将参数值分配给<code>@name</code>和<code>@description</code>变量：
+			</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;7treasure.rb</div>
+			<pre class="language-ruby line-numbers"><code>def initialize( aName, aDescription )
+  @name = aName
+  @description = aDescription
+end</code></pre>
+			<p class="head-indent">
+				当一个类包含名为<code>initialize</code>的方法，它会在使用<code>new</code>方法创建对象时自动地被调用。使用<code>initialize</code>来设置一个对象的实例变量的值是不错的主意。
+			</p>
+			<p class="head-indent">
+				这相对于使用方法（例如<code>set_name</code>）设置每个实例变量的值有两个明显的好处。首先，一个复杂的类可能包含许多实例变量，你可以通过一个<code>initialize</code>方法设置它们全部的值，而不是通过许多独立的“set”方法。其次，如果这些变量在对象创建时都被自动的初始化，你就不会以空的变量结束程序（例如在前面的程序中我们尝试显示<code>someotherdog</code>的名字时会返回 <em>nil</em> 值）。
 			</p>
 		</section>
 	</section>
