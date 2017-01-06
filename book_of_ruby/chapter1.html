@@ -282,7 +282,7 @@ puts self.class</code></pre>
 			</p>
 		</section>
 		<section>
-			<h3>构造器——new 与 initialize</h3>
+			<h3>构造方法——new 与 initialize</h3>
 			<p class="head-indent">
 				现在，来看看另一个用户自定义类的例子。加载 <strong>7treasure.rb</strong> ，这是制作了一个冒险游戏。它包含两个类 Thing（东西） 和 Treasure（宝藏），Thing 类与 Cat 和 Dog 类特别的相似，除了它不包含 woof 或者 miaow。
 			</p>
@@ -300,6 +300,58 @@ end</code></pre>
 			<p class="head-indent">
 				这相对于使用方法（例如<code>set_name</code>）设置每个实例变量的值有两个明显的好处。首先，一个复杂的类可能包含许多实例变量，你可以通过一个<code>initialize</code>方法设置它们全部的值，而不是通过许多独立的“set”方法。其次，如果这些变量在对象创建时都被自动的初始化，你就不会以空的变量结束程序（例如在前面的程序中我们尝试显示<code>someotherdog</code>的名字时会返回 <em>nil</em> 值）。
 			</p>
+			<p class="head-indent">
+				最后，我创建了一个名为<code>to_s</code>的方法用来返回一个表示宝物对象的字符串。这个<code>to_s</code>方法名不是随意的，相同的方法名已被在 Ruby 标准对象库中使用。实际上，<code>to_s</code>方法被定义在 Object 类中，该类是其它类的祖先。通过重新定义<code>to_s</code>方法，我添加了新的行为，这比默认的方法更适合于 Treasure 类。换句话说，我已经“覆盖”（overridden）了它的<code>to_s</code>方法。
+			</p>
+			<p class="head-indent">
+				<code>new</code>方法可以创建一个对象，所以它可以被认为是对象的“构造方法”。然而，你通常不应该实现你自己的<code>new</code>方法（这是可能的，但它通常不可取）。相反，当你想要执行任何“设置”操作（例如为对象的内部变量赋值）时，应在<code>initialize</code>方法中完成，Ruby 会在一个新对象创建后立即执行<code>initialize</code>方法。
+			</p>
+			<div class="note">
+				<dl>
+					<dt>垃圾回收（Garbage Collection，GC）</dt>
+					<dd class="head-indent">
+						在许多语言中（例如 C++ 和 Delphi for Win32），销毁任何已经创建并且不再需要的对象是程序员的职责。换句话说，对象被赋予析构函数以及构造函数。在 Ruby 中，你不必做这些了，因为 Ruby 有一个内置的“垃圾回收器”，它会在你的程序不再引用对象时销毁它并回收内存。
+					</dd>
+				</dl>
+			</div>
+		</section>
+		<section>
+			<h3>查看对象</h3>
+			<p class="head-indent">
+				顺便提一下，Treasure 对象 <strong>t1</strong> 内部使用了<code>inspect</code>方法：
+			</p>
+			<pre class="language-ruby line-numbers"><code>t1.inspect</code></pre>
+			<p class="head-indent">
+				<code>inspect</code>是为所有的 Ruby 对象定义的，它将返回一个包含人类可读的表示该对象的字符串。在本例中，它显示这样一些信息：
+			</p>
+			<pre class="language-ruby"><code>#&lt;Treasure:0x28962f8 @description="an Elvish weapon forged of gold", @name="Sword"&gt;</code></pre>
+			<p class="head-indent">
+				它是以类名 Treasure 开始，后面跟随一个数字，这是 Ruby 内部用来识别特定对象的的识别码；随后就是对象的名字和变量的值。
+			</p>
+			<p class="head-indent">Ruby 还提供了<code>p</code>方法作为打印和查看对象细节的快捷语法，像这样：</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;p.rb</div>
+			<pre class="language-ruby line-numbers"><code>p(anobject)</code></pre>
+			<p class="head-indent">
+				来看看如何用<code>to_s</code>方法将各种对象以及测试将一个 Treasure 对象在没有重写<code>to_s</code>方法的情况下转换成字符串，场试运行 <strong> 8to_s.rb</strong> 程序：
+			</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;8to_s.rb</div>
+			<pre class="language-ruby line-numbers"><code>puts(Class.to_s)     #=> Class
+puts(Object.to_s)    #=> Object
+puts(String.to_s)    #=> String
+puts(100.to_s)       #=> 100
+puts(Treasure.to_s)  #=> Treasure</code></pre>
+			<p class="head-indent">
+				正如你将看到的，当<code>to_s</code>方法被调用时，类（如 Class,、Object、String 以及 Treasure ）只是简单的返回它们的名字；而一个对象，例如 Treasure 对象 <strong>t</strong> ，返回与<code>inspect</code>方法返回值一样的对象标识符：
+			</p>
+			<pre class="language-ruby line-numbers"><code>t = Treasure.new( "Sword", "A lovely Elvish weapon" )
+puts(t.to_s)
+    #=> #&lt;Treasure:0x3308100&gt;
+puts(t.inspect) 
+    #=> #&lt;Treasure:0x3308100 @name="Sword", @description="A lovely Elvish weapon"&gt;</code></pre>
+    		<br />
+    		<p class="head-indent">
+    			虽然 <strong>7treasure.rb</strong> 程序可能作为一个游戏的基础代码包含了不同类型的对象，其代码仍然是重复的。毕竟，为什么 Thing 类有一个 name 而 Treasure 也要包含一个 name 呢？如果把 Treasure 视为一类东西可能是更有意义的。在一个完整的游戏中，其它对象，例如 Rooms（房间） 和 Weapons（武器）可能也是其它的一类东西。是时候应该在一个合适的类层次上开始工作了，这就是我们下一章将要讲到的...
+    		</p>
 		</section>
 	</section>
 </body>
