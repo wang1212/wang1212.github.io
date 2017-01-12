@@ -101,14 +101,14 @@
 						</p>
 					</section>
 					<section>
-						<h3>（父）伪元素 :：after</h3>
+						<h3>伪元素 :after</h3>
 						<p class="head-indent">接下来要说的就是一种推荐的做法了，这个方法被大多数人采用。</p>
 						<pre class="language-markup"><code>&lt;style&gt;
   	#container{
       ...
       zoom: 1;  /* IE兼容 */
   	}
-  	#container::after{
+  	#container:after{
       clear: both;  /* 清除浮动 */
       content: '';  /* 伪元素默认属性 */
       height: 0;  /* 保证不显示 */
@@ -121,14 +121,35 @@
 						</p>
 					</section>
 					<section>
+						<h3>双伪元素</h3>
+						<p class="head-indent">
+							随着浏览器的更新，标准的统一和兼容，可以使用更简洁的双伪元素法清除浮动，它与上面的原理相同。
+						</p>
+						<pre class="language-markup"><code>&lt;style&gt;
+    #container:before, #container:after {
+      content:"";
+	  display:table;
+    }
+    #container:after {
+	  clear:both;
+    }
+    #container {
+	  zoom:1;
+    }
+&lt;/style&gt;</code></pre>
+						<p class="head-indent">
+							这里的<code>:before</code>伪元素并不是用来清除浮动的，而是解决垂直方向上<code>margin</code>重叠问题。
+						</p>
+					</section>
+					<section>
 						<h3>其他方法</h3>
 						<p class="head-indent">
 							在实际开发过程中，我们发现并不是只有以上三种方法会产生清除浮动的效果，而其他某些时候也会产生该效果，下面就简单的列举一下。
 						</p>
 						<ul>
 							<li>父元素也浮动时；</li>
-							<li>父元素为绝对定位时；</li>
-							<li>父元素 display: table；</li>
+							<li>父元素为<strong>绝对定位</strong>时；</li>
+							<li>父元素<code>display: table</code>；</li>
 						</ul>
 						<p class="head-indent">
 							以上这些均是一些副作用产生了清除浮动的效果，不应该作为清除浮动的目的来使用，因为这样会产生一些其他问题。
@@ -138,7 +159,7 @@
 				<section>
 					<h2>结语</h2>
 					<p class="head-indent">
-						也许，CSS 清除浮动的方法不止这些，不过我们只是单纯的为了清除浮动，采取最优雅的方法即可。
+						也许，CSS 清除浮动的方法不止这些，不过我们只是单纯的为了清除浮动，采取最优雅的方法即可。其实，直接定义父元素的高度也相当于清除了浮动的副作用。
 					</p>
 				</section>			
 			</div>			

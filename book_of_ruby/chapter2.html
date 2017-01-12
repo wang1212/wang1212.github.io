@@ -24,7 +24,7 @@
 	<section>
 		<h2 id="page-title">类的层次结构、属性与变量</h2>
 		<p class="head-indent">
-			在上一节结束时我们创建两个类：Thing 和 Treasure，尽管事实上这两个类共享了一些功能（特别是两者都包含<code>name</code>），但它们是没有联系的。
+			在上一节结束时我们创建两个类：Thing 和 Treasure，尽管事实上这两个类共享了一些功能（特别是两者都包含 'name'），但它们是没有联系的。
 		</p>
 		<p class="head-indent">
 			现在，这两个类的重复看起来是不值一提的。但是，当你开始写一些复杂的程序时，你的类将会包含大量的变量和方法；你真的想将同样的事情一遍又一遍的重复吗。
@@ -35,6 +35,27 @@
 		<div class="note head-indent">
 			<strong>类层次——祖先（Ancestors）和后代（Descendants）：</strong>在这本书中，我会经常提及“后代”类继承（inherit）自它们祖先类，这些术语意味着“相关”类之间的一种类似于家庭的关系。Ruby 中每一个类只有一个父亲，然而，它可能在一个很长很大的家庭树中，有许多代的父母、祖父母等等...
 		</div>
+		<p class="head-indent">
+			Thing 类的特征通常被定义在它内部，Treasure 类则会自动地“继承” Thing 类所有的的特性。所以，我们不需要再次对这些特征进行编码，而是额外添加一些 Treasures 类特有的特性。
+		</p>
+		<p class="head-indent">
+			通常地规则是，在创建类层次结构时，具有更多通用特征的类要比具有更多特殊特征的类层次更高一些。所以，只有一个 <i>name</i> 和 <i>description</i> 的 Thing 类是具有 <i>name</i>、<i>description</i> 以及 <i>value</i> 的 Treasure 类的祖先；Thing 类也可能是一些其它的特殊类的祖先，例如具有 <i>name</i>、<i>description</i> 以及 <i>exits</i> 的 Room 类。
+		</p>
+		<div class="note">
+			<dl>
+				<dt><strong>一个父亲，有多个孩子...</strong></dt>
+				<dd class="head-indent">
+					Thing 类具有 <i>name</i> 和 <i>description</i> （在 Ruby 程序中，它们可能是内部变量<code>@name</code>和<code>@description</code>）。Treasure 和 Room 类都派生自 Thing 类，所以它们自动地继承了 <i>name</i> 和 <i>description</i> 。Treasure 类添加了一个 <i>value</i>，所以它就具有 <i>name</i>、<i>description</i> 和 <i>value</i> ；Room 类添加了一个 <i>exits</i>，所以它就具有 <i>name</i>、<i>description</i> 和 <i>exits</i> 。
+				</dd>
+			</dl>
+		</div>
+		<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;1adventure.rb</div>
+		<p class="head-indent">
+			来让我们看看如何在 Ruby 中创建一个后代类。加载 <strong>1adventure.rb</strong> 程序，这只需要定义一个具有两个实例变量（instance variables）<code>@name</code>和<code>@description</code>的 Thing 类，它们的值可以在创建新的 Thing 对象时在<code>initialize</code>方法中赋值。
+		</p>
+		<p class="head-indent">
+			实例变量通常不能（也不应该）被外部直接访问，这是为了遵循上一章讲到的封装（ encapsulation）原则。为了获得我们所需要的每个变量的值，我们需要一个 get 访问器方法，例如<code>get_name</code>；为了给某个变量赋一个新值，我们也需要一个 set 访问器方法，例如<code>set_name</code>。
+		</p>
 		<section>
 			<h3>超类与子类</h3>
 		</section>
