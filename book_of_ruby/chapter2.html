@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-	<header>
+	<header class="hidden-sm-down text-xs-left">
 		<p class="h1 text-xs-center">Chapter Two</p><hr />
 		<p class="h2 text-xs-center">Class Hierarchies, Attributes and Class Variables</p>
 		<ul>
@@ -58,9 +58,40 @@
 		</p>
 		<section>
 			<h3>超类与子类</h3>
+			<p class="head-indent">现在来看看 Treasure 类，注意声明方式：</p>
+			<pre class="language-ruby line-numbers"><code>class Treasure < Thing</code></pre>
+			<p class="head-indent">
+				尖括号<code>&lt;</code>表示 Treasure 是 Thing 的一个子类（后代类），因此它从 Thing 类继承数据（变量）和行为（方法）。因为<code>get_name</code>、<code>set_name</code>、<code>get_description</code>以及<code>set_description</code>方法已经存在于 Thing 类中，所以不需要在后代类（Treasure）中再编写了。
+			</p>
+			<p class="head-indent">
+				Treasure 类还有额外的数据，也就是它的 value（<code>@value</code>），我已经为它编写了 <em>get</em> 和 <em>set</em> 访问器了。当创建一个新的 Treasure 对象时，它的<code>initialize</code>方法会被自动调用。一个 Treasure 对象有三个变量（<code>@name</code>、<code>@description</code>和<code>@value</code>）需要初始化，所以它的<code>initialize</code>方法有三个参数。前两个参数使用<code>super</code>关键字传递给超类（Thing）的<code>initialize</code>方法，以便 Thing 类的<code>initialize</code>方法可以处理它们：
+			</p>
+			<pre class="language-ruby line-numbers"><code>super(aName, aDescription)</code></pre>
+			<p class="head-indent">
+				当在方法中使用时，<code>super</code>关键字调用在祖先类或超类中的与当前所在方法的同名方法。如果<code>super</code>关键字没有指定任何参数，当前方法的所有参数将会传递给祖先类的方法。但是，像本例中一样，提供了一个特定的参数列表时（这里是<code>aName</code>和<code>aDescription</code>），那么只有这些参数会被传递给祖先类的方法。
+			</p>
 		</section>
 		<section>
 			<h3>向超类传递参数</h3>
+			<p class="head-indent">
+				当调用超类的方法时，括号是很重要的！如果参数列表为空，并且没有使用括号，那么所有的参数都将传递给超类。但是，参数列表为空，并且使用了括号时，将不会给超类传递任何参数。
+			</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;super_args.rb</div>
+			<pre class="language-ruby line-numbers"><code># This passes a, b, c to the superclass
+def initialize(a, b, c, d, e, f)
+  super(a, b, c)
+end
+# This passes a, b, c to the superclass
+def initialize(a, b, c)
+  super 
+end
+# This passes no arguments to the superclass
+def initialize(a, b, c)
+  super()
+end</code></pre>
+			<div class="note">
+				要更好的了解<code>super</code>关键字的使用，请参阅本章末尾的<strong>深入探索</strong>部分。
+			</div>
 		</section>
 		<section>
 			<h3>访问器方法</h3>
