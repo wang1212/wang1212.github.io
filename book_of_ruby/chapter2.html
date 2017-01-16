@@ -95,9 +95,44 @@ end</code></pre>
 		</section>
 		<section>
 			<h3>访问器方法</h3>
+			<p class="head-indent">
+				虽然这些类在冒险游戏中运行的足够好，但它们仍然是累赘的，因为设置了大量的 <em>get</em> 和 <em>set</em> 访问器方法。让我们看看有什么补救措施。
+			</p>
+			<p class="head-indent">
+				替换掉<code>@description</code>实例变量的两个不同的方法，<code>get_description</code>和<code>set_description</code>。
+			</p>
+			<pre class="language-ruby line-numbers"><code>puts(t1.get_description)
+t1.set_description(“Some description”)</code></pre>
+			<p class="head-indent">取值和赋值也许更好一些，对于一个简单的变量使用下面的方式进行取值和赋值：</p>
+			<pre class="language-ruby line-numbers"><code>puts(t1.description)
+t1.description = “Some description”</code></pre>
+			<p class="head-indent">
+				为了能够做到这一点，我们需要修改 Treasure 类的定义。实现这一点的方法是重写<code>@description</code>的访问器方法：
+			</p>
+			<pre class="language-ruby line-numbers"><code>def description
+  return @description
+end
+
+def description=(aDescription)
+  @description = aDescription
+end</code></pre>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;accessors1.rb</div>
+			<p class="head-indent">
+				我已经在 <strong>accessors1.rb</strong> 中添加了类似于上面的访问器。<em>get</em> 访问器被称为<code>description</code>，<em>set</em> 访问器被称为<code>description=</code>（即就是，将等号（=）附加到 <em>get</em> 访问器方法名后面）。现在，就可以将一个新的字符串进行赋值了：
+			</p>
+			<pre class="language-ruby line-numbers"><code>t.description = "a bit faded and worn around the edges"</code></pre>
+			<p class="head-indent">你可以像这样取值：</p>
+			<pre class="language-ruby line-numbers"><code>puts(t.description)</code></pre>
 		</section>
 		<section>
 			<h3>'Set' 访问器</h3>
+			<p class="head-indent">
+				当你想要以这种方式编写 set 访问器时，必须将<code>=</code>字符附加到方法名后面，而不仅仅是将其放置于方法名和参数之间。
+			</p>
+			<p class="head-indent">所以，这样是正确的：</p>
+			<pre class="language-ruby"><code>def name=(aName)</code></pre>
+			<p class="head-indent">这样是错误的：</p>
+			<pre class="language-ruby"><code>def name = (aName)</code></pre>
 		</section>
 		<section>
 			<h3>属性的读与写</h3>
