@@ -223,14 +223,46 @@ attr_writer(:description)</code></pre>
 			<p class="head-indent">
 				我创建了一个用来返回描述 Treasure 对象的字符串的<code>to_s</code>方法。回想一下，所有的 Ruby 类都有一个标准的<code>to_s</code>方法，<code>Thing.to_s</code>方法覆盖（替换）了默认的方法。当您希望实现适合特定类类型的新行为时，你可以覆盖现有的方法。
 			</p>
-			<pre class="language-ruby line-numbers"><code></code></pre>
 		</section>
 		<section>
 			<h3>调用超类方法</h3>
-			
+			<p class="head-indent">
+				我已经决定我的游戏会有两个派生自 Thing 的后代类。Treasure 类添加了一个可读写的<code>value</code>属性；注意它的<code>initialize</code>方法中调用了超类方法，是为了在初始化新变量<code>@value</code>之前</code>初始化<code>name</code>和<code>description</code>属性：
+			</p>
+			<pre class="language-ruby line-numbers"><code>super(aName, aDescription)
+@value = aValue</code></pre>
+			<p class="head-indent">
+				在这里如果我省略了对超类方法的调用，那么<code>name</code>和<code>description</code>属性将永远不会被初始化。这是因为<code>Treasure.initialize</code>覆盖了<code>Thing.initialize</code>，所以当一个 Treasure 对象被创建时，<code>Thing.initialize</code>代码不会自动被执行。
+			</p>
+			<p class="head-indent">
+				另一方面，<code>Room</code>类也派生自 Thing，目前没有<code>initialize</code>方法；所以当一个新的 Room 对象被创建时，Ruby 会从类层次中逐层向上寻找该方法。第一个<code>initialize</code>方法在 Thing 中被发现；所以一个 Room 对象的<code>name</code>和<code>description</code>属性在这里被初始化。
+			</p>
 		</section>
 		<section>
 			<h3>类变量</h3>
+			<p class="head-indent">在这个程序中还有一些其他的有趣的东西。在顶级类 Thing 中你会看到：</p>
+			<pre class="language-ruby line-numbers"><code>@@num_things = 0</code></pre>
+			<p class="head-indent">
+				此变量的名字是以两个 <strong>@</strong> 字符开头的，<code>@@num_things</code>定义这是一个“类变量”（class variable）。到目前为止，我们在类中使用的变量都是实例变量，以单个 <strong>@</strong> 开头，例如<code>@name</code>。而每个类的新对象（实例）会将自己的值分配给自己的实例变量，然而所有派生自特定类的对象共享相同的类变量。我已经给<code>@@num_things</code>赋值为 0 以确保其是有意义的。
+			</p>
+			<p class="head-indent">
+				在这里，<code>@@num_things</code>类变量用来记录在游戏运行的 Thing 对象的数量。它只是在每个新对象被创建时在它的初始化方法中简单的递增类变量（通过<code>+=1</code>）：
+			</p>
+			<pre class="language-ruby line-numbers"><code>@@num_things +=1</code></pre>
+			<p class="head-indent">
+				如果你接着看我的代码，你会看到我创建一了包含 rooms 的数组（array）的 Map 类。这也包括一个标准的<code>to_s</code>方法，可以打印出数组中每个 room 的信息。不要担心 Map 类的实现，我们将在后面章节讨论数组及其方法。
+			</p>
+			<p class="head-indent">
+				滚动到代码文件的底部，然后运行程序看看我是如何创建和初始化所有的对象以及使用类变量，<code>@@num_things</code>，来记录已创建的 Thing 对象的数量。
+			</p>
+			<div class="note">
+				<dl>
+					<dt class="text-xs-center"><strong>类变量与实例变量</strong></dt>
+					<dd class="head-indent">
+						对于 Thing 类，如有三个不同的 Thing 对象（实例），<code>@name</code>作为实例变量，因各个对象（实例）的不同而取值不同；并且各个对象之间修改<code>@name</code>的值并不会相互影响，是独立的。Thing 类中有一个<code>@@num_things</code>类变量，它被三个对象共享，其中一个修改<code>@@num_things</code>的值时，其它对象访问到<code>@@num_things</code>的值也会发生改变。所以说，实例变量<code>@name</code>是对象独有的，而类变量<code>@@num_things</code>是被所有对象共享的。
+					</dd>
+				</dl>
+			</div>
 		</section>
 	</section>
 	<section>
