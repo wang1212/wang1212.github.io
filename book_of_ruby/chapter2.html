@@ -269,6 +269,19 @@ attr_writer(:description)</code></pre>
 		<h2>深入探索</h2>
 		<section>
 			<h3>超类</h3>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;super.rb</div>
+			<p class="head-indent">
+				要理解 super 关键字的工作原理，请看我们的示例程序，<strong> super.rb </strong>。它包含五个相关类：Thing 类其他所有类的祖先；从 Thing 类衍生到 Thing2 类，再从 Thing2 类衍生到 Thing3 类，然后依次是 Thing4 和 Thing5 类。
+			</p>
+			<p class="head-indent">
+				让我们仔细看看这个层次中的前三个类：Thing 类有两个实例变量，<code>@name</code>和<code>@description</code>；Thing2 类也定义了<code>@fulldescription</code>（一个包含<code>@name</code>与<code>@description</code>的字符串）；Thing3 类则添加了另一个变量<code>@value</code>。
+			</p>
+			<p class="head-indent">
+				这三个类各自包含一个<code>initialize</code>方法，用来在创建新对象时设置变量的值；它们各自也有一个名为<code>aMethod</code>的方法，用来改变一个或多个变量的值。后代类 Thing2 和 Thing3 在它们的方法中都使用了<code>super</code>关键字。
+			</p>
+			<div class="note head-indent">
+				在命令窗口运行 <strong>super.rb</strong> 。去按位测试代码，键入 1 到 5的一个数字，当有提示时或者键入 'q' 退出。
+			</div>
 		</section>
 		<section>
 			<h3>类中的常量</h3>
