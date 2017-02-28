@@ -3,221 +3,41 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<nav id="side-bar" class="col-xl-3 col-md-4 col-sm-8 col-xs-10 text-xs-left">
+			<nav id="ruby-side-bar" class="col-xl-3 col-md-4 col-sm-8 col-xs-10 text-xs-left">
 				<p class="h2 page-title">The Book Of Ruby</p>
 				<p>作者：Huw Collingbourne</p>
 				<p>翻译：<a href="https://wang1212.github.io/">不如怀念</a></p>
 				<p>目录：</p>
 				<ul>
-					<li><a href="#/book_of_ruby/homepage">主页</a></li>
-					<li><a href="#/book_of_ruby/author">关于作者</a></li>
-					<li><a href="#/book_of_ruby/introduction">序言</a></li>
-					<li><a href="#/book_of_ruby/chapter1">第一章</a></li>
-					<li><a href="#/book_of_ruby/chapter2">第二章</a></li>
-					<li><a href="#/book_of_ruby/chapter3">第三章</a></li>
-					<li><a href="#/book_of_ruby/chapter4">第四章</a></li>
-					<li><a href="#/book_of_ruby/chapter5">第五章</a></li>
-					<li><a href="#/book_of_ruby/chapter6">第六章</a></li>
-					<li><a href="#/book_of_ruby/chapter7">第七章</a></li>
-					<li><a href="#/book_of_ruby/chapter8">第八章</a></li>
-					<li><a href="#/book_of_ruby/chapter9">第九章</a></li>
-					<li><a href="#/book_of_ruby/chapter10">第十章</a></li>
-					<li><a href="#/book_of_ruby/chapter11">第十一章</a></li>
-					<li><a href="#/book_of_ruby/chapter12">第十二章</a></li>
-					<li><a href="#/book_of_ruby/chapter13">第十三章</a></li>
-					<li><a href="#/book_of_ruby/chapter14">第十四章</a></li>
-					<li><a href="#/book_of_ruby/chapter15">第十五章</a></li>
-					<li><a href="#/book_of_ruby/chapter16">第十六章</a></li>
-					<li><a href="#/book_of_ruby/chapter17">第十七章</a></li>
-					<li><a href="#/book_of_ruby/chapter18">第十八章</a></li>
-					<li><a href="#/book_of_ruby/chapter19">第十九章</a></li>
-					<li><a href="#/book_of_ruby/chapter20">第二十章</a></li>
-					<li><a href="#/book_of_ruby/appendices">附录</a></li>
-					<li><a href="#/book_of_ruby/indexes">索引</a></li>
+					<li><a href="/#/book_of_ruby/homepage">主页</a></li>
+					<li><a href="/#/book_of_ruby/author">关于作者</a></li>
+					<li><a href="/#/book_of_ruby/introduction">序言</a></li>
+					<li><a href="/#/book_of_ruby/chapter1">第一章</a></li>
+					<li><a href="/#/book_of_ruby/chapter2">第二章</a></li>
+					<li><a href="/#/book_of_ruby/chapter3">第三章</a></li>
+					<li><a href="/#/book_of_ruby/chapter4">第四章</a></li>
+					<li><a href="/#/book_of_ruby/chapter5">第五章</a></li>
+					<li><a href="/#/book_of_ruby/chapter6">第六章</a></li>
+					<li><a href="/#/book_of_ruby/chapter7">第七章</a></li>
+					<li><a href="/#/book_of_ruby/chapter8">第八章</a></li>
+					<li><a href="/#/book_of_ruby/chapter9">第九章</a></li>
+					<li><a href="/#/book_of_ruby/chapter10">第十章</a></li>
+					<li><a href="/#/book_of_ruby/chapter11">第十一章</a></li>
+					<li><a href="/#/book_of_ruby/chapter12">第十二章</a></li>
+					<li><a href="/#/book_of_ruby/chapter13">第十三章</a></li>
+					<li><a href="/#/book_of_ruby/chapter14">第十四章</a></li>
+					<li><a href="/#/book_of_ruby/chapter15">第十五章</a></li>
+					<li><a href="/#/book_of_ruby/chapter16">第十六章</a></li>
+					<li><a href="/#/book_of_ruby/chapter17">第十七章</a></li>
+					<li><a href="/#/book_of_ruby/chapter18">第十八章</a></li>
+					<li><a href="/#/book_of_ruby/chapter19">第十九章</a></li>
+					<li><a href="/#/book_of_ruby/chapter20">第二十章</a></li>
+					<li><a href="/#/book_of_ruby/appendices">附录</a></li>
+					<li><a href="/#/book_of_ruby/indexes">索引</a></li>
 				</ul>
-				<div id="close-sidebar" style="display:none" class="my-nav-item hidden-md-up">
-					<span class="fa fa-angle-double-left"></span>
-				</div>
 			</nav>
-			<div id="content" class="col-xl-9 offset-xl-3 col-md-8 offset-md-4"></div>	
+			<div id="content" class="col-xl-9 offset-xl-3 col-md-8 offset-md-4" style="padding: 2rem 0;"></div>	
 		</div>
 	</div>
-
-	<script src="/source/js/jquery-3.1.0.min.js"></script>
-	<script>
-		$(function(){
-			var url = location.hash.match(/\w+(?=-)?/) + '',
-				$body = $('body'),
-				$progress_bar = $('#progress-bar'),
-				$side_bar = $('#side-bar'),
-				sidebar_width = $side_bar.outerWidth(),
-				$close_sidebar = $('#close-sidebar'),
-				$open_sidebar = $('#open-sidebar'),
-				$content = $('#content'),
-				$to_top = $('#to-top'),
-				$foot_nav = $('#foot-nav');
-
-			function showContent(newUrl){
-				url = newUrl;
-				$progress_bar.width(0);
-				$side_bar.find('a').removeClass('on-scroll').siblings('ul').slideUp(500);
-
-				$content.fadeOut(300, function(){
-					$content.html("<h1>正在奋力加载哟...</h1>").fadeIn(300, function(){
-						if (url != 'null' && url != false) {
-							$.ajax({
-								type: 'GET',
-								url: './' + url + '.html',
-								dataType: 'html',
-							})
-							.done(function(html){
-								var $a = $side_bar.find('a[href="#/book_of_ruby/'+url+'"]');
-
-								$a.addClass('on-scroll');
-
-								$content.fadeOut(300, function(){
-									if (url == 'homepage' || url == 'author') {
-										$content.html(html).fadeIn(1000);
-									}else{
-										$content.html(html).append($('<script src="/source/js/prism.js">')).fadeIn(1000);
-									}
-									// Generate Catelog
-									generateCatelog($a.parent('li'));
-									document.title = $a.text() + ' : ' + $content.find('#page-title').text();
-								});
-							})
-							.fail(function(){
-								$content.fadeOut(300, function(){
-									$content.html("<h1>加载失败了，请求的页面不存在</h1>").fadeIn(500);
-									document.title = "错误，页面不存在";
-								});
-							});
-						}else{
-							location.hash = '#homepage';
-						}
-					});
-				});
-			}
-
-			function generateCatelog($_target){
-				var _id = url + '-',
-					$_newCate = $_target.children('ul');
-
-				$('#content section').each(function() {
-					var $self = $(this),
-						$parent = $self.parent('section'),
-						$prev = $self.prevAll('section'),
-						$target,
-						id = _id;
-
-					if ($parent.length === 0) {
-						id += 'paragraph' + $prev.length;
-
-						if ($_newCate.length === 0) {
-							$target = $_target.children('ul');
-
-							if ($target.length === 0) {
-								$target = $_target.append($('<ul style="display:none">')).children('ul:last-of-type');
-							} else {
-								$target = $target.last();
-							}							
-						}
-					} else {
-						$parent = $parent.last();
-						id = $parent.attr('id') + '-' + $prev.length;
-
-						if ($_newCate.length === 0) {
-							if ($prev.length === 0) {
-								$target = $_target
-									.find('a[href="#/book_of_ruby/' + $parent.attr('id') + '"]')
-									.parent('li')
-									.append($('<ul>'))
-									.children('ul:last-of-type');
-							} else {
-								$target = $_target.find('a[href="#/book_of_ruby/' + $prev.attr('id') + '"]').parent('li').parent('ul');
-							}							
-						}
-					}
-
-					$self.attr('id', id);
-
-					if ($target && $target.find('a[href="#/book_of_ruby/'+id+'"]').length === 0) {
-						$('<li>')
-							.append($('<a>')
-								.attr('href', '#' + id)
-								.text($self.children('h2,h3,h4,h5,h6').first().text())
-							).appendTo($target);
-					}
-				});	
-
-				if ($_newCate.length === 0) {
-					$_target.children('ul').last().slideDown(1500);
-				} else {
-					$_newCate.last().slideDown(1000);
-				}
-			}
-
-			// Auto loading
-			$(window).on("hashchange", function(){
-				var newUrl = location.hash.match(/\w+(?=-)?/) + '';
-
-				if(url != newUrl){
-					showContent(newUrl);
-				}
-			});
-
-			$(window).on('scroll', function(){
-				var $self = $(window),
-					w_scrollTop = $self.scrollTop();
-
-				// Reading progress
-				$progress_bar.width((w_scrollTop + $self.height()) / $body.height() * $self.width());
-
-				// Auto merge
-				$('section').each(function() {
-					var $self = $(this),
-						$a = $('a[href="#/book_of_ruby/' + $self.attr('id') + '"]'),
-						dif = w_scrollTop - $self.offset().top;
-
-					if (dif >= -20 && dif <= $self.outerHeight(true)) {
-						$a.addClass('on-scroll').siblings('ul').slideDown(1000);
-					} else {
-						$a.removeClass('on-scroll').siblings('ul').slideUp(500);
-					}
-				});
-
-				// Show top
-				w_scrollTop > $self.height() ? $to_top.show(1000) : $to_top.hide(1000);
-			});
-
-			$to_top.on('click', function(){
-				$(window).scrollTop(0);
-			});
-
-			// Open sidebar
-			$open_sidebar.on('click', function(){
-				$foot_nav.hide(300, function(){
-					$side_bar.animate({ left: '0px' }, 1000, function(){
-						$close_sidebar.offset({ left: sidebar_width - 56 }).show(800);
-					});
-				});
-			});
-
-			// Close sidebar
-			$close_sidebar.on('click', function(){
-				$(this).hide(300, function(){
-					$side_bar.animate({ left: -sidebar_width }, 1000, function(){
-						$foot_nav.show(800);
-					});
-				});
-			});
-
-			if (url == 'null' || url == false) {
-				location.hash = '#homepage';
-			}else{
-				showContent(url);
-			}
-		});
-	</script>
 </body>
 </html>

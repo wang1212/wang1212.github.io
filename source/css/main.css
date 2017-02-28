@@ -1,22 +1,3 @@
-blockquote {
-	padding-left: 1rem;
-	border-left: 3px solid gray;
-}
-pre {
-	font-size: 80%;
-}
-li > pre {
-	margin-left: -2.5rem !important;
-}
-section[id*="paragraph"] p/*, header p */{
-	text-align: justify;
-}
-strong {
-	font-weight: normal;
-	color: orange;
-	padding: 0 0.2rem;
-}
-
 /* All */
 html {
 	min-height: 100%;
@@ -26,10 +7,24 @@ body {
 	text-align: justify;
 	min-height: 100%;
 	position: relative;
-	border-bottom: 2rem solid rgb(42, 42, 42);
 }
 button {
 	outline: none !important;
+}
+strong {
+	font-weight: normal;
+	color: orange;
+	padding: 0 0.1rem;
+}
+blockquote {
+	padding-left: 1rem;
+	border-left: 3px solid gray;
+}
+pre {
+	font-size: 80%;
+}
+li > pre {
+	margin-left: -2.5rem !important;
 }
 .head-indent {
 	text-indent: 2em;
@@ -70,7 +65,7 @@ button {
 }
 #index-footer {
 	background-color: rgb(42, 42, 42);
-	padding: 1rem 0;
+	padding: 1rem 0 3rem;
 }
 #index-footer img {
 	width: 7.5rem;
@@ -113,55 +108,43 @@ button {
 .jumbotron {
 	padding-bottom: 1rem;
 }
-li[id*="cate-"] {
+li[id^="cate-"] {
 	border-color: #fff;
 }
-li[id*="cate-"] .list-group-item-heading {
+li[id^="cate-"] .list-group-item-heading {
 	cursor: pointer;
 }
 
 /* categories... */
-#cate-side-bar {
+#cate-side-bar, #ruby-side-bar {
 	color: white;
-	background-color: rgba(0,0,0, .75);	
+	background-color: rgba(0,0,0, .75);
 	padding: 2rem 1rem;
 	position: fixed;
 	left: -100%;
 	z-index: 1020;
-	min-height: 100%;
+	height: 100%;
 	overflow:  auto;	
 }
-#cate-side-bar ul {
+#cate-side-bar ul, #ruby-side-bar ul {
 	font-size: 0.9em;
 	list-style-type: none;
 	padding-left: 1rem;
 }
-#cate-side-bar > ul {
+#cate-side-bar > ul, #ruby-side-bar > ul {
 	font-size: 1rem;
 	list-style-type: disc;
 	padding-left: 2rem;	
 	display: block !important;
 }
-#cate-side-bar li {
+#cate-side-bar span, #ruby-side-bar a, #ruby-side-bar span {
 	color: white;
 	text-decoration: none;
 	cursor: pointer;
 }
-#cate-side-bar .on-scroll {
+#cate-side-bar .on-scroll, #ruby-side-bar .on-scroll {
 	color: orange;
 }
-#open-sidebar, #close-sidebar {
-	color: orange;
-	border: none;
-	border-radius: 0;
-	position: fixed;
-	bottom: 1.25rem;
-	z-index: 1050;
-}		
-#open-sidebar {
-	left: 1.25rem;
-}
-
 @media (max-width: 767px) {
 	#cate-side-bar {
 		top: 0 !important;
@@ -174,22 +157,15 @@ li[id*="cate-"] .list-group-item-heading {
 		position: relative;
 		left: 0 !important;
 	}
-	#cate-side-bar li {
+	#cate-side-bar span {
 		color: gray;
 	}	
-	#cate-side-bar li:hover {
+	#cate-side-bar span:hover {
 		color: black;
 	}
 }
 
 /* Book_of_Ruby.index */
-/*#content {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-}*/
-/*#content h1, #content h2 {
-	text-align: center;
-}*/
 .note {
 	border: 1px solid rgba(88, 88, 88, .3);
 	border-radius: 5px;
@@ -197,53 +173,20 @@ li[id*="cate-"] .list-group-item-heading {
 	padding: 1rem;
 	margin-bottom: 1rem;
 }
-#side-bar {
-	color: white;
-	background-color: rgba(0,0,0, .75);
-	padding: 2rem 1rem 1rem 1.5rem;
-	position: fixed;
-	top: 0;
-	left: -100%;
-	z-index: 1020;
-	height: 100%;
-	overflow:  auto;
-}
-#side-bar ul {
-	font-size: 0.9em;
-	list-style-type: none;
-	padding-left: 1rem;
-}		
-#side-bar > ul {
-	font-size: 1rem;
-	list-style-type: disc;
-	padding-left: 2rem;
-	display: block !important;
-}		
-#side-bar a {
-	color: white;
-	text-decoration: none;
-}
-#side-bar .on-scroll {
-	color: orange;
-}
-#open-sidebar, #close-sidebar {
-	color: orange;
-	border: none;
-	border-radius: 0;
-	position: fixed;
-	bottom: 1.25rem;
-	z-index: 1050;
-}		
-#open-sidebar {
-	left: 1.25rem;
-}
+#ruby-side-bar {
+	padding-bottom: 4rem;
+}	
 @media (min-width: 768px) {		
-	#side-bar {
+	#ruby-side-bar {
 		background-color: rgba(0,0,0, 1);
 		padding-left: 2rem;
 		left: 0 !important;
+		z-index: 1035;
+		padding-bottom: 2rem;
 	}
-	#side-bar a:hover {
+	#ruby-side-bar a:hover, #ruby-side-bar span:hover {
 		color: orange;
 	}
 }
+
+/* Book_of_Ruby... */

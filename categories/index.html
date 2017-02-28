@@ -53,7 +53,7 @@
 				 	key = $self.parent().attr('id').substr(5),
 				 	$ul = $self.next('ul');
 
-				$ul.slideToggle(1000);
+				$ul.slideToggle(500);
 
 				if (!$ul.data('hasData')) {
 					$.getJSON('/source/json/categories.json', function(data){
@@ -64,7 +64,7 @@
 						}
 
 						$ul.hide(300, function(){
-							$(this).html(str).slideDown(1000);
+							$(this).html(str).slideDown(500);
 						});
 					});
 					
