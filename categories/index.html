@@ -1,124 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no">
-	<title>笔记 Categories</title>
-	<meta name="author" content="不如怀念" />
-	<meta name="keywords" content="笔记，分享" />
-	<meta name="description" content="这是我的个人主页，用来记录我的学习历程，与他人进行分享交流" />	
-	<link rel="icon" href="/favicon.ico">
-	<link rel="stylesheet" href="/source/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/source/css/font-awesome.min.css">
-	<style>
-		body {
-			font-family: "FontAwesome", Helvetica,Tahoma,Arial,"Microsoft YaHei","华文细黑",sans-serif;
-		}
-		.my-nav-item {
-			font-size: 1.75rem;
-			color: black;
-			text-align: center;
-			width: 2.5rem;
-			height: 2.5rem;
-			line-height: 2.5rem;
-			border: 1px solid rgba(10,10,10, .6);
-			border-radius: 2.5rem;
-			cursor: pointer;
-		}
-		.my-nav-item a {
-			color: black;
-			text-decoration: none;
-		}
-		@media (min-width: 768px) {
-			.my-nav-item {
-				color: white;
-				background-color: black;
-				opacity: 0.5;
-				transition: opacity .8s,0s linear;
-			}			
-			.my-nav-item:hover {
-				opacity: 1;
-			}
-			.my-nav-item a {
-				color: white;
-			}
-		}
-		.jumbotron {
-			padding-bottom: 1rem;
-		}
-		li[id*="cate-"] {
-			border-color: #fff;
-		}
-		li[id*="cate-"] .list-group-item-heading {
-			cursor: pointer;
-		}
-		.page-footer {
-			border-top: 1px solid gray;
-			padding: 1rem 0 2rem;
-			margin: 2.25rem 0 0.75rem;
-		}
-		.page-footer img {
-			width: 7.5rem;
-			height: 7.5rem;
-			margin-bottom: 1.25rem;
-		}
-		#foot-nav {
-			position: fixed;
-			right: 2.25rem;
-			bottom: 1.25rem;
-			z-index: 20;
-		}
-		#foot-nav .my-nav-item {
-			float: right;
-		}
-		#foot-nav .my-nav-item:not(:last-child) {
-			margin-left: 0.75rem;
-		}	
-	</style>
-</head>
 <body>
-	<header class="jumbotron jumbotron-fluid">
-		<div class="container">
-			<h1 class="display-3">笔记 <small class="text-muted hidden-sm-down">Categories</small></h1>
-			<hr />
-			<p class="lead">分享与交流是让我获得提升的最佳途径<br />
-			<span class="hidden-xs-down">Sharing and communication is the best way to get my promotion</span></p>
-		</div>
-	</header>
-	<div class="container">
-		<ul class="list-group">
-			<li class="list-group-item" style="border-color: #fff">
-				<p class="text-xs-center">正在奋力加载哟...</p>
-			</li>
-		</ul>
-	</div>
-	<footer class="page-footer">
-		<div class="container">
-			<div class="row text-xs-center">
-				<div class="col-md-2 offset-md-2">
-					<img class="rounded" src="/source/images/head.jpg" alt="head">
-				</div>
-				<div class="col-md-6">
-					<p class="lead">用心对待每一个人、每一件事</p>
-					<p>Mr.Wang（不如怀念）</p>
-					<p>E-mail：wangyuan230@163.com</p>
-				</div>
+	<div id="list" style="display: block">
+		<div class="page-title" style="display: none">笔记 Categories</div>
+		<header class="jumbotron jumbotron-fluid">
+			<div class="container text-xs-center">
+				<h1 class="display-3">笔记 <small class="text-muted hidden-sm-down">Categories</small></h1>
+				<hr />
+				<p class="lead">
+					分享与交流是让我获得提升的最佳途径<br />
+					<span class="hidden-xs-down">Sharing and communication is the best way to get my promotion</span>
+				</p>
 			</div>
-		</div>
-	</footer>
-	<nav id="foot-nav">
-		<div id="to-top" style="display:none" class="my-nav-item">
-			<a href="#" class="fa fa-arrow-up"></a>
-		</div>
-		<div class="my-nav-item">
-			<a href="/" class="fa fa-home"></a>
-		</div>
-	</nav>
+		</header>
+		<div class="container">
+			<ul class="list-group">
+				<li class="list-group-item" style="border-color: #fff">
+					<p class="text-xs-center">正在奋力加载哟...</p>
+				</li>
+			</ul>
+		</div>		
+	</div>
+	<div id="content" style="display: none; margin-bottom: 2rem;"></div>
 
-	<script src="/source/js/jquery-3.1.0.min.js"></script>
 	<script>
 		$(function(){
+			// Generate list head
 			$.getJSON('/source/json/categories.json', function(data){
 				var str = '',
 					num = 0,
@@ -135,12 +42,13 @@
 					articles += data[i].length;
 				}
 
-				$('.container > .list-group').fadeOut(300, function(){
+				$('#list .list-group').fadeOut(300, function(){
 					$(this).append($(str)).children(':first-child').html('有 ' + num + ' 个类别，共 ' + articles + ' 篇文章。加油喔！<small class="hidden-sm-down text-muted">There are ' + num + ' categories, ' + articles + ' articles. Come on!</small>').end().fadeIn(1000);
 				});
 			});
 
-			$('body > .container').on('click','li[id*="cate-"] .list-group-item-heading',function(){
+			// Get list content
+			$('#list .list-group').on('click', 'li[id*="cate-"] .list-group-item-heading', function(){
 				var $self = $(this),
 				 	key = $self.parent().attr('id').substr(5),
 				 	$ul = $self.next('ul');
@@ -148,11 +56,11 @@
 				$ul.slideToggle(1000);
 
 				if (!$ul.data('hasData')) {
-					$.getJSON('/source/json/categories.json',function(data){
+					$.getJSON('/source/json/categories.json', function(data){
 						var str = '';
 
 						for (var i in data[key]){
-							str += '<a href="' + data[key][i].path + '" class="list-group-item list-group-item-action list-group-item-success">' + data[key][i].title + '<span class="hidden-sm-down float-xs-right">' + data[key][i].time + '</span></a>';
+							str += '<a href="/#' + data[key][i].path + '" class="list-group-item list-group-item-action list-group-item-success">' + data[key][i].title + '<span class="hidden-sm-down float-xs-right">' + data[key][i].time + '</span></a>';
 						}
 
 						$ul.hide(300, function(){
@@ -162,15 +70,11 @@
 					
 					$ul.data('hasData', true);
 				}
-
 			});
 
-			$(window).on('scroll', function() {
-				var $self = $(this),
-					w_scrollTop = $self.scrollTop(),
-					$top = $('#to-top');		
-
-				w_scrollTop > $self.height() ? $top.show(1000) : $top.hide(1000)	
+			// Get and show content
+			$('#list .list-group').on('click', 'a[href*="/#/"]', function(){
+				$('#list').slideToggle(300);
 			});
 		});
 	</script>	
