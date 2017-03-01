@@ -1,12 +1,11 @@
 /* All */
 html {
-	min-height: 100%;
+	height: 100%;
 }
 body {
 	font-family: "FontAwesome", Helvetica, Tahoma, Arial, "Microsoft YaHei", "华文细黑", sans-serif;
 	text-align: justify;
-	min-height: 100%;
-	position: relative;
+	height: 100%;
 }
 button {
 	outline: none !important;
