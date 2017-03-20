@@ -176,8 +176,10 @@ ping
 							<li>nextSibling</li>
 						</ul>
 						<pre class="language-markup"><code>&lt;body&gt;
-&lt;ul&gt;&lt;li id="A"&gt;&lt;/li&gt;
-&lt;li id="B"&gt;&lt;/li&gt;&lt;em&gt;&lt;/em&gt;&lt;/ul&gt;
+	&lt;ul&gt;
+		&lt;li id="A"&gt;&lt;/li&gt;
+  		&lt;li id="B"&gt;&lt;/li&gt;&lt;em&gt;&lt;/em&gt;
+  	&lt;/ul&gt;
 &lt;/body&gt;
 &lt;script&gt;
   	/* 
@@ -216,12 +218,12 @@ ping
 							<li>document.createTextNode()</li>
 						</ul>
 						<pre class="language-markup"><code>&lt;script&gt;
-  // 创建一个元素节点div
-  var new_div=document.createElement("div");
-  document.write(new_div.nodeType+"&lt;br /&gt;"); // 输出1
-  // 创建一个文本节点
-  var new_text=document.createTextNode("Hello World!");
-  document.write(new_text.nodeType+"&lt;br /&gt;"); // 输出3
+  	// 创建一个元素节点div
+  	var new_div=document.createElement("div");
+  	document.write(new_div.nodeType+"&lt;br /&gt;"); // 输出1
+  	// 创建一个文本节点
+  	var new_text=document.createTextNode("Hello World!");
+  	document.write(new_text.nodeType+"&lt;br /&gt;"); // 输出3
 &lt;/script&gt;</code></pre>
 					</section>
 					<section>
@@ -402,7 +404,6 @@ alert(document.documentElement.textContent);</code></pre>
 						</ul>
 						<p class="head-indent">以上这些属性与前面所介绍的属性相类似，只不过这些属性会忽略掉其他类型的节点对象，只返回元素节点对象。当然，利用这些属性完成 DOM 树的元素节点遍历也是类似的，我们不再详细举例讨论。</p>
 						<p class="head-indent"><b>利用<code>childElementCount</code>可以获取目标节点直属子元素节点的数目。</b></p>
-						<pre class="language-markup"><code></code></pre>
 					</section>
 				</section>
 				<section>

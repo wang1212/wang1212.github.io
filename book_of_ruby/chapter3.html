@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+	<header class="hidden-sm-down text-xs-left">
+		<p class="h1 text-xs-center">Chapter Three</p><hr />
+		<p class="h2 text-xs-center">Strings and Ranges</p>
+		<ul>
+			<li class="h3">User-Defined String Delimiters</li>
+			<li class="h3">Backquotes</li>
+			<li class="h3">String Handling</li>
+		</ul>
+		<p class="h2 text-xs-center">Digging Deeper</p>
+		<ul>
+			<li class="h3">Ranges</li>
+			<li class="h3">Iterating With A Range</li>
+			<li class="h3">Heredocs</li>
+			<li class="h3">String Literals</li>
+		</ul>
+	</header>
+	<h1 class="page-title text-xs-center">第三章</h1><hr />
+	<section>
+		<h2 class="text-xs-center">字符串和范围</h2>
+		<p class="head-indent">
+			到目前为止，我已经在我的程序中使用了很多字符串（String）。事实上，在本书中的第一个程序中就有字符串。这里再给出来：
+		</p>
+		<pre class="language-ruby line-numbers"><code>puts 'hello world'</code></pre>
+		<p class="head-indent">
+			在第一个程序中字符串使用单引号作为分隔符，我在第二个程序中则使用了双引号来替换：
+		</p>
+		<pre class="language-ruby line-numbers"><code>print('Enter your name: ')
+name = gets()
+puts("Hello #{name}")</code></pre>
+		<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;1strings.rb</div>
+		<p class="head-indent">
+			双引号字符串要比单引号字符串做更多的工作。尤其地，即便字符串是代码它也有能力去执行。要执行代码的话，请使用<code>#</code>字符与大括号将其包含进去。
+		</p>
+		<p class="head-indent">
+			在上面的示例中，<code>#{name}</code>在双引号字符串中指示 Ruby 获取<code>name</code>变量的值并将其插入到字符串中。所以，如果<code>name</code>等于 "Fred"，将会显示 "Hello Fred"。<strong>1strings.rb</strong> 示例程序提供了双引号字符串中嵌入式表达式的更多示例。
+		</p>
+		<p class="head-indent">
+			双引号字符串不仅能够执行获取属性或者变量的值，例如<code>ob.name</code>，还有诸如<code>2*3</code>的表达式，方法调用<code>ob.ten</code>（<strong>ten</strong>是一个方法名）以及转义字符换行符 "\n" 和制表符 "\t" 都能被识别执行。
+		</p>
+		<p class="head-indent">
+			单引号字符串则不会执行这些。并且，单引号字符串可以使用反斜杠表示下一个字符仅仅表示其字面意思。当一个单引号字符串中包含单引号时，这是非常有用的：
+		</p>
+		<pre class="language-ruby line-numbers"><code>'It\'s my party'</code></pre>
+		<p class="head-indent">
+			假设名为<code>ten</code>的方法返回值为10，你可以写出下面的代码：
+		</p>
+		<pre class="language-ruby line-numbers"><code>puts("Here's a tab\t a new line\n a calculation #{2*3} and a method-call #{ob.ten}")</code></pre>
+		<p class="head-indent">
+			由于这是双引号字符串，因此将执行嵌入式表达式，并显示以下内容：
+		</p>
+		<pre class="language-ruby"><code>Here's a tab	a new line
+a calculation 6 and a method-call 10</code></pre>
+		<p class="head-indent">
+			接下来，让我们看当使用单引号时会发生什么：
+		</p>
+		<pre class="language-ruby line-numbers"><code>puts('Here\'s a tab\t a new line\n a calculation #{2*3} and a method-call #{ob.ten}')</code></pre>
+		<p class="head-indent">
+			这一次，嵌入式表达式将不会被执行，所以将显示：
+		</p>
+		<pre class="language-ruby"><code>Here's a tab\t a new line\n a calculation #{2*3} and a method-call #{ob.ten}</code></pre>
+		<section>
+			<h3>用户自定义字符串分隔符</h3>
+		</section>
+		<section>
+			<h3>反引号</h3>
+		</section>
+		<section>
+			<h3>字符串处理</h3>
+		</section>
+	</section>
+	<section>
+		<h2 class="text-xs-center">深入探索</h2>
+		<section>
+			<h3>范围</h3>
+		</section>
+		<section>
+			<h3>范围迭代器</h3>
+		</section>
+		<section>
+			<h3>HereDocs</h3>
+		</section>
+		<section>
+			<h3>字符串字面量</h3>
+		</section>		
+	</section>
+
+	<script src="/source/js/prism.js"></script>
+</body>
+</html>
