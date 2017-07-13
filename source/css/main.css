@@ -31,6 +31,7 @@ li > pre {
 #progress-bar {
 	height: 3px;
 	background-color: orange;
+	z-index: 1040;
 }
 
 /* index */

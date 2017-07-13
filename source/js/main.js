@@ -20,14 +20,13 @@ $(function() {
 			$to_open.css('display', 'none');
 			$to_close.css('display', 'none');
 			$('#index-footer').removeClass('col-xl-9 offset-xl-3 col-md-8 offset-md-4');
+			$progress_bar.css('display', 'none');
 
 			// homepage
 			if (url_index === 0) {
 				$index_nav.addClass('hidden-md-up');
-				$progress_bar.css('display', 'none');
 			} else {
 				$index_nav.removeClass('hidden-md-up');
-				$progress_bar.css('display', 'block');
 			}
 			// categories.index
 			if (url_index === 1 && $list.length && $content.length) {
@@ -126,9 +125,13 @@ $(function() {
 
 	// To top
 	$win.on('scroll', function() {
-		var w_scrollTop = $win.scrollTop();
+		var $content = $('#content'),
+			w_scrollTop = $win.scrollTop();
 		// Progress
-		$progress_bar.width((w_scrollTop + $win.height()) / $body.height() * $win.width());
+		if ($content && $content.css('display') != "none") {
+			$progress_bar.width((w_scrollTop + $win.height()) / $content.height() * $win.width());
+			$progress_bar.css('display', 'block');
+		}
 		// Top
 		w_scrollTop > $win.height() ? $to_top.show(1000) : $to_top.hide(1000);
 	});
@@ -212,7 +215,6 @@ $(function() {
 
 		// 导航点击事件
 		$sideBar.on('click', 'span[id^="#"]', function() {
-			console.log(111);
 			var id = $(this).attr('id').substr(1);
 
 			$content.find('section').each(function() {
