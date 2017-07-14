@@ -92,6 +92,14 @@ $(function() {
 			})
 			.fail(function() {
 				$content.fadeOut(300, function() {
+					var $ruby_side_bar = $('#ruby-side-bar');
+					// 清除已有导航
+					if ($ruby_side_bar.length > 0) {
+						$ruby_side_bar.find('a[href^="/#"]').parent('li').find('ul').slideUp(500, function() {
+							$(this).remove();
+						});
+					}
+
 					$content.html("<h1 class='text-xs-center'>加载失败了，请求的页面不存在</h1>").fadeIn(500);
 					// Change page title
 					document.title = "错误，页面不存在";
@@ -179,8 +187,6 @@ $(function() {
 		$others.length && $others.find('ul').slideUp(500, function() {
 			$(this).remove();
 		});
-		// 清除已有导航数据
-		$sideBar.find('ul').remove();
 
 		// 自动遍历生成导航目录
 		$content.find('section').each(function() {
