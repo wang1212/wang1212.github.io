@@ -177,8 +177,10 @@ $(function() {
 
 		// 清除导航数据
 		$others.length && $others.find('ul').slideUp(500, function() {
-			$(this).empty();
+			$(this).remove();
 		});
+		// 清除已有导航数据
+		$sideBar.find('ul').remove();
 
 		// 自动遍历生成导航目录
 		$content.find('section').each(function() {
