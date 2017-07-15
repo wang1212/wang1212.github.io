@@ -63,12 +63,127 @@ a calculation 6 and a method-call 10</code></pre>
 		<pre class="language-ruby"><code>Here's a tab\t a new line\n a calculation #{2*3} and a method-call #{ob.ten}</code></pre>
 		<section>
 			<h3>用户自定义字符串分隔符</h3>
+			<p class="head-indent">
+				如果由于某些原因，使用单双引号不方便，例如你的字符串包含很多的引号，而你不想总是使用反斜杠去转义，那么你也可以通过其它方式去分割字符串。
+			</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;2strings.rb</div>
+			<p class="head-indent">
+				双引号的标准替代分隔符是<strong>%Q</strong>和<strong>/</strong>或者<strong>%/</strong>和<strong>/</strong>，然而单引号则为<strong>%q</strong>和<strong>/</strong>。因此：
+			</p>
+			<pre class="language-ruby"><code>%Q/This is the same as a double-quoted string./
+%/This is also the same as a double-quoted string./
+%q/And this is the same as a single-quoted string/</code></pre>
+			<p class="head-indent">
+				你甚至可以定义自己的字符串分隔符。它们必须是非字母数字字符,可以包含非打印字符，比如换行符和通常在 Ruby 中有特殊含义的字符，例如<code>#</code>。你选择的字符应该放在<strong>%Q</strong>或<strong>%q</strong>之后，并且应该确保终止字符串的是同样的字符。如果你使用的分隔符是一个开括号，相应的在字符串结尾处应该使用闭括号，像这样：
+			</p>
+			<pre class="language-ruby"><code>%Q[This is a string]</code></pre>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;3strings.rb</div>
+			<p class="head-indent">
+				你可以在示例程序<strong> 3strings.rb </strong>中发现许多种字符串分隔符。不用说，有时候使用一些深奥的字符（比如换行符和星号）分割字符串很有用，但在许多情况下这些方式的缺点可能会掩盖掉其优点。
+			</p>
 		</section>
 		<section>
 			<h3>反引号</h3>
+			<p class="head-indent">
+				一个其它类型的字符串值得特别提及：一个由反引号括起来的字符串——也就是在键盘左上角的向内指向的引号字符<strong> `</strong>。
+			</p>
+			<p class="head-indent">
+				Ruby 认为任何由反引号括起来的都是一个可以使用<code>print</code>或<code>puts</code>方法传递给操作系统执行的命令。到目前为止，你可能已经猜到 Ruby 提供了不仅仅一种方式去实现这些。事实证明，<code>%x/some command/</code>与<code>`somecommand`</code>具有相同的效果，当然<code>%x{some command}</code>也是如此。例如，在 Windows 操作系统上，如下所示的三行代码都是将命令<strong>dir</strong>传递给操作系统执行，显示目录列表：
+			</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;4backquotes.rb</div>
+			<pre class="language-ruby line-numbers"><code>puts(`dir`)
+puts(%x/dir/)
+puts(%x{dir})</code></pre>
+			<p class="head-indent">你也可以在双引号字符串中嵌入命令，如下所示：</p>
+			<pre class="language-ruby"><code>print( "Goodbye #{%x{calc}}" )</code></pre>
+			<p class="head-indent">
+				如果你这么做，要小心的是，命令首先会被执行。你的 Ruby 程序会进行等待，直到开始的进程终止。在这种情况下，计算器将先弹出来。你可以做一些计算，只有当你关闭计算器的时候，字符串 “Goodbye” 才会显示。
+			</p>
 		</section>
 		<section>
 			<h3>字符串处理</h3>
+			<p class="head-indent">在结束字符串这个话题之前，我们将快速查看一看字符串的处理操作。</p>
+			<section>
+				<h4>连接</h4>
+				<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;string_concat.rb</div>
+				<p class="head-indent">
+					你可以使用<code>&lt;&lt;</code>或<code>+</code>，或者说在中间放置一个空格来连接字符串。这里有三个字符串连接示例，在每一种情况下<code>s</code>都被赋值为字符串 “Hello World” ：
+				</p>
+				<pre class="language-ruby line-numbers"><code>s = "Hello " << "world"
+s = "Hello " + "world"
+s = "Hello " "world"</code></pre>
+				<p class="head-indent">
+					但是请注意，当你使用<code>&lt;&lt;</code>方法时，你可以直接附加一个整数（0到255），而不必先将它转换为字符串；当使用<code>+</code>或者空格时，整数必须使用<code>to_s</code>方法先转换为字符串。
+				</p>
+				<div class="note">
+					<h6 style="font-weight: bold;">关于逗号</h6>
+					<p class="head-indent">
+						你有时可能会看到 Ruby 代码使用逗号分割来分割字符串或者其它类型数据。在某些情况下，这些逗号似乎有连接字符串的效果。例如，下面的代码一眼看上去似乎是创建和显示了一个由三个子字符串加整数组成的字符串：
+					</p>
+					<pre class="language-ruby line-numbers"><code>s4 = "This ", "is", " not a string!", 10
+print("print (s4):", s4, "\n")</code></pre>
+					<p class="head-indent">
+						事实上，用逗号分割的列表是创建了一个数组——一个基于字符串的有序列表。<strong>string_concat.rb</strong> 程序包含的示例证明了这一点。
+					</p>
+					<p class="head-indent">
+						请注意，当你将一个数组传递给一个方法比如<code>puts</code>，数组中的每个元素将被单独处理。你可以像下面一样将<code>x</code>传递给<code>puts</code>：
+					</p>
+					<pre class="language-ruby"><code>puts(x)</code></pre>
+					<p class="head-indent">在这种情况下，输出将会是：</p>
+					<pre class="language-ruby"><code>This
+is
+not a string!
+10</code></pre>
+					<p class="head-indent">我们将在下一章中更深入的研究数组。</p>
+				</div>
+			</section>
+			<section>
+				<h4>字符串赋值</h4>
+				<p class="head-indent">
+					Ruby 的 String 类提供了许多有用的字符串处理方法。大多数的方法将会创建一个新的字符串对象。例如，在下面的代码中，第二行左侧的<code>s</code>与右侧的<code>s</code>不是同一个对象：
+				</p>
+				<pre class="language-ruby line-numbers"><code>s = "hello world"
+s = s + "!"</code></pre>
+				<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;string_assign.rb</div>
+				<p class="head-indent">
+					一些字符串方法实际上是在不创建新的字符串对象的情况下改变其本身。这些方法通常以感叹号结尾（例如，<code>capitalize!</code>）。
+				</p>
+				<p class="head-indent">
+					如果有疑问，可以使用<code>object_id</code>方法来检查对象。我已经在<strong> string_assign.rb </strong>程序中提供了几个不需要创建新字符串对象的操作示例。运行它们并且在字符串操作执行完之后检查<code>s</code>的<code>object_id</code>。
+				</p>
+			</section>
+			<section>
+				<h4>字符串索引</h4>
+				<p class="head-indent">
+					你可以将字符串视为一个字符数组，并使用方括号以及索引查找在该数组中特定索引处的字符。Ruby 中的字符串和数组索引是从 0 开始的。所以，要将字符串<code>s</code> “Hello world” 中的 “e” 替换为 “a”，你应该在索引 1 处赋值一个新的字符：
+				</p>
+				<pre class="language-ruby line-numbers"><code>s = "Hello world"
+puts(s[1])  # prints out 101 – the ASCII value of 'e'</code></pre>
+				<p class="head-indent">为了获得实际的字符，可以这么做：</p>
+				<pre class="language-ruby line-numbers"><code>s = "Hello world"
+puts(s[1,1])  # prints out 'e'</code></pre>
+				<p class="head-indent">
+					这将告诉 Ruby 将字符串中索引 1 处的字符返回。如果你想要返回索引 1 处开始的3个字符，你可以输入：
+				</p>
+				<pre class="language-ruby"><code>puts(s[1,3])  # prints "ell"</code></pre>
+				<p class="head-indent">这告诉 Ruby 返回从索引 1 处开始接下来的3个字符。或者，你也可以使用双点符号 “范围（range）”来表示:</p>
+				<pre class="language-ruby"><code>puts(s[1..3])  # also prints "ell"</code></pre>
+				<div class="note">关于范围（Ranges），你可以参阅本章末尾的<strong>深入探索</strong>部分。</div>
+				<p class="head-indent">
+					字符串还可以使用负值索引，在这种情况下，-1 代表最后一个字符的位置，并且可以再次指定要返回的字符数：
+				</p>
+				<pre class="language-ruby line-numbers"><code>puts(s[-1,1])  # prints 'd'
+puts(s[-5,1])  # prints 'w'
+puts(s[-5,5])  # prints "world"</code></pre>
+				<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;string_index.rb</div>
+				<p class="head-indent">使用减号指定范围时，起始和终止索引必须均用负值：</p>
+				<pre class="language-ruby line-numbers"><code>puts(s[-5..5])  # this prints an empty string!
+puts(s[-5..-1])  # prints "world"</code></pre>
+				<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;string_methods.rb</div>
+				<p class="head-indent">
+					最后，你可能需要尝试一些可用于操作字符串的标准方法。这些方法包括改变字符串大小写，反转字符串，插入子字符串，删除重复字符等等。我在 <strong>string_methods.rb</strong> 提供了几个示例。
+				</p>
+			</section>
 		</section>
 	</section>
 	<section>
