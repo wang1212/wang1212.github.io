@@ -184,6 +184,58 @@ puts(s[-5..-1])  # prints "world"</code></pre>
 					最后，你可能需要尝试一些可用于操作字符串的标准方法。这些方法包括改变字符串大小写，反转字符串，插入子字符串，删除重复字符等等。我在 <strong>string_methods.rb</strong> 提供了几个示例。
 				</p>
 			</section>
+			<section>
+				<h4>删除换行符 chop 与 chomp</h4>
+				<p class="head-indent">
+					一些方便的字符串处理方法值得提及一下。<code>chop</code>与<code>chomp</code>方法可用于从字符串的末尾删除字符。<code>chop</code>方法会返回一个字符串，这个字符串是删除最后一个字符得到的，但如果在字符串末尾处发现了回车符和换行符 “\r\n” 则删除一个回车符或换行符之后返回字符串。<code>chomp</code>方法返回一个字符串，这个字符串是删除了末尾一个回车符或换行符得到的。
+				</p>
+				<p class="head-indent">
+					这些方法在你需要删除用户输入或者文件输入的换行符时是非常有用的。例如，当你使用<code>gets</code>方法读取一行文本时，它将返回该文本以及在末尾的“记录分隔符”，默认地通常是换行符。
+				</p>
+				<div class="note">
+					<h6 style="font-weight: bold;">记录分隔符- $/</h6>
+					<p class="head-indent">
+						Ruby 预定义了一个变量<code>$/</code>来作为“记录分隔符”。这个变量被用于一些方法中，例如<code>gets</code>和<code>chomp</code>中。<code>gets</code>方法读入一个字符串时将会包含一个记录分隔符。<code>chomp</code>方法将会返回一个字符串，该字符串末尾存在记录分隔符时删除后返回，不存在时直接返回未修改的原始字符串。如果你愿意，可以重新定义记录分隔符，如下所示：
+					</p>
+					<pre class="language-ruby"><code>$/="*"  # the "*" character is now the record separator</code></pre>
+					<p class="head-indent">
+						当你重新定义了记录分隔符之后，新的字符或字符串现在将会在一些方法中被使用，例如<code>gets</code>和<code>chomp</code>方法。例如：
+					</p>
+					<pre class="language-ruby line-numbers"><code>$/= "world"
+s = gets()  # user enters "Had we but world enough and time…"
+puts(s)  # displays "Had we but world"</code></pre>	
+				</div>
+				<p class="head-indent">
+					你可以使用<code>chop</code>和<code>chomp</code>方法来删除换行符。在大多数情况下，<code>chomp</code>方法是最好的，因为它不会删除最后的字符，除非末尾是记录分隔符，而<code>chop</code>方法无论最后一个字符是什么都会删除。这里是一些示例：
+				</p>
+				<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;chop_chomp.rb</div>
+				<pre class="language-ruby line-numbers"><code># Note: s1 includes a carriage return and linefeed
+s1 = "Hello world
+"
+s2 = "Hello world"
+s1.chop  # returns "Hello world"
+s1.chomp # returns "Hello world"
+s2.chop  # returns "Hello worl" – note the missing "d"!
+s2.chomp # returns "Hello world"</code></pre>
+				<p class="head-indent"><code>chomp</code>方法允许你指定要用做分隔符的字符或字符串：</p>
+				<pre class="language-ruby"><code>s2.chomp("rld")  # returns "Hello wo"</code></pre>
+			</section>
+			<section>
+				<h4>格式化字符串</h4>
+				<p class="head-indent">
+					Ruby 提供了<code>printf</code>方法来打印包含以百分号<strong>%</strong>开头的说明符的“格式化字符串”。格式化字符串之后可以是一个或多个用逗号分隔的数据项；数据项的列表应与格式说明符的类型相匹配。实际数据项替换字符串中匹配的说明符，并相应地进行格式化。这是一些常见的格式说明符：
+				</p>
+				<pre class="language-ruby"><code>%d – decimal number
+%f – floating point number
+%o – octal number
+%p – inspect object
+%s – string
+%x – hexadecimal number</code></pre>
+				<p class="head-indent">
+					你可以通过在浮点数说明符<strong>%f</strong>前面放置一个点号来控制浮点精度。例如，这将显示两位浮点值：
+				</p>
+				<pre class="language-ruby"><code>printf("%0.02f", 10.12945)  # displays 10.13</code></pre>
+			</section>
 		</section>
 	</section>
 	<section>
