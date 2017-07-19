@@ -95,7 +95,7 @@ a calculation 6 and a method-call 10</code></pre>
 puts(%x/dir/)
 puts(%x{dir})</code></pre>
 			<p class="head-indent">你也可以在双引号字符串中嵌入命令，如下所示：</p>
-			<pre class="language-ruby"><code>print( "Goodbye #{%x{calc}}" )</code></pre>
+			<pre class="language-ruby line-numbers"><code>print( "Goodbye #{%x{calc}}" )</code></pre>
 			<p class="head-indent">
 				如果你这么做，要小心的是，命令首先会被执行。你的 Ruby 程序会进行等待，直到开始的进程终止。在这种情况下，计算器将先弹出来。你可以做一些计算，只有当你关闭计算器的时候，字符串 “Goodbye” 才会显示。
 			</p>
@@ -128,7 +128,7 @@ print("print (s4):", s4, "\n")</code></pre>
 					<p class="head-indent">
 						请注意，当你将一个数组传递给一个方法比如<code>puts</code>，数组中的每个元素将被单独处理。你可以像下面一样将<code>x</code>传递给<code>puts</code>：
 					</p>
-					<pre class="language-ruby"><code>puts(x)</code></pre>
+					<pre class="language-ruby line-numbers"><code>puts(x)</code></pre>
 					<p class="head-indent">在这种情况下，输出将会是：</p>
 					<pre class="language-ruby"><code>This
 is
@@ -165,9 +165,9 @@ puts(s[1,1])  # prints out 'e'</code></pre>
 				<p class="head-indent">
 					这将告诉 Ruby 将字符串中索引 1 处的字符返回。如果你想要返回索引 1 处开始的3个字符，你可以输入：
 				</p>
-				<pre class="language-ruby"><code>puts(s[1,3])  # prints "ell"</code></pre>
+				<pre class="language-ruby line-numbers"><code>puts(s[1,3])  # prints "ell"</code></pre>
 				<p class="head-indent">这告诉 Ruby 返回从索引 1 处开始接下来的3个字符。或者，你也可以使用双点符号 “范围（range）”来表示:</p>
-				<pre class="language-ruby"><code>puts(s[1..3])  # also prints "ell"</code></pre>
+				<pre class="language-ruby line-numbers"><code>puts(s[1..3])  # also prints "ell"</code></pre>
 				<div class="note">关于范围（Ranges），你可以参阅本章末尾的<strong>深入探索</strong>部分。</div>
 				<p class="head-indent">
 					字符串还可以使用负值索引，在这种情况下，-1 代表最后一个字符的位置，并且可以再次指定要返回的字符数：
@@ -197,7 +197,7 @@ puts(s[-5..-1])  # prints "world"</code></pre>
 					<p class="head-indent">
 						Ruby 预定义了一个变量<code>$/</code>来作为“记录分隔符”。这个变量被用于一些方法中，例如<code>gets</code>和<code>chomp</code>中。<code>gets</code>方法读入一个字符串时将会包含一个记录分隔符。<code>chomp</code>方法将会返回一个字符串，该字符串末尾存在记录分隔符时删除后返回，不存在时直接返回未修改的原始字符串。如果你愿意，可以重新定义记录分隔符，如下所示：
 					</p>
-					<pre class="language-ruby"><code>$/="*"  # the "*" character is now the record separator</code></pre>
+					<pre class="language-ruby line-numbers"><code>$/="*"  # the "*" character is now the record separator</code></pre>
 					<p class="head-indent">
 						当你重新定义了记录分隔符之后，新的字符或字符串现在将会在一些方法中被使用，例如<code>gets</code>和<code>chomp</code>方法。例如：
 					</p>
@@ -218,7 +218,7 @@ s1.chomp # returns "Hello world"
 s2.chop  # returns "Hello worl" – note the missing "d"!
 s2.chomp # returns "Hello world"</code></pre>
 				<p class="head-indent"><code>chomp</code>方法允许你指定要用做分隔符的字符或字符串：</p>
-				<pre class="language-ruby"><code>s2.chomp("rld")  # returns "Hello wo"</code></pre>
+				<pre class="language-ruby line-numbers"><code>s2.chomp("rld")  # returns "Hello wo"</code></pre>
 			</section>
 			<section>
 				<h4>格式化字符串</h4>
@@ -234,7 +234,7 @@ s2.chomp # returns "Hello world"</code></pre>
 				<p class="head-indent">
 					你可以通过在浮点数说明符<strong>%f</strong>前面放置一个点号来控制浮点精度。例如，这将显示两位浮点值：
 				</p>
-				<pre class="language-ruby"><code>printf("%0.02f", 10.12945)  # displays 10.13</code></pre>
+				<pre class="language-ruby line-numbers"><code>printf("%0.02f", 10.12945)  # displays 10.13</code></pre>
 			</section>
 		</section>
 	</section>
@@ -242,12 +242,38 @@ s2.chomp # returns "Hello world"</code></pre>
 		<h2 class="text-xs-center">深入探索</h2>
 		<section>
 			<h3>范围</h3>
+			<p class="head-indent">
+				在 Ruby 中，Range 是一个表示指定的起始和终止值之间一组数的类。通常，使用整数定义范围，但也可以使用其它有序值（比如浮点数或字符）来定义范围。值可以是负的，尽管如此，你应该注意起始值应该始终小于终止值。这有一些示例：
+			</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;ranges.rb</div>
+			<pre class="language-ruby line-numbers"><code>a = (1..10)
+b = (-10..-1)
+c = (-10..10)
+d = ('a'..'z')</code></pre>
+			<p class="head-indent">你也可以使用三个点而不是两个点指定范围：这将创建一个不包含终止值范围：</p>
+			<pre class="language-ruby line-numbers"><code>d = ('a'..'z')   # this two-dot range = 'a'..'z'
+e = ('a'...'z')   # this three-dot range = 'a'..'y'</code></pre>
+			<p class="head-indent">你可以使用<code>to_a</code>方法创建一个由范围定义的数的数组：</p>
+			<pre class="language-ruby line-numbers"><code>(1..10).to_a</code></pre>
+			<p class="head-indent">请注意，由于两个浮点数之间的数不是有限的，所以<code>to_a</code>方法并没有为浮点数所定义。</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;str_range.rb</div>
+			<p class="head-indent">你甚至可以创建字符串范围，你需要非常的小心，这样做的话最终可能会超出你的预想。例如，看看你是否知道这个范围指定的值：</p>
+			<pre class="language-ruby line-numbers"><code>str_range = ('abc'..'def')</code></pre>
+			<p class="head-indent">
+				一眼看去，从"abc"到"def"这个范围的值可能不多。实际上，这个范围之间的值不少于 2110 个！它们具体如下："abc"、"abd"、"abe"等等，直到"a"结束；然后再从"b"开始，"baa"、"bab"、"bac"等等。准确的说，这种范围是不常用的，最好要非常小心或者直接不使用。
+			</p>
 		</section>
 		<section>
 			<h3>范围迭代器</h3>
+			<p class="head-indent">你可以使用范围从起始值迭代到终止值。例如，以下是将数字从1到10打印出来的方法：</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;for_to.rb</div>
+			<pre class="language-ruby line-numbers"><code>for i in (1..10) do
+  puts( i )
+end</code></pre>
 		</section>
 		<section>
 			<h3>HereDocs</h3>
+			
 		</section>
 		<section>
 			<h3>字符串字面量</h3>
