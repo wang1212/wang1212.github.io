@@ -273,11 +273,69 @@ end</code></pre>
 		</section>
 		<section>
 			<h3>HereDocs</h3>
-			
+			<p class="head-indent">
+				虽然你可以在单双引号之间写跨行的长字符串，但许多 Ruby 程序员更喜欢使用名为"heredoc"这种替代类型的字符串。hererdoc 是一个以特定结束标记开始的文本块，这可以是你自己选择的结束标记。这里，我选择了 EODOC 作为结束标记：
+			</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;heredoc.rb</div>
+			<pre class="language-ruby line-numbers"><code>hdoc1 = &lt;&lt;EODOC</code></pre>
+			<p class="head-indent">
+				这告诉 Ruby，直到遇到结束标记时所有行都是单个字符串。这个字符串被赋值给<code>hdoc1</code>变量。这是一个完整的例子：
+			</p>
+			<pre class="language-ruby line-numbers"><code>hdoc1 = &lt;&lt;EODOC
+I wandered lonely as a #{"cloud".upcase},
+That floats on high o'er vale and hill...
+EODOC</code></pre>
+			<p class="head-indent">
+				默认情况下，heredocs 被视为双引号字符串，所以表达式<code>#{"cloud".upcase}</code>将会被执行。如果你想要一个 heredoc 被视为单引号字符串，在单引号之间指定结束标记：
+			</p>
+			<pre><code>hdoc2 =  &lt;&lt;'EODOC'
+I wandered lonely as a #{"cloud".upcase},
+That floats on high o'er vale and hill...
+EODOC</code></pre>
+			<p class="head-indent">
+				默认情况下，heredoc 的结束标记必须与左侧对齐。如果你想缩进，应该在指定结束标记时使用<code>&lt;&lt;-</code>来代替<code>&lt;&lt;</code>：
+			</p>
+			<pre class="language-ruby line-numbers"><code>hdoc3 = &lt;&lt;-EODOC
+I wandered lonely as a #{"cloud".upcase},
+That floats on high o'er vale and hill...
+    EODOC</code></pre>
+    		<p class="head-indent">你可以自己选择适当的结束标记，使用保留字也是可以的（但这似乎不是明智的做法！）。</p>
+    		<pre class="language-ruby line-numbers"><code>hdoc4 = &lt;&lt;def
+I wandered lonely as a #{"cloud".upcase},
+That floats on high o'er vale and hill...
+def</code></pre>
+			<p class="head-indent">一个被赋值为 heredoc 的变量也可以像其它字符串变量一样使用：</p>
+			<pre class="language-ruby line-numbers"><code>puts(hdoc1)</code></pre>
 		</section>
 		<section>
 			<h3>字符串字面量</h3>
-		</section>		
+			<p class="head-indent">
+				如本章前面所述，你可以选择使用<strong>%q/</strong>和<strong>/</strong>来分割单引号字符串，以及使用<strong>%Q/</strong>和<strong>/</strong>来分割双引号字符串。
+			</p>
+			<p class="head-indent">
+				Ruby 提供了类似的方法来定义反引号字符串、正则表达式（regular expressions）、符号（symbols）和数组（arrays）的分隔符。以这种方式定义字符串数组特别的有用，这样避免了为每个元素都要输入字符串分隔符。这里是一些字符串字面量分隔符的参考：
+			</p>
+			<pre class="language-ruby"><code>%q/   /
+%Q/   /
+%/   /
+%w/   /
+%W/   /
+%r|   |
+%s/   /
+%x/   /</code></pre>
+			<p class="head-indent">
+				请注意，你可以选择要使用的分隔符。我选择了<strong>/</strong>，而正则表达式则使用了<strong>|</strong>（因为<strong>/</strong>是一个常规的正则表达式分隔符），同样地我也可以使用方括号、星号、&或者其它符号（例如<code>%W*dog cat＃{1 + 2}*</code>或<code>%s&dog&</code>）。这是一些示例：
+			</p>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;literals.rb</div>
+			<pre class="language-ruby line-numbers"><code>p %q/dog cat #{1+2}/  #=> "dog cat \#{1+2}"
+p %Q/dog cat #{1+2}/  #=> "dog cat 3"
+p %/dog cat #{1+2}/  #=> "dog cat 3"
+p %w/dog cat #{1+2}/  #=> ["dog", "cat", "\#{1+2}"]
+p %W/dog cat #{1+2}/  #=> ["dog", "cat", "3"]
+p %r|^[a-z]*$|  #=> /^[a-z]*$/
+p %s/dog/ #=> :dog
+p %x/vol/ #=> " Volume in drive C is OS [etc...]"</code></pre>
+		</section>
 	</section>
 
 	<script src="/source/js/prism.js"></script>
