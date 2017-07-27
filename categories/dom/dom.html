@@ -362,7 +362,7 @@ alert(document.documentElement.textContent);</code></pre>
   	&lt;p&gt;World!&lt;/p&gt;
 &lt;/body&gt;
 &lt;script&gt;
-  	// insertAdjacentText()与insertAdjacentText()方法均有两个参数
+  	// insertAdjacentHTML()与insertAdjacentText()方法均有两个参数
   	// 第一个参数可选项为：
   	// "beforebegin"   （开始标签前）
   	// "afterbegin"    （开始标签后）
@@ -370,9 +370,9 @@ alert(document.documentElement.textContent);</code></pre>
   	// "afterend"      （关闭标签后）
 
   	// 创建&lt;strong&gt;元素节点和文本节点并插入到p节点开始标签后面
-  	document.querySelector("p")insertAdjacentHTML("afterbegin","&lt;strong&gt;Hello&lt;/strong&gt;,");
+  	document.querySelector("p").insertAdjacentHTML("afterbegin","&lt;strong&gt;Hello&lt;/strong&gt;");
 &lt;/script&gt;</code></pre>
-						<p class="head-indent"><code>insertAdjacentText()</code>方法与<code>innerHTML</code>属性功能一样，而<code>insertAdjacentText()</code>方法与<code>textContent</code>、<code>innerText</code>属性功能一样。上述示例可以看出，这两个方法根据第一个参数可以实现精准插入。<b>需要注意的是，这两个方法并不会覆盖掉节点内原来的所有子节点，而是将新的节点插入到子节点序列中的相应位置。</b>
+						<p class="head-indent"><code>insertAdjacentHTML()</code>方法与<code>innerHTML</code>属性功能一样，而<code>insertAdjacentText()</code>方法与<code>textContent</code>、<code>innerText</code>属性功能一样。上述示例可以看出，这两个方法根据第一个参数可以实现精准插入。<b>需要注意的是，这两个方法并不会覆盖掉节点内原来的所有子节点，而是将新的节点插入到子节点序列中的相应位置。</b>
 						</p>
 					</section>
 					<section>
