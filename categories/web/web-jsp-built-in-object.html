@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body>
+	<header class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="page-title  display-4">JSP 内置对象</h1>
+			<p>
+				<span class="tag tag-danger">Web</span>&nbsp;&nbsp;&nbsp;
+				<span class="tag tag-warning">JSP</span>&nbsp;&nbsp;&nbsp;
+				<span class="tag tag-info">内置对象</span>
+			</p>
+			<p class="head-indent lead">
+				JSP 全称为 Java Server Page，即 Java 服务器页面，基于简化的 Servlet 设计，是一种建立动态网页的技术标准。JSP 有九个内置对象，可以不加声明和创建就可以在 JSP 页面脚本中直接使用，为开发提供了极大地便利。
+			</p>
+			<hr />
+			<p>
+				<span id="time" class="tag tag-pill tag-success">发表于 2017-8-11</span>&nbsp;
+				<span id="categories" class="tag tag-pill tag-success">分类 Web</span>
+			</p>
+		</div>
+	</header>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<section>
+					<h2>内置对象</h2>
+					<p class="head-indent">
+						内置对象（built-in object）是 JSP 技术自有的，供开发者在 JSP 页面中直接使用，简化开发过程，提高效率。JSP 提供了九个内置对象：
+					</p>
+					<ul>
+						<li><strong>out</strong><div>javax.servlet.jsp.JspWriter，客户端输出。</div></li>
+						<li><strong>request</strong><div>javax.servlet.http.HttpServletRequest，请求信息。</div></li>
+						<li><strong>response</strong><div>javax.servlet.http.HttpServletResponse，响应信息。</div></li>
+						<li><strong>session</strong><div>javax.servlet.http.HttpSession，会话管理。</div></li>
+						<li><strong>application</strong><div>javax.servlet.ServletContext，全局应用管理。</div></li>
+						<li><strong>pageContext</strong><div>javax.servlet.jsp.PageContext，代表 JSP 上下文。</div></li>
+						<li><strong>config</strong><div>javax.servlet.ServletConfig，服务器配置信息。</div></li>
+						<li><strong>page</strong><div>java.lang.Object，代表 JSP 自身，类似 this。</div></li>
+						<li><strong>exception</strong><div>java.lang.Throwable，页面异常信息。</div></li>
+					</ul>
+					<p class="head-indent">
+						以上就是 JSP 九大内置对象的简要介绍及其所属的 Java 类。
+					</p>
+				</section>
+				<section>
+					<h2>内置对象详解</h2>
+					<p class="head-indent">
+						接下来，将对 JSP 的内置对象进行详细的了解，其中有五个较为常用，需着重理解。
+					</p>
+					<section>
+						<h3>out</h3>
+						<p class="head-indent">
+							out 对象是 JspWriter 类的实例，常用来向客户端页面输出信息，并且管理应用服务器上的输出缓冲区。在使用 out 对象输出数据时，可以对数据缓冲区进行操作，及时清除缓冲区中的残余数据，为其他的输出让出缓冲空间。待数据输出完毕后，要及时关闭输出流。
+						</p>
+						<ul>
+							<li>void println() 向客户端打印字符串</li>
+							<li>void clear() 清除缓冲区内容，需在 flush() 之前调用</li>
+							<li>void clearBuffer() 清除缓冲区内容</li>
+							<li>void flush() 将缓冲区内容输出到客户端</li>
+							<li>int getBufferSize() 返回缓冲区字节大小</li>
+							<li>int getRemaining() 返回缓冲区剩余可用字节数</li>
+							<li>boolean isAutoFlush() 返回缓冲区满时，自动清空还是抛出异常</li>
+							<li>void close() 关闭输出流</li>
+						</ul>
+						<dl>
+							<dt>缓冲区</dt>
+							<dd class="head-indent">Buffer，一块用来保存临时数据的内存区域。</dd>
+						</dl>
+					</section>
+					<section>
+						<h3>request</h3>
+						<p class="head-indent">
+							request 对象是 HttpServletRequest 类的实例，封装了客户端的请求信息，主要用于接受通过 HTTP 协议传送到服务器的数据（包括头信息、系统信息、请求方式以及请求参数等）。其作用域为请求的全过程，在服务器完成响应该请求之前均有效。
+						</p>
+						<ul>
+							<li>String getParameter(String name) 返回 name 指定参数的值</li>
+							<li>String[] getParameterValues(String name) 返回包含参数 name 的所有值的数组</li>
+							<li>void setAttribute(String key, Object value) 存储此请求中的属性</li>
+							<li>object getAttribute(String key) 返回指定属性的属性值</li>
+							<li>String getContentType() 得到请求的 MIME 类型</li>
+							<li>String getProtocol() 返回请求用的协议类型及版本号</li>
+							<li>String getServerName() 返回接受请求的服务器主机名</li>
+							<li>void setCharacterEncoding(String name) 设置客户端的字符集编码</li>
+						</ul>
+						<p class="head-indent">
+							使用表单提交数据时，会发生中文乱码问题，如果使用的是 Post 提交方式，可以在请求页面使用 <code>setCharacterEncoding()</code> 将字符集编码设置为与提交页面一致即可，推荐 <strong>utf-8</strong>。如果使用的是 URL 传参，也就是 Get 提交方式时，需在服务器配置页面进行设置。
+						</p>
+						<dl>
+							<dt>Get 与 Post</dt>
+							<dd class="head-indent">
+								Get 方法是以明文的方式通过 URL 提交数据，最多不超过 2KB，安全性较低，但效率高。而 Post 方法则是将提交的信息封装到 HTML Header 内，适合提交数据量大，且安全性较高的信息。
+							</dd>
+						</dl>
+					</section>
+					<section>
+						<h3>response</h3>
+						<p class="head-indent">
+							response 对象是 HttpServletResponse 类的实例，包含了响应客户端请求的信息。其作用域为整个 Jsp 页面，其它页面无效。
+						</p>
+						<ul>
+							<li>String getCharacterEncoding() 返回响应用的字符集编码</li>
+							<li>void setContentType(String type) 设置响应的 MIME 类型</li>
+							<li>PrintWriter getWriter() 返回可以向客户端输出字符的对象</li>
+							<li>sendRedirect(String location) 重定向客户端的请求</li>
+						</ul>
+						<p class="head-indent">
+							需要注意的是，通过<code>getWriter()</code>得到的 PrintWriter 对象与内置 out 对象均可以向客户端输出字符，但前者总是早于后者输出；这其实是因为 out 对象会将内容先暂存在缓冲区，使用<code>flush()</code>方法则可以将其提前输出到客户端。
+						</p>
+						<dl>
+							<dt>请求重定向与请求转发</dt>
+							<dd class="head-indent">
+								请求重定向，由<code>response.sendRedirect()</code>实现，从本质上讲等同于客户端发送了两次请求，第一次的请求信息会丢失，地址栏 URL 会改变，属于客户端行为。请求转发，由<code>request.getRequestDispatcher().forward(req, resp)</code>实现，从本质上讲客户端只发送了一次请求，请求信息会保存，地址栏的 URL 不会改变，属于服务器端行为。
+							</dd>
+						</dl>
+					</section>
+					<section>
+						<h3>session</h3>
+						<p class="head-indent">
+							session 对象是 HttpSession 类的实例，代表客户端与服务器的一次会话，是由服务器自动创建的与用户请求相关的对象。服务器为每个用户都生成一个 session 对象，用于保存该用户的信息，跟踪用户的操作状态。
+						</p>
+						<ul>
+							<li>long getCreationTime() 返回 session 创建的时间</li>
+							<li>public String getId() 返回 session 的 ID</li>
+							<li>public Object setAttribute(String name, Object value) 使用指定名称将对象绑定到此会话</li>
+							<li>public Object getAttribute(String name) 返回绑定到此会话的特定对象，没有则为 null</li>
+							<li>String[] getValueNames() 返回一个包含次 session 所有可用属性的数组</li>
+							<li>int getMaxInactiveInterval() 返回此 session 两次请求之间的超时时限</li>
+							<li>void setMaxInactiveInterval() 设置此 session 两次请求之间的超时时限</li>
+						</ul>
+						<p class="head-indent">
+							从一个客户打开浏览器并连接到服务器开始，到客户关闭浏览器离开这个服务器结束，被称为一个会话。只要当前所有的页面没有全部关闭，此会话在未超时前仍然是有效的；如果当前所有页面全都关闭之后，此会话将会失效。
+						</p>
+					</section>
+					<section>
+						<h3>application</h3>
+						<p class="head-indent">
+							application 对象是 ServletContext 类的实例，实现了用户间的数据共享，可存放全局变量。在服务启动时，该对象实例化，直到服务器关闭之前该对象均是有效可用的。
+						</p>
+						<ul>
+							<li>public void setAttribute(String name, Object value) 设置保存一个属性</li>
+							<li>public Object getAttribute(String name) 获取指定属性的值</li>
+							<li>Enumeration getAttributeNames() 返回所有属性名的枚举</li>
+							<li>String getServerInfo() 返回JSP(Servlet)引擎名及版本号</li>
+						</ul>
+					</section>
+					<section>
+						<h3>page</h3>
+						<p class="head-indent">
+							page 对象是 java.lang.Object 类的实例，指向当前 JSP 页面，类似于 this 指针。
+						</p>
+						<ul>
+							<li>class getClass() 返回此 Object 的类</li>
+							<li>int hashCode() 返回此 Object 的 hash 码</li>
+							<li>boolean equals(Object obj) 判断此 Object 与指定的对象是否相等</li>
+							<li>void copy(Object obj) 把此 Object 拷贝到指定对象中</li>
+							<li>Object clone() 克隆此 Object 对象</li>
+							<li>String toString() 把此 Object 转换成 String 类的对象</li>
+							<li>void notify() 唤醒一个等待的线程</li>
+							<li>void notifyAll() 唤醒所有等待的线程</li>
+							<li>void wait(int timeout) 使一个线程处于等待直到 timeout 结束或被唤醒</li>
+							<li>void wait() 使一个线程处于等待直到被唤醒</li>
+						</ul>
+					</section>
+					<section>
+						<h3>pageContext</h3>
+						<p class="head-indent">
+							pageContext 对象是 pageContext 类的实例，提供了对 JSP 页面内所有的对象及名字空间的访问。
+						</p>
+						<ul>
+							<li>JspWriter getOut() 返回当前客户端响应被使用的 JspWriter 流(out)</li>
+							<li>ServletRequest getRequest() 返回当前页的 ServletRequest 对象(request)</li>
+							<li>ServletResponse getResponse() 返回当前页的 ServletResponse 对象(response)</li>
+							<li>HttpSession getSession() 返回当前页中的 HttpSession 对象(session)</li>
+							<li>ServletContext getServletContext() 返回当前页的 ServletContext 对象(application)</li>
+							<li>Object getPage() 返回当前页的 Object 对象(page)</li>
+							<li> ServletConfig getServletConfig() 返回当前页的 ServletConfig 对象(config)</li>
+							<li>Exception getException() 返回当前页的 Exception 对象(exception)</li>
+							<li>void setAttribute(String name, Object obj, int scope) 在指定范围内设置属性及属性值</li>
+							<li>public Object getAttribute(String name) 取得指定属性的值</li>
+							<li>Object getAttribute(String name, int scope) 在指定范围内取属性的值</li>
+							<li>int getAttributeScope(String name) 返回某属性的作用范围</li>
+							<li>void forward(String relativeUrlPath) 使当前页面重导到另一页面</li>
+							<li>void include(String relativeUrlPath) 在当前位置包含另一文件</li>
+						</ul>
+					</section>
+					<section>
+						<h3>config</h3>
+						<p class="head-indent">
+							config 对象是 ServletConfig 类的实例，是在一个 Servlet 初始化时，JSP 引擎向它传递信息用的。
+						</p>
+						<ul>
+							<li>ServletContext getServletContext() 返回含有服务器相关信息的 ServletContext 对象</li>
+							<li>String getInitParameter(String name) 返回初始化参数的值</li>
+							<li>Enumeration getInitParameterNames() 返回 Servlet 初始化所需所有参数的枚举</li>
+						</ul>
+					</section>
+					<section>
+						<h3>exception</h3>
+						<p class="head-indent">
+							exception 对象是 java.lang.Throwable 类的实例，是页面中异常对象。如果 JSP 页面要使用此对象，就必须设置<code>isErrorPage="true"</code>，否则无法编译。如果在 JSP 页面中出现没有捕获到的异常，就会生成 exception 对象，并把 exception 对象传送到在 page 指令中设定的错误页面中，然后在错误页面中处理相应的 exception 对象。
+						</p>
+						<ul>
+							<li>String getMessage() 返回描述异常的信息</li>
+							<li>String toString() 返回关于异常的简短描述消息</li>
+							<li>void printStackTrace() 显示异常及其栈轨迹</li>
+							<li>Throwable fillInStackTrace() 重写异常的执行栈轨迹</li>
+						</ul>
+					</section>
+				</section>		
+			</div>			
+		</div>		
+	</div>
+	
+	<script src="/source/js/prism.js"></script>
+</body>
+</html>
