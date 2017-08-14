@@ -3,14 +3,16 @@
 <body>
 	<header class="jumbotron jumbotron-fluid">
 		<div class="container">
-			<h1 class="page-title  display-4">JSP 内置对象</h1>
+			<h1 class="page-title  display-4">JSP 内置对象、指令与动作</h1>
 			<p>
 				<span class="tag tag-danger">Web</span>&nbsp;&nbsp;&nbsp;
 				<span class="tag tag-warning">JSP</span>&nbsp;&nbsp;&nbsp;
-				<span class="tag tag-info">内置对象</span>
+				<span class="tag tag-info">内置对象</span>&nbsp;&nbsp;&nbsp;
+				<span class="tag tag-primary">指令</span>&nbsp;&nbsp;&nbsp;
+				<span class="tag tag-success">动作</span>
 			</p>
 			<p class="head-indent lead">
-				JSP 全称为 Java Server Page，即 Java 服务器页面，基于简化的 Servlet 设计，是一种建立动态网页的技术标准。JSP 有九个内置对象，可以不加声明和创建就可以在 JSP 页面脚本中直接使用，为开发提供了极大地便利。
+				JSP 全称为 Java Server Page，即 Java 服务器页面，基于简化的 Servlet 设计，是一种建立动态网页的技术标准。JSP 有九个内置对象，可以不加声明和创建就可以在 JSP 页面脚本中直接使用，同时还提供了动作与指令元素，为开发提供了极大地便利。
 			</p>
 			<hr />
 			<p>
@@ -37,13 +39,7 @@
 						<li><strong>config</strong><div>javax.servlet.ServletConfig，服务器配置信息。</div></li>
 						<li><strong>page</strong><div>java.lang.Object，代表 JSP 自身，类似 this。</div></li>
 						<li><strong>exception</strong><div>java.lang.Throwable，页面异常信息。</div></li>
-					</ul>
-					<p class="head-indent">
-						以上就是 JSP 九大内置对象的简要介绍及其所属的 Java 类。
-					</p>
-				</section>
-				<section>
-					<h2>内置对象详解</h2>
+					</ul>					
 					<p class="head-indent">
 						接下来，将对 JSP 的内置对象进行详细的了解，其中有五个较为常用，需着重理解。
 					</p>
@@ -206,7 +202,103 @@
 							<li>Throwable fillInStackTrace() 重写异常的执行栈轨迹</li>
 						</ul>
 					</section>
-				</section>		
+				</section>
+				<section>
+					<h2>指令</h2>
+					<p class="head-indent">
+						JSP 指令用来设置整个页面相关的属性，如网页的编码方式和所使用的脚本语言。JSP 内置了三大指令，下面就来一一介绍：
+					</p>
+					<section>
+						<h3>Page</h3>
+						<p class="head-indent">
+							Page 指令为容器提供当前页面的使用说明，如使用的脚本语言和所需要引入的类等，一个 JSP 页面可以包含多个 page 指令。其语法格式如下：
+						</p>
+						<pre class="language-html"><code>&lt;%@ page attribute="" %&gt;</code></pre>
+						<p class="head-indent">page 指令的常用属性有以下：</p>
+						<ul>
+							<li>language <div>指定页面所使用的脚本语言，默认为 Java</div></li>
+							<li>contentType <div>指定页面的 MIME 类型和字符编码</div></li>
+							<li>import <div>导入要使用的 Java 类</div></li>
+							<li>errorPage <div>指定当前页面发生异常时需要转向的错误处理页面</div></li>
+							<li>isErrorPage <div>指定当前页面是否可以作为另一个页面的错误处理页</div></li>
+						</ul>
+					</section>
+					<section>
+						<h3>Include</h3>
+						<p class="head-indent">
+							Include 指令用来在当前 JSP 页面包含其它文件，JSP、HTML、文本文件均可以。被包含的文件会在当前 JSP 页面编译期间执行，最终只转换成一个 Servlet，编译效率较低，但执行很快，可以称之为静态包含。语法格式如下：
+						</p>
+						<pre class="language-html"><code>&lt;%@ include file="文件的相对 url 地址" %&gt;</code></pre>
+					</section>
+					<section>
+						<h3>Taglib</h3>
+						<p class="head-indent">
+							Taglib 指令是为了让用户可以引入自定义的标签库，其语法格式如下：
+						</p>
+						<pre class="language-html"><code>&lt;%@ taglib uri="库文件的 uri 地址" prefix="标签库前缀" %&gt;</code></pre>
+					</section>
+				</section>
+				<section>
+					<h2>动作</h2>
+					<p class="head-indent">
+						JSP 动作元素是在请求阶段执行的，利用其可以动态的插入文件、重用 JavaBean 组件、页面重定向等。JSP 提供了多个动作元素，且每个动作元素都两个常用的属性，下面来看看：
+					</p>
+					<ul><div><b>动作元素常见的共有属性</b></div>
+						<li>id
+							<div>动作元素的唯一标识，可以在JSP页面中通过 PageContext 来引用。</div>
+						</li>
+						<li>scope
+							<div>用于定义动作元素的作用域范围，其取值可能为：page、request、session、application。</div>
+						</li>
+					</ul>
+					<section>
+						<h3>include</h3>
+						<p class="head-indent">
+							include 动作元素的作用与 Include 指令一样，可以将 JSP、HTML、文本文件包含到当前页面中，不同的是后者在页面编译期间就将文件包含进去，生成一个 Servlet，而 include 动作则是在请求阶段才将文件包含到当前页面中，最终将会生成两个 Servlet，编译效率高，但执行较慢，可以称之为动态包含。其语法格式如下：
+						</p>
+						<pre class="language-html"><code>&lt;jsp:include page="文件相对 url 地址" flush="是否刷新缓冲区" /&gt;</code></pre>
+					</section>
+					<section>
+						<h3>useBean</h3>
+						<p class="head-indent">
+							useBean 动作用来加载一个将在 JSP 页面中使用的 JavaBean，它使得我们可以发挥 Java 组件复用的优势。其语法格式为：
+						</p>
+						<pre class="language-html"><code>&lt;jsp:useBean id="对象name" class="包含包名的完整类路径" /&gt;</code></pre>
+						<p class="head-indent">其等价的脚本为：</p>
+						<pre class="language-java"><code>Object obj = new Object();</code></pre>
+					</section>
+					<section>
+						<h3>setProperty</h3>
+						<p class="head-indent">setProperty 动作用来设置已经实例化的 Bean 对象的属性，其语法格式如下：</p>
+						<pre class="language-html"><code>&lt;!-- 手动指定属性值 --&gt;
+&lt;jsp:setProperty name="对象name" property="属性名" value="属性值" /&gt;
+&lt;!-- 与请求参数匹配 --&gt;
+&lt;jsp:setProperty name="对象name" property="属性名" param="参数名" /&gt;</code></pre>
+						<p class="head-indent">需要注意的是，以上两种方式只能选择一种，不能同时出现<code>value</code>和<code>param</code>属性。如果 setProperty 动作作为 useBean 动作元素的子元素，只有在实例化一个新的 Bean 时才有效，引用已存在的 Bean 实例是无效的。</p>
+					</section>
+					<section>
+						<h3>getProperty</h3>
+						<p class="head-indent">getProperty 动作用来获取已经实例化的 Bean 对象的属性，其语法格式如下：</p>
+						<pre class="language-html"><code>&lt;jsp:getProperty name="对象name" property="属性名" /&gt;</code></pre>
+					</section>
+					<section>
+						<h3>forward</h3>
+						<p class="head-indent">
+							forward 动作用来将请求转发到另一个页面，其本质为请求转发，而不是请求重定向。其语法格式为：
+						</p>
+						<pre class="language-html"><code>&lt;jsp:forward page="相对URL" /&gt;</code></pre>
+						<p class="head-indent">其等价的脚本为：</p>
+						<pre class="language-java"><code>request.getRequestDispatcher("URL").forward(request, response);</code></pre>
+					</section>
+					<section>
+						<h3>param</h3>
+						<p class="head-indent">param 动作元素是用来传递属性的，常作为 forward 动作元素的子元素存在。示例如下：</p>
+						<pre class="language-html"><code>&lt;jsp:forward page="相对URL"&gt;
+  &lt;jsp:param value="属性值" name="属性名" /&gt;
+&lt;/jsp:forward&gt;</code></pre>
+						<p class="head-indent">传递的参数值可以使用<code>request.getParameter(name)</code>获取，也可以覆盖掉已有参数的值。</p>
+					</section>
+				</section>
 			</div>			
 		</div>		
 	</div>
