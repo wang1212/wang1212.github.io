@@ -65,6 +65,27 @@
 						</blockquote>
 					</section>
 					<section>
+						<h3>Web 安全字体</h3>
+						<p class="head-indent">
+							占据页面主导内容元素的大多是文字，Web 字体是由<code>font-family</code>指定的，可以同时指定多个，浏览器会自动挨个解析，保证前面的解析失败时，后面的可以备用，保证 Web 字体使用的安全性。
+						</p>
+						<pre class="language-html"><code>&lt;style&gt;
+	html, body { font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "华文细黑", sans-serif; }
+&lt;style/&gt;</code></pre>
+						<p class="head-indent">
+							这样的设置，兼具了 Windows 与 Mac OS 以及移动端设备，保证在任何操作系统与设备上都不会导致字体解析失败。通常将此属性放在公有 css 样式表中，最好加到<code>body</code>或<code>html</code>标签上，以保证其它元素的默认字体统一。需要注意的是，为何在这里强调 Web 字体，我们所熟知的“<strong>宋体</strong>”属于打印字体，也就是纸质打印时它是表现较好的，而 Web 展现上“宋体”应该避免，视觉效果并不好。
+						</p>
+						<p class="head-indent">与字体相关的其实还有符号，为了实现符号的自适应，通常符号我们使用其编码。</p>
+						<blockquote>
+							<b>HTML ISO-8859-1 参考手册 : </b><a href="http://www.runoob.com/tags/ref-entities.html" target="_blank">http://www.runoob.com/tags/ref-entities.html</a>
+						</blockquote>
+						<p class="head-indent">CSS 3 还引入了新的特性<code>@font-face</code>，使我们可以加载已有的字体资源文件，而彻底解决用户客户端系统没有安装所需要字体的问题。</p>
+						<blockquote>
+							<b>Font Awesome : </b><a href="http://fontawesome.io/" target="_blank">http://fontawesome.io/</a>
+						</blockquote>
+						<p class="head-indent">Font Awesome 是一个字体和常用标志符号库，采用矢量符号图，可以满足我们的自适应需求。</p>
+					</section>
+					<section>
 						<h3>CSS 布局核心知识</h3>
 						<p class="head-indent">
 							自从 DIV + CSS 这种页面布局开始成为主流，更考验我们开发者掌握的 CSS 布局核心知识，较为重要的有：
@@ -156,7 +177,58 @@ function(){
 					<pre class="language-cmd "><code>npm install http-server [-g]</code></pre>
 					<p class="head-indent">安装完成后，打开命令行工具，切换到项目根目录，输入以下命令即可：</p>
 					<pre class="language-cmd"><code>http-server</code></pre>
-				</section>		
+				</section>
+				<section>
+					<h2>SEO 与 SPA</h2>
+					<p class="head-indent">
+						SEO 即 Search Engine Optimization（搜索引擎优化），写前端页面事实上不是我们全部的工作，在页面实现过程中，应该根据项目考虑一下页面结构对 SEO 是否友好。当然，其实有专门做 SEO 的网站优化人员。通常来说，注重内容的网站对 SEO 的需求比较高，比如门户网站，个人博客等等；而像注重服务的网站应用则不太注重 SEO 排名，比如网页微信、网页QQ、管理页面。
+					</p>
+					<p class="head-indent">
+						SPA 即 Single Page Web Application（单页面应用程序），在一个主页面中异步加载整个应用的所有服务页面，传统的采用<code>#</code>也就是<code>location.hash</code>配合<code>hashchange()</code>事件的解决方案，目前还可以采用 HTML5 的新 API <code>popState()</code>和<code>pushState()</code>的解决方案。 SPA 带来的 Web 应用性能提升和流畅体验是显著的，堪比客户端软件，但 SPA 是对 SEO 不友好的。
+					</p>
+					<p class="head-indent">
+						SEO 与 SPA 放在一块说是比较合适的，因为像这种 SPA 技术以及目前的前端组件化开发框架，基本都采用动态加载 DOM 技术，然而对于搜索引擎来说只检索静态页面，不执行页面中的 js，那么动态加载的 DOM 就无法被搜索引擎检索到，并不利于 SEO 排名。
+					</p>
+				</section>
+				<section>
+					<h2>常用框架、库</h2>
+					<p class="head-indent">这里总结一些前端较为常用的框架或者库，前端在于尝鲜，不断的尝试新东西，保持一颗敢于探索新事物的心。</p>
+					<ul>
+						<li>CSS 初始化</li>
+						<blockquote>
+							<b>Normalize.css : </b><a href="http://necolas.github.io/normalize.css/" target="_blank">http://necolas.github.io/normalize.css/</a>
+						</blockquote>
+						<li>CSS 动画</li>
+						<blockquote>
+							<b>Animate.css : </b><a href="https://daneden.github.io/animate.css/" target="_blank">https://daneden.github.io/animate.css/</a>
+						</blockquote>
+						<li>字体符号</li>
+						<blockquote>
+							<b>Font Awesome : </b><a href="http://fontawesome.io/" target="_blank">http://fontawesome.io/</a>
+						</blockquote>
+						<li>类库</li>
+						<blockquote>
+							<b>jQuery(桌面端) : </b><a href="http://jquery.com/" target="_blank">http://jquery.com/</a><br />
+							<b>zepto.JS(移动端) : </b><a href="http://zeptojs.com/" target="_blank">http://zeptojs.com/</a>
+						</blockquote>						
+						<li>响应式框架</li>
+						<blockquote>
+							<b>Bootstrap : </b><a href="http://getbootstrap.com/" target="_blank">http://getbootstrap.com/</a><br />
+							<b>Foundation : </b><a href="http://foundation.zurb.com/" target="_blank">http://foundation.zurb.com/</a><br />
+							<b>semantic UI : </b><a href="https://semantic-ui.com/" target="_blank">https://semantic-ui.com/</a>
+						</blockquote>
+						<li>界面层开发框架</li>
+						<blockquote>
+							<b>Vue.js : </b><a href="https://cn.vuejs.org/" target="_blank">https://cn.vuejs.org/</a><br />
+							<b>React : </b><a href="https://facebook.github.io/react/" target="_blank">https://facebook.github.io/react/</a>
+						</blockquote>
+						<li>MVVM 框架</li>
+						<blockquote>
+							<b>AngularJS : </b><a href="https://angularjs.org/" target="_blank">https://angularjs.org/</a><br />
+							<b>Angular : </b><a href="https://angular.io/" target="_blank">https://angular.io/</a>							
+						</blockquote>
+					</ul>
+				</section>
 			</div>			
 		</div>		
 	</div>
