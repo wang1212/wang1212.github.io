@@ -79,6 +79,9 @@
 							通常来说，写一个 DOM 结构和样式时，我们应该在写完全部的 DOM 结构后，再去开始加 CSS 样式进行布局。而我们要养成的习惯是，先从子元素开始加样式、定宽高，这是极为重要的。很多人喜欢先定父元素宽高然后把子元素放进去，这是不对的，父元素应该遵循让子元素去自动撑开的原则。这样做的好处是，子元素与父元素结构紧密，整个页面结构更趋向于我们所期望的那样，也更方便维护。当页面结构出现问题，而你在不断更改多个元素宽高时，就要考虑考虑这种情况了。
 						</p>
 						<p class="head-indent">
+							元素的尺寸除了宽高以外，还有<code>border</code>、<code>padding</code>、<code>margin</code>，在 CSS3 中提供了新的样式属性<code>box-sizing</code>，其可取的值有<code>border-box</code>、<code>content-box</code>，前者定义元素的宽高包含元素内部、内边距和边框，而后者定义元素的宽高仅仅包含元素的内容，我们通常在写页面时将其统一一下，建议选择<code>border-box</code>取值。其次，扩充元素范围用<code>padding</code>，设置元素之间距离则用<code>margin</code>，一定要遵循这个原则，因为<code>hover</code>事件触发条件的范围包含元素的<code>padding</code>。
+						</p>
+						<p class="head-indent">
 							浮动是非常方便的一个特性，我们基本经常都会用到，而浮动起来简单，但浮动的子元素撑不起来父元素的高度是个很关键的副作用，一定要合理解决，合理解决不是说去给父元素设置一个定高，依然要遵循父元素让子元素撑开的原则，清除浮动的方法有很多，多了解多使用。
 						</p>
 						<p class="head-indent">
@@ -139,8 +142,21 @@ function(){
 	// 暴露给全局的接口
 	window.i = i;
 	window.a = a;
-}(window)</code></pre>					
-				</section>			
+}(window)</code></pre>
+				</section>	
+				<section>
+					<h2>服务器调试</h2>
+					<p class="head-indent">
+						如果仅仅做的是前端页面，事实上不用装 Tomcat 这些看起来配置较为复杂的服务器，使用<strong> http-server </strong>这个零配置的 HTTP 服务器插件即可。页面其实也可以直接在本地打开预览，但对于整个项目来说，在服务器上调试可以更接近用户环境，容易发现使用中的诸多问题。
+					</p>
+					<blockquote>
+						<b>http-server : </b><a href="https://www.npmjs.com/package/http-server" target="_blank">https://www.npmjs.com/package/http-server</a>
+					</blockquote>
+					<p class="head-indent">使用 npm 即可安装：</p>
+					<pre class="language-cmd "><code>npm install http-server [-g]</code></pre>
+					<p class="head-indent">安装完成后，打开命令行工具，切换到项目根目录，输入以下命令即可：</p>
+					<pre class="language-cmd"><code>http-server</code></pre>
+				</section>		
 			</div>			
 		</div>		
 	</div>
