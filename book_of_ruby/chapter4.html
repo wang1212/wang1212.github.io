@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+	<header class="hidden-sm-down text-xs-left">
+		<p class="h1 text-xs-center">Chapter Four</p><hr />
+		<p class="h2 text-xs-center">Arrays and Hashes</p>
+		<ul>
+			<li class="h3">Arrays</li>
+			<li class="h3">Hashes</li>
+		</ul>
+		<p class="h2 text-xs-center">Digging Deeper</p>
+		<ul>
+			<li class="h3">Treating Hashes As Arrays</li>
+			<li class="h3">Appending and Concatenating</li>
+			<li class="h3">Matrices and Vectors</li>
+			<li class="h3">Sets</li>
+		</ul>
+	</header>
+	<h1 class="page-title text-xs-center">第四章</h1><hr />
+	<section>
+		<h2 class="text-xs-center">数组与哈希表</h2>
+		<p class="head-indent">
+			到目前为止，我们一般一直在使用单个对象。 在这一章中我们将会了解如何创建对象列表。 我们首先来看最常见的列表结构类型——数组。
+		</p>
+		<section>
+			<h3>数组</h3>
+			<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;array0.rb</div>
+			<div class="note">
+				<p class="head-indent">
+					数组是每个元素都可以被索引到的有序集合。在 Ruby 中，（与许多其它语言不同）一个 Array 可以包含不同类型的元素，例如字符串、整数和浮点数，甚至是方法的返回值。
+				</p>
+				<pre class="language-ruby line-numbers"><code>a1 = [1, 'two', 3.0, array_length(a0)]</code></pre>
+				<p class="head-indent">
+					数组中的第一个项目的索引为 0，这意味着数组中的最后一个元素的索引为数组中元素总数减 1。如上所示，给定一个数组<code>a1</code>，然后访问其第一个和最后一个元素：
+				</p>
+				<pre class="language-ruby line-numbers"><code>a1[0]  # returns 1st item (at index 0)
+a1[3]  # returns 4th item (at index 3)</code></pre>
+			</div>
+			<p class="head-indent">
+				我们已经使用了数次数组，例如在第二章的 <strong>2adventure.rb</strong> 中我们使用了一个数组来存储房间的地图：
+			</p>
+			<pre class="language-ruby line-numbers"><code>mymap = Map.new([room1, room2, room3])</code></pre>
+			<section>
+				<h4>创建数组</h4>
+				<p class="head-indent">
+					与其他许多编程语言一样，Ruby 使用方括号来界定数组。你可以使用逗号分隔多个值很容易的创建一个数组，并将其赋给一个变量。
+				</p>
+				<pre class="language-ruby line-numbers"><code>arr = ['one','two','three','four']</code></pre>
+				<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;array1.rb</div>
+				<p class="head-indent">
+					与 Ruby 中其它的东西一样，数组也是对象。你可能会猜到，正如字符串一样，它由<code>Array</code>类定义，索引从 0 开始。你可以将索引放在方括号中得到相应元素，如果索引无效，将会返回<code>nil</code>：
+				</p>
+				<pre class="language-ruby line-numbers"><code>arr = ['a', 'b', 'c']
+puts(arr[0]) # shows "a"
+puts(arr[1]) # shows "b"
+puts(arr[2]) # shows "c"
+puts(arr[3]) # nil</code></pre>
+				<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;array2.rb</div>
+				<p class="head-indent">
+					在数组中混合数据类型是被允许的，甚至也可以包含一些产生值的表达式。假设你创建了这个方法：
+				</p>
+				<pre class="language-ruby line-numbers"><code>def hello
+	return "hello world"
+end</code></pre>
+				<p class="head-indent">你可以这样声明一个数组：</p>
+				<pre class="language-ruby line-numbers"><code>x = [1+2, hello, `dir`]</code></pre>
+				<p class="head-indent">
+					这里，第一个元素是整数 3，第二个元素是字符串 “hello world”（由<code>hello</code>方法返回）。如果你在 Windows 上运行，第三个数组将是一个包含目录列表的字符串。这是因为<code>`dir`</code>反引号字符串是可以被操作系统执行的命令（见第三章）。因此，数组中的最后一个位置将被 <strong>dir</strong> 命令返回的文件名字符串填充。如果你是运行在不同的操作系统上，这时候应该替换一个合适的命令。
+				</p>
+				<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;dir_array.rb</div>
+				<div class="note">
+					<p><b>创建一个文件名的数组</b></p>
+					<p class="head-indent">
+						许多 Ruby 类有返回值为数组的方法。例如，Dir 类用来执行在磁盘上目录操作，拥有<code>entries</code>方法。传递给该方法一个目录名称，将会返回一个包含文件名列表的数组。
+					</p>
+					<pre class="language-ruby line-numbers"><code>Dir.entries('C:\\') # returns an array of files in C:\</code></pre>
+				</div>
+				<p class="head-indent">
+					如果你要创建一个包含单引号字符串的数组，但是输入所有引号又很麻烦，一种简洁的方式就是使用<code>%w</code>和将不带引号的字符串以空格分隔放入圆括号中的形式表示（或者使用<code>%W</code>表示双引号字符串，如第三章所述）：
+				</p>
+				<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;array2.rb</div>
+				<pre class="language-ruby line-numbers"><code>y = %w(this is an array of strings)</code></pre>
+				<p class="head-indent">
+					你也可以使用通常的构造器来（new）创建一个数组，你可以同时将一个整数传递给构造方法，来创建一个特定大小（每个元素值为<code>nil</code>）的数组。当然，你也可以传递两个参数，第一个参数指定数组大小，第二个参数指定要放入数组中的元素：
+				</p>
+				<pre class="language-ruby line-numbers"><code>a = Array.new # an empty array
+a = Array.new(2) # [nil,nil]
+a = Array.new(2, "hello world")  # ["hello world", "hello world"]</code></pre>
+			</section>
+			<section>
+				<h4>多维数组</h4>
+			</section>
+			<section>
+				<h4>数组迭代</h4>
+			</section>
+			<section>
+				<h4>数组索引</h4>
+			</section>
+			<section>
+				<h4>数组拷贝</h4>
+			</section>
+			<section>
+				<h4>数组的平均数测试</h4>
+			</section>
+			<section>
+				<h4>数组排序</h4>
+			</section>
+			<section>
+				<h4>比较值</h4>
+			</section>
+			<section>
+				<h4>数组方法</h4>
+			</section>
+		</section>
+		<section>
+			<h3>哈希表</h3>
+			<section>
+				<h4>创建哈希表</h4>
+			</section>
+			<section>
+				<h4>哈希表索引</h4>
+			</section>
+			<section>
+				<h4>哈希表拷贝</h4>
+			</section>
+			<section>
+				<h4>哈希表排序</h4>
+			</section>
+			<section>
+				<h4>哈希表方法</h4>
+			</section>
+		</section>
+	</section>
+	<section>
+		<h2>深入探索</h2>
+		<section>
+			<h3>以数组方式操作哈希表</h3>
+		</section>
+		<section>
+			<h3>附加和连接</h3>
+		</section>
+		<section>
+			<h3>矩阵和向量</h3>
+		</section>
+		<section>
+			<h3>Sets</h3>
+		</section>
+	</section>
+
+	<script src="/source/js/prism.js"></script>
+</body>
+</html>
