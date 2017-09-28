@@ -89,9 +89,82 @@ a = Array.new(2, "hello world")  # ["hello world", "hello world"]</code></pre>
 			</section>
 			<section>
 				<h4>多维数组</h4>
+				<p class="head-indent">
+					要创建一个多维数组，你可以先创建一个数组，然后再将其它数组作为元素放入该数组中。例如，这将创建一个包含两个数组元素的数组。
+				</p>
+				<pre class="language-ruby line-numbers"><code>a = Array.new(2)
+a[0]= Array.new(2,'hello')
+a[1]= Array.new(2,'world')</code></pre>
+				<div class="note">
+					你还可以将数组对象作为参数传递给数组的<code>new</code>方法来创建多维数组。不过要注意，虽然在传递数组参数时不适用圆括号是可以的，但你如果不在方法名和参数之间加入空格，Ruby 将认为这是一个语法错误，所以在传递参数时，请一定要使用圆括号。
+				</div>
+				<p class="head-indent">
+					也可以使用方括号将数组嵌套在一起。这是创建了一个包含四个数组元素的 2 维数组，每个数组元素包含四个整数元素：
+				</p>
+				<pre class="language-ruby line-numbers"><code>a = [  [1,2,3,4],
+[5,6,7,8],
+[9,10,11,12],
+[13,14,15,16]  ]</code></pre>
+				<p class="head-indent">
+					在上面显示的代码中，我将四个子数组分别放在不同行中，这并不是强制性的，但这样的写法有助于构建多元化的数组结构，通过将每个子数组显示为一行，类似电子表格中的行。当谈到数组中的数组时，可以很方便的将每个子数组引用为外层数组的行。
+				</p>
+				<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;multi_array.rb</div>
+				<p class="head-indent">
+					有关更多的使用多维数组的示例，请加载 <strong>multi_array.rb</strong> 程序。首先创建了包含另外两个数组的多维数组<code>multiarr</code>，而这两个数组中在多维数组中的索引分别为 0 和 1。
+				</p>
+				<pre class="language-ruby line-numbers"><code>multiarr = [['one','two','three','four'],[1,2,3,4]]</code></pre>
 			</section>
 			<section>
 				<h4>数组迭代</h4>
+				<p class="head-indent">
+					你可以使用<code>for</code>循环来遍历数组访问数组中的元素，循环将会遍历位于索引 0 和 1 处的子数组两个元素：
+				</p>
+				<pre class="language-ruby line-numbers"><code>for i in multiarr
+	puts(i.inspect)
+end</code></pre>
+				<p class="head-indent">将会输出：</p>
+				<pre class="language-ruby"><code>["one", "two", "three", "four"]
+[1, 2, 3, 4]</code></pre>
+				<p class="head-indent">
+					那么，你如何子数组中的元素呢？如果元素数量是固定的，你可以指定多个不同迭代变量，这时将会匹配子数组中对应索引位置的元素。
+				</p>
+				<p class="head-indent">这两个子数组有四个元素，所以你可以使用四个迭代变量：</p>
+				<pre class="language-ruby line-numbers"><code>for (a,b,c,d) in multiarr
+	print("a=#{a}, b=#{b}, c=#{c}, d=#{d}\n" )
+end</code></pre>
+				<div class="note">
+					<p><b>迭代器和 for 循环</b></p>
+					<p class="head-indent"><code>for</code>循环中的代码对每一个迭代元素进行执行，语法可以总结如下：</p>
+					<pre class="language-ruby"><code>for &lt;one or more variables&gt; in &lt;expression&gt; do
+	&lt;code to run&gt;
+end</code></pre>
+					<p class="head-indent">
+						当提供多个变量时，会将这些变量传递给代码里面的<code>for...end</code>块，如同给方法传递参数一样。在这里，你可以将<code>(a,b,c,d)</code>作为四个参数进行初始化，每一次匹配<code>for</code>循环所遍历的多维数组<code>multiarr</code>的每一行：
+					</p>
+					<pre class="language-ruby line-numbers"><code>for (a,b,c,d) in multiarr
+	print("a=#{a}, b=#{b}, c=#{c}, d=#{d}\n" )
+end</code></pre>
+					<p class="head-indent">我们将在下一章中更深入地研究<code>for</code>循环和其他迭代器。</p>
+				</div>
+				<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;multi_array2.rb</div>
+				<p class="head-indent">您还可以使用for循环来单独迭代每个子数组中的所有元素：</p>
+				<pre class="language-ruby line-numbers"><code>for s in multiarr[0]
+	puts(s) 
+end
+for s in multiarr[1]
+	puts(s) 
+end</code></pre>
+				<p class="head-indent">
+					以上两种技术（多个迭代变量和多个<code>for</code>循环）都需要满足两个条件：a）你需要知道多维数组有几行或者几列；b）每个子数组都包含相同数量的元素。
+				</p>
+				<p class="head-indent">
+					为了更灵活的迭代多维数组，你可以使用嵌套的<code>for</code>循环。一个外部循环遍历每一行，内部循环则遍历当前行中的元素。这种技术在子数组有不同数量元素时都可以正常运行：
+				</p>
+				<pre class="language-ruby line-numbers"><code>for row in multiarr
+	for item in row
+		puts(item)
+	end
+end</code></pre>
 			</section>
 			<section>
 				<h4>数组索引</h4>
