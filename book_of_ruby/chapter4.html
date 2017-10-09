@@ -168,6 +168,42 @@ end</code></pre>
 			</section>
 			<section>
 				<h4>数组索引</h4>
+				<p class="head-indent">
+					与字符串一样（参见第三章），你可以使用负数从末尾开始索引元素，也可以使用范围来索引：
+				</p>
+				<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;array_index.rb</div>
+				<pre class="language-ruby line-numbers"><code>arr = ['h','e','l','l','o',' ','w','o','r','l','d']
+
+print( arr[0,5] )  #=> "hello"
+print( arr[-5,5 ] ) #=> "world"
+print( arr[0..4] ) #=> "hello"
+print( arr[-5..-1] ) #=> "world"</code></pre>
+				<p class="head-indent">
+					注意，与字符串一样，当提供两个整数以返回一个来自数组的连续几项的元素，第一个整数作为起始索引，第二个则是元素数目（并非终止索引）：
+				</p>
+				<pre class="language-ruby line-numbers"><code>arr[0,5]  # returns 5 chars - ["h", "e", "l", "l", "o"]</code></pre>
+				<div style="font-weight: 600"><span class="fa fa-file-code-o"></span>&nbsp;array_assign.rb</div>
+				<p class="head-indent">
+					你也可以利用索引来进行数组中元素的赋值，例如，我们首先创建一个空的数组，然后对索引为 0，1 和 3 的位置进行赋值，而没有赋值的索引为 2 的位置将填充一个默认值<code>nil</code>：
+				</p>
+				<pre class="language-ruby line-numbers"><code>arr = []
+
+arr[0] = [0]
+arr[1] = ["one"]
+arr[3] = ["a", "b", "c"]
+
+# arr now contains:
+# [[0], ["one"], nil, ["a", "b", "c"]]</code></pre>
+				<p class="head-indent">同样地，你也可以使用范围，负索引等：</p>
+				<pre class="language-ruby line-numbers"><code>arr2 = ['h','e','l','l','o',' ','w','o','r','l','d']
+
+arr2[0] = 'H'
+arr2[2,2] = 'L', 'L'
+arr2[4..6] = 'O','-','W'
+arr2[-4,4] = 'a','l','d','o'
+
+# arr2 now contains:
+# ["H", "e", "L", "L", "O", "-", "W", "a", "l", "d", "o"]</code></pre>
 			</section>
 			<section>
 				<h4>数组拷贝</h4>
