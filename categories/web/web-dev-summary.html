@@ -49,6 +49,14 @@
 					<p class="head-indent">
 						页面兼容性与自适应需求是应首先要考虑的问题，因为前端开发的难点在于浏览器之间的统一，而要做到大多数浏览器统一的显示和交互效果，兼容性是躲不过的。而兼容性又分为 HTML5 新标签、CSS3 新样式、JS 解析兼容几大类别，其中 CSS 与 JS 兼容是要着重考虑的问题，毕竟 Win7 默认自带还是 IE8，这是我们开发者的痛点。其次，多数项目需求可能既要满足客户端用户也要满足移动端用户，自适应问题接踵而来，可以解决自适应的 CSS 框架最常见的就是 Bootstrap 了，了解一下其实现自适应的原理是很有必要的；还有 jQuery 类库可以更方便的操作 DOM，并解决一些兼容问题。
 					</p>
+					<blockquote>
+						<b>html5shiv.js : </b><a href="https://github.com/aFarkas/html5shiv/" target="_blank">https://github.com/aFarkas/html5shiv/</a><br />
+						<b>selectivizr.js : </b><a href="https://github.com/keithclark/selectivizr" target="_blank">https://github.com/keithclark/selectivizr</a><br />
+						<b>Respond.js : </b><a href="https://github.com/scottjehl/Respond" target="_blank">https://github.com/scottjehl/Respond</a>
+					</blockquote>
+					<p class="head-indent">
+						以上三个工具都是用来解决 IE6-8 兼容性问题，其中 <strong>html5shiv.js</strong> 用来提供对 html5 新标签（例如 footer、nav）的支持；<strong>selectivizr.js</strong> 用来提供对 CSS3 新选择器（例如 :nth-child、:last-child）的支持；<strong>Respond.js</strong> 用来提供对 CSS3 <code>@media</code>媒体查询机制（min-width/max-width）的支持。
+					</p>
 					<p class="head-indent">
 						说完兼容性和自适应需求才可以谈谈到底选择什么框架，前端目前比较火的框架像 React 、 Vue.js 这些属于显示层的，我们用起来门槛较低，一般官方各版本都会说明浏览器的兼容级别，这些界面层的框架其实最终目的是帮助我们减少手写 重复的 DOM 结构的工作，将类似 DOM 结构作为一个个组件，实现重用，其次像事件、数据交互这些也更为好管理一些。而其它的像 Aangular.JS 这种就是比较重的 MVVM 框架了，类似于传统的 Web 开发中的 MVC 模式，将更多后台要做的事情拿到前台来做，提高应用性能和体验，门槛相对较高。
 					</p>
