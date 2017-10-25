@@ -34,8 +34,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if lte IE 8 ： 其中 lte 代表小于等于。
 	 -->
 	<!--[if lte IE 8]>
-		<script type="text/javascript" src="./source/js/html5shiv.min.js"></script>
-		<script type="text/javascript" src="./source/js/respond.min.js"></script>
+		<script type="text/javascript" src="./source/js/compatible-plugin/html5shiv.min.js"></script>
+		<script type="text/javascript" src="./source/js/compatible-plugin/respond.min.js"></script>
 	<![endif]-->
 	<style type="text/css">
 		/* 公共样式表中  */
@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if lte IE 8 ： 其中 lte 代表小于等于。
 	 -->
 	<!--[if lte IE 8]>
-		<script type="text/javascript" src="./source/js/selectivizr.min.js"></script>
+		<script type="text/javascript" src="./source/js/compatible-plugin/selectivizr.min.js"></script>
 	<![endif]-->
 </body>
 </html>
