@@ -1,15 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
 	<!-- 将页面所有当前 url 位置设置为根路径 -->
-    <base href="<%=basePath%>">
-	<meta charset="UTF-8">
+    <base>
+	<script>
+		document.getElementsByTagName('base')[0].href = location.protocol + '//' + location.host + location.pathname.match(/\/[^\/]+/) + '/';
+	</script>
 	<!-- 强制让 IE 使用最新内核渲染 -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<!-- 禁止用户缩放 -->
@@ -34,16 +30,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if lte IE 8 ： 其中 lte 代表小于等于。
 	 -->
 	<!--[if lte IE 8]>
-		<script type="text/javascript" src="./source/js/compatible-plugin/html5shiv.min.js"></script>
-		<script type="text/javascript" src="./source/js/compatible-plugin/respond.min.js"></script>
+		<script type="text/javascript" src="./source/plugins/compatible-plugin/html5shiv.min.js"></script>
+		<script type="text/javascript" src="./source/plugins/compatible-plugin/respond.min.js"></script>
 	<![endif]-->
 	<style type="text/css">
-		/* 公共样式表中  */
+		/* 公共样式表中 base.css */
 		html, body { 
 			/* 适配移动设备  */
 			font-size: 12px;
 			/* 保证字体安全，盒子模型统一  */
-			font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "华文细黑", sans-serif; 	
+			font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
 			/* 统一行高  */
 			line-height: 1.4;
 			/* 页面占满  */
@@ -70,16 +66,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			padding: 0;
 			margin: 0;
 		}
+		:focus {
+			outline: none;
+		}
+		button, input, optgroup, select, textarea {
+			/* 保证字体安全  */
+			font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+		}		
+ 		a {
+			text-decoration: none;
+		}
+		ul, li{ 
+			list-style: none;
+		}		
         /* 清除浮动 */
         .clear-float:before, .clear-float:after {
-		  	content:"";
-			display:table;
+		  	content: "";
+			display: table;
 		}
 		.clear-float:after {
-			clear:both;
+			clear: both;
 		}
 		.clear-float {
-			zoom:1;
+			zoom: 1;
 		}			
 		/* 响应式工具 
 
@@ -95,6 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			position: absolute;
 			left: 0;
 			top: 0;
+			z-index: 2;
 		}
 		.responsive-rel, .responsive-container {
 			box-sizing: border-box;
@@ -103,8 +113,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			position: relative;
 			left: 0;
 			top: 0;
+			z-index: 1;
 		}			
 	</style>
+	<script>
+		// 判断是不是 IE 8 以下
+		var _lte_IE_8 = !!(navigator.appName == 'Microsoft Internet Explorer' && +navigator.appVersion.split(';')[1].match(/\d+/)[0] < 9);
+	</script>
 </head>
 <body>
 
@@ -115,7 +130,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if lte IE 8 ： 其中 lte 代表小于等于。
 	 -->
 	<!--[if lte IE 8]>
-		<script type="text/javascript" src="./source/js/compatible-plugin/selectivizr.min.js"></script>
+		<script type="text/javascript" src="./source/plugins/compatible-plugin/selectivizr.min.js"></script>
 	<![endif]-->
 </body>
 </html>
