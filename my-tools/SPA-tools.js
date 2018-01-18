@@ -244,6 +244,9 @@ Model.prototype = {
 
 		_self.dom = options.dom && $(options.dom) || _default_options.dom;
 
+		// 单例模式标记
+		_self._id && _self.dom && _self.dom.addClass('component-single');
+
 		_self._props = options.props || _default_options.props;
 
 		_self.datas = options.datas || _default_options.datas;
