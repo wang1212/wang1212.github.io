@@ -79,7 +79,41 @@
 		}
 		ul, li{ 
 			list-style: none;
-		}		
+		}
+		/* 滚动条样式 */
+		::-webkit-scrollbar { /* 整体 */
+			width: 8px;
+			height: 8px;
+			background-color: #ccc;
+			border-radius: 4px;
+		}
+		/* ::-webkit-scrollbar:hover {
+			width: 16px;
+			height: 16px;
+			border-radius: 8px;
+		} */
+		::-webkit-scrollbar-button { /* 上下按钮 */
+			background-color: auto;
+		}
+		::-webkit-scrollbar-track { /* 外层轨道 */
+			background-color: transparent;
+		}
+		::-webkit-scrollbar-track-piece { /* 内层轨道 */
+			background-color: transparent;
+		}
+		::-webkit-scrollbar-thumb { /* 拖动部分 */
+			background-color: black;
+			border-radius: 4px;
+		}
+		/* ::-webkit-scrollbar-thumb:hover {
+			border-radius: 8px;
+		} */
+		::-webkit-scrollbar-corner { /* 边角 */
+			background-color: auto;
+		}
+		::-webkit-resizer { /* 缩放 */
+			background-color: auto;
+		}	
         /* 清除浮动 */
         .clear-float:before, .clear-float:after {
 		  	content: "";
