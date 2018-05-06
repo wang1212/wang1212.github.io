@@ -4,7 +4,7 @@ const SRC_DIR = './src/',
 
 module.exports =  {
 	'dev': false,
-	'map': true,
+	'map': false,
 
 	'src' : SRC_DIR,
 	'dist': DIST_DIR,
