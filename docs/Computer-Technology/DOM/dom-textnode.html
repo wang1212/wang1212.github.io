@@ -1,0 +1,115 @@
+<h2 id="-">文本节点</h2>
+<p>　　文本节点的 DOM 操作是不常用的，我们通常直接用元素节点的 <code>innerHTML</code> 属性直接替换其所有文本节点，但当我们要对文本节点进行局部操作时 DOM 操作却是很有用的。下面列举一些文本节点常用的属性及方法：</p>
+<ul>
+<li>textContent</li>
+<li>appendData()</li>
+<li>deleteData()</li>
+<li>insertData()</li>
+<li>replaceData()</li>
+<li>subStringData()</li>
+<li>splitText()</li>
+<li>normalize</li>
+<li>Data</li>
+</ul>
+<p>　　需要注意的是，我们在元素节点中留下的空格、回车符、制表符等空白字符也是被解析成文本节点的，所以说我们不压缩页面代码的话，会有许多无用的文本节点影响性能。</p>
+<h2 id="-dom-">文本节点的 DOM 操作</h2>
+<p>　　下面就详细介绍一下文本节点常用的 DOM 操作的过程，首先来了解一下如何创建一个文本节点并将其插入到 DOM 树中。</p>
+<h3 id="-dom-">创建节点并更新到 DOM 树</h3>
+<p>　　文本（Text）节点不同于元素节点，在 <code>document</code> 对象上也有专门用来创建文本节点的方法。</p>
+<ul>
+<li>createTextNode()</li>
+</ul>
+<p>exp：</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+　　<span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+　　<span class="hljs-keyword">var</span> textO = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">'Hello World!'</span>);
+    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'h1'</span>).appendChild(textO);
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre><h3 id="-">获取节点的文本值</h3>
+<p>　　文本节点的文本值是呈现出来给用户看的，但有些时候我们也需要让程序去获知被用户修改后的文本值。</p>
+<ul>
+<li>data</li>
+<li>nodeValue</li>
+<li>substringData()</li>
+</ul>
+<p>exp：</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello World!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-keyword">var</span> textO = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'h1'</span>).firstChild;
+    <span class="hljs-comment">// 获取文本值</span>
+    <span class="hljs-built_in">console</span>.log(texto.data); <span class="hljs-comment">// Hello World!</span>
+    <span class="hljs-built_in">console</span>.log(textO.nodeValue); <span class="hljs-comment">// Hello World!</span>
+    <span class="hljs-comment">// 获取文本值的长度</span>
+    <span class="hljs-built_in">console</span>.log(textO.length);
+    <span class="hljs-built_in">console</span>.log(textO.data.length);
+    <span class="hljs-built_in">console</span>.log(textO.nodeValue.length);
+    <span class="hljs-comment">// 获取部分文本值（开始索引&lt;不包括&gt;，长度）</span>
+    <span class="hljs-built_in">console</span>.log(textO.substringData(<span class="hljs-number">6</span>,<span class="hljs-number">5</span>)); <span class="hljs-comment">// World</span>
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre><h3 id="-">节点的文本值操作</h3>
+<p>　　文本节点的文本值事实上也是重要的数据，这涉及到一些查看、增添、删除、修改等操作。</p>
+<ul>
+<li>appendData()</li>
+<li>deleteData()</li>
+<li>insertData()</li>
+<li>replaceData()</li>
+<li>splitText()</li>
+</ul>
+<p>exp：</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello World<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-keyword">var</span> textO = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'h1'</span>).firstChild;
+    <span class="hljs-comment">// 添加（尾部附加）</span>
+    textO.appendData(<span class="hljs-string">'!'</span>);
+    <span class="hljs-built_in">console</span>.log(textO.data); <span class="hljs-comment">// Hello World!</span>
+    <span class="hljs-comment">// 删除（删除位置索引&lt;不包括&gt;，删除长度）</span>
+    textO.deleteData(<span class="hljs-number">7</span>,<span class="hljs-number">4</span>);
+    <span class="hljs-built_in">console</span>.log(textO.data); <span class="hljs-comment">// Hello W!</span>
+    <span class="hljs-comment">// 插入（插入位置索引&lt;其后插入&gt;，插入值）</span>
+    textO.insertData(<span class="hljs-number">7</span>,<span class="hljs-string">'orld'</span>);
+    <span class="hljs-built_in">console</span>.log(textO.data); <span class="hljs-comment">// Hello World!</span>
+    <span class="hljs-comment">// 替换（替换位置索引&lt;不包括&gt;，替换长度，替换值）</span>
+    textO.replaceData(<span class="hljs-number">6</span>,<span class="hljs-number">5</span>,<span class="hljs-string">'China'</span>)
+    <span class="hljs-built_in">console</span>.log(textO.data); <span class="hljs-comment">// Hello China!</span>
+    <span class="hljs-comment">// 分割（分割位置索引&lt;不包括&gt;，分割长度）</span>
+    <span class="hljs-keyword">var</span> sText = textO.splitText(<span class="hljs-number">6</span>,<span class="hljs-number">5</span>);
+    <span class="hljs-built_in">console</span>.log(sText.data); <span class="hljs-comment">// China!</span>
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre><p>　　<code>splitText()</code> 方法会按要求将一个文本节点分割成多个文本节点，同时还会返回包含分割部分的文本节点对象。</p>
+<h3 id="-">多个文本节点的情况</h3>
+<p>　　当我们在一个元素节点内写了很多文本值时，只要它们没有被元素节点分割，所有相邻的文本值将被浏览器解析成一个文本节点。但是，当我们主动创建多个文本节点并插入到 DOM 树中时，浏览器却不会合并这些相邻的文本节点。</p>
+<h4 id="-">元素内所有文本值</h4>
+<p>　　当元素节点内的文本值被多个元素节点分割时，这些文本值会被解析成多个文本节点。元素节点的 <code>innerHTML</code> 属性获取的是该节点内的所有后代节点（包括文本节点与元素节点），而我们有时候却只想查看该节点的所有文本值（所有文本节点合并而成），下面就来看看如何查看。</p>
+<ul>
+<li>textContent</li>
+</ul>
+<p>exp：</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello <span class="hljs-tag">&lt;<span class="hljs-name">i</span>&gt;</span>World!<span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-keyword">var</span> eleO = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'h1'</span>);
+    <span class="hljs-comment">// 获取所有文本值</span>
+    <span class="hljs-built_in">console</span>.log(eleO.textContent); <span class="hljs-comment">// Hello World!</span>
+    <span class="hljs-comment">// 设置所有文本值</span>
+    eleO.textContent = <span class="hljs-string">'Hello World!'</span>;
+    <span class="hljs-built_in">console</span>.log(eleO.textContent); <span class="hljs-comment">// Hello World!</span>
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre><p>　　<strong>我们会发现，<code>textContent</code> 与 <code>innerHTML</code> 获取的值不同，但是它们在进行设置时行为却是一样的，也就是说会覆盖掉目标元素节点内的所有后代节点。</strong></p>
+<h4 id="-">合并多个文本节点</h4>
+<p>　　当有多个相邻的文本节点存在时，我们可以让其合并成一个文本节点，只需要在它们的父元素节点上使用 <code>normalize()</code> 方法即可，这里不再做示例。</p>
+<ul>
+<li>normalize()</li>
+</ul>
+<h2 id="-">结语</h2>
+<p>　　文本节点的属性及方法大部分都可以用在注释节点（Comment）上。</p>
+<h2 id="-">参考</h2>
+<ul>
+<li>《DOM启蒙》，Cody Lindley，陈养剑 译</li>
+</ul>

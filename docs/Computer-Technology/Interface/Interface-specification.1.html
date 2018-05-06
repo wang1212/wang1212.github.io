@@ -1,0 +1,169 @@
+<h1 id="-">接口文档规范</h1>
+<p>涉及到客户端与服务器端数据交互问题，需要进行接口（API）的规范定义，现统一使用 .md 格式文件来书写。</p>
+<pre><code><span class="hljs-keyword">let</span> doc = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'id'</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">return</span>;
+}
+</code></pre><h2 id="-">文档属性</h2>
+<p>接口文档除过接口信息以外，还有几个关键的属性需要标明。</p>
+<ul>
+<li>Title：文档标题；</li>
+<li>Description：文档概述；</li>
+<li>Time：应该标明接口文档的编写时间；</li>
+<li>Editor：标明编写接口文档的人及其负责岗位；</li>
+<li>Participant：标明参与接口文档编写的人及其负责岗位</li>
+<li>Reader：该接口文档的预期读者。</li>
+</ul>
+<h3 id="-">举例</h3>
+<pre><code>{
+    <span class="hljs-attr">"Title"</span>: <span class="hljs-string">"林校项目 API 文档"</span>,
+    <span class="hljs-attr">"Description"</span>: <span class="hljs-string">"此文档涵盖了林校项目整个系统的 Web 前端、Android 客户端所需要的所有 API 接口。"</span>,
+    <span class="hljs-attr">"Time"</span>: <span class="hljs-string">"2018-03-28"</span>,
+    <span class="hljs-attr">"Editor"</span>: <span class="hljs-string">"mrwang, Web 前端"</span>,
+    <span class="hljs-attr">"Participant"</span>: [
+        <span class="hljs-string">"mrli, Android 客户端"</span>,
+        <span class="hljs-string">"mrchen,  Android 客户端"</span>,
+        <span class="hljs-string">"mryue, Java 服务器端"</span>
+    ],
+    <span class="hljs-attr">"Reader"</span>: <span class="hljs-string">"林校项目所有开发人员"</span>
+}
+</code></pre><p>当然，还可以添加一些有用的字段来进行说明。</p>
+<h2 id="-">接口信息</h2>
+<p>客户端向后台请求数据时，需要的接口（API）规范可以由客户端或者服务器端来定义，书写规范遵循一下几点：</p>
+<ul>
+<li>description：该接口的描述，注明该接口用来干什么，目的是什么等；</li>
+<li>request： <ul>
+<li>name：接口名称，使用动词+名词，例如 getInfo，也可以留给后端人员去补充；</li>
+<li>uri：请求的路径，例如 /ForestManage/，也可以留给后端人员去补充；</li>
+<li>param：请求参数，写明参数名与参数类型，是否必须，以及候选条件等;</li>
+</ul>
+</li>
+<li>response：<ul>
+<li>type：响应数据格式；</li>
+<li>content：响应数据样例，必须举出必要字段，并附加注释。</li>
+</ul>
+</li>
+</ul>
+<p>除过以上必要的信息以外，还可以添加其它有用的字段，比如备注等，根据需要添加即可。</p>
+<h3 id="-">举例</h3>
+<pre><code>{
+    <span class="hljs-string">"description"</span>: <span class="hljs-string">"根据用户名，获取用户数据信息"</span>,
+    <span class="hljs-string">"request"</span>: {
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"getUserInfo"</span>,
+        <span class="hljs-string">"uri"</span>: <span class="hljs-string">"/ForestManage/"</span>
+        <span class="hljs-string">"param"</span>: [
+            {
+                <span class="hljs-string">"name"</span>: <span class="hljs-string">"username"</span>,
+                <span class="hljs-string">"type"</span>: <span class="hljs-string">"String"</span>,
+                <span class="hljs-string">"required"</span>: <span class="hljs-number">1</span>  // <span class="hljs-number">1</span> 表示必要的参数， <span class="hljs-number">0</span> 表示非必要参数
+            }
+        ]
+    },
+    <span class="hljs-string">"response"</span>: {
+        <span class="hljs-string">"type"</span>: <span class="hljs-string">"json"</span>,
+        <span class="hljs-string">"content"</span>: {
+            <span class="hljs-string">"code"</span>: <span class="hljs-string">""</span>,  // 状态码，例如 <span class="hljs-number">1001</span> 表示查询成功， <span class="hljs-number">1002</span> 表示查询失败
+            <span class="hljs-string">"data"</span>: {
+                <span class="hljs-string">"username"</span>: <span class="hljs-string">""</span>, // 用户名
+                <span class="hljs-string">"sex"</span>: <span class="hljs-string">""</span>,      // 性别
+                <span class="hljs-string">"age"</span>: <span class="hljs-string">""</span>,      // 年龄
+                <span class="hljs-string">"phone"</span>: <span class="hljs-string">""</span>,    // 联系电话
+            }
+        }
+    }
+}
+</code></pre><h3 id="-">文档格式</h3>
+<p>统一使用 .md 格式文件来写接口文档，接口可以按种类、模块进行划分，可以写在不同的文件中，也可以写在同一个文件中。</p>
+<h4 id="-">不同类型、模块接口写在不同的文件中：</h4>
+<blockquote>
+<p>./interface-user</p>
+</blockquote>
+<pre><code>{
+    <span class="hljs-string">"description"</span>: <span class="hljs-string">"接口1"</span>,
+    ...
+}, 
+
+{
+    <span class="hljs-string">"description"</span>: <span class="hljs-string">"接口2"</span>,
+    ...
+}
+
+...
+</code></pre><blockquote>
+<p>./interface-exam</p>
+</blockquote>
+<pre><code>{
+    <span class="hljs-string">"description"</span>: <span class="hljs-string">"接口1"</span>,
+    ...
+}, 
+
+{
+    <span class="hljs-string">"description"</span>: <span class="hljs-string">"接口2"</span>,
+    ...
+}
+
+...
+</code></pre><h4 id="-">不同类型、模块接口写在同一个文件中：</h4>
+<blockquote>
+<p>./interface</p>
+</blockquote>
+<p>--- interface-user</p>
+<pre><code>{
+    <span class="hljs-string">"description"</span>: <span class="hljs-string">"接口1"</span>,
+    ...
+}, 
+
+{
+    <span class="hljs-string">"description"</span>: <span class="hljs-string">"接口2"</span>,
+    ...
+}
+
+...
+</code></pre><p>--- interface-exam</p>
+<pre><code>{
+    <span class="hljs-string">"description"</span>: <span class="hljs-string">"接口1"</span>,
+    ...
+}, 
+
+{
+    <span class="hljs-string">"description"</span>: <span class="hljs-string">"接口2"</span>,
+    ...
+}
+
+...
+</code></pre><p>尽可能将不同模块的接口分成独立文件去写。</p>
+<h2 id="-">例子</h2>
+<p>下面举一个完整的接口文档例子。</p>
+<hr>
+<blockquote>
+<p>./interface.md</p>
+</blockquote>
+<h1 id="api-">API 文档</h1>
+<h2 id="document-message">Document-message</h2>
+<pre><code>{
+    <span class="hljs-attr">"Title"</span>: <span class="hljs-string">"林校项目 API 文档"</span>,
+    <span class="hljs-attr">"Description"</span>: <span class="hljs-string">"此文档涵盖了林校项目整个系统的 Web 前端、Android 客户端所需要的所有 API 接口。"</span>,
+    <span class="hljs-attr">"Time"</span>: <span class="hljs-string">"2018-03-28"</span>,
+    <span class="hljs-attr">"Editor"</span>: <span class="hljs-string">"mrwang, Web 前端"</span>,
+    <span class="hljs-attr">"Participant"</span>: [
+        <span class="hljs-string">"mrli, Android 客户端"</span>,
+        <span class="hljs-string">"mrchen,  Android 客户端"</span>,
+        <span class="hljs-string">"mryue, Java 服务器端"</span>
+    ],
+    <span class="hljs-attr">"Reader"</span>: <span class="hljs-string">"林校项目所有开发人员"</span>
+}
+</code></pre><h2 id="interface-message">Interface-message</h2>
+<pre><code>{
+    <span class="hljs-string">"description"</span>: <span class="hljs-string">"接口1"</span>,
+    ...
+}, 
+
+{
+    <span class="hljs-string">"description"</span>: <span class="hljs-string">"接口2"</span>,
+    ...
+}
+
+...
+</code></pre>

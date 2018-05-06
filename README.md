@@ -1,5 +1,5 @@
-# 不如怀念
+# My Blog - 不如怀念
 
-　　分享与交流是让我获得提升的最佳途径。
+分享与交流是我获得提升的最佳途径。
 
-　　<small>Sharing and communication is the best way to get my promotion.<small>
+<small>Sharing and communication is the best way to get my promotion.<small>

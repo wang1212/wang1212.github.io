@@ -1,0 +1,43 @@
+/*! About page style sheet  */
+
+[content="about"] {
+    font-size: 1.5rem;
+
+    > section {
+        overflow: hidden;
+    }
+
+    .head {
+        position: relative;
+        padding-bottom: .5rem;
+
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            left: -10%;
+            bottom: 0;
+            width: 120%;
+            border-bottom: 1px solid #ccc;
+        }
+
+        &::after {
+            border-bottom-color: black;
+            transform: scaleX(.5);
+            transition: all .4s ease-out;
+        }
+
+        &:hover::after {
+            transform: scaleX(1);
+        }
+    }
+
+    .progress {
+        height: 1.5rem;
+        font-size: 1rem;
+
+        .progress-bar {
+            width: 0;
+            transition: all 1.6s ease-out;
+        }
+    }
+}

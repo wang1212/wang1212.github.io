@@ -1,0 +1,21 @@
+<h2 id="bfc">BFC</h2>
+<p>　　BFC（Block Formatting Context，块级格式化上下文）是 CSS 2.1 中的一个规范，在 CSS 3 中也称为 Flow Root。首先，BFC 是<strong>块级元素</strong>身上的一个特性，通常它是隐藏不生效的，但某些情况下它会显现出来：</p>
+<ol>
+<li><code>float</code> 不为 <code>none</code></li>
+<li><code>position</code> 不为 <code>static</code>、<code>relative</code></li>
+<li><code>overflow</code> 不为 <code>visible</code></li>
+<li><code>display</code> 不为 <code>table-cell</code>、<code>table-caption</code>、<code>inline-block</code>、<code>flex</code>、<code>inline-flex</code></li>
+</ol>
+<p>　　只要满足上述任一条件，该块级元素身上的 BFC 特性即会显现出来。</p>
+<h2 id="bfc-">BFC特性</h2>
+<p>　　BFC 特性所展现出来的效果可以通俗的总结为，<strong>BFC 特性导致块级元素成为一个容器盒子，将会把容器内的元素与容器外的元素相互隔离（也就是说容器内外的元素之间不再发生相互作用）。</strong>于是乎，我们就可以说该容器内的所有元素都处在了同一个块级格式化上下文中，只有它们之间才会发生相互作用。</p>
+<h3 id="-margin-">清除 margin 重叠</h3>
+<p>　　最典型的相互作用就是两个相邻的块级元素垂直方向上的 <code>margin</code> 值会发生重叠并取最大值。当我们为其中一个元素包裹一个 div 元素并使该元素的 BFC 显现（例如 <code>overflow:hidden</code>）时，我们会发现原先两个元素在垂直方向上的 <code>margin</code> 值已不再重叠，这也就是说明它们之间已不存在相互作用。</p>
+<h3 id="-float-">清除 float 覆盖</h3>
+<p>　　当一个元素 <code>float</code> 设置不为 <code>none</code> 时，该元素将会浮动起来脱离文档流，导致它后面的非浮动元素前移，从而自己覆盖在前移的元素上。这时候，当我们使它后面的非浮动元素 BFC 特性显现（例如 <code>overflow:auto</code>）时，我们就会发现这些元素不会前移了。</p>
+<h3 id="float-">float 包含</h3>
+<p>　　同样地，当父元素的高度没有设置，子元素浮动起来后，父元素的 <code>height</code> 依然为 <code>0</code>。这时候，我们使父元素的 BFC 特性显现（例如 <code>float:left</code>）时，我们会发现父元素的高度被浮动的子元素撑起来了，也就是父元素将浮动子元素包含了起来。</p>
+<h3 id="-">清除文字环绕</h3>
+<p>　　当一个浮动元素后面跟了个 <code>&lt;p&gt;</code> 元素且内部有大量文字，这些文字会产生环绕效果，也就是环绕在浮动元素周围。我们可以使该 p 元素的 BFC 特性显现（例如 <code>overflow:hidden</code>），然后我们就可以看到文字全部显示在了侧边，而不会再环绕在该浮动元素上下方，也就是类似评论功能中头像与评论文字两侧布局的效果。</p>
+<h2 id="-">结语</h2>
+<p>　　事实上，BFC 特性还有许多其它的妙用，我们在开发过程中可以多尝试，挖掘它新的技巧。</p>
