@@ -10,9 +10,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'),
 
 
 module.exports = {
-	mode        : gulp_config.dev ? 'development': 'production',
+	mode        : gulp_config.dev ? 'development'                 : 'production',
 	target      : 'web',
-	devtool     : 'cheap-module-eval-source-map',
+	devtool     : gulp_config.map ? 'cheap-module-eval-source-map': 'none',
 	watch       : true,
 	watchOptions: {
 		ignored: /node_modules/
@@ -35,8 +35,9 @@ module.exports = {
 					{
 						loader : 'babel-loader',
 						options: {
-							presets: ['env'],
-							plugins: [require('babel-plugin-syntax-dynamic-import')]
+							presets   : ['env'],
+							plugins   : [require('babel-plugin-syntax-dynamic-import')],
+							sourceMaps: true
 						}
 					}
 				]
