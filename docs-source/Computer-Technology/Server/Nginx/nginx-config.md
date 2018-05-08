@@ -20,6 +20,63 @@
 
 　　不管 nginx 基于什么场景发挥什么作用，都是基于特定的配置来实现，nginx 的配置文件也相对比较简单。
 
+### 开启 gzip
+
+　　开启 gzip 压缩可以在客户端请求文本文件时，将传输大小压缩至少**70%**左右，可以获得非常好的优化效果，通常都会开启 gzip 压缩配置。
+
+    http {
+        ...
+
+        # gzip
+        gzip                on;
+        gzip_min_length     20;
+        gzip_buffers        4 16k;
+        gzip_comp_level     6;
+        gzip_types          text/plain text/xml text/css text/javascript application/x-javascript application/javascript application/json;
+        gzip_http_version   1.0;
+        gzip_disable        "MSIE [1-6]\.";
+        gzip_proxied        off;
+        gzip_vary           on;
+
+        ...
+    }
+
+### 允许跨域
+
+　　有时候，比较大（几百兆以上）的静态资源需要在客户端使用异步方式加载（例如 Ajax），但是多个人合作开发时，拷贝这些静态资源到各自本地（如果不这么做，将会出现跨域问题）是最糟糕的解决方案，这个时候我们可以将静态资源放在一个服务器上，然后使用反向代理或者允许跨域的配置巧妙的解决这个问题。
+
+    location /static/ {
+        ...
+
+        add_header 'Access-Control-Allow-Origin'      '*';
+        add_header 'Access-Control-Allow-Headers'     'Content-Type';
+        add_header 'Access-Control-Allow-Credentials' 'true';
+    }
+
 ### 反向代理
 
-　　
+　　Nginx 可以作为一个反向代理服务器，来为我们提供一些场景下的解决方案，例如负载均衡、跨域、前后端完全分离开发场景等等。
+
+    location / {
+        proxy_set_header Host            $http_host;
+        proxy_set_header X-Real-IP       $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_cookie_path /project/ /;
+        proxy_pass http://127.0.0.1:8181/project/;
+    }
+
+　　这里有几点需要注意下：
+
+- `proxy_set_header`
+
+    　　目的是为了保证后端（被代理的）服务器获取到远程客户端的真实信息，相当于将前端（nginx 反向代理）服务器的信息隐藏，造成客户端直接访问后端服务器的“假象”。
+
+    　　`Host` 应尽可能设置成 `$http_host`，这样会包含完整的 **IP** 和**端口**信息，设置为 `$host` 时将不会包含端口信息。
+
+- `proxy_cookie_path`
+
+    　　目的是为了在访问路径与代理路径发生改变（不一致）的情况下防止出现客户端 Cookie 丢失的问题。
+
+- `proxy_pass`
+
+    　　则是后端（被代理）服务器地址。

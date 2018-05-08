@@ -3,5 +3,52 @@
 <p>　　Nginx 在生产环境下的应用场景通常作为负载均衡的前端服务器，对请求进行分发，实现极高的并发量。当然，在开发环境下，nginx 也可以作为一个工具来使用，提供给我们极大的便利，例如利用反向代理来实现前后端的完全分离开发。</p>
 <h2 id="nginx-">Nginx 特定场景下的配置</h2>
 <p>　　不管 nginx 基于什么场景发挥什么作用，都是基于特定的配置来实现，nginx 的配置文件也相对比较简单。</p>
-<h3 id="-">反向代理</h3>
-<p>　　</p>
+<h3 id="-gzip">开启 gzip</h3>
+<p>　　开启 gzip 压缩可以在客户端请求文本文件时，将传输大小压缩至少<strong>70%</strong>左右，可以获得非常好的优化效果，通常都会开启 gzip 压缩配置。</p>
+<pre><code>http {
+    ...
+
+    <span class="hljs-comment"># gzip</span>
+    gzip                <span class="hljs-keyword">on</span>;
+    gzip_min_length     <span class="hljs-number">20</span>;
+    gzip_buffers        <span class="hljs-number">4</span> <span class="hljs-number">16</span>k;
+    gzip_comp_level     <span class="hljs-number">6</span>;
+    gzip_types          <span class="hljs-built_in">text</span>/plain <span class="hljs-built_in">text</span>/xml <span class="hljs-built_in">text</span>/css <span class="hljs-built_in">text</span>/javascript <span class="hljs-built_in">application</span>/x-javascript <span class="hljs-built_in">application</span>/javascript <span class="hljs-built_in">application</span>/json;
+    gzip_http_version   <span class="hljs-number">1.0</span>;
+    gzip_disable        <span class="hljs-string">"MSIE [1-6]\."</span>;
+    gzip_proxied        off;
+    gzip_vary           <span class="hljs-keyword">on</span>;
+
+    ...
+}
+</code></pre><h3 id="-">允许跨域</h3>
+<p>　　有时候，比较大（几百兆以上）的静态资源需要在客户端使用异步方式加载（例如 Ajax），但是多个人合作开发时，拷贝这些静态资源到各自本地（如果不这么做，将会出现跨域问题）是最糟糕的解决方案，这个时候我们可以将静态资源放在一个服务器上，然后使用反向代理或者允许跨域的配置巧妙的解决这个问题。</p>
+<pre><code>location /static/ {
+    ...
+
+    add_header <span class="hljs-symbol">'Access</span>-Control-Allow-Origin'      <span class="hljs-string">'*'</span>;
+    add_header <span class="hljs-symbol">'Access</span>-Control-Allow-Headers'     <span class="hljs-symbol">'Content</span>-<span class="hljs-keyword">Type</span>';
+    add_header <span class="hljs-symbol">'Access</span>-Control-Allow-Credentials<span class="hljs-string">' '</span><span class="hljs-literal">true</span>';
+}
+</code></pre><h3 id="-">反向代理</h3>
+<p>　　Nginx 可以作为一个反向代理服务器，来为我们提供一些场景下的解决方案，例如负载均衡、跨域、前后端完全分离开发场景等等。</p>
+<pre><code><span class="hljs-attribute">location</span> / {
+    <span class="hljs-attribute">proxy_set_header</span> Host            <span class="hljs-variable">$http_host</span>;
+    <span class="hljs-attribute">proxy_set_header</span> X-Real-IP       <span class="hljs-variable">$remote_addr</span>;
+    <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;
+    <span class="hljs-attribute">proxy_cookie_path</span> /project/ /;
+    <span class="hljs-attribute">proxy_pass</span> http://127.0.0.1:8181/project/;
+}
+</code></pre><p>　　这里有几点需要注意下：</p>
+<ul>
+<li><p><code>proxy_set_header</code></p>
+<p>  　　目的是为了保证后端（被代理的）服务器获取到远程客户端的真实信息，相当于将前端（nginx 反向代理）服务器的信息隐藏，造成客户端直接访问后端服务器的“假象”。</p>
+<p>  　　<code>Host</code> 应尽可能设置成 <code>$http_host</code>，这样会包含完整的 <strong>IP</strong> 和<strong>端口</strong>信息，设置为 <code>$host</code> 时将不会包含端口信息。</p>
+</li>
+<li><p><code>proxy_cookie_path</code></p>
+<p>  　　目的是为了在访问路径与代理路径发生改变（不一致）的情况下防止出现客户端 Cookie 丢失的问题。</p>
+</li>
+<li><p><code>proxy_pass</code></p>
+<p>  　　则是后端（被代理）服务器地址。</p>
+</li>
+</ul>
