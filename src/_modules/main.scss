@@ -175,3 +175,112 @@
         width: 100%;
     }
 }
+
+/** 
+ * Side nav
+ */
+.H {
+    position: absolute;
+    left: 0;
+    top: 305px;
+    z-index: 1050;
+    overflow: auto;
+    font-size: 1.25rem;
+    padding: 2rem 1rem 1rem 2rem;
+    background-color: rgba($color: #000000, $alpha: .85);
+    transition: left .8s ease-in-out;
+
+    &.scroll {
+        position: fixed;
+        top: 0;
+        height: 100%;
+    }
+
+    &.hide {
+        left: -400px;
+        overflow: visible;
+
+        > .hide {
+            right: auto;
+            left: 400px;
+        }
+    }
+
+    > p {
+        color: #aaa;
+        cursor: pointer;
+        margin-bottom: .5rem;
+
+        &.active {
+            color: orange;
+        }
+    }
+
+    .H-h1 {
+        font-size: 1em;
+    }
+
+    .H-h2 {
+        font-size: .95em;
+        text-indent: 1rem;
+    }
+
+    .H-h3 {
+        font-size: .9em;
+        text-indent: 1.75rem;
+    }
+
+    .H-h4 {
+        font-size: .85em;
+        text-indent: 2.5rem;
+    }
+
+    .H-h5 {
+        font-size: .8em;
+        text-indent: 3.25rem;
+    }
+    
+    .H-h6 {
+        font-size: .75em;
+        text-indent: 4rem;
+    }
+
+    > .hide {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 40px;
+        line-height: 40px;
+        color: #fff;
+        font-size: 1rem;
+        text-align: center;
+        background-color: rgba(0, 0, 0, .75);
+        cursor: pointer;
+
+        &:hover {
+            color: orange;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        & {
+            top: 368px;
+        }
+    }
+
+    @media screen and (min-width: 1800px) {
+        & {
+            left: 0;
+            background-color: transparent;
+
+            > p:hover {
+                color: black;
+            }
+
+            > .hide {
+                color: black;
+                background-color: transparent;
+            }
+        }
+    }
+}

@@ -5,7 +5,7 @@
         "keywords": ["Nginx", "Config", "Windows"],
         "summary": "Nginx 作为一个轻量、高性能的服务器，近年来颇受欢迎，无论是生产环境还是开发环境都有其发挥作用的地方，其配置文件相对来说还是较为简单的。而且，现在 nginx 也支持 Windows 环境了，利用不同的配置可以满足我们不同的需求。",
         "ctime": "2018-3-15 12:38:00",
-        "mtime": "2016-3-15 12:38:00"
+        "mtime": "2018-5-12 3:43:00"
     }
 
 ---
@@ -20,6 +20,38 @@
 
 　　不管 nginx 基于什么场景发挥什么作用，都是基于特定的配置来实现，nginx 的配置文件也相对比较简单。
 
+### 工作进程
+
+　　Nginx 是基于异步非阻塞 IO 模型的，同时也支持多进程，通常将其工作进程数目设置为 CPU 的核心数，以发挥其最大作用，实现高并发。
+
+    {
+        worker_processes  4;
+
+        ...
+    }
+
+　　这个配置是写在配置文件顶部的。
+
+### 设置编码
+
+　　通常来说，将编码设置为 `UTF-8` 是比较合适的。
+
+    server {
+        ...
+
+        charset utf-8;
+    }
+
+### 更改上传数据大小限制
+
+　　Nginx 默认的数据上传大小为 2M，某些情况下我们需要将其更改的大一些，以符合业务需求。
+
+    server {
+        ...
+
+        client_max_body_size 20m;
+    }   
+
 ### 开启 gzip
 
 　　开启 gzip 压缩可以在客户端请求文本文件时，将传输大小压缩至少**70%**左右，可以获得非常好的优化效果，通常都会开启 gzip 压缩配置。
@@ -32,7 +64,7 @@
         gzip_min_length     20;
         gzip_buffers        4 16k;
         gzip_comp_level     6;
-        gzip_types          text/plain text/xml text/css text/javascript application/x-javascript application/javascript application/json;
+        gzip_types          text/plain text/xml text/css text/javascript application/x-javascript application/javascript application/json; 
         gzip_http_version   1.0;
         gzip_disable        "MSIE [1-6]\.";
         gzip_proxied        off;
@@ -40,6 +72,28 @@
 
         ...
     }
+
+　　其中有几个配置需要特别注意：
+
+- `gzip_min_length`
+
+    　　文件大小小于该值的文件将不会被压缩，大于此值时才会被压缩。
+
+- `gzip_buffers`
+
+    　　设置用于处理请求压缩的缓冲区数量和大小。比如 `32 4K` 表示按照内存页（one memory page）大小以 4K 为单位（即一个系统中内存页为 4K），申请 32 倍的内存空间。通常默认即可。
+
+- `gzip_comp_level`
+
+    　　设置压缩级别，值为 1-9。压缩级别越高，压缩效果越好，但同时越耗费时间和 CPU 性能，所以通常设置为 6 即可。
+
+- `gzip_types`
+
+    　　设置要压缩的文件 MIME 类型，默认包含 `text/html`。gzip 只对文本文件的压缩效果较好，不建议设置非文本文件。
+
+- `gzip_http_version`
+
+    　　设置要进行压缩的 http 协议版本，默认设置为 1.0 即可，因为 nginx 和后端服务器（Server）默认采用 HTTP/1.0 进行通信的，防止出现不压缩的情况。
 
 ### 允许跨域
 

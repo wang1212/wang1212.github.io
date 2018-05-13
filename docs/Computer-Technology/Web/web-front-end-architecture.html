@@ -1,0 +1,531 @@
+<p>　　让 Web 前端开发可持续化、可扩展，关注四个核心<strong>代码</strong>、<strong>流程</strong>、<strong>测试</strong>、<strong>文档</strong>。</p>
+<h2 id="-">代码</h2>
+<h3 id="html">HTML</h3>
+<h4 id="-">模块化标记</h4>
+<p>　　构建模块化标记原则：<strong>标签表达结构</strong>，<strong>类名控制外观</strong>。这样做的好处就是，对相同类型结构的模块可以复用标签模版，同时又可以通过改变类名来灵活的控制模块的外观。例如：</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"theme-container-card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">nav</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"theme-nav-block-items"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"theme-title-xxx"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"theme-content-xxx"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">footer</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"theme-endnote-fluid"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">footer</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+</code></pre><p>　　在这里，类名其实对应的是不同的主题样式。</p>
+<p>　　构建一个完整的页面，应该将其分解为一些更细小的可复用的单元，也就是组件模块。</p>
+<h4 id="-">编码规范</h4>
+<h5 id="-">文档类型</h5>
+<p>　　HTML5 的文档类型申明：<code>&lt;!DOCTYPE html&gt;</code></p>
+<h5 id="html-">HTML验证</h5>
+<p>　　规范化的 HTML 是显现技术要求与局限的显著质量基线，它促进了 HTML 被更好地运用。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span> 
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Test<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">article</span>&gt;</span>This is only a test.<span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span>
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Test<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">article</span>&gt;</span>This is only a test.<span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span>
+</code></pre><h5 id="-">省略可选标签</h5>
+<p>　　HTML5 规范中规定了 HTML 等标签是可以省略的。但从可读性来说，在开发的源文件中<strong>不要这样做</strong>，因为省略标签可能会导致一些问题。</p>
+<h5 id="-">资源加载</h5>
+<p>　　CSS 资源（<code>&lt;link&gt;</code>）在 <code>&lt;head&gt;</code> 标签中引入，避免 DOM 加载完后重复渲染；JS 资源（<code>&lt;script&gt;</code>）在文档尾部 <code>&lt;/body&gt;</code> 闭合标签前引入，避免过早的加载 JS 阻塞 DOM 渲染。例如：</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    ...
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"base.css"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    ...
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"common.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</code></pre><p>　　<strong>慎用</strong> <code>&lt;script&gt;</code> 标签的 <code>async</code> 和 <code>defer</code> 属性。</p>
+<h5 id="-">语义化</h5>
+<p>　　使用 HTML 5 新标签，构建语义化标签模块，有利于理解和提高效率。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-section">&lt;section&gt;</span>
+    <span class="hljs-section">&lt;nav&gt;</span><span class="hljs-section">&lt;/nav&gt;</span>
+    <span class="hljs-section">&lt;header&gt;</span><span class="hljs-section">&lt;/header&gt;</span>
+    <span class="hljs-section">&lt;main&gt;</span><span class="hljs-section">&lt;/main&gt;</span>
+    <span class="hljs-section">&lt;footer&gt;</span><span class="hljs-section">&lt;/footer&gt;</span>
+<span class="hljs-section">&lt;/section&gt;</span>
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code>&lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"section"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"nav"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    &lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"header"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    &lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"main"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    &lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"footer"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+&lt;<span class="hljs-regexp">/div&gt;</span>
+</code></pre><h5 id="-">多媒体回溯</h5>
+<p>　　对页面上的媒体而言，像图片、视频、canvas 动画等，要确保其有可替代的接入接口。图片文件我们可采用有意义的备选文本（alt），视频和音频文件我们可以为其加上说明文字或字幕。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code>&lt;img <span class="hljs-attribute">src</span>=<span class="hljs-string">"imgs/banner.png"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-string">"Prairie and Horse"</span>&gt;
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code>&lt;img <span class="hljs-attribute">src</span>=<span class="hljs-string">"imgs/banner.png"</span>&gt;
+或
+&lt;img <span class="hljs-attribute">src</span>=<span class="hljs-string">"imgs/banner.png"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-string">"Banner image one"</span>&gt;
+</code></pre><p>　　这些替代文字应该描述媒体资源的内容，而不是这些媒体资源的作用、类型等。</p>
+<h5 id="-">关注点分离</h5>
+<p>　　严格地保证<strong>结构（HTML）</strong>、<strong>表现（CSS）</strong>、<strong>行为（JS）</strong>三者分离，并尽量使三者之间没有太多的交互和联系。遵循：</p>
+<ul>
+<li>不要引入太多零散的样式表，合并成大文件。</li>
+<li>不要使用内联样式（<code>&lt;style&gt; … &lt;/style&gt;</code>）、和行内样式。</li>
+<li>不要引入太多零散的脚本文件，合并成大文件。</li>
+<li>不要使用内联脚本（<code>&lt;script&gt; … &lt;/script&gt;</code>）。</li>
+<li>不要使用表象元素（例如 <code>&lt;b&gt;</code>、<code>&lt;u&gt;</code>、<code>&lt;font&gt;</code> 等）。</li>
+<li>不要使用表象类名（例如center、red、left）。</li>
+</ul>
+<p>　　这样做的好处是，代码干净整洁，利于维护。</p>
+<h5 id="-">内容至上</h5>
+<p>　　不要让非内容信息污染了你的 HTML。遵循：</p>
+<ul>
+<li>不要引入一些特定的 HTML 结构来解决一些视觉设计问题。</li>
+<li>不要将 <code>&lt;img&gt;</code> 元素当做专门用来做视觉设计的元素。</li>
+</ul>
+<p>　　这些是什么意思呢？HTML 结构应该表达的是文档内容，而非设计要素。例如，列表
+元素 <code>&lt;li&gt;</code> 前面的原点、空心圆等修饰性的东西<strong>不应该</strong>用额外的标签去实现，可以借助<strong>伪元素</strong>实现。同样地，<code>&lt;img&gt;</code> 引入的图片应该是内容相关的，而非修饰性东西。</p>
+<h5 id="tab-index-">Tab Index 在可用性上的运用</h5>
+<p>　　依据元素的重要性来重新排列其 tab 切换顺序。你可以设置 <code>tabindex=&quot;-1&quot;</code> 在任何元素上来禁用其 tab 切换。</p>
+<p>　　当你在一个默认不可聚焦的元素上增加了功能，你应该总是为其加上 <code>tabindex</code> 属性使其变为可聚焦状态，而且这也会激活其 CSS 的伪类 <code>:focus</code>。选择合适的 tabindex 值，或是直接使用 <code>tabindex=&quot;0&quot;</code> 将元素们组织成同一 tab 顺序水平，并强制干预其自然阅读顺序。</p>
+<h5 id="id-">ID 和锚点</h5>
+<p>　　通常一个比较好的做法是将页面内所有的标题元素（<code>h2</code>、<code>h3</code>）都加上 ID。这样做，页面 URL 的 hash 中带上对应的 ID 名称，即形成描点，方便跳转至对应元素所处位置。</p>
+<h5 id="-">格式化</h5>
+<p>　　<strong>块级元素应独占一行，内联元素放在同一行，子元素缩进使用制表符。</strong></p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Item<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> one<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code>&lt;nav&gt;<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Item<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> one<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></span>
+</code></pre><h5 id="-">引号</h5>
+<p>　　HTML 标签属性值应该用<strong>双引号</strong>，而不是单引号。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code>&lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"container"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code>&lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">'container'</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</code></pre><h4 id="-">注释</h4>
+<p>　　在 HTML 页面进行必要的注释是应该的，尤其是 SPA 单页面应用，标明不同的模块位置，便于维护和扩展。</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">header</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Single Page Web Application<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- container 容器 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"content"</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- Module-1 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">section</span>&gt;</span>
+            ...
+        <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- Module-2 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">section</span>&gt;</span>
+            ...
+        <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">footer</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>CopyRight 2018<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">footer</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</code></pre><h3 id="css-sass-">CSS（Sass）</h3>
+<h4 id="-css">模块化 CSS</h4>
+<p>　　构建模块化的 CSS 有多种方法，这里推荐三种：</p>
+<h5 id="oocss-">OOCSS 方法</h5>
+<p>　　Object-Oriented CSS，即面向对象的CSS，主要有两个原则：<strong>分离结构和外观，分离容器和内容。</strong></p>
+<p>　　分离结构和外观，意味着将视觉特性定义为可复用的单元，最简单的例子就是以主题形式定义 CSS。</p>
+<p>　　分离容器和内容，指的是不再将元素位置作为样式的限定词，定义可复用的 CSS 类名，无关于标签内容位置。</p>
+<p>　　例如：</p>
+<pre><code>&lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"toggle simple"</span>&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"toggle-control open"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"toggle-title"</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    &lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"toggle-details open"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    ...
+&lt;<span class="hljs-regexp">/div&gt;</span>
+</code></pre><h5 id="smacss-">SMACSS 方法</h5>
+<p>　　Scalable and Modular Architecture for CSS，即模块化架构的可扩展CSS，它将样式系统划分为五个类别：</p>
+<ul>
+<li><p>基础</p>
+<p>  如果不添加 CSS 类名，标记会以什么外观呈现。</p>
+</li>
+<li><p>布局</p>
+<p>  把页面分成一些区域。</p>
+</li>
+<li><p>模块</p>
+<p>  设计中的模块化、可复用的单元。</p>
+</li>
+<li><p>状态</p>
+<p>  描述在特定的状态或情况下，模块或布局的显示方式。</p>
+</li>
+<li><p>主题</p>
+<p>  一个可选的视觉外观层，可以让你更换不同主题。</p>
+</li>
+</ul>
+<p>　　OOCSS 与 SMACSS 有许多相似之处，它们都把样式的作用域限定到根节点的 CSS 类名上，然后通过皮肤（OOCSS）与子模块（SMACSS）进行修改，后者使用了 is 前缀的状态类名。例如：</p>
+<pre><code>&lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"toggle toggle-simple"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"toggle-control is-active"</span>&gt;
+        &lt;h2 <span class="hljs-built_in">class</span>=<span class="hljs-string">"toggle-title"</span>&gt;Title&lt;/h2&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"toggle-details is-active"</span>&gt;
+        ...
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+    ...
+&lt;/<span class="hljs-keyword">div</span>&gt;
+</code></pre><h5 id="bem-">BEM 方法</h5>
+<p>　　Block Element Modifier，即块元素修饰符，只是一个CSS 类命名的规则，建议每个元素都添加带有如下内容的 CSS类名：</p>
+<ul>
+<li><p>块名</p>
+<p>  所属组件的名称。</p>
+</li>
+<li><p>元素</p>
+<p>  元素在块里面的名称。</p>
+</li>
+<li><p>修饰符</p>
+<p>  任何与块或者元素相关联的修饰符。</p>
+</li>
+</ul>
+<p>　　例如：</p>
+<pre><code>&lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"toggle toggle--simple"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"toggle__control toggle__control--active"</span>&gt;
+        &lt;h2 <span class="hljs-built_in">class</span>=<span class="hljs-string">"toggle__title"</span>&gt;Title&lt;/h2&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"toggle__details toggle__details--active"</span>&gt;
+        ...
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+    ...
+&lt;/<span class="hljs-keyword">div</span>&gt;
+</code></pre><p>　　以上三种方法各有优势，提供给了我们构建模块化CSS 的方式，也是三种思维方式，在实际开发过程中可以借鉴。</p>
+<h4 id="-">编码规范</h4>
+<h5 id="id-and-class-">ID and class 命名</h5>
+<p>　　命名应该遵循<strong>语义化</strong>原则，表达其具体的用途和含义，这样做的好处是更容易理解，同时发生变化的可能性也很小。同时，<strong>单词的分隔符统一使用中划线 “-”</strong>。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.bg-important</span> {
+    <span class="hljs-attribute">background-color</span>: red;
+}
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.bg-red</span> {
+    <span class="hljs-attribute">background-color</span>: red;
+}
+</code></pre><p>　　命名不要出现表象词，比如颜色等，同时表达的含义应具体而不是通用化。</p>
+<h5 id="-id">避免使用 ID</h5>
+<p>　　通常，在样式文件中<strong>不应该</strong>出现 <code>ID</code>，所有的样式均应该由 <code>class</code> 来定义，因为 ID 会导致样式不可重用的后果。</p>
+<h5 id="-">避免使用标签名</h5>
+<p>　　在选择器中<strong>不应该</strong>出现标签名，这样做的好处是可以提高样式的复用性。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.container</span> &gt; <span class="hljs-selector-class">.content</span> &gt; <span class="hljs-selector-class">.title</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">2em</span>;
+}
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-selector-tag">div</span><span class="hljs-selector-class">.container</span> &gt; main<span class="hljs-selector-class">.content</span> &gt; <span class="hljs-selector-tag">h2</span><span class="hljs-selector-class">.title</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">2em</span>;
+}
+</code></pre><p>　　选择器中出现标签名的话，会将外观（CSS）与结构（HTML）绑定在一起，不利于重用。</p>
+<h5 id="-">精确匹配</h5>
+<p>　　在使用选择器时应该尽可能的精确匹配到目标元素，这样发生问题时更容易找到问题也有利于性能优化。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.content</span> &gt; <span class="hljs-selector-class">.title</span> {
+    <span class="hljs-attribute">font-weight</span>: bold;
+}
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.content</span> <span class="hljs-selector-class">.title</span> {
+    <span class="hljs-attribute">font-weight</span>: bold;
+}
+</code></pre><p>　　如果匹配的是直接子代元素，就使用直接子代选择器，这样性能更好，也不容易影响非直接子代元素的后代元素样式。</p>
+<h5 id="-">缩写属性</h5>
+<p>　　部分的 CSS 属性值是可以进行缩写的，这样编码效率也会提高，但缩写属性也应该慎用，因为缩写属性牵扯到顺序问题，像 <code>font</code>、<code>background</code> 这些顺序难记的属性不应该使用缩写，而像 <code>padding</code>、<code>margin</code> 这些常用并且顺序好记的属性应该使用缩写。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.content</span> {
+    <span class="hljs-attribute">background</span>: <span class="hljs-number">#000</span>;
+    <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">"./imgs/bg.png"</span>);
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">20px</span> <span class="hljs-number">0</span> <span class="hljs-number">10px</span>;
+}
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.content</span> {
+    <span class="hljs-attribute">background</span>: <span class="hljs-number">#000</span>;
+    <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">"./imgs/bg.png"</span>);
+    <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">10px</span>;
+    <span class="hljs-attribute">padding-right</span>: <span class="hljs-number">20px</span>;
+}
+</code></pre><h5 id="0-">0 与 单位</h5>
+<p>　　如果属性值为 0，不在使用单位。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-attribute">padding</span>: <span class="hljs-number">2px</span> <span class="hljs-number">0</span>;
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-attribute">padding</span>: <span class="hljs-number">2px</span> <span class="hljs-number">0px</span>;
+</code></pre><h5 id="-">十六进制表示法</h5>
+<p>　　当使用十六进制表示颜色值时，尽可能用更简短的方式，例如使用3 位。同时，使用小写表示，<strong>不要使用大写</strong>。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-attribute">color</span>: <span class="hljs-number">#d8a</span>;
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-attribute">color</span>: <span class="hljs-number">#DD88AA</span>;
+</code></pre><h5 id="-">声明顺序</h5>
+<p>　　采用统一的属性声明顺序，可以提高可读性。通常，应遵循以下顺序（依次从上至下）：</p>
+<ul>
+<li>结构性属性：<ol>
+<li><code>display</code>;</li>
+<li><code>position</code>、<code>left</code>、<code>top</code>、<code>z-index</code> 等;</li>
+<li><code>overflow</code>、<code>float</code> 等;</li>
+<li><code>width</code>、<code>height</code>;</li>
+<li><code>margin</code>、<code>padding</code>。</li>
+</ol>
+</li>
+<li>表现性属性：<ol>
+<li><code>color</code>、<code>text</code>;</li>
+<li><code>font</code>;</li>
+<li><code>background</code>、<code>border</code> 等。</li>
+</ol>
+</li>
+</ul>
+<h5 id="-">分号 与 空格</h5>
+<p>　　CSS 属性值后<strong>必须用</strong>分号结束，每条属性声明都<strong>应该</strong>使用新的一行，并且在<strong>冒号与属性值中间空出一个空格</strong>，提高可读性。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.content</span> {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>;
+    <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">10px</span>;
+}
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.content</span> {
+    <span class="hljs-attribute">width</span>:<span class="hljs-number">200px</span>; <span class="hljs-attribute">margin-bottom</span>:<span class="hljs-number">10px</span>
+}
+</code></pre><h5 id="-">规格分隔</h5>
+<p>　　每个规则之间使用一行进行分割，每个选择器<strong>应该</strong>使用新的一行。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.container</span> {
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">20px</span>;
+}
+
+<span class="hljs-selector-class">.content</span>, 
+<span class="hljs-selector-class">.item</span><span class="hljs-selector-pseudo">:hover</span> {
+    <span class="hljs-attribute">color</span>: orange;
+}
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.container</span> {
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">20px</span>;
+}
+<span class="hljs-selector-class">.content</span>, <span class="hljs-selector-class">.item</span><span class="hljs-selector-pseudo">:hover</span> {
+    <span class="hljs-attribute">color</span>: orange;
+}
+</code></pre><h5 id="-">引号</h5>
+<p>　　属性值中的引号应该使用双引号，而不是单引号。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-built_in">background</span>-<span class="hljs-built_in">image</span>: url(<span class="hljs-string">"./imgs/bg.png"</span>);
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-built_in">background</span>-<span class="hljs-built_in">image</span>: url(<span class="hljs-string">'./imgs/bg.png'</span>);
+</code></pre><h5 id="-scss-">使用 Scss 语法</h5>
+<p>　　SCSS 是 Sass 3 引入的新语法，其语法完全兼容 CSS 3，并且继承了 Sass 的强大功能。Scss语法相较于 Sass 语法更接近 CSS 语法，所以<strong>统一使用 Scss 语法</strong>。</p>
+<h5 id="-">选择器嵌套</h5>
+<p>　　使用 Sass 预处理器后，使得我们可以进行选择器嵌套，大幅度提高了编码效率，也使 CSS 代码变得更为简洁，结构更为清晰。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.container</span> {
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">20px</span>;
+
+    &amp; &gt; <span class="hljs-selector-class">.content</span> {
+        <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid black;
+    }
+}
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.container</span> {
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">20px</span>;
+}
+
+<span class="hljs-selector-class">.container</span> &gt; <span class="hljs-selector-class">.content</span> {
+    <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid black;
+}
+</code></pre><h5 id="-">选择器嵌套顺序</h5>
+<p>　　属性声明遵循一定顺序，同样地，选择器的嵌套也应该遵循一定的顺序以提高可读性。
+通常，应该遵循以下顺序（依次从上至下）：</p>
+<ol>
+<li>当前选择器的样式属性；</li>
+<li>父级选择器的伪类选择器 (:first-letter、:hover、:active 等)；</li>
+<li>伪类元素 (:before and :after)；</li>
+<li>父级选择器的声明样式 (.selected、.active、.enlarged 等)；</li>
+<li>用Sass的上下文媒体查询；</li>
+<li>子选择器作为最后的部分。</li>
+</ol>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-selector-class">.item</span> {
+    <span class="hljs-comment">// 1. 当前选择器样式属性</span>
+    <span class="hljs-attribute">font-size</span>: .<span class="hljs-number">8em</span>;
+
+    <span class="hljs-comment">// 2. 父级选择器的伪类</span>
+    &amp;：hover {
+        <span class="hljs-attribute">color</span>: orange;
+    }
+
+    <span class="hljs-comment">// 3. ::before &amp;&amp; ::after</span>
+    &amp;::before {
+        <span class="hljs-attribute">content</span>: attr(<span class="hljs-string">"tip"</span>);
+        <span class="hljs-attribute">display</span>: block;
+    }
+
+    <span class="hljs-comment">// 4. 父级选择器声明样式</span>
+    &amp;<span class="hljs-selector-class">.selected</span> {
+        <span class="hljs-attribute">background-color</span>: red;
+    }
+
+    <span class="hljs-comment">// 5. 上下文媒体查询</span>
+    @<span class="hljs-keyword">media</span> screen and (min-width: 768px) {
+        <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.2em</span>;
+    }
+
+    <span class="hljs-comment">// 6. 子类选择器</span>
+    &amp; &gt; <span class="hljs-selector-class">.text</span> {
+        <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">400</span>;
+    }
+}
+</code></pre><h4 id="-">注释</h4>
+<p>　　在使用 Sass 写 CSS 时有很大的灵活性来组织代码结构，但注释也是很必要的。</p>
+<h5 id="-">文档注释</h5>
+<p>　　通常写在文件的开始部分，涉及文档的概述以及版本号，及其依赖等。</p>
+<pre><code>/*! 
+    normalize.css v8<span class="hljs-number">.0</span><span class="hljs-number">.0</span> | <span class="hljs-type">MIT</span> License |<span class="hljs-type">github</span>.com/necolas/normalize.css
+*/
+</code></pre><h5 id="-">模块注释</h5>
+<p>　　模块的注释使用多行注释，标明该模块、代码块的作用等。</p>
+<pre><code><span class="hljs-comment">/**
+ * Remove the margin in all browsers.
+ */</span>
+</code></pre><h5 id="-">普通注释</h5>
+<p>　　对于一些比较关键的代码，要进行注释，写在单行即可。</p>
+<pre><code><span class="hljs-comment">/* menu-1 */</span>
+</code></pre><h3 id="javascript">JavaScript</h3>
+<p>　　前后端分离后，前端需要写更多的业务逻辑代码，不再是单纯写 HTML 与 CSS 了，很多需求的实现都依靠于 JavaScript。</p>
+<h4 id="-js-web-">基于 JS 的 Web 应用</h4>
+<p>　　创建可扩展且可持续的设计系统，并维护一套高质量的代码。</p>
+<h5 id="-">选择框架</h5>
+<p>　　没有哪个 JavaScript 框架是完美的，任何一个框架都是基于 JavaScript 来实现的，框架提供给我们的是一种设计模式和更优的实现方式。</p>
+<p>　　选择哪个框架，首先我们要考虑业务需求是否复杂，大多时候使用框架反而会增加代码量和无畏的复杂逻辑。其实，很多时候我们是用不到框架的，我们更多时候用到的是一些例如 Jquery 库、Bootstrap CSS 库这些工具，当现有的业务手动实现遇到技术瓶颈时，我们才应该去考虑使用一些开源的框架和工具。</p>
+<p>　　永远保证采用最精简的方案做项目，而不是一开始就准备一大套工具和大规模的启动页，这对我们没有任何好处。</p>
+<h5 id="-">维护整洁的代码</h5>
+<p>　　通常，开发一个项目，尤其是多人协作的过程中，应该遵循一定的“JavaScript”开发编码规范，这样整体代码具有相同的风格，利于后期维护，即便是再简单的项目也应该如此。</p>
+<ul>
+<li><p>保持代码的整洁性</p>
+<p>  　　JavaScript 是一种脚本语言，而且语法相对松散，编写恰当的 JavaScript 代码非常关键，最好在项目中结合单元测试使用一些格式/错误提示，而且能帮助团队编写符合规范的代码。其实，JS Hint 是这些工具中一个很好的例子。</p>
+</li>
+<li><p>创造可复用的函数</p>
+<p>  　　编程语言最大的特点就是可复用性，在开发过程中应尽可能的将有类似行为的过程操作抽象出来，形成一个可复用的函数，这样做可以大幅减少整体代码量，也能够更好的组织代码结构。</p>
+</li>
+</ul>
+<h4 id="-">编码规范</h4>
+<h5 id="-">缩进</h5>
+<p>　　保持良好的代码缩进习惯，缩进统一使用<strong>“制表符”</strong>。</p>
+<h5 id="iife">IIFE</h5>
+<p>　　将代码包裹在一个 IIFE（Immediately-Invoked Function Expression，立即执行函数）中，创建独立的作用域，保证每一个人的代码不会污染全局作用域。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code>(<span class="hljs-name">function</span>(<span class="hljs-name">window</span>) {
+    ...
+})(<span class="hljs-name">window</span>)<span class="hljs-comment">;</span>
+</code></pre><h5 id="-">严格模式</h5>
+<p>　　使用严格模式保证 JavaScript 代码的健壮性，严格模式可以作用于整个脚本或者一段代码块中，为了尽可能的不引起冲突，请在代码块中使用严格模式。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">window</span>) </span>{
+<span class="hljs-meta">    'use strict'</span>;
+    ...
+})(<span class="hljs-built_in">window</span>);
+</code></pre><h5 id="-">变量声明</h5>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-attribute">var a</span> = 1,
+    b = 2;
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-attribute">var a</span> = 1;
+<span class="hljs-attribute">var b</span> = 2;
+</code></pre><h5 id="-">== 与 ===</h5>
+<p>　　比较时如果使用 <code>==</code> 的话，会忽略掉比较对象的类型，应该总是使用 <code>===</code> 进行精确的类型与值比较。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-symbol">0 </span>=== <span class="hljs-comment">'' // false</span>
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-symbol">0 </span>== <span class="hljs-comment">'' // true</span>
+</code></pre><h5 id="-">声明提升</h5>
+<p>　　JavaScript 中有声明提升的机制，因为不存在块作用域，在同一个作用域中不同代码块中声明的变量与函数最终都会被提升到作用域顶层声明。</p>
+<pre><code>var a<span class="hljs-comment">;</span>
+
+<span class="hljs-attribute">a</span> = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+if (a) {
+    var b = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+}
+</code></pre><p>　　<strong>等同于：</strong></p>
+<pre><code>var a,
+    <span class="hljs-keyword">b;
+</span>
+a = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+if (a) {
+    <span class="hljs-keyword">b </span>= <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+}
+</code></pre><p>　　因为存在声明提升的机制，所以在编码时<strong>应该</strong>将变量与函数声明写到<strong>作用域顶层</strong>。</p>
+<h5 id="-">条件运算符</h5>
+<p>　　在逻辑比较简单时，应该使用条件运算符而不是 <code>if…else</code> 语句。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code>a === <span class="hljs-number">1</span> ? console.<span class="hljs-built_in">log</span>('true') : console.<span class="hljs-built_in">log</span>('false');
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-keyword">if</span> (a === <span class="hljs-number">1</span>) {
+    console.<span class="hljs-built_in">log</span>('<span class="hljs-literal">true</span>');
+} <span class="hljs-keyword">else</span> {
+    console.<span class="hljs-built_in">log</span>('<span class="hljs-literal">false</span>');
+}
+</code></pre><h5 id="-">函数声明</h5>
+<p>　　函数的声明应该在作用域的顶层，而不是某个语句块中，因为 JavaScript 没有块作用域的概念，并且由于声明提升的原因，最好将函数声明写在作用域的顶层。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> </span>{}
+
+<span class="hljs-keyword">if</span>(b){
+    <span class="hljs-keyword">var</span> bar = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{};
+    ...
+}
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code><span class="hljs-keyword">if</span>(b){
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> </span>{}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span> </span>{}
+    ...
+}
+</code></pre><h5 id="-">闭包</h5>
+<p>　　JavaScript 代码中大量的使用了闭包机制，这是一个很好的机制，但是应该时刻注意闭包所带来的内存泄漏的问题。<strong>应该在使用完变量后，尽可能将不再需要使用但存在内存泄漏隐患的变量手动释放。</strong></p>
+<h5 id="eval-">eval() 函数</h5>
+<p>　　<code>eval()</code> 函数可以将字符串编译为 JavaScript 代码然后执行，但<strong>不应该使用它</strong>，一方面是效率很低，另一方面则是涉及到安全问题。</p>
+<h5 id="this-">this 关键字</h5>
+<p>　　由于 JavaScript 的词法作用域机制，以及代码中大多时候都会存在多层嵌套的函数，<code>this</code> 关键字的指向很容易被搞错，如果要在内层函数使用外层函数的 <code>this</code> 引用对象，应该使用一个变量在外层函数作用域内将其缓存起来，然后使用该变量在内层函数中进行引用。</p>
+<h5 id="-">数组初始化</h5>
+<p>　　数组的初始化应该使用字面量而不是构造函数，构造函数的参数容易引起误会。</p>
+<p>　　<strong>推荐：</strong></p>
+<pre><code>var a = <span class="hljs-string">[3]</span>;  // <span class="hljs-string">[3]</span>
+</code></pre><p>　　<strong>不推荐：</strong></p>
+<pre><code>var a = <span class="hljs-keyword">new</span> Array(<span class="hljs-number">3</span>); <span class="hljs-regexp">//</span> [<span class="hljs-literal">undefined</span>, <span class="hljs-literal">undefined</span>, <span class="hljs-literal">undefined</span>]
+</code></pre><h5 id="-">引号</h5>
+<p>　　JavaScript 中引号统一使用<strong>“单引号”</strong>，因为这在书写HTML 字符串模版属性时将非常有用。</p>
+<h5 id="tostring-">toString()</h5>
+<p>　　可以自定义 <code>toString()</code> 函数来控制对象的字符串化，但要保证该方法始终能够正确执行。</p>
+<h4 id="-">注释</h4>
+<p>　　JavaScript 是一个灵活性很大的语言，那么就会带来代码维护和阅读上的困难，良好的注释会帮助我们减轻这些负担。</p>
+<h5 id="-">文档注释</h5>
+<p>　　通常写在文件的开始部分，涉及文档的概述以及版本号，及其依赖等。</p>
+<pre><code>/*! 
+    jQuery v1<span class="hljs-meta">.11</span><span class="hljs-meta">.3</span> | 
+    (c) <span class="hljs-number">2005</span>, <span class="hljs-number">2015</span> jQuery Foundation, <span class="hljs-keyword">Inc</span>. |
+    jquery.org/license
+ */
+</code></pre><h5 id="-">方法注释</h5>
+<p>　　对于模块以及方法尤其要写明注释，这对于如何理解你的方法是至关重要的，应该遵循：<strong>为什么要写这个方法或者模块，解决了什么问题，而不是这个方法是用来干什么。</strong></p>
+<pre><code>/**
+ * ...
+ *
+ * <span class="hljs-variable">@description</span> <span class="hljs-string">"..."</span>
+ * <span class="hljs-variable">@author</span> mrwang
+ * <span class="hljs-variable">@param</span> {Jquery Object} <span class="hljs-variable">$all_a</span> 
+ * <span class="hljs-variable">@returns</span>
+ *<span class="hljs-regexp">/</span>
+</code></pre><h5 id="-">普通注释</h5>
+<p>　　普通注释可分为多行注释和单行注释，在必要的地方进行注释即可。</p>
+<pre><code>单行：
+<span class="hljs-comment">// somethings</span>
+
+多行：
+<span class="hljs-comment">/*
+    somethings
+ */</span>
+</code></pre><h2 id="-">流程</h2>
+<h2 id="-">测试</h2>
+<h2 id="-">文档</h2>
+<h2 id="-">参考</h2>
+<ul>
+<li>《前端架构设计》- Micah Godbolt 著</li>
+</ul>

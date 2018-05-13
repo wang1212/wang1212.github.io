@@ -11,10 +11,7 @@ import 'Component/Router/Router.js';
 /** 
  * Make sure the page is full at least full screen
  */
-window.onresize = () => {
-    $('.page-main').css('min-height', $(document).height() - $('.page-head').outerHeight(true) - $('.page-foot').outerHeight(true));
-};
-window.onresize();
+$('.page-main').css('min-height', $(document).height() - $('.page-head').outerHeight(true) - $('.page-foot').outerHeight(true));
 
 
 /** 
@@ -47,6 +44,8 @@ fetch('./data/blog-data.json')
 const content = document.getElementById('content');
 
 Router.add(['/home', /docs.*/, '/about', '/more'], () => {
+    $('.H').remove();
+
 	const loaded = content.getAttribute('loaded').split(','),
 		state = Router.get_state_url()[0];
 

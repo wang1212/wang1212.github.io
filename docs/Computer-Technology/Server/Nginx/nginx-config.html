@@ -3,7 +3,29 @@
 <p>　　Nginx 在生产环境下的应用场景通常作为负载均衡的前端服务器，对请求进行分发，实现极高的并发量。当然，在开发环境下，nginx 也可以作为一个工具来使用，提供给我们极大的便利，例如利用反向代理来实现前后端的完全分离开发。</p>
 <h2 id="nginx-">Nginx 特定场景下的配置</h2>
 <p>　　不管 nginx 基于什么场景发挥什么作用，都是基于特定的配置来实现，nginx 的配置文件也相对比较简单。</p>
-<h3 id="-gzip">开启 gzip</h3>
+<h3 id="-">工作进程</h3>
+<p>　　Nginx 是基于异步非阻塞 IO 模型的，同时也支持多进程，通常将其工作进程数目设置为 CPU 的核心数，以发挥其最大作用，实现高并发。</p>
+<pre><code>{
+    worker_processes  <span class="hljs-number">4</span><span class="hljs-comment">;</span>
+
+    ...
+}
+</code></pre><p>　　这个配置是写在配置文件顶部的。</p>
+<h3 id="-">设置编码</h3>
+<p>　　通常来说，将编码设置为 <code>UTF-8</code> 是比较合适的。</p>
+<pre><code>server {
+    ...
+
+    charset utf-<span class="hljs-number">8</span><span class="hljs-comment">;</span>
+}
+</code></pre><h3 id="-">更改上传数据大小限制</h3>
+<p>　　Nginx 默认的数据上传大小为 2M，某些情况下我们需要将其更改的大一些，以符合业务需求。</p>
+<pre><code>server {
+    ...
+
+    client_max_body_size <span class="hljs-number">20</span>m<span class="hljs-comment">;</span>
+}   
+</code></pre><h3 id="-gzip">开启 gzip</h3>
 <p>　　开启 gzip 压缩可以在客户端请求文本文件时，将传输大小压缩至少<strong>70%</strong>左右，可以获得非常好的优化效果，通常都会开启 gzip 压缩配置。</p>
 <pre><code>http {
     ...
@@ -13,7 +35,7 @@
     gzip_min_length     <span class="hljs-number">20</span>;
     gzip_buffers        <span class="hljs-number">4</span> <span class="hljs-number">16</span>k;
     gzip_comp_level     <span class="hljs-number">6</span>;
-    gzip_types          <span class="hljs-built_in">text</span>/plain <span class="hljs-built_in">text</span>/xml <span class="hljs-built_in">text</span>/css <span class="hljs-built_in">text</span>/javascript <span class="hljs-built_in">application</span>/x-javascript <span class="hljs-built_in">application</span>/javascript <span class="hljs-built_in">application</span>/json;
+    gzip_types          <span class="hljs-built_in">text</span>/plain <span class="hljs-built_in">text</span>/xml <span class="hljs-built_in">text</span>/css <span class="hljs-built_in">text</span>/javascript <span class="hljs-built_in">application</span>/x-javascript <span class="hljs-built_in">application</span>/javascript <span class="hljs-built_in">application</span>/json; 
     gzip_http_version   <span class="hljs-number">1.0</span>;
     gzip_disable        <span class="hljs-string">"MSIE [1-6]\."</span>;
     gzip_proxied        off;
@@ -21,7 +43,25 @@
 
     ...
 }
-</code></pre><h3 id="-">允许跨域</h3>
+</code></pre><p>　　其中有几个配置需要特别注意：</p>
+<ul>
+<li><p><code>gzip_min_length</code></p>
+<p>  　　文件大小小于该值的文件将不会被压缩，大于此值时才会被压缩。</p>
+</li>
+<li><p><code>gzip_buffers</code></p>
+<p>  　　设置用于处理请求压缩的缓冲区数量和大小。比如 <code>32 4K</code> 表示按照内存页（one memory page）大小以 4K 为单位（即一个系统中内存页为 4K），申请 32 倍的内存空间。通常默认即可。</p>
+</li>
+<li><p><code>gzip_comp_level</code></p>
+<p>  　　设置压缩级别，值为 1-9。压缩级别越高，压缩效果越好，但同时越耗费时间和 CPU 性能，所以通常设置为 6 即可。</p>
+</li>
+<li><p><code>gzip_types</code></p>
+<p>  　　设置要压缩的文件 MIME 类型，默认包含 <code>text/html</code>。gzip 只对文本文件的压缩效果较好，不建议设置非文本文件。</p>
+</li>
+<li><p><code>gzip_http_version</code></p>
+<p>  　　设置要进行压缩的 http 协议版本，默认设置为 1.0 即可，因为 nginx 和后端服务器（Server）默认采用 HTTP/1.0 进行通信的，防止出现不压缩的情况。</p>
+</li>
+</ul>
+<h3 id="-">允许跨域</h3>
 <p>　　有时候，比较大（几百兆以上）的静态资源需要在客户端使用异步方式加载（例如 Ajax），但是多个人合作开发时，拷贝这些静态资源到各自本地（如果不这么做，将会出现跨域问题）是最糟糕的解决方案，这个时候我们可以将静态资源放在一个服务器上，然后使用反向代理或者允许跨域的配置巧妙的解决这个问题。</p>
 <pre><code>location /static/ {
     ...

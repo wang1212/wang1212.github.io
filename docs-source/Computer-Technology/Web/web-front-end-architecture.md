@@ -1,0 +1,784 @@
+---
+
+    {
+        "title": "Web 前端架构设计",
+        "keywords": ["Web", "前端", "架构", "设计"],
+        "summary": "Web 前端开发是一个零散化的过程，因为基本上没有专业的 IDE 来为我们提供一整套的自动化流程解决方案，如何让前端开发可持续化、可扩展也极为重要。",
+        "ctime": "2018-3-28 14:01:00",
+        "mtime": "2018-3-28 14:01:00"
+    }
+
+--- 
+
+　　让 Web 前端开发可持续化、可扩展，关注四个核心**代码**、**流程**、**测试**、**文档**。
+
+## 代码
+
+### HTML
+
+#### 模块化标记
+
+　　构建模块化标记原则：**标签表达结构**，**类名控制外观**。这样做的好处就是，对相同类型结构的模块可以复用标签模版，同时又可以通过改变类名来灵活的控制模块的外观。例如：
+
+    <section class="theme-container-card">
+        <nav class="theme-nav-block-items"></nav>
+        <header class="theme-title-xxx">
+            <h2></h2>
+        </header>
+        <main class="theme-content-xxx">
+            <p></p>
+            <div></div>
+        </main>
+        <footer class="theme-endnote-fluid"></footer>
+    </section>
+
+　　在这里，类名其实对应的是不同的主题样式。
+
+　　构建一个完整的页面，应该将其分解为一些更细小的可复用的单元，也就是组件模块。
+
+#### 编码规范
+
+##### 文档类型
+
+　　HTML5 的文档类型申明：`<!DOCTYPE html>`
+
+##### HTML验证
+
+　　规范化的 HTML 是显现技术要求与局限的显著质量基线，它促进了 HTML 被更好地运用。
+
+　　**推荐：**
+
+    <!DOCTYPE html> 
+    <meta charset="utf-8">
+    <title>Test</title>
+    <article>This is only a test.</article>
+
+　　**不推荐：**
+
+    <title>Test</title>
+    <article>This is only a test.</article>
+
+##### 省略可选标签
+
+　　HTML5 规范中规定了 HTML 等标签是可以省略的。但从可读性来说，在开发的源文件中**不要这样做**，因为省略标签可能会导致一些问题。
+
+##### 资源加载
+
+　　CSS 资源（`<link>`）在 `<head>` 标签中引入，避免 DOM 加载完后重复渲染；JS 资源（`<script>`）在文档尾部 `</body>` 闭合标签前引入，避免过早的加载 JS 阻塞 DOM 渲染。例如：
+
+    <head>
+        ...
+        <link rel="stylesheet" href="base.css">
+    </head>
+    <body>
+        ...
+        <script src="common.js"></script>
+    </body>
+
+　　**慎用** `<script>` 标签的 `async` 和 `defer` 属性。
+
+##### 语义化
+
+　　使用 HTML 5 新标签，构建语义化标签模块，有利于理解和提高效率。
+
+　　**推荐：**
+
+    <section>
+        <nav></nav>
+        <header></header>
+        <main></main>
+        <footer></footer>
+    </section>
+
+　　**不推荐：**
+
+    <div class="section">
+        <div class="nav"></div>
+        <div class="header"></div>
+        <div class="main"></div>
+        <div class="footer"></div>
+    </div>
+
+##### 多媒体回溯
+
+　　对页面上的媒体而言，像图片、视频、canvas 动画等，要确保其有可替代的接入接口。图片文件我们可采用有意义的备选文本（alt），视频和音频文件我们可以为其加上说明文字或字幕。
+
+　　**推荐：**
+
+    <img src="imgs/banner.png" alt="Prairie and Horse">
+
+　　**不推荐：**
+
+    <img src="imgs/banner.png">
+    或
+    <img src="imgs/banner.png" alt="Banner image one">
+
+　　这些替代文字应该描述媒体资源的内容，而不是这些媒体资源的作用、类型等。
+
+##### 关注点分离
+
+　　严格地保证**结构（HTML）**、**表现（CSS）**、**行为（JS）**三者分离，并尽量使三者之间没有太多的交互和联系。遵循：
+
+- 不要引入太多零散的样式表，合并成大文件。
+- 不要使用内联样式（`<style> … </style>`）、和行内样式。
+- 不要引入太多零散的脚本文件，合并成大文件。
+- 不要使用内联脚本（`<script> … </script>`）。
+- 不要使用表象元素（例如 `<b>`、`<u>`、`<font>` 等）。
+- 不要使用表象类名（例如center、red、left）。
+
+　　这样做的好处是，代码干净整洁，利于维护。
+
+##### 内容至上
+
+　　不要让非内容信息污染了你的 HTML。遵循：
+
+- 不要引入一些特定的 HTML 结构来解决一些视觉设计问题。
+- 不要将 `<img>` 元素当做专门用来做视觉设计的元素。
+
+　　这些是什么意思呢？HTML 结构应该表达的是文档内容，而非设计要素。例如，列表
+元素 `<li>` 前面的原点、空心圆等修饰性的东西**不应该**用额外的标签去实现，可以借助**伪元素**实现。同样地，`<img>` 引入的图片应该是内容相关的，而非修饰性东西。
+
+##### Tab Index 在可用性上的运用
+
+　　依据元素的重要性来重新排列其 tab 切换顺序。你可以设置 `tabindex="-1"` 在任何元素上来禁用其 tab 切换。
+
+　　当你在一个默认不可聚焦的元素上增加了功能，你应该总是为其加上 `tabindex` 属性使其变为可聚焦状态，而且这也会激活其 CSS 的伪类 `:focus`。选择合适的 tabindex 值，或是直接使用 `tabindex="0"` 将元素们组织成同一 tab 顺序水平，并强制干预其自然阅读顺序。
+
+##### ID 和锚点
+
+　　通常一个比较好的做法是将页面内所有的标题元素（`h2`、`h3`）都加上 ID。这样做，页面 URL 的 hash 中带上对应的 ID 名称，即形成描点，方便跳转至对应元素所处位置。
+
+##### 格式化
+
+　　**块级元素应独占一行，内联元素放在同一行，子元素缩进使用制表符。**
+
+　　**推荐：**
+
+    <nav>
+        <ul>
+            <li><span>Item</span> one</li>
+        </ul>
+    </nav>
+
+　　**不推荐：**
+
+    <nav><ul><li><span>Item</span> one</li></ul></nav>
+
+##### 引号
+
+　　HTML 标签属性值应该用**双引号**，而不是单引号。
+
+　　**推荐：**
+
+    <div class="container"></div>
+
+　　**不推荐：**
+
+    <div class='container'></div>
+
+#### 注释
+
+　　在 HTML 页面进行必要的注释是应该的，尤其是 SPA 单页面应用，标明不同的模块位置，便于维护和扩展。
+
+    <body>
+        <header>
+            <h1>Single Page Web Application</h1>
+        </header>
+        <!-- container 容器 -->
+        <main id="content">
+            <!-- Module-1 -->
+            <section>
+                ...
+            </section>
+            <!-- Module-2 -->
+            <section>
+                ...
+            </section>
+        </main>
+        <footer>
+            <p>CopyRight 2018</p>
+        </footer>
+    </body>
+
+### CSS（Sass）
+
+#### 模块化 CSS
+
+　　构建模块化的 CSS 有多种方法，这里推荐三种：
+
+##### OOCSS 方法
+
+　　Object-Oriented CSS，即面向对象的CSS，主要有两个原则：**分离结构和外观，分离容器和内容。**
+
+　　分离结构和外观，意味着将视觉特性定义为可复用的单元，最简单的例子就是以主题形式定义 CSS。
+
+　　分离容器和内容，指的是不再将元素位置作为样式的限定词，定义可复用的 CSS 类名，无关于标签内容位置。
+
+　　例如：
+
+    <div class="toggle simple">
+        <div class="toggle-control open">
+            <h1 class="toggle-title">Title</h1>
+        </div>
+        <div class="toggle-details open"></div>
+        ...
+    </div>
+
+##### SMACSS 方法
+
+　　Scalable and Modular Architecture for CSS，即模块化架构的可扩展CSS，它将样式系统划分为五个类别：
+
+- 基础
+
+    如果不添加 CSS 类名，标记会以什么外观呈现。
+
+- 布局
+
+    把页面分成一些区域。
+
+- 模块
+
+    设计中的模块化、可复用的单元。
+
+- 状态
+
+    描述在特定的状态或情况下，模块或布局的显示方式。
+
+- 主题
+
+    一个可选的视觉外观层，可以让你更换不同主题。
+
+　　OOCSS 与 SMACSS 有许多相似之处，它们都把样式的作用域限定到根节点的 CSS 类名上，然后通过皮肤（OOCSS）与子模块（SMACSS）进行修改，后者使用了 is 前缀的状态类名。例如：
+
+    <div class="toggle toggle-simple">
+        <div class="toggle-control is-active">
+            <h2 class="toggle-title">Title</h2>
+        </div>
+        <div class="toggle-details is-active">
+            ...
+        </div>
+        ...
+    </div>
+
+##### BEM 方法
+
+　　Block Element Modifier，即块元素修饰符，只是一个CSS 类命名的规则，建议每个元素都添加带有如下内容的 CSS类名：
+
+- 块名
+
+    所属组件的名称。
+
+- 元素
+
+    元素在块里面的名称。
+
+- 修饰符
+
+    任何与块或者元素相关联的修饰符。
+
+　　例如：
+
+    <div class="toggle toggle--simple">
+        <div class="toggle__control toggle__control--active">
+            <h2 class="toggle__title">Title</h2>
+        </div>
+        <div class="toggle__details toggle__details--active">
+            ...
+        </div>
+        ...
+    </div>
+
+　　以上三种方法各有优势，提供给了我们构建模块化CSS 的方式，也是三种思维方式，在实际开发过程中可以借鉴。
+
+#### 编码规范
+
+##### ID and class 命名
+
+　　命名应该遵循**语义化**原则，表达其具体的用途和含义，这样做的好处是更容易理解，同时发生变化的可能性也很小。同时，**单词的分隔符统一使用中划线 “-”**。
+
+　　**推荐：**
+
+    .bg-important {
+        background-color: red;
+    }
+
+　　**不推荐：**
+
+    .bg-red {
+        background-color: red;
+    }
+
+　　命名不要出现表象词，比如颜色等，同时表达的含义应具体而不是通用化。
+
+##### 避免使用 ID
+
+　　通常，在样式文件中**不应该**出现 `ID`，所有的样式均应该由 `class` 来定义，因为 ID 会导致样式不可重用的后果。
+
+##### 避免使用标签名
+
+　　在选择器中**不应该**出现标签名，这样做的好处是可以提高样式的复用性。
+
+　　**推荐：**
+
+    .container > .content > .title {
+        font-size: 2em;
+    }
+
+　　**不推荐：**
+
+    div.container > main.content > h2.title {
+        font-size: 2em;
+    }
+
+　　选择器中出现标签名的话，会将外观（CSS）与结构（HTML）绑定在一起，不利于重用。
+
+##### 精确匹配
+
+　　在使用选择器时应该尽可能的精确匹配到目标元素，这样发生问题时更容易找到问题也有利于性能优化。
+
+　　**推荐：**
+
+    .content > .title {
+        font-weight: bold;
+    }
+
+　　**不推荐：**
+
+    .content .title {
+        font-weight: bold;
+    }
+
+　　如果匹配的是直接子代元素，就使用直接子代选择器，这样性能更好，也不容易影响非直接子代元素的后代元素样式。
+
+##### 缩写属性
+
+　　部分的 CSS 属性值是可以进行缩写的，这样编码效率也会提高，但缩写属性也应该慎用，因为缩写属性牵扯到顺序问题，像 `font`、`background` 这些顺序难记的属性不应该使用缩写，而像 `padding`、`margin` 这些常用并且顺序好记的属性应该使用缩写。
+
+　　**推荐：**
+
+    .content {
+        background: #000;
+        background-image: url("./imgs/bg.png");
+        padding: 0 20px 0 10px;
+    }
+
+　　**不推荐：**
+
+    .content {
+        background: #000;
+        background-image: url("./imgs/bg.png");
+        padding-left: 10px;
+        padding-right: 20px;
+    }
+
+##### 0 与 单位
+
+　　如果属性值为 0，不在使用单位。
+
+　　**推荐：**
+
+    padding: 2px 0;
+
+　　**不推荐：**
+
+    padding: 2px 0px;
+
+##### 十六进制表示法
+
+　　当使用十六进制表示颜色值时，尽可能用更简短的方式，例如使用3 位。同时，使用小写表示，**不要使用大写**。
+
+　　**推荐：**
+
+    color: #d8a;
+
+　　**不推荐：**
+
+    color: #DD88AA;
+
+##### 声明顺序
+
+　　采用统一的属性声明顺序，可以提高可读性。通常，应遵循以下顺序（依次从上至下）：
+
+- 结构性属性：
+    1. `display`;
+    2. `position`、`left`、`top`、`z-index` 等;
+    3. `overflow`、`float` 等;
+    4. `width`、`height`;
+    5. `margin`、`padding`。
+- 表现性属性：
+    1. `color`、`text`;
+    2. `font`;
+    3. `background`、`border` 等。
+
+##### 分号 与 空格
+
+　　CSS 属性值后**必须用**分号结束，每条属性声明都**应该**使用新的一行，并且在**冒号与属性值中间空出一个空格**，提高可读性。
+
+　　**推荐：**
+
+    .content {
+        width: 200px;
+        margin-bottom: 10px;
+    }
+
+　　**不推荐：**
+
+    .content {
+        width:200px; margin-bottom:10px
+    }
+
+##### 规格分隔
+
+　　每个规则之间使用一行进行分割，每个选择器**应该**使用新的一行。
+
+　　**推荐：**
+
+    .container {
+        padding: 10px 20px;
+    }
+
+    .content, 
+    .item:hover {
+        color: orange;
+    }
+
+　　**不推荐：**
+
+    .container {
+        padding: 10px 20px;
+    }
+    .content, .item:hover {
+        color: orange;
+    }
+
+##### 引号
+
+　　属性值中的引号应该使用双引号，而不是单引号。
+
+　　**推荐：**
+
+    background-image: url("./imgs/bg.png");
+
+　　**不推荐：**
+
+    background-image: url('./imgs/bg.png');
+
+##### 使用 Scss 语法
+
+　　SCSS 是 Sass 3 引入的新语法，其语法完全兼容 CSS 3，并且继承了 Sass 的强大功能。Scss语法相较于 Sass 语法更接近 CSS 语法，所以**统一使用 Scss 语法**。
+
+##### 选择器嵌套
+
+　　使用 Sass 预处理器后，使得我们可以进行选择器嵌套，大幅度提高了编码效率，也使 CSS 代码变得更为简洁，结构更为清晰。
+
+　　**推荐：**
+
+    .container {
+        padding: 10px 20px;
+
+        & > .content {
+            border: 1px solid black;
+        }
+    }
+
+　　**不推荐：**
+
+    .container {
+        padding: 10px 20px;
+    }
+
+    .container > .content {
+        border: 1px solid black;
+    }
+
+##### 选择器嵌套顺序
+
+　　属性声明遵循一定顺序，同样地，选择器的嵌套也应该遵循一定的顺序以提高可读性。
+通常，应该遵循以下顺序（依次从上至下）：
+
+
+1.	当前选择器的样式属性；
+2.	父级选择器的伪类选择器 (:first-letter、:hover、:active 等)；
+3.	伪类元素 (:before and :after)；
+4.	父级选择器的声明样式 (.selected、.active、.enlarged 等)；
+5.	用Sass的上下文媒体查询；
+6.	子选择器作为最后的部分。
+
+　　**推荐：**
+
+    .item {
+        // 1. 当前选择器样式属性
+        font-size: .8em;
+        
+        // 2. 父级选择器的伪类
+        &：hover {
+            color: orange;
+        }
+
+        // 3. ::before && ::after
+        &::before {
+            content: attr("tip");
+            display: block;
+        }
+
+        // 4. 父级选择器声明样式
+        &.selected {
+            background-color: red;
+        }
+
+        // 5. 上下文媒体查询
+        @media screen and (min-width: 768px) {
+            font-size: 1.2em;
+        }
+
+        // 6. 子类选择器
+        & > .text {
+            font-weight: 400;
+        }
+    }
+
+#### 注释
+
+　　在使用 Sass 写 CSS 时有很大的灵活性来组织代码结构，但注释也是很必要的。
+
+##### 文档注释
+
+　　通常写在文件的开始部分，涉及文档的概述以及版本号，及其依赖等。
+
+    /*! 
+        normalize.css v8.0.0 | MIT License |github.com/necolas/normalize.css
+    */
+
+##### 模块注释
+
+　　模块的注释使用多行注释，标明该模块、代码块的作用等。
+
+    /**
+     * Remove the margin in all browsers.
+     */
+
+##### 普通注释
+
+　　对于一些比较关键的代码，要进行注释，写在单行即可。
+
+    /* menu-1 */
+
+### JavaScript
+
+　　前后端分离后，前端需要写更多的业务逻辑代码，不再是单纯写 HTML 与 CSS 了，很多需求的实现都依靠于 JavaScript。
+
+#### 基于 JS 的 Web 应用
+
+　　创建可扩展且可持续的设计系统，并维护一套高质量的代码。
+
+##### 选择框架
+
+　　没有哪个 JavaScript 框架是完美的，任何一个框架都是基于 JavaScript 来实现的，框架提供给我们的是一种设计模式和更优的实现方式。
+
+　　选择哪个框架，首先我们要考虑业务需求是否复杂，大多时候使用框架反而会增加代码量和无畏的复杂逻辑。其实，很多时候我们是用不到框架的，我们更多时候用到的是一些例如 Jquery 库、Bootstrap CSS 库这些工具，当现有的业务手动实现遇到技术瓶颈时，我们才应该去考虑使用一些开源的框架和工具。
+
+　　永远保证采用最精简的方案做项目，而不是一开始就准备一大套工具和大规模的启动页，这对我们没有任何好处。
+
+##### 维护整洁的代码
+
+　　通常，开发一个项目，尤其是多人协作的过程中，应该遵循一定的“JavaScript”开发编码规范，这样整体代码具有相同的风格，利于后期维护，即便是再简单的项目也应该如此。
+
+- 保持代码的整洁性
+
+    　　JavaScript 是一种脚本语言，而且语法相对松散，编写恰当的 JavaScript 代码非常关键，最好在项目中结合单元测试使用一些格式/错误提示，而且能帮助团队编写符合规范的代码。其实，JS Hint 是这些工具中一个很好的例子。
+
+- 创造可复用的函数
+
+    　　编程语言最大的特点就是可复用性，在开发过程中应尽可能的将有类似行为的过程操作抽象出来，形成一个可复用的函数，这样做可以大幅减少整体代码量，也能够更好的组织代码结构。
+
+#### 编码规范
+
+##### 缩进
+
+　　保持良好的代码缩进习惯，缩进统一使用**“制表符”**。
+
+##### IIFE
+
+　　将代码包裹在一个 IIFE（Immediately-Invoked Function Expression，立即执行函数）中，创建独立的作用域，保证每一个人的代码不会污染全局作用域。
+
+　　**推荐：**
+
+    (function(window) {
+        ...
+    })(window);
+
+##### 严格模式
+
+　　使用严格模式保证 JavaScript 代码的健壮性，严格模式可以作用于整个脚本或者一段代码块中，为了尽可能的不引起冲突，请在代码块中使用严格模式。
+
+　　**推荐：**
+
+    (function(window) {
+        'use strict';
+        ...
+    })(window);
+
+##### 变量声明
+
+　　**推荐：**
+
+    var a = 1,
+        b = 2;
+
+　　**不推荐：**
+
+    var a = 1;
+    var b = 2;
+
+##### == 与 ===
+
+　　比较时如果使用 `==` 的话，会忽略掉比较对象的类型，应该总是使用 `===` 进行精确的类型与值比较。
+
+　　**推荐：**
+
+    0 === '' // false
+
+　　**不推荐：**
+
+    0 == '' // true
+
+##### 声明提升
+
+　　JavaScript 中有声明提升的机制，因为不存在块作用域，在同一个作用域中不同代码块中声明的变量与函数最终都会被提升到作用域顶层声明。
+
+    var a;
+
+    a = 1;
+    if (a) {
+        var b = 1;
+    }
+
+　　**等同于：**
+
+    var a,
+        b;
+        
+    a = 1;
+    if (a) {
+        b = 1;
+    }
+
+　　因为存在声明提升的机制，所以在编码时**应该**将变量与函数声明写到**作用域顶层**。
+
+##### 条件运算符
+
+　　在逻辑比较简单时，应该使用条件运算符而不是 `if…else` 语句。
+
+　　**推荐：**
+
+    a === 1 ? console.log('true') : console.log('false');
+
+　　**不推荐：**
+
+    if (a === 1) {
+        console.log('true');
+    } else {
+        console.log('false');
+    }
+
+##### 函数声明
+
+　　函数的声明应该在作用域的顶层，而不是某个语句块中，因为 JavaScript 没有块作用域的概念，并且由于声明提升的原因，最好将函数声明写在作用域的顶层。
+
+　　**推荐：**
+
+    function foo() {}
+
+    if(b){
+        var bar = function() {};
+        ...
+    }
+
+　　**不推荐：**
+
+    if(b){
+    function foo() {}
+    function bar() {}
+        ...
+    }
+
+##### 闭包
+
+　　JavaScript 代码中大量的使用了闭包机制，这是一个很好的机制，但是应该时刻注意闭包所带来的内存泄漏的问题。**应该在使用完变量后，尽可能将不再需要使用但存在内存泄漏隐患的变量手动释放。**
+
+##### eval() 函数
+
+　　`eval()` 函数可以将字符串编译为 JavaScript 代码然后执行，但**不应该使用它**，一方面是效率很低，另一方面则是涉及到安全问题。
+
+##### this 关键字
+
+　　由于 JavaScript 的词法作用域机制，以及代码中大多时候都会存在多层嵌套的函数，`this` 关键字的指向很容易被搞错，如果要在内层函数使用外层函数的 `this` 引用对象，应该使用一个变量在外层函数作用域内将其缓存起来，然后使用该变量在内层函数中进行引用。
+
+##### 数组初始化
+
+　　数组的初始化应该使用字面量而不是构造函数，构造函数的参数容易引起误会。
+
+　　**推荐：**
+
+    var a = [3];  // [3]
+
+　　**不推荐：**
+
+    var a = new Array(3); // [undefined, undefined, undefined]
+
+##### 引号
+
+　　JavaScript 中引号统一使用**“单引号”**，因为这在书写HTML 字符串模版属性时将非常有用。
+
+##### toString()
+
+　　可以自定义 `toString()` 函数来控制对象的字符串化，但要保证该方法始终能够正确执行。
+
+#### 注释
+
+　　JavaScript 是一个灵活性很大的语言，那么就会带来代码维护和阅读上的困难，良好的注释会帮助我们减轻这些负担。
+
+##### 文档注释
+
+　　通常写在文件的开始部分，涉及文档的概述以及版本号，及其依赖等。
+
+    /*! 
+        jQuery v1.11.3 | 
+        (c) 2005, 2015 jQuery Foundation, Inc. |
+        jquery.org/license
+     */
+
+##### 方法注释
+
+　　对于模块以及方法尤其要写明注释，这对于如何理解你的方法是至关重要的，应该遵循：**为什么要写这个方法或者模块，解决了什么问题，而不是这个方法是用来干什么。**
+
+    /**
+     * ...
+     *
+     * @description "..."
+     * @author mrwang
+     * @param {Jquery Object} $all_a 
+     * @returns
+     */
+
+##### 普通注释
+
+　　普通注释可分为多行注释和单行注释，在必要的地方进行注释即可。
+
+    单行：
+    // somethings
+
+    多行：
+    /*
+        somethings
+     */
+
+## 流程
+
+## 测试
+
+## 文档
+
+## 参考
+
+- 《前端架构设计》- Micah Godbolt 著

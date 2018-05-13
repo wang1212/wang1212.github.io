@@ -91,7 +91,7 @@ Router.add(/^\/docs((?!.html).)*$/, () => {
 							item.ctime[0].slice(1).join('/') +   
 						'</span>' +
 						'<span class="_mtime body d-md-block d-inline-block text-success">' + 
-							item.mtime[0].join('/') + ' ' + item.mtime[1].join(':') +
+							item.mtime[0].join('/') + ' ' + item.mtime[1].slice(0, 2).join(':') +
 						' 更新</span>' +
 					'</dt>' +
 					'<dd class="content col-md-9">' +
@@ -119,6 +119,8 @@ Router.add(/\/docs.*(\.html)$/, () => {
 	fetch(Router.get_state().slice(1))
 		.then(response => response.text())
 		.then(data => {
+			$(window).scrollTop(0);
+			
 			$('#content').fadeOut('fast', function(){
 				/* Mount document data */
 				let _state = Router.get_state(),
@@ -148,8 +150,8 @@ Router.add(/\/docs.*(\.html)$/, () => {
 						'<hr class="my-4">' +
 						'<p>' + _keywords + '</p>' +
 						'<p>' +
-							'<span class="mr-2 badge badge-pill badge-light">' + _doc.ctime[0].join('-') + ' ' + _doc.ctime[1].join(':') + ' 添加</span>' +
-							'<span class="mr-2 badge badge-pill badge-light">' + _doc.mtime[0].join('-') + ' ' + _doc.mtime[1].join(':') + ' 更新</span>' +
+							'<span class="mr-2 badge badge-pill badge-light">' + _doc.ctime[0].join('-') + ' ' + _doc.ctime[1].slice(0, 2).join(':') + ' 添加</span>' +
+							'<span class="mr-2 badge badge-pill badge-light">' + _doc.mtime[0].join('-') + ' ' + _doc.mtime[1].slice(0, 2).join(':') + ' 更新</span>' +
 						'</p>' +
 					'</header>';
 
@@ -169,6 +171,77 @@ Router.add(/\/docs.*(\.html)$/, () => {
 
 						$(item).attr('line-number', _line_number.reverse().join(' '));
 					});
+
+					/* Generate navigation */
+					let h_datas = [];
+
+					['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].forEach((h, i) => {
+						$(this).find(h).each((index, item) => {
+							h_datas.push({
+								type: h,
+								top : $(item).offset().top,
+								text: $(item).text()
+							});
+						});						
+					});
+
+					let $h = $('<section class="H"></section>'),
+						_prefix = [-1, '.', -1, ' '];
+
+					h_datas.sort((a, b) => a.top - b.top).forEach(h => {
+						let _text = h.text;
+
+						if(h.type === 'h2') {
+							_prefix[0] = _prefix[0] + 1;
+							_prefix[2] = -1;
+
+							_text = _prefix[0] + ' ' + _text;
+						} else if (h.type === 'h3') {
+							_prefix[2] = _prefix[2] + 1;
+
+							_text = _prefix.join('') + _text;
+						}
+
+						$h.append($('<p class="H-' + h.type + '" type="' + h.type + '" top="' + h.top + '">' + _text + '</p>'));
+					});
+
+					$h.append($('<span class="hide">Hide</span>'));
+
+					$('body').append($h);
+
+					$h.children('p').click(function(){
+						$(window).scrollTop($(this).attr('top') - 20);
+					});
+
+					$h.children('.hide').click(function(){
+						if ($h.is('.hide')) {
+							$h.removeClass('hide');
+							$(this).text('Hide');
+						} else {
+							$h.addClass('hide');
+							$(this).text('Show');
+						}
+					});
+
+					window.onscroll = () => {
+						const scrollTop = $(window).scrollTop(),
+							doc_width = $(document).width();
+
+						if (doc_width > 768 && scrollTop > 376 || doc_width < 768 && scrollTop > 290) {
+							$h.addClass('scroll');
+						} else {
+							$h.removeClass('scroll');
+						}
+
+						$h.children('p').removeClass('active');
+
+						h_datas.some((h, i) => {
+							if (scrollTop < h.top - 21) {
+								$h.children('p[top="' + h_datas[Math.max(0, i - 1)].top + '"]').addClass('active');
+								return true;
+							}
+						});
+					};
 
 				});
 			});
