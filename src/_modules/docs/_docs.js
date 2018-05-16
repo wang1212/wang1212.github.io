@@ -119,8 +119,6 @@ Router.add(/\/docs.*(\.html)$/, () => {
 	fetch(Router.get_state().slice(1))
 		.then(response => response.text())
 		.then(data => {
-			$(window).scrollTop(0);
-			
 			$('#content').fadeOut('fast', function(){
 				/* Mount document data */
 				let _state = Router.get_state(),

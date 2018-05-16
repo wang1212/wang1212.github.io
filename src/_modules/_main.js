@@ -44,6 +44,7 @@ fetch('./data/blog-data.json')
 const content = document.getElementById('content');
 
 Router.add(['/home', /docs.*/, '/about', '/more'], () => {
+    $(window).scrollTop(0);
     $('.H').remove();
 
 	const loaded = content.getAttribute('loaded').split(','),
