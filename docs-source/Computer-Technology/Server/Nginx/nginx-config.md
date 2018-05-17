@@ -5,7 +5,7 @@
         "keywords": ["Nginx", "Config", "Windows"],
         "summary": "Nginx 作为一个轻量、高性能的服务器，近年来颇受欢迎，无论是生产环境还是开发环境都有其发挥作用的地方，其配置文件相对来说还是较为简单的。而且，现在 nginx 也支持 Windows 环境了，利用不同的配置可以满足我们不同的需求。",
         "ctime": "2018-3-15 12:38:00",
-        "mtime": "2018-5-12 3:43:00"
+        "mtime": "2018-5-17 9:08:00"
     }
 
 ---
@@ -106,6 +106,14 @@
         add_header 'Access-Control-Allow-Headers'     'Content-Type';
         add_header 'Access-Control-Allow-Credentials' 'true';
     }
+
+- `Access-Control-Allow-Origin`
+
+    　　必选，这个响应头信息代表的是允许跨域请求的域名，`*` 则表示允许任意域名向此服务器发起跨域请求。
+
+- `Access-Control-Allow-Credentials`
+
+    　　可选，这个响应头信息代表的是跨域请求是否需要携带 **Cookie** 信息，默认为 `false`，在需要利用 Session-Cookie 机制的情况下务必设置为 `true`。
 
 ### 反向代理
 
