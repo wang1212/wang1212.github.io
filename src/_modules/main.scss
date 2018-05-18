@@ -208,6 +208,7 @@
 
         &.active {
             color: orange;
+            border-color: orange;
         }
     }
 
@@ -238,6 +239,14 @@
     .H-h6 {
         font-size: .75em;
         text-indent: 4rem;
+    }
+
+    .H-h2,
+    .H-h3,
+    .H-h4,
+    .H-h5,
+    .H-h6 {
+        border-left: 2px solid transparent;
     }
 
     > .hide {
