@@ -70,7 +70,15 @@
     add_header <span class="hljs-symbol">'Access</span>-Control-Allow-Headers'     <span class="hljs-symbol">'Content</span>-<span class="hljs-keyword">Type</span>';
     add_header <span class="hljs-symbol">'Access</span>-Control-Allow-Credentials<span class="hljs-string">' '</span><span class="hljs-literal">true</span>';
 }
-</code></pre><h3 id="-">反向代理</h3>
+</code></pre><ul>
+<li><p><code>Access-Control-Allow-Origin</code></p>
+<p>  　　必选，这个响应头信息代表的是允许跨域请求的域名，<code>*</code> 则表示允许任意域名向此服务器发起跨域请求。</p>
+</li>
+<li><p><code>Access-Control-Allow-Credentials</code></p>
+<p>  　　可选，这个响应头信息代表的是跨域请求是否需要携带 <strong>Cookie</strong> 信息，默认为 <code>false</code>，在需要利用 Session-Cookie 机制的情况下务必设置为 <code>true</code>。</p>
+</li>
+</ul>
+<h3 id="-">反向代理</h3>
 <p>　　Nginx 可以作为一个反向代理服务器，来为我们提供一些场景下的解决方案，例如负载均衡、跨域、前后端完全分离开发场景等等。</p>
 <pre><code><span class="hljs-attribute">location</span> / {
     <span class="hljs-attribute">proxy_set_header</span> Host            <span class="hljs-variable">$http_host</span>;
