@@ -5,7 +5,7 @@
         "keywords": ["Web", "前端", "架构", "设计"],
         "summary": "Web 前端开发是一个零散化的过程，基本上没有专业的 IDE 来为我们提供一整套的自动化流程解决方案，如何从需求到实现一步步快速推进形成完整的工作流，在后期如何高效的进行测试和优化，让前端开发可持续化、可扩展显得极为重要。",
         "ctime": "2018-3-28 14:01:00",
-        "mtime": "2018-5-22 3:42:00"
+        "mtime": "2018-5-23 0:03:00"
     }
 
 --- 
@@ -1109,7 +1109,39 @@
 
 #### 视觉还原测试的多面性
 
+　　借助于多种技术和流程，视觉还原测试可以有多种风格。虽然新的工具不断地被发布到开源社区，但他们通常是一小部分功能的组合。大多数工具可以归属为以下几类。
 
+- 基于页面的比较
+
+    　　<a href="https://github.com/BBC-News/wraith" target="_blank">Wraith</a> 是一个基于页面的比较的例子。它使用 YAML 作为设置文件，因此可以很轻松地比较来自两个不同来源的一大串页面列表。当你不期望两个不同来源的页面有任何差异时，比如需要比较线上页面和在工作中即将部署的页面时，这个方法会很合适。
+
+- 基于组件的比较
+
+    　　在基于组件或者基于选择器的比较方面，<a href="https://github.com/garris/BackstopJS" target="_blank">BackstopJS</a> 是一个绝佳的选择。基于组件的比较工具使你可以抓取独立的页面片段进行对比，这样可以写出更有针对性的测试，并防止误报。
+
+- CSS 单位测试
+
+    　　<a href="https://github.com/jamesshore/quixote" target="_blank">Quixote</a> 是一类比较独特的比较工具，用于比较 CSS 单位的差异，而不是视觉上的差异。Quixote 可以设置 TDD 模式的测试用例，这些用例会设置好预期的 CSS 数值（比如字体大小为 1em，侧边栏的内边距是 2.5%），然后检测页面是否满足这些条件。它还可以诊断页面是否遵守品牌的视觉规范，比如 logo 的尺寸是否正确，以及 logo 与其它内容是否保持恰当的距离。
+
+- 基于无头浏览器的测试
+
+    　　<a href="https://github.com/gemini-testing/gemini" target="_blank">Gemini</a> 是一款可以使用无头浏览器 <a href="http://phantomjs.org/" target="_blank">PhantomJS</a> 的比较工具，它可以在抓取截图之前加载 Web 页面。PhantomJS 是 JavaScript 实现的 WebKit 内核的浏览器，这意味着它速度非常快，并且具有跨平台的一致性。
+
+- 基于桌面浏览器的测试
+
+    　　Geimin 非常独特，它支持在在传统的桌面浏览器上运行测试用例。为了达到这个目的，Gemini 使用 <a href="http://docs.seleniumhq.org/download/" target="_blank">Selenium</a> 服务器打开并操作系统中安装的浏览器。这种方式没有基于无头浏览器的方式快，而且也受到系统安装的浏览器版本的影响。但是它更接近真实情况，并且可以发现某个特定浏览器引入的 bug。
+
+- 包含脚本库文件
+
+    　　<a href="http://casperjs.org" target="_blank">CasperJS</a> 是一个导航脚本库，可以和 PhantomJS 等无头浏览器协同工作。该工具可以和在浏览器中打开的页面进行交互。使用它，你可以点击按钮，等待模态窗口，填充并提交表单，最终对结果进行截图。CasperJS 还可以在 PhantomJS 打开的页面中执行 JavaScript，你可以隐藏元素、关掉动画，甚至还可以使用静态模拟内容替换掉动态真实内容。
+
+- 基于图像用户界面的比较工具，支持更改确认
+
+    　　<a href="https://github.com/diffux/diffux" target="_blank">Diffux</a> 项目存储了测试历史数据，并可以在基于 Web 的用户界面中提供测试结果的反馈。基准图像存储在数据库中，任何对它的改动都必须在该应用界面中标记为接收或者拒绝。
+
+- 基于命令行的比较工具，支持更改确认
+
+    　　<a href="https://github.com/Huddle/PhantomCSS" target="_blank">PhantomCSS</a> 是一款基于组件的比较工具，借助于 PhantomJS 和 CasperJS，它可以仅通过命令行来运行。测试是通过命令行终端运行的，无论测试是否通过，其结果都会输出到命令行终端里。这种类型的工具尤其适合通过 Grunt 或者 Gulp 运行，而其输出也很适合 Jenkins 或者 Travis CI 等自动化工具。
 
 ## 文档
 
