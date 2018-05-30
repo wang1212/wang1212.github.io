@@ -5,7 +5,7 @@
         "keywords": ["Web", "前端", "Cookie", "sessionStorage", "localStorage"],
         "summary": "为了达到某些需求，我们通常需要在本地存储一些数据，方便我们进行用户个性化定制服务。",
         "ctime": "2016-6-1 1:00:00",
-        "mtime": "2016-6-1 1:00:00"
+        "mtime": "2018-5-27 17:27:00"
     }
 
 --- 
@@ -31,6 +31,8 @@
 ### sessionStorage
 
 　　sessionStorage 存储的数据量也要大得多，但它是不能在同源窗口中共享的，也就是说它只允许在同窗口同页面中访问。而且，sessionStorage 存储的数据会在浏览器窗口关闭的时候自动删除，不能实现持久的保存数据。
+
+　　**注意：`sessionStorage` 在不同的标签页之间无法共享。**
 
 ## 结语
 

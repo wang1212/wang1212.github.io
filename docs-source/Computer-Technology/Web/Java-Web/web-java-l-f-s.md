@@ -2,7 +2,7 @@
 
     {
         "title": "监听器、过滤器、Servlet",
-        "keywords": ["Web", "服务器端", "Java", "Servlet", "Listener", "Filter"],
+        "keywords": ["Web", "Java", "服务器端", "Servlet", "Listener", "Filter"],
         "summary": "在 Java Web 开发过程中，监听器、过滤器、Servlet 这三大内容是很重要的组件，也是实现很多功能的根本所在。",
         "ctime": "2017-8-31 11:52:00",
         "mtime": "2017-8-31 11:52:00"

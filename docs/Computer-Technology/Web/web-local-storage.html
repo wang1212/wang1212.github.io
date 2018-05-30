@@ -9,5 +9,6 @@
 <p>　　localStorage 存储的数据量要大得多，大约5M左右；它在同源窗口中也是共享的。而且，localStorage 存储数据的时间甚至长达数年（不主动删除，即使浏览器关闭也存在），所以说在开发过程中我们可以使用它来存储更多的数据，并更持久的存储。</p>
 <h3 id="sessionstorage">sessionStorage</h3>
 <p>　　sessionStorage 存储的数据量也要大得多，但它是不能在同源窗口中共享的，也就是说它只允许在同窗口同页面中访问。而且，sessionStorage 存储的数据会在浏览器窗口关闭的时候自动删除，不能实现持久的保存数据。</p>
+<p>　　<strong>注意：<code>sessionStorage</code> 在不同的标签页之间无法共享。</strong></p>
 <h2 id="-">结语</h2>
 <p>　　就目前来看，HTML5 提供的新的 Web 本地存储方法适合存储一些非敏感数据，对于用户敏感的数据还是依靠 Cookie 来存储更安全一些。而 Web 本地存储是没有绝对安全的，依然面临很严峻的考验。</p>
