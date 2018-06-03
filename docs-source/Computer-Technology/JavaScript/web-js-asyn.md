@@ -2,10 +2,10 @@
 
     {
         "title": "JavaScript 异步编程",
-        "keywords": ["JavaScript", "异步编程"],
+        "keywords": ["JavaScript", "异步编程", "Ajax", "Promise", "Fetch"],
         "summary": "JavaScript 作为一门在 Web 开发中的主流语言，常常涉及到交互事件方面的应用，这不可避免的用到了异步编程的方法，而它本身则是单线程运行的。在以往的开发中，异步编程正变得越来越难管理，新的 Promise 标准 API 将使得异步编程更加方便、安全。",
         "ctime": "2017-3-22 15:48:00",
-        "mtime": "2017-3-22 15:48:00"
+        "mtime": "2017-6-3 13:46:00"
     }
 
 --- 
@@ -189,7 +189,7 @@
 			console.log(msg);  // 42
 		});
 
-　　前者若传入一个空数组，它会立即决议完成，而后者会永远处于等待状态。
+　　**前者若传入一个空数组，它会立即决议完成，而后者会永远处于等待状态。**
 
 ### 局限性
 
@@ -239,6 +239,110 @@
 　　其次，Promise 一旦创建就无法被终止，我们通过外部来终止一个 Promise 是非常不安全的，因为这会影响其它 Promise 的决议结果。在某些情况下，比如一旦请求超时，我们希望能立即终止 Promise，但目前还没有更安全的方法来解决这个问题。
 
 　　Promise 虽然相对于回调函数更方便、简单。安全一些，但其本质还是基于回调函数的，并且比回调函数要做的事情更多。这也就意味着 Promise 的性能可能并不比 回调函数高，但回过头来说，微小的性能损失与极大的便利和安全来说，相信后者是我们选择 Promise 的理由。
+
+## Fetch
+
+　　基于 Promise API，现在为我们提供了简单、方便的 Fetch API 作为一种异步获取数据的备选方案。Fetch 并不能完全替代 Ajax，Fetch 只是简单的提供了异步获取数据的功能，而 Ajax 则提供了一系列的事件机制来帮助我们更细粒度的掌控数据获取过程的情况。
+
+### Ajax（XMLHttpRequest）
+
+　　大多时候我们使用的 Ajax API 都是其它辅助库（例如 jQuery）为我们封装好的，而原生的 Ajax 使用是这样的：
+
+	var xmlhttp;
+	if (window.XMLHttpRequest){
+		//  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		// IE6, IE5 浏览器执行代码
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xmlhttp.onreadystatechange = function(){
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
+		}
+	}
+
+	xmlhttp.open("GET", "/api/getData", true);
+	xmlhttp.send();
+
+　　可以看出来，原生的 Ajax 使用起来是比较麻烦的，但同样地，`XMLHttpRequest` 对象提供了许多事件来为我们提供一些实际需求的解决方案，例如进度显示。
+
+### Fetch 更简洁的备选方案
+
+　　然而，更多的场景下我们只是需要异步获取数据即可，不需要那么细粒度的控制，这时候使用 Ajax 反而显得非常麻烦了，于是出现了 Fetch 这种使用起来更简洁的备选方案。
+
+　　Fetch 是基于 Promise 的，所以编码风格与其一致。来看看如何使用原生的 Fetch API 获取数据：
+
+	fetch('/api/getData', { method: 'GET' })
+		.then(response => response.json() )
+		.then(json => console.log(json) )
+		.catch(err => alert(err.message) );
+
+　　看起来，`fetch` 使用起来要简单不少，它是在客户端构造一个 `Request` 对象发送给服务器，然后服务器返回一个 `Response` 对象返回给客户端；而且也基于 Promise 解决了回调嵌套的问题。
+
+　　在使用 Fetch API 的过程中仍然要注意一些问题。
+
+#### 默认不携带 Cookie
+
+　　**fetch 发送请求默认是不携带 Cookie 信息的，不管是同域还是跨域请求；因此，在需要使用 Session-Cookie 机制进行权限验证的场景下，务必配置 `credentials` 项**：
+
+- `omit`：默认值，请求不携带 Cookie 信息；
+- `same-origin`：允许同域请求携带 Cookie 信息，跨域请求则不允许；
+- `include`：同域或跨域请求皆携带 Cookie 信息
+
+exp：
+	
+	fetch('/api/getData', { method: 'GET', credentials: 'same-origin' })
+		.then(response => response.json() )
+		.then(json => console.log(json) )
+		.catch(err => alert(err.message) );
+
+#### 仅在请求不能完成时 reject
+
+　　**因为 fetch 是基于 Promise 的，而服务器响应的 `Response` 对象中封装的信息（例如响应状态码 200、403 等）不会作为 reject 的条件，而是仅在客户端与服务器端发生网络错误不能顺利完成请求时才会 `reject`。**
+
+　　所以，这就需要在服务器返回 `Response` 对象时我们做一些简单的检验工作。
+
+	fetch('/api/getData', { method: 'GET' })
+		.then(response => {
+			// check status
+			if(response.status === 200){
+				return response.json();
+			} else {
+				throw new Error(response.statusText);
+			}
+		})
+		.then(json => console.log(json) )
+		.catch(err => alert(err.message) );
+
+#### GET 请求
+
+　　在发送 Get 请求时，参数一般就携带在 `url` 中。
+
+	fetch('/api/getData?t=' + new Date().getTime(), { method: 'GET' })
+		.then(response => response.json() )
+		.then(json => console.log(json) )
+		.catch(err => alert(err.message) );
+
+#### POST 请求
+
+　　**在发送 Post 请求时，参数只能携带在 `body` 中，而且即便没有参数，`body` 也不能为空。**参数通常使用 `FormData` 对象来构建。
+
+	let formData = new FormData();
+	formData.append('username', 'mrwang');
+	formData.append('password', '123456');
+
+	fetch('/api/postData', {
+		method: 'POST',
+		body: formData
+	})
+		.then(response => response.json() )
+		.then(json => console.log(json) )
+		.catch(err => alert(err.message) );
+
+
+　　更重要的是，现在（2018 年），`Fetch API` 已经在主流浏览器中获得了广泛的支持，所以不用太担心兼容问题。
 
 ## 参考
 

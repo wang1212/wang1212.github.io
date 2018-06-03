@@ -13,6 +13,15 @@
     "home": {
         "card": [
             {
+                "title"  : "",
+                "time"   : "2018-5-31",
+                "content": {
+                    "text": [
+                        "尊重那些与你抗争的人，因为你争的是理，不是去损毁对方的人格。--- 刘墉"
+                    ]
+                }
+            },
+            {
                 "title"  : "Ruby",
                 "time"   : "2015-5-20",
                 "content": {
@@ -39,7 +48,7 @@
                     "66RPG": "http://rm.66rpg.com/",
                     "梦单论坛" : "https://dream.supmers.com/forum.php"
                 }
-            }           
+            }
         ],
         "link": [
             ["MDN Developer Document", "https://developer.mozilla.org/en-US/"],
@@ -49,6 +58,7 @@
             ["Varvy SEO tool", "https://varvy.com/"],
             ["PageSpeed Insights", "https://developers.google.com/speed/pagespeed/insights/"],
             ["Can I use CSS3", "https://caniuse.com/"],
+            ["GeoJSON 格式规范说明", "https://www.oschina.net/translate/geojson-spec?cmp"],
             ["菜鸟教程", "http://www.runoob.com/"],
             ["句子迷", "http://www.juzimi.com/"]
         ]

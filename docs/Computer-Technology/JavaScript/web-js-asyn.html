@@ -123,7 +123,7 @@ p4.<span class="hljs-keyword">catch</span>(rejected);
     .then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">msg</span>)</span>{
         <span class="hljs-built_in">console</span>.log(msg);  <span class="hljs-comment">// 42</span>
     });
-</code></pre><p>　　前者若传入一个空数组，它会立即决议完成，而后者会永远处于等待状态。</p>
+</code></pre><p>　　<strong>前者若传入一个空数组，它会立即决议完成，而后者会永远处于等待状态。</strong></p>
 <h3 id="-">局限性</h3>
 <p>　　首先，Promise 链的决议结果是顺序传递地，也就是说如果其中发生错误或变为拒绝状态，直到遇到第一个 <code>rejected</code> 方法，该错误才会被捕获。同时，因为第一个 <code>rejected</code> 方法已将该错误捕获并处理，此时后续的 Promise 链将失去作用，这在某些情况下不是我们想要的结果。</p>
 <pre><code>var p = new Promise(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(resolve, reject)</span></span>{
@@ -163,6 +163,83 @@ p4.<span class="hljs-keyword">catch</span>(rejected);
 <p>　　在前面我们说过，一旦 Promise 的状态改变，就无法再进行改变了，Promise 是单决议的。这在很多时候有利于程序的安全，但在某些时候却是非常尴尬的，比如交互事件。<code>click</code> 事件每次触发都会进行响应，但 Promise 在第一次触发后就已经决议过，此后再也无法改变状态，这并不是我们想要的效果。</p>
 <p>　　其次，Promise 一旦创建就无法被终止，我们通过外部来终止一个 Promise 是非常不安全的，因为这会影响其它 Promise 的决议结果。在某些情况下，比如一旦请求超时，我们希望能立即终止 Promise，但目前还没有更安全的方法来解决这个问题。</p>
 <p>　　Promise 虽然相对于回调函数更方便、简单。安全一些，但其本质还是基于回调函数的，并且比回调函数要做的事情更多。这也就意味着 Promise 的性能可能并不比 回调函数高，但回过头来说，微小的性能损失与极大的便利和安全来说，相信后者是我们选择 Promise 的理由。</p>
+<h2 id="fetch">Fetch</h2>
+<p>　　基于 Promise API，现在为我们提供了简单、方便的 Fetch API 作为一种异步获取数据的备选方案。Fetch 并不能完全替代 Ajax，Fetch 只是简单的提供了异步获取数据的功能，而 Ajax 则提供了一系列的事件机制来帮助我们更细粒度的掌控数据获取过程的情况。</p>
+<h3 id="ajax-xmlhttprequest-">Ajax（XMLHttpRequest）</h3>
+<p>　　大多时候我们使用的 Ajax API 都是其它辅助库（例如 jQuery）为我们封装好的，而原生的 Ajax 使用是这样的：</p>
+<pre><code><span class="hljs-keyword">var</span> xmlhttp;
+<span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.XMLHttpRequest){
+    <span class="hljs-comment">//  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码</span>
+    xmlhttp = <span class="hljs-keyword">new</span> XMLHttpRequest();
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// IE6, IE5 浏览器执行代码</span>
+    xmlhttp = <span class="hljs-keyword">new</span> ActiveXObject(<span class="hljs-string">"Microsoft.XMLHTTP"</span>);
+}
+
+xmlhttp.onreadystatechange = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">if</span> (xmlhttp.readyState == <span class="hljs-number">4</span> &amp;&amp; xmlhttp.status == <span class="hljs-number">200</span>){
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"myDiv"</span>).innerHTML = xmlhttp.responseText;
+    }
+}
+
+xmlhttp.open(<span class="hljs-string">"GET"</span>, <span class="hljs-string">"/api/getData"</span>, <span class="hljs-literal">true</span>);
+xmlhttp.send();
+</code></pre><p>　　可以看出来，原生的 Ajax 使用起来是比较麻烦的，但同样地，<code>XMLHttpRequest</code> 对象提供了许多事件来为我们提供一些实际需求的解决方案，例如进度显示。</p>
+<h3 id="fetch-">Fetch 更简洁的备选方案</h3>
+<p>　　然而，更多的场景下我们只是需要异步获取数据即可，不需要那么细粒度的控制，这时候使用 Ajax 反而显得非常麻烦了，于是出现了 Fetch 这种使用起来更简洁的备选方案。</p>
+<p>　　Fetch 是基于 Promise 的，所以编码风格与其一致。来看看如何使用原生的 Fetch API 获取数据：</p>
+<pre><code>fetch(<span class="hljs-string">'/api/getData'</span>, { <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span> })
+    .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.json() )
+    .then(<span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(json) )
+    .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> alert(err.message) );
+</code></pre><p>　　看起来，<code>fetch</code> 使用起来要简单不少，它是在客户端构造一个 <code>Request</code> 对象发送给服务器，然后服务器返回一个 <code>Response</code> 对象返回给客户端；而且也基于 Promise 解决了回调嵌套的问题。</p>
+<p>　　在使用 Fetch API 的过程中仍然要注意一些问题。</p>
+<h4 id="-cookie">默认不携带 Cookie</h4>
+<p>　　<strong>fetch 发送请求默认是不携带 Cookie 信息的，不管是同域还是跨域请求；因此，在需要使用 Session-Cookie 机制进行权限验证的场景下，务必配置 <code>credentials</code> 项</strong>：</p>
+<ul>
+<li><code>omit</code>：默认值，请求不携带 Cookie 信息；</li>
+<li><code>same-origin</code>：允许同域请求携带 Cookie 信息，跨域请求则不允许；</li>
+<li><code>include</code>：同域或跨域请求皆携带 Cookie 信息</li>
+</ul>
+<p>exp：</p>
+<pre><code>fetch(<span class="hljs-string">'/api/getData'</span>, { <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>, <span class="hljs-attr">credentials</span>: <span class="hljs-string">'same-origin'</span> })
+    .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.json() )
+    .then(<span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(json) )
+    .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> alert(err.message) );
+</code></pre><h4 id="-reject">仅在请求不能完成时 reject</h4>
+<p>　　<strong>因为 fetch 是基于 Promise 的，而服务器响应的 <code>Response</code> 对象中封装的信息（例如响应状态码 200、403 等）不会作为 reject 的条件，而是仅在客户端与服务器端发生网络错误不能顺利完成请求时才会 <code>reject</code>。</strong></p>
+<p>　　所以，这就需要在服务器返回 <code>Response</code> 对象时我们做一些简单的检验工作。</p>
+<pre><code>fetch(<span class="hljs-string">'/api/getData'</span>, { <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span> })
+    .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {
+        <span class="hljs-comment">// check status</span>
+        <span class="hljs-keyword">if</span>(response.status === <span class="hljs-number">200</span>){
+            <span class="hljs-keyword">return</span> response.json();
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(response.statusText);
+        }
+    })
+    .then(<span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(json) )
+    .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> alert(err.message) );
+</code></pre><h4 id="get-">GET 请求</h4>
+<p>　　在发送 Get 请求时，参数一般就携带在 <code>url</code> 中。</p>
+<pre><code>fetch(<span class="hljs-string">'/api/getData?t='</span> + <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime(), { <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span> })
+    .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.json() )
+    .then(<span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(json) )
+    .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> alert(err.message) );
+</code></pre><h4 id="post-">POST 请求</h4>
+<p>　　<strong>在发送 Post 请求时，参数只能携带在 <code>body</code> 中，而且即便没有参数，<code>body</code> 也不能为空。</strong>参数通常使用 <code>FormData</code> 对象来构建。</p>
+<pre><code><span class="hljs-keyword">let</span> formData = <span class="hljs-keyword">new</span> FormData();
+formData.append(<span class="hljs-string">'username'</span>, <span class="hljs-string">'mrwang'</span>);
+formData.append(<span class="hljs-string">'password'</span>, <span class="hljs-string">'123456'</span>);
+
+fetch(<span class="hljs-string">'/api/postData'</span>, {
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+    <span class="hljs-attr">body</span>: formData
+})
+    .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.json() )
+    .then(<span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(json) )
+    .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> alert(err.message) );
+</code></pre><p>　　更重要的是，现在（2018 年），<code>Fetch API</code> 已经在主流浏览器中获得了广泛的支持，所以不用太担心兼容问题。</p>
 <h2 id="-">参考</h2>
 <ul>
 <li>《你不知道的 JavaScript》（中卷），[美] Kyle Simpson，单业 姜南 译</li>
