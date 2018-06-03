@@ -30,22 +30,23 @@
 
 　　JS 在浏览器中执行的模式是一种任务队列的形式，多个任务排成队等待主线程调用 JS 引擎执行自己的代码。这并不会出现多线程中的竞争状态，但这也意味着糟糕的编程方式可能会因为一个任务而导致整个任务链被阻塞。
 
-	funtion response(data){
+	function response(data){
 		// data 是一个大数组，并要进行遍历处理
-		data.map(function(val){
-			return val * 2
+		var temp = data;
+
+		temp.map(function(val){
+			return val * 2;
 		});
 	}
 
 　　如果说 `data` 的大小在 1000 左右可以被瞬间处理完成，那么 `data` 的大小突然变成几十万呢？所以，这样的编程方式很容易因为单个任务导致其它任务被严重阻塞。
 
-	funtion response(data){
+	function response(data){
 		// 一次只处理 1000 个
 		var temp = data.splice(0, 1000);
 
-		// data 是一个大数组，并要进行遍历处理
 		temp.map(function(val){
-			return val * 2
+			return val * 2;
 		});
 
 		// 剩余的稍后继续处理
@@ -56,7 +57,50 @@
 		}
 	}
 
-　　经过特殊处理之后的程序，一次只处理一部分数据，将一个大任务分割成多个小任务来完成，就会避免阻塞任务链的情况。因此，明白 JS 的任务队列模型，并保持良好的编程习惯会让 Web 应用更流畅。
+　　经过特殊处理之后的程序，一次只处理一部分数据，将一个大任务分割成多个小任务来完成，就会避免阻塞任务链的情况。
+
+### JavaScript 事件轮询机制
+
+　　在 JS 引擎中，基于单线程采用了事件轮询（event loop）机制来实现高并发，与单核 CPU 处理多任务进程是相似的。**主线程负责处理单个任务（macrotask）的所有流程（microtask），主线程会将同一个任务的所有流程处理完毕之后再去询问任务队列是否有新的任务需要执行，如果有则会将新的一个任务放到主线程去处理，如此往复循环。**
+
+- macrotask
+
+	　　我们可以将一个 `macrotask` 看作一个任务，多个任务存放在任务队列中，等待主线程处理。
+
+- microtask
+
+	　　而对于一个任务，我们可以有更细粒度的划分，即多个流程，我们可以将一个 `microtask` 看作任务的一个流程。
+
+　　**在此基础上，我们可以理解为任务队列包含多个任务（macrotask），而单个任务又包含多个流程（microtask）。**这样我们对业务逻辑的处理可以有更细粒度的掌控，同样地有以下 API 来为我们提供一些解决方案：
+
+- macrotask 系
+	- `setTimeout`
+	- `setInterval`
+	- `setImmediate`
+	- I/O
+	- UI rendering
+- microtask 系
+	- `process.nextTick`
+	- `Promise`
+	- `MutationObserver`
+
+　　举个简单的例子：
+
+	setTimeout(() => console.log(1));
+
+	Promise.resolve(true)
+		.then(() => console.log(2))
+		.then(() => console.log(3))
+		.then(() => console.log(4));
+
+	setTimeout(() => console.log(5));
+
+	// console
+	2 3 4 1 5
+
+　　之所以输出顺序是 `2 3 4 1 5`，就是因为 `Promise` 属于 microtask 系，也就是说无论有多少个 `then` 回调，它们都属于同一个任务的不同流程，只有这些流程全部处理完，主线程才会处理下一个任务。
+
+　　因此，明白 JS 的事件轮询机制以及任务队列模型，并保持良好的编程习惯会让 Web 应用更流畅。
 
 ## 函数回调
 

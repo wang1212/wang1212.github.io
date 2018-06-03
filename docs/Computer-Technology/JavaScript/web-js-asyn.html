@@ -9,30 +9,72 @@
 <h2 id="-">任务队列</h2>
 <p>　　虽然，JS 没有多线程并发能力，但是并发却是非常有用的。在一个优秀的前端应用中，交互是非常流畅的，这得益于良好的编程能力所模拟出来的并发效果。</p>
 <p>　　JS 在浏览器中执行的模式是一种任务队列的形式，多个任务排成队等待主线程调用 JS 引擎执行自己的代码。这并不会出现多线程中的竞争状态，但这也意味着糟糕的编程方式可能会因为一个任务而导致整个任务链被阻塞。</p>
-<pre><code>funtion response(<span class="hljs-keyword">data</span>){
-    // <span class="hljs-keyword">data</span> 是一个大数组，并要进行遍历处理
-    <span class="hljs-keyword">data</span>.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(val)</span></span>{
-        <span class="hljs-keyword">return</span> val * <span class="hljs-number">2</span>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">response</span><span class="hljs-params">(data)</span></span>{
+    <span class="hljs-comment">// data 是一个大数组，并要进行遍历处理</span>
+    <span class="hljs-keyword">var</span> temp = data;
+
+    temp.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(val)</span></span>{
+        <span class="hljs-keyword">return</span> val * <span class="hljs-number">2</span>;
     });
 }
 </code></pre><p>　　如果说 <code>data</code> 的大小在 1000 左右可以被瞬间处理完成，那么 <code>data</code> 的大小突然变成几十万呢？所以，这样的编程方式很容易因为单个任务导致其它任务被严重阻塞。</p>
-<pre><code>funtion response(<span class="hljs-keyword">data</span>){
-    // 一次只处理 <span class="hljs-number">1000</span> 个
-    var temp = <span class="hljs-keyword">data</span>.splice(<span class="hljs-number">0</span>, <span class="hljs-number">1000</span>);
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">response</span><span class="hljs-params">(data)</span></span>{
+    <span class="hljs-comment">// 一次只处理 1000 个</span>
+    <span class="hljs-keyword">var</span> temp = data.splice(<span class="hljs-number">0</span>, <span class="hljs-number">1000</span>);
 
-    // <span class="hljs-keyword">data</span> 是一个大数组，并要进行遍历处理
     temp.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(val)</span></span>{
-        <span class="hljs-keyword">return</span> val * <span class="hljs-number">2</span>
+        <span class="hljs-keyword">return</span> val * <span class="hljs-number">2</span>;
     });
 
-    // 剩余的稍后继续处理
-    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">data</span>.length &gt; <span class="hljs-number">0</span>){
+    <span class="hljs-comment">// 剩余的稍后继续处理</span>
+    <span class="hljs-keyword">if</span>(data.length &gt; <span class="hljs-number">0</span>){
         setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
-            response(<span class="hljs-keyword">data</span>);
+            response(data);
         }, <span class="hljs-number">0</span>);
     }
 }
-</code></pre><p>　　经过特殊处理之后的程序，一次只处理一部分数据，将一个大任务分割成多个小任务来完成，就会避免阻塞任务链的情况。因此，明白 JS 的任务队列模型，并保持良好的编程习惯会让 Web 应用更流畅。</p>
+</code></pre><p>　　经过特殊处理之后的程序，一次只处理一部分数据，将一个大任务分割成多个小任务来完成，就会避免阻塞任务链的情况。</p>
+<h3 id="javascript-">JavaScript 事件轮询机制</h3>
+<p>　　在 JS 引擎中，基于单线程采用了事件轮询（event loop）机制来实现高并发，与单核 CPU 处理多任务进程是相似的。<strong>主线程负责处理单个任务（macrotask）的所有流程（microtask），主线程会将同一个任务的所有流程处理完毕之后再去询问任务队列是否有新的任务需要执行，如果有则会将新的一个任务放到主线程去处理，如此往复循环。</strong></p>
+<ul>
+<li><p>macrotask</p>
+<p>  　　我们可以将一个 <code>macrotask</code> 看作一个任务，多个任务存放在任务队列中，等待主线程处理。</p>
+</li>
+<li><p>microtask</p>
+<p>  　　而对于一个任务，我们可以有更细粒度的划分，即多个流程，我们可以将一个 <code>microtask</code> 看作任务的一个流程。</p>
+</li>
+</ul>
+<p>　　<strong>在此基础上，我们可以理解为任务队列包含多个任务（macrotask），而单个任务又包含多个流程（microtask）。</strong>这样我们对业务逻辑的处理可以有更细粒度的掌控，同样地有以下 API 来为我们提供一些解决方案：</p>
+<ul>
+<li>macrotask 系<ul>
+<li><code>setTimeout</code></li>
+<li><code>setInterval</code></li>
+<li><code>setImmediate</code></li>
+<li>I/O</li>
+<li>UI rendering</li>
+</ul>
+</li>
+<li>microtask 系<ul>
+<li><code>process.nextTick</code></li>
+<li><code>Promise</code></li>
+<li><code>MutationObserver</code></li>
+</ul>
+</li>
+</ul>
+<p>　　举个简单的例子：</p>
+<pre><code>setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>));
+
+Promise.resolve(<span class="hljs-literal">true</span>)
+    .<span class="hljs-keyword">then</span>(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>))
+    .<span class="hljs-keyword">then</span>(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-number">3</span>))
+    .<span class="hljs-keyword">then</span>(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-number">4</span>));
+
+setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-number">5</span>));
+
+<span class="hljs-regexp">//</span> <span class="hljs-built_in">console</span>
+<span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">1</span> <span class="hljs-number">5</span>
+</code></pre><p>　　之所以输出顺序是 <code>2 3 4 1 5</code>，就是因为 <code>Promise</code> 属于 microtask 系，也就是说无论有多少个 <code>then</code> 回调，它们都属于同一个任务的不同流程，只有这些流程全部处理完，主线程才会处理下一个任务。</p>
+<p>　　因此，明白 JS 的事件轮询机制以及任务队列模型，并保持良好的编程习惯会让 Web 应用更流畅。</p>
 <h2 id="-">函数回调</h2>
 <p>　　函数回调是实现 JS 异步编程的重要途径，基本上绝大多数异步代码都使用了函数回调。当然，事件监听也是我们用来进行异步编程的一种方式，只不过前者更广泛一些。</p>
 <pre><code><span class="hljs-comment">// 最典型的函数回调依然是 ajax 请求</span>
