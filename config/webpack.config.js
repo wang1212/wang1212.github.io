@@ -19,7 +19,7 @@ module.exports = {
 	},
 	context: PATH.resolve(__dirname, '../'),
 	entry  : {
-		main: './src/_modules/_main.js'
+		app: './src/modules/_main.js'
 	},
 	output: {
 		path         : PATH.resolve(__dirname, '../'),   //require('./gulpfile.config').dist,
@@ -95,8 +95,8 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
 			filename: './index.html',
-			template: './src/_modules/_main.html',
-			chunks  : ['main', 'commons']
+			template: './src/modules/_main.html',
+			chunks  : ['app', 'commons']
 		}),
 		new UglifyJsPlugin({
 			sourceMap: true
@@ -108,8 +108,8 @@ module.exports = {
 	],
 	resolve: {
 		alias: {
-			Component: PATH.resolve('./src/_components'),
-			Module   : PATH.resolve('./src/_modules'),
+			Component: PATH.resolve('./src/components'),
+			Module   : PATH.resolve('./src/modules'),
 			Data     : PATH.resolve('./data')
 		}
 	},
