@@ -8,11 +8,6 @@ import blog from 'Data/blog-data.json';
 /* Router Plugin */
 import 'Component/Router/Router.js';
 
-/** 
- * Make sure the page is full at least full screen
- */
-$('.page-main').css('min-height', $(document).height() - $('.page-head').outerHeight(true) - $('.page-foot').outerHeight(true));
-
 
 /** 
  * Render blog data
