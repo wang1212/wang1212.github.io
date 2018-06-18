@@ -1,0 +1,53 @@
+/*! MORE page style */
+
+[content="more"] {
+    
+    h3 {
+        border-bottom: 1px solid #eee;
+    }
+
+    .row > section > main {
+        overflow-y: auto;
+        max-height: 100vh;
+    }
+
+    .book {
+        border-left: 2px solid transparent;
+        background-color: rgba(222,222,222,.25);
+        transition: all .4s linear;
+
+        &:hover {
+            border-left-color: #4CAF50;
+        }
+
+        .summary {
+            text-indent: 2em;
+        }
+
+        p {
+            margin-bottom: .5rem;
+        }
+    }
+
+    .movie {
+        border-left: 2px solid transparent;
+        background-color: rgba(222,222,222,.25);
+        transition: all .4s linear;
+
+        &:hover {
+            border-left-color: #2196f3;
+        }        
+
+        .summary {
+            text-indent: 2em;
+        }
+        
+        p {
+            margin-bottom: .5rem;
+        }
+    }
+
+    .author {
+        color: #9e9e9e;
+    }
+}

@@ -11,8 +11,8 @@ Router.add('/home', () => {
 
 	let $dom = $(
 		'<div class="row">' +
-			'<section class="cards col-lg-8"></section>' +
-			'<section class="side col-lg-4 d-none d-md-block"></section>' +
+			'<section class="cards col-md-8"></section>' +
+			'<section class="side col-md-4 d-none d-md-block"></section>' +
 		'</div>'
 	);
 
