@@ -27,7 +27,44 @@ gulp.task('clean', function() {
 });
 
 /* Copy */
-gulp.task('copy', ['copy:json']);
+gulp.task('copy', [/* 'copy:vendors', 'copy:html',  */'copy:json']);
+
+gulp.task('copy:vendors', ['clean'], function () {
+
+	DEV.mapping({
+		'src' : CONFIG.vendors.src,
+		'dist': CONFIG.vendors.dist
+	});
+
+	return DEV.watch({
+		'src'     : CONFIG.vendors.src,
+		'dist'    : CONFIG.vendors.dist,
+		'callback': DEV.mapping,
+		'events'  : {
+			'change': browser_sync.reload,
+			'unlink': DEV.mapping_unlink
+		}
+	});
+
+});
+
+gulp.task('copy:html', ['clean'], function () {
+
+	DEV.mapping({
+		'src' : CONFIG.modules.view.src,
+		'dist': CONFIG.dist
+	});
+
+	return DEV.watch({
+		'src'     : CONFIG.modules.view.src,
+		'dist'    : CONFIG.dist,
+		'callback': DEV.mapping,
+		'events'  : {
+			'change': browser_sync.reload,
+			'unlink': DEV.mapping_unlink
+		}
+	});
+});
 
 gulp.task('copy:json', ['clean'], function () {
 

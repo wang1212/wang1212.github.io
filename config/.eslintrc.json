@@ -6,6 +6,7 @@
         "jquery" : true
     },
     "extends"      : "eslint:recommended",
+    "parser"       : "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
@@ -16,7 +17,13 @@
     "plugins": [],
     "rules"  : {
         "no-console": [
-            "off"
+            "error",
+            {
+                "allow": [
+                    "warn",
+                    "error"
+                ]
+            }
         ],
         "indent": [
             "error",
