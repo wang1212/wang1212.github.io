@@ -19,7 +19,7 @@ module.exports = {
 	},
 	context: PATH.resolve(__dirname, '../'),
 	entry  : {
-		app: './src/modules/_main.js'
+		app: './src/app.js'
 	},
 	output: {
 		path         : PATH.resolve(__dirname, '../'),   //require('./gulpfile.config').dist,
@@ -95,7 +95,7 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
 			filename: './index.html',
-			template: './src/modules/_main.html',
+			template: './src/app.html',
 			chunks  : ['app', 'commons']
 		}),
 		new UglifyJsPlugin({

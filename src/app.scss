@@ -1,19 +1,19 @@
 /*!  All style */
 
 /* Shared basic style sheet */
-@import '../components/base/base.scss';
+@import './components/base/_base.scss';
 
 /* Home page style */
-@import './home/_home.scss';
+@import './modules/home/_home.scss';
 
 /* Document page style */
-@import './docs/_docs.scss';
+@import './modules/docs/_docs.scss';
 
 /* About page style */
-@import './about/_about.scss';
+@import './modules/about/_about.scss';
 
 /* More page style */
-@import './more/_more.scss';
+@import './modules/more/_more.scss';
 
 
 body {

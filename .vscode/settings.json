@@ -18,8 +18,5 @@
     "scss.lint.propertyIgnoredDueToDisplay"    : "error",
     "scss.lint.unknownVendorSpecificProperties": "warning",
     "scss.lint.zeroUnits"                      : "warning",
-    
-    "eslint.options"                           : {
-        "configFile": "./config/.eslintrc.json"
-    }
+    "editor.insertSpaces"                      : false
 }

@@ -3,29 +3,31 @@ const SRC_DIR = './src/',
 	DIST_DIR = require('path').resolve(__dirname, '../dist/');
 
 module.exports =  {
-	'dev': false,
-	'map': false,
+	dev: false,
+	map: false,
 
-	'src' : SRC_DIR,
-	'dist': DIST_DIR,
+	src : SRC_DIR,
+	dist: DIST_DIR,
 
-	'modules': {
-		'src' : SRC_DIR + 'modules/',
-		'view': {
-			'src': SRC_DIR + 'modules/**/!(_)*.html'
-		},
-		'js': {
-			'src': SRC_DIR + 'modules/**/!(_)*.js'
-		},
-		'scss': {
-			'src': SRC_DIR + 'modules/**/!(_)*.scss'
-		},
-		'img': {
-			'src': SRC_DIR + 'modules/**/!(_)*.{png,jpg,jpeg,gif}'
-		},
-		'json': {
-			'src': SRC_DIR + 'modules/**/!(_)*.json'
-		}
+	vendors: {
+		src : SRC_DIR + 'vendors/**/!(_|README)*',
+		dist: DIST_DIR + '/vendors/'
+	},
+
+	view: {
+		src: SRC_DIR + '**/!(_)*.html'
+	},
+	js: {
+		src: SRC_DIR + '**/!(_)*.js'
+	},
+	scss: {
+		src: SRC_DIR + '**/!(_)*.scss'
+	},
+	img: {
+		src: SRC_DIR + '**/!(_)*.{png,jpg,jpeg,gif}'
+	},
+	json: {
+		src: SRC_DIR + '**/!(_)*.json'
 	}
 	
 };

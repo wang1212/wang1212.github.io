@@ -51,12 +51,12 @@ gulp.task('copy:vendors', ['clean'], function () {
 gulp.task('copy:html', ['clean'], function () {
 
 	DEV.mapping({
-		'src' : CONFIG.modules.view.src,
+		'src' : CONFIG.view.src,
 		'dist': CONFIG.dist
 	});
 
 	return DEV.watch({
-		'src'     : CONFIG.modules.view.src,
+		'src'     : CONFIG.view.src,
 		'dist'    : CONFIG.dist,
 		'callback': DEV.mapping,
 		'events'  : {
@@ -69,12 +69,12 @@ gulp.task('copy:html', ['clean'], function () {
 gulp.task('copy:json', ['clean'], function () {
 
 	DEV.mapping({
-		'src' : CONFIG.modules.json.src,
+		'src' : CONFIG.json.src,
 		'dist': CONFIG.dist
 	});
 
 	return DEV.watch({
-		'src'     : CONFIG.modules.json.src,
+		'src'     : CONFIG.json.src,
 		'dist'    : CONFIG.dist,
 		'callback': DEV.mapping,
 		'events'  : {
@@ -85,17 +85,35 @@ gulp.task('copy:json', ['clean'], function () {
 });
 
 /* Minify */
-gulp.task('minify', ['minify:sass2css', 'minify:img']);
+gulp.task('minify', [/* 'minify:js',  */'minify:sass2css', 'minify:img']);
 
-gulp.task('minify:sass2css', ['clean'], function() {
+gulp.task('minify:js', ['clean'], function () {
 
-	DEV.scss_2_css({
-		'src' : CONFIG.modules.scss.src,
+	DEV.js_min({
+		'src' : CONFIG.js.src,
 		'dist': CONFIG.dist
 	});
 
 	return DEV.watch({
-		'src'     : CONFIG.modules.scss.src,
+		'src'     : CONFIG.js.src,
+		'dist'    : CONFIG.dist,
+		'callback': DEV.js_min,
+		'events'  : {
+			'change': browser_sync.reload,
+			'unlink': DEV.min_unlink
+		}
+	});
+});
+
+gulp.task('minify:sass2css', ['clean'], function() {
+
+	DEV.scss_2_css({
+		'src' : CONFIG.scss.src,
+		'dist': CONFIG.dist
+	});
+
+	return DEV.watch({
+		'src'     : CONFIG.scss.src,
 		'dist'    : CONFIG.dist,
 		'callback': DEV.scss_2_css,
 		'events'  : {
@@ -108,12 +126,12 @@ gulp.task('minify:sass2css', ['clean'], function() {
 gulp.task('minify:img', ['clean'], function() {
 
 	DEV.img_min({
-		'src' : CONFIG.modules.img.src,
+		'src' : CONFIG.img.src,
 		'dist': CONFIG.dist
 	});
 
 	return DEV.watch({
-		'src'     : CONFIG.modules.img.src,
+		'src'     : CONFIG.img.src,
 		'dist'    : CONFIG.dist,
 		'callback': DEV.img_min,
 		'events'  : {

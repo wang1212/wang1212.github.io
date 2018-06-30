@@ -1,10 +1,10 @@
 /*! Document page style */
 
 /* Syntax highlighting plugin - highlight */
-@import '../../components/highlight/highlight.scss';
+@import '../../components/highlight/_highlight.scss';
 
 /* Custom document style */
-@import '../../components/custom-doc-style/custom-doc.scss';
+@import '../../components/custom-doc-style/_custom-doc.scss';
 
 [content="docs"] {
 
