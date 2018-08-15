@@ -6,8 +6,8 @@ const SRC_DIR = './src/',
 	DIST_DIR = NODE_ENV === 'production' ? require('path').resolve(__dirname, '../dist/') : require('path').resolve(__dirname, '../dist/');
 
 module.exports =  {
-	'dev': !(NODE_ENV === 'production'),
-	'map': !(NODE_ENV === 'production'),
+	dev: !(NODE_ENV === 'production'),
+	map: !(NODE_ENV === 'production'),
 
 	src : SRC_DIR,
 	dist: DIST_DIR,
