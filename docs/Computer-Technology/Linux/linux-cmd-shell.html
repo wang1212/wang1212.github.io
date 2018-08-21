@@ -273,11 +273,18 @@ wc &lt;&lt; [定界符]  // 结束定界符
   [命令] &amp;  <span class="hljs-comment">// 该命令在后台执行</span>
 </code></pre></li>
 </ul>
-<h3 id="-">用户切换、密码更改</h3>
-<pre><code><span class="hljs-selector-tag">su</span> <span class="hljs-selector-attr">[用户名]</span> <span class="hljs-comment">// 切换到目标用户，默认是root用户</span>
-<span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-attr">[命令]</span> <span class="hljs-comment">// 以root权限执行该条命令</span>
+<h3 id="-">用户、密码</h3>
+<pre><code><span class="hljs-selector-tag">su</span> <span class="hljs-selector-attr">[用户名]</span> <span class="hljs-comment">// 切换到目标用户，默认是 root 用户</span>
+
+<span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-attr">[命令]</span> <span class="hljs-comment">// 以 root 权限执行该条命令</span>
+
+#  添加用户
+<span class="hljs-selector-tag">useradd</span> <span class="hljs-selector-attr">[选项]</span> <span class="hljs-selector-attr">[用户名]</span>
+<span class="hljs-selector-tag">-d</span>  <span class="hljs-comment">// 指定用户目录</span>
+<span class="hljs-selector-tag">-g</span>  <span class="hljs-comment">// 指定用户群组</span>
+
 <span class="hljs-selector-tag">passwd</span> <span class="hljs-selector-attr">[用户名]</span> <span class="hljs-comment">// 更改目标用户密码，默认当前用户</span>
-</code></pre><h3 id="-">用户登录信息</h3>
+</code></pre><h3 id="-">登录日志</h3>
 <pre><code>w <span class="hljs-comment"> // 查看系统中用户登录情况，资源情况</span>
 who <span class="hljs-comment"> // 查看系统中用户登录情况</span>
 <span class="hljs-keyword">last</span> <span class="hljs-comment"> // 查看系统中用户登录日志</span>
@@ -345,17 +352,34 @@ fsck [磁盘目录]
 
 <span class="hljs-selector-tag">fdisk</span> <span class="hljs-selector-tag">-l</span>   <span class="hljs-comment">// 查看系统中已经识别的硬盘</span>
 <span class="hljs-selector-tag">fdisk</span> <span class="hljs-selector-tag">-t</span> <span class="hljs-selector-tag">vfat</span> <span class="hljs-selector-attr">[设备文件名]</span> <span class="hljs-selector-attr">[挂载点]</span>  <span class="hljs-comment">// 以 fat32 文件格式挂载U盘（linux 默认不支持 ntfs 文件系统）</span>
+</code></pre><h3 id="-">端口</h3>
+<pre><code>netstat -anp | <span class="hljs-keyword">grep</span> <span class="hljs-number">177</span>  <span class="hljs-comment">// 查看指定端口进程</span>
+</code></pre><h3 id="-">系统服务</h3>
+<pre><code><span class="hljs-selector-tag">service</span> <span class="hljs-selector-attr">[服务名称]</span> <span class="hljs-selector-attr">[选项]</span>
+<span class="hljs-selector-tag">service</span> * <span class="hljs-selector-tag">start</span>   <span class="hljs-comment">// 启动服务</span>
+<span class="hljs-selector-tag">service</span> * <span class="hljs-selector-tag">stop</span>    <span class="hljs-comment">// 停止服务</span>
+<span class="hljs-selector-tag">service</span> * <span class="hljs-selector-tag">status</span>  <span class="hljs-comment">// 服务状态</span>
+<span class="hljs-selector-tag">service</span> * <span class="hljs-selector-tag">restart</span> <span class="hljs-comment">// 重启服务</span>
 </code></pre><h3 id="-">系统信息</h3>
-<pre><code>hwclock  <span class="hljs-comment">// 查看硬件时钟时间（等价 clock 命令）</span>
-uptime  <span class="hljs-comment">// 查看系统运行时间</span>
+<pre><code># 操作系统信息
+uname [选项]
+-<span class="ruby">a  /<span class="hljs-regexp">/ 所有信息，包含操作系统名称，计算机名、内核、架构
+</span></span>-<span class="ruby"><span class="hljs-regexp">m  /</span><span class="hljs-regexp">/ 系统架构（32/</span><span class="hljs-number">64</span>）
+</span>
+hwclock  // 查看硬件时钟时间（等价 clock 命令）
+uptime  // 查看系统运行时间
 
-lspci  <span class="hljs-comment">// 查看PCI设备</span>
--v  <span class="hljs-comment">// 详细信息</span>
+lspci  // 查看PCI设备
+-<span class="ruby">v  /<span class="hljs-regexp">/ 详细信息
+</span></span>
+lsusb  // 查看USB设备
+-<span class="ruby"><span class="hljs-regexp">v  /</span><span class="hljs-regexp">/ 详细信息
+</span></span>
+lsmod  // 查看加载的模块（驱动）
+</code></pre><h2 id="-">应用安装</h2>
+<pre><code><span class="hljs-selector-tag">dpkg</span> <span class="hljs-selector-tag">-L</span> <span class="hljs-selector-attr">[应用名称]</span>  <span class="hljs-comment">// 查看已安装应用相关路径</span>
 
-lsusb  <span class="hljs-comment">// 查看USB设备</span>
--v  <span class="hljs-comment">// 详细信息</span>
-
-lsmod  <span class="hljs-comment">// 查看加载的模块（驱动）</span>
+<span class="hljs-selector-tag">dpkg</span> <span class="hljs-selector-tag">--get-selections</span> | <span class="hljs-selector-tag">grep</span> <span class="hljs-selector-attr">[应用名称]</span>  <span class="hljs-comment">// 查看已安装应用相关所有包</span>
 </code></pre><h2 id="-">快捷键</h2>
 <p>　　下面是一些在 Bash 终端界面的快捷键。</p>
 <ul>

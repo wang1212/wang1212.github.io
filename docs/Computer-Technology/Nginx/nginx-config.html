@@ -10,8 +10,15 @@
 
     ...
 }
-</code></pre><p>　　这个配置是写在配置文件顶部的。</p>
-<h3 id="-">设置编码</h3>
+</code></pre><p>　　这个配置是写在配置文件顶部的，其值也可以为 <code>auto</code>。</p>
+<h3 id="-nginx-">隐藏 nginx 版本号</h3>
+<p>　　隐藏掉版本号，可以降低被攻击的风险。</p>
+<pre><code>http {
+    ...
+
+    server_tokens off<span class="hljs-comment">;</span>
+}
+</code></pre><h3 id="-">设置编码</h3>
 <p>　　通常来说，将编码设置为 <code>UTF-8</code> 是比较合适的。</p>
 <pre><code>server {
     ...
