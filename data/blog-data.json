@@ -108,28 +108,28 @@
         "Technology_Stack": {
             "Web 前端": [
                 ["HTML", "80%"],
-                ["CSS", "70%"],
-                ["JavaScript", "85%"],
-                ["jQuery", "75%"],
-                ["Bootstrap v4", "75%"],
-                ["React.js", "50%"]
+                ["CSS3", "75%"],
+                ["jQuery", "85%"],
+                ["Bootstrap v4", "80%"],
+                ["React.js", "60%"]
             ],
             "CSS 预处理器": [
                 ["Sass", "65%"]
             ],
             "流程化构建工具": [
-                ["gulp", "70%"]
+                ["gulp", "80%"]
             ],
             "模块化打包工具": [
-                ["webpack v4", "60%"]
+                ["webpack v4", "70%"]
             ],
             "编程语言": [
+                ["JavaScript", "90%"],
                 ["Java", "25%"],
                 ["Ruby", "40%"]
             ],
             "版本控制工具": [
                 ["SVN", "60%"],
-                ["Git", "40%"]
+                ["Git", "50%"]
             ],
             "Web GIS": [
                 ["Leaflet.js", "45%"],
@@ -155,6 +155,11 @@
 
     "more": {
         "books": [
+            {
+                "name"   : "《摆渡人》",
+                "author" : "[英] 克莱儿·麦克福尔",
+                "summary": "也许人只有在颠沛流离之后，才能重新印证时间在内心留下的痕迹。"
+            },
             {
                 "name"   : "《前端架构设计》",
                 "author" : "[美] Micah Godbolt",
