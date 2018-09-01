@@ -4,11 +4,15 @@
         "title": "Nginx 配置",
         "keywords": ["Nginx", "Config"],
         "summary": "Nginx 作为一个轻量、高性能的服务器，近年来颇受欢迎，无论是生产环境还是开发环境都有其发挥作用的地方，其配置文件相对来说还是较为简单的。而且，现在 nginx 也支持 Windows 环境了，利用不同的配置可以满足我们不同的需求。",
-        "ctime": "2018-3-15 12:38:00",
-        "mtime": "2018-5-17 9:08:00"
+        "ctime": "2018-03-15 12:38:00",
+        "mtime": "2018-09-01 12:24:00"
     }
 
 ---
+
+　　**<u>建议主要参考官网英文文档。</u>**
+
+　　具体指令直接可以在官网文档的 Alphabetical index of directives（按字母顺序排列的指令索引）中搜索即可。
 
 ## Nginx
 
@@ -32,6 +36,8 @@
 
 　　这个配置是写在配置文件顶部的，其值也可以为 `auto`。
 
+> 官网文档：Core functionality/worker_processes
+
 ### 隐藏 nginx 版本号
 
 　　隐藏掉版本号，可以降低被攻击的风险。
@@ -41,6 +47,8 @@
 
         server_tokens off;
     }
+
+> 官网文档：ngx_http_core_module/server_tokens
 
 ### 设置编码
 
@@ -52,6 +60,8 @@
         charset utf-8;
     }
 
+> 官网文档：ngx_http_charset_module/charset
+
 ### 更改上传数据大小限制
 
 　　Nginx 默认的数据上传大小为 2M，某些情况下我们需要将其更改的大一些，以符合业务需求。
@@ -60,7 +70,9 @@
         ...
 
         client_max_body_size 20m;
-    }   
+    }
+
+> 官网文档：ngx_http_core_module/client_max_body_size
 
 ### 开启 gzip
 
@@ -105,6 +117,45 @@
 
     　　设置要进行压缩的 http 协议版本，默认设置为 1.0 即可，因为 nginx 和后端服务器（Server）默认采用 HTTP/1.0 进行通信的，防止出现不压缩的情况。
 
+> 官网文档：ngx_http_gzip_module
+
+### 路由匹配规则
+
+　　nginx 像一个路由，客户端通过什么地址访问服务器，服务器则在配置文件中通过设置好的路由来匹配请求进行转发。
+
+　　nginx 的匹配规则分为 3 类：
+
+- 正则匹配：由 `~`（不忽略大小写） 和 `~*`（忽略大小写）开头
+- 精确匹配：由 `=` 开头
+- 前缀匹配：由 `^~` 开头或没有任何字符的规则
+
+　　匹配顺序：**首先检查精确匹配，匹配到则终止；其次，检查前缀字符串匹配，匹配到时，若是以 `^~` 开头的则终止，否则继续进行正则匹配；最后，检查正则匹配，顺序为配置文件中书写顺序（从上到下），匹配到第一条则终止，若没匹配到，则以匹配到的前缀匹配规则为最终结果。**
+
+    # 精确匹配，加速 / 请求的处理
+    location = / {
+        ...
+    }
+
+    # 前缀匹配，处理一些需要缓存的静态资源
+    location ^~ /static/ {
+        root    /Data/static/;
+        expires 7d;
+    }
+
+    # 正则匹配，处理静态资源
+    location ~* \.(html|js|css|png|jpg|jpeg|gif|json|ico|otf|eot|svg|ttf|woff|woff2|map)$ {
+        root /Data/webapps/;
+    }
+
+    # 前缀匹配，默认处理（可以做反向代理，处理动态资源请求）
+    location / {
+        proxy_pass  http://127.0.0.1:8080;
+    }
+
+　　在非精确匹配的规则内部是可以嵌套 `location` 规则的。
+
+> 官网文档：ngx_http_core_module/location
+
 ### 允许跨域
 
 　　有时候，比较大（几百兆以上）的静态资源需要在客户端使用异步方式加载（例如 Ajax），但是多个人合作开发时，拷贝这些静态资源到各自本地（如果不这么做，将会出现跨域问题）是最糟糕的解决方案，这个时候我们可以将静态资源放在一个服务器上，然后使用反向代理或者允许跨域的配置巧妙的解决这个问题。
@@ -124,6 +175,8 @@
 - `Access-Control-Allow-Credentials`
 
     　　可选，这个响应头信息代表的是跨域请求是否需要携带 **Cookie** 信息，默认为 `false`，在需要利用 Session-Cookie 机制的情况下务必设置为 `true`。
+
+> 官网文档：ngx_http_headers_module/add_header
 
 ### 反向代理
 
@@ -152,3 +205,5 @@
 - `proxy_pass`
 
     　　则是后端（被代理）服务器地址。
+
+> 官网文档：ngx_http_proxy_module
