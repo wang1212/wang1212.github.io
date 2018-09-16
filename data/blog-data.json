@@ -14,6 +14,15 @@
         "card": [
             {
                 "title"  : "",
+                "time"   : "2018-9-16",
+                "content": {
+                    "text": [
+                        "其实我们每个人的生活都是一个世界，即使最平凡的人也要为他生活的那个世界而奋斗。--- 路遥《平凡的世界》"
+                    ]
+                }
+            },
+            {
+                "title"  : "",
                 "time"   : "2018-8-15",
                 "content": {
                     "text": [
@@ -89,6 +98,10 @@
             ["Firefox status", "https://platform-status.mozilla.org/"],
             ["Webkit", "https://webkit.org/"],
             ["GitHub Guides", "https://guides.github.com/"],
+            ["Advanced Bash-Scripting Guide", "http://tldp.org/LDP/abs/html/"],
+            ["BashPitfalls", "http://mywiki.wooledge.org/BashPitfalls"],
+            ["COMMANDLINEFU.COM", "https://www.commandlinefu.com/commands/browse"],
+            ["图灵社区", "http://www.ituring.com.cn/"],
             ["WebGL 中文网", "http://www.hewebgl.com/"],
             ["GeoJSON 格式规范说明", "https://www.oschina.net/translate/geojson-spec?cmp"],
             ["前端开发资源", "http://www.css88.com/"],
@@ -111,17 +124,11 @@
                 ["HTML", "80%"],
                 ["CSS3", "75%"],
                 ["jQuery", "85%"],
-                ["Bootstrap v4", "80%"],
-                ["React.js", "60%"]
-            ],
-            "CSS 预处理器": [
-                ["Sass", "65%"]
-            ],
-            "流程化构建工具": [
-                ["gulp", "80%"]
-            ],
-            "模块化打包工具": [
-                ["webpack v4", "70%"]
+                ["Bootstrap v4", "90%"],
+                ["React.js / Redux / Router", "75%"],
+                ["Sass", "65%"],
+                ["gulp", "80%"],
+                ["webpack v4", "80%"]
             ],
             "编程语言": [
                 ["JavaScript", "90%"],
@@ -129,11 +136,11 @@
                 ["Ruby", "40%"]
             ],
             "版本控制工具": [
-                ["SVN", "60%"],
-                ["Git", "50%"]
+                ["Git", "60%"],
+                ["SVN", "50%"]
             ],
             "Web GIS": [
-                ["Leaflet.js", "45%"],
+                ["Leaflet.js", "70%"],
                 ["OpenLayers", "20%"],
                 ["Cesium.js", "20%"]
             ]
