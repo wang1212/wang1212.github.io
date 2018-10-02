@@ -22,10 +22,26 @@
 <p>  　　Linux 可运行在不同的CPU平台上，可移植性很强，所以 Linux 在嵌入式系统开发当中应用广泛。</p>
 </li>
 </ul>
-<h3 id="linux-">linux 内核</h3>
-<p>　　<strong>Linux 操作系统对于用户空间和内核空间有严格的区分，他们之间有明显的界限。</strong>用户空间主要包含GNU C库（glibc）和用户应用程序（User Applications）等；内核空间则包含系统调用接口（System Call Interface，SCI）、内核（Kernel）、板级支持包（Board Support Package，BSP）三层。</p>
+<h2 id="linux-">Linux 的组成</h2>
+<p>　　首先，Linux 可划分为以下四部分：</p>
+<ul>
+<li>Linux 内核</li>
+<li>GNU 工具</li>
+<li>图形化桌面环境</li>
+<li>应用软件</li>
+</ul>
+<h3 id="linux-">Linux 内核</h3>
+<p>　　<strong>Linux 系统的核心是内核。</strong>内核控制着计算机系统上所有的硬件和软件，在必要时分配硬件，并根据需要执行软件。</p>
+<p>　　内核主要负责以下四种功能：</p>
+<ul>
+<li>系统内存管理</li>
+<li>软件程序管理</li>
+<li>硬件设备管理</li>
+<li>文件系统管理</li>
+</ul>
+<p>　　<strong>Linux 操作系统对于用户空间和内核空间有严格的区分，他们之间有明显的界限。</strong>用户空间主要包含 GNU C库（glibc）和用户应用程序（User Applications）等；内核空间则包含系统调用接口（System Call Interface，SCI）、内核（Kernel）、板级支持包（Board Support Package，BSP）三层。</p>
 <p>　　Windows 系统的内核是 NT，它是一种微内核，只提供操作系统必要的功能，例如进程管理，内存管理等等，微内核可以更方便的进行升级，扩展；而<strong> Linux 操作系统的内核是 linux，它是一种宏内核</strong>，不仅在内核中实现了操作系统必要的服务，而且硬件设备驱动也存在于内核中，内核效率相对于微内核来说较高，对硬件设备支持也更全面。所有不同发行版本的 Linux 操作系统都是使用的统一标准的 linux 内核，版本号由 Linux 社区所控制。</p>
-<p>　　linux内核主要包含以下几部分子系统：</p>
+<p>　　linux 内核主要包含以下几部分子系统：</p>
 <ul>
 <li><p>系统调用接口（System Call Interface，SCI）</p>
 <p>  　　系统调用接口主要实现从用户空间到内核的函数调用，是一个非常有用的函数调用多路复用和多路分解服务。</p>
@@ -50,22 +66,8 @@
 </li>
 </ul>
 <p>　　linux 内核还是一个动态内核，支持动态添加或删除软件组件，可以在任何时候根据需要将特定模块进行插入，即实现用户定制功能。</p>
-<h3 id="shell">Shell</h3>
-<p>　　Linux 是一个基于命令行的操作系统，提供了一个命令解释器，即 shell（壳）。Shell 是一个软件，是操作系统的用户界面，用户通过在 shell 中输入命令，然后命令解释器解释完成后将指令送往内核中执行，来实现对 Linux 的操作。</p>
-<p>　　Linux 中的 shell 也有不同的版本：Bourne Shell（贝尔实验室开发）、Bash（GNU 开发）、C shell（Sun 公司开发）、Z shell（集成了前几种 shell 的优点）等等。</p>
-<h3 id="bootloader">Bootloader</h3>
-<p>　　<strong>Bootloader 是系统的启动加载程序，用来初始化硬件设备、建立内存空间映射图，为调用内核准备好正确的环境。</strong>Bootloader 一般包括两种不同的操作模式：</p>
-<ul>
-<li><p>启动加载模式</p>
-<p>  　　此模式下，Bootloader 会将操作系统从固态存储设备上加载进内存。</p>
-</li>
-<li><p>下载模式</p>
-<p>  　　此模式下，目标机可通过串口连接或网络连接从主机下载文件，例如内核映射和根文件系统映射。</p>
-</li>
-</ul>
-<p>　　Bootloader 的作用主要是完成系统配置、中断接管、系统引导；装载内核、根文件系统、参数传递、内核调试、内核和根文件系统的下载。</p>
-<h3 id="-">文件（设备）系统</h3>
-<p>　　Linux 操作系统支持非常多的文件系统类型，例如 ext、ext2、ext3、iso9660、xfs、ntfs、proc 等等。而且，<strong>Linux 中的一切设备都抽象成为了文件，用户通过设备文件（设备节点）来使用设备驱动操作设备。</strong>Linux 系统中将设备分为三类：</p>
+<h4 id="-">文件（设备）系统</h4>
+<p>　　Linux 操作系统支持非常多的文件系统类型，例如 ext、ext2、ext3、ext4、iso9660、xfs、ntfs、proc 等等。而且，<strong>Linux 中的一切设备都抽象成为了文件，用户通过设备文件（设备节点）来使用设备驱动操作设备。</strong>Linux 系统中将设备分为三类：</p>
 <ul>
 <li><p>字符设备</p>
 <p>  　　指那些必须以串行顺序依次进行访问的设备，如触摸屏、磁带驱动器、鼠标等，用字节流存取文件，没有缓冲区。</p>
@@ -77,8 +79,51 @@
 <p>  　　网络设备不同于前两者，不能直接对文件进行操作，不能直接访问网络设备驱动，在 Linux 中通过设备接口和 Socket（套接字）技术（协议）来进行网络设备（进程）之间的通信，从而访问网络设备驱动，实现对网络设备的操作。</p>
 </li>
 </ul>
-<h3 id="-">根目录</h3>
-<p>　　Windows 下用户可以将硬盘实现分区，即C盘、D盘等，文件存储的实现是多个并行树形结构；而在<strong>Linux 下硬盘用户是不可以分区的，文件存储的实现是单个树形结构，最顶层则是根目录<code>/</code>。</strong></p>
+<h3 id="gnu-">GNU 工具</h3>
+<p>　　除了由内核控制硬件设备外，操作系统还需要工具来执行一些标准功能，比如控制文件和程序。Linus 在创建 Linux 系统内核时，并没有可用的系统工具。</p>
+<p>　　GNU 组织（GNU是GNU’s Not Unix的缩写）开发了一套完整的Unix工具，但没有可以运行它们的内核系统。这些工具是在名为开源软件（open source software，OSS）的软件理念下开发的。</p>
+<p>　　<strong>将 Linus 的 Linux 内核和 GNU 操作系统工具整合起来，就产生了一款完整的、功能丰富的免费操作系统。</strong>因此，Linux 操作系统又称 GNU/Linux 系统。</p>
+<h4 id="-gnu-">核心 GNU 工具</h4>
+<p>　　GNU 项目的主旨在于为 Unix 系统管理员设计出一套类似于 Unix 的环境。这个目标促使该项目移植了很多常见的 Unix 系统命令行工具。供 Linux 系统使用的这组核心工具被称为 coreutils（core utilities）软件包。</p>
+<p>　　GNU coreutils 软件包由三部分构成：</p>
+<ul>
+<li>用以处理文件的工具</li>
+<li>用以操作文本的工具</li>
+<li>用以管理进程的工具</li>
+</ul>
+<h4 id="shell">shell</h4>
+<p>　　GNU/Linux shell 是一种特殊的交互式工具。它为用户提供了启动程序、管理文件系统中的文件以及运行在 Linux 系统上的进程的途径。shell 的核心是命令行提示符。命令行提示符是 shell 负责交互的部分。它允许你输入文本命令，然后解释命令，并在内核中执行。</p>
+<p>　　shell 包含了一组内部命令，用这些命令可以完成诸如复制文件、移动文件、重命名文件、显示和终止系统中正运行的程序等操作。shell 也允许你在命令行提示符中输入程序的名称，它会将程序名传递给内核以启动它。</p>
+<p>　　你也可以将多个 shell 命令放入文件中作为程序执行。这些文件被称作 shell 脚本。你在命令行上执行的任何命令都可放进一个 shell 脚本中作为一组命令执行。</p>
+<p>　　在 Linux 系统上，通常有好几种 Linux shell 可用。不同的 shell 有不同的特性，有些更利于创建脚本，有些则更利于管理进程。所有 Linux 发行版默认的shell 都是 bash shell。bash shell 由 GNU 项目开发，被当作标准 Unix shell——Bourne shell（以创建者的名字命名）的替代品。bash shell 的名
+称就是针对 Bourne shell 的拼写所玩的一个文字游戏，称为 Bourne again shell。</p>
+<h3 id="linux-">Linux 桌面环境</h3>
+<p>　　在 Linux 的早期（20 世纪 90 年代初期），能用的只有一个简单的 Linux 操作系统文本界面。这个文本界面允许系统管理员运行程序，控制程序的执行，以及在系统中移动文件。</p>
+<p>　　随着 Microsoft Windows 的普及，电脑用户已经不再满足于对着老式的文本界面工作了。这推动了 OSS（open source software）社区的更多开发活动，Linux 图形化桌面环境应运而生。Linux 有各种图形化桌面可供选择。</p>
+<h4 id="x-window-">X Window 系统</h4>
+<p>　　X Window 软件是直接和 PC 上的显卡及显示器打交道的底层程序。它控制着    Linux 程序如何在电脑上显示出漂亮的窗口和图形。Linux 并非唯一使用 X Window 的操作系统，它有针对不同操作系统的版本。</p>
+<p>　　核心的 X Window 软件可以产生图形化显示环境，但仅此而已。虽然对于运行独立应用这已经足够，但在日常 PC 使用中却并不是那么有用。它没有桌面环境供用户操作文件或是开启程序。为此，你需要一个建立在X Window系统软件之上的桌面环境。</p>
+<h4 id="kde-">KDE 桌面</h4>
+<p>　　KDE（K Desktop Environment，K 桌面环境）最初于 1996 年作为开源项目发布。它会生成一个类似于 Microsoft Windows 的图形化桌面环境。</p>
+<p>　　KDE 桌面允许你把应用程序图标和文件图标放置在桌面的特定位置上。单击应用程序图标，Linux 系统就会运行该应用程序。单击文件图标，KDE 桌面就会确定使用哪种应用程序来处理该文件。</p>
+<h4 id="gnome-">GNOME 桌面</h4>
+<p>　　GNOME（the GNU Network Object Model Environment，GNU 网络对象模型环境）是另一个流行的 Linux 桌面环境。GNOME 于 1999 年首次发布，现已成为许多 Linux 发行版默认的桌面环境（不过用得最多的是 Red Hat Linux）。</p>
+<h4 id="unity-">Unity 桌面</h4>
+<p>　　这是 Ubuntu 的公司自己开发的一套叫作 Unity 的 Linux 桌面环境。Unity 桌面得名于该项目的目标——为工作站、平板电脑以及移动设备提供一致的桌面体验。
+不管你是在工作站还是在手机上使用 Ubuntu，Unity 桌面的使用方式都是一样的。</p>
+<h2 id="bootloader-">Bootloader 是什么</h2>
+<p>　　<strong>Bootloader 是系统的启动加载程序，用来初始化硬件设备、建立内存空间映射图，为调用内核准备好正确的环境。</strong>Bootloader 一般包括两种不同的操作模式：</p>
+<ul>
+<li><p>启动加载模式</p>
+<p>  　　此模式下，Bootloader 会将操作系统从固态存储设备上加载进内存。</p>
+</li>
+<li><p>下载模式</p>
+<p>  　　此模式下，目标机可通过串口连接或网络连接从主机下载文件，例如内核映射和根文件系统映射。</p>
+</li>
+</ul>
+<p>　　Bootloader 的作用主要是完成系统配置、中断接管、系统引导；装载内核、根文件系统、参数传递、内核调试、内核和根文件系统的下载。</p>
+<h2 id="linux-">Linux 的系统目录</h2>
+<p>　　Windows 下用户可以将硬盘实现分区，即 C 盘、D 盘等，文件存储的实现是多个并行树形结构；而在 <strong>Linux 下硬盘用户是不可以分区的，文件存储的实现是单个树形结构，最顶层则是根目录<code>/</code>。</strong></p>
 <p>　　在根目录下，有许多一级子目录，这些子目录有很多必须的目录，即 Linxu 不可或缺的目录，主要有：</p>
 <ul>
 <li><p>/bin</p>
@@ -116,12 +161,51 @@
 </li>
 </ul>
 <p>　　以上就是 Linux 根目录下一些关键性目录及其存储的文件。需要注意的是：<strong>Linux 下的文件存放并不像 Windows 下那样具有随意性，很多文件需要存放在相应的目录中才行。</strong></p>
-<h2 id="-gui-">图形用户界面（GUI）</h2>
-<p>　　GUI (图形用户界面)可以帮助用户进行更便捷的操作，提高用户的使用体验，能极大的提高处理日常工作的效率。在以上特点中，我明确的说明了 Linux 没有实现 GUI，可能很多人不同意，明明现在使用的 Linux 都有图形用户界面。这里呢，有一个非常重要的概念：<strong>Linux 的 GUI 并没有在其系统中真正实现。</strong></p>
-<p>　　Linux 操作系统的GUI是通过X（视窗）协议来实现的，所有 Linux 下 GUI 的实现都是需要通过与 X 服务器的通讯来完成，即就是 GUI 在 Linux 中相当于一个应用程序，即以独立进程存在，这个进程就是X服务器。一句话，GUI 不是 Linux 操作系统的一部分，它是独立于操作系统之外的。也就是说，即便是抛弃 GUI 的实现，Linux 依然可以通过命令行完成所有的用户命令。</p>
-<p>　　既然说到 GUI，就不得不说微软的操作系统，Windows 之所以能在面对大众用户的商业市场取得巨大成功，是有原因的。这个原因就是，微软通过系统底层函数，真正实现了 GUI，使得其 Windows 操作系统的用户体验得到了极大的提升，让大多数人的日常工作效率得到了极大的提高，也让人们在日常生活进行浏览网页，玩游戏等等接触互联网的途径更为便捷，这对于促进互联网的大众化发展也是极具重大意义的。</p>
-<p>　　可能有的人会说，既然 Linux 可以通过 X 协议实现 GUI，那应该也具备面向大众市场的能力。这么说的人可能没有接触过 Linux，若接触过但你忽略了最重要的因素：质量和性能。到目前为止，Linux 下 GUI 实现的还不能称之为完美，最起码要达到与 Windows 下 GUI 一样的用户体验还是有很大差距的。之所以出现这样的情况，是因为 Windows 通过系统底层函数调用完成 GUI 的描绘，这本身就是一种系统内置服务，效率很高，并且通过 Windows系统多年来的迭代升级，质量也会更高；然而，在 Linux 下每一次的 GUI 实现，都要依靠与X服务器通讯并调用 CPU 来描绘 GUI，这样的后果就是严重影响计算机性能，即便是在I5处理器下，性能消耗也是很严重，同时 Linux 下 GUI 实现的质量明显不足，这是因为缺乏商业支持的结果。</p>
 <h2 id="-">应用程序安装</h2>
 <p>　　Linux 是一个开源的操作系统，上面使用的软件大多数为开源软件，安装应用程序的方式与 Windows 很不相同。Linux 下的应用程序安装包多为源码包，在安装前需要进行编译，然后才能进行安装；不过，也有 RPM 包，安装过程中不需要手动编译，对技术要求较低。但是，源码包适合所有发行版本的 Linux，RPM 包却没有这个优点。</p>
+<h2 id="linux-">Linux 发行版</h2>
+<p>　　我们将完整的 Linux 系统包称为发行版。有很多不同的 Linux 发行版来满足可能存在的各种运算需求。大多数发行版是为某个特定用户群定制的，比如商业用户、多媒体爱好者、软件开发人员或者普通家庭用户。每个定制的发行版都包含了支持特定功能所需的各种软件包，比如为多媒体爱好者准备的音频和视频编辑软件，为软件开发人员准备的编译器和集成开发环境（IDE）。</p>
+<p>　　不同的 Linux 发行版通常归类为3种：</p>
+<ul>
+<li>完整的核心Linux发行版</li>
+<li>特定用途的发行版</li>
+<li>LiveCD测试发行版</li>
+</ul>
+<h3 id="-linux-">核心 Linux 发行版</h3>
+<p>　　核心 Linux 发行版含有内核、一个或多个图形化桌面环境以及预编译好的几乎所有能见到的 Linux 应用。它提供了一站式的完整 Linux 安装。市场上比较流行的核心 Linux 发行版有以下：</p>
+<ul>
+<li>Slackware - 最早的 Linux 发行版中的一员，在 Linux 极客中比较流行</li>
+<li>Red Hat - 主要用于 Internet 服务器的商业发行版</li>
+<li>Fedora - 从 Red Hat 分离出的家用发行版</li>
+<li>Gentoo - 为高级 Linux 用户设计的发行版，仅包含 Linux 源代码</li>
+<li>openSUSE - 用于商用和家用的发行版</li>
+<li>Debian - 在 Linux 专家和商用 Linux 产品中流行的发行版</li>
+</ul>
+<h3 id="-linux-">特定用途的 Linux 发行版</h3>
+<p>　　除了提供特定软件外（比如仅为商业用户提供的办公应用），定制化 Linux 发行版还尝试通过自动检测和自动配置常见硬件来帮助新手安装 Linux。这使得 Linux 的安装过程轻松愉悦了许多。</p>
+<p>　　市场上流行的定制化 Linux 发行版有以下：</p>
+<ul>
+<li>CentOS - 一款基于 Red Hat 企业版 Linux 源代码构建的免费发行版</li>
+<li>Ubuntu - 一款用于学校和家庭的免费发行版</li>
+<li>PCLinuxOS - 一款用于家庭和办公的免费发行版</li>
+<li>Mint - 一款用于家庭娱乐的免费发行版</li>
+<li>dyne:bolic - 一款用于音频和 MIDI 应用的免费发行版</li>
+<li>Puppy Linux - 一款适用于老旧 PC 的小型免费发行版</li>
+</ul>
+<p>　　许多特定用途的 Linux 发行版都是基于 Debian Linux。它们使用和 Debian 一样的安装文件，但仅打包了完整 Debian 系统中的一小部分。</p>
+<h3 id="linux-livecd">Linux LiveCD</h3>
+<p>　　Linux 世界中一个相对较新的现象是可引导的 Linux CD 发行版的出现。它无需安装就可以看到 Linux 系统是什么样的。多数现代 PC 都能从 CD 启动，而不是必须从标准硬盘启动。基于这点，一些 Linux 发行版创建了含有 Linux 样本系统（称为 Linux LiveCD）的可引导 CD。</p>
+<p>　　一些可用的流行 Linux LiveCD：</p>
+<ul>
+<li>Knoppix - 来自德国的一款 Linux 发行版，也是最早的 LiveCD Linux</li>
+<li>PCLinuxOS - 一款成熟的 LiveCD 形式的 Linux 发行版</li>
+<li>Ubuntu - 为多种语言设计的世界级 Linux 项目</li>
+<li>Slax - 基于 Slackware Linux 的一款 LiveCD Linux</li>
+<li>Puppy Linux - 为老旧 PC 设计的一款全功能 Linux</li>
+</ul>
 <h2 id="-">结语</h2>
-<p>　　这篇文章并不能涵盖 Linux 操作系统的所有概念，Linux 的可移植性很强，使得其在嵌入式系统开发中有着广泛的应用，智能手机操作系统安卓（Android）使用的就是 linux 内核。可以说，Linux 操作系统为开发者提供了一个优秀的开发环境，但 Linux 并不适合所有人。</p>
+<p>　　这篇文章并不能涵盖 Linux 操作系统的所有概念，Linux 的可移植性很强，使得其在嵌入式系统开发中有着广泛的应用，智能手机操作系统安卓（Android）使用的就是 linux 内核。可以说，Linux 操作系统为开发者提供了一个优秀的开发环境，同时也是一个兼具稳定性和安全性的服务器环境。</p>
+<h2 id="-">书</h2>
+<ul>
+<li>《Linux命令行与shell脚本编程大全》（第3版）- [美] Richard Blum / Christine Bresnahan 著</li>
+</ul>
