@@ -1,6 +1,7 @@
 {
     "name"         : "不如怀念",
     "constellation": "Capricorn",
+    "github"       : "https://github.com/wang1212",
     "email"        : "mrwang1212@126.com",
     "signature"    : {
         "English": "To treat every person and every thing with heart !",
@@ -99,7 +100,7 @@
             ["Webkit", "https://webkit.org/"],
             ["GitHub Guides", "https://guides.github.com/"],
             ["Advanced Bash-Scripting Guide", "http://tldp.org/LDP/abs/html/"],
-            ["BashPitfalls", "http://mywiki.wooledge.org/BashPitfalls"],
+            ["Bash Pitfalls", "http://mywiki.wooledge.org/BashPitfalls"],
             ["COMMANDLINEFU.COM", "https://www.commandlinefu.com/commands/browse"],
             ["图灵社区", "http://www.ituring.com.cn/"],
             ["WebGL 中文网", "http://www.hewebgl.com/"],

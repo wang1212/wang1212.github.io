@@ -9,18 +9,18 @@ import blog from 'Data/blog-data.json';
 import 'Component/Router/Router.js';
 
 
-/** 
+/**
  * Render blog data
  */
 $('.page-head').find('.name').text(blog.name).end()
-	.find('.constellation').text(blog.constellation).end()
+	.find('.constellation').html(blog.constellation + '，<a href="' + blog.github + '" target="_blank">GitHub</a>').end()
 	.find('.email').text(blog.email).end()
 	.find('.English').text(blog.signature.English).end()
 	.find('.Chinese').text(blog.signature.Chinese.content).end()
 	.find('.Chinese-ref').text(blog.signature.Chinese.reference);
 
 
-/** 
+/**
  * Header animation
  */
 fetch('./data/blog-data.json')
@@ -33,7 +33,7 @@ fetch('./data/blog-data.json')
 	.catch(err => alert(err.message));
 
 
-/** 
+/**
  * Lazy Load
  */
 const content = document.getElementById('content');
@@ -50,7 +50,7 @@ Router.add(['/home', /docs.*/, '/about', '/more'], () => {
 			.then(response => {
 				loaded.push(state);
 				content.setAttribute('loaded', loaded.join(','));
-				
+
 				Router._apply();
 			})
 			.catch(err => console.error(err.message));
