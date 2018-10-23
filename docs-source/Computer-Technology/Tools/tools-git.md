@@ -5,10 +5,10 @@
         "keywords": ["Git", "Bash"],
         "summary": "Git 是一个分布式的版本控制工具，类似的版本控制工具还有 SVN ；由于 GitHub 平台的盛行，也使得 git 更加受欢迎，在 Windows 平台使用 git 也是非常方便的。",
         "ctime": "2016-12-31 13:49:00",
-        "mtime": "2018-8-15 16:42:00"
+        "mtime": "2018-10-23 15:30:00"
     }
 
---- 
+---
 
 ## Git
 
@@ -32,7 +32,7 @@
 
 　　进行用户名和邮箱的全局配置：
 
-    git config --global user.name "MrWang"
+    git config --global user.name "wang1212"
     git config --global user.email "mrwang1212@126.com"
 
 　　查看配置信息：
@@ -73,6 +73,19 @@
     ssh -T git@github.com
 
 　　回车后输入 **yes**，如果看到 **Hi {你的用户名}** 一串信息，就说明添加 SSH 密钥成功了。
+
+#### HTTPS
+
+　　SSH 虽然安全方便，但配置略显复杂。自从大部分网站从 HTTP 升级到 HTTPS 协议后，信息传输安全性也大大提高了，GitHub 目前全站采用了 HTTPS 协议。因此，现在 GitHub 推荐我们使用 HTTPS，即便捷又安全。
+
+　　在使用 HTTPS 协议进行一些 git 操作时，为了避免需要重复输入用户名和密码进行验证，git 提供了 `credential.helper` 配置项来使用第三方凭证管理工具保存用户名和密码，并在需要验证的时候自动进行调用。
+
+　　在 Windows 平台安装 git 的时候，默认配置了 `credential.helper` 为 `manager`，在 Bash 命令行输入以下命令即可查看到该配置项：
+
+    > git config --system --list
+    credential.helper=manager
+
+　　该配置使得我们在进行 git 操作（push 等）时第一次输入用户名和密码，验证成功后，往后的所有操作不再需要进行重复的手动输入验证。在 Win 菜单搜索**网络密码管理**打开后即可看到保存的 git 服务的用户凭证；同时，登录你的 GitHub Web 客户端后，进入 **Settings -> Developer settings -> Personal access tokens** 即可看到这里增加了一个 token，在这里可以很方便的管理通过 HTTPS 验证的 PC。
 
 ## 使用 Git
 
