@@ -1,0 +1,59 @@
+<h2 id="web-">Web 前端</h2>
+<p>　　这里主要是一些 Web 前端相关的，自己已经掌握或者曾经使用过的框架、库等东西。</p>
+<ul>
+<li><strong>前端的项目构建工具</strong></li>
+</ul>
+<blockquote>
+<p><strong>Webpack：</strong> <a href="https://webpack.js.org/">https://webpack.js.org/</a> <br>
+<strong>Gulp：</strong> <a href="https://gulpjs.com/">https://gulpjs.com/</a></p>
+</blockquote>
+<p>　　项目构建工具主要是自动化完成一些代码、图片优化、压缩的工作，提供 js 模块的打包和依赖构建功能，之前是 gulp 和 webpack 混合着用，现在基本上只用 webpack 了。</p>
+<blockquote>
+<p><strong>Sass：</strong> <a href="http://sass-lang.com/">http://sass-lang.com/</a> <br>
+<strong>PostCss：</strong> <a href="https://gulpjs.com/">https://gulpjs.com/</a></p>
+</blockquote>
+<p>　　这些工具都是与 CSS 相关的，主要是提供一些像写代码的方式去写 CSS ，例如提高复用、可维护性，顺带着处理一下浏览器的兼容性问题。刚开始的时候 CSS 预处理器其实有 Less 和 Sass 两个选择，但 Sass 似乎未来的发展更好一些，所以一直用的都是 Sass。后来，又出现了 CSS 后处理器 PostCss，新技术引领着趋势，尝试了下感觉还挺好用。</p>
+<blockquote>
+<p><strong>Babel：</strong> <a href="https://babeljs.io/">https://babeljs.io/</a></p>
+</blockquote>
+<p>　　Babel 主要是将我们编写的 ES6/7/8 代码编译成可以在现代化浏览器中运行的 ES5+ 代码。有了 Babel 之后，使用新的 JavaScript 语言特性编写代码要更高效、方便，显著缩短开发时间。</p>
+<ul>
+<li><strong>CSS 库/框架</strong></li>
+</ul>
+<blockquote>
+<p><strong>Bootstrap：</strong> <a href="https://getbootstrap.com/">https://getbootstrap.com/</a></p>
+</blockquote>
+<p>　　CSS 库/框架对于开发者来说，提供了一种快速实现用户界面（UI）的工具。前端的发展分支很多，注重了 js 模块化和交互逻辑，必然对 CSS（UI）花费的时间就要少了，Bootstrap 恰好是一个成熟并且便捷的可以快速实现用户界面的 CSS 库/框架。</p>
+<ul>
+<li><strong>JS 库/框架</strong></li>
+</ul>
+<blockquote>
+<p><strong>jQuery：</strong> <a href="https://jquery.com/">https://jquery.com/</a></p>
+</blockquote>
+<p>　　jQuery 相信是每个前端开发者入门学习使用的 js 库，为我们提供了很多便捷的操作 DOM 的方法，同时也处理了诸多 js 兼容性问题。至今，各大网站 jQuery 的身影依然到处可见。</p>
+<ul>
+<li><strong>React</strong></li>
+</ul>
+<blockquote>
+<p><strong>React：</strong> <a href="https://reactjs.org/">https://reactjs.org/</a></p>
+</blockquote>
+<p>　　事实上，我觉得还是有必要将 React 独立出来的，因为 React 代表了前端开发的一种实现方式和技术生态圈，是一整套的解决方案。刚开始，其实面临着两种选择，React 和 Vue，后者属于前者的模仿和追赶超越者，当然它们都有各自的特色，我出于喜欢 jsx 语法和 React 有 facebook 这种大型项目成功案例等原因，选择了 React。</p>
+<blockquote>
+<p><strong>Redux：</strong> <a href="https://redux.js.org/">https://redux.js.org/</a> <br>
+<strong>Redux-Thunk：</strong> <a href="https://github.com/reduxjs/redux-thunk">https://github.com/reduxjs/redux-thunk</a> <br>
+<strong>Redux-Logger：</strong> <a href="https://github.com/LogRocket/redux-logger">https://github.com/LogRocket/redux-logger</a></p>
+</blockquote>
+<p>　　由于 React 的数据是单向流动的，因此父子组件要实现交互其实挺麻烦的，需要依靠 props 和回调来实现。这个时候 Redux 就充当了应用状态管理角色，来统一管理应用的全部状态，并在应用中随处可访问。Redux-Thunk 则解决了 Redux 默认的同步更新状态的问题，现代化 Web 应用大多都依赖于 ajax、fetch 异步获取数据，Redux-Thunk 则提供了异步更新状态的解决方案。Redux-Logger 则是一个工具，提供了 Redux 中状态更新日志记录的功能，主要是为了方便开发者调试。</p>
+<p>　　当然，Redux 的替代方案目前有很多，听说 Mbox 也不错，后面会尝试一下。</p>
+<blockquote>
+<p><strong>React-Router：</strong> <a href="https://reacttraining.com/react-router/">https://reacttraining.com/react-router/</a></p>
+</blockquote>
+<p>　　目前，前端开发已经承担了过去很多未曾想过的工作，之前页面的路由跳转都是由服务器端来控制，现在在前后端分离的趋势下服务器端只负责数据的业务逻辑计算，其它的工作（例如路由控制）均交由前端来完成。这样做的好处也是显而易见的，前端拥有了更多的自主权，SPA 应用的用户体验也更好了。React-Router 就是一个 React 应用中的前端路由解决方案。</p>
+<blockquote>
+<p><strong>reactstrap：</strong> <a href="https://reactstrap.github.io/">https://reactstrap.github.io/</a></p>
+</blockquote>
+<p>　　在 React 应用中，一切皆组件，并遵循相应的状态管理规则。为了快速实现用户界面（UI），单纯的使用 Bootstrap 还需要自行编写额外的代码，其官方也没有实现 Bootstrap 的 React 组件，不过部分民间开发者做了这些工作，我从中挑选了一个觉得实现的比较好的，也就是 reactstrap。</p>
+<blockquote>
+<p><strong>React-Loadable：</strong> <a href="https://github.com/jamiebuilds/react-loadable">https://github.com/jamiebuilds/react-loadable</a></p>
+</blockquote>
+<p>　　SPA 应用通常打包之后文件都很大，客户端的网络状况也需要考虑，所以就需要分模块实现懒加载。我们自己可以利用 js 语言本身的一些特性（例如 import 动态导入）实现懒加载，但是 React-Loadable 提供了一种将模块组件实现懒加载的优化方案，帮我们处理了很多细节性问题。</p>

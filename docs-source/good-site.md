@@ -4,8 +4,8 @@
         "title": "优质 Web Site",
         "keywords": ["Web Site", "Useful"],
         "summary": "对于平常遇到的优质资源站点在这里做一些汇总，也方便以后用到的时候回过来头好找。",
-        "ctime": "2018-1-25 20:55:00",
-        "mtime": "2018-1-25 20:55:00"
+        "ctime": "2018-01-25 20:55:00",
+        "mtime": "2018-12-02 15:38:00"
     }
 
 ---
@@ -48,7 +48,8 @@
 
 　　这是一些提供免费 CDN 服务的站点，里面也有好多意想不到的好资源。
 
-> **BootCDN：**http://www.bootcdn.cn/
+> **BootCDN：**http://www.bootcdn.cn/ <br>
+> **Staticfile CDN：**https://staticfile.org/
 
 ## 图片压缩
 
