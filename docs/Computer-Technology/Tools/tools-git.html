@@ -11,7 +11,7 @@
 <p>　　我们首先可以对 Git 进行简单的配置，使用 SSH 来避免重复提交时每次都要输入密码。</p>
 <h4 id="-">个人信息</h4>
 <p>　　进行用户名和邮箱的全局配置：</p>
-<pre><code>git<span class="hljs-built_in"> config </span>--global user.name <span class="hljs-string">"MrWang"</span>
+<pre><code>git<span class="hljs-built_in"> config </span>--global user.name <span class="hljs-string">"wang1212"</span>
 git<span class="hljs-built_in"> config </span>--global user.email <span class="hljs-string">"mrwang1212@126.com"</span>
 </code></pre><p>　　查看配置信息：</p>
 <pre><code>git<span class="hljs-built_in"> config </span>--global -l
@@ -36,6 +36,13 @@ ssh-<span class="hljs-keyword">add</span><span class="bash"> ~/.ssh/id_rsa</span
 <p>　　最后，可以测试一下：</p>
 <pre><code><span class="hljs-selector-tag">ssh</span> <span class="hljs-selector-tag">-T</span> <span class="hljs-selector-tag">git</span>@<span class="hljs-keyword">github</span>.<span class="hljs-keyword">com</span>
 </code></pre><p>　　回车后输入 <strong>yes</strong>，如果看到 <strong>Hi {你的用户名}</strong> 一串信息，就说明添加 SSH 密钥成功了。</p>
+<h4 id="https">HTTPS</h4>
+<p>　　SSH 虽然安全方便，但配置略显复杂。自从大部分网站从 HTTP 升级到 HTTPS 协议后，信息传输安全性也大大提高了，GitHub 目前全站采用了 HTTPS 协议。因此，现在 GitHub 推荐我们使用 HTTPS，即便捷又安全。</p>
+<p>　　在使用 HTTPS 协议进行一些 git 操作时，为了避免需要重复输入用户名和密码进行验证，git 提供了 <code>credential.helper</code> 配置项来使用第三方凭证管理工具保存用户名和密码，并在需要验证的时候自动进行调用。</p>
+<p>　　在 Windows 平台安装 git 的时候，默认配置了 <code>credential.helper</code> 为 <code>manager</code>，在 Bash 命令行输入以下命令即可查看到该配置项：</p>
+<pre><code>&gt; git<span class="hljs-built_in"> config </span>--system --list
+credential.<span class="hljs-attribute">helper</span>=manager
+</code></pre><p>　　该配置使得我们在进行 git 操作（push 等）时第一次输入用户名和密码，验证成功后，往后的所有操作不再需要进行重复的手动输入验证。在 Win 菜单搜索<strong>网络密码管理</strong>打开后即可看到保存的 git 服务的用户凭证；同时，登录你的 GitHub Web 客户端后，进入 <strong>Settings -&gt; Developer settings -&gt; Personal access tokens</strong> 即可看到这里增加了一个 token，在这里可以很方便的管理通过 HTTPS 验证的 PC。</p>
 <h2 id="-git">使用 Git</h2>
 <p>　　下面来看看 git bash 中一些常用的 git 命令，介绍一下其简单的用法，利用 git 来管理我们的代码。</p>
 <h3 id="-">初始化</h3>
