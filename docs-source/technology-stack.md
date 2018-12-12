@@ -5,7 +5,7 @@
         "keywords": ["Technology stack"],
         "summary": "作为一名开发者，定期对自己的技术栈，常用开发工具、框架、库做一个分析总结，适时更新自己的技术储备。",
         "ctime": "2018-12-02 15:43:00",
-        "mtime": "2018-12-11 15:58:00"
+        "mtime": "2018-12-12 18:36:00"
     }
 
 ---
@@ -32,6 +32,21 @@
 
 　　项目的源代码一般会由一个团队中多个成员来共同开发维护、迭代升级，为了更好的追踪每个人对源代码所做的任何修改，最终可以方便的合并多个人的修改，以及存储每个版本的源代码快照记录，提供恢复、备份等操作，会用到版本控制工具。目前，主要有 SVN 和 Git 两种最常用的工具。SVN 是一款比较古老的基于中心化管理，使用起来较为简单的版本控制工具，Tortoise SVN 提供了图形界面，可以更方便的使用 SVN；Git 则是新一代的基于分布式管理，使用起来略微复杂的版本控制工具，开源代码托管平台 GitHub 就是基于 Git 建立的，建议直接在 Bash 终端中通过命令使用 Git 更方便。
 
+- **包管理器**
+
+> **npm：** https://www.npmjs.com/ <br>
+> **yarn：** https://yarnpkg.com/
+
+　　npm 是一个 Node 模块包管理工具，一般都随 Node.js 一起安装，应该是前端开发者最先接触到的包管理器了。后来由于一些 npm 的缺陷问题，yarn 出现了，它使用了并行下载安装、缓存、离线模式等特性显著提高了依赖的安装速度和准确性，值得一试。
+
+> **pip：** https://pypi.org/project/pip/
+
+　　pip 是一个现代化的，通用的 Python 包管理工具，通过该工具安装下载的 Python 包模块均来自于 Python 官方维护的第三方包存储库 PyPI（Python Package Index ）。
+
+> **RubyGems：** https://rubygems.org/
+
+　　RubyGems 是 Ruby 的包管理工具，与 npm、pip 那些功能类似。
+
 ## Web 前端
 
 　　这里主要是一些 Web 前端相关的，自己已经掌握或者曾经使用过的框架、库等东西。
@@ -51,6 +66,17 @@
 > **Babel：** https://babeljs.io/
 
 　　Babel 主要是将我们编写的 ES6/7/8 代码编译成可以在现代化浏览器中运行的 ES5+ 代码。有了 Babel 之后，使用新的 JavaScript 语言特性编写代码要更高效、方便，显著缩短开发时间。
+
+- **图标库**
+
+> **Font Awesome：** https://fontawesome.com/ <br>
+> **Material Icons（google）：** http://google.github.io/material-design-icons/ <br>
+> **Material Design Icons：** http://materialdesignicons.com/ <br>
+> **Flat Icon：** https://www.flaticon.com/ <br>
+> **Icons8：** https://icons8.com/ <br>
+> **Iconfont：** http://www.iconfont.cn/
+
+　　界面上多用一些图标会增加用户体验效果，Font Awesome 是之前 Bootstrap 3.X 版本官方采用的矢量图标库，目前来说还是很好用的。
 
 - **CSS 库/框架**
 
@@ -74,6 +100,17 @@
 > **Lodash：** https://lodash.com/
 
 　　Lodash 是一个 JavaScript 的工具函数库，提供了很多针对字符串、数组、对象等类型数据的处理方法，内部也结合了惰性计算对性能做了优化，是一个不错的工具。
+
+> **axios：** https://www.npmjs.com/package/axios
+
+　　axios 是一个支持现代化浏览器的基于 Promise 的 HTTP 客户端工具。
+
+- **数据可视化**
+
+> **Echarts：** http://echarts.baidu.com/ <br>
+> **D3：** https://d3js.org/
+
+　　如何将数据有效、直观的呈现给用户是非常重要的，数据可视化的解决方案很多，但通用且功能齐全的不多，国内的 Echarts 还算不错，只是文档太烂（源码有 java 的味道）。D3.js 是一个可定制化并且功能强大的数据可视化图形库，学习曲线略高。
 
 - **React**
 
