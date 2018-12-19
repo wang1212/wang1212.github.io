@@ -85,9 +85,10 @@
 　　Normalize 将所有不同浏览器的元素默认样式进行了统一，是一个类似于 Reset CSS 的工具库。
 
 > **Bootstrap：** https://getbootstrap.com/ <br>
+> **Materialize：** https://materializecss.com/ <br>
 > **Material Design Lite：** https://getmdl.io
 
-　　CSS 库/框架对于开发者来说，提供了一种快速实现用户界面（UI）的工具。前端的发展分支很多，注重了 js 模块化和交互逻辑，必然对 CSS（UI）花费的时间就要少了，Bootstrap 恰好是一个成熟并且便捷的可以快速实现用户界面的 CSS 库/框架。
+　　CSS 库/框架对于开发者来说，提供了一种快速实现用户界面（UI）的工具。前端的发展分支很多，注重了 js 模块化和交互逻辑，必然对 CSS（UI）花费的时间就要少了，Bootstrap 恰好是一个成熟并且便捷的可以快速实现用户界面的 CSS 库/框架。而 Materialize 则是一个可以媲美 Bootstrap 的基于 Material Design 的前端 CSS 框架。
 
 　　Material Design Lite 是谷歌官方提供的一套 CSS 库/框架，遵循了谷歌自己提出来的 Material Design 风格，还是挺不错的。
 
@@ -107,10 +108,11 @@
 
 - **数据可视化**
 
+> **Chart.js：** https://www.chartjs.org/ <br>
 > **Echarts：** http://echarts.baidu.com/ <br>
 > **D3：** https://d3js.org/
 
-　　如何将数据有效、直观的呈现给用户是非常重要的，数据可视化的解决方案很多，但通用且功能齐全的不多，国内的 Echarts 还算不错，只是文档太烂（源码有 java 的味道）。D3.js 是一个可定制化并且功能强大的数据可视化图形库，学习曲线略高。
+　　如何将数据有效、直观的呈现给用户是非常重要的，数据可视化的解决方案很多，但通用且功能齐全的不多，国内的 Echarts 还算不错，只是文档太烂（源码有 java 的味道），Chart.js 则是一个开源、轻量级的图表库，很好用。D3.js 是一个可定制化并且功能强大的数据可视化图形库，学习曲线略高。
 
 - **React**
 
