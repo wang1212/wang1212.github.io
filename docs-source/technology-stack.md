@@ -5,7 +5,7 @@
         "keywords": ["Technology stack"],
         "summary": "作为一名开发者，定期对自己的技术栈，常用开发工具、框架、库做一个分析总结，适时更新自己的技术储备。",
         "ctime": "2018-12-02 15:43:00",
-        "mtime": "2018-12-12 18:36:00"
+        "mtime": "2018-12-20 09:50:00"
     }
 
 ---
@@ -70,7 +70,7 @@
 - **图标库**
 
 > **Font Awesome：** https://fontawesome.com/ <br>
-> **Material Icons（google）：** http://google.github.io/material-design-icons/ <br>
+> **Material Icons（google）：** https://material.io/tools/icons/ <br>
 > **Material Design Icons：** http://materialdesignicons.com/ <br>
 > **Flat Icon：** https://www.flaticon.com/ <br>
 > **Icons8：** https://icons8.com/ <br>
@@ -86,11 +86,14 @@
 
 > **Bootstrap：** https://getbootstrap.com/ <br>
 > **Materialize：** https://materializecss.com/ <br>
-> **Material Design Lite：** https://getmdl.io
+> **Material Design Lite：** https://getmdl.io <br>
+> **Material Components Web：** https://material.io/develop/ <br>
+> **UIkit：** https://getuikit.com/ <br>
+> **Pure：** https://purecss.io/
 
 　　CSS 库/框架对于开发者来说，提供了一种快速实现用户界面（UI）的工具。前端的发展分支很多，注重了 js 模块化和交互逻辑，必然对 CSS（UI）花费的时间就要少了，Bootstrap 恰好是一个成熟并且便捷的可以快速实现用户界面的 CSS 库/框架。而 Materialize 则是一个可以媲美 Bootstrap 的基于 Material Design 的前端 CSS 框架。
 
-　　Material Design Lite 是谷歌官方提供的一套 CSS 库/框架，遵循了谷歌自己提出来的 Material Design 风格，还是挺不错的。
+　　Material Design Lite 是谷歌官方提供的一套轻量级 CSS 库/框架，遵循了谷歌自己提出来的 Material Design 风格，还是挺不错的；而 Material Components Web（MDC-Web）则是前者的后续产品。
 
 - **JS 库/框架**
 
