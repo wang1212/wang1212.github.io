@@ -5,7 +5,7 @@
         "keywords": ["Web Site", "Useful"],
         "summary": "对于平常遇到的优质资源站点在这里做一些汇总，也方便以后用到的时候回过来头好找。",
         "ctime": "2018-01-25 20:55:00",
-        "mtime": "2018-12-02 15:38:00"
+        "mtime": "2018-12-25 08:47:00"
     }
 
 ---
@@ -24,7 +24,7 @@
 
 ## 技术文档
 
-　　这是一些技术文档，可以供平时查阅和学习，有一定的权威性。
+　　这是一些优质的技术文档，可以供平时查阅和学习，有一定的权威性或者可参考性。
 
 > **MDN Developer Document：**https://developer.mozilla.org/en-US/ <br>
 > **jQuery API 中文文档：**http://jquery.cuishifeng.cn/ <br>
@@ -42,6 +42,7 @@
 
 > **图灵社区：**http://www.ituring.com.cn/ <br>
 > **开源中国：**https://www.oschina.net/ <br>
+> **掘金翻译计划：**https://github.com/xitu/gold-miner <br>
 > **前端开发资源：**http://www.css88.com/
 
 ## 免费 CDN
@@ -79,7 +80,8 @@
 
 > **Perfection kills：**http://perfectionkills.com/ <br>
 > **COMMANDLINEFU.COM：**https://www.commandlinefu.com/commands/browse <br>
-> **30 seconds of code：**http://www.css88.com/30-seconds-of-code/
+> **33 js concepts：**https://github.com/leonardomso/33-js-concepts <br>
+> **30 seconds of code：**https://30secondsofcode.org/
 
 　　这些站点的内容可能会随意一些，不是那么的正式，但其中的价值是极高的，只不过面对零散的优质资源需要我们仔细筛选吸收了。
 
