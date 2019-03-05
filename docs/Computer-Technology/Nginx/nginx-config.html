@@ -1,5 +1,8 @@
 <p>　　<strong><u>建议主要参考官网英文文档。</u></strong></p>
 <p>　　具体指令直接可以在官网文档的 Alphabetical index of directives（按字母顺序排列的指令索引）中搜索即可。</p>
+<blockquote>
+<p>官方文档：<a href="http://nginx.org/en/docs/">http://nginx.org/en/docs/</a></p>
+</blockquote>
 <h2 id="nginx">Nginx</h2>
 <p>　　Nginx 是一位俄罗斯开发者（伊戈尔·赛索耶夫）开发的服务器，于 2004 年 10 月 4 日公开发布。Nginx 的优势在于轻量级和高性能，尤其是高并发的场景下，相对其它服务器来说表现比较好，因此现在颇受欢迎。Nginx 通常运行在 Unix/Linux 环境下，当然现在官方也发布了 Windows 环境下的应用，不过性能有所降低，这是受限于系统环境的影响。</p>
 <p>　　Nginx 在生产环境下的应用场景通常作为负载均衡的前端服务器，对请求进行分发，实现极高的并发量。当然，在开发环境下，nginx 也可以作为一个工具来使用，提供给我们极大的便利，例如利用反向代理来实现前后端的完全分离开发。</p>
@@ -56,7 +59,7 @@
     gzip_min_length     <span class="hljs-number">20</span>;
     gzip_buffers        <span class="hljs-number">4</span> <span class="hljs-number">16</span>k;
     gzip_comp_level     <span class="hljs-number">6</span>;
-    gzip_types          <span class="hljs-built_in">text</span>/plain <span class="hljs-built_in">text</span>/xml <span class="hljs-built_in">text</span>/css <span class="hljs-built_in">text</span>/javascript <span class="hljs-built_in">application</span>/x-javascript <span class="hljs-built_in">application</span>/javascript <span class="hljs-built_in">application</span>/json; 
+    gzip_types          <span class="hljs-built_in">text</span>/plain <span class="hljs-built_in">text</span>/xml <span class="hljs-built_in">text</span>/css <span class="hljs-built_in">text</span>/javascript <span class="hljs-built_in">application</span>/x-javascript <span class="hljs-built_in">application</span>/javascript <span class="hljs-built_in">application</span>/json;
     gzip_http_version   <span class="hljs-number">1.0</span>;
     gzip_disable        <span class="hljs-string">"MSIE [1-6]\."</span>;
     gzip_proxied        off;
@@ -163,3 +166,16 @@ location / {
 <blockquote>
 <p>官网文档：ngx_http_proxy_module</p>
 </blockquote>
+<h3 id="-">重定向</h3>
+<p>　　重定向是一个比较常见的需求，nginx 的重定向指令（rewrite）还是相当简单的。例如，需要将所有 http 请求重定向到 https 下，官方推荐这么做：</p>
+<pre><code><span class="hljs-section">server</span> {
+    <span class="hljs-attribute">listen</span>      <span class="hljs-number">80</span>;
+    <span class="hljs-attribute">server_name</span> localhost;
+    <span class="hljs-attribute">return</span> <span class="hljs-number">301</span> https://example.com<span class="hljs-variable">$request_uri</span>;
+}
+</code></pre><p>　　事实上，也可以用 <code>rewrite</code> 指令，不过官方不推荐：</p>
+<pre><code>server {
+    ...
+    rewrite ^<span class="hljs-regexp">/(.*)$ https:/</span><span class="hljs-regexp">/example.com/</span><span class="hljs-variable">$1</span> permanent;
+}
+</code></pre><p>　　<strong>注意：</strong> <code>301</code> 重定向可能会导致 POST 请求被改变为 GET 请求，并可能丢失提交数据，此时使用 <code>308</code> 状态码替换即可。</p>

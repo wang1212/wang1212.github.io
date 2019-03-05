@@ -5,7 +5,7 @@
         "keywords": ["Nginx", "Config"],
         "summary": "Nginx 作为一个轻量、高性能的服务器，近年来颇受欢迎，无论是生产环境还是开发环境都有其发挥作用的地方，其配置文件相对来说还是较为简单的。而且，现在 nginx 也支持 Windows 环境了，利用不同的配置可以满足我们不同的需求。",
         "ctime": "2018-03-15 12:38:00",
-        "mtime": "2018-09-01 12:24:00"
+        "mtime": "2019-03-05 18:41:00"
     }
 
 ---
@@ -13,6 +13,8 @@
 　　**<u>建议主要参考官网英文文档。</u>**
 
 　　具体指令直接可以在官网文档的 Alphabetical index of directives（按字母顺序排列的指令索引）中搜索即可。
+
+> 官方文档：http://nginx.org/en/docs/
 
 ## Nginx
 
@@ -86,7 +88,7 @@
         gzip_min_length     20;
         gzip_buffers        4 16k;
         gzip_comp_level     6;
-        gzip_types          text/plain text/xml text/css text/javascript application/x-javascript application/javascript application/json; 
+        gzip_types          text/plain text/xml text/css text/javascript application/x-javascript application/javascript application/json;
         gzip_http_version   1.0;
         gzip_disable        "MSIE [1-6]\.";
         gzip_proxied        off;
@@ -207,3 +209,22 @@
     　　则是后端（被代理）服务器地址。
 
 > 官网文档：ngx_http_proxy_module
+
+### 重定向
+
+　　重定向是一个比较常见的需求，nginx 的重定向指令（rewrite）还是相当简单的。例如，需要将所有 http 请求重定向到 https 下，官方推荐这么做：
+
+    server {
+        listen      80;
+        server_name localhost;
+        return 301 https://example.com$request_uri;
+    }
+
+　　事实上，也可以用 `rewrite` 指令，不过官方不推荐：
+
+    server {
+        ...
+        rewrite ^/(.*)$ https://example.com/$1 permanent;
+    }
+
+　　**注意：** `301` 重定向可能会导致 POST 请求被改变为 GET 请求，并可能丢失提交数据，此时使用 `308` 状态码替换即可。
