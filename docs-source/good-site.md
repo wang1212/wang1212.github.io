@@ -40,6 +40,8 @@
 
 　　这里是一些提供了非常有用的资源的论坛社区，多看看还是对自己很有帮助的。
 
+> **开源空间信息基金会：**https://www.osgeo.org/ <br>
+> **Stack Overflow：**https://stackoverflow.com/ <br>
 > **图灵社区：**http://www.ituring.com.cn/ <br>
 > **开源中国：**https://www.oschina.net/ <br>
 > **掘金翻译计划：**https://github.com/xitu/gold-miner <br>
