@@ -179,3 +179,6 @@ location / {
     rewrite ^<span class="hljs-regexp">/(.*)$ https:/</span><span class="hljs-regexp">/example.com/</span><span class="hljs-variable">$1</span> permanent;
 }
 </code></pre><p>　　<strong>注意：</strong> <code>301</code> 重定向可能会导致 POST 请求被改变为 GET 请求，并可能丢失提交数据，此时使用 <code>308</code> 状态码替换即可。</p>
+<blockquote>
+<p>官网文档：ngx_http_rewrite_module</p>
+</blockquote>
