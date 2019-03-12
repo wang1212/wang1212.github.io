@@ -5,7 +5,7 @@
         "keywords": ["Web Site", "Useful"],
         "summary": "对于平常遇到的优质资源站点在这里做一些汇总，也方便以后用到的时候回过来头好找。",
         "ctime": "2018-01-25 20:55:00",
-        "mtime": "2018-12-25 08:47:00"
+        "mtime": "2019-03-12 14:59:00"
     }
 
 ---
@@ -20,7 +20,9 @@
 > **Firefox status：**https://platform-status.mozilla.org/ <br>
 > **Webkit：**https://webkit.org/ <br>
 > **GitHub Guides：**https://guides.github.com/ <br>
-> **Can I use：**https://caniuse.com/
+> **Can I use：**https://caniuse.com/ <br>
+> **Npm Trends：**https://www.npmtrends.com/ <br>
+> **Npm Charts：**https://npmcharts.com/
 
 ## 技术文档
 
@@ -66,6 +68,13 @@
 > **optimizilla：**http://optimizilla.com/ <br>
 
 　　图片也是一种二进制文件，前端由于资源限制通常需要压缩图片，而且只在意图片的展示，那么压缩的过程中就会删除掉图片本身的一些描述信息，PNG 格式的图片通常通过降低位深（24位降到8位）来实现压缩，所以这些都是有损压缩，不适合前端以外的无损压缩需求。
+
+## 开源工具
+
+　　这是一些开源的工具，可以帮助我们进行数据处理、分析等等。
+
+> **Mapshaper：**https://mapshaper.org/ <br>
+> **Turf.js：**http://turfjs.org/
 
 ## Web 优化
 

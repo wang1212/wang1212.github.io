@@ -101,6 +101,8 @@
             ["Chrome Blink status", "https://www.chromestatus.com/"],
             ["Firefox status", "https://platform-status.mozilla.org/"],
             ["Webkit", "https://webkit.org/"],
+            ["Npm Trends", "https://www.npmtrends.com/"],
+            ["Npm Charts", "https://npmcharts.com/"],
             ["GitHub Guides", "https://guides.github.com/"],
             ["Advanced Bash-Scripting Guide", "http://tldp.org/LDP/abs/html/"],
             ["Bash Pitfalls", "http://mywiki.wooledge.org/BashPitfalls"],

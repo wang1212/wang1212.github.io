@@ -4,7 +4,7 @@
   "description": "Record and share knowledge",
   "main": "main.js",
   "scripts": {
-    "start": "set NODE_ENV=development & gulp",
+    "start": "set NODE_ENV=development && gulp",
     "build": "gulp",
     "webpack": "npx webpack --config ./config/webpack.config.js"
   },
