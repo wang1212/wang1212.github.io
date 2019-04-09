@@ -5,7 +5,7 @@
         "keywords": ["Technology stack"],
         "summary": "作为一名开发者，定期对自己的技术栈，常用开发工具、框架、库做一个分析总结，适时更新自己的技术储备。",
         "ctime": "2018-12-02 15:43:00",
-        "mtime": "2018-12-20 09:50:00"
+        "mtime": "2019-03-19 10:08:00"
     }
 
 ---
@@ -51,7 +51,7 @@
 
 　　这里主要是一些 Web 前端相关的，自己已经掌握或者曾经使用过的框架、库等东西。
 
-- **前端的项目构建工具**
+- **项目构建工具**
 
 > **Webpack：** https://webpack.js.org/ <br>
 > **Gulp：** https://gulpjs.com/
@@ -66,6 +66,14 @@
 > **Babel：** https://babeljs.io/
 
 　　Babel 主要是将我们编写的 ES6/7/8 代码编译成可以在现代化浏览器中运行的 ES5+ 代码。有了 Babel 之后，使用新的 JavaScript 语言特性编写代码要更高效、方便，显著缩短开发时间。
+
+- **PWA（Progressive Web App）**
+
+　　PWA（Progressive Web App，渐进式 Web 应用）是一种理念，使用多种技术来增强 Web App 的功能，可以让网站的体验变得更好，能够模拟一些原生功能，比如通知推送。
+
+> **WorkBox：** https://developers.google.com/web/tools/workbox/
+
+　　谷歌（Google）作为 PWA 的先行者，Web 标准的推动者，一直引领着 Web 前沿开发技术，WorkBox 就是专门为构建 PWA 应用提供的一套开发工具，支持多个平台，并提供了方便的 Webpack 插件。
 
 - **图标库**
 
@@ -109,7 +117,9 @@
 
 　　axios 是一个支持现代化浏览器的基于 Promise 的 HTTP 客户端工具。
 
-- **数据可视化**
+### 数据可视化
+
+　　作为 Web 前端开发者来说，数据可视化是个很常见，并且非常重要的需求。
 
 > **Chart.js：** https://www.chartjs.org/ <br>
 > **Echarts：** http://echarts.baidu.com/ <br>
@@ -117,7 +127,7 @@
 
 　　如何将数据有效、直观的呈现给用户是非常重要的，数据可视化的解决方案很多，但通用且功能齐全的不多，国内的 Echarts 还算不错，只是文档太烂（源码有 java 的味道），Chart.js 则是一个开源、轻量级的图表库，很好用。D3.js 是一个可定制化并且功能强大的数据可视化图形库，学习曲线略高。
 
-- **React**
+### React
 
 > **React：** https://reactjs.org/
 
@@ -146,7 +156,7 @@
 
 　　Material-UI 则是遵循谷歌 Material Design 的基于 React 的 CSS 组件库。
 
-- **GIS**
+### Web GIS
 
 　　GIS 是当前一个热门领域，未来前景也相当好，随着 Web 技术的发展， Web GIS 也成了 GIS 行业的技术发展趋势。
 
@@ -162,6 +172,10 @@
 > **Cesium：** https://cesiumjs.org/
 
 　　Cesium 是一个开源的，可构建全球 3D 场景的 Web GIS 库，目前在三维地图领域应该算是最好的开源方案了，值得学习。
+
+> **Mapbox GL：** https://docs.mapbox.com/mapbox-gl-js/overview/
+
+　　Mapbox 作为近年来在全球发展前景越来越好的开源地图服务公司，产出了相当多的开源 GIS 工具套件，覆盖了 Web 端、移动端、桌面端。Mapbox GL JS 就是一款支持 2 维、3 维地图渲染，支持加载矢量瓦片的开源 Web 地图引擎，效果与性能也都非常好。
 
 ## 服务器端
 
