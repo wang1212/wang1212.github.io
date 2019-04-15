@@ -5,7 +5,7 @@
         "keywords": ["Nginx", "Config"],
         "summary": "Nginx 作为一个轻量、高性能的服务器，近年来颇受欢迎，无论是生产环境还是开发环境都有其发挥作用的地方，其配置文件相对来说还是较为简单的。而且，现在 nginx 也支持 Windows 环境了，利用不同的配置可以满足我们不同的需求。",
         "ctime": "2018-03-15 12:38:00",
-        "mtime": "2019-03-05 18:41:00"
+        "mtime": "2019-04-16 01:10:00"
     }
 
 ---
@@ -230,3 +230,21 @@
 　　**注意：** `301` 重定向可能会导致 POST 请求被改变为 GET 请求，并可能丢失提交数据，此时使用 `308` 状态码替换即可。
 
 > 官网文档：ngx_http_rewrite_module
+
+### 日志分割
+
+　　Nginx 的访问日志（access_log）默认是没有进行分割的，时间一长，日志文件就会有 GB 级别的大小，日志写入速度变慢，也会影响 nginx 的性能。我们可以通过很简单的方式，将访问日志设置为按天记录,将日志记录在不同的文件中。
+
+    server {
+        ...
+        # cut log by day
+        if ($time_iso8601 ~ "^(\d{4})-(\d{2})-(\d{2})") {
+            set $year  $1;
+            set $month $2;
+            set $day   $3;
+        }
+
+        access_log  logs/access/host.access-$year-$month-$day.log main;
+    }
+
+> 官网文档：ngx_http_log_module
