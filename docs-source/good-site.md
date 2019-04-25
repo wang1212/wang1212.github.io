@@ -53,6 +53,8 @@
 
 　　这是一些提供免费 CDN 服务的站点，里面也有好多意想不到的好资源。
 
+> **jsDelivr：**https://www.jsdelivr.com/ <br>
+> **UNPKG：**https://unpkg.com/ <br>
 > **BootCDN：**http://www.bootcdn.cn/ <br>
 > **Staticfile CDN：**https://staticfile.org/
 

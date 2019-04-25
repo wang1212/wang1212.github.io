@@ -98,6 +98,8 @@
         ],
         "link": [
             ["MDN Developer Document", "https://developer.mozilla.org/en-US/"],
+            ["jsDelivr", "https://www.jsdelivr.com/"],
+            ["UNPKG", "https://unpkg.com/"],
             ["BootCDN", "http://www.bootcdn.cn/"],
             ["Staticfile CDN", "https://staticfile.org/"],
             ["W3C", "https://www.w3.org/"],
