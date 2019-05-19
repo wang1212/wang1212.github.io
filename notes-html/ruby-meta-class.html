@@ -1,0 +1,257 @@
+<p>　　<u>本文的代码均在 Ruby 2.3.0 环境下测试通过。</u></p>
+<h2 id="类">类</h2>
+<p>　　我们都知道在面向对象编程中，我们大多数时候都是用类（class）在封装方法和变量，而 Ruby 中的类继承自模块（Module），接下来应该深入到类（模块）中去了解对象模型。</p>
+<h3 id="当前类">当前类</h3>
+<p>　　无论我们的程序运行到哪里，总会存在一个当前对象 <code>self</code>，而对象是所属类的实例，所以也就存在一个当前类。</p>
+<pre><code>result = <span class="hljs-keyword">class</span> <span class="hljs-symbol">A</span>
+    <span class="hljs-symbol">self</span>
+<span class="hljs-symbol">end</span>
+
+<span class="hljs-symbol">p</span> <span class="hljs-symbol">result</span>  # ==&gt; <span class="hljs-symbol">A</span></code></pre><p>　　<strong>特别的是，类也是一个对象，它是 <code>Class</code> 类的实例，充当当前对象 <code>self</code>；但此时的当前类我们更愿意定义为该 <code>self</code> 指向的类，而不是 <code>Class</code>，因为前者是有意义的。</strong></p>
+<pre><code>result.class_eval <span class="hljs-keyword">do</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">speak</span></span>
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+p result.instance_methods(<span class="hljs-literal">false</span>)
+<span class="hljs-comment"># ==&gt; [:speak]</span></code></pre><p>　　<strong>除过使用 <code>class</code> 关键字打开一个类外，我们也可以使用类调用 <code>class_eval()</code> 方法打开一个类，不过后者并没有创建一个独立的作用域，而是块作用域，块中 <code>self</code> 指向类自身；它和 <code>instance_eval()</code> 方法是相似的。</strong></p>
+<pre><code>result.<span class="hljs-keyword">class</span><span class="hljs-constructor">_exec(:<span class="hljs-params">speak</span>)</span> <span class="hljs-keyword">do</span> <span class="hljs-pattern-match">|name|
+    define<span class="hljs-constructor">_method(<span class="hljs-params">name</span>)</span> <span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+p result.instance<span class="hljs-constructor">_methods(<span class="hljs-params">false</span>)</span>
+# <span class="hljs-operator">==</span>&gt; [:speak]</span></code></pre><p>　　<code>class_eval()</code> 方法不允许传递块参数，而 <code>class_exec()</code> 方法会将方法参数传递给块参数。</p>
+<p>　　<strong>在类（类方法）定义中，<code>self</code> 指向当前对象，当前对象也是当前类；而在实例方法定义中，<code>self</code> 指向当前对象，当前类则是当前对象的所属类。</strong></p>
+<h3 id="类实例变量">类实例变量</h3>
+<p>　　类本身也是一个对象，所以我们可以在类中定义类实例变量，这和对象实例变量是一样的，是该类独有的。</p>
+<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span>
+    @var1 = <span class="hljs-string">"class_instance_variable"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initialize</span></span>
+        @var2 = <span class="hljs-string">"instance_variable"</span>
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+p A.instance_variables
+<span class="hljs-comment"># ==&gt; [:<span class="hljs-doctag">@var</span>1]</span>
+p A.new.instance_variables
+<span class="hljs-comment"># ==&gt; [:<span class="hljs-doctag">@var</span>2]</span></code></pre><p>　　也就是说，<strong>实例变量定义时是绑定在<code>self</code>指向的当前对象身上的，它是该对象独有的变量。</strong></p>
+<h3 id="类变量">类变量</h3>
+<p>　　Ruby 中还有一种变量叫做类变量，它不是属于某个类（对象）的变量。</p>
+<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span>
+    @@var = <span class="hljs-string">"class_variable"</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> &lt; A</span>
+<span class="hljs-keyword">end</span>
+
+p A.class_variables
+<span class="hljs-comment"># ==&gt; [:@<span class="hljs-doctag">@var</span>]</span>
+p B.class_variables
+<span class="hljs-comment"># ==&gt; [:@<span class="hljs-doctag">@var</span>]</span></code></pre><p>　　从该示例可以看出，我们定义在父类中的类变量被子类继承了，<strong>所以类变量不是单独属于某个类的变量，而是被类继承链共享的变量。</strong></p>
+<p>　　所以在选择上来说，如果不希望子类继承父类的变量，我们应该选择类实例变量，这样大多时候更安全一些。</p>
+<h3 id="类方法">类方法</h3>
+<p>　　类方法事实上是一种特殊的方法，Ruby 把它命名为单例方法（singleton_method）。</p>
+<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">self</span></span>.new_method
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+p A.singleton_methods
+<span class="hljs-comment"># ==&gt; [:new_method]</span></code></pre><p>　　<strong>单例方法定义时通常直接指定接受者，这样就会将该方法的调用权限限制在该接受者上，其他对象是无法调用该方法的。</strong>其实，所谓的单例也就是这个意思，即单个实例对象的方法；而这区别于一个类的所有实例化对象共同拥有类中实例方法。</p>
+<pre><code><span class="hljs-keyword">class</span> A
+    def one_method
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+a = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">A</span>.</span></span><span class="hljs-keyword">new</span>
+b = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">A</span>.</span></span><span class="hljs-keyword">new</span>
+def b.other_method
+<span class="hljs-keyword">end</span>
+
+p a.public<span class="hljs-constructor">_methods(<span class="hljs-params">false</span>)</span>
+# ==&gt; <span class="hljs-literal">[:<span class="hljs-identifier">one_method</span>]</span>
+p b.public<span class="hljs-constructor">_methods(<span class="hljs-params">false</span>)</span>
+# ==&gt; <span class="hljs-literal">[:<span class="hljs-identifier">other_method</span>, :<span class="hljs-identifier">one_method</span>]</span></code></pre><p>　　该示例说明了类中的实例方法 <code>one_method()</code> 是该类的所有实例对象共有的，而我们给其中一个对象定义了单例方法 <code>other_method()</code>，该方法则是该单个实例所有的。</p>
+<p>　　单例方法是相当有用的，当我们要单独给某个对象增加一些方法时，就不需要去另外创建一个类了。</p>
+<h3 id="类宏">类宏</h3>
+<p>　　Ruby 的对象默认是封装的，不允许外部直接访问对象的实例变量，所以就需要去定义 <code>getter()</code> 和 <code>setter()</code> 方法。</p>
+<pre><code><span class="hljs-keyword">class</span> <span class="hljs-symbol">Person</span>
+    <span class="hljs-symbol">def</span> <span class="hljs-symbol">name</span>
+        <span class="hljs-symbol">return</span> @<span class="hljs-symbol">name</span>
+    <span class="hljs-symbol">end</span>
+
+    <span class="hljs-symbol">def</span> <span class="hljs-symbol">name</span>=(<span class="hljs-symbol">new_name</span>)
+        @<span class="hljs-symbol">name</span> = <span class="hljs-symbol">new_name</span>
+    <span class="hljs-symbol">end</span>
+<span class="hljs-symbol">end</span></code></pre><p>　　其实，这一组读、写方法是没什么技术含量的，尤其是有多个需要外部访问的实例变量时，这样的写法反而使代码显得冗余。所以，我们需要更优雅的方式来解决这个问题。</p>
+<pre><code><span class="hljs-keyword">class</span> <span class="hljs-symbol">Person</span>
+    <span class="hljs-symbol">attr_accessor</span> :<span class="hljs-symbol">name</span>
+<span class="hljs-symbol">end</span></code></pre><p>　　这就是 Ruby 给我们提供的解决方案，这显得优雅多了。<code>attr_accessor()</code> 可接受多个参数，这些参数被作为实例变量的名称各创建一组读、写方法；同样地，<code>attr_reader()</code> 用来创建实例变量的读方法，<code>attr_writer()</code> 则用来创建实例变量的写方法。</p>
+<p>　　对于多个实例变量我们只需使用同一个方法声明式地动态创建它们各自的读、写方法，这样的技术称之为类宏。<strong>类宏的意义在于，对于业务逻辑非常相似的行为，我们不需要自己去一个个实现，我们可以写一个通用的模版然后提供一个方法接口来动态实现。</strong></p>
+<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">self</span>.<span class="hljs-title">attr_my_method</span><span class="hljs-params">(*variables)</span></span>
+        variables.each <span class="hljs-keyword">do</span> <span class="hljs-params">|var|</span>
+            define_method(var) { instance_variable_get(<span class="hljs-string">"@<span class="hljs-subst">#{var}</span>"</span>) }
+            define_method(<span class="hljs-string">"<span class="hljs-subst">#{var}</span>="</span>) { <span class="hljs-params">|value|</span> instance_variable_set(<span class="hljs-string">"@<span class="hljs-subst">#{var}</span>"</span>, value) }
+        <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+
+    attr_my_method <span class="hljs-symbol">:name</span>
+<span class="hljs-keyword">end</span>
+
+p Person.instance_methods(<span class="hljs-literal">false</span>)
+<span class="hljs-comment"># ==&gt; [:name, :name=]</span>
+
+a = Person.new
+p a.instance_variables  <span class="hljs-comment"># ==&gt; []</span>
+a.name = <span class="hljs-string">"MrWang"</span>
+p a.name  <span class="hljs-comment"># ==&gt; "MrWang"</span>
+p a.instance_variables  <span class="hljs-comment"># ==&gt; [:<span class="hljs-doctag">@name</span>]</span></code></pre><p>　　看吧，其实我们自己也可以实现一个类似的定义实例变量读、写方法的统一接口方法 <code>attr_my_method()</code>，类宏完美的诠释了动态生成代码的元编程能力。</p>
+<h2 id="单例类">单例类</h2>
+<p>　　前面刚说过类方法其实是个单例方法（singleton_method），作为一个实例对象独有的方法，它肯定是不存在于该对象所属类中的，同时它也不可能存在于该对象身上，因为对象自身只存在实例变量，实例方法只不过是个引用而已。</p>
+<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">self</span>.<span class="hljs-title">new_method</span></span>
+    <span class="hljs-keyword">end</span>
+    p <span class="hljs-keyword">self</span>.<span class="hljs-keyword">class</span>
+
+    <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;&lt; self</span>
+        p <span class="hljs-keyword">self</span>.<span class="hljs-keyword">class</span>
+        p <span class="hljs-keyword">self</span>.instance_methods(<span class="hljs-literal">false</span>)
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-comment"># ==&gt; Class</span>
+<span class="hljs-comment"># ==&gt; Class</span>
+<span class="hljs-comment"># ==&gt; [:new_method]</span></code></pre><p>　　<code>Test</code> 是 <code>Class</code> 类的实例对象，我们通过 <code>class</code> 关键字又创建了一个独立作用域，然后我们发现这也是个类，是一个匿名类，而且 <code>new_method()</code> 方法竟然是该类的实例方法。于是，我们大胆的想象 Test 真正的所属类并不是 Class 类，而是这个匿名类。</p>
+<p>　　其实，对象的 <code>class()</code> 方法骗了我们，该方法刻意隐藏了对象真正的所属类，它返回的是我们期望的结果，但不是正确的结果。<strong>对象真正的所属类是一个单例类（singleton_class），它只有一个实例也就是该对象，单例方法是存在于该类中的，这也就解释了为什么单例方法只有该对象独有了。</strong>我们有时候也称之为特征类（eigenclass）、匿名类、元类（metaclass）。</p>
+<pre><code>p <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Test</span>.</span></span>singleton_class.instance<span class="hljs-constructor">_methods(<span class="hljs-params">false</span>)</span>
+# ==&gt; <span class="hljs-literal">[:<span class="hljs-identifier">new_method</span>]</span></code></pre><p>　　我们可以调用对象的 <code>singleton_class()</code> 方法来获取到单例类的引用。</p>
+<h3 id="继承链">继承链</h3>
+<p>　　单例类的存在似乎让 Ruby 的继承链变得更复杂了，现在我们深入到继承链中去看看。</p>
+<pre><code>p <span class="hljs-keyword">Test</span>.ancestors
+# ==&gt; [<span class="hljs-keyword">Test</span>, Object, Kernel, BasicObject]
+p <span class="hljs-keyword">Test</span>.singleton_class.ancestors
+# ==&gt; [#&lt;<span class="hljs-keyword">Class</span>:<span class="hljs-keyword">Test</span>&gt;, &lt;<span class="hljs-keyword">Class</span>:Object&gt;, #&lt;<span class="hljs-keyword">Class</span>:BasicObject&gt;, <span class="hljs-keyword">Class</span>, <span class="hljs-keyword">Module</span>, Object, Kernel, BasicObject]</code></pre><p>　　<code>ancestors()</code> 方法可以获取类的继承链，我们发现 <code>Test</code> 的继承链正是我们期望的，而 <code>Test.singleton_class</code> 的继承链也并没有与前者发生冲突，它们像是两条平行线。<strong>也就是说，一个类依次继承自超类，而该类的单例类也依次继承自超类的单例类，前者与后者的继承链是平行的。</strong></p>
+<p>　　类方法是单例方法，但是子类却可以调用父类的类方法，从单例类的继承链可以很好的理解这是为什么。<strong>单例方法是单例类的实例方法，会随单例类继承链依次继承下来，所以子类可以调用父类的类方法也就不奇怪了。</strong></p>
+<pre><code>p <span class="hljs-keyword">Test</span>.new.singleton_class.ancestors
+# ==&gt; [#&amp;lt;<span class="hljs-keyword">Class</span>:#&amp;lt;<span class="hljs-keyword">Test</span>:<span class="hljs-number">0x00000002766d60</span>&amp;gt;&amp;gt;, <span class="hljs-keyword">Test</span>, Object, Kernel, BasicObject]</code></pre><p>　　<strong>而对于一个类的实例化对象来说，该实例的单例类继承自所属类的继承链，所以说实例对象的方法调用过程中，方法查找（Method Lookup）的起点并不是所属类而是单例类。</strong>因此，单例方法是会覆盖所属类中同名实例方法的。</p>
+<h3 id="单例方法">单例方法</h3>
+<p>　　下面，我们就来看看如何定义单例方法。大致的方法就两种，打开单例类定义与不打开单例类定义，但最终单例方法都是存在于单例类中的。</p>
+<pre><code><span class="hljs-comment"># 打开单例类定义单例方法</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> &lt;&lt; obj</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">new_singleton_method</span></span>
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></code></pre><p>　　可以使用 <code>class &lt;&lt; 对象引用</code> 的方式打开单例类，在其中定义单例方法，这种方式会创建一个独立作用域。</p>
+<pre><code><span class="hljs-comment"># 直接在对象上定义单例方法</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">obj</span></span>.new_singleton_method
+<span class="hljs-keyword">end</span></code></pre><p>　　也可以使用 <code>对象引用.方法名</code> 的方式直接定义对象的单例方法，前面一直演示的类方法就采用的这种方式。</p>
+<pre><code><span class="hljs-comment"># 在对象上下文中定义单例方法</span>
+obj.instance_eval <span class="hljs-keyword">do</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">new_sinleton_method</span></span>
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></code></pre><p>　　<code>instance_eval()</code> 与 <code>instance_exec()</code> 方法都会获取对象的上下文（作用域），在其中也可以定义单例方法。事实上，这也是打开了对象的单例类，我们打印块中的 <code>self</code> 就能明白。</p>
+<h2 id="方法">方法</h2>
+<p>　　我们通过对类（模块）深入的理解，了解了单例类和单例方法，对对象模型有了更深刻的认识。而方法又是类（模块）中的主角，下面来了解一下有关方法的新技术。</p>
+<h3 id="对象扩展">对象扩展</h3>
+<p>　　Ruby 的类是不支持多继承的，但提供了 MixIn 这种优雅的解决方案，通过 <code>include()</code> 与 <code>prepend()</code> 方法就可以将模块中的实例方法包含进目标类中，实现多重继承。</p>
+<pre><code><span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">MyModule</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">other_method</span></span>
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass1</span></span>
+    <span class="hljs-keyword">include</span> MyModule
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass2</span></span>
+    prepend MyModule
+<span class="hljs-keyword">end</span>
+
+p MyClass1.ancestors
+<span class="hljs-comment"># ==&gt; [MyClass1, MyModule, Object, Kernel, BasicObject]</span>
+p MyClass1.instance_methods.<span class="hljs-keyword">include</span>?(<span class="hljs-symbol">:other_method</span>)
+<span class="hljs-comment"># ==&gt; true</span>
+p MyClass2.ancestors
+<span class="hljs-comment"># ==&gt; [MyModule, MyClass2, Object, Kernel, BasicObject]</span>
+p MyClass2.instance_methods.<span class="hljs-keyword">include</span>?(<span class="hljs-symbol">:other_method</span>)
+<span class="hljs-comment"># ==&gt; true</span></code></pre><p>　　<strong>可以看出两个方法都是将模块加入了继承链中，不过 <code>include()</code> 方法将模块作为该类的超类，意味着该类中的方法则会覆盖掉模块中的同名方法；而 <code>prepend()</code> 方法将模块作为该类的子类，意味着模块中的方法会覆盖掉该类中的同名方法。</strong></p>
+<p>　　不过，它实际上是将模块中的实例方法添加到了该类中，扩展了类的实例方法，因为类也是对象所以称为对象扩展，但为了区分实例对象，我们称之为<strong>类扩展</strong>。</p>
+<p>　　类扩展是添加了实例方法，并没有扩展类对象本身；我们如果把类看做一个对象的话，在单例类中使用 <code>include()</code> 与 <code>prepend()</code> 方法，则会为类自身添加单例方法，我们称为 <code>对象扩展</code>。</p>
+<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass1</span></span>
+    <span class="hljs-class"><span class="hljs-keyword">class</span> &lt;&lt; self</span>
+        <span class="hljs-keyword">include</span> MyModule
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+p MyClass1.singleton_class.ancestors
+<span class="hljs-comment"># ==&gt; [#&amp;lt;Class:MyClass1&amp;gt;, MyModule, #&amp;lt;Class:Object&amp;gt;, #&amp;lt;Class:BasicObject&amp;gt;, Class, ...]</span>
+p MyClass1.singleton_class.instance_methods.<span class="hljs-keyword">include</span>?(<span class="hljs-symbol">:other_method</span>)
+<span class="hljs-comment"># ==&gt; true</span></code></pre><p>　　打开单例类反而显得繁琐，我们可以使用 <code>extend()</code> 方法实现同样的对象扩展的效果，它适用任何对象。</p>
+<pre><code><span class="hljs-keyword">class</span> <span class="hljs-symbol">MyClass1</span>
+    <span class="hljs-symbol">extend</span> <span class="hljs-symbol">MyModule</span>
+<span class="hljs-symbol">end</span></code></pre><h3 id="钩子方法">钩子方法</h3>
+<p>　　我们知道调用方法其实是一个消息传递的过程，如果这个消息被传送给接受者时同时也被另一个方法捕获，那么这样的场景就是运行了钩子方法。</p>
+<pre><code><span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">MyModule</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">self</span>.<span class="hljs-title">included</span><span class="hljs-params">(mixIn_class)</span></span>
+        p <span class="hljs-string">"Me was mixed into <span class="hljs-subst">#{mixIn_class}</span>"</span>
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span></span>
+    <span class="hljs-keyword">include</span> MyModule
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">self</span>.<span class="hljs-title">inherited</span><span class="hljs-params">(sub_class)</span></span>
+        p <span class="hljs-string">"Me was inherited by <span class="hljs-subst">#{sub_class}</span>"</span>
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+<span class="hljs-comment"># ==&gt; "Me was mixed into MyClass"</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SubClass</span> &lt; MyClass</span>
+<span class="hljs-keyword">end</span>
+<span class="hljs-comment"># ==&gt; "Me was inherited by SubClass"</span></code></pre><p>　　这里的 <code>included()</code> 与 <code>inherited()</code> 方法就是两个钩子函数，它们在模块自身被混入的时候捕获混入类的信息，以及在类自身被子类继承的时候捕获子类信息。其实只要得到混入类和子类的引用可以干很多事，在这里只是简单的打印了一行消息。</p>
+<p>　　当然，Ruby 里的钩子方法远不止这些，像我们定义一个方法时其实就是在给类添加方法，这时的钩子方法就为 <code>method_added()</code>，类似的还有很多，我们可以合理的运用钩子方法做一些特殊的处理。</p>
+<h3 id="方法别名">方法别名</h3>
+<p>　　如果我们的项目依赖于一个库，而该库中某个方法我们正好需要部分修改，但是我们又无法直接访问该库源文件，我们并不想直接覆盖重写，因为我们发现我们对该方法的内部实现细节并不知道。</p>
+<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Object</span></span>
+    <span class="hljs-comment"># 方法别名</span>
+    <span class="hljs-keyword">alias</span> <span class="hljs-symbol">:original_to_s</span> <span class="hljs-symbol">:to_s</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_s</span></span>
+        <span class="hljs-string">"I will be changed to string --&gt; "</span> + original_to_s
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+p Object.new.to_s
+<span class="hljs-comment"># ==&gt; "I will be changed to string --&gt; #&amp;lt;Object:0x0000000283c320&amp;gt;"</span></code></pre><p>　　使用 <code>alias</code> 关键字，以 <code>alias :new_name :old_name</code> 的形式即可将一个方法指定给两个不同的方法签名，然后我们可以重新定义旧的方法签名的实现，同时依然可以使用新方法签名去调用原来的方法。这样就解决了我们不清楚旧方法内部实现细节又想进行微修改的目的。</p>
+<p>　　<code>alias_method()</code> 方法具有相同的作用。</p>
+<h3 id="删除方法">删除方法</h3>
+<p>　　Ruby 中父类的所有实例方法都会被子类继承，使用 <code>public、protected、private</code> 关键字只不过是修改了方法调用权限而已。有时候，我们可能不想让一个子类继承父类的某些方法，但不能直接删除父类中的方法，否则会影响父类的其他子类继承该方法。</p>
+<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">a_method</span></span>
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> &lt; A</span>
+    <span class="hljs-comment"># 删除继承自A的方法</span>
+    <span class="hljs-keyword">undef</span> <span class="hljs-symbol">:a_method</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">b_method</span></span>
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> &lt; A</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">c_method</span></span>
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+p B.instance_methods.<span class="hljs-keyword">include</span>?(<span class="hljs-symbol">:a_method</span>)
+<span class="hljs-comment"># ==&gt; false</span>
+p C.instance_methods.<span class="hljs-keyword">include</span>?(<span class="hljs-symbol">:a_method</span>)
+<span class="hljs-comment"># ==&gt; true</span></code></pre><p>　　使用 <code>undef()</code> 或者 <code>undef_method()</code> 方法都可以将多个实例方法从类中删除。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li>《Ruby元编程》，[意] Paolo Perrotta，廖志刚 译</li>
+<li>《Ruby基础教程》，[日] 高桥征义 后藤裕藏，何文斯 译</li>
+</ul>

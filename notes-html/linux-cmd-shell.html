@@ -1,0 +1,372 @@
+<h2 id="shell">Shell</h2>
+<p>　　Linux 是一个基于命令行的操作系统，提供了一个命令解释器，即 Shell（壳）。Shell 是一个软件，是操作系统的用户界面，用户通过在 Shell 中输入命令，然后命令解释器解释完成后将指令送往内核中执行，来实现对 Linux 系统的操作。</p>
+<p>　　Linux 中的 Shell 也有不同的版本：Bourne Shell（贝尔实验室开发）、Bash（GNU 开发）、C shell（Sun 公司开发）、Z shell（集成了前几种 shell 的优点）等等，我们目前最常用的就是 Bash。</p>
+<h2 id="常用命令">常用命令</h2>
+<p>　　下面将是一些常用的 Shell 命令的总结，熟悉这些命令能帮助我们更快的适应 Linux 系统的环境。</p>
+<h3 id="目录、文件">目录、文件</h3>
+<p>　　文件与目录是系统中最常见的基本单位，这里介绍一些常用的文件、目录操作。</p>
+<pre><code><span class="hljs-section"># 文件属性与权限（总共10位）</span>
+[<span class="hljs-string">-</span>][<span class="hljs-symbol">---</span>][<span class="hljs-string">---</span>][<span class="hljs-symbol">---</span>]
+<span class="hljs-section"># 第1位：-表示文件；d表示目录；l表示软链接</span>
+<span class="hljs-section"># 第2-4位：rwx 所有者（user）用户权限</span>
+<span class="hljs-section"># 第5-7位：rwx 所属组（group）用户权限</span>
+<span class="hljs-section"># 第8-10位: rwx 其他用户权限</span>
+r （可读） w （可写） x （可执行）
+<span class="hljs-section"># 示例</span>
+-rwxr-xr-x # 这是一个文件，所有者可读可写可执行，所属组与其他用户可读可执行但不可写
+
+pwd  # 查看当前路径
+cd  [目录]  # 切换到目标目录</code></pre><h4 id="创建">创建</h4>
+<pre><code><span class="hljs-meta"># 目录</span>
+<span class="hljs-keyword">mkdir</span> [目录]  <span class="hljs-meta"># 创建一个空目录</span>
+<span class="hljs-keyword">mkdir</span> -p [目录/子目录/]  <span class="hljs-meta"># 创建一个多层嵌套目录</span>
+
+<span class="hljs-meta"># 文件</span>
+touch [文件]  <span class="hljs-meta"># 创建一个文件，或者更新已有文件时间</span></code></pre><h4 id="删除">删除</h4>
+<pre><code><span class="hljs-comment"># 命令格式</span>
+rm [选项] [目录文件]
+<span class="hljs-comment"># 命令选项</span>
+-i  <span class="hljs-comment"># 删除时提示</span>
+-r  <span class="hljs-comment"># 允许删除目录</span>
+-f  <span class="hljs-comment"># 忽略提示警告</span>
+<span class="hljs-comment"># 命令示例</span>
+rm -rf <span class="hljs-string">./tmp</span>  <span class="hljs-comment"># 删除当前目录下的tmp文件或目录，忽略提示警告</span>
+
+rmdir [目录]  <span class="hljs-comment"># 删除一个目录（只能删除空目录）</span></code></pre><h4 id="查看">查看</h4>
+<pre><code><span class="hljs-comment"># 目录</span>
+<span class="hljs-comment"># 命令格式</span>
+<span class="hljs-keyword">ls</span> [选项] [目录]
+<span class="hljs-comment"># 命令选项</span>
+-d  <span class="hljs-comment"># 查看目录属性</span>
+-a  <span class="hljs-comment"># 查看目录内所有文件和子目录，包括隐藏的</span>
+-l  <span class="hljs-comment"># 显示文件、子目录详细信息</span>
+-h  <span class="hljs-comment"># 显示文件、子目录大小（带单位）</span>
+-i  <span class="hljs-comment"># 显示文件、子目录 inode</span>
+-R  <span class="hljs-comment"># 递归显示目录（显示子目录的子目录路径）</span>
+<span class="hljs-comment"># 命令示例</span>
+<span class="hljs-keyword">ls</span> -a  <span class="hljs-comment"># 查看当前目录所有文件、子目录</span>
+<span class="hljs-keyword">ls</span> -lh <span class="hljs-string">/root/</span>  <span class="hljs-comment"># 查看root目录内所有文件、子目录并显示详细信息和大小</span>
+
+<span class="hljs-comment"># 文件</span>
+cat [文件]  <span class="hljs-comment"># 查看文件内容</span>
+file [文件]  <span class="hljs-comment"># 查看文件类型</span>
+
+head [-n] [文件]  <span class="hljs-comment"># 显示文件内容开始n行（默认10行）</span>
+tail [-n] [文件]  <span class="hljs-comment"># 显示文件内容末尾n行（默认10行）</span>
+-f  <span class="hljs-comment"># 持续更新文件末尾内容（方便查看更新的日志）</span>
+
+more [文件]  <span class="hljs-comment"># 翻页显示文件内容（只能向下翻页）</span>
+less [文件]  <span class="hljs-comment"># 翻页显示文件内容（上下翻页）</span></code></pre><h4 id="复制">复制</h4>
+<pre><code><span class="hljs-meta"># 命令格式</span>
+<span class="hljs-keyword">cp</span> [选项] [源目录文件] [目标目录]
+<span class="hljs-meta"># 命令选项</span>
+-r  <span class="hljs-meta"># 允许复制目录</span>
+-p  <span class="hljs-meta"># 同时复制文件属性</span>
+-d  <span class="hljs-meta"># 若源文件是链接文件，则复制链接属性</span>
+-a  <span class="hljs-meta"># 相当于 -pdr</span>
+-v  <span class="hljs-meta"># 显示详细信息</span>
+<span class="hljs-meta"># 命令示例</span>
+<span class="hljs-keyword">cp</span> -r ./tmp1 ./tmp/  <span class="hljs-meta"># 将当前目录下的tmp1目录或文件复制到当前目录下tmp目录内</span></code></pre><h4 id="剪切">剪切</h4>
+<pre><code>mv <span class="hljs-string">[源目录文件]</span> <span class="hljs-string">[目标目录]</span>  # 剪切目录或文件
+mv <span class="hljs-string">[旧目录文件名]</span> <span class="hljs-string">[新目录文件名]</span>  # 重命名</code></pre><h3 id="搜索">搜索</h3>
+<p>　　由于命令行的界面给我们查看系统文件带来了视觉上的不便，所以学会使用命令去搜索文件会给我们了解系统中存放的文件情况带来方便。</p>
+<h4 id="locate">locate</h4>
+<pre><code><span class="hljs-meta"># 搜索某个目录、文件的所在路径</span>
+<span class="hljs-keyword">locate</span> [文件]  <span class="hljs-meta"># 在后台数据库中搜索，速度快；但是最近新建的不能找到，需执行 updatedb 更新数据库</span></code></pre><h4 id="find">find</h4>
+<pre><code><span class="hljs-comment"># 搜索某个目录、文件的所在路径，以及详细信息等</span>
+<span class="hljs-comment"># 命令格式</span>
+<span class="hljs-keyword">find</span> [搜索范围] [选项] [搜索目标]
+<span class="hljs-comment"># 命令选项</span>
+-name  <span class="hljs-comment"># 按目录或文件名搜索</span>
+-user  <span class="hljs-comment"># 按用户名搜索</span>
+-nouser  <span class="hljs-comment"># 搜索没有用户的目录、文件</span>
+-mtime  <span class="hljs-comment"># 按内容修改时间搜索</span>
+-atime  <span class="hljs-comment"># 按内容访问时间搜索</span>
+-ctime  <span class="hljs-comment"># 按属性修改时间搜索</span>
+-size  <span class="hljs-comment"># 按目录、文件大小搜索</span>
+-inum  <span class="hljs-comment"># 按目录、文件 inode 搜索</span>
+<span class="hljs-comment"># 命令示例</span>
+<span class="hljs-keyword">find</span> ./ -name tmp  <span class="hljs-comment"># 在当前目录下搜索名字为tmp的目录和文件</span>
+<span class="hljs-keyword">find</span> / -nouser  <span class="hljs-comment"># 在根目录下搜索没有用户的目录和文件</span>
+<span class="hljs-keyword">find</span> ./ -mtime +<span class="hljs-number">10</span> <span class="hljs-comment"># 在当前目录下搜索10天前修改的目录和文件</span>
+<span class="hljs-keyword">find</span> ./ -size <span class="hljs-number">25</span>k  <span class="hljs-comment"># 在当前目录下搜索大小为25KB的目录和文件</span>
+<span class="hljs-keyword">find</span> ./ -size +<span class="hljs-number">25</span>k -a -size <span class="hljs-number">-50</span>k <span class="hljs-comment"># 在当前目录下搜索大小为25KB到50KB的目录和文件</span>
+<span class="hljs-keyword">find</span> ./ -inum <span class="hljs-number">262</span>  <span class="hljs-comment"># 在当前目录下查找inode是262的目录和文件</span>
+
+<span class="hljs-comment"># 执行多条命令（后一条命令接受前一条命令的结果）</span>
+<span class="hljs-keyword">find</span> [搜索范围] [选项] [搜索目标] -exec [命令] [选项] {} \;
+<span class="hljs-comment"># 命令示例</span>
+<span class="hljs-keyword">find</span> ./ -size <span class="hljs-number">25</span>k -exec ls -lh {} \;  <span class="hljs-comment"># 搜索当前目录下大小是25KB的目录和文件并显示详细信息</span></code></pre><h4 id="whereis">whereis</h4>
+<pre><code><span class="hljs-comment"># 搜索命令所在路径及帮助文档</span>
+<span class="hljs-comment"># 命令格式</span>
+whereis [选项] [命令]
+<span class="hljs-comment"># 命令选项</span>
+-b  <span class="hljs-comment"># 只查找可执行文件（命令）</span>
+-m  <span class="hljs-comment"># 只查找帮助文件</span>
+<span class="hljs-comment"># 命令示例</span>
+whereis <span class="hljs-keyword">ls</span>  <span class="hljs-comment"># 查找 ls 命令可执行文件所在路径及帮助文档所在路径</span></code></pre><h4 id="which">which</h4>
+<pre><code><span class="hljs-comment"># 搜索命令所在路径以及别名</span>
+<span class="hljs-attribute">which</span><span class="hljs-meta"> [命令]</span></code></pre><h4 id="grep">grep</h4>
+<pre><code><span class="hljs-comment"># 搜索文件内容</span>
+<span class="hljs-comment"># 命令格式</span>
+<span class="hljs-keyword">grep</span> [选项] [搜索内容] [文件]
+<span class="hljs-comment"># 命令选项</span>
+-v  <span class="hljs-comment"># 结果取反</span>
+-i  <span class="hljs-comment"># 忽略大小写</span>
+<span class="hljs-comment"># 命令示例</span>
+<span class="hljs-keyword">grep</span> <span class="hljs-string">"Hello"</span> hello.sh  <span class="hljs-comment"># 搜索 hello.sh 文件内包含Hello字符串的地方</span></code></pre><h3 id="帮助">帮助</h3>
+<p>　　事实上，Linux 下的 shell 命令大概有三千左右个，而且常用的也非常多，我们不可能去死记硬背，学会适当的时候去查看命令的帮助文件也是很好的。</p>
+<h4 id="man">man</h4>
+<pre><code><span class="hljs-comment"># 命令格式</span>
+man [选项] [级别] [命令]
+<span class="hljs-comment"># 命令选项</span>
+-f  <span class="hljs-comment"># 查看命令所有级别（等价于 whatis ）</span>
+-k  <span class="hljs-comment"># 查看所有相关命令（等价于 apropos ）</span>
+<span class="hljs-comment"># 命令示例</span>
+man <span class="hljs-keyword">ls</span>  <span class="hljs-comment"># 查看 ls 命令详细帮助</span></code></pre><h4 id="help">help</h4>
+<pre><code>[命令] --<span class="hljs-keyword">help</span>  # 查看 <span class="hljs-keyword">shell</span> 外部命令的详细帮助，如 <span class="hljs-keyword">ls</span>
+<span class="hljs-keyword">help</span> [命令]  # 查看 <span class="hljs-keyword">shell</span> 内部命令的详细帮助，如 <span class="hljs-keyword">cd</span>（可用 whereis 判断是否内部命令）</code></pre><h4 id="info">info</h4>
+<pre><code># 命令格式
+info [命令]
+# 帮助页面命令
+-<span class="ruby"> 回车  <span class="hljs-comment"># 进入子帮助页面</span>
+</span>-<span class="ruby"> u  <span class="hljs-comment"># 进入上层页面</span>
+</span>-<span class="ruby"> n  <span class="hljs-comment"># 进入下一个帮助小节</span>
+</span>-<span class="ruby"> p  <span class="hljs-comment"># 进入下一个帮助小节</span>
+</span>-<span class="ruby"> q  <span class="hljs-comment"># 退出帮助页面</span></span></code></pre><h3 id="压缩、解压">压缩、解压</h3>
+<p>　　Linux 系统下的多数应用软件都是以源代码的方式打包，而解压缩则是安装应用软件的常用操作。</p>
+<h4 id="zip格式">.zip格式</h4>
+<pre><code># 压缩
+zip <span class="hljs-string">[压缩文件名]</span> <span class="hljs-string">[源文件]</span>
+zip -r <span class="hljs-string">[压缩文件名]</span> <span class="hljs-string">[源目录]</span>
+
+# 解压
+unzip <span class="hljs-string">[源目录文件]</span></code></pre><h4 id="gz格式">.gz格式</h4>
+<pre><code><span class="hljs-comment"># 压缩</span>
+<span class="hljs-attribute">gzip</span> [源文件]  <span class="hljs-comment"># 直接压缩源文件，源文件消失</span>
+gzip -c [源文件] &gt; [压缩文件名]  <span class="hljs-comment"># 本质是写入一个压缩文件，源文件不消失</span>
+gzip -r [源目录]  <span class="hljs-comment"># 只会压缩源目录内源文件，源文件消失</span>
+
+<span class="hljs-comment"># 解压</span>
+gzip  -d [源文件]  <span class="hljs-comment"># 源文件消失</span>
+gunzip [源文件]  <span class="hljs-comment"># 源文件消失</span>
+gunzip -r [源目录]  <span class="hljs-comment"># 源目录内源文件解压，源文件消失</span></code></pre><h4 id="bz2格式">.bz2格式</h4>
+<pre><code><span class="hljs-comment"># 压缩（不能压缩目录）</span>
+<span class="hljs-keyword">bzip2 </span>[源文件]  <span class="hljs-comment"># 源文件消失</span>
+<span class="hljs-keyword">bzip2 </span>-k [源文件]  <span class="hljs-comment"># 保留源文件</span>
+
+<span class="hljs-comment"># 解压</span>
+<span class="hljs-keyword">bzip2 </span>-d [源文件]  <span class="hljs-comment"># 源文件消失</span>
+<span class="hljs-keyword">bzip2 </span>-dk [源文件]  <span class="hljs-comment"># 保留源文件</span>
+<span class="hljs-keyword">bunzip2 </span>[源文件]  <span class="hljs-comment"># 源文件消失</span>
+<span class="hljs-keyword">bunzip2 </span>-k [源文件]  <span class="hljs-comment"># 保留源文件</span></code></pre><h4 id="tar包格式">.tar包格式</h4>
+<pre><code><span class="hljs-comment"># 打包、解包</span>
+tar [选项] [包文件名] [源文件]
+<span class="hljs-comment"># 命令选项</span>
+-c  <span class="hljs-comment"># 打包</span>
+-x  <span class="hljs-comment"># 解包</span>
+-t  <span class="hljs-comment"># 查看包内文件</span>
+-v  <span class="hljs-comment"># 显示过程</span>
+-f  <span class="hljs-comment"># 指定打包后文件名</span>
+<span class="hljs-comment"># 命令示例</span>
+tar -cvf <span class="hljs-keyword">bag.tar </span><span class="hljs-keyword">bag </span> <span class="hljs-comment"># 打包一个目录或文件</span>
+tar -xvf <span class="hljs-keyword">bag.tar </span> <span class="hljs-comment"># 解包</span>
+tar -tvf <span class="hljs-keyword">bag.tar </span> <span class="hljs-comment"># 查看包内文件</span></code></pre><h4 id="targz，tarbz2格式">.tar.gz，.tar.bz2格式</h4>
+<pre><code># 压缩
+<span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">-zcvf</span> <span class="hljs-selector-attr">[压缩文件名]</span> <span class="hljs-selector-attr">[源目录文件]</span>  # 保留源目录文件（<span class="hljs-selector-tag">-z</span> 为 <span class="hljs-selector-class">.gz</span> 格式）
+<span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">-jcvf</span> <span class="hljs-selector-attr">[压缩文件名]</span> <span class="hljs-selector-attr">[源目录文件]</span>  # 保留源目录文件（<span class="hljs-selector-tag">-j</span> 为 <span class="hljs-selector-class">.bz2</span> 格式）
+
+# 解压
+<span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">-zxvf</span> <span class="hljs-selector-attr">[源文件名]</span>  # 保留源文件（<span class="hljs-selector-tag">-z</span> 为 <span class="hljs-selector-class">.gz</span> 格式）
+<span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">-jxvf</span> <span class="hljs-selector-attr">[源文件名]</span>  # 保留源文件（<span class="hljs-selector-tag">-j</span> 为 <span class="hljs-selector-class">.bz2</span> 格式）</code></pre><h3 id="命令历史">命令历史</h3>
+<pre><code>history  <span class="hljs-comment"># 所有曾经执行过的命令</span>
+-c  <span class="hljs-comment"># 清空历史命令</span>
+-w  <span class="hljs-comment"># 把缓存中的历史命令保存在文件中 ./bash_history</span>
+
+!!  <span class="hljs-comment"># 执行上一条命令</span>
+!u  <span class="hljs-comment"># 执行曾经以u开头的命令</span>
+!<span class="hljs-number">12</span>  <span class="hljs-comment"># 执行曾经第12命令</span>
+!-n  <span class="hljs-comment"># 执行曾经第前n个命令</span>
+!?<span class="hljs-built_in">name</span>  <span class="hljs-comment"># 执行曾经包含name的命令</span>
+
+Ctrl+R  <span class="hljs-comment"># 搜索曾经执行过的命令</span>
+<span class="hljs-comment">#  按 ESC 后再按 . 会增加上一个命令的选项</span></code></pre><h3 id="命令别名">命令别名</h3>
+<pre><code><span class="hljs-keyword">alias</span>  <span class="hljs-comment"># 查询所有别名</span>
+<span class="hljs-keyword">alias</span> <span class="hljs-keyword">ls</span>=<span class="hljs-string">"ls --color=never"</span> <span class="hljs-comment"># 设置别名</span>
+<span class="hljs-keyword">unalias</span> <span class="hljs-keyword">ls</span>  <span class="hljs-comment"># 删除别名</span>
+
+<span class="hljs-comment"># 用户目录下的 bashrc ，设置别名永久生效</span>
+source <span class="hljs-string">.bashrc</span>  <span class="hljs-comment"># 让文件立即执行，别名立即生效</span></code></pre><h3 id="io">IO</h3>
+<p>　　这里简单介绍一些输入、输出重定向的命令。</p>
+<h4 id="输出重定向">输出重定向</h4>
+<pre><code><span class="hljs-comment"># 标准输出重定向</span>
+[命令] &gt; [文件] <span class="hljs-comment"># 以覆盖的方式，把命令的正确输出到指定文件或者设备中去</span>
+[命令] <span class="hljs-meta">&gt;&gt; </span>[文件]  <span class="hljs-comment"># 以追加的方式，把命令的正确输出到指定文件或者设备中去</span>
+
+<span class="hljs-comment"># 标准错误输出重定向</span>
+[错误命令] <span class="hljs-number">2</span>&gt;[文件]  <span class="hljs-comment"># 以覆盖的方式，把命令的正确输出到指定文件或者设备中去（注意&gt;后无空格）</span>
+[错误命令] <span class="hljs-number">2</span><span class="hljs-meta">&gt;&gt;</span>[文件]  <span class="hljs-comment"># 以追加的方式，把命令的正确输出到指定文件或者设备中去（注意&gt;&gt;后无空格）</span>
+
+<span class="hljs-comment"># 标准正确和错误输出同时保存</span>
+[命令] &gt; [文件] <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span>  <span class="hljs-comment"># 覆盖方式</span>
+[命令] <span class="hljs-meta">&gt;&gt; </span>文件 <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span>  <span class="hljs-comment"># 追加方式</span>
+[命令] &amp;&gt;[文件]  <span class="hljs-comment"># 覆盖方式（注意&gt;后无空格）</span>
+[命令] &amp;<span class="hljs-meta">&gt;&gt;</span>[文件]  <span class="hljs-comment"># 追加方式（注意&gt;&gt;后无空格）</span>
+[命令]<span class="hljs-meta">&gt;&gt;</span>[文件<span class="hljs-number">1</span>] <span class="hljs-number">2</span>&gt;&gt;[文件<span class="hljs-number">2</span>]  <span class="hljs-comment"># 正确输出保存到文件1，错误输出保存到文件2（注意&gt;&gt;后无空格）</span></code></pre><h4 id="输入重定向">输入重定向</h4>
+<pre><code><span class="hljs-attribute">wc</span>  <span class="hljs-comment"># 输入内容，输入完成后Ctrl+D</span>
+-c  <span class="hljs-comment"># 统计字节数</span>
+-w  <span class="hljs-comment"># 统计单词数</span>
+-l  <span class="hljs-comment"># 统计行数</span>
+
+wc &lt; [文件]  <span class="hljs-comment"># 将文件内容输入</span>
+wc &lt;&lt; [定界符]  <span class="hljs-comment"># 结束定界符</span></code></pre><h3 id="管道符">管道符</h3>
+<pre><code>[命令<span class="hljs-number">1</span>] | [命令<span class="hljs-number">2</span>]  # 命令<span class="hljs-number">1</span>的正确输出作为命令<span class="hljs-number">2</span>的操作对象</code></pre><h2 id="系统命令">系统命令</h2>
+<p>　　这是一些涉及到系统权限或者说有关系统信息的命令，应谨慎操作。</p>
+<h3 id="关机、重启">关机、重启</h3>
+<ul>
+<li><p>shutdown</p>
+<pre><code>  <span class="hljs-meta"># 命令格式</span>
+  <span class="hljs-built_in">shutdown</span> [选项] [时间]
+  <span class="hljs-meta"># 命令选项</span>
+  -h  <span class="hljs-meta"># 关机</span>
+  -r  <span class="hljs-meta"># 重启</span>
+  -c  <span class="hljs-meta"># 取消前一个关机、重启命令</span>
+  <span class="hljs-meta"># 命令示例</span>
+  <span class="hljs-built_in">shutdown</span> -h now  <span class="hljs-meta"># 立即关机</span>
+  <span class="hljs-built_in">shutdown</span> -r <span class="hljs-number">20</span>:<span class="hljs-number">20</span> &amp;  <span class="hljs-meta"># 20:20时重启（&amp; 为后台运行）</span></code></pre></li>
+<li><p>其他命令</p>
+<pre><code>  reboot  # 立即重启
+  poweroff  # 立即关机
+  logout  # 退出登录
+
+  # 非安全命令
+  init <span class="hljs-number">0</span>  # <span class="hljs-number">0</span> 关机
+  init <span class="hljs-number">6</span>  # <span class="hljs-number">6</span> 重启
+  # （<span class="hljs-number">0</span> 关机 <span class="hljs-number">1</span> 单用户 <span class="hljs-number">2</span> 不完全多用户，无NFS <span class="hljs-number">3</span> 完全多用户 <span class="hljs-number">4</span> 未分配 <span class="hljs-number">5</span> 图形界面 <span class="hljs-number">6</span> 重启）
+  runlevel  # 查看当前运行级别
+
+  [命令] &amp;  # 该命令在后台执行</code></pre></li>
+</ul>
+<h3 id="用户、密码">用户、密码</h3>
+<pre><code><span class="hljs-attribute">su</span> [用户名] <span class="hljs-comment"># 切换到目标用户，默认是 root 用户</span>
+
+sudo [命令] <span class="hljs-comment"># 以 root 权限执行该条命令</span>
+
+<span class="hljs-comment">#  添加用户</span>
+useradd [选项] [用户名]
+-d  <span class="hljs-comment"># 指定用户目录</span>
+-g  <span class="hljs-comment"># 指定用户群组</span>
+
+passwd [用户名] <span class="hljs-comment"># 更改目标用户密码，默认当前用户</span></code></pre><h3 id="登录日志">登录日志</h3>
+<pre><code><span class="hljs-attribute">w</span>  <span class="hljs-comment"># 查看系统中用户登录情况，资源情况</span>
+who  <span class="hljs-comment"># 查看系统中用户登录情况</span>
+<span class="hljs-literal">last</span>  <span class="hljs-comment"># 查看系统中用户登录日志</span>
+lastlog  <span class="hljs-comment"># 查看系统中所有用户最后一次登陆时间</span></code></pre><h3 id="日期、时间">日期、时间</h3>
+<pre><code><span class="hljs-built_in">date</span>  <span class="hljs-comment"># 查看当前系统时间</span>
+<span class="hljs-built_in">date</span> -s <span class="hljs-string">"20:00:00"</span>  <span class="hljs-comment"># 修改当前时间</span>
+<span class="hljs-built_in">date</span> +%Y<span class="hljs-comment">--%m--%d  # 格式化显示</span></code></pre><h3 id="进程管理">进程管理</h3>
+<p>　　通常使用<code>ps</code>命令来查看系统运行的进程信息。</p>
+<pre><code><span class="hljs-comment"># 显示在当前 shell 终端运行的进程</span>
+ps [选项]
+-[A|e]  <span class="hljs-comment"># 显示所有进程信息</span>
+-l      <span class="hljs-comment"># 显示长列表信息</span>
+
+<span class="hljs-comment"># 示例</span>
+ps -ef  <span class="hljs-comment"># 查看系统中所有运行进程</span>
+
+<span class="hljs-comment"># 实时显示系统进程信息</span>
+top
+
+<span class="hljs-comment"># 杀死进程</span>
+<span class="hljs-built_in">kill</span> [PID]
+killall [进程名]</code></pre><h3 id="磁盘管理">磁盘管理</h3>
+<p>　　下面是一些用于对磁盘信息进行查看或者统计的命令。</p>
+<pre><code># 查看磁盘分区使用情况
+df [选项] [路径]
+-<span class="ruby">l  <span class="hljs-comment"># 仅显示本地磁盘（默认选项）</span>
+</span>-<span class="ruby">a  <span class="hljs-comment"># 显示所有文件系统的磁盘使用情况</span>
+</span>-<span class="ruby">h  <span class="hljs-comment"># 以1024进制自动换算合适的单位显示磁盘容量</span>
+</span>-<span class="ruby">H  <span class="hljs-comment"># 以1000进制自动换算合适的单位显示磁盘容量</span>
+</span>-<span class="ruby">T  <span class="hljs-comment"># 显示磁盘分区类型</span>
+</span>-<span class="ruby">t  <span class="hljs-comment"># 显示指定类型文件系统的磁盘分区（比如EXT4）</span>
+</span>-<span class="ruby">x  <span class="hljs-comment"># 不显示指定类型文件系统的磁盘分区</span>
+</span>
+# 统计磁盘上的文件大小
+du [选项] [路径]
+-<span class="ruby">b  <span class="hljs-comment"># 以byte为单位统计文件（四舍五入）</span>
+</span>-<span class="ruby">k  <span class="hljs-comment"># 以KB为单位统计文件（四舍五入）</span>
+</span>-<span class="ruby">m  <span class="hljs-comment"># 以MB为单位统计文件（四舍五入）</span>
+</span>-<span class="ruby">h  <span class="hljs-comment"># 以1024进制自动换算合适的单位统计文件</span>
+</span>-<span class="ruby">H  <span class="hljs-comment"># 以1000进制自动换算合适的单位统计文件</span>
+</span>-<span class="ruby">s  <span class="hljs-comment"># 指定统计路径（默认是当前路径）</span></span></code></pre><h3 id="文件系统">文件系统</h3>
+<p>　　仅仅分区之后，磁盘还是不能使用的，必须创建文件系统才能使用，此时也会首先格式化硬盘。</p>
+<pre><code><span class="hljs-comment"># 创建文件系统</span>
+mke2fs [选项] [文件系统格式] [磁盘目录]
+-t  <span class="hljs-comment"># 指定文件系统格式</span>
+-b  <span class="hljs-comment"># 指定文件系统块大小</span>
+-L  <span class="hljs-comment"># 指定卷标</span>
+-j  <span class="hljs-comment"># 建立文件系统日志</span>
+<span class="hljs-comment"># 命令示例</span>
+mke2fs -t ext4 <span class="hljs-regexp">/dev/</span>sda3
+
+<span class="hljs-comment"># 简写操作命令</span>
+mkfs.[文件系统格式] [磁盘目录]
+<span class="hljs-comment"># 命令示例</span>
+mkfs.ext4 <span class="hljs-regexp">/dev/</span>sda3
+
+<span class="hljs-comment"># 查看文件系统的详细信息</span>
+dumpe2fs [磁盘目录]
+<span class="hljs-comment"># 命令示例</span>
+dumpe2fs <span class="hljs-regexp">/dev/</span>sda2
+
+<span class="hljs-comment"># 查看文件系统标签</span>
+e2label [磁盘目录]
+<span class="hljs-comment"># 设置文件系统标签</span>
+e2label [磁盘目录] [标签名]
+
+<span class="hljs-comment"># 检查目标磁盘文件系统是否损坏（已卸载）</span>
+fsck [磁盘目录]
+-y  <span class="hljs-comment"># 不提示直接修复</span>
+-t  <span class="hljs-comment"># 指定修复的文件系统格式</span></code></pre><h3 id="挂载、卸载">挂载、卸载</h3>
+<pre><code>mount  # 查看系统中已经挂载的设备
+mount -a   # 按配置文件 /etc/fstab 的内容，自动挂载
+mount -t  <span class="hljs-string">[文件系统]</span> -o <span class="hljs-string">[特殊选项]</span> <span class="hljs-string">[设备文件名]</span> <span class="hljs-string">[挂载点]</span>  # 挂载指定设备
+
+umount <span class="hljs-string">[挂载点或设备文件名]</span>  # 卸载设备文件
+
+fdisk -l   # 查看系统中已经识别的硬盘
+fdisk -t vfat <span class="hljs-string">[设备文件名]</span> <span class="hljs-string">[挂载点]</span>  # 以 fat32 文件格式挂载U盘（linux 默认不支持 ntfs 文件系统）</code></pre><h3 id="端口">端口</h3>
+<pre><code>netstat -anp | <span class="hljs-keyword">grep</span> <span class="hljs-number">177</span>  <span class="hljs-comment"># 查看指定端口进程</span></code></pre><h3 id="系统服务">系统服务</h3>
+<pre><code>service [服务名称] [选项]<span class="hljs-built_in">
+service </span>* start   # 启动服务<span class="hljs-built_in">
+service </span>* stop    # 停止服务<span class="hljs-built_in">
+service </span>* status  # 服务状态<span class="hljs-built_in">
+service </span>* restart # 重启服务</code></pre><h3 id="系统信息">系统信息</h3>
+<pre><code><span class="hljs-comment"># 操作系统信息</span>
+uname [选项]
+-<span class="hljs-keyword">a</span>  <span class="hljs-comment"># 所有信息，包含操作系统名称，计算机名、内核、架构</span>
+-m  <span class="hljs-comment"># 系统架构（32/64）</span>
+
+hwclock  <span class="hljs-comment"># 查看硬件时钟时间（等价 clock 命令）</span>
+uptime  <span class="hljs-comment"># 查看系统运行时间</span>
+
+lspci  <span class="hljs-comment"># 查看PCI设备</span>
+-v  <span class="hljs-comment"># 详细信息</span>
+
+lsusb  <span class="hljs-comment"># 查看USB设备</span>
+-v  <span class="hljs-comment"># 详细信息</span>
+
+lsmod  <span class="hljs-comment"># 查看加载的模块（驱动）</span></code></pre><h2 id="应用安装">应用安装</h2>
+<pre><code>dpkg -L [应用名称]  <span class="hljs-meta"># 查看已安装应用相关路径</span>
+
+dpkg --<span class="hljs-keyword">get</span>-selections | grep [应用名称]  <span class="hljs-meta"># 查看已安装应用相关所有包</span></code></pre><h2 id="快捷键">快捷键</h2>
+<p>　　下面是一些在 Bash 终端界面的快捷键。</p>
+<ul>
+<li><kbd>Ctrl + C</kbd> 强制终止命令</li>
+<li><kbd>Ctrl + L</kbd> 清屏命令 clear</li>
+<li><kbd>Ctrl + A</kbd> 光标移动到行首</li>
+<li><kbd>Ctrl + E</kbd> 光标移动到行尾</li>
+<li><kbd>Ctrl + U</kbd> 删除整行</li>
+<li><kbd>Ctrl + Z</kbd> 把命令放入后台</li>
+<li><kbd>Ctrl + R</kbd> 在历史中搜索命令</li>
+</ul>

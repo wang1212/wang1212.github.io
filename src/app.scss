@@ -1,26 +1,17 @@
-/*!  All style */
+/* App style sheet */
 
 /* Shared basic style sheet */
-@import './components/base/_base.scss';
+@import './utils/base.scss';
 
-/* Home page style */
-@import './modules/home/_home.scss';
-
-/* Document page style */
-@import './modules/docs/_docs.scss';
-
-/* About page style */
-@import './modules/about/_about.scss';
-
-/* More page style */
-@import './modules/more/_more.scss';
-
-
-body {
-    min-height: 100vh;
+.App {
+	display: flex;
+	flex-direction: column;
+	overflow-x: hidden;
+	min-height: 100vh;
 }
 
-/** 
+
+/**
  * Page head
  */
 .page-head {
@@ -150,14 +141,14 @@ body {
         .signature {
             max-height: 10rem;
         }
-        
+
         .nav-item {
             transform: translateY(0);
         }
     }
 }
 
-/** 
+/**
  * Page main
  */
 .page-main {
@@ -166,27 +157,8 @@ body {
     padding: 2rem 1rem 160px;
 }
 
-/** 
- * Page foot
- */
-.page-foot {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    padding: 3rem 0 5rem;
-    color: white;
-    background-color: #1b1e21;
 
-    > .copyright {
-        position: absolute;
-        bottom: 1rem;
-        left: 0;
-        width: 100%;
-    }
-}
-
-/** 
+/**
  * Side nav
  */
 .H {
@@ -245,7 +217,7 @@ body {
         font-size: .8em;
         text-indent: 3.25rem;
     }
-    
+
     .H-h6 {
         font-size: .75em;
         text-indent: 4rem;

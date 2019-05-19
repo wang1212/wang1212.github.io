@@ -1,0 +1,202 @@
+<h2 id="内置对象">内置对象</h2>
+<p>　　内置对象（built-in object）是 JSP 技术自有的，供开发者在 JSP 页面中直接使用，简化开发过程，提高效率。JSP 提供了九个内置对象：</p>
+<ul>
+<li><p>out</p>
+<p>  javax.servlet.jsp.JspWriter，客户端输出。</p>
+</li>
+<li><p>request</p>
+<p>  javax.servlet.http.HttpServletRequest，请求信息。</p>
+</li>
+<li><p>response</p>
+<p>  javax.servlet.http.HttpServletResponse，响应信息。</p>
+</li>
+<li><p>session</p>
+<p>  javax.servlet.http.HttpSession，会话管理。</p>
+</li>
+<li><p>application</p>
+<p>  javax.servlet.ServletContext，全局应用管理。</p>
+</li>
+<li><p>pageContext</p>
+<p>  javax.servlet.jsp.PageContext，代表 JSP 上下文。</p>
+</li>
+<li><p>config</p>
+<p>  javax.servlet.ServletConfig，服务器配置信息。</p>
+</li>
+<li><p>page</p>
+<p>  java.lang.Object，代表 JSP 自身，类似 this。</p>
+</li>
+<li><p>exception</p>
+<p>  java.lang.Throwable，页面异常信息。</p>
+</li>
+</ul>
+<p>　　接下来，将对 JSP 的内置对象进行详细的了解，其中有五个较为常用，需着重理解。</p>
+<h3 id="out">out</h3>
+<p>　　out 对象是 JspWriter 类的实例，常用来向客户端页面输出信息，并且管理应用服务器上的输出缓冲区。在使用 out 对象输出数据时，可以对数据缓冲区进行操作，及时清除缓冲区中的残余数据，为其他的输出让出缓冲空间。待数据输出完毕后，要及时关闭输出流。</p>
+<ul>
+<li>void println() 向客户端打印字符串</li>
+<li>void clear() 清除缓冲区内容，需在 flush() 之前调用</li>
+<li>void clearBuffer() 清除缓冲区内容</li>
+<li>void flush() 将缓冲区内容输出到客户端</li>
+<li>int getBufferSize() 返回缓冲区字节大小</li>
+<li>int getRemaining() 返回缓冲区剩余可用字节数</li>
+<li>boolean isAutoFlush() 返回缓冲区满时，自动清空还是抛出异常</li>
+<li>void close() 关闭输出流</li>
+</ul>
+<blockquote>
+<p><strong>缓冲区</strong>：Buffer，一块用来保存临时数据的内存区域。</p>
+</blockquote>
+<h3 id="request">request</h3>
+<p>　　request 对象是 HttpServletRequest 类的实例，封装了客户端的请求信息，主要用于接受通过 HTTP 协议传送到服务器的数据（包括头信息、系统信息、请求方式以及请求参数等）。其作用域为请求的全过程，在服务器完成响应该请求之前均有效。</p>
+<ul>
+<li>String getParameter(String name) 返回 name 指定参数的值</li>
+<li>String[] getParameterValues(String name) 返回包含参数 name 的所有值的数组</li>
+<li>void setAttribute(String key, Object value) 存储此请求中的属性</li>
+<li>object getAttribute(String key) 返回指定属性的属性值</li>
+<li>String getContentType() 得到请求的 MIME 类型</li>
+<li>String getProtocol() 返回请求用的协议类型及版本号</li>
+<li>String getServerName() 返回接受请求的服务器主机名</li>
+<li>void setCharacterEncoding(String name) 设置客户端的字符集编码</li>
+</ul>
+<p>　　使用表单提交数据时，会发生中文乱码问题，如果使用的是 Post 提交方式，可以在请求页面使用  <code>setCharacterEncoding()</code> 将字符集编码设置为与提交页面一致即可，推荐 <strong>utf-8</strong>。如果使用的是 URL 传参，也就是 Get 提交方式时，需在服务器配置页面进行设置。</p>
+<blockquote>
+<p><strong>Get 与 Post</strong> <br>
+　　Get 方法是以明文的方式通过 URL 提交数据，最多不超过 2KB，安全性较低，但效率高。而 Post 方法则是将提交的信息封装到 HTML Header 内，适合提交数据量大，且安全性较高的信息。</p>
+</blockquote>
+<h3 id="response">response</h3>
+<p>　　response 对象是 HttpServletResponse 类的实例，包含了响应客户端请求的信息。其作用域为整个 Jsp 页面，其它页面无效。</p>
+<ul>
+<li>String getCharacterEncoding() 返回响应用的字符集编码</li>
+<li>void setContentType(String type) 设置响应的 MIME 类型</li>
+<li>PrintWriter getWriter() 返回可以向客户端输出字符的对象</li>
+<li>sendRedirect(String location) 重定向客户端的请求</li>
+</ul>
+<p>　　需要注意的是，通过 <code>getWriter()</code> 得到的 <code>PrintWriter</code> 对象与内置 <code>out</code> 对象均可以向客户端输出字符，但前者总是早于后者输出；这其实是因为 out 对象会将内容先暂存在缓冲区，使用 <code>flush()</code> 方法则可以将其提前输出到客户端。</p>
+<blockquote>
+<p><strong>请求重定向与请求转发</strong> <br>
+　　请求重定向，由 <code>response.sendRedirect()</code> 实现，从本质上讲等同于客户端发送了两次请求，第一次的请求信息会丢失，地址栏 URL 会改变，属于客户端行为。请求转发，由 <code>request.getRequestDispatcher().forward(req, resp)</code> 实现，从本质上讲客户端只发送了一次请求，请求信息会保存，地址栏的 URL 不会改变，属于服务器端行为。</p>
+</blockquote>
+<h3 id="session">session</h3>
+<p>　　session 对象是 HttpSession 类的实例，代表客户端与服务器的一次会话，是由服务器自动创建的与用户请求相关的对象。服务器为每个用户都生成一个 session 对象，用于保存该用户的信息，跟踪用户的操作状态。</p>
+<ul>
+<li>long getCreationTime() 返回 session 创建的时间</li>
+<li>public String getId() 返回 session 的 ID</li>
+<li>public Object setAttribute(String name, Object value) 使用指定名称将对象绑定到此会话</li>
+<li>public Object getAttribute(String name) 返回绑定到此会话的特定对象，没有则为 null</li>
+<li>String[] getValueNames() 返回一个包含次 session 所有可用属性的数组</li>
+<li>int getMaxInactiveInterval() 返回此 session 两次请求之间的超时时限</li>
+<li>void setMaxInactiveInterval() 设置此 session 两次请求之间的超时时限</li>
+</ul>
+<p>　　从一个客户打开浏览器并连接到服务器开始，到客户关闭浏览器离开这个服务器结束，被称为一个会话。只要当前所有的页面没有全部关闭，此会话在未超时前仍然是有效的；如果当前所有页面全都关闭之后，此会话将会失效。</p>
+<h3 id="application">application</h3>
+<p>　　application 对象是 ServletContext 类的实例，实现了用户间的数据共享，可存放全局变量。在服务启动时，该对象实例化，直到服务器关闭之前该对象均是有效可用的。</p>
+<ul>
+<li>public void setAttribute(String name, Object value) 设置保存一个属性</li>
+<li>public Object getAttribute(String name) 获取指定属性的值</li>
+<li>Enumeration getAttributeNames() 返回所有属性名的枚举</li>
+<li>String getServerInfo() 返回JSP(Servlet)引擎名及版本号</li>
+</ul>
+<h3 id="page">page</h3>
+<p>　　page 对象是 java.lang.Object 类的实例，指向当前 JSP 页面，类似于 this 指针。</p>
+<ul>
+<li>class getClass() 返回此 Object 的类</li>
+<li>int hashCode() 返回此 Object 的 hash 码</li>
+<li>boolean equals(Object obj) 判断此 Object 与指定的对象是否相等</li>
+<li>void copy(Object obj) 把此 Object 拷贝到指定对象中</li>
+<li>Object clone() 克隆此 Object 对象</li>
+<li>String toString() 把此 Object 转换成 String 类的对象</li>
+<li>void notify() 唤醒一个等待的线程</li>
+<li>void notifyAll() 唤醒所有等待的线程</li>
+<li>void wait(int timeout) 使一个线程处于等待直到 timeout 结束或被唤醒</li>
+<li>void wait() 使一个线程处于等待直到被唤醒</li>
+</ul>
+<h3 id="pagecontext">pageContext</h3>
+<p>　　pageContext 对象是 pageContext 类的实例，提供了对 JSP 页面内所有的对象及名字空间的访问。</p>
+<ul>
+<li>JspWriter getOut() 返回当前客户端响应被使用的 JspWriter 流(out)</li>
+<li>ServletRequest getRequest() 返回当前页的 ServletRequest 对象(request)</li>
+<li>ServletResponse getResponse() 返回当前页的 ServletResponse 对象(response)</li>
+<li>HttpSession getSession() 返回当前页中的 HttpSession 对象(session)</li>
+<li>ServletContext getServletContext() 返回当前页的 ServletContext 对象(application)</li>
+<li>Object getPage() 返回当前页的 Object 对象(page)</li>
+<li>ServletConfig getServletConfig() 返回当前页的 ServletConfig 对象(config)</li>
+<li>Exception getException() 返回当前页的 Exception 对象(exception)</li>
+<li>void setAttribute(String name, Object obj, int scope) 在指定范围内设置属性及属性值</li>
+<li>public Object getAttribute(String name) 取得指定属性的值</li>
+<li>Object getAttribute(String name, int scope) 在指定范围内取属性的值</li>
+<li>int getAttributeScope(String name) 返回某属性的作用范围</li>
+<li>void forward(String relativeUrlPath) 使当前页面重导到另一页面</li>
+<li>void include(String relativeUrlPath) 在当前位置包含另一文件</li>
+</ul>
+<h3 id="config">config</h3>
+<p>　　config 对象是 ServletConfig 类的实例，是在一个 Servlet 初始化时，JSP 引擎向它传递信息用的。</p>
+<ul>
+<li>ServletContext getServletContext() 返回含有服务器相关信息的 ServletContext 对象</li>
+<li>String getInitParameter(String name) 返回初始化参数的值</li>
+<li>Enumeration getInitParameterNames() 返回 Servlet 初始化所需所有参数的枚举</li>
+</ul>
+<h3 id="exception">exception</h3>
+<p>　　exception 对象是 java.lang.Throwable 类的实例，是页面中异常对象。如果 JSP 页面要使用此对象，就必须设置 <code>isErrorPage=&quot;true&quot;</code>，否则无法编译。如果在 JSP 页面中出现没有捕获到的异常，就会生成 exception 对象，并把 exception 对象传送到在 page 指令中设定的错误页面中，然后在错误页面中处理相应的 exception 对象。</p>
+<ul>
+<li>String getMessage() 返回描述异常的信息</li>
+<li>String toString() 返回关于异常的简短描述消息</li>
+<li>void printStackTrace() 显示异常及其栈轨迹</li>
+<li>Throwable fillInStackTrace() 重写异常的执行栈轨迹</li>
+</ul>
+<h2 id="指令">指令</h2>
+<p>　　JSP 指令用来设置整个页面相关的属性，如网页的编码方式和所使用的脚本语言。JSP 内置了三大指令，下面就来一一介绍：</p>
+<h3 id="page-1">Page</h3>
+<p>　　Page 指令为容器提供当前页面的使用说明，如使用的脚本语言和所需要引入的类等，一个 JSP 页面可以包含多个 page 指令。其语法格式如下：</p>
+<pre><code>&lt;%@<span class="hljs-built_in"> page </span><span class="hljs-attribute">attribute</span>=<span class="hljs-string">""</span> %&gt;</code></pre><p>　　page 指令的常用属性有以下：</p>
+<ul>
+<li><p>language</p>
+<p>  指定页面所使用的脚本语言，默认为 Java</p>
+</li>
+<li><p>contentType</p>
+<p>  指定页面的 MIME 类型和字符编码</p>
+</li>
+<li><p>import</p>
+<p>  导入要使用的 Java 类</p>
+</li>
+<li><p>isErrorPage</p>
+<p>  指定当前页面是否可以作为另一个页面的错误处理页</p>
+</li>
+</ul>
+<h3 id="include">Include</h3>
+<p>　　Include 指令用来在当前 JSP 页面包含其它文件，JSP、HTML、文本文件均可以。被包含的文件会在当前 JSP 页面编译期间执行，最终只转换成一个 Servlet，编译效率较低，但执行很快，可以称之为静态包含。语法格式如下：</p>
+<pre><code>&lt;%@ include <span class="hljs-keyword">file</span>=<span class="hljs-string">"文件的相对 url 地址"</span> %&gt;</code></pre><h3 id="taglib">Taglib</h3>
+<p>　　Taglib 指令是为了让用户可以引入自定义的标签库，其语法格式如下：</p>
+<pre><code>&lt;<span class="hljs-meta">%</span>@ taglib uri=<span class="hljs-string">"库文件的 uri 地址"</span> prefix=<span class="hljs-string">"标签库前缀"</span> <span class="hljs-meta">%</span>&gt;</code></pre><h2 id="动作">动作</h2>
+<p>　　JSP 动作元素是在请求阶段执行的，利用其可以动态的插入文件、重用 JavaBean 组件、页面重定向等。JSP 提供了多个动作元素，且每个动作元素都两个常用的属性，下面来看看：</p>
+<ul>
+<li><p>动作元素常见的共有属性</p>
+<ul>
+<li><p>id</p>
+<p>  　　动作元素的唯一标识，可以在JSP页面中通过 PageContext 来引用。</p>
+</li>
+<li><p>scope</p>
+<p>  　　用于定义动作元素的作用域范围，其取值可能为：page、request、session、application。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="include-1">include</h3>
+<p>　　include 动作元素的作用与 Include 指令一样，可以将 JSP、HTML、文本文件包含到当前页面中，不同的是后者在页面编译期间就将文件包含进去，生成一个 Servlet，而 include 动作则是在请求阶段才将文件包含到当前页面中，最终将会生成两个 Servlet，编译效率高，但执行较慢，可以称之为动态包含。其语法格式如下：</p>
+<pre><code>&lt;jsp:include <span class="hljs-attribute">page</span>=<span class="hljs-string">"文件相对 url 地址"</span> <span class="hljs-attribute">flush</span>=<span class="hljs-string">"是否刷新缓冲区"</span> /&gt;</code></pre><h3 id="usebean">useBean</h3>
+<p>　　useBean 动作用来加载一个将在 JSP 页面中使用的 JavaBean，它使得我们可以发挥 Java 组件复用的优势。其语法格式为：</p>
+<pre><code>&lt;jsp:useBean <span class="hljs-built_in">id</span>=<span class="hljs-string">"对象name"</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"包含包名的完整类路径"</span> /&gt;</code></pre><p>　　其等价为：</p>
+<pre><code><span class="hljs-built_in">Object</span> obj = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();</code></pre><h3 id="setproperty">setProperty</h3>
+<p>　　setProperty 动作用来设置已经实例化的 Bean 对象的属性，其语法格式如下：</p>
+<pre><code><span class="hljs-comment">&lt;!-- 手动指定属性值 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">jsp:setProperty</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"对象name"</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"属性名"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"属性值"</span> /&gt;</span>
+<span class="hljs-comment">&lt;!-- 与请求参数匹配 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">jsp:setProperty</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"对象name"</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"属性名"</span> <span class="hljs-attr">param</span>=<span class="hljs-string">"参数名"</span> /&gt;</span></code></pre><p>　　需要注意的是，以上两种方式只能选择一种，不能同时出现 <code>value</code> 和 <code>param</code> 属性。如果 setProperty 动作作为 useBean 动作元素的子元素，只有在实例化一个新的 Bean 时才有效，引用已存在的 Bean 实例是无效的。</p>
+<h3 id="getproperty">getProperty</h3>
+<p>　　getProperty 动作用来获取已经实例化的 Bean 对象的属性，其语法格式如下：</p>
+<pre><code>&lt;jsp:getProperty <span class="hljs-built_in">name</span>=<span class="hljs-string">"对象name"</span> <span class="hljs-keyword">property</span>=<span class="hljs-string">"属性名"</span> /&gt;</code></pre><h3 id="forward">forward</h3>
+<p>　　forward 动作用来将请求转发到另一个页面，其本质为请求转发，而不是请求重定向。其语法格式为：</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">jsp:forward</span> <span class="hljs-attr">page</span>=<span class="hljs-string">"相对URL"</span> /&gt;</span></code></pre><p>　　其等价为：</p>
+<pre><code><span class="hljs-built_in">request</span>.getRequestDispatcher(<span class="hljs-string">"URL"</span>).forward(<span class="hljs-built_in">request</span>, <span class="hljs-built_in">response</span>);</code></pre><h3 id="param">param</h3>
+<p>　　param 动作元素是用来传递属性的，常作为 forward 动作元素的子元素存在。示例如下：</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">jsp:forward</span> <span class="hljs-attr">page</span>=<span class="hljs-string">"相对URL"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">jsp:param</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"属性值"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"属性名"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">jsp:forward</span>&gt;</span></code></pre><p>　　传递的参数值可以使用 <code>request.getParameter(name)</code> 获取，也可以覆盖掉已有参数的值。</p>

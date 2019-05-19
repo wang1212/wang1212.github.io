@@ -1,0 +1,299 @@
+/*!  All style */
+
+/* Shared basic style sheet */
+@import './components/base/_base.scss';
+
+/* Home page style */
+@import './modules/home/_home.scss';
+
+/* Document page style */
+@import './modules/docs/_docs.scss';
+
+/* About page style */
+@import './modules/about/_about.scss';
+
+/* More page style */
+@import './modules/more/_more.scss';
+
+
+body {
+    min-height: 100vh;
+}
+
+/** 
+ * Page head
+ */
+.page-head {
+    >.banner {
+        padding: 90px 0;
+    }
+
+    .author {
+        transition: transform 1s ease-in-out 1.5s;
+
+        @media (min-width: 1200px) {
+            transform: translateX(50%);
+        }
+
+        .name {
+            position: relative;
+            line-height: 3.5rem;
+            transition: all .8s linear;
+            transform: scale(.8);
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: 0;
+                border-bottom: 2px solid #343a40;
+                transform: scaleX(0);
+                transform-origin: 0 0;
+                transition: all 1s linear .5s;
+            }
+
+            &::after {
+                transform-origin: 100% 0;
+                bottom: 0;
+            }
+
+            &:hover::before, &:hover::after {
+                transform: scaleX(0) !important;
+            }
+        }
+
+        .constellation,
+        .email {
+            font-size: 1.25rem;
+        }
+    }
+
+    .signature {
+        text-align: left;
+        color: #ced4da;
+        font-size: 1.2rem;
+        transition: all 1.6s ease-in 2s;
+        max-height: 0;
+        overflow: hidden;
+
+        &:hover {
+            color: black;
+            transition: all .8s ease-in;
+        }
+    }
+
+    >.main-nav {
+        overflow: hidden;
+        padding-bottom: .5rem;
+        border-bottom: 1px solid #ddd;
+        box-shadow: 0 .25rem .25rem rgba(22, 22, 22, .5);
+
+        .nav-item, .nav-item::before {
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .nav-item {
+            display: inline-block;
+            position: relative;
+            padding: 0 0 5px 0;
+            color: #333;
+            font-weight: lighter;
+            transition: transform .6s linear .8s;
+            transform: translateY(4rem);
+
+            &::before {
+                content: attr(txt);
+                box-sizing: border-box;
+                position: absolute;
+                left: 0;
+                top: 0;
+                overflow: hidden;
+                height: 100%;
+                max-width: 0;
+                padding: 0 0 4px 0;
+                text-align: left;
+                color: black;
+                border-bottom: 1px solid black;
+                transition: all .6s linear;
+            }
+
+            &:hover::before {
+                max-width: 100%;
+            }
+
+            @media screen and (min-width: 992px) {
+                &::before {
+                    content: attr(txt-lg);
+                }
+            }
+        }
+    }
+
+    /* animation */
+    &.anim {
+
+        .author {
+            transform: translateX(0);
+
+            .name {
+                transform: scale(1);
+                &::before,
+                &::after {
+                    transform: scaleX(1);
+                }
+            }
+        }
+
+        .signature {
+            max-height: 10rem;
+        }
+        
+        .nav-item {
+            transform: translateY(0);
+        }
+    }
+}
+
+/** 
+ * Page main
+ */
+.page-main {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 2rem 1rem 160px;
+}
+
+/** 
+ * Page foot
+ */
+.page-foot {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 3rem 0 5rem;
+    color: white;
+    background-color: #1b1e21;
+
+    > .copyright {
+        position: absolute;
+        bottom: 1rem;
+        left: 0;
+        width: 100%;
+    }
+}
+
+/** 
+ * Side nav
+ */
+.H {
+    position: absolute;
+    left: 0;
+    top: 305px;
+    z-index: 1050;
+    overflow: auto;
+    font-size: 1.25rem;
+    padding: 2rem 1rem 1rem 2.5rem;
+    background-color: rgba($color: #000000, $alpha: .85);
+    transition: left .8s ease-in-out;
+
+    &.scroll {
+        position: fixed;
+        top: 0;
+        height: 100%;
+    }
+
+    &.hide {
+        left: -400px;
+        overflow: visible;
+    }
+
+    > p {
+        color: #aaa;
+        cursor: pointer;
+        margin-bottom: .5rem;
+
+        &.active {
+            color: orange;
+            border-color: orange;
+        }
+    }
+
+    .H-h1 {
+        font-size: 1em;
+    }
+
+    .H-h2 {
+        font-size: .95em;
+        text-indent: 1rem;
+    }
+
+    .H-h3 {
+        font-size: .9em;
+        text-indent: 1.75rem;
+    }
+
+    .H-h4 {
+        font-size: .85em;
+        text-indent: 2.5rem;
+    }
+
+    .H-h5 {
+        font-size: .8em;
+        text-indent: 3.25rem;
+    }
+    
+    .H-h6 {
+        font-size: .75em;
+        text-indent: 4rem;
+    }
+
+    .H-h2,
+    .H-h3,
+    .H-h4,
+    .H-h5,
+    .H-h6 {
+        border-left: 2px solid transparent;
+    }
+
+    > .hide {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        line-height: 40px;
+        color: #fff;
+        font-size: 1rem;
+        text-align: center;
+        background-color: rgba(0, 0, 0, .75);
+        cursor: pointer;
+
+        &:hover {
+            color: orange;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        & {
+            top: 368px;
+        }
+    }
+
+    @media screen and (min-width: 1800px) {
+        & {
+            background-color: transparent;
+
+            > p:hover {
+                color: black;
+            }
+
+            > .hide {
+                color: black;
+                background-color: transparent;
+            }
+        }
+    }
+}
