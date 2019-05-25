@@ -2,8 +2,8 @@
 
 .page-notes {
 	min-height: 100vh;
-	padding-top: 5rem;
-	padding-bottom: 10rem;
+	padding-top: 4rem;
+	padding-bottom: 6rem;
 
 	/* tags cloud */
 	> .tags-box {
@@ -32,7 +32,7 @@
 					content: '';
 					position: absolute;
 					left: 0;
-					top: 50%;
+					top: 1.15rem;
 					width: .75rem;
 					height: .75rem;
 					border-radius: 50%;

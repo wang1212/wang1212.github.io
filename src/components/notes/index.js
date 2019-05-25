@@ -15,14 +15,12 @@ function get_color (num) {
 
 
 /* views */
-const Tags = _.map(category.tags, (file_indexs, tag) => {
-	return `
-		<a class="btn btn-${get_color(file_indexs.length)} mr-2 mb-2" href="#/notes/${tag}">
-			${tag}
-			<span class="badge badge-light ml-2">${file_indexs.length}</span>
-		</a>
-	`;
-}).join('');
+const Tags = _.map(category.tags, (file_indexs, tag) => [tag, file_indexs.length]).sort((a, b) => b[1] - a[1]).map(item => (`
+	<a class="btn btn-${get_color(item[1])} mr-2 mb-2" href="#/notes/${item[0]}">
+		${item[0]}
+		<span class="badge badge-light ml-2">${item[1]}</span>
+	</a>
+`)).join('');
 
 
 const TagNotesListContent = state => {
@@ -58,7 +56,8 @@ const TagNotesListContent = state => {
 									`).join('')
 								}
 							</div>
-							<p class="text-muted mb-0">${file.summary}</p>
+							<p class="text-muted mb-1">${file.summary}</p>
+							<span class="badge badge-light">${file.mtime[0].join('-')}  ${file.mtime[1].slice(0, 2).join(':')} 最后更新</span>
 						</div>
 					`).join('')
 				}

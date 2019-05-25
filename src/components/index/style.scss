@@ -1,34 +1,5 @@
 /*! page index style */
 
-.diamond {
-	overflow: hidden;
-	position: relative;
-	width: 6rem;
-	height: 10rem;
-	margin: 8px;
-	background-color: #b3d7ff;
-
-	&::before, &::after {
-		content: '';
-		box-sizing: border-box;
-		position: absolute;
-		left: -3rem;
-		top: 0rem;
-		width: 12rem;
-		height: 10rem;
-		border-left: 3rem solid #fff;
-		border-right: 3rem solid #fff;
-	}
-
-	&::before {
-		transform: rotate(60deg)
-	}
-
-	&::after {
-		transform: rotate(-60deg);
-	}
-}
-
 .page-index {
 	overflow: hidden;
 	position: relative;
@@ -94,8 +65,11 @@
 	}
 
 	.index-title {
+		padding: 0 2rem;
 		margin-bottom: 10rem;
+		line-height: 1.8;
 		font-weight: lighter;
+		text-align: center;
 		opacity: 1;
 		animation: anim_index_title 4s linear;
 	}
