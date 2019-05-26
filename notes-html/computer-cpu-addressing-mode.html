@@ -22,7 +22,7 @@
 <p>　　操作数存放在存储器(内存)中，在指令给出的是该操作数的有效地址(段内偏移地址)。操作数通常存放在数据段中，默认的段地址存放在 D 段寄存器中。</p>
 <p>　　操作数的内存地址：<strong>DS段地址×16(左移4位)+16位偏移地址=20位内存地址</strong>。</p>
 <pre><code><span class="hljs-keyword">MOV</span> <span class="hljs-built_in">BX</span>, [<span class="hljs-number">2000H</span>]    (假设段地址 <span class="hljs-built_in">DS</span>=<span class="hljs-number">1000H</span>)
-内存地址：<span class="hljs-number">1000H</span>×<span class="hljs-number">16</span>+<span class="hljs-number">2000H</span>=<span class="hljs-number">12000H</span> </code></pre><p>　　注意：段地址也有可能不在 DS 中，此时指令中会给出存放段地址的寄存器号(段超越前缀不可省略)。</p>
+内存地址：<span class="hljs-number">1000H</span>×<span class="hljs-number">16</span>+<span class="hljs-number">2000H</span>=<span class="hljs-number">12000H</span></code></pre><p>　　注意：段地址也有可能不在 DS 中，此时指令中会给出存放段地址的寄存器号(段超越前缀不可省略)。</p>
 <pre><code><span class="hljs-keyword">MOV</span> <span class="hljs-built_in">ES</span>:[<span class="hljs-number">2000H</span>], <span class="hljs-built_in">AX</span>  （段地址存放在<span class="hljs-built_in">ES</span>寄存器中）</code></pre><h3 id="寄存器直接寻址">寄存器(直接)寻址</h3>
 <p>　　操作数存放在 CPU 内部寄存器中，例如 AX、BX、CX、DX 等。</p>
 <pre><code><span class="hljs-keyword">MOV</span> <span class="hljs-built_in">DS</span>, <span class="hljs-built_in">AX</span>

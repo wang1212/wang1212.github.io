@@ -2,13 +2,14 @@
 
     {
         "title": "微处理器寻址范围",
-        "keywords": ["Computer", "CPU", "寻址范围"],
+        "tags": ["Computer Technology", "Computer"],
+        "keywords": ["Computer Technology", "Computer", "MPU"],
         "summary": "为什么内存不是越大越好，内存的大小受限于处理器的寻址范围。",
         "ctime": "2016-4-28 1:42:00",
         "mtime": "2016-4-28 1:42:00"
     }
 
---- 
+---
 
 　　在此之前，让我们带着下面这个问题来看这篇文章：**64位处理器所支持的最大内存(寻址范围)为多少？**
 

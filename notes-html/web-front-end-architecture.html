@@ -21,7 +21,7 @@
 <h5 id="html验证">HTML验证</h5>
 <p>　　规范化的 HTML 是显现技术要求与局限的显著质量基线，它促进了 HTML 被更好地运用。</p>
 <p>　　<strong>推荐：</strong></p>
-<pre><code><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span> 
+<pre><code><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Test<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">article</span>&gt;</span>This is only a test.<span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span></code></pre><p>　　<strong>不推荐：</strong></p>
@@ -265,7 +265,7 @@
     <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">20px</span>;
 }
 
-<span class="hljs-selector-class">.content</span>, 
+<span class="hljs-selector-class">.content</span>,
 <span class="hljs-selector-class">.item</span><span class="hljs-selector-pseudo">:hover</span> {
     <span class="hljs-attribute">color</span>: orange;
 }</code></pre><p>　　<strong>不推荐：</strong></p>
@@ -341,7 +341,7 @@
 <p>　　在使用 Sass 写 CSS 时有很大的灵活性来组织代码结构，但注释也是很必要的。</p>
 <h5 id="文档注释">文档注释</h5>
 <p>　　通常写在文件的开始部分，涉及文档的概述以及版本号，及其依赖等。</p>
-<pre><code>/*! 
+<pre><code>/*!
     normalize.css v8<span class="hljs-number">.0</span><span class="hljs-number">.0</span> | <span class="hljs-type">MIT</span> License |<span class="hljs-type">github</span>.com/necolas/normalize.css
 */</code></pre><h5 id="模块注释">模块注释</h5>
 <p>　　模块的注释使用多行注释，标明该模块、代码块的作用等。</p>
@@ -444,8 +444,8 @@ if (a) {
 <p>　　JavaScript 是一个灵活性很大的语言，那么就会带来代码维护和阅读上的困难，良好的注释会帮助我们减轻这些负担。</p>
 <h5 id="文档注释-1">文档注释</h5>
 <p>　　通常写在文件的开始部分，涉及文档的概述以及版本号，及其依赖等。</p>
-<pre><code>/*! 
-    jQuery v1<span class="hljs-meta">.11</span><span class="hljs-meta">.3</span> | 
+<pre><code>/*!
+    jQuery v1<span class="hljs-meta">.11</span><span class="hljs-meta">.3</span> |
     (c) <span class="hljs-number">2005</span>, <span class="hljs-number">2015</span> jQuery Foundation, <span class="hljs-keyword">Inc</span>. |
     jquery.org/license
  */</code></pre><h5 id="方法注释">方法注释</h5>
@@ -455,7 +455,7 @@ if (a) {
  *
  * <span class="hljs-variable">@description</span> <span class="hljs-string">"..."</span>
  * <span class="hljs-variable">@author</span> mrwang
- * <span class="hljs-variable">@param</span> {Jquery Object} <span class="hljs-variable">$all_a</span> 
+ * <span class="hljs-variable">@param</span> {Jquery Object} <span class="hljs-variable">$all_a</span>
  * <span class="hljs-variable">@returns</span>
  *<span class="hljs-regexp">/</span></code></pre><h5 id="普通注释-1">普通注释</h5>
 <p>　　普通注释可分为多行注释和单行注释，在必要的地方进行注释即可。</p>
@@ -635,7 +635,7 @@ if (a) {
 </li>
 </ul>
 <h5 id="http-请求次数">HTTP 请求次数</h5>
-<p>　　浏览器对页面渲染的所需的每个文件都要进行 HTTP 请求。<strong>因为每个浏览器对 HTTP 
+<p>　　浏览器对页面渲染的所需的每个文件都要进行 HTTP 请求。<strong>因为每个浏览器对 HTTP
 请求的次数有但域名限制，所以大量单独的文件意味着浏览器必须进行多轮并发请求。</strong>在速度较慢的网络环境中，这么多并发请求会造成很复杂的影响。因此，减少获取所需文件的并发请求次数，效果会更显著。</p>
 <p>　　可以通过以下方法减少并发请求次数：</p>
 <ul>

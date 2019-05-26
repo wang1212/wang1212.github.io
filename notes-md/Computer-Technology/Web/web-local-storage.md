@@ -2,13 +2,14 @@
 
     {
         "title": "Web 本地存储",
-        "keywords": ["Web", "前端", "Cookie", "sessionStorage", "localStorage"],
+        "tags": ["Computer Technology", "Web", "前端"],
+        "keywords": ["Computer Technology", "Web", "前端", "Cookie", "LocalStorage", "SessionStorage"],
         "summary": "为了达到某些需求，我们通常需要在本地存储一些数据，方便我们进行用户个性化定制服务。",
         "ctime": "2016-6-1 1:00:00",
         "mtime": "2018-5-27 17:27:00"
     }
 
---- 
+---
 
 ## Web 存储
 

@@ -91,25 +91,26 @@ function dir_display (dir_path) {
 			_mtime = [_mtime.slice(0, 3), _mtime.slice(3)];
 
 			const _file_data = {
-				'name': path.basename(new_filepath_name),
-				'title': _doc_info.title || '无标题文档',
-				'ctime': _ctime,
-				'mtime': _mtime,
+				'name'    : path.basename(new_filepath_name),
+				'title'   : _doc_info.title || '无标题文档',
+				'ctime'   : _ctime,
+				'mtime'   : _mtime,
+				'tags'    : _doc_info.tags || [],
 				'keywords': _doc_info.keywords || [],
-				'summary': _doc_info.summary || ''
+				'summary' : _doc_info.summary || ''
 			};
 
 			const _file_index = category.data.push(_file_data) - 1;
 
 			/* tags */
-			_file_data.keywords.forEach(keyword => {
-				let _file_indexs = category.tags[keyword] || (category.tags[keyword] = []),
+			_file_data.tags.forEach(tag => {
+				let _file_indexs = category.tags[tag] || (category.tags[tag] = []),
 					_dir_tags = category.dirs[_temp_prev_dir[_temp_prev_dir.length - 1]];
 
 				_file_indexs.push(_file_index);
 
 				/* push dir */
-				!_dir_tags.includes(keyword) && _dir_tags.push(keyword);
+				!_dir_tags.includes(tag) && _dir_tags.push(tag);
 			});
 
 		} else if (_stats.isDirectory()) {

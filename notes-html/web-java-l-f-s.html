@@ -40,11 +40,11 @@
 <span class="hljs-meta">@WebListener</span>  <span class="hljs-comment">// 此处使用了注解注册该监听器</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppListener</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ServletContextListener</span> </span>{
 
-    <span class="hljs-meta">@Override</span>  <span class="hljs-comment">// 销毁方法 </span>
+    <span class="hljs-meta">@Override</span>  <span class="hljs-comment">// 销毁方法</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">contextDestroyed</span><span class="hljs-params">(ServletContextEvent arg0)</span> </span>{ }
 
     <span class="hljs-meta">@Override</span>  <span class="hljs-comment">// 初始化方法</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">contextInitialized</span><span class="hljs-params">(ServletContextEvent arg0)</span> </span>{ }    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">contextInitialized</span><span class="hljs-params">(ServletContextEvent arg0)</span> </span>{ }
 }</code></pre><hr>
 <pre><code><span class="hljs-comment">&lt;!-- 也可以在 web.xml 文件中注册该监听器 --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">listener</span>&gt;</span>
@@ -89,7 +89,7 @@
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">destroy</span><span class="hljs-params">()</span> </span>{ }
 
     <span class="hljs-meta">@Override</span>  <span class="hljs-comment">// 过滤方法</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doFilter</span><span class="hljs-params">(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)</span> </span>{ 
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doFilter</span><span class="hljs-params">(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)</span> </span>{
         <span class="hljs-comment">// 放行（必须）</span>
         arg2.doFilter(arg0, arg1);
     }

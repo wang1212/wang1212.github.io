@@ -2,7 +2,8 @@
 
     {
         "title": "国庆游延安",
-        "keywords": ["Tourism", "延安"],
+        "tags": ["Life", "Tourism"],
+        "keywords": ["Life", "Tourism", "延安"],
         "summary": "原以为国庆将会七天呆在房间里看书玩游戏度过，却未曾想过能去延安这个“革命圣地”看看。",
         "ctime": "2018-10-07 21:55:00",
         "mtime": "2018-10-13 11:22:00"

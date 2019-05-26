@@ -1,14 +1,15 @@
 ---
 
     {
-        "title": "JSP 内置对象、指令与动作",
-        "keywords": ["Web", "Java", "服务器端", "JSP", "内置对象", "动作", "指令"],
+		"title": "JSP 内置对象、指令与动作",
+		"tags": ["Computer Technology", "Web", "服务器端", "Java"],
+        "keywords": ["Computer Technology", "Web", "服务器端", "Java", "JSP"],
         "summary": "JSP 全称为 Java Server Page，即 Java 服务器页面，基于简化的 Servlet 设计，是一种建立动态网页的技术标准。JSP 有九个内置对象，可以不加声明和创建就可以在 JSP 页面脚本中直接使用，同时还提供了动作与指令元素，为开发提供了极大地便利。",
         "ctime": "2017-8-11 11:07:00",
         "mtime": "2017-8-11 11:07:00"
     }
 
---- 
+---
 
 ## 内置对象
 

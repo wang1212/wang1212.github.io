@@ -2,13 +2,14 @@
 
     {
         "title": "Ruby-元编程之类",
-        "keywords": ["Ruby", "元编程", "Class"],
+        "tags": ["Computer Technology", "Ruby"],
+        "keywords": ["Computer Technology", "Ruby", "元编程", "Class"],
         "summary": "这篇文章讲述关于 Ruby 中类相关的知识，这也是面向对象语言的核心。事实上，有很多编程语言都具备元编程的能力，而 Ruby 则是将元编程发挥到极致的语言。元编程这个概念是模糊的，很多人都说是用代码生成代码的方式，不过我们不用去纠结这个概念。元编程最具有魅力的地方就是，原来我们还可以在程序运行时去操控代码。",
         "ctime": "2016-12-8 21:07:00",
         "mtime": "2016-12-8 21:07:00"
     }
 
---- 
+---
 
 　　<u>本文的代码均在 Ruby 2.3.0 环境下测试通过。</u>
 
@@ -327,7 +328,7 @@
     class Object
         # 方法别名
         alias :original_to_s :to_s
-        
+
         def to_s
             "I will be changed to string --> " + original_to_s
         end

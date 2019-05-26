@@ -2,13 +2,14 @@
 
     {
         "title": "DOM-元素节点属性",
-        "keywords": ["Web", "前端", "DOM", "NodeAttribute"],
+        "tags": ["Computer Technology", "Web", "前端", "DOM"],
+        "keywords": ["Computer Technology", "Web", "前端", "DOM", "Attribute"],
         "summary": "元素节点上具有很多属性，这些属性我们通常可以很方便的获取，并进行简单的操作。",
         "ctime": "2016-5-21 21:00:00",
         "mtime": "2016-5-21 21:00:00"
     }
 
---- 
+---
 
 ## 节点属性常用操作
 
@@ -243,7 +244,7 @@ exp:
         // 去掉ID
         div_obj.removeAttribute("id");
 
-        // 添加class,让DIV居中 
+        // 添加class,让DIV居中
         div_obj.classList.add("b2");
         // 获取class
         console.log(div_obj.getAttribute("class"));  // 输出 b1 b2

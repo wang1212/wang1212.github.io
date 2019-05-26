@@ -10,7 +10,7 @@ import _ from 'lodash';
 
 /* utils */
 function get_color (num) {
-	return num >= 10 ? 'primary' : (num >= 3 ? 'info' : 'light');
+	return num >= 10 ? 'primary' : (num >= 5 ? 'info' : 'light');
 }
 
 
@@ -51,9 +51,11 @@ const TagNotesListContent = state => {
 							<a class="item-title h5 mb-2" href="#/note-content/${file.name}">${file.title}</a>
 							<div>
 								${
-									file.keywords.map(keyword => `
-										<a class="btn btn-outline-dark btn-sm mr-2 mb-2" href="#/notes/${keyword}">${keyword}</a>
-									`).join('')
+									file.keywords.map(keyword => (
+										file.tags.includes(keyword)
+										&& `<a class="btn btn-outline-dark btn-sm mr-2 mb-2" href="#/notes/${keyword}">${keyword}</a>`
+										|| `<span class="btn btn-outline-dark btn-sm mr-2 mb-2">${keyword}</span>`
+									)).join('')
 								}
 							</div>
 							<p class="text-muted mb-1">${file.summary}</p>

@@ -2,13 +2,14 @@
 
     {
         "title": "Web 前端架构设计",
-        "keywords": ["Web", "前端", "架构", "设计"],
+        "tags": ["Computer Technology", "Web", "前端"],
+        "keywords": ["Computer Technology", "Web", "前端", "架构设计"],
         "summary": "Web 前端开发是一个零散化的过程，基本上没有专业的 IDE 来为我们提供一整套的自动化流程解决方案，如何从需求到实现一步步快速推进形成完整的工作流，在后期如何高效的进行测试和优化，让前端开发可持续化、可扩展显得极为重要。",
         "ctime": "2018-3-28 14:01:00",
         "mtime": "2018-7-1 1:29:00"
     }
 
---- 
+---
 
 　　让 Web 前端开发可持续化、可扩展，关注四个核心**代码**、**流程**、**测试**、**文档**。
 
@@ -48,7 +49,7 @@
 
 　　**推荐：**
 
-    <!DOCTYPE html> 
+    <!DOCTYPE html>
     <meta charset="utf-8">
     <title>Test</title>
     <article>This is only a test.</article>
@@ -437,7 +438,7 @@
         padding: 10px 20px;
     }
 
-    .content, 
+    .content,
     .item:hover {
         color: orange;
     }
@@ -509,7 +510,7 @@
     .item {
         // 1. 当前选择器样式属性
         font-size: .8em;
-        
+
         // 2. 父级选择器的伪类
         &：hover {
             color: orange;
@@ -545,7 +546,7 @@
 
 　　通常写在文件的开始部分，涉及文档的概述以及版本号，及其依赖等。
 
-    /*! 
+    /*!
         normalize.css v8.0.0 | MIT License |github.com/necolas/normalize.css
     */
 
@@ -657,7 +658,7 @@
 
     var a,
         b;
-        
+
     a = 1;
     if (a) {
         b = 1;
@@ -742,8 +743,8 @@
 
 　　通常写在文件的开始部分，涉及文档的概述以及版本号，及其依赖等。
 
-    /*! 
-        jQuery v1.11.3 | 
+    /*!
+        jQuery v1.11.3 |
         (c) 2005, 2015 jQuery Foundation, Inc. |
         jquery.org/license
      */
@@ -757,7 +758,7 @@
      *
      * @description "..."
      * @author mrwang
-     * @param {Jquery Object} $all_a 
+     * @param {Jquery Object} $all_a
      * @returns
      */
 
@@ -1017,7 +1018,7 @@
 
 ##### HTTP 请求次数
 
-　　浏览器对页面渲染的所需的每个文件都要进行 HTTP 请求。**因为每个浏览器对 HTTP 
+　　浏览器对页面渲染的所需的每个文件都要进行 HTTP 请求。**因为每个浏览器对 HTTP
 请求的次数有但域名限制，所以大量单独的文件意味着浏览器必须进行多轮并发请求。**在速度较慢的网络环境中，这么多并发请求会造成很复杂的影响。因此，减少获取所需文件的并发请求次数，效果会更显著。
 
 　　可以通过以下方法减少并发请求次数：

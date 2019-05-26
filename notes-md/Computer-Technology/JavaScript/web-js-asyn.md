@@ -1,14 +1,15 @@
 ---
 
     {
-        "title": "JavaScript 异步编程",
-        "keywords": ["JavaScript", "异步编程", "Ajax", "Promise", "Fetch"],
+		"title": "JavaScript 异步编程",
+		"tags": ["Computer Technology", "JavaScript"],
+        "keywords": ["Computer Technology", "JavaScript", "Async"],
         "summary": "JavaScript 作为一门在 Web 开发中的主流语言，常常涉及到交互事件方面的应用，这不可避免的用到了异步编程的方法，而它本身则是单线程运行的。在以往的开发中，异步编程正变得越来越难管理，新的 Promise 标准 API 将使得异步编程更加方便、安全。",
         "ctime": "2017-3-22 15:48:00",
         "mtime": "2018-6-3 13:46:00"
     }
 
---- 
+---
 
 ## 异步与并行
 
@@ -336,7 +337,7 @@
 - `include`：同域或跨域请求皆携带 Cookie 信息
 
 exp：
-	
+
 	fetch('/api/getData', { method: 'GET', credentials: 'same-origin' })
 		.then(response => response.json() )
 		.then(json => console.log(json) )

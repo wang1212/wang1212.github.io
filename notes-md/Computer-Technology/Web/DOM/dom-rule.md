@@ -2,13 +2,14 @@
 
     {
         "title": "DOM-元素节点几何量",
-        "keywords": ["Web", "前端", "DOM", "几何量"],
+        "tags": ["Computer Technology", "Web", "前端", "DOM"],
+        "keywords": ["Computer Technology", "Web", "前端", "DOM", "Rule"],
         "summary": "当我们在查看 HTML 文档时，每个元素节点被解析后，都画成了可视形状。我们可以获取每个元素节点的几何量（宽、高、偏移量）以及页面滚动距离。",
         "ctime": "2016-5-19 14:54:00",
         "mtime": "2016-5-19 14:54:00"
     }
 
---- 
+---
 
 ## 元素节点几何量
 
@@ -31,7 +32,7 @@
             background-color: #ccc;
             border: 5px solid yellow;
             padding: 10px;
-            margin: 15px; 
+            margin: 15px;
             position: relative;
         }
         #in{
@@ -40,7 +41,7 @@
             background-color: red;
             border: 3px solid blue;
             padding: 6px;
-            margin: 9px;  
+            margin: 9px;
         }
     </style>
     <body>
@@ -81,7 +82,7 @@ exp：
             background-color: #ccc;
             border: 10px solid yellow;
             padding: 30px;
-            margin: 50px; 
+            margin: 50px;
         }
     </style>
     <body>
@@ -119,7 +120,7 @@ exp：
             background-color: #ccc;
             border: 10px solid yellow;
             padding: 30px;
-            margin: 50px; 
+            margin: 50px;
         }
     </style>
     <body>

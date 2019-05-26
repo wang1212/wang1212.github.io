@@ -107,5 +107,5 @@ public class AllTests { }</code></pre><p>　　在创建测试套件时可以勾
     @Test
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> testDivide() {
         assertEquals(expected, new Calculate().divide(input1, input2));
-    }    
+    }
 }</code></pre><p>　　参数化设置的测试类要使用 <code>@RunWith</code> 注解将运行器修改为 <strong>Parameterized.class</strong>。该类中要声明变量来存放预期值和结果值，声明一个 <code>@Parameters</code> 注解标注的返回值为 <code>Collection</code> 的公共静态方法来返回一组参数值，其次还要声明一个带参数的构造方法。</p>

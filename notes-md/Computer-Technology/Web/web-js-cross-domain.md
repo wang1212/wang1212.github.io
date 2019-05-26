@@ -1,14 +1,15 @@
 ---
 
     {
-        "title": "JS 跨域访问",
-        "keywords": ["Web", "前端", "JavaScript", "跨域"],
+		"title": "JS 跨域访问",
+		"tags": ["Computer Technology", "Web", "前端"],
+        "keywords": ["Computer Technology", "Web", "前端", "Cross-domain"],
         "summary": "为了用户的安全，浏览器通常都会限制 JavaScript 跨域访问，也就是默认不允许不同域名下页面之间进行资源的传递，但很多时候我们又有跨域请求资源的需求。",
         "ctime": "2016-8-10 15:18:00",
         "mtime": "2016-8-10 15:18:00"
     }
 
---- 
+---
 
 ## 同源策略
 
@@ -40,7 +41,7 @@
 
 	<script>
 		// 在全局创建一个回调函数（result 参数为跨域访问到的资源）
-		function callback(result){ 
+		function callback(result){
 			...
 			// 在这里处理跨域访问到的资源（也可以保存在全局变量中）
 			...
@@ -92,7 +93,7 @@
 				// 修改 src 到同源域名下（空白页）
 				this.src = 'about:blank';
 				this.onload = function() {
-					// 取得跨域访问资源，移除该 iframe 
+					// 取得跨域访问资源，移除该 iframe
 					var data = JSON.parse(this.contentWindow.name);
 					document.body.removeChild(this);
 					// 接下来就可以处理得到的资源了
@@ -148,7 +149,7 @@
 			// 销毁该事件
 			this.onmessage = null;
 			// 移除该 iframe
-			document.body.removeChild(nIframe);	
+			document.body.removeChild(nIframe);
 		}
 
 		var nIframe = document.createElement('iframe');

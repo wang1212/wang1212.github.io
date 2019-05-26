@@ -2,13 +2,14 @@
 
     {
         "title": "VS Code 配置同步",
-        "keywords": ["VS Code", "Setting-Sync"],
+        "tags": ["Computer Technology", "Tools"],
+        "keywords": ["Computer Technology", "Tools", "VS Code"],
         "summary": "利用一款插件来同步 VS Code 的配置到 GitHub 的 gist 上，实现多个设备间共享一套配置。",
         "ctime": "2018-8-15 16:42:00",
         "mtime": "2018-8-15 16:42:00"
     }
 
---- 
+---
 
 ## VS Code
 

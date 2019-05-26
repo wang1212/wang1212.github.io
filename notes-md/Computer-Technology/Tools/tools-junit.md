@@ -2,13 +2,14 @@
 
     {
         "title": "Junit 测试工具",
-        "keywords": ["Java", "JUnit4"],
+        "tags": ["Computer Technology", "Tools"],
+        "keywords": ["Computer Technology", "Tools", "Java", "JUnit4", "Test"],
         "summary": "通常一个项目的代码量是比较大的，而且其中逻辑也较为复杂，在开发完成后再进行项目测试其实是比较耗费时间和精力的，因此边开发边测试是个很好的选择，而 JUnit 则为我们提供了这样的便利。",
         "ctime": "2017-8-30 23:42:00",
         "mtime": "2017-8-30 23:42:00"
     }
 
---- 
+---
 
 ## JUnit
 
@@ -155,7 +156,7 @@
         @Test
         public void testDivide() {
             assertEquals(expected, new Calculate().divide(input1, input2));
-        }	
+        }
     }
 
 　　参数化设置的测试类要使用 `@RunWith` 注解将运行器修改为 **Parameterized.class**。该类中要声明变量来存放预期值和结果值，声明一个 `@Parameters` 注解标注的返回值为 `Collection` 的公共静态方法来返回一组参数值，其次还要声明一个带参数的构造方法。

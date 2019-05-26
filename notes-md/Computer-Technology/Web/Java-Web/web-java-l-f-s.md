@@ -1,14 +1,15 @@
 ---
 
     {
-        "title": "监听器、过滤器、Servlet",
-        "keywords": ["Web", "Java", "服务器端", "Servlet", "Listener", "Filter"],
+		"title": "监听器、过滤器、Servlet",
+		"tags": ["Computer Technology", "Web", "服务器端", "Java"],
+        "keywords": ["Computer Technology", "Web", "服务器端", "Java", "Listener", "Filter", "Servlet"],
         "summary": "在 Java Web 开发过程中，监听器、过滤器、Servlet 这三大内容是很重要的组件，也是实现很多功能的根本所在。",
         "ctime": "2017-8-31 11:52:00",
         "mtime": "2017-8-31 11:52:00"
     }
 
---- 
+---
 
 ## 监听器
 
@@ -50,11 +51,11 @@
 	@WebListener  // 此处使用了注解注册该监听器
 	public class AppListener implements ServletContextListener {
 
-		@Override  // 销毁方法 
+		@Override  // 销毁方法
 		public void contextDestroyed(ServletContextEvent arg0) { }
 
 		@Override  // 初始化方法
-		public void contextInitialized(ServletContextEvent arg0) { }	
+		public void contextInitialized(ServletContextEvent arg0) { }
 	}
 
 ---
@@ -117,7 +118,7 @@
 		public void destroy() { }
 
 		@Override  // 过滤方法
-		public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2) { 
+		public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2) {
 			// 放行（必须）
 			arg2.doFilter(arg0, arg1);
 		}
@@ -126,7 +127,7 @@
 		public void init(FilterConfig arg0) { }
 	}
 
---- 
+---
 
 	<!-- 也可以在 web.xml 文件中注册该过滤器 -->
 	<filter>
@@ -190,7 +191,7 @@
 		@WebInitParam(name="password",value="1314")
 	})
 	public class ServletLife extends HttpServlet {
-		
+
 		@Override  // 初始化方法
 		public void init() { }
 
@@ -204,7 +205,7 @@
 		protected void doPost(request, response) { }
 	}
 
---- 
+---
 
 	<!-- 也可以在 web.xml 文件中注册该 Servlet -->
 	<servlet>

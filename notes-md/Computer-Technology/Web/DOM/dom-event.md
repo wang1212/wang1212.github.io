@@ -2,13 +2,14 @@
 
     {
         "title": "DOM-事件",
-        "keywords": ["Web", "前端", "DOM", "Event"],
+        "tags": ["Computer Technology", "Web", "前端", "DOM"],
+        "keywords": ["Computer Technology", "Web", "前端", "DOM", "Event"],
         "summary": "JavaScript 的作用就是让 html 静态页面具备动态效果，而这些基本都是利用 DOM 事件来实现的。",
         "ctime": "2016-5-23 12:18:00",
         "mtime": "2016-5-23 12:18:00"
     }
 
---- 
+---
 
 ## 注册 DOM 事件
 
@@ -38,8 +39,8 @@
 
         // 第三种：2级DOM事件（addEventListener 方法）
         var div_obj2 = document.querySelector("#event2");
-        
-        div_obj2.addEventListener("click", function(){ 
+
+        div_obj2.addEventListener("click", function(){
             alert(1);
         }, false);
     </script>
@@ -69,7 +70,7 @@
         document.body.addEventListener('click', function(){
             console.info("2：捕获目标中");
         }, true);
-    
+
         // 目标div
         document.querySelector('div').addEventListener('click', function(){
             console.info("3：找到目标div");
@@ -199,7 +200,7 @@ exp：
             alert(this.value);
             this.value="";
         }
-        
+
         // 定义input上的0级DOM事件
         document.querySelector("input").onclick = show;
         // 移除0级DOM事件（内联事件也一样）

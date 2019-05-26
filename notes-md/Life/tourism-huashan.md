@@ -2,7 +2,8 @@
 
     {
         "title": "夜爬西岳华山",
-        "keywords": ["Tourism", "西岳华山"],
+        "tags": ["Life", "Tourism"],
+        "keywords": ["Life", "Tourism", "华山"],
         "summary": "五一假期过后，正好有机会陪着朋友爬了一次华山，也算是对自己的一次挑战。",
         "ctime": "2018-05-06 13:37:00",
         "mtime": "2018-05-06 13:37:00"

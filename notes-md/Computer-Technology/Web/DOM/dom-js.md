@@ -2,13 +2,14 @@
 
     {
         "title": "DOM-加载 JavaScript",
-        "keywords": ["Web", "前端", "DOM", "JavaScript"],
+        "tags": ["Computer Technology", "Web", "前端", "DOM", "JavaScript"],
+        "keywords": ["Computer Technology", "Web", "前端", "DOM", "JavaScript"],
         "summary": "页面的动态交互离不开 Javascript，将 js 脚本引入页面时会阻塞页面加载，在某些时候我们则可以选择异步加载 js 脚本。",
         "ctime": "2016-5-24 22:49:00",
         "mtime": "2016-5-24 22:49:00"
     }
 
---- 
+---
 
 ## 引入 js 代码
 
@@ -35,7 +36,7 @@
     <body>
         <div onclick="show()"></div>
         <script>
-            function show() { ... } 
+            function show() { ... }
             // 作用等价形式为下
             var obj = document.querySelector('div');
             obj.onclick = show;

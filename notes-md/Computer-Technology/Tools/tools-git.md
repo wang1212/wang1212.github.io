@@ -2,7 +2,8 @@
 
     {
         "title": "使用 Git",
-        "keywords": ["Git", "Bash"],
+        "tags": ["Computer Technology", "Tools"],
+        "keywords": ["Computer Technology", "Tools", "Git"],
         "summary": "Git 是一个分布式的版本控制工具，类似的版本控制工具还有 SVN ；由于 GitHub 平台的盛行，也使得 git 更加受欢迎，在 Windows 平台使用 git 也是非常方便的。",
         "ctime": "2016-12-31 13:49:00",
         "mtime": "2018-10-23 15:30:00"

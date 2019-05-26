@@ -2,13 +2,14 @@
 
     {
         "title": "Sublime Text-Vim 插件",
-        "keywords": ["Sublime Text", "Vim"],
+        "tags": ["Computer Technology", "Tools"],
+        "keywords": ["Computer Technology", "Tools", "Sublime Text", "Vim"],
         "summary": "Sumblime Text 是一个具有漂亮的界面和强大功能的文本编辑器，而且也支持许多丰富的插件。它是一个收费软件，但是允许开发人员无限期的免费试用。",
         "ctime": "2016-5-18 12:55:00",
         "mtime": "2016-5-18 12:55:00"
     }
 
---- 
+---
 
 ## Vim
 

@@ -26,7 +26,7 @@
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
     <span class="hljs-comment">// 获取DIV元素的标签名</span>
     <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).tagName);  <span class="hljs-comment">// 输出 "DIV"</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).nodeName);  <span class="hljs-comment">// 输出 "DIV"  </span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).nodeName);  <span class="hljs-comment">// 输出 "DIV"</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><h3 id="获取属性列表集合">获取属性列表/集合</h3>
 <p>　　每个元素节点身上都有很多属性（包括继承自 Node），我们可以取得一个由当前元素定义的 Attr（属性）节点组成的集合。</p>
 <ul>
@@ -57,7 +57,7 @@
     <span class="hljs-comment">// 设置属性</span>
     <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'img'</span>).setAttribute(<span class="hljs-string">'src'</span>,<span class="hljs-string">'123.png'</span>);
     <span class="hljs-comment">// 获取属性</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'img'</span>).getAttribute(<span class="hljs-string">'src'</span>));  <span class="hljs-comment">// 输出 123.png  </span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'img'</span>).getAttribute(<span class="hljs-string">'src'</span>));  <span class="hljs-comment">// 输出 123.png</span>
     <span class="hljs-comment">// 移除属性</span>
     <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'img'</span>).removeAttribute(<span class="hljs-string">'src'</span>);
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><h3 id="属性检测">属性检测</h3>
@@ -132,7 +132,7 @@
     <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).classList.toggle(<span class="hljs-string">'b'</span>);
     <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).classList.toggle(<span class="hljs-string">'c'</span>);
     <span class="hljs-comment">// 查看class属性值</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).className);  <span class="hljs-comment">// 输出 a c  </span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).className);  <span class="hljs-comment">// 输出 a c</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><h3 id="data-属性">data-*属性</h3>
 <p>　　元素节点上经常会出现一些类似 <code>data-*</code> 形式的属性，这些属性是为了让我们实现某些目的而进行数据保存的属性。</p>
 <ul>

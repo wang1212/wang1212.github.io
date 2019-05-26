@@ -2,13 +2,14 @@
 
     {
         "title": "Ruby-元编程之代码块",
-        "keywords": ["Ruby", "元编程", "Block"],
+        "tags": ["Computer Technology", "Ruby"],
+        "keywords": ["Computer Technology", "Ruby", "元编程", "Block"],
         "summary": "这篇文章讲述关于 Ruby 中代码块相关的知识，这也是 Ruby 的特色。事实上，有很多编程语言都具备元编程的能力，而 Ruby 则是将元编程发挥到极致的语言。元编程这个概念是模糊的，很多人都说是用代码生成代码的方式，不过我们不用去纠结这个概念。元编程最具有魅力的地方就是，原来我们还可以在程序运行时去操控代码。",
         "ctime": "2016-12-5 15:33:00",
         "mtime": "2016-12-5 15:33:00"
     }
 
---- 
+---
 
 　　<u>本文的代码均在 Ruby 2.3.0 环境下测试通过。</u>
 
@@ -110,7 +111,7 @@
     end
 
     test # ==> no block
-    
+
     test { puts "block is here" } # ==> block is here
 
 ## 作用域
@@ -159,7 +160,7 @@
         puts "block_x=#{x}"
         x += y
     end
-    
+
     puts "main_local_x=#{x}"
 
     # ==> main_local_x=10
@@ -184,7 +185,7 @@
         Inner = Class.new do
             puts "class->main:" + local_variable
 
-            define_method :func do 
+            define_method :func do
                 puts "method->main:" + local_variable
             end
         end
@@ -301,7 +302,7 @@
     # 获取方法内块的引用
     closure_1 = closure(1)
     closure_2 = closure(2)
-    
+
     closure_1.call  # ==> block_local_x=10
     closure_2.call  # ==> block_local_x=20
     closure_1.call  # ==> block_local_x=100

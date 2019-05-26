@@ -113,9 +113,11 @@ const NoteContent = ({ file, html }) => {
 					<hr class="my-4">
 					<div class="mb-3">
 						${
-							file.keywords.map(keyword => `
-								<a class="btn btn-outline-dark btn-sm mr-2 mb-2" href="#/notes/${keyword}">${keyword}</a>
-							`).join('')
+							file.keywords.map(keyword => (
+								file.tags.includes(keyword)
+								&& `<a class="btn btn-outline-dark btn-sm mr-2 mb-2" href="#/notes/${keyword}">${keyword}</a>`
+								|| `<span class="btn btn-outline-dark btn-sm mr-2 mb-2">${keyword}</span>`
+							)).join('')
 						}
 					</div>
 					<div>

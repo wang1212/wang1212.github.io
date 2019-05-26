@@ -150,7 +150,7 @@ machine.book33</code></pre><p>　　该机器提供了具体的方法让读者�
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initialize</span></span>
         @@free_id.each <span class="hljs-keyword">do</span> <span class="hljs-params">|id|</span>
             <span class="hljs-comment"># 动态定义</span>
-            define_singleton_method(<span class="hljs-string">"book<span class="hljs-subst">#{id}</span>"</span>) <span class="hljs-keyword">do</span> 
+            define_singleton_method(<span class="hljs-string">"book<span class="hljs-subst">#{id}</span>"</span>) <span class="hljs-keyword">do</span>
                 puts <span class="hljs-string">"欢迎阅览本书，编号<span class="hljs-subst">#{id}</span>"</span>
                 <span class="hljs-comment">#...</span>
                 <span class="hljs-comment">#return content</span>

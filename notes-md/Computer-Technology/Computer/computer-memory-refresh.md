@@ -2,13 +2,14 @@
 
     {
         "title": "内存的 3 种刷新方式",
-        "keywords": ["Computer", "内存", "刷新方式"],
+        "tags": ["Computer Technology", "Computer"],
+        "keywords": ["Computer Technology", "Computer", "Memory"],
         "summary": "内存为我们提供了一个数据快速交换的缓冲区，但同时会在掉电的情况下数据丢失，来看看内存是如何在带电情况下刷新数据的。",
         "ctime": "2016-5-3 1:59:00",
         "mtime": "2016-5-3 1:59:00"
     }
 
---- 
+---
 
 　　**众所周知，内存（Memory）是带电存储的，掉电就会丢失数据，所以需要刷新来保持数据。**
 

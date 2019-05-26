@@ -2,13 +2,14 @@
 
     {
         "title": "DOM-选取元素节点",
-        "keywords": ["Web", "前端", "DOM", "Selector"],
+        "tags": ["Computer Technology", "Web", "前端", "DOM"],
+        "keywords": ["Computer Technology", "Web", "前端", "DOM", "Selector"],
         "summary": "DOM 操作都是通过对文档树中节点的访问来实现的，如何选取特定的元素节点是关键，进而才能访问该元素节点实现修改、查看、移除、替换等操作。",
         "ctime": "2016-5-17 22:10:00",
         "mtime": "2016-5-17 22:10:00"
     }
 
---- 
+---
 
 ## 选取特定单一元素节点
 
@@ -114,7 +115,7 @@ exp：
         console.log(document.querySelectorAll("#animals>li"));
 
         // 这样也可以
-        var li_animals=document.querySelector("#animals"); 
+        var li_animals=document.querySelector("#animals");
         console.log(li_animals.querySelectorAll("li"));
     </script>
 

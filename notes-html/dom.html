@@ -150,7 +150,7 @@ ping
     <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><span class="xml">
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span>
 <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">
-    /* 
+    /*
     这里要注意的是，</span></span><span class="xml"><span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>元素节点有4个直属子节点，包括：
         两个</span></span></span><span class="xml"><span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>元素节点，一个</span></span></span><span class="xml"><span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>元素节点，一个文本（Text）节点。
     这是因为第一个<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span></span><span class="xml"><span class="actionscript">后面的回车符也是文本字符。
@@ -306,7 +306,7 @@ alert<span class="hljs-built_in">(document</span>.documentElement.textContent);<
 
     <span class="hljs-comment">// 创建文本节点并插入DOM树,下面两句效果一样</span>
     <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">"h1"</span>).textContent=<span class="hljs-string">"China"</span>;
-    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">"h1"</span>).innerText=<span class="hljs-string">"China"</span>;  
+    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">"h1"</span>).innerText=<span class="hljs-string">"China"</span>;
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><p>　　上述示例可以看到，通过给 <code>innerHTML</code> 与 <code>textContent</code>、<code>innerText</code> 属性赋值，可以替换掉一个元素节点内的节点结构（源代码），也就是创建新节点并插入到 DOM 树中，覆盖掉该元素节点原来的所有子节点。</p>
 <p>　　不过，<code>innerHTML</code> 属性会检测字符串中的元素标签，并将其转换成实际的 DOM 节点插入到 DOM 树中；而 <code>textContent</code>、<code>innerText</code> 属性会将整个字符串当作一个文本节点直接插入到 DOM 树中，字符串中的元素标签将会失效。</p>
 <pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>

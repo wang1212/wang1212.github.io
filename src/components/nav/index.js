@@ -12,10 +12,11 @@ const Nav = () => (`
 	<nav id="Nav" class="page-nav">
 		<div class="menu">
 			<div class="item-list">
-				<a class="item btn btn-outline-dark material-icons" href="#/index" title="主页">home</a>
-				<a class="item btn btn-outline-dark material-icons" href="#/notes" title="记录">reorder</a>
+				<a class="item btn btn-outline-dark material-icons" href="#/index" title="主页">favorite</a>
+				<a class="item btn btn-outline-dark material-icons" href="#/notes" title="笔记">reorder</a>
+				<a class="item btn btn-outline-dark material-icons" href="https://github.com/wang1212/awesome-favorites-list" title="收藏链接">link</a>
 			</div>
-			<i class="main-btn btn btn-dark material-icons" title="导航菜单">fingerprint</i>
+			<i class="main-btn btn btn-dark material-icons" title="导航菜单">dashboard</i>
 		</div>
 		<i id="nav-go-top" class="go-top main-btn btn btn-dark material-icons mt-3 _hide" title="返回页面顶部">arrow_upward</i>
 	</nav>

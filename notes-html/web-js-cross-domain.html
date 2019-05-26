@@ -15,7 +15,7 @@
 <h4 id="客户端代码">客户端代码</h4>
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
     <span class="hljs-comment">// 在全局创建一个回调函数（result 参数为跨域访问到的资源）</span>
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">result</span>)</span>{ 
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">result</span>)</span>{
         ...
         <span class="hljs-comment">// 在这里处理跨域访问到的资源（也可以保存在全局变量中）</span>
         ...
@@ -57,7 +57,7 @@
             <span class="hljs-comment">// 修改 src 到同源域名下（空白页）</span>
             <span class="hljs-keyword">this</span>.src = <span class="hljs-string">'about:blank'</span>;
             <span class="hljs-keyword">this</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-                <span class="hljs-comment">// 取得跨域访问资源，移除该 iframe </span>
+                <span class="hljs-comment">// 取得跨域访问资源，移除该 iframe</span>
                 <span class="hljs-keyword">var</span> data = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-keyword">this</span>.contentWindow.name);
                 <span class="hljs-built_in">document</span>.body.removeChild(<span class="hljs-keyword">this</span>);
                 <span class="hljs-comment">// 接下来就可以处理得到的资源了</span>
@@ -97,7 +97,7 @@
         <span class="hljs-comment">// 销毁该事件</span>
         <span class="hljs-keyword">this</span>.onmessage = <span class="hljs-literal">null</span>;
         <span class="hljs-comment">// 移除该 iframe</span>
-        <span class="hljs-built_in">document</span>.body.removeChild(nIframe);    
+        <span class="hljs-built_in">document</span>.body.removeChild(nIframe);
     }
 
     <span class="hljs-keyword">var</span> nIframe = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'iframe'</span>);

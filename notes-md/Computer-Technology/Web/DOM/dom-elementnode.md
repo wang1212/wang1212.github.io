@@ -2,13 +2,14 @@
 
     {
         "title": "DOM-元素节点",
-        "keywords": ["Web", "前端", "DOM", "ElementNode"],
+        "tags": ["Computer Technology", "Web", "前端", "DOM"],
+        "keywords": ["Computer Technology", "Web", "前端", "DOM", "Element Node"],
         "summary": "可以说，元素节点是 DOM 树中的核心部分，我们进行文档的操作通常都是建立在元素节点上的。",
         "ctime": "2016-5-17 13:19:00",
         "mtime": "2016-5-17 13:19:00"
     }
 
---- 
+---
 
 ## 元素节点
 
@@ -49,7 +50,7 @@ exp：
     <script>
         // 获取DIV元素的标签名
         console.log(document.querySelector('div').tagName);  // 输出 "DIV"
-        console.log(document.querySelector('div').nodeName);  // 输出 "DIV"  
+        console.log(document.querySelector('div').nodeName);  // 输出 "DIV"
     </script>
 
 ### 获取属性列表/集合
@@ -67,7 +68,7 @@ exp：
         // 获取属性列表/集合
         var attr=document.querySelector('input').attributes;
         console.log(attr);  // 输出 NamedNodeMap{...}
-        
+
         // 遍历取得属性名与值
         for (var i in attr) {
             console.log(attr[i].nodeName+':'+attr[i].nodeValue);
@@ -88,7 +89,7 @@ exp：
         // 设置属性
         document.querySelector('img').setAttribute('src','123.png');
         // 获取属性
-        console.log(document.querySelector('img').getAttribute('src'));  // 输出 123.png  
+        console.log(document.querySelector('img').getAttribute('src'));  // 输出 123.png
         // 移除属性
         document.querySelector('img').removeAttribute('src');
     </script>
@@ -186,7 +187,7 @@ exp：
         document.querySelector('div').classList.toggle('b');
         document.querySelector('div').classList.toggle('c');
         // 查看class属性值
-        console.log(document.querySelector('div').className);  // 输出 a c  
+        console.log(document.querySelector('div').className);  // 输出 a c
     </script>
 
 ### data-*属性

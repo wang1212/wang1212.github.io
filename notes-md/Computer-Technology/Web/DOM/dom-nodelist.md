@@ -2,13 +2,14 @@
 
     {
         "title": "DOM-节点集合",
-        "keywords": ["Web", "前端", "DOM", "NodeList", "Collection"],
+        "tags": ["Computer Technology", "Web", "前端", "DOM"],
+        "keywords": ["Computer Technology", "Web", "前端", "DOM", "NodeList"],
         "summary": "当从文档树中选取成组的节点或者使用预定义的节点集合时，这些节点都是放在 NodeList 或者一个 HTMLCollecton 之中，而不是一个数组（Array）中。",
         "ctime": "2016-5-17 22:30:00",
         "mtime": "2016-5-17 22:30:00"
     }
 
---- 
+---
 
 ## 节点集合
 
@@ -87,7 +88,7 @@
         console.log(Array.isArray(document.body.childNodes)); // 输出false
 
         // 验证 HTMLCollection
-        console.log(Array.isArray(document.links)); // 输出false  
+        console.log(Array.isArray(document.links)); // 输出false
     </script>
 
 　　如何将一个类数组列表转换成真正的 javascript 数组？

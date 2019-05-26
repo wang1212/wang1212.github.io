@@ -25,7 +25,7 @@
     <span class="hljs-comment">// 第三种：2级DOM事件（addEventListener 方法）</span>
     <span class="hljs-keyword">var</span> div_obj2 = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">"#event2"</span>);
 
-    div_obj2.addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{ 
+    div_obj2.addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
         alert(<span class="hljs-number">1</span>);
     }, <span class="hljs-literal">false</span>);
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><p>　　以上示例可以看出，我们有三种定义事件的方式：<strong>内联（html）事件</strong>、<strong>属性（0级DOM）事件</strong>、<strong>2级DOM事件</strong>。事实上，前两者的本质是一样的，都是内联属性事件；<strong>我们通常都是通过第三种方式来（2级DOM事件）定义事件的，它可以将同种事件定义多次而不会覆盖。</strong></p>

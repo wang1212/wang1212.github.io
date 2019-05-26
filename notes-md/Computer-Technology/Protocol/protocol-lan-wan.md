@@ -2,13 +2,14 @@
 
     {
         "title": "局域网（LAN）与广域网（WAN）",
-        "keywords": ["Protocol", "LAN", "WAN"],
+        "tags": ["Computer Technology", "Protocol"],
+        "keywords": ["Computer Technology", "Protocol", "LAN", "WAN"],
         "summary": "TCP/IP 的网络接口层包括物理层和数据链路层，既是局域网（LAN）技术起作用的分层，又是广域网（WAN）技术和连接管理协议发挥作用的层次。",
         "ctime": "2016-6-18 18:22:00",
         "mtime": "2016-6-18 18:22:00"
     }
 
---- 
+---
 
 ## 局域网（LAN）
 

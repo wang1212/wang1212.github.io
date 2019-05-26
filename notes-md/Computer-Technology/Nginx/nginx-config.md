@@ -2,7 +2,8 @@
 
     {
         "title": "Nginx 配置",
-        "keywords": ["Nginx", "Config"],
+        "tags": ["Computer Technology", "Server", "Nginx"],
+        "keywords": ["Computer Technology", "Server", "Nginx", "Config"],
         "summary": "Nginx 作为一个轻量、高性能的服务器，近年来颇受欢迎，无论是生产环境还是开发环境都有其发挥作用的地方，其配置文件相对来说还是较为简单的。而且，现在 nginx 也支持 Windows 环境了，利用不同的配置可以满足我们不同的需求。",
         "ctime": "2018-03-15 12:38:00",
         "mtime": "2019-04-16 01:10:00"

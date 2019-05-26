@@ -2,7 +2,8 @@
 
     {
         "title": "围城",
-        "keywords": ["Reading"],
+        "tags": ["Life", "Reading"],
+        "keywords": ["Life", "Reading"],
         "summary": "终于看完了钱钟书的《围城》，也正好写篇日志记录下自己最近刚看完的一些书的个人感受。",
         "ctime": "2019-04-08 22:29:00",
         "mtime": "2019-04-08 22:29:00"
