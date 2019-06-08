@@ -4,6 +4,8 @@
 
 import './style.scss';
 
+import Chart from 'chart.js';
+
 import category from 'utils/category.json';
 import _ from 'lodash';
 
@@ -72,18 +74,83 @@ const TagNotesListContent = state => {
 };
 
 
-const Notes = (context: any) => (`
-	<main class="page-notes container">
-		<section id="" class="tags-box mb-5">
-			<h2>Tags</h2>
-			<hr/>
-			${Tags}
-		</section>
-		<section class="tag-notes-list">
-			${TagNotesListContent(context.state)}
-		</section>
-	</main>
-`);
+const Notes = (context: any) => {
+
+	let _tag = decodeURI(context.state[1]);
+
+	const view = `
+		<main class="page-notes container">
+			<section class="mb-4">
+				<canvas id="notes-chart" class="notes-chart"></canvas>
+			</section>
+			<section class="tags-box mb-5">
+				<h2>Tags</h2>
+				<hr/>
+				${Tags}
+			</section>
+			<section class="tag-notes-list">
+				${TagNotesListContent(context.state)}
+			</section>
+		</main>
+	`;
+
+	setTimeout(() => {
+		const labels = {
+			'Web 前端开发': 'Front End',
+			'Web 后端开发': 'Back End',
+			'GIS 开发': 'GIS',
+			'阅读': 'Reading',
+			'旅游': 'Tourism',
+			'经济': 'Economics',
+			'金融': 'Finance',
+		};
+
+		category.tags[_tag] && !_.values(labels).includes(_tag) && (labels[_tag] = _tag);
+
+		function adjustRadiusBasedOnData (ctx) {
+			var v = ctx.dataset.data[ctx.dataIndex];
+			return v < 5 ? 5
+				: v < 10 ? 7
+					: v < 20 ? 9
+						: v < 35 ? 11
+							: v < 50 ? 13
+								: 15;
+		}
+
+		// chart
+		new Chart(document.getElementById('notes-chart'), {
+			type: 'radar',
+			data: {
+				labels: _.keys(labels),
+				datasets: [{
+					label: '',
+					data: _.values(labels).map(tag => _.get(category.tags, [tag, 'length'], 0)),
+					backgroundColor: Chart.helpers.color('#007bff').alpha(0.2).rgbString(),
+					borderColor: Chart.helpers.color('#007bff').alpha(0.5).rgbString(),
+				}]
+			},
+			options: {
+				legend: false,
+				tooltips: false,
+				elements: {
+					point: {
+						radius: adjustRadiusBasedOnData,
+						pointStyle: 'circle',
+						hoverRadius: 15,
+					}
+				},
+				scale: {
+					pointLabels: {
+						fontColor: '#007bff',
+						fontSize: 14
+					}
+				}
+			}
+		});
+	}, 300);
+
+	return view;
+};
 
 
 export default Notes;

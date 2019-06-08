@@ -2,8 +2,8 @@
 
     {
         "title": "DOM-文档片段",
-        "tags": ["Computer Technology", "Web", "前端", "DOM"],
-        "keywords": ["Computer Technology", "Web", "前端", "DOM", "Fragment"],
+        "tags": ["Computer Technology", "Web", "Front End", "DOM"],
+        "keywords": ["Computer Technology", "Web", "Front End", "DOM", "Fragment"],
         "summary": "DOM 操作是非常消耗性能的，如果要进行大量的 DOM 操作，我们可以选择在内存中先构建一个文档片段然后一次性插入 DOM 树。",
         "ctime": "2016-5-23 13:10:00",
         "mtime": "2016-5-23 13:10:00"

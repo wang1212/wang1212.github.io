@@ -2,8 +2,8 @@
 
     {
         "title": "文档对象模型（DOM）",
-        "tags": ["Computer Technology", "Web", "前端", "DOM"],
-        "keywords": ["Computer Technology", "Web", "前端", "DOM"],
+        "tags": ["Computer Technology", "Web", "Front End", "DOM"],
+        "keywords": ["Computer Technology", "Web", "Front End", "DOM"],
         "summary": "在网页设计中，有一个很重要的角色需要我们了解，DOM 帮助我们对页面元素进行增、删、改等全方位的操作，而且让 JavaScript 在客户端修改 HTML 文档成为一个很简单的事情，可以说 DOM 为我们操作 HTML 文档提供了强大的编程接口。",
         "ctime": "2016-5-16 14:04:00",
         "mtime": "2016-5-16 14:04:00"

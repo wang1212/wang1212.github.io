@@ -2,8 +2,8 @@
 
     {
 		"title": "JS 跨域访问",
-		"tags": ["Computer Technology", "Web", "前端"],
-        "keywords": ["Computer Technology", "Web", "前端", "Cross-domain"],
+		"tags": ["Computer Technology", "Web", "Front End"],
+        "keywords": ["Computer Technology", "Web", "Front End", "Cross-domain"],
         "summary": "为了用户的安全，浏览器通常都会限制 JavaScript 跨域访问，也就是默认不允许不同域名下页面之间进行资源的传递，但很多时候我们又有跨域请求资源的需求。",
         "ctime": "2016-8-10 15:18:00",
         "mtime": "2016-8-10 15:18:00"

@@ -34,3 +34,35 @@
 <p>　　除此之外，还有一个比较重要的就是 DTM（Digital Terrain Model，数字地形模型） 与 DEM（Digital Elevation Model，数字高程模型）。</p>
 <p>　　DTM 是利用一个任意坐标系中大量选择的已知 x、y、z 的坐标点对连续地面的一种模拟表示，或者说，DTM 就是地形表面形态属性信息的数字表达，是带有空间位置特征和地形属性特征的数字描述。<strong>x、y 表示该点的平面坐标，z 值可以表示高程、坡度、温度等信息，当 z 表示高程时，就是数字高程模型，即 DEM。</strong>地形表面形态的属性信息一般包括高程、坡度、坡向等。</p>
 <p>　　一般认为，DTM 是描述包括高程在内的各种地貌因子，如坡度、坡向、坡度变化率等因子在内的线性和非线性组合的空间分布，其中 DEM 是零阶单纯的单项数字地貌模型，其他如坡度、坡向及坡度变化率等地貌特性可在 DEM 的基础上派生。</p>
+<h2 id="服务类型">服务类型</h2>
+<p>　　在 GIS 开发中，为了分享地图数据和提高数据源的灵活性，这时候就会需要部署/发布一个网络地图服务，用来提供在线的地图数据分发功能。通常来说，网络地图服务分为 <strong>动态地图服务</strong> 和 <strong>缓存（静态）地图服务</strong>，大致有 WMS、WFS、WCS、TMS、WMTS 几种。</p>
+<blockquote>
+<p>OGC - <a href="http://www.opengeospatial.org/">Open Geospatial Consortium</a>，开放地理空间信息联盟，一个非盈利的国际标准组织，GIS 相关官方标准的制定者。 <br />
+OSGeo - <a href="https://www.osgeo.org/">Open Source Geospatial Foundation</a>，开源空间信息基金会，一个全球性非营利性组织，目标是支持全球性的合作，建立和推广高品质的空间信息开源软件。</p>
+</blockquote>
+<h3 id="动态地图服务">动态地图服务</h3>
+<p>　　动态地图服务通常是基于可定制化的地图需求，来实时动态生成所需要的地图数据供客户端访问，同时也提供给客户端一些可对地图进行编辑的操作。其特点就是：<strong>实时渲染、效率低、可编辑、交互性强。</strong></p>
+<ul>
+<li><strong>WMS</strong></li>
+</ul>
+<p>　　WMS（Web Map Service，网络地图服务）通过具有地理空间信息的数据来实时渲染地图（地理数据的可视化表现）数据，它提供给客户端的是地图图像，格式类型多为 PNG、GIF、JPEG、SVG、WebCGM 等。</p>
+<ul>
+<li><strong>WFS</strong></li>
+</ul>
+<p>　　WFS（Web Feature Service，网络要素服务）通过 GML（Geography Markup Language，地理标记语言）传递地理空间数据，它支持在基于 HTTP 协议的分布式计算平台上对地理要素进行插入（INSERT）、更新（UPDATE）、删除（DELETE）和发现（DISCOVERY）等操作，并且在这些操作的过程中保证了地理数据变化的一致性。</p>
+<p>　　基于 WFS，我们通常在 GIS 客户端提供地图的属性查询、空间查询等客户需求的实现。</p>
+<ul>
+<li><strong>WCS</strong></li>
+</ul>
+<p>　　WCS（Web Coverage Service，网络覆盖服务）是 OGC 定义的在 Web 上以 “Coverage” 的形式共享地理空间数据的规范。所谓 “Coverage” 是指能够返回其时空域中任意指定点的值的数据，其形式易于输入到模型中使用。WCS 服务是以 “Coverage” 的形式实现了栅格影像数据集的共享，如卫星影像、数字高程数据等栅格数据。</p>
+<h3 id="缓存地图服务">缓存地图服务</h3>
+<p>　　缓存（静态）地图服务是在动态地图服务这种实时渲染效率低的情况下提出的一种以灵活性换取性能的解决方案，更适合提供全球性大范围的地图数据在线服务。其特点就是：<strong>缓存数据、效率高、范围广、不可编辑、交互性弱。</strong></p>
+<p>　　缓存地图服务通常不需要特殊的地图服务器，将生成的地图数据文件放在一个 Web 服务器中即可实现。</p>
+<ul>
+<li><strong>TMS</strong></li>
+</ul>
+<p>　　TMS（Tile Map Service，切片地图服务）是 OSGeo 提出的一种解决方案，它允许客户端访问切片地图数据，仅支持 RESTful 形式访问。</p>
+<ul>
+<li><strong>WMTS</strong></li>
+</ul>
+<p>　　WMTS（Web Map Tile Service，网络地图切片服务）是 OGC 基于 TMS 的特点和优势，附加了更多功能的一种新的地图服务官方标准，支持 RESTful、SOAP、KVP 形式访问，也是 OGC 首个支持RESTful 访问的服务标准。</p>

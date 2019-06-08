@@ -2,8 +2,8 @@
 
     {
         "title": "DOM-元素节点",
-        "tags": ["Computer Technology", "Web", "前端", "DOM"],
-        "keywords": ["Computer Technology", "Web", "前端", "DOM", "Element Node"],
+        "tags": ["Computer Technology", "Web", "Front End", "DOM"],
+        "keywords": ["Computer Technology", "Web", "Front End", "DOM", "Element Node"],
         "summary": "可以说，元素节点是 DOM 树中的核心部分，我们进行文档的操作通常都是建立在元素节点上的。",
         "ctime": "2016-5-17 13:19:00",
         "mtime": "2016-5-17 13:19:00"

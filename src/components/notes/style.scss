@@ -5,6 +5,14 @@
 	padding-top: 4rem;
 	padding-bottom: 6rem;
 
+	/**
+	 * - notes-chart
+	 */
+	.notes-chart {
+		min-height: 200px;
+		max-height: 50vh;
+	}
+
 	/* tags cloud */
 	> .tags-box {
 
@@ -44,7 +52,6 @@
 
 				> .item-title {
 					display: block;
-					color: black;
 					text-decoration: none;
 				}
 

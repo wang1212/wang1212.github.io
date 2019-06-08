@@ -2,8 +2,8 @@
 
     {
         "title": "DOM-选取元素节点",
-        "tags": ["Computer Technology", "Web", "前端", "DOM"],
-        "keywords": ["Computer Technology", "Web", "前端", "DOM", "Selector"],
+        "tags": ["Computer Technology", "Web", "Front End", "DOM"],
+        "keywords": ["Computer Technology", "Web", "Front End", "DOM", "Selector"],
         "summary": "DOM 操作都是通过对文档树中节点的访问来实现的，如何选取特定的元素节点是关键，进而才能访问该元素节点实现修改、查看、移除、替换等操作。",
         "ctime": "2016-5-17 22:10:00",
         "mtime": "2016-5-17 22:10:00"

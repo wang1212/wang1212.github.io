@@ -2,8 +2,8 @@
 
     {
         "title": "DOM-事件",
-        "tags": ["Computer Technology", "Web", "前端", "DOM"],
-        "keywords": ["Computer Technology", "Web", "前端", "DOM", "Event"],
+        "tags": ["Computer Technology", "Web", "Front End", "DOM"],
+        "keywords": ["Computer Technology", "Web", "Front End", "DOM", "Event"],
         "summary": "JavaScript 的作用就是让 html 静态页面具备动态效果，而这些基本都是利用 DOM 事件来实现的。",
         "ctime": "2016-5-23 12:18:00",
         "mtime": "2016-5-23 12:18:00"

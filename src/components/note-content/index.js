@@ -96,15 +96,7 @@ function generate_navigation () {
 /* eslint-disable */
 const NoteContent = ({ file, html }) => {
 
-	setTimeout(() => {
-		/* insert line num */
-		insert_code_line_num();
-
-		/* generate */
-		generate_navigation();
-	}, 300);
-
-	return (`
+	const view = `
 		<main class="page-note-content note-content">
 			<header class="container-fluid jumbotron">
 				<div class="container">
@@ -128,7 +120,17 @@ const NoteContent = ({ file, html }) => {
 			</header>
 			<main class="container">${html}</main>
 		</main>
-	`);
+	`;
+
+	setTimeout(() => {
+		/* insert line num */
+		insert_code_line_num();
+
+		/* generate */
+		generate_navigation();
+	}, 300);
+
+	return view;
 
 };
 /* eslint-enable */

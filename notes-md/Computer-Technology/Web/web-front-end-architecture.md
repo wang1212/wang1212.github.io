@@ -2,8 +2,8 @@
 
     {
         "title": "Web 前端架构设计",
-        "tags": ["Computer Technology", "Web", "前端"],
-        "keywords": ["Computer Technology", "Web", "前端", "架构设计"],
+        "tags": ["Computer Technology", "Web", "Front End"],
+        "keywords": ["Computer Technology", "Web", "Front End", "架构设计"],
         "summary": "Web 前端开发是一个零散化的过程，基本上没有专业的 IDE 来为我们提供一整套的自动化流程解决方案，如何从需求到实现一步步快速推进形成完整的工作流，在后期如何高效的进行测试和优化，让前端开发可持续化、可扩展显得极为重要。",
         "ctime": "2018-3-28 14:01:00",
         "mtime": "2018-7-1 1:29:00"
