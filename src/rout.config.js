@@ -7,6 +7,7 @@ import R from 'utils/Router.js';
 import blog from 'utils/blog_data.json';
 import category from 'utils/category.json';
 
+import Loading from 'components/loading/index.js';
 import Index from 'components/index/index.js';
 import Notes from 'components/notes/index.js';
 import NoteContent from 'components/note-content/index.js';
@@ -21,6 +22,8 @@ const HTML_DIR = 'notes-html/';
 R.add(/\/.*/, elem_app => {
 
 	document.documentElement.scrollTop = document.body.scrollTop = 0;
+
+	elem_app.querySelector('#Content').innerHTML = Loading();
 
 	Array.from(elem_app.querySelectorAll('#Nav a.item')).forEach(elem => {
 		// active nav item
