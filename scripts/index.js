@@ -19,12 +19,7 @@ const browser_sync = require('browser-sync').create();
 
 
 // server
-browser_sync.init({
-	open : false,
-	server: {
-		baseDir: './'
-	}
-});
+browser_sync.init(path_config.proxy_options);
 
 
 del([path_config.build], { force: true }).then(() => {
