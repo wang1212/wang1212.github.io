@@ -6,7 +6,7 @@
         "keywords": ["Computer Technology", "Tools", "Web", "Node.js", "npm"],
         "summary": "npm 是 Node.js 的一个包管理器，Web 前端工程师也经常利用它来简化开发流程，来看看如何愉快的使用 npm。",
         "ctime": "2019-07-06 15:43:00",
-        "mtime": "2019-07-06 15:43:00"
+        "mtime": "2019-07-09 01:10:00"
     }
 
 ---
@@ -57,6 +57,22 @@
 
     npm install -D|--save-dev <package_name>   // 在当前项目本地安装开发环境依赖包，会列在 devDependencies 中
     npm uninstall -D|--save-dev <package_name> // 卸载安装在项目本地的 devDependencies 中指定包
+
+　　这里值得一提的是，在 npm 5.2+ 之后，附带了一个 `npx` 命令，作用是**执行包的二进制文件**：
+
+    npx [options] [-p|--package <pkg>]... <command> [command-arg]...
+
+    npx create-react-app my-app     // 执行 create-react-app 包的主命令
+
+　　通过 `npx` 命令执行包的二进制文件有一个优点：**不需要安装包，即可执行包的命令，对本地环境无污染。**
+
+　　而且，在 npm 6.0+ 之后，`init` 命令可以接收一个新的选项：
+
+    npm init <initializer>
+
+    npm init react-app my-app       // same as : npx create-react-app my-app
+
+　　其中 `<initializer>` 是一个以 `create-` 开头命名的包，算是对这种特殊命名的包的 `npx` 命令的简写方式。
 
 ## Node 版本管理
 

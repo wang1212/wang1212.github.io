@@ -27,7 +27,15 @@ npm install [-P|--save] &lt;<span class="hljs-keyword">package</span><span class
 npm uninstall [-S|--save] &lt;<span class="hljs-keyword">package</span><span class="hljs-number">_n</span>ame&gt;   <span class="hljs-comment">// 卸载安装在项目本地的 dependencies 中指定包</span>
 
 npm install -D|--save-dev &lt;<span class="hljs-keyword">package</span><span class="hljs-number">_n</span>ame&gt;   <span class="hljs-comment">// 在当前项目本地安装开发环境依赖包，会列在 devDependencies 中</span>
-npm uninstall -D|--save-dev &lt;<span class="hljs-keyword">package</span><span class="hljs-number">_n</span>ame&gt; <span class="hljs-comment">// 卸载安装在项目本地的 devDependencies 中指定包</span></code></pre><h2 id="node-版本管理">Node 版本管理</h2>
+npm uninstall -D|--save-dev &lt;<span class="hljs-keyword">package</span><span class="hljs-number">_n</span>ame&gt; <span class="hljs-comment">// 卸载安装在项目本地的 devDependencies 中指定包</span></code></pre><p>　　这里值得一提的是，在 npm 5.2+ 之后，附带了一个 <code>npx</code> 命令，作用是<strong>执行包的二进制文件</strong>：</p>
+<pre><code><span class="hljs-string">npx </span>[<span class="hljs-string">options]</span> [-p|<span class="hljs-built_in">--package</span> &lt;<span class="hljs-string">pkg&gt;</span>]... &lt;<span class="hljs-string">command&gt;</span> [<span class="hljs-string">command-arg]</span>...
+
+<span class="hljs-string">npx </span><span class="hljs-built_in">create-react-app</span> <span class="hljs-string">my-app </span>    // 执行 <span class="hljs-built_in">create-react-app</span> 包的主命令</code></pre><p>　　通过 <code>npx</code> 命令执行包的二进制文件有一个优点：<strong>不需要安装包，即可执行包的命令，对本地环境无污染。</strong></p>
+<p>　　而且，在 npm 6.0+ 之后，<code>init</code> 命令可以接收一个新的选项：</p>
+<pre><code><span class="hljs-string">npm </span><span class="hljs-string">init </span>&lt;<span class="hljs-string">initializer&gt;</span>
+
+<span class="hljs-string">npm </span><span class="hljs-string">init </span><span class="hljs-string">react-app </span><span class="hljs-string">my-app </span>      // <span class="hljs-string">same </span><span class="hljs-string">as </span>: <span class="hljs-string">npx </span><span class="hljs-built_in">create-react-app</span> <span class="hljs-string">my-app</span></code></pre><p>　　其中 <code>&lt;initializer&gt;</code> 是一个以 <code>create-</code> 开头命名的包，算是对这种特殊命名的包的 <code>npx</code> 命令的简写方式。</p>
+<h2 id="node-版本管理">Node 版本管理</h2>
 <p>　　作为一名 Node.js 开发，如何在自己的设备上管理多个 Node 版本是一个相当重要的技能，而 npm 库中的 <code>n</code> 模块就为我们提供了最佳解决方案，使用它可以在同一台设备上安装多个不同版本的 Node，并随时进行切换，同时也可以方便的升级、降级。</p>
 <p>　　作为一个管理 Node 的工具，建议将其安装在全局：</p>
 <pre><code>npm <span class="hljs-keyword">install</span> -g n</code></pre><p>　　安装完成后，执行以下命令安装相应版本的 Node：</p>
