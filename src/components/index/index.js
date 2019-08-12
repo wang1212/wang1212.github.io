@@ -11,6 +11,9 @@ const Index = () => (`
 		<div class="index-name display-4">${blog.index_name}</div>
 		<p class="index-title h4">${blog.index_title[Math.floor(Math.random() * blog.index_title.length)]}</p>
 		<div class="go-down">
+			<a class="btn btn-outline-dark btn-sm font-weight-bolder" href="mailto:${blog.email}" target="_blank" title="${blog.email}">
+				Email
+			</a>
 			<a class="btn btn-outline-dark btn-sm font-weight-bolder" href="${blog.github}" target="_blank" title="wang1212-${blog.index_name}">
 				GitHub
 			</a>
