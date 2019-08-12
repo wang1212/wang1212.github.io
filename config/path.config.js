@@ -8,4 +8,10 @@ module.exports = (NODE_ENV, is_dev = NODE_ENV === 'development') => ({
 	src: './src/',
 	/* app build directory */
 	build: require('path').resolve(__dirname, '../build/'),
+	proxy_options: {
+		open: false,
+		server: {
+			baseDir: './'
+		}
+	}
 });
