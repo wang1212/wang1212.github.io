@@ -17,6 +17,9 @@ const Index = () => (`
 			<a class="btn btn-outline-dark btn-sm font-weight-bolder" href="${blog.github}" target="_blank" title="wang1212-${blog.index_name}">
 				GitHub
 			</a>
+			<a class="btn btn-outline-dark btn-sm font-weight-bolder" href="${blog.gitee}" target="_blank" title="wang1212-${blog.index_name}">
+				Gitee
+			</a>
 		</div>
 	</main>
 `);
