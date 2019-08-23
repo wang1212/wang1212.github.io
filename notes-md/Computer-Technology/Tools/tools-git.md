@@ -6,7 +6,7 @@
         "keywords": ["Computer Technology", "Tools", "Git"],
         "summary": "Git 是一个分布式的版本控制工具，类似的版本控制工具还有 SVN ；由于 GitHub 平台的盛行，也使得 git 更加受欢迎，在 Windows 平台使用 git 也是非常方便的。",
         "ctime": "2016-12-31 13:49:00",
-        "mtime": "2018-10-23 15:30:00"
+        "mtime": "2019-08-23 10:40:00"
     }
 
 ---
@@ -170,6 +170,56 @@
 　　除此之外，还有一种情况就是我们在工作区将同一个文件重命名后，需要删除原有在暂存区中的文件，添加新的文件到暂存区中，但是它们的文件内容是相同的。所以，直接可以进行重命名操作：
 
     git mv old_filename new_filename
+
+### 远程仓库
+
+　　通常，我们会将代码库推送到远程的代码托管平台上进行管理，例如：
+
+- [Github](https://github.com/)
+- [Gitlab](https://about.gitlab.com/)
+- [BitBucket](https://bitbucket.org/)
+- [Gitee（开源中国）](https://gitee.com/)
+
+　　在其它设备上就可以从远程仓库拉取代码：
+
+    # 可指定文件夹名称，不指定的话与仓库同名
+    git clone <rep_url> [dir_name]
+
+    # 查看本地仓库关联的远程仓库
+    git remote -v
+    # 查看本地仓库分支关联的远程仓库分支
+    git branch -vv
+
+　　在本地仓库完成开发后，经过 `add`、`commit` 之后，即可推送到远程仓库进行同步：
+
+    # 推送到远程仓库，默认为 origin 仓库，当前分支
+    git push [origin] [current_branch]
+
+　　如果是通过 `git clone` 从远程仓库拉取到本地的，可以看到会有一个默认的 `origin` 远程仓库；但是，如果是在本地建立的仓库，没有与远程仓库关联，可以先添加一个远程仓库，然后在推送时指定一个远程仓库，或者将本地仓库与远程仓库关联：
+
+    # 添加远程仓库
+    git remote set-url <name> <rep_url>
+    # or
+    git remote add <name> <rep_url>
+
+- 在推送时指定一个远程仓库
+
+    ```
+    git push --set-upstream <remote> <remote_branch>
+    ```
+
+- 将本地分支与远程分支关联
+
+    ```
+    git branch --set-upstream-to=<remote>/<remote_branch> <local_branch>
+    ```
+
+### 多仓库同步
+
+　　鉴于一个平台可能存在风险，可以将代码托管在多个平台上，例如国外 Github，国内 Gitee，实现的具体方式就是将本地仓库同时与多个远程仓库关联，即可实现在 `push` 时给多个远程仓库同步推送更新：
+
+    # 在某个 remote 下添加额外一个远程仓库
+    git remote set-url --add <name> <new_rep_url>
 
 ## 分支管理
 
