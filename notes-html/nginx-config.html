@@ -173,7 +173,18 @@ location / {
 <blockquote>
 <p>官网文档：ngx_http_rewrite_module</p>
 </blockquote>
-<h3 id="日志分割">日志分割</h3>
+<h4 id="项目首页重定向">项目首页重定向</h4>
+<p>　　大多数时候，我们在同一个域名下会部署多个 Web 应用，访问的话需要 <strong>WebAppName</strong> 来进行区分，例如 <code>localhost:80/App</code>，那么 <code>App</code> 其实就代表了一个 Web 应用，将会映射到相应的文件夹。这里有一个细节性问题，文件夹的路径必然以 <code>/</code> 结束，所以大多数服务器都会自动做一次重定向，将 <code>localhost:80/App</code> 重定向到 <code>localhost:80/App/</code>。如果 Nginx 没有配置，默认是不会做这个重定向的，为了用户访问方便，我们需要解决这个问题：</p>
+<pre><code><span class="hljs-attribute">localhost</span> / {
+    <span class="hljs-comment"># 这是一个默认配置文件中的配置项</span>
+    <span class="hljs-comment"># First attempt to serve request as file, then</span>
+    <span class="hljs-comment"># as directory, then fall back to displaying a 404.</span>
+    <span class="hljs-attribute">try_files</span> <span class="hljs-variable">$uri</span> <span class="hljs-variable">$uri</span>/ =<span class="hljs-number">404</span>;
+}</code></pre><p>　　这个配置基本上解决了该问题，但<strong>在内外网端口不一致时，会出现问题</strong>。例如，我们通过 <code>www.example.com:80/App</code> 访问部署在内网 <code>8080</code> 端口上的 Nginx 时，Nginx 会将其重定向到 <code>www.example.com:8080/App/</code>，这里的差异在于，重定向时丢失了外网端口，用户此时将会访问失败。</p>
+<p>　　目前，还没找到比较优雅的解决办法，可以用以下配置暂时解决该问题：</p>
+<pre><code>location ~ ^<span class="hljs-regexp">/[^/</span>]+<span class="hljs-variable">$ </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-number">301</span> <span class="hljs-variable">$scheme</span><span class="hljs-symbol">://</span><span class="hljs-variable">$http_host</span><span class="hljs-variable">$uri</span>/;
+}</code></pre><h3 id="日志分割">日志分割</h3>
 <p>　　Nginx 的访问日志（access_log）默认是没有进行分割的，时间一长，日志文件就会有 GB 级别的大小，日志写入速度变慢，也会影响 nginx 的性能。我们可以通过很简单的方式，将访问日志设置为按天记录,将日志记录在不同的文件中。</p>
 <pre><code>server {
     <span class="hljs-built_in">..</span>.

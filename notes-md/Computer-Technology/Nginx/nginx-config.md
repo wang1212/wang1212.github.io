@@ -6,7 +6,7 @@
         "keywords": ["Computer Technology", "Server", "Nginx", "Config"],
         "summary": "Nginx 作为一个轻量、高性能的服务器，近年来颇受欢迎，无论是生产环境还是开发环境都有其发挥作用的地方，其配置文件相对来说还是较为简单的。而且，现在 nginx 也支持 Windows 环境了，利用不同的配置可以满足我们不同的需求。",
         "ctime": "2018-03-15 12:38:00",
-        "mtime": "2019-06-08 04:15:00"
+        "mtime": "2019-09-17 18:54:00"
     }
 
 ---
@@ -233,6 +233,25 @@
 　　**注意：** `301` 重定向可能会导致 POST 请求被改变为 GET 请求，并可能丢失提交数据，此时使用 `308` 状态码替换即可。
 
 > 官网文档：ngx_http_rewrite_module
+
+#### 项目首页重定向
+
+　　大多数时候，我们在同一个域名下会部署多个 Web 应用，访问的话需要 **WebAppName** 来进行区分，例如 `localhost:80/App`，那么 `App` 其实就代表了一个 Web 应用，将会映射到相应的文件夹。这里有一个细节性问题，文件夹的路径必然以 `/` 结束，所以大多数服务器都会自动做一次重定向，将 `localhost:80/App` 重定向到 `localhost:80/App/`。如果 Nginx 没有配置，默认是不会做这个重定向的，为了用户访问方便，我们需要解决这个问题：
+
+    localhost / {
+        # 这是一个默认配置文件中的配置项
+        # First attempt to serve request as file, then
+        # as directory, then fall back to displaying a 404.
+        try_files $uri $uri/ =404;
+    }
+
+　　这个配置基本上解决了该问题，但**在内外网端口不一致时，会出现问题**。例如，我们通过 `www.example.com:80/App` 访问部署在内网 `8080` 端口上的 Nginx 时，Nginx 会将其重定向到 `www.example.com:8080/App/`，这里的差异在于，重定向时丢失了外网端口，用户此时将会访问失败。
+
+　　目前，还没找到比较优雅的解决办法，可以用以下配置暂时解决该问题：
+
+    location ~ ^/[^/]+$ {
+        return 301 $scheme://$http_host$uri/;
+    }
 
 ### 日志分割
 
