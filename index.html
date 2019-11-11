@@ -24,6 +24,64 @@
 	<link rel="stylesheet" href="build/vendors/libs/bootstrap-4.3.1-dist/css/bootstrap.min.css">
 	<!-- import google icons -->
 	<link rel="stylesheet" href="build/vendors/libs/material-design-icons-3.0.1/material-icons.css">
+	<!-- page resources loading -->
+	<style>
+		.page-loading_container {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color : #fefefe;
+		}
+		.page-loading_content {
+			box-sizing: border-box;
+			display: block;
+			position : relative;
+			height: 140px;
+			width: 150px;
+			padding: 20px 25px;
+		}
+		.page-loading_content > .page-loading_text {
+			color : orange;
+			width: 4rem;
+			line-height: 1;
+			position : absolute;
+			top: 50%;
+			left: 50%;
+			margin: -.5rem 0 0 -2rem;
+			text-align: center;
+		}
+		.page-loading_round {
+			height: 100%;
+			width: 100%;
+			border: 1px solid orange;
+			border-radius: 50%;
+			position: relative;
+			animation: page-loading_round 2s infinite;
+			-webkit-animation : page-loading_round 2s infinite;
+		}
+		.page-loading_round_circle {
+			position: absolute;
+			left: 10px;
+			top: 10px;
+			height: 10px;
+			width: 10px;
+			border-radius: 50%;
+			background-color: orange;
+		}
+		@keyframes page-loading_round {
+			0% {transform : rotate(0deg);}
+			100% {transform : rotate(360deg);}
+		}
+		@-webkit-keyframes page-loading_round {
+			0% {-webkit-transform : rotate(0deg);}
+			100% {-webkit-transform : rotate(360deg);}
+		}
+	</style>
 	<!-- IE6-8  兼容解决方案
 		html5shiv ： 提供对 html5 新标签（例如 footer、nav）的支持;
 		respond ： 用来提供对 CSS3 @media媒体查询机制（min-width/max-width）的支持。
@@ -47,9 +105,18 @@
 			});
 		}
 	</script>
-<link href="build/app.98fe500e62370df67999.css" rel="stylesheet"></head>
+<link href="build/app.30fd574052b8bb4fe206.css" rel="stylesheet"></head>
 <body>
-	<div id="App" class="App"></div>
+	<div id="App" class="App">
+		<div class="page-loading_container">
+			<div class="page-loading_content">
+				<div class="page-loading_round">
+					<div class="page-loading_round_circle"></div>
+				</div>
+				<div class="page-loading_text">loading...</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- IE6-8  兼容解决方案
 		selectivizr ：提供对 CSS3 新选择器（例如 :nth-child、:last-child）的支持，style 标签内样式不解析，动态生成的 DOM 也不解析。（需要 jQuery、dojo 等库的支持）
@@ -60,5 +127,5 @@
 		<script type="text/javascript" src="./vendors/plugins/compatible-plugin/selectivizr.min.js"></script>
 	<![endif]-->
 	<script src="build/vendor.js"></script>
-<script type="text/javascript" src="build/app.edaddedc21cf6ee367ac.js"></script></body>
+<script type="text/javascript" src="build/app.dc8156efae93552160c0.js"></script></body>
 </html>
