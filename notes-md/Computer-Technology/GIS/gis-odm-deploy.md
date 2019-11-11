@@ -210,13 +210,13 @@
 
 　　同样的，任意找一台内网中的服务器配置好必要的运行环境（Ubuntu、Git、Python3、Docker），执行：
 
-　　docker run -ti -p 3001:3000 -p 8080:8080 -p 10000:10000 opendronemap/clusterodm
+	docker run -ti -p 3001:3000 -p 8080:8080 -p 10000:10000 opendronemap/clusterodm
 
 　　此时会从 Docker Hub 下载 `opendronemap/clusterodm` 镜像文件（约 1GB），如果宿主机 `3001` 端口已被占用换成其它端口即可。运行成功后，可访问 `localhost:10000` 查看已加入的 NodeODM 节点信息。ClusterODM 对 NodeODM 的管理操作（添加、删除、查看），都是通过 telnet 协议完成：
 
 	telnet localhost 8080
 
-	连接成功后，即可管理 NodeODM 节点，输入 `HELP` 可查看所有命令。
+　　连接成功后，即可管理 NodeODM 节点，输入 `HELP` 可查看所有命令。
 
 　　此时将需要作为集群部署的 NodeODM 节点从 WebODM 管理页面中删除，而是直接添加 ClusterODM，这样在 WebODM 中创建的任务如果选择了 ClusterODM 作为处理节点，其会自动协调连接到 ClusterODM 的所有空闲 NodeODM 节点并行处理该任务。
 

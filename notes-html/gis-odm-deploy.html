@@ -85,11 +85,9 @@ ping </span>&lt;local_net_ip&gt; # 测试是否能访问局域网中其它主机
 <h3 id="部署-clusterodm">部署 ClusterODM</h3>
 <p>　　NodeODM 只能支持一个节点处理一个任务，要缩短时间，提高效率，必然有多个 NodeODM 节点处理同一个任务的需求，而 ODM 团队近期（2019年 6 月）宣布了<a href="https://docs.opendronemap.org/large.html#">拆分合并</a>的新特性，并在不断优化，而其设计也非常简洁，只需使用 <a href="https://github.com/OpenDroneMap/ClusterODM">ClusterODM</a> 来自动管理多个 NodeODM 节点即可。</p>
 <p>　　同样的，任意找一台内网中的服务器配置好必要的运行环境（Ubuntu、Git、Python3、Docker），执行：</p>
-<p>　　docker run -ti -p 3001:3000 -p 8080:8080 -p 10000:10000 opendronemap/clusterodm</p>
-<p>　　此时会从 Docker Hub 下载 <code>opendronemap/clusterodm</code> 镜像文件（约 1GB），如果宿主机 <code>3001</code> 端口已被占用换成其它端口即可。运行成功后，可访问 <code>localhost:10000</code> 查看已加入的 NodeODM 节点信息。ClusterODM 对 NodeODM 的管理操作（添加、删除、查看），都是通过 telnet 协议完成：</p>
-<pre><code>telnet localhost <span class="hljs-number">8080</span>
-
-连接成功后，即可管理 NodeODM 节点，输入 `HELP` 可查看所有命令。</code></pre><p>　　此时将需要作为集群部署的 NodeODM 节点从 WebODM 管理页面中删除，而是直接添加 ClusterODM，这样在 WebODM 中创建的任务如果选择了 ClusterODM 作为处理节点，其会自动协调连接到 ClusterODM 的所有空闲 NodeODM 节点并行处理该任务。</p>
+<pre><code>docker run -ti -p <span class="hljs-number">3001</span>:<span class="hljs-number">3000</span> -p <span class="hljs-number">8080</span>:<span class="hljs-number">8080</span> -p <span class="hljs-number">10000</span>:<span class="hljs-number">10000</span> opendronemap/clusterodm</code></pre><p>　　此时会从 Docker Hub 下载 <code>opendronemap/clusterodm</code> 镜像文件（约 1GB），如果宿主机 <code>3001</code> 端口已被占用换成其它端口即可。运行成功后，可访问 <code>localhost:10000</code> 查看已加入的 NodeODM 节点信息。ClusterODM 对 NodeODM 的管理操作（添加、删除、查看），都是通过 telnet 协议完成：</p>
+<pre><code>telnet localhost <span class="hljs-number">8080</span></code></pre><p>　　连接成功后，即可管理 NodeODM 节点，输入 <code>HELP</code> 可查看所有命令。</p>
+<p>　　此时将需要作为集群部署的 NodeODM 节点从 WebODM 管理页面中删除，而是直接添加 ClusterODM，这样在 WebODM 中创建的任务如果选择了 ClusterODM 作为处理节点，其会自动协调连接到 ClusterODM 的所有空闲 NodeODM 节点并行处理该任务。</p>
 <p>　　这里还需要注意的是，如果要让集群生效，需要在创建任务的时候将 <code>sm-cluster</code> 选项设置为 <code>true</code>，同时调整 <code>split</code> 和 <code>split-overlap</code> 选项，如果失败，说明 <code>split</code> 和 <code>split-overlap</code> 选项参数有问题，调整后再试。具体设置项参考以下文档：</p>
 <blockquote>
 <p><a href="https://docs.opendronemap.org/arguments.html">ODM 配置项（官方文档）</a></p>
