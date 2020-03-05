@@ -6,7 +6,7 @@
         "keywords": ["Computer Technology", "Server", "Nginx", "Config"],
         "summary": "Nginx 作为一个轻量、高性能的服务器，近年来颇受欢迎，无论是生产环境还是开发环境都有其发挥作用的地方，其配置文件相对来说还是较为简单的。而且，现在 nginx 也支持 Windows 环境了，利用不同的配置可以满足我们不同的需求。",
         "ctime": "2018-03-15 12:38:00",
-        "mtime": "2019-09-17 18:54:00"
+        "mtime": "2020-03-05 23:15:00"
     }
 
 ---
@@ -160,6 +160,32 @@
 　　在非精确匹配的规则内部是可以嵌套 `location` 规则的。
 
 > 官网文档：ngx_http_core_module/location
+
+### 虚拟目录
+
+　　虚拟目录解决了客户端请求资源的 **URL** 与服务器端对应资源存在位置不一致的问题。如下所示：
+
+    # 虚拟目录
+    location /static/ {
+        alias /DataDisk/resources/;
+    }
+
+    # 这样，客户端发送 example.com/static/bg.png 的请求实际映射到了服务器端 /DataDisk/resources/bg.png 的资源上
+
+　　**URL** 作为统一资源定位符，代表的是资源所在的真实网络位置，但在某些情况下，出于安全性、降低逻辑复杂性等因素的考虑，给客户端提供一个虚拟目录可能更好，这个时候使用 `alias` 指令就可以实现。
+
+　　作为对比，我们使用 `root` 指令通常指定的是真实目录。如下所示：
+
+    # 真实目录
+    location /static/ {
+        alias /DataDisk/resources;
+    }
+
+    # 这样，客户端发送 example.com/static/bg.png 的请求实际映射到了服务器端 /DataDisk/resources/static/bg.png 的资源上
+
+　　可以看出，`root` 指令通常适合用在资源路径完全真实存在的情况下，而 `alias` 指令则更适合用在资源路径前缀部分不是真实存在的情况下。
+
+> 官网文档：ngx_http_core_module/alias
 
 ### 允许跨域
 
