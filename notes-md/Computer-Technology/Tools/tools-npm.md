@@ -6,7 +6,7 @@
         "keywords": ["Computer Technology", "Tools", "Web", "Node.js", "npm"],
         "summary": "npm 是 Node.js 的一个包管理器，Web 前端工程师也经常利用它来简化开发流程，来看看如何愉快的使用 npm。",
         "ctime": "2019-07-06 15:43:00",
-        "mtime": "2019-07-09 01:10:00"
+        "mtime": "2020-03-15 22:34:00"
     }
 
 ---
@@ -35,7 +35,7 @@
 　　更换仓库源：
 
     npm config set registry <source>
-
+    
     npm config set registry https://registry.npmjs.org/         // 换回官方源
     npm config set registry https://registry.npm.taobao.org/    // 换到国内淘宝源
 
@@ -48,20 +48,20 @@
 　　通常来说，我们只会利用 npm 来安装、卸载依赖包，或者在项目启动时进行初始化。
 
     npm init [-y]   // 在当前文件夹初始化，生成一个 package.json 文件，-y 选项为全部默认
-
+    
     npm install --global|-g <package_name>     // 在全局安装指定包
     npm uninstall --global|-g <package_name>   // 卸载安装在全局的指定包
-
+    
     npm install [-P|--save] <package_name>     // 在当前项目本地安装生产环境依赖包，会列在 dependencies 中
     npm uninstall [-S|--save] <package_name>   // 卸载安装在项目本地的 dependencies 中指定包
-
+    
     npm install -D|--save-dev <package_name>   // 在当前项目本地安装开发环境依赖包，会列在 devDependencies 中
     npm uninstall -D|--save-dev <package_name> // 卸载安装在项目本地的 devDependencies 中指定包
 
 　　这里值得一提的是，在 npm 5.2+ 之后，附带了一个 `npx` 命令，作用是**执行包的二进制文件**：
 
     npx [options] [-p|--package <pkg>]... <command> [command-arg]...
-
+    
     npx create-react-app my-app     // 执行 create-react-app 包的主命令
 
 　　通过 `npx` 命令执行包的二进制文件有一个优点：**不需要安装包，即可执行包的命令，对本地环境无污染。**
@@ -69,7 +69,7 @@
 　　而且，在 npm 6.0+ 之后，`init` 命令可以接收一个新的选项：
 
     npm init <initializer>
-
+    
     npm init react-app my-app       // same as : npx create-react-app my-app
 
 　　其中 `<initializer>` 是一个以 `create-` 开头命名的包，算是对这种特殊命名的包的 `npx` 命令的简写方式。
@@ -148,12 +148,22 @@
 　　我们不需要反复进行**发布--测试--修复--撤销发布--重新发布**这个过程，npm 官方为我们提供了便捷的本地测试工具，也就是 `link` 命令。
 
     npm link    // 在你将要发布的包根目录下执行该命令，如同将其安装到全局一样，更改文件及时生效，不需要重新 link
-
+    
     npm link <package_name>     // 在另外一个测试目录中执行该命令，如同 install
-
+    
     npm unlink  // 测试完成后，在你将要发布的包根目录下执行该命令，unlink 会将其从全局卸载
 
 　　本地测试还是相当简单和方便的，也是无污染的。
+
+#### 小技巧
+
+　　这里有个小技巧可以不使用 `npm link` 命令就能在本地测试，而且是真的无污染：
+
+```
+"dependencies": {
+  "my-dev-module": "file:../my-dev-module/index.min.js"
+}
+```
 
 ### 登录
 
@@ -184,3 +194,11 @@
 　　**事实上，npm 官方不建议开发者使用 `unpublish` 命令来撤销发布，因为如果其它用户已经安装了该包作为依赖，并能正常使用的情况下该包被撤销，会导致其它用户无法再次安装该包。**所以，尽可能用 `deprecate` 命令来表明该包已被弃用，即便用户安装成功，也会有醒目的提示告知用户已被弃用，用户则会及时寻找替代包。
 
     npm deprecate <package_name>[@<version>] <message>
+
+### 退出登录
+
+　　如果不是在自己的机器上工作，建议完成发布后退出登录，保证数据安全。退出登录与登录一样简单，同样需要指定 `--registry` 与 `--scope` 参数。
+
+```
+npm logout [--registry=url] [--scope=@orgname]
+```

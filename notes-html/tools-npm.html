@@ -75,7 +75,11 @@ n latest    // 安装最新版 <span class="hljs-keyword">node</span>
 npm <span class="hljs-keyword">link</span> &lt;package_name&gt;     <span class="hljs-comment">// 在另外一个测试目录中执行该命令，如同 install</span>
 
 npm unlink  <span class="hljs-comment">// 测试完成后，在你将要发布的包根目录下执行该命令，unlink 会将其从全局卸载</span></code></pre><p>　　本地测试还是相当简单和方便的，也是无污染的。</p>
-<h3 id="登录">登录</h3>
+<h4 id="小技巧">小技巧</h4>
+<p>　　这里有个小技巧可以不使用 <code>npm link</code> 命令就能在本地测试，而且是真的无污染：</p>
+<pre><code><span class="hljs-string">"dependencies"</span>: {
+  <span class="hljs-string">"my-dev-module"</span>: <span class="hljs-string">"file:../my-dev-module/index.min.js"</span>
+}</code></pre><h3 id="登录">登录</h3>
 <p>　　发布前需要在命令行登录 npm <strong>官方仓库</strong>：</p>
 <pre><code>npm login [<span class="hljs-attribute">--registry</span>=url] [<span class="hljs-attribute">--scope</span>=@orgname]</code></pre><p>　　<strong>注意：如果替换了官方源，一定要指定 <code>--registry=https://registry.npmjs.org/</code>，这样才能登录到官方仓库进行发布。</strong><code>--scope</code>则是命名空间，例如 <code>@babel</code>。</p>
 <p>　　登录成功后，可以查看已登录用户：</p>
@@ -85,4 +89,6 @@ npm unlink  <span class="hljs-comment">// 测试完成后，在你将要发布�
 <h3 id="撤销发布">撤销发布</h3>
 <p>　　通常，是在本地测试无误后进行发布，如果真的在发布后发现问题，导致不能正常使用，可以撤销发布：</p>
 <pre><code>npm unpublish <span class="hljs-meta">[&lt;@scope&gt;/]&lt;package_name&gt;[@&lt;version&gt;]</span></code></pre><p>　　<strong>事实上，npm 官方不建议开发者使用 <code>unpublish</code> 命令来撤销发布，因为如果其它用户已经安装了该包作为依赖，并能正常使用的情况下该包被撤销，会导致其它用户无法再次安装该包。</strong>所以，尽可能用 <code>deprecate</code> 命令来表明该包已被弃用，即便用户安装成功，也会有醒目的提示告知用户已被弃用，用户则会及时寻找替代包。</p>
-<pre><code>npm deprecate <span class="hljs-tag">&lt;<span class="hljs-name">package_name</span>&gt;</span>[@<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>] <span class="hljs-tag">&lt;<span class="hljs-name">message</span>&gt;</span></code></pre>
+<pre><code>npm deprecate <span class="hljs-tag">&lt;<span class="hljs-name">package_name</span>&gt;</span>[@<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>] <span class="hljs-tag">&lt;<span class="hljs-name">message</span>&gt;</span></code></pre><h3 id="退出登录">退出登录</h3>
+<p>　　如果不是在自己的机器上工作，建议完成发布后退出登录，保证数据安全。退出登录与登录一样简单，同样需要指定 <code>--registry</code> 与 <code>--scope</code> 参数。</p>
+<pre><code>npm logout [<span class="hljs-attribute">--registry</span>=url] [<span class="hljs-attribute">--scope</span>=@orgname]</code></pre>
