@@ -1,7 +1,6 @@
 /*! path config */
 
-'use strict';
-
+'use strict'
 
 module.exports = (NODE_ENV, is_dev = NODE_ENV === 'development') => ({
 	/* app src directory */
@@ -9,9 +8,9 @@ module.exports = (NODE_ENV, is_dev = NODE_ENV === 'development') => ({
 	/* app build directory */
 	build: require('path').resolve(__dirname, '../build/'),
 	proxy_options: {
-		open: false,
+		open: true,
 		server: {
-			baseDir: './'
-		}
-	}
-});
+			baseDir: './',
+		},
+	},
+})

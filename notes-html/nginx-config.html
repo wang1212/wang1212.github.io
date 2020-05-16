@@ -17,7 +17,7 @@
     ...
 }</code></pre><p>　　这个配置是写在配置文件顶部的，其值也可以为 <code>auto</code>。</p>
 <blockquote>
-<p>官网文档：Core functionality/worker_processes</p>
+<p>官网文档：<a href="http://nginx.org/en/docs/ngx_core_module.html#worker_processes">Core functionality/worker_processes</a></p>
 </blockquote>
 <h3 id="隐藏-nginx-版本号">隐藏 nginx 版本号</h3>
 <p>　　隐藏掉版本号，可以降低被攻击的风险。</p>
@@ -26,7 +26,7 @@
 
     <span class="hljs-attr">server_tokens</span> <span class="hljs-string">off;</span>
 <span class="hljs-attr">}</span></code></pre><blockquote>
-<p>官网文档：ngx_http_core_module/server_tokens</p>
+<p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server_tokens">ngx_http_core_module/server_tokens</a></p>
 </blockquote>
 <h3 id="设置编码">设置编码</h3>
 <p>　　通常来说，将编码设置为 <code>UTF-8</code> 是比较合适的。</p>
@@ -35,7 +35,7 @@
 
     <span class="hljs-attr">charset</span> <span class="hljs-string">utf-8;</span>
 <span class="hljs-attr">}</span></code></pre><blockquote>
-<p>官网文档：ngx_http_charset_module/charset</p>
+<p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_charset_module.html#charset">ngx_http_charset_module/charset</a></p>
 </blockquote>
 <h3 id="更改上传数据大小限制">更改上传数据大小限制</h3>
 <p>　　Nginx 默认的数据上传大小为 2M，某些情况下我们需要将其更改的大一些，以符合业务需求。</p>
@@ -44,7 +44,7 @@
 
     <span class="hljs-attr">client_max_body_size</span> <span class="hljs-string">20m;</span>
 <span class="hljs-attr">}</span></code></pre><blockquote>
-<p>官网文档：ngx_http_core_module/client_max_body_size</p>
+<p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size">ngx_http_core_module/client_max_body_size</a></p>
 </blockquote>
 <h3 id="开启-gzip">开启 gzip</h3>
 <p>　　开启 gzip 压缩可以在客户端请求文本文件时，将传输大小压缩至少<strong>70%</strong>左右，可以获得非常好的优化效果，通常都会开启 gzip 压缩配置。</p>
@@ -82,7 +82,7 @@
 </li>
 </ul>
 <blockquote>
-<p>官网文档：ngx_http_gzip_module</p>
+<p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip">ngx_http_gzip_module</a></p>
 </blockquote>
 <h3 id="路由匹配规则">路由匹配规则</h3>
 <p>　　nginx 像一个路由，客户端通过什么地址访问服务器，服务器则在配置文件中通过设置好的路由来匹配请求进行转发。</p>
@@ -114,7 +114,7 @@ location / {
     proxy_pass  http://127.0.0.1:8080;
 }</span></code></pre><p>　　在非精确匹配的规则内部是可以嵌套 <code>location</code> 规则的。</p>
 <blockquote>
-<p>官网文档：ngx_http_core_module/location</p>
+<p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#location">ngx_http_core_module/location</a></p>
 </blockquote>
 <h3 id="虚拟目录">虚拟目录</h3>
 <p>　　虚拟目录解决了客户端请求资源的 <strong>URL</strong> 与服务器端对应资源存在位置不一致的问题。如下所示：</p>
@@ -132,7 +132,17 @@ location / {
 
 <span class="hljs-comment"># 这样，客户端发送 example.com/static/bg.png 的请求实际映射到了服务器端 /DataDisk/resources/static/bg.png 的资源上</span></code></pre><p>　　可以看出，<code>root</code> 指令通常适合用在资源路径完全真实存在的情况下，而 <code>alias</code> 指令则更适合用在资源路径前缀部分不是真实存在的情况下。</p>
 <blockquote>
-<p>官网文档：ngx_http_core_module/alias</p>
+<p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#alias">ngx_http_core_module/alias</a></p>
+</blockquote>
+<h3 id="文件列表浏览">文件列表浏览</h3>
+<p>　　静态资源服务器一般允许用户查看服务器上的文件列表，例如 CDN、镜像站等。nginx 出于安全考虑，默认是不允许客户端浏览器查看服务器上的文件列表的，可以通过以下指令来进行配置：</p>
+<pre><code class="language-nginx"><span class="hljs-attribute">location</span> /static/ {
+    <span class="hljs-attribute">autoindex</span> <span class="hljs-literal">on</span>;                <span class="hljs-comment"># 开启客户端文件列表浏览</span>
+    <span class="hljs-attribute">autoindex_exact_size</span> <span class="hljs-literal">off</span>;   <span class="hljs-comment"># 默认显示的文件确切大小，单位 b，关闭后自动计算 KB/MB/GB 等</span>
+    <span class="hljs-attribute">autoindex_localtime</span> <span class="hljs-literal">on</span>;     <span class="hljs-comment"># 文件的改动时间以服务器时间为准</span>
+}</code></pre>
+<blockquote>
+<p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_autoindex_module.html">ngx_http_autoindex_module</a></p>
 </blockquote>
 <h3 id="允许跨域">允许跨域</h3>
 <p>　　有时候，比较大（几百兆以上）的静态资源需要在客户端使用异步方式加载（例如 Ajax），但是多个人合作开发时，拷贝这些静态资源到各自本地（如果不这么做，将会出现跨域问题）是最糟糕的解决方案，这个时候我们可以将静态资源放在一个服务器上，然后使用反向代理或者允许跨域的配置巧妙的解决这个问题。</p>
@@ -151,7 +161,7 @@ location / {
 </li>
 </ul>
 <blockquote>
-<p>官网文档：ngx_http_headers_module/add_header</p>
+<p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header">ngx_http_headers_module/add_header</a></p>
 </blockquote>
 <h3 id="反向代理">反向代理</h3>
 <p>　　Nginx 可以作为一个反向代理服务器，来为我们提供一些场景下的解决方案，例如负载均衡、跨域、前后端完全分离开发场景等等。</p>
@@ -175,7 +185,7 @@ location / {
 </li>
 </ul>
 <blockquote>
-<p>官网文档：ngx_http_proxy_module</p>
+<p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html">ngx_http_proxy_module</a></p>
 </blockquote>
 <h3 id="重定向">重定向</h3>
 <p>　　重定向是一个比较常见的需求，nginx 的重定向指令（rewrite）还是相当简单的。例如，需要将所有 http 请求重定向到 https 下，官方推荐这么做：</p>
@@ -189,7 +199,7 @@ location / {
     rewrite ^<span class="hljs-regexp">/(.*)$ https:/</span><span class="hljs-regexp">/example.com/</span><span class="hljs-variable">$1</span> permanent;
 }</code></pre><p>　　<strong>注意：</strong> <code>301</code> 重定向可能会导致 POST 请求被改变为 GET 请求，并可能丢失提交数据，此时使用 <code>308</code> 状态码替换即可。</p>
 <blockquote>
-<p>官网文档：ngx_http_rewrite_module</p>
+<p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html">ngx_http_rewrite_module</a></p>
 </blockquote>
 <h4 id="项目首页重定向">项目首页重定向</h4>
 <p>　　大多数时候，我们在同一个域名下会部署多个 Web 应用，访问的话需要 <strong>WebAppName</strong> 来进行区分，例如 <code>localhost:80/App</code>，那么 <code>App</code> 其实就代表了一个 Web 应用，将会映射到相应的文件夹。这里有一个细节性问题，文件夹的路径必然以 <code>/</code> 结束，所以大多数服务器都会自动做一次重定向，将 <code>localhost:80/App</code> 重定向到 <code>localhost:80/App/</code>。如果 Nginx 没有配置，默认是不会做这个重定向的，为了用户访问方便，我们需要解决这个问题：</p>
@@ -215,5 +225,5 @@ location / {
 
     access_log  logs/access/host.access-<span class="hljs-variable">$year</span>-<span class="hljs-variable">$month</span>-<span class="hljs-variable">$day</span>.log main;
 }</code></pre><blockquote>
-<p>官网文档：ngx_http_log_module</p>
+<p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_log_module.html">ngx_http_log_module</a></p>
 </blockquote>

@@ -6,7 +6,7 @@
         "keywords": ["Computer Technology", "Server", "Nginx", "Config"],
         "summary": "Nginx 作为一个轻量、高性能的服务器，近年来颇受欢迎，无论是生产环境还是开发环境都有其发挥作用的地方，其配置文件相对来说还是较为简单的。而且，现在 nginx 也支持 Windows 环境了，利用不同的配置可以满足我们不同的需求。",
         "ctime": "2018-03-15 12:38:00",
-        "mtime": "2020-03-05 23:15:00"
+        "mtime": "2020-05-16 22:58:00"
     }
 
 ---
@@ -35,13 +35,13 @@
 
     {
         worker_processes  4;
-
+    
         ...
     }
 
 　　这个配置是写在配置文件顶部的，其值也可以为 `auto`。
 
-> 官网文档：Core functionality/worker_processes
+> 官网文档：[Core functionality/worker_processes](http://nginx.org/en/docs/ngx_core_module.html#worker_processes)
 
 ### 隐藏 nginx 版本号
 
@@ -49,11 +49,11 @@
 
     http {
         ...
-
+    
         server_tokens off;
     }
 
-> 官网文档：ngx_http_core_module/server_tokens
+> 官网文档：[ngx_http_core_module/server_tokens](http://nginx.org/en/docs/http/ngx_http_core_module.html#server_tokens)
 
 ### 设置编码
 
@@ -61,11 +61,11 @@
 
     server {
         ...
-
+    
         charset utf-8;
     }
 
-> 官网文档：ngx_http_charset_module/charset
+> 官网文档：[ngx_http_charset_module/charset](http://nginx.org/en/docs/http/ngx_http_charset_module.html#charset)
 
 ### 更改上传数据大小限制
 
@@ -73,11 +73,11 @@
 
     server {
         ...
-
+    
         client_max_body_size 20m;
     }
 
-> 官网文档：ngx_http_core_module/client_max_body_size
+> 官网文档：[ngx_http_core_module/client_max_body_size](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size)
 
 ### 开启 gzip
 
@@ -85,7 +85,7 @@
 
     http {
         ...
-
+    
         # gzip
         gzip                on;
         gzip_min_length     20;
@@ -96,7 +96,7 @@
         gzip_disable        "MSIE [1-6]\.";
         gzip_proxied        off;
         gzip_vary           on;
-
+    
         ...
     }
 
@@ -122,7 +122,7 @@
 
     　　设置要进行压缩的 http 协议版本，默认设置为 1.0 即可，因为 nginx 和后端服务器（Server）默认采用 HTTP/1.0 进行通信的，防止出现不压缩的情况。
 
-> 官网文档：ngx_http_gzip_module
+> 官网文档：[ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)
 
 ### 路由匹配规则
 
@@ -140,18 +140,18 @@
     location = / {
         ...
     }
-
+    
     # 前缀匹配，处理一些需要缓存的静态资源
     location ^~ /static/ {
         root    /Data/static/;
         expires 7d;
     }
-
+    
     # 正则匹配，处理静态资源
     location ~* \.(html|js|css|png|jpg|jpeg|gif|json|ico|otf|eot|svg|ttf|woff|woff2|map)$ {
         root /Data/webapps/;
     }
-
+    
     # 前缀匹配，默认处理（可以做反向代理，处理动态资源请求）
     location / {
         proxy_pass  http://127.0.0.1:8080;
@@ -159,7 +159,7 @@
 
 　　在非精确匹配的规则内部是可以嵌套 `location` 规则的。
 
-> 官网文档：ngx_http_core_module/location
+> 官网文档：[ngx_http_core_module/location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)
 
 ### 虚拟目录
 
@@ -169,7 +169,7 @@
     location /static/ {
         alias /DataDisk/resources/;
     }
-
+    
     # 这样，客户端发送 example.com/static/bg.png 的请求实际映射到了服务器端 /DataDisk/resources/bg.png 的资源上
 
 　　**URL** 作为统一资源定位符，代表的是资源所在的真实网络位置，但在某些情况下，出于安全性、降低逻辑复杂性等因素的考虑，给客户端提供一个虚拟目录可能更好，这个时候使用 `alias` 指令就可以实现。
@@ -180,12 +180,26 @@
     location /static/ {
         alias /DataDisk/resources;
     }
-
+    
     # 这样，客户端发送 example.com/static/bg.png 的请求实际映射到了服务器端 /DataDisk/resources/static/bg.png 的资源上
 
 　　可以看出，`root` 指令通常适合用在资源路径完全真实存在的情况下，而 `alias` 指令则更适合用在资源路径前缀部分不是真实存在的情况下。
 
-> 官网文档：ngx_http_core_module/alias
+> 官网文档：[ngx_http_core_module/alias](http://nginx.org/en/docs/http/ngx_http_core_module.html#alias)
+
+### 文件列表浏览
+
+　　静态资源服务器一般允许用户查看服务器上的文件列表，例如 CDN、镜像站等。nginx 出于安全考虑，默认是不允许客户端浏览器查看服务器上的文件列表的，可以通过以下指令来进行配置：
+
+```nginx
+location /static/ {
+    autoindex on;				# 开启客户端文件列表浏览
+    autoindex_exact_size off;   # 默认显示的文件确切大小，单位 b，关闭后自动计算 KB/MB/GB 等
+    autoindex_localtime on;     # 文件的改动时间以服务器时间为准
+}
+```
+
+> 官网文档：[ngx_http_autoindex_module](http://nginx.org/en/docs/http/ngx_http_autoindex_module.html)
 
 ### 允许跨域
 
@@ -193,7 +207,7 @@
 
     location /static/ {
         ...
-
+    
         add_header 'Access-Control-Allow-Origin'      '*';
         add_header 'Access-Control-Allow-Headers'     'Content-Type';
         add_header 'Access-Control-Allow-Credentials' 'true';
@@ -207,7 +221,7 @@
 
     　　可选，这个响应头信息代表的是跨域请求是否需要携带 **Cookie** 信息，默认为 `false`，在需要利用 Session-Cookie 机制的情况下务必设置为 `true`。
 
-> 官网文档：ngx_http_headers_module/add_header
+> 官网文档：[ngx_http_headers_module/add_header](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
 ### 反向代理
 
@@ -237,7 +251,7 @@
 
     　　则是后端（被代理）服务器地址。
 
-> 官网文档：ngx_http_proxy_module
+> 官网文档：[ngx_http_proxy_module](http://nginx.org/en/docs/http/ngx_http_proxy_module.html)
 
 ### 重定向
 
@@ -258,7 +272,7 @@
 
 　　**注意：** `301` 重定向可能会导致 POST 请求被改变为 GET 请求，并可能丢失提交数据，此时使用 `308` 状态码替换即可。
 
-> 官网文档：ngx_http_rewrite_module
+> 官网文档：[ngx_http_rewrite_module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)
 
 #### 项目首页重定向
 
@@ -291,8 +305,8 @@
             set $month $2;
             set $day   $3;
         }
-
+    
         access_log  logs/access/host.access-$year-$month-$day.log main;
     }
 
-> 官网文档：ngx_http_log_module
+> 官网文档：[ngx_http_log_module](http://nginx.org/en/docs/http/ngx_http_log_module.html)
