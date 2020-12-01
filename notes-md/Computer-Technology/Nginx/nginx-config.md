@@ -6,7 +6,7 @@
         "keywords": ["Computer Technology", "Server", "Nginx", "Config"],
         "summary": "Nginx 作为一个轻量、高性能的服务器，近年来颇受欢迎，无论是生产环境还是开发环境都有其发挥作用的地方，其配置文件相对来说还是较为简单的。而且，现在 nginx 也支持 Windows 环境了，利用不同的配置可以满足我们不同的需求。",
         "ctime": "2018-03-15 12:38:00",
-        "mtime": "2020-05-16 22:58:00"
+        "mtime": "2020-12-02 01:19:00"
     }
 
 ---
@@ -161,6 +161,27 @@
 
 > 官网文档：[ngx_http_core_module/location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)
 
+#### 调试技巧
+
+　　nginx 本身是比较难调试的，不过在配置 `location` 指令时，可以利用 `return` 指令来进行调试。
+  
+  ```nginx
+ location /test/ {
+   return 600;
+ }
+ ```
+ 
+ 　　此时若访问 **/test/** 路径，可以看到响应码为 `600` 时，说明路径匹配成功。同时，可以添加一些辅助文本信息：
+
+  ```nginx
+ location /test/ {
+   default_type text/html;
+   return 600 'Hello';
+ }
+ ```
+ 
+ > 官网文档：[ngx_http_rewrite_module/return](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
+
 ### 虚拟目录
 
 　　虚拟目录解决了客户端请求资源的 **URL** 与服务器端对应资源存在位置不一致的问题。如下所示：
@@ -250,6 +271,24 @@ location /static/ {
 - `proxy_pass`
 
     　　则是后端（被代理）服务器地址。
+
+#### 代理服务路径变化时
+
+　　如果说在反向代理过程中，路径没有差异，一般来说不会出现什么问题，但是如果路径有变化时，会出现两个问题，一个是 **cookie 丢失**，另一个则是 **后端服务器重定向错误**。 第一个问题可以用 `proxy_cookie_path` 指令解决，第二个问题则使用 `proxy_redirect` 指令解决。具体如下：
+
+```nginx
+location /test/ {
+  proxy_cookie_path /project/ /test/;
+  proxy_pass http://127.0.0.1:8181/project/;
+  proxy_redirect ~(https?://[^/]+)?/project/(.*) $scheme://$http_host/test/$2;
+}
+```
+
+　　首先，`proxy_pass` 指令配置的代理服务在用户实际访问时路径发生了变化。用户以 **/test/users** 路径访问时，实际被 nginx 代理到后端的服务路径为 **/project/users**，可以明显的看到路径的前缀发生了变化。
+  
+　　此时，`proxy_cookie_path` 指令告诉 nginx 将后端被代理服务的响应头中 cookie_path 进行转换，这样在客户端访问任意路径时，cookie_path 也会保持和访问路径一致，而不是实际代理的服务路径，否则 cookie 将会在客户端丢失。
+  
+　　同时，如果说被代理的服务有重定向需求的话，不配置 `proxy_redirect` 指令，重定向的路径将会发生错误，需要告诉 nginx 将其路径中部分进行替换。例如，用户访问 **/test/**，被代理的服务路径为 **/project/**，此时被代理服务做一个重定向操作到 **/project/index.html**，如果不做转换，用户会直接访问该路径将发生错误。在这里，`proxy_redirect` 指令所做的就是将响应头中 `Location`字段的值由 **/project/index.html** 替换为 **/test/index.html**，这样用户将会正常访问到资源。
 
 > 官网文档：[ngx_http_proxy_module](http://nginx.org/en/docs/http/ngx_http_proxy_module.html)
 

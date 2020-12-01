@@ -116,6 +116,19 @@ location / {
 <blockquote>
 <p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#location">ngx_http_core_module/location</a></p>
 </blockquote>
+<h4 id="调试技巧">调试技巧</h4>
+<p>　　nginx 本身是比较难调试的，不过在配置 <code>location</code> 指令时，可以利用 <code>return</code> 指令来进行调试。</p>
+<pre><code class="language-nginx"> <span class="hljs-keyword">location</span> <span class="hljs-title">/test</span>/ {
+   return <span class="hljs-number">600</span>;
+ }</code></pre>
+<p> 　　此时若访问 <strong>/test/</strong> 路径，可以看到响应码为 <code>600</code> 时，说明路径匹配成功。同时，可以添加一些辅助文本信息：</p>
+<pre><code class="language-nginx"> <span class="hljs-attribute">location</span> /test/ {
+   <span class="hljs-attribute">default_type</span> text/html;
+   <span class="hljs-attribute">return</span> <span class="hljs-number">600</span> <span class="hljs-string">'Hello'</span>;
+ }</code></pre>
+<blockquote>
+<p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return">ngx_http_rewrite_module/return</a></p>
+</blockquote>
 <h3 id="虚拟目录">虚拟目录</h3>
 <p>　　虚拟目录解决了客户端请求资源的 <strong>URL</strong> 与服务器端对应资源存在位置不一致的问题。如下所示：</p>
 <pre><code><span class="hljs-comment"># 虚拟目录</span>
@@ -184,6 +197,16 @@ location / {
 <p>  　　则是后端（被代理）服务器地址。</p>
 </li>
 </ul>
+<h4 id="代理服务路径变化时">代理服务路径变化时</h4>
+<p>　　如果说在反向代理过程中，路径没有差异，一般来说不会出现什么问题，但是如果路径有变化时，会出现两个问题，一个是 <strong>cookie 丢失</strong>，另一个则是 <strong>后端服务器重定向错误</strong>。 第一个问题可以用 <code>proxy_cookie_path</code> 指令解决，第二个问题则使用 <code>proxy_redirect</code> 指令解决。具体如下：</p>
+<pre><code class="language-nginx"><span class="hljs-attribute">location</span> /test/ {
+  <span class="hljs-attribute">proxy_cookie_path</span> /project/ /test/;
+  <span class="hljs-attribute">proxy_pass</span> http://127.0.0.1:8181/project/;
+  <span class="hljs-attribute">proxy_redirect</span> ~(https?://[^/]+)?/project/(.*) <span class="hljs-variable">$scheme</span>://<span class="hljs-variable">$http_host</span>/test/<span class="hljs-variable">$2</span>;
+}</code></pre>
+<p>　　首先，<code>proxy_pass</code> 指令配置的代理服务在用户实际访问时路径发生了变化。用户以 <strong>/test/users</strong> 路径访问时，实际被 nginx 代理到后端的服务路径为 <strong>/project/users</strong>，可以明显的看到路径的前缀发生了变化。</p>
+<p>　　此时，<code>proxy_cookie_path</code> 指令告诉 nginx 将后端被代理服务的响应头中 cookie_path 进行转换，这样在客户端访问任意路径时，cookie_path 也会保持和访问路径一致，而不是实际代理的服务路径，否则 cookie 将会在客户端丢失。</p>
+<p>　　同时，如果说被代理的服务有重定向需求的话，不配置 <code>proxy_redirect</code> 指令，重定向的路径将会发生错误，需要告诉 nginx 将其路径中部分进行替换。例如，用户访问 <strong>/test/</strong>，被代理的服务路径为 <strong>/project/</strong>，此时被代理服务做一个重定向操作到 <strong>/project/index.html</strong>，如果不做转换，用户会直接访问该路径将发生错误。在这里，<code>proxy_redirect</code> 指令所做的就是将响应头中 <code>Location</code>字段的值由 <strong>/project/index.html</strong> 替换为 <strong>/test/index.html</strong>，这样用户将会正常访问到资源。</p>
 <blockquote>
 <p>官网文档：<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html">ngx_http_proxy_module</a></p>
 </blockquote>

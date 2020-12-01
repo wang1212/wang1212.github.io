@@ -1,13 +1,13 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "181f081fe653d608f86148e80af207ad",
+    "revision": "c4d230008b7966c56a40fb45f681ca75",
     "url": "../index.html"
   },
   {
-    "url": "app.60dfbe8d1a4558a2bb64.js"
+    "url": "app.443bbb9a4fe7869fffd1.css"
   },
   {
-    "url": "app.7ce4437d63c12c4f634b.css"
+    "url": "app.e9b9c872f06c023d2d69.js"
   },
   {
     "revision": "9b053b121e306b1e6199b35935593451",
@@ -86,7 +86,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "vendors\\libs\\material-design-icons-3.0.1\\webfonts\\MaterialIcons-Regular.ijmap"
   },
   {
-    "revision": "1c18379e0279731596f8263d94389a72",
+    "revision": "770d425844e796efd306626264ab1e27",
     "url": "vendors\\libs\\material-design-icons-3.0.1\\webfonts\\MaterialIcons-Regular.svg"
   },
   {
