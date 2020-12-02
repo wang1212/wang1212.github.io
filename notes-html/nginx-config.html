@@ -140,7 +140,7 @@ location / {
 <p>　　作为对比，我们使用 <code>root</code> 指令通常指定的是真实目录。如下所示：</p>
 <pre><code><span class="hljs-comment"># 真实目录</span>
 <span class="hljs-keyword">location</span> <span class="hljs-title">/static</span>/ {
-    alias /DataDisk/resources;
+    root /DataDisk/resources;
 }
 
 <span class="hljs-comment"># 这样，客户端发送 example.com/static/bg.png 的请求实际映射到了服务器端 /DataDisk/resources/static/bg.png 的资源上</span></code></pre><p>　　可以看出，<code>root</code> 指令通常适合用在资源路径完全真实存在的情况下，而 <code>alias</code> 指令则更适合用在资源路径前缀部分不是真实存在的情况下。</p>

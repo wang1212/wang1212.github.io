@@ -199,7 +199,7 @@
 
     # 真实目录
     location /static/ {
-        alias /DataDisk/resources;
+        root /DataDisk/resources;
     }
     
     # 这样，客户端发送 example.com/static/bg.png 的请求实际映射到了服务器端 /DataDisk/resources/static/bg.png 的资源上
