@@ -1,131 +1,151 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<!-- 强制让 IE 使用最新内核渲染 -->
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<!-- 禁止用户缩放 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no">
-	<!-- 优先选择 chrome 内核渲染 -->
-	<meta name="renderer" content="webkit">
-	<!-- 禁止页面缓存 -->
-	<meta http-equiv="pragma" content="no-cache" />
-	<meta http-equiv="Cache-control" content="no-cache" />
-	<meta http-equiv="expires" content="0" />
-	<title>不如怀念</title>
-	<!-- 页面关键字（搜索引擎抓取） -->
-	<meta name="keywords" content="blog,wang1212,github,不如怀念" />
-	<!-- 页面内容描述（搜索引擎抓取） -->
-	<meta name="description" content="这是我的博客，用来记录和分享生活中的一些有趣的事情。" />
-	<meta name="theme-color" content="#278fef" />
-	<link rel="icon" href="build/favicon.ico">
-	<link rel="manifest" href="build/manifest.json">
-	<!-- 页面 css 初始化（保证各浏览器页面默认样式统一，应最先引入，bootstrap 框架已内置该文件） -->
-	<link rel="stylesheet" href="build/vendors/libs/bootstrap-4.3.1-dist/css/bootstrap.min.css">
-	<!-- import google icons -->
-	<link rel="stylesheet" href="build/vendors/libs/material-design-icons-3.0.1/material-icons.css">
-	<!-- page resources loading -->
-	<style>
-		.page-loading_container {
-			position: absolute;
-			left: 0;
-			top: 0;
-			width: 100vw;
-			height: 100vh;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			background-color : #fefefe;
-		}
-		.page-loading_content {
-			box-sizing: border-box;
-			display: block;
-			position : relative;
-			height: 140px;
-			width: 150px;
-			padding: 20px 25px;
-		}
-		.page-loading_content > .page-loading_text {
-			color : orange;
-			width: 4rem;
-			line-height: 1;
-			position : absolute;
-			top: 50%;
-			left: 50%;
-			margin: -.5rem 0 0 -2rem;
-			text-align: center;
-		}
-		.page-loading_round {
-			height: 100%;
-			width: 100%;
-			border: 1px solid orange;
-			border-radius: 50%;
-			position: relative;
-			animation: page-loading_round 2s infinite;
-			-webkit-animation : page-loading_round 2s infinite;
-		}
-		.page-loading_round_circle {
-			position: absolute;
-			left: 10px;
-			top: 10px;
-			height: 10px;
-			width: 10px;
-			border-radius: 50%;
-			background-color: orange;
-		}
-		@keyframes page-loading_round {
-			0% {transform : rotate(0deg);}
-			100% {transform : rotate(360deg);}
-		}
-		@-webkit-keyframes page-loading_round {
-			0% {-webkit-transform : rotate(0deg);}
-			100% {-webkit-transform : rotate(360deg);}
-		}
-	</style>
-	<!-- IE6-8  兼容解决方案
-		html5shiv ： 提供对 html5 新标签（例如 footer、nav）的支持;
-		respond ： 用来提供对 CSS3 @media媒体查询机制（min-width/max-width）的支持。
+	<head>
+		<meta charset="utf-8" />
+		<!-- 强制让 IE 使用最新内核渲染 -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<!-- 禁止用户缩放 -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no" />
+		<!-- 优先选择 chrome 内核渲染 -->
+		<meta name="renderer" content="webkit" />
+		<!-- 禁止页面缓存 -->
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="Cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<title>不如怀念</title>
+		<!-- 页面关键字（搜索引擎抓取） -->
+		<meta name="keywords" content="blog,wang1212,github,不如怀念" />
+		<!-- 页面内容描述（搜索引擎抓取） -->
+		<meta name="description" content="这是我的博客，用来记录和分享生活中的一些有趣的事情。" />
+		<meta name="theme-color" content="#278fef" />
+		<link rel="icon" href="build/favicon.ico" />
+		<link rel="manifest" href="build/manifest.json" />
+		<!-- 页面 css 初始化（保证各浏览器页面默认样式统一，应最先引入，bootstrap 框架已内置该文件） -->
+		<link rel="stylesheet" href="build/vendors/libs/bootstrap-4.3.1-dist/css/bootstrap.min.css" />
+		<!-- import google icons -->
+		<link rel="stylesheet" href="build/vendors/libs/material-design-icons-3.0.1/material-icons.css" />
+		<!-- page resources loading -->
+		<style>
+			.page-loading_container {
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 100vw;
+				height: 100vh;
+				background-color: rgb(254, 254, 254);
+			}
+			.page-loading_content {
+				position: relative;
+				display: block;
+				box-sizing: border-box;
+				width: 150px;
+				height: 140px;
+				padding: 20px 25px;
+			}
+			.page-loading_content > .page-loading_text {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 4rem;
+				margin: -0.5rem 0 0 -2rem;
+				color: orange;
+				line-height: 1;
+				text-align: center;
+			}
+			.page-loading_round {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				border: 1px solid orange;
+				border-radius: 50%;
+				-webkit-animation: page-loading_round 2s infinite;
+				animation: page-loading_round 2s infinite;
+			}
+			.page-loading_round_circle {
+				position: absolute;
+				top: 10px;
+				left: 10px;
+				width: 10px;
+				height: 10px;
+				background-color: orange;
+				border-radius: 50%;
+			}
+			@keyframes page-loading_round {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+			@-webkit-keyframes page-loading_round {
+				0% {
+					-webkit-transform: rotate(0deg);
+				}
+				100% {
+					-webkit-transform: rotate(360deg);
+				}
+			}
+		</style>
+		<!-- IE6-8  兼容解决方案
+			html5shiv ： 提供对 html5 新标签（例如 footer、nav）的支持;
+			respond ： 用来提供对 CSS3 @media媒体查询机制（min-width/max-width）的支持。
 
-		if lte IE 8 ： 其中 lte 代表小于等于。
-	 -->
-	<!--[if lte IE 8]>
-		<script type="text/javascript" src="./vendors/plugins/compatible-plugin/html5shiv.min.js"></script>
-		<script type="text/javascript" src="./vendors/plugins/compatible-plugin/respond.min.js"></script>
-	<![endif]-->
-	<script>
-		// 判断是不是 IE 8 以下
-		var _lte_IE_8 = !!(navigator.appName == 'Microsoft Internet Explorer' && +navigator.appVersion.split(';')[1].match(/\d+/)[0] < 9);
-	</script>
-	<script>
-		// Check that service workers are registered
-		if (location.protocol != 'file:' && 'serviceWorker' in navigator ) {
-			// Use the window load event to keep the page load performant
-			window.addEventListener('load', function () {
-				navigator.serviceWorker.register( 'build/service-worker.js' );
-			});
-		}
-	</script>
-<link href="build/app.6b57524123b438072772.css" rel="stylesheet"></head>
-<body>
-	<div id="App" class="App">
-		<div class="page-loading_container">
-			<div class="page-loading_content">
-				<div class="page-loading_round">
-					<div class="page-loading_round_circle"></div>
+			if lte IE 8 ： 其中 lte 代表小于等于。
+		-->
+		<!--[if lte IE 8]>
+				<script type="text/javascript" src="./vendors/plugins/compatible-plugin/html5shiv.min.js"></script>
+				<script type="text/javascript" src="./vendors/plugins/compatible-plugin/respond.min.js"></script>
+			<![endif]
+		-->
+		<!-- 访问统计 -->
+		<script>
+			if (!sessionStorage.getItem('_swa') && document.referrer.indexOf(location.protocol + '//' + location.host) !== 0) {
+				fetch(
+					'https://counter.dev/track?' +
+						new URLSearchParams({ referrer: document.referrer, screen: screen.width + 'x' + screen.height, user: 'mrwang1212', utcoffset: '8' })
+				)
+			}
+			sessionStorage.setItem('_swa', '1')
+		</script>
+		<script>
+			// 判断是不是 IE 8 以下
+			var _lte_IE_8 = !!(navigator.appName == 'Microsoft Internet Explorer' && +navigator.appVersion.split(';')[1].match(/\d+/)[0] < 9)
+		</script>
+		<script>
+			// Check that service workers are registered
+			if (location.protocol != 'file:' && 'serviceWorker' in navigator) {
+				// Use the window load event to keep the page load performant
+				window.addEventListener('load', function () {
+					navigator.serviceWorker.register('build/service-worker.js')
+				})
+			}
+		</script>
+	<link href="build/app.f5de68b0cb952a9fe2bf.css" rel="stylesheet"></head>
+	<body>
+		<div id="App" class="App">
+			<div class="page-loading_container">
+				<div class="page-loading_content">
+					<div class="page-loading_round">
+						<div class="page-loading_round_circle"></div>
+					</div>
+					<div class="page-loading_text">loading...</div>
 				</div>
-				<div class="page-loading_text">loading...</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- IE6-8  兼容解决方案
-		selectivizr ：提供对 CSS3 新选择器（例如 :nth-child、:last-child）的支持，style 标签内样式不解析，动态生成的 DOM 也不解析。（需要 jQuery、dojo 等库的支持）
+		<!-- IE6-8  兼容解决方案
+			selectivizr ：提供对 CSS3 新选择器（例如 :nth-child、:last-child）的支持，style 标签内样式不解析，动态生成的 DOM 也不解析。（需要 jQuery、dojo 等库的支持）
 
-		if lte IE 8 ： 其中 lte 代表小于等于。
-	 -->
-	<!--[if lte IE 8]>
-		<script type="text/javascript" src="./vendors/plugins/compatible-plugin/selectivizr.min.js"></script>
-	<![endif]-->
-	<script src="build/vendor.js"></script>
-<script type="text/javascript" src="build/app.321a599228db60d8cc60.js"></script></body>
+			if lte IE 8 ： 其中 lte 代表小于等于。
+		-->
+		<!--[if lte IE 8]>
+			<script type="text/javascript" src="./vendors/plugins/compatible-plugin/selectivizr.min.js"></script>
+			<![endif]
+		-->
+		<script src="build/vendor.js"></script>
+	<script type="text/javascript" src="build/app.321a599228db60d8cc60.js"></script></body>
 </html>
