@@ -12,4 +12,6 @@
 - [Chart.js](https://www.chartjs.org/)
 - [Google Material Icons](https://fonts.google.com/icons)
 - [Lodash](https://lodash.com/)
+- [highlight.js](https://highlightjs.org/)
+- [Marked](https://marked.js.org/)
 - [Counter](https://counter.dev/) - [See my info ?](https://counter.dev/dashboard.html?user=mrwang1212&token=crq1TWS5OR%2FR0ksf)
