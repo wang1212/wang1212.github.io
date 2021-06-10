@@ -36,7 +36,7 @@ debounced() <span class="hljs-comment">// 调用 n 次</span></code></pre>
     <span class="hljs-comment">// ...</span>
 
     <span class="hljs-comment">// wait 没有指定时，默认利用 requestAnimationFrame API 做了性能优化</span>
-    <span class="hljs-keyword">const</span> useRAF = (!wait &amp;&amp; wait !== <span class="hljs-number">0</span> &amp;&amp; typeofroot.requestAnimationFrame === <span class="hljs-string">'function'</span>)
+    <span class="hljs-keyword">const</span> useRAF = (!wait &amp;&amp; wait !== <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-keyword">typeof</span> root.requestAnimationFrame === <span class="hljs-string">'function'</span>)
 
     <span class="hljs-comment">// 闭包结构</span>
     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounced</span><span class="hljs-params">(<span class="hljs-rest_arg">...args</span>)</span>  </span>{}
