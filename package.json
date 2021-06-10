@@ -17,8 +17,8 @@
     "m_2_h": "node scripts/md_2_html.js"
   },
   "dependencies": {
-    "chart.js": "^2.8.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "wordcloud": "^1.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

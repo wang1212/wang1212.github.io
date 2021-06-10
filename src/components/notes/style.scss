@@ -6,48 +6,58 @@
 	padding-bottom: 6rem;
 
 	/**
-	 * - notes-chart
+	 * - words cloud
 	 */
-	.notes-chart {
-		min-height: 200px;
-		max-height: 50vh;
+	.word-cloud {
+		height: 50vh;
+
+		> div {
+			height: 100%;
+
+			.word {
+				opacity: 0.85;
+
+				&:hover {
+					opacity: 1;
+					cursor: pointer;
+				}
+			}
+		}
 	}
 
 	/* tags cloud */
 	> .tags-box {
-
 	}
 
 	/* tag notes list */
 	> .tag-notes-list {
-
 		> .notes-list {
 			padding: 0 1rem;
 
 			> .time-year-break {
-				margin: .5rem 0;
+				margin: 0.5rem 0;
 			}
 
 			> .note-item {
 				display: block;
 				position: relative;
-				border-left: .25rem solid #ddd;
-				padding: .5rem 0 .5rem 1rem;
+				border-left: 0.25rem solid #ddd;
+				padding: 0.5rem 0 0.5rem 1rem;
 				margin-left: 1rem;
-				transition: all .4s linear;
+				transition: all 0.4s linear;
 
 				&::before {
 					content: '';
 					position: absolute;
 					left: 0;
 					top: 1.15rem;
-					width: .75rem;
-					height: .75rem;
+					width: 0.75rem;
+					height: 0.75rem;
 					border-radius: 50%;
-					transform: translate(-.5rem, -.375rem);
+					transform: translate(-0.5rem, -0.375rem);
 					background-color: #ddd;
 
-					transition: all .4s linear;
+					transition: all 0.4s linear;
 				}
 
 				> .item-title {
@@ -56,16 +66,13 @@
 				}
 
 				&:hover {
-					border-left-color: #2196F3;
+					border-left-color: #2196f3;
 
 					&::before {
-						background-color: #2196F3;
+						background-color: #2196f3;
 					}
 				}
 			}
-
 		}
-
 	}
-
 }
