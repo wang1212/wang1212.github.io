@@ -30,11 +30,23 @@
 </blockquote>
 <p>　　对于如今市场上主流的 Java 语言，其语言处理器设计较为复杂，首先通过编译器将源代码转换为虚拟机的机器码（JVM 字节码），并由虚拟机（JVM）来执行。而且，为了提高效率，运行时采用了将字节码转换为机器码的即时编译（Just In Time Compiler）等技术。</p>
 <h4 id="编译器（compiler）">编译器（Compiler）</h4>
-<p>　　<strong>编译器的工作是将编程语言的源代码（原始语言）转换为可执行的形式（目标语言）。</strong>其大致按顺序会执行多个或所有以下流程：预处理、词法分析、解析、语义分析（语法导向翻译）、将输入程序转换为中间表示（IR）、代码优化和代码生成。</p>
+<p>　　<strong>编译器的工作是将编程语言的源代码（原始语言）转换为可执行的形式（目标语言）。</strong>其大致按顺序会执行多个或所有以下流程：预处理、词法分析、语法分析（解析）、语义分析（语法导向翻译）、将输入程序转换为中间表示（IR）、代码优化和代码生成。</p>
 <p>　　编译器设计一般分为三个阶段，前端、中端和后端。编译前端包括生成中间表示（IR）之前的流程，这个 IR 通常是程序相对于源代码的较低级别的表示，在该阶段主要做一些静态分析工作，例如类型检查。编译中端则是对前端生成的 IR 做进一步处理，该阶段主要做与 CPU 架构无关的优化，例如去除无用（消除死代码）或无法访问（可达性分析）的代码。编译后端对中端生成的优化 IR 基于特定的 CPU 架构做进一步的分析、转换和优化处理，最终生成依赖于特定平台的汇编代码。</p>
 <p>　　编译器这种前/中/后的设计方式使得不同语言的前端与不同 CPU 架构的后端相结合成为可能，同时共享中端的优化。例如，GNU 编译器集（GCC）、Clang（LLVM）等。</p>
 <h5 id="提前编译（aot）与即时编译（jit）">提前编译（AOT）与即时编译（JIT）</h5>
 <p>　　目前根据编译的时机可将其分为静态编译和动态编译。其中静态编译通常称为提前编译（Ahead-of-time compilation），是指在程序执行之前将高级编程语言编译成低级语言的行为，减少需要在运行时执行的工作量，通常性能最优。而动态编译技术目前最具代表性的则为即时编译（Just-in-time compilation），是指在程序执行期间（在运行时）而不是在执行之前进行编译，是对两种传统的机器代码翻译方法（提前编译和解释）的结合，具有编译代码的速度和解释的灵活性，当然也引入了解释器的开销和编译及链接的额外开销。</p>
+<h5 id="词法分析">词法分析</h5>
+<p>　　词法分析器构成了现代处理中编译器前端的第一阶段。词法分析（Lexical analysis）简单来说就是“将源代码由字符序列转换为有意义的单词（token）序列”的工序。将只是字符串的源代码整理为有些许意义的单词序列，后续阶段的处理就会变得简单。</p>
+<p>　　以 C 语言为例说明：</p>
+<pre><code class="language-c"><span class="hljs-attribute">x</span> = a + b * 2;</code></pre>
+<p>　　上面的表达式经过词法分析后生成如下内容：</p>
+<pre><code>[(identifier, x), (operator, =), (identifier, a), (operator, +), (identifier, b), (operator, *), (literal, <span class="hljs-number">2</span>), (separator, ;)]</code></pre><p>　　我们可以借助 <a href="https://en.wikipedia.org/wiki/Lex_(software)">lex</a> 工具根据编写单词的规则自动生成词法分析函数。</p>
+<h5 id="语法分析">语法分析</h5>
+<p>　　语法分析（Syntax analysis）是检查在词法分析阶段准备好的单词是否符合语法，并进行符合语法的处理的工序，最终结果是生成一个解析树（parse tree）数据结构。语法分析的方法有好几种，其中最有名、最简单的方法是使用别名为“生成编译器的编译器”的语法分析函数生成工具，比如 <a href="https://en.wikipedia.org/wiki/Yacc">yacc</a>（yet another compiler compiler）。</p>
+<h5 id="抽象语法树">抽象语法树</h5>
+<p>　　抽象语法树（Abstract syntax tree）是用编程语言编写的源代码的抽象语法结构的树表示，树的每个节点表示源代码中出现的一个构造。语法是“抽象的”，因为它不代表真实语法中出现的每个细节，而只是结构或与内容相关的细节。例如，分组括号在树结构中是隐含的，因此不必将它们表示为单独的节点。</p>
+<p>　　抽象语法树在语义分析期间被大量使用，其中编译器检查程序和语言元素的正确使用。编译器还在语义分析期间根据 AST 生成符号表。树的完整遍历允许验证程序的正确性。验证正确性后，AST 作为代码生成的基础。AST 通常用于为代码生成生成中间表示 (IR)，有时也称为中间语言。</p>
+<p>　　抽象语法树多用于程序分析和程序转换系统。</p>
 <h4 id="标准库（standard-library）">标准库（Standard Library）</h4>
 <p>　　<strong>语言的标准库通常被其用户视为语言的一部分，包括常用算法、数据结构和输入输出机制的定义。</strong>标准库为程序员利用该语言实现更复杂的功能提供了必要的依赖。</p>
 <p>　　那么，标准库中应该包含什么？对于标准库的设计哲学，可以参考 C/C++ 和 Java/Python，前者只提供在实现程序功能时必要且合理的数据结构和算法，规模相对较小，而后者旨在提供更多的便利、易于编码，封装了较为复杂和强大的功能，规模相对来说更为庞大。因此，Python 成为了目前主流的用来科学研究的语言，它可以很方便的完成复杂的数学计算和科学分析工作。</p>
@@ -43,12 +55,30 @@
 <h5 id="执行模型（execution-model）">执行模型（Execution model）</h5>
 <p>　　编程语言由文法/句法加上执行模型组成。执行模型指定语言元素的行为。通过应用执行模型，可以推导出用该编程语言编写的程序的行为。</p>
 <p>　　例如，当程序员“阅读”代码时，在他们的脑海中，他们会浏览每一行代码的作用。实际上，他们模拟了他们头脑中的行为。程序员正在做的是将执行模型应用于代码，这会导致代码的行为。</p>
+<h3 id="虚拟机（virtual-machine）">虚拟机（Virtual Machine）</h3>
+<p>　　虚拟机是运行时的一种技术实现，是用软件实现的（无实际硬件的）计算机，区别于系统虚拟机，将其称之为“进程虚拟机”。进程虚拟机最初是作为中间语言的抽象平台出现的，中间语言被编译器用作程序的中间表示（IR）。它的目的是提供一个独立于平台的编程环境，抽象出底层硬件或操作系统的细节，并允许程序在任何平台上以相同的方式执行。因此，<strong>虚拟机最大的优点就是拥有可移植性。</strong></p>
+<p>　　配合各种各样的 CPU 生成机器语言的代码生成处理是编译器中最复杂的部分，适配新出现的 CPU 架构重新开发代码生成处理，对语言处理器的开发者来说是很大的负担，虚拟机在减少这类负担上起到了很大作用。另一方面，与在硬件上直接执行相比，模拟虚拟的 CPU 运行的虚拟机在性能上有很大损失，但可以通过引入即时编译（JIT）技术来弥补。</p>
+<p>　　虚拟机性能相关的实现技术可以了解一下：</p>
+<ul>
+<li>RISC 与 CISC</li>
+<li>栈与寄存器</li>
+<li>指令格式</li>
+</ul>
+<p>　　RISC 是 Reduced Instruction Set Computer（精简指令集计算机）的缩写，是通过减少指令的种类、简化电路来提高 CPU 性能的架构。具有代表性的 CPU 有 MIPS 和 SPARC 等。在移动设备上广泛使用的 ARM 处理器就属于 RISC。</p>
+<p>　　CISC 是与 RISC 相对的一个词汇，是 Complex Instruction Set Computer（复杂指令集计算机）的缩写，简单来说就是“不是 RISC 的 CPU”。CISC 的每个指令执行的处理都非常大，而且指令的种类繁多，因此实现起来也比较复杂。</p>
+<p>　　对用软件实现的虚拟机来说，我们就不能忽视取指令（Instruction Fetch，IF）处理所需要的成本。也就是说，做同样的处理时所需的指令数越少越好。好的虚拟机指令集是类 CISC 架构的指令集，它的全部指令都是高粒度的。</p>
+<p>　　虚拟机架构的两大流派是栈式虚拟机和寄存器式虚拟机。栈式虚拟机原则上通过栈对数据进行操作，而寄存器式虚拟机的指令中包含寄存器编号，原则上对寄存器进行操作。</p>
+<p>　　与寄存器式虚拟机相比，栈式虚拟机更为简单，程序也相对较小。然而，由于所有的指令都通过栈来交换数据，所以对指令之间的先后顺序有很大的依赖，很难实施交换指令顺序这样的优化。而寄存器式虚拟机由于指令中包含寄存器信息，所以程序相对较大。</p>
+<p>　　用哪种架构取决于具体场景，著名的 Java 虚拟机（JVM）采用的是栈式虚拟机架构，而谷歌为优化移动设备性能，为 Android 提供的 Dalvik 虚拟机则采用的是寄存器式虚拟机架构。</p>
+<p>　　虚拟机解释的中间语言（指令序列）被称为“字节码”，源于 Smalltalk 的指令是以字节为单位的。当然，不是所有虚拟机都拥有字节单位的指令集，例如 mruby 的指令集就是用 32 位整数表示的，可以称之为“字码”，但因为 JVM 比较出名且其采用的是字节码，所以一般将虚拟机解释的中间语言称之为“字节码”。字码与字节码的优缺点不在这里赘述。</p>
 <h2 id="参考">参考</h2>
 <ul>
 <li>《松本行弘：编程语言的设计与实现》，[日] 松本行弘，郑明智 译</li>
 <li><a href="https://en.wikipedia.org/wiki/Compiler">https://en.wikipedia.org/wiki/Compiler</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Ahead-of-time_compilation">https://en.wikipedia.org/wiki/Ahead-of-time_compilation</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">https://en.wikipedia.org/wiki/Just-in-time_compilation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">https://en.wikipedia.org/wiki/Abstract_syntax_tree</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Library_(computing)">https://en.wikipedia.org/wiki/Library_(computing)</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Runtime_system">https://en.wikipedia.org/wiki/Runtime_system</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Virtual_machine">https://en.wikipedia.org/wiki/Virtual_machine</a></li>
 </ul>
