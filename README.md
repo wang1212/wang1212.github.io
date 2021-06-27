@@ -3,13 +3,15 @@
 分享与交流是我获得提升的最佳途径。
 
 <small>Sharing and communication is the best way to get my promotion.<small>
-  
+
 ## Tools
+
+我的博客中使用的开源工具。
 
 *Open source tools used in my blog.*
 
 - [Bootstrap](https://getbootstrap.com/)
-- [Chart.js](https://www.chartjs.org/)
+- [wordcloud](https://github.com/timdream/wordcloud2.js)
 - [Google Material Icons](https://fonts.google.com/icons)
 - [Lodash](https://lodash.com/)
 - [highlight.js](https://highlightjs.org/)
