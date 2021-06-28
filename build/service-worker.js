@@ -15,7 +15,7 @@ importScripts("wb-assets/workbox-v4.3.1/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "wb-assets/workbox-v4.3.1"});
 
 importScripts(
-  "wb-assets/precache-manifest.39eda94d51c6adc6fd82c2063960e2f1.js"
+  "wb-assets/precache-manifest.eae20665308dd116fc2f2f2b5f9ff79b.js"
 );
 
 self.addEventListener('message', (event) => {

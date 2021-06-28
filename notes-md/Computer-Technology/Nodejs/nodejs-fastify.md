@@ -35,11 +35,13 @@
 
 　　其实，Web 开发框架还有一个较为严峻的问题就是项目的工程化标准，最著名的就是 MVC 模型，而对应的也有解决此类问题的 Node.js 框架，近年来发展前景比较好的应该就是 nest.js 了。
 
+> [Introducing Fastify, a Speedy Node.js Web Framework](https://thenewstack.io/introducing-fastify-speedy-node-js-web-framework/)
+
 ## Fastify 的实现细节 
 
 　　了解了 Fastify 的设计理念之后，接下来要看看开发团队是如何实施的，探索其技术细节。
 
-### `fast-json-stringify`
+### JSON 序列化
 
 　　Fastify 项目的历史故事背后是 `fast-json-stringify` 模块的诞生，该模块比 `JSON.stringify()` 这种原生 JavaScript 方法快很多，可以达到 2 到 3 倍的性能优势。其背后的原理主要是 **依赖 JSON Schema 对 JSON 数据进行校验，避免了类型判断的过程，从而提高了性能**。根据其公开的基准测试，其优势主要体现在处理的目标数据为复杂对象时，可以达到 4 倍的性能优势。
 
@@ -60,3 +62,38 @@ result = (new Function('schema', code))(root)
 　　第二个细节便是 *README.md* 文件中有提到可以和 `flatstr` 模块很好的配合使用，因为该模块会触发 V8 的优化机制，把字符串最终转换成了 `Buffer`。 其项目的 *README.md* 文件中 **How does it work** 段落详细解释了底层机制，简单的来说，v8 会在某些情况下针对 `String` 数据做特定优化，而该模块的主要作用就是主动去触发这种 v8 的优化机制以达到提高性能的目的。
 
 > [GitHub: `flatstr`](https://github.com/davidmarkclements/flatstr)
+
+### 路由（Routing）
+
+　　Fastify 的路由是依赖 `find-my-way` 模块实现的，在公开的基准测试中相比于 `express` 和 `koa-router` 有数倍的性能优势。
+
+　　根据 `find-my-way` 模块的 *README.md* 文件中所介绍，其 **底层采用了基数树（Radix tree，亦称 compact prefix tree）的数据结构，并非通常的路由数组和迭代正则匹配方案**。基数树是一种空间优化的前缀树（即紧凑前缀树），具有前缀树的搜索性能同时尽可能小的占用内存。前缀树的应用场景比较常见，常用于字符串检索，例如字典查找、字符统计、公共前缀匹配等等，要比遍历数组和正则匹配的查找性能好数倍。但前缀树的内存消耗比较大，所以通过将只有一个子节点的与其父节点合并从而减少内存消耗，形成了“基数树”数据结构。
+
+> [GitHub: `find-my-way`](https://github.com/delvedor/find-my-way)
+>
+> [Radix tree](https://en.wikipedia.org/wiki/Radix_tree)
+
+　　Koa 的官方路由 `@koa/router` 从源码中可以看到，是将每个路由的路径 `path` 转换成正则表达式存储在数组中，此后遍历该数组通过正则匹配来完成路由映射，这种方案实现起来相对简单，但性能要低得多。不过也有一个同样基于基数树结构实现的 `koa-tree-router` 模块，性能比前者高数倍，当然它的功能还是相当简单的。Express 的官方路由实现也大致相同，`@koa/router` 应该是参考了前者的实现。
+
+### 闭包（Closure）
+
+　　闭包是 JavaScript 一个很有用的语言特性，利用它可以实现很多东西，最常见的则是模块封装了，在没有类（Class）概念的情况下，要实现类似类的效果必然会用到闭包，很多第三方库就是这样做的，例如著名的 `jQuery`。但另一方面需要注意的是，闭包极易引起内存泄漏，同时造成不必要的内存消耗。
+
+```js
+// bar 函数因为闭包的原因，对外部函数的参数 bigData 保持引用，
+// 导致 bigData 无法被 GC，驻留在内存中，浪费了内存
+function foo(bigData) {
+    function bar() {}
+    bar()
+}
+
+// 不用闭包即可
+function foo(bigData) {
+    bar()
+}
+
+function bar() {}
+```
+
+　　基于此，**Fastify 团队在框架内部基本上杜绝了利用闭包实现功能，从而保证了低内存消耗**。
+
