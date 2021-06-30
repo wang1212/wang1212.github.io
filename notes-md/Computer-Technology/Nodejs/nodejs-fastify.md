@@ -6,7 +6,7 @@
         "keywords": ["Computer Technology", "Node.js", "JavaScript", "Web", "Fastify"],
         "summary": "Fastify 作为一个 Node.js Web 框架，是如何实现高性能和低内存消耗的呢？",
         "ctime": "2021-06-27 16:28:00",
-        "mtime": "2021-06-28 01:19:00"
+        "mtime": "2021-07-01 02:11:00"
     }
 
 ---
@@ -59,7 +59,35 @@ result = (new Function('schema', code))(root)
 
 > [Faster than C? Parsing binary data in JavaScript.](https://github.com/felixge/faster-than-c)
 
-　　第二个细节便是 *README.md* 文件中有提到可以和 `flatstr` 模块很好的配合使用，因为该模块会触发 V8 的优化机制，把字符串最终转换成了 `Buffer`。 其项目的 *README.md* 文件中 **How does it work** 段落详细解释了底层机制，简单的来说，v8 会在某些情况下针对 `String` 数据做特定优化，而该模块的主要作用就是主动去触发这种 v8 的优化机制以达到提高性能的目的。
+　　我们也可以通过以下示例代码来进行简单的测试：
+
+```js
+function a() {
+  for (let i = 0; i < 3; i++) {
+    console.log(i);
+  }
+}
+
+
+const code = [0, 1, 2].map(i => `console.log(${i})`);
+// 函数体预编译后 b 等价于
+// function b() {
+//   console.log(0);
+//   console.log(1);
+//   console.log(2);
+// }
+const b = new Function(code);
+
+console.time('a');
+a();
+console.timeEnd('a'); // a: 0.136962890625 ms
+
+console.time('b');
+b();
+console.timeEnd('b'); // b: 0.05908203125 ms
+```
+
+　　第二个细节便是 *README.md* 文件中有提到可以和 `flatstr` 模块很好的配合使用，因为该模块会触发 V8 的优化机制，把字符串最终转换成了 `Buffer`。 其项目的 *README.md* 文件中 **How does it work** 段落详细解释了底层机制，简单的来说，V8 会在某些情况下针对 `String` 数据做特定优化，而该模块的主要作用就是主动去触发这种 V8 的优化机制以达到提高性能的目的。
 
 > [GitHub: `flatstr`](https://github.com/davidmarkclements/flatstr)
 
@@ -77,23 +105,141 @@ result = (new Function('schema', code))(root)
 
 ### 闭包（Closure）
 
-　　闭包是 JavaScript 一个很有用的语言特性，利用它可以实现很多东西，最常见的则是模块封装了，在没有类（Class）概念的情况下，要实现类似类的效果必然会用到闭包，很多第三方库就是这样做的，例如著名的 `jQuery`。但另一方面需要注意的是，闭包极易引起内存泄漏，同时造成不必要的内存消耗。
+　　闭包是 JavaScript 一个很有用的语言特性，利用它可以实现很多东西，最常见的则是模块封装了，在没有类（Class）概念的情况下，要实现类似类的效果必然会用到闭包，很多第三方库就是这样做的，例如著名的 `jQuery`。但另一方面需要注意的是，闭包极易引起内存泄漏，同时造成不必要的内存消耗；而且，在闭包中如果嵌套太深，作用域递归解析也会有一定的开销。
 
 ```js
-// bar 函数因为闭包的原因，对外部函数的参数 bigData 保持引用，
-// 导致 bigData 无法被 GC，驻留在内存中，浪费了内存
-function foo(bigData) {
-    function bar() {}
-    bar()
+function process(bigData, cb) {
+  remoteCall(bigData, function (err, something)) {
+    storeSomething(something, function (err, res) {
+      // 该函数是暂时的，但是难以被优化
+      // bigData 一直驻留在作用域中，无法被 GC
+      cb(null, res * 2)
+    })
+  }
 }
 
-// 不用闭包即可
-function foo(bigData) {
-    bar()
+// -------
+
+function process(bigData, cb) {
+  remoteCall(bigData, function (err, something)) {
+    // bigData 在这里退出了作用域，可以被 GC
+    callStoreSomething(something, cb)           
+  }
 }
 
-function bar() {}
+function callStoreSomething(something, cb) {
+  // 该函数可以被优化
+  storeSomething(something, function (err, res) {
+    cb(null, res * 2)
+  })  
+}
 ```
 
 　　基于此，**Fastify 团队在框架内部基本上杜绝了利用闭包实现功能，从而保证了低内存消耗**。
 
+> [JavaScript: Closures and the Call Stack](https://akaphenom.medium.com/javascript-closures-and-the-call-stack-722ef2c3b5a8)
+>
+> [Scope](https://en.wikipedia.org/wiki/Scope_(computer_science))
+
+### 调用栈（Call stack）
+
+　　Fastify 内部优化之后，调用栈也小很多，作者利用 `0x` 工具进行了分析，从生成的栈火焰图来看，Express 的图形中有两个高峰，说明调用栈特别大；相对的，Fastify 的图形总体较为平缓。**更小的调用栈也降低了内存消耗**，详细信息可以在下面的视频讲解中查看。
+
+> [Take your http server to ludicrous speed](https://www.youtube.com/watch?v=5z46jJZNe8k)
+>
+> [GitHub: `0x`](https://github.com/davidmarkclements/0x)
+>
+> [Call stack](https://en.wikipedia.org/wiki/Call_stack)
+
+### 服务器的生命周期（Server Lifecycle）
+
+　　大多数 Web 框架的生命周期是相似的：服务器启动，路由处理程序注册，服务器侦听请求并调用适当的函数来处理它们。如下图所示，Fastify 做了特殊处理，在服务器启动之后执行预初始化阶段（preinitialisation ），该阶段做了一些优化工作，使用 `fast-json-stringify` 模块处理 JSON schemas，以及用 `reusify` 模块优化处理函数（handler functions）。
+
+<div style="text-align:center"><img src="https://www.nearform.com/wp-content/uploads/jekyllsite/blog/2017/08/diagram_fastify_lifecycle.png" /></div>
+
+　　这里提及的 `reusify` 模块是如何来优化处理函数的呢？首先，请求的处理函数属于频繁被执行的代码块，也就是所谓的"热代码路径（hot code paths）"。`reusify` 的源码非常简单，主要作用是 **将对象或者函数进行缓存，降低高并发场景下热代码路径上的 GC 压力**。
+
+> [Reaching Ludicrous Speed with Fastify](https://www.nearform.com/blog/reaching-ludicrous-speed-with-fastify/)
+>
+> [GitHub: `reusify`](https://github.com/mcollina/reusify)
+>
+> [Avoid allocations in compiler hot paths” Roslyn Coding Conventions](https://stackoverflow.com/questions/22894877/avoid-allocations-in-compiler-hot-paths-roslyn-coding-conventions)
+
+　　不过，在 `reusify` 模块给出的示例代码中有一个细节值得注意：
+
+```js
+// ...
+function MyObject () {
+  // you need to define this property
+  // so V8 can compile MyObject into an
+  // hidden class
+  this.next = null
+  // ...
+```
+
+　　作者注释到你要重用的对象内部第一个属性应该定义为 `next`，因为可以触发 V8 的优化机制 **“隐藏类（hidden class）”**。首先，**隐藏类是 V8 内部为了优化非整数索引属性（命名属性）的访问速度的机制，每一次对对象命名属性的增删操作都会导致新的隐藏类被创建，而具备同样的命名属性定义顺序的对象可以共享隐藏类，减少开销**。接下来，通过查看 `reusify` 模块的源码便可知道，模块内部为了实现缓存队列给被重用的对象添加了一个 `next` 属性，由此便可以明白作者的注释是告诉我们如何利用好 V8 的内部优化机制 —— 隐藏类。
+
+> [Fast properties in V8](https://v8.dev/blog/fast-properties)
+>
+> [V8 Hidden class](https://engineering.linecorp.com/en/blog/v8-hidden-class/)
+>
+> [Clearing up the `hidden classes` concept of V8](https://stackoverflow.com/questions/17925726/clearing-up-the-hidden-classes-concept-of-v8)
+>
+> [Should I put default values of attributes on the prototype to save space?](https://codereview.stackexchange.com/questions/28344/should-i-put-default-values-of-attributes-on-the-prototype-to-save-space/28360#28360)
+
+### 插件模型（Plugin Model）
+
+　　Fastify 的灵活扩展主要依赖于其插件系统，同时也支持 Express 中间件（需要 `middie` 插件），可以说是 Express 与 Hapi 的组合。在探究 Fastify 的插件模型之前，先来看看 Koa 的中间件模型的源码实现：
+
+```js
+// https://github.com/koajs/compose/blob/25568a36509fefc58914bc2a7600f787b16aa0df/index.js#L42
+function compose (middleware) {
+  // ...
+  return function (context, next) {
+	// ...
+    return dispatch(0)
+    function dispatch (i) {
+      // ...
+      // 遍历嵌套迭代（类递归）的方式执行
+      return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
+    }
+  }
+}
+```
+
+　　我们可以看到 `koa-compose` 模块实现了 Koa 的中间件模型，是一种通过遍历嵌套迭代（类递归）的方式来逐个执行中间件函数，而且引入上下游（upstream / downstream）的概念，这种方式会导致调用栈会非常的大，性能很难优化。而查看 Express 的源码，发现其会把中间件函数当作路由函数来对待，存储在数组中，后续也会以类似的方式执行，同样也会有调用栈过大的问题。
+
+　　Fastify 依赖于 `avvio` 模块 **建立了一种基于可重入（reentrant ）和有向无环图（directed acyclic graph）的插件模型**，可以正确处理异步代码，保证插件的加载顺序，避免了前面提到的调用栈过大的问题。建立一个有向无环图的插件系统可以保证不会创建交叉依赖，并且实现了可以在应用程序的不同部分使用相同插件的不同版本。
+
+<div style="text-align:center"><img style="width: 30vw; height: 25vw" src="https://survivejs.com/9f7ecd003147aad41c8b8c236c703db4.png" />
+    <p>
+        有向无环图
+    </p>
+</div>
+
+　　由于这种架构模式，带来的另外一个好处就是很容易将应用拆分为多个微服务。
+
+<div style="text-align:center"><img style="width: 42vw; height: 25vw" src="https://survivejs.com/6758771bb4590b09ac0780ceb3c51da9.png" />
+    <p>
+        有向无环图服务
+    </p>
+</div>
+
+　　那么，可重入带来了什么？可重入性是代码的一种属性，指其没有共享状态，可以安全的在多个线程中或者递归地调用执行；换句话说，代码因为具备某些状态，在多个线程或者递归调用时因为改变了该状态而导致逻辑出错，表明代码是不可重入的，不具备可重入性。常见的应用场景就是在遍历图形的算法中，可能会多次到达同一个节点，可重入性保证了遍历过程中是安全的。
+
+> [GitHub: `middie`](https://github.com/fastify/middie)
+>
+> [GitHub: `avvio`](https://github.com/fastify/avvio)
+>
+> [Directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
+>
+> [What is the Re-entrant lock and concept in general?](https://stackoverflow.com/questions/1312259/what-is-the-re-entrant-lock-and-concept-in-general)
+
+## 结语
+
+　　可以看得出来，Fastify 对性能的追求是极致的，涉及到很多 V8 内部对代码的优化机制，通过了解还是收获颇丰的。回过头来，Node.js Web 框架虽然层出不穷，但根据 NPM Trends 的下载量统计来看，Express 依然高居榜首，说明 Node.js Web 框架在重业务场景下的应用其实不多，更多的应该是作为一些小项目的后端或者类似 BFF 层这种轻量的场景下应用。从 Express 到 Koa 再到 Fastify，这是向更轻量更高性能的方向发展，技术的发展趋势也从侧面反映了该技术在业务场景中的价值体现。
+
+## 其它参考资源
+
+- [What if I told you that HTTP can be fast?](https://www.webexpo.net/prague2017/talk/what-if-i-told-you-that-http-can-be-fast/)
+- [Fastify - Fast and low overhead web framework for Node.js - Interview with Tomas Della Vedova](https://survivejs.com/blog/fastify-interview/)

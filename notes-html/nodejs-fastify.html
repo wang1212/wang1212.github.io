@@ -34,7 +34,31 @@
 <blockquote>
 <p><a href="https://github.com/felixge/faster-than-c">Faster than C? Parsing binary data in JavaScript.</a></p>
 </blockquote>
-<p>　　第二个细节便是 <em>README.md</em> 文件中有提到可以和 <code>flatstr</code> 模块很好的配合使用，因为该模块会触发 V8 的优化机制，把字符串最终转换成了 <code>Buffer</code>。 其项目的 <em>README.md</em> 文件中 <strong>How does it work</strong> 段落详细解释了底层机制，简单的来说，v8 会在某些情况下针对 <code>String</code> 数据做特定优化，而该模块的主要作用就是主动去触发这种 v8 的优化机制以达到提高性能的目的。</p>
+<p>　　我们也可以通过以下示例代码来进行简单的测试：</p>
+<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) {
+    <span class="hljs-built_in">console</span>.log(i);
+  }
+}
+
+
+<span class="hljs-keyword">const</span> code = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>].map(<span class="hljs-function"><span class="hljs-params">i</span> =&gt;</span> <span class="hljs-string">`console.log(<span class="hljs-subst">${i}</span>)`</span>);
+<span class="hljs-comment">// 函数体预编译后 b 等价于</span>
+<span class="hljs-comment">// function b() {</span>
+<span class="hljs-comment">//   console.log(0);</span>
+<span class="hljs-comment">//   console.log(1);</span>
+<span class="hljs-comment">//   console.log(2);</span>
+<span class="hljs-comment">// }</span>
+<span class="hljs-keyword">const</span> b = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Function</span>(code);
+
+<span class="hljs-built_in">console</span>.time(<span class="hljs-string">'a'</span>);
+a();
+<span class="hljs-built_in">console</span>.timeEnd(<span class="hljs-string">'a'</span>); <span class="hljs-comment">// a: 0.136962890625 ms</span>
+
+<span class="hljs-built_in">console</span>.time(<span class="hljs-string">'b'</span>);
+b();
+<span class="hljs-built_in">console</span>.timeEnd(<span class="hljs-string">'b'</span>); <span class="hljs-comment">// b: 0.05908203125 ms</span></code></pre>
+<p>　　第二个细节便是 <em>README.md</em> 文件中有提到可以和 <code>flatstr</code> 模块很好的配合使用，因为该模块会触发 V8 的优化机制，把字符串最终转换成了 <code>Buffer</code>。 其项目的 <em>README.md</em> 文件中 <strong>How does it work</strong> 段落详细解释了底层机制，简单的来说，V8 会在某些情况下针对 <code>String</code> 数据做特定优化，而该模块的主要作用就是主动去触发这种 V8 的优化机制以达到提高性能的目的。</p>
 <blockquote>
 <p><a href="https://github.com/davidmarkclements/flatstr">GitHub: <code>flatstr</code></a></p>
 </blockquote>
@@ -47,18 +71,110 @@
 </blockquote>
 <p>　　Koa 的官方路由 <code>@koa/router</code> 从源码中可以看到，是将每个路由的路径 <code>path</code> 转换成正则表达式存储在数组中，此后遍历该数组通过正则匹配来完成路由映射，这种方案实现起来相对简单，但性能要低得多。不过也有一个同样基于基数树结构实现的 <code>koa-tree-router</code> 模块，性能比前者高数倍，当然它的功能还是相当简单的。Express 的官方路由实现也大致相同，<code>@koa/router</code> 应该是参考了前者的实现。</p>
 <h3 id="闭包（closure）">闭包（Closure）</h3>
-<p>　　闭包是 JavaScript 一个很有用的语言特性，利用它可以实现很多东西，最常见的则是模块封装了，在没有类（Class）概念的情况下，要实现类似类的效果必然会用到闭包，很多第三方库就是这样做的，例如著名的 <code>jQuery</code>。但另一方面需要注意的是，闭包极易引起内存泄漏，同时造成不必要的内存消耗。</p>
-<pre><code class="language-js"><span class="hljs-comment">// bar 函数因为闭包的原因，对外部函数的参数 bigData 保持引用，</span>
-<span class="hljs-comment">// 导致 bigData 无法被 GC，驻留在内存中，浪费了内存</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span><span class="hljs-params">(bigData)</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span> </span>{}
-    bar()
+<p>　　闭包是 JavaScript 一个很有用的语言特性，利用它可以实现很多东西，最常见的则是模块封装了，在没有类（Class）概念的情况下，要实现类似类的效果必然会用到闭包，很多第三方库就是这样做的，例如著名的 <code>jQuery</code>。但另一方面需要注意的是，闭包极易引起内存泄漏，同时造成不必要的内存消耗；而且，在闭包中如果嵌套太深，作用域递归解析也会有一定的开销。</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> process(bigData, cb) {
+  remote<span class="hljs-constructor">Call(<span class="hljs-params">bigData</span>, <span class="hljs-params">function</span> (<span class="hljs-params">err</span>, <span class="hljs-params">something</span>)</span>) {
+    store<span class="hljs-constructor">Something(<span class="hljs-params">something</span>, <span class="hljs-params">function</span> (<span class="hljs-params">err</span>, <span class="hljs-params">res</span>)</span> {
+      <span class="hljs-comment">// 该函数是暂时的，但是难以被优化</span>
+      <span class="hljs-comment">// bigData 一直驻留在作用域中，无法被 GC</span>
+      cb(null, res<span class="hljs-operator"> * </span><span class="hljs-number">2</span>)
+    })
+  }
 }
 
-<span class="hljs-comment">// 不用闭包即可</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span><span class="hljs-params">(bigData)</span> </span>{
-    bar()
+<span class="hljs-comment">// -------</span>
+
+<span class="hljs-keyword">function</span> process(bigData, cb) {
+  remote<span class="hljs-constructor">Call(<span class="hljs-params">bigData</span>, <span class="hljs-params">function</span> (<span class="hljs-params">err</span>, <span class="hljs-params">something</span>)</span>) {
+    <span class="hljs-comment">// bigData 在这里退出了作用域，可以被 GC</span>
+    call<span class="hljs-constructor">StoreSomething(<span class="hljs-params">something</span>, <span class="hljs-params">cb</span>)</span>           
+  }
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span> </span>{}</code></pre>
+<span class="hljs-keyword">function</span> call<span class="hljs-constructor">StoreSomething(<span class="hljs-params">something</span>, <span class="hljs-params">cb</span>)</span> {
+  <span class="hljs-comment">// 该函数可以被优化</span>
+  store<span class="hljs-constructor">Something(<span class="hljs-params">something</span>, <span class="hljs-params">function</span> (<span class="hljs-params">err</span>, <span class="hljs-params">res</span>)</span> {
+    cb(null, res<span class="hljs-operator"> * </span><span class="hljs-number">2</span>)
+  })  
+}</code></pre>
 <p>　　基于此，<strong>Fastify 团队在框架内部基本上杜绝了利用闭包实现功能，从而保证了低内存消耗</strong>。</p>
+<blockquote>
+<p><a href="https://akaphenom.medium.com/javascript-closures-and-the-call-stack-722ef2c3b5a8">JavaScript: Closures and the Call Stack</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Scope_(computer_science)">Scope</a></p>
+</blockquote>
+<h3 id="调用栈（call-stack）">调用栈（Call stack）</h3>
+<p>　　Fastify 内部优化之后，调用栈也小很多，作者利用 <code>0x</code> 工具进行了分析，从生成的栈火焰图来看，Express 的图形中有两个高峰，说明调用栈特别大；相对的，Fastify 的图形总体较为平缓。<strong>更小的调用栈也降低了内存消耗</strong>，详细信息可以在下面的视频讲解中查看。</p>
+<blockquote>
+<p><a href="https://www.youtube.com/watch?v=5z46jJZNe8k">Take your http server to ludicrous speed</a></p>
+<p><a href="https://github.com/davidmarkclements/0x">GitHub: <code>0x</code></a></p>
+<p><a href="https://en.wikipedia.org/wiki/Call_stack">Call stack</a></p>
+</blockquote>
+<h3 id="服务器的生命周期（server-lifecycle）">服务器的生命周期（Server Lifecycle）</h3>
+<p>　　大多数 Web 框架的生命周期是相似的：服务器启动，路由处理程序注册，服务器侦听请求并调用适当的函数来处理它们。如下图所示，Fastify 做了特殊处理，在服务器启动之后执行预初始化阶段（preinitialisation ），该阶段做了一些优化工作，使用 <code>fast-json-stringify</code> 模块处理 JSON schemas，以及用 <code>reusify</code> 模块优化处理函数（handler functions）。</p>
+<div style="text-align:center"><img src="https://www.nearform.com/wp-content/uploads/jekyllsite/blog/2017/08/diagram_fastify_lifecycle.png" /></div>
+
+<p>　　这里提及的 <code>reusify</code> 模块是如何来优化处理函数的呢？首先，请求的处理函数属于频繁被执行的代码块，也就是所谓的&quot;热代码路径（hot code paths）&quot;。<code>reusify</code> 的源码非常简单，主要作用是 <strong>将对象或者函数进行缓存，降低高并发场景下热代码路径上的 GC 压力</strong>。</p>
+<blockquote>
+<p><a href="https://www.nearform.com/blog/reaching-ludicrous-speed-with-fastify/">Reaching Ludicrous Speed with Fastify</a></p>
+<p><a href="https://github.com/mcollina/reusify">GitHub: <code>reusify</code></a></p>
+<p><a href="https://stackoverflow.com/questions/22894877/avoid-allocations-in-compiler-hot-paths-roslyn-coding-conventions">Avoid allocations in compiler hot paths” Roslyn Coding Conventions</a></p>
+</blockquote>
+<p>　　不过，在 <code>reusify</code> 模块给出的示例代码中有一个细节值得注意：</p>
+<pre><code class="language-js"><span class="hljs-comment">// ...</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyObject</span> <span class="hljs-params">()</span> </span>{
+  <span class="hljs-comment">// you need to define this property</span>
+  <span class="hljs-comment">// so V8 can compile MyObject into an</span>
+  <span class="hljs-comment">// hidden class</span>
+  <span class="hljs-keyword">this</span>.next = <span class="hljs-literal">null</span>
+  <span class="hljs-comment">// ...</span></code></pre>
+<p>　　作者注释到你要重用的对象内部第一个属性应该定义为 <code>next</code>，因为可以触发 V8 的优化机制 <strong>“隐藏类（hidden class）”</strong>。首先，<strong>隐藏类是 V8 内部为了优化非整数索引属性（命名属性）的访问速度的机制，每一次对对象命名属性的增删操作都会导致新的隐藏类被创建，而具备同样的命名属性定义顺序的对象可以共享隐藏类，减少开销</strong>。接下来，通过查看 <code>reusify</code> 模块的源码便可知道，模块内部为了实现缓存队列给被重用的对象添加了一个 <code>next</code> 属性，由此便可以明白作者的注释是告诉我们如何利用好 V8 的内部优化机制 —— 隐藏类。</p>
+<blockquote>
+<p><a href="https://v8.dev/blog/fast-properties">Fast properties in V8</a></p>
+<p><a href="https://engineering.linecorp.com/en/blog/v8-hidden-class/">V8 Hidden class</a></p>
+<p><a href="https://stackoverflow.com/questions/17925726/clearing-up-the-hidden-classes-concept-of-v8">Clearing up the <code>hidden classes</code> concept of V8</a></p>
+<p><a href="https://codereview.stackexchange.com/questions/28344/should-i-put-default-values-of-attributes-on-the-prototype-to-save-space/28360#28360">Should I put default values of attributes on the prototype to save space?</a></p>
+</blockquote>
+<h3 id="插件模型（plugin-model）">插件模型（Plugin Model）</h3>
+<p>　　Fastify 的灵活扩展主要依赖于其插件系统，同时也支持 Express 中间件（需要 <code>middie</code> 插件），可以说是 Express 与 Hapi 的组合。在探究 Fastify 的插件模型之前，先来看看 Koa 的中间件模型的源码实现：</p>
+<pre><code class="language-js"><span class="hljs-comment">// https://github.com/koajs/compose/blob/25568a36509fefc58914bc2a7600f787b16aa0df/index.js#L42</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">compose</span> (<span class="hljs-params">middleware</span>) </span>{
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context, next</span>) </span>{
+    <span class="hljs-comment">// ...</span>
+    <span class="hljs-keyword">return</span> dispatch(<span class="hljs-number">0</span>)
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dispatch</span> (<span class="hljs-params">i</span>) </span>{
+      <span class="hljs-comment">// ...</span>
+      <span class="hljs-comment">// 遍历嵌套迭代（类递归）的方式执行</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(fn(context, dispatch.bind(<span class="hljs-literal">null</span>, i + <span class="hljs-number">1</span>)));
+    }
+  }
+}</code></pre>
+<p>　　我们可以看到 <code>koa-compose</code> 模块实现了 Koa 的中间件模型，是一种通过遍历嵌套迭代（类递归）的方式来逐个执行中间件函数，而且引入上下游（upstream / downstream）的概念，这种方式会导致调用栈会非常的大，性能很难优化。而查看 Express 的源码，发现其会把中间件函数当作路由函数来对待，存储在数组中，后续也会以类似的方式执行，同样也会有调用栈过大的问题。</p>
+<p>　　Fastify 依赖于 <code>avvio</code> 模块 <strong>建立了一种基于可重入（reentrant ）和有向无环图（directed acyclic graph）的插件模型</strong>，可以正确处理异步代码，保证插件的加载顺序，避免了前面提到的调用栈过大的问题。建立一个有向无环图的插件系统可以保证不会创建交叉依赖，并且实现了可以在应用程序的不同部分使用相同插件的不同版本。</p>
+<div style="text-align:center"><img style="width: 30vw; height: 25vw" src="https://survivejs.com/9f7ecd003147aad41c8b8c236c703db4.png" />
+    <p>
+        有向无环图
+    </p>
+</div>
+
+<p>　　由于这种架构模式，带来的另外一个好处就是很容易将应用拆分为多个微服务。</p>
+<div style="text-align:center"><img style="width: 42vw; height: 25vw" src="https://survivejs.com/6758771bb4590b09ac0780ceb3c51da9.png" />
+    <p>
+        有向无环图服务
+    </p>
+</div>
+
+<p>　　那么，可重入带来了什么？可重入性是代码的一种属性，指其没有共享状态，可以安全的在多个线程中或者递归地调用执行；换句话说，代码因为具备某些状态，在多个线程或者递归调用时因为改变了该状态而导致逻辑出错，表明代码是不可重入的，不具备可重入性。常见的应用场景就是在遍历图形的算法中，可能会多次到达同一个节点，可重入性保证了遍历过程中是安全的。</p>
+<blockquote>
+<p><a href="https://github.com/fastify/middie">GitHub: <code>middie</code></a></p>
+<p><a href="https://github.com/fastify/avvio">GitHub: <code>avvio</code></a></p>
+<p><a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">Directed acyclic graph</a></p>
+<p><a href="https://stackoverflow.com/questions/1312259/what-is-the-re-entrant-lock-and-concept-in-general">What is the Re-entrant lock and concept in general?</a></p>
+</blockquote>
+<h2 id="结语">结语</h2>
+<p>　　可以看得出来，Fastify 对性能的追求是极致的，涉及到很多 V8 内部对代码的优化机制，通过了解还是收获颇丰的。回过头来，Node.js Web 框架虽然层出不穷，但根据 NPM Trends 的下载量统计来看，Express 依然高居榜首，说明 Node.js Web 框架在重业务场景下的应用其实不多，更多的应该是作为一些小项目的后端或者类似 BFF 层这种轻量的场景下应用。从 Express 到 Koa 再到 Fastify，这是向更轻量更高性能的方向发展，技术的发展趋势也从侧面反映了该技术在业务场景中的价值体现。</p>
+<h2 id="其它参考资源">其它参考资源</h2>
+<ul>
+<li><a href="https://www.webexpo.net/prague2017/talk/what-if-i-told-you-that-http-can-be-fast/">What if I told you that HTTP can be fast?</a></li>
+<li><a href="https://survivejs.com/blog/fastify-interview/">Fastify - Fast and low overhead web framework for Node.js - Interview with Tomas Della Vedova</a></li>
+</ul>
