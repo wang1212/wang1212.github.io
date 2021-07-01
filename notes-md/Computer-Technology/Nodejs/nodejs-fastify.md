@@ -224,8 +224,9 @@ function compose (middleware) {
         有向无环图服务
     </p>
 </div>
-
 　　那么，可重入带来了什么？可重入性是代码的一种属性，指其没有共享状态，可以安全的在多个线程中或者递归地调用执行；换句话说，代码因为具备某些状态，在多个线程或者递归调用时因为改变了该状态而导致逻辑出错，表明代码是不可重入的，不具备可重入性。常见的应用场景就是在遍历图形的算法中，可能会多次到达同一个节点，可重入性保证了遍历过程中是安全的。
+
+　　具体实现，在 Fastify 官方文档的 **[Encapsulation](https://www.fastify.io/docs/latest/Encapsulation/)** 章节有关于其基本特性 "封装上下文（encapsulation context）" 的介绍，示例代码形象易懂，核心是围绕 `register` API 构建的自上而下继承的上下文模型，并可以通过 `fastify-plugin` 模块打破这种限制完成特定场景下的应用。在 Fastify 中一切皆插件，形成的这种插件系统，也正是上面提到的可以将应用方便的拆分为微服务的基础。
 
 > [GitHub: `middie`](https://github.com/fastify/middie)
 >
@@ -235,6 +236,20 @@ function compose (middleware) {
 >
 > [What is the Re-entrant lock and concept in general?](https://stackoverflow.com/questions/1312259/what-is-the-re-entrant-lock-and-concept-in-general)
 
+### 其它方面
+
+　　除了上面所介绍的 Fastify 特点外，还有其它一些方面值得关注。
+
+　　第一个，`Decorators` API 提供了一个在整个应用的请求链路中共享数据的机制，此 API 也体现了 Fastify 对性能的关注，其与 V8 内部优化机制“隐藏类”和“内联缓存”相关。
+
+> [JavaScript engine fundamentals: Shapes and Inline Caches](https://mathiasbynens.be/notes/shapes-ics)
+
+　　第二个，`Hooks` API 允许监听一些应用生命周期事件，提供了更高的灵活性，给特定场景下的应用提供了较好的实现机制。
+
+　　第三个，内置了依赖于 `Pino` 模块实现的日志系统，日志作为后端应用针对错误分析、性能分析等的原始信息是相当重要的，可见 Fastify 团队关注点还是相当准确的。
+
+　　最后，Fastify 的插件生态目前可能还不算很丰富，但官方提供的核心插件基本上也覆盖了常见的各种场景，例如消息队列、WebSocket、鉴权、缓存等。
+
 ## 结语
 
 　　可以看得出来，Fastify 对性能的追求是极致的，涉及到很多 V8 内部对代码的优化机制，通过了解还是收获颇丰的。回过头来，Node.js Web 框架虽然层出不穷，但根据 NPM Trends 的下载量统计来看，Express 依然高居榜首，说明 Node.js Web 框架在重业务场景下的应用其实不多，更多的应该是作为一些小项目的后端或者类似 BFF 层这种轻量的场景下应用。从 Express 到 Koa 再到 Fastify，这是向更轻量更高性能的方向发展，技术的发展趋势也从侧面反映了该技术在业务场景中的价值体现。
@@ -243,3 +258,23 @@ function compose (middleware) {
 
 - [What if I told you that HTTP can be fast?](https://www.webexpo.net/prague2017/talk/what-if-i-told-you-that-http-can-be-fast/)
 - [Fastify - Fast and low overhead web framework for Node.js - Interview with Tomas Della Vedova](https://survivejs.com/blog/fastify-interview/)
+
+## 附：对比表
+
+| 对比项(2021-06-01)                          | express                                            | koa                                                          | Fastify                                              | nestjs                         |
+| ------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------- | ------------------------------ |
+| 当前版本                                    | v4.17.1(2019-05-26)                                | v2.13.1(2021-01-04)                                          | v3.17.0(2021-05-29)                                  | v7.6.17(2021-05-18)            |
+| 设计理念/哲学                               | 小型、强大的 HTTP 服务器工具                       | 更轻量、高性能、“洋葱模型”                                   | 高性能、低开销，开发友好                             | 提供 Node Web 应用的”架构规范“ |
+| 技术架构                                    | 核心简单，具备路由等常见功能，其它需依赖中间件扩展 | 核心极简，不包含任何额外功能，路由等其它功能需要依赖中间件扩展 | 核心简单，提供路由、日志等必要组件，其它依赖插件扩展 | 底层核心可替换，上层 MVC 模型  |
+| 扩展机制                                    | 中间件                                             | 中间件                                                       | 插件                                                 | 插件                           |
+| 项目活跃度（近一年平均每周 GitHub commits） | 0-2                                                | 0-2                                                          | 5-10                                                 | 20                             |
+| 维护团队的 roadmap                          | 4.x -> 5.0（缓慢）                                 | 2.x -> 3.0（缓慢）                                           | 3.x -> 4.0（积极）                                   | v8.0 计划完成，待发布          |
+| 是否支持 ts                                 | 社区维护 @types                                    | 社区维护 @types                                              | 官方维护 @types                                      | 官方内置支持                   |
+| 公开的基准测试                              | QPS 最低                                           | QPS 高                                                       | QPS 最高                                             |                                |
+| 技术生态（官方+社区）                       | 丰富                                               | 丰富                                                         | 较丰富                                               | 较丰富                         |
+| 常见业务场景解决方案                        | 社区中间件                                         | 社区中间件                                                   | 官方插件                                             | 官方文档，内置适配器           |
+| 商业案例                                    | 有                                                 | 有                                                           | 有                                                   | 有                             |
+| 上手难易程度                                | 容易                                               | 容易                                                         | 容易                                                 | 中等                           |
+| 可查阅的资料                                | 多                                                 | 较多                                                         | 较多                                                 | 较多                           |
+| 官网文档（中文）                            | 有                                                 | 有                                                           | 有                                                   | 有                             |
+| OpenJS 基金会项目                           | 是                                                 |                                                              | 是                                                   |                                |

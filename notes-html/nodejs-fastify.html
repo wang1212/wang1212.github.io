@@ -163,14 +163,24 @@ b();
         有向无环图服务
     </p>
 </div>
+　　那么，可重入带来了什么？可重入性是代码的一种属性，指其没有共享状态，可以安全的在多个线程中或者递归地调用执行；换句话说，代码因为具备某些状态，在多个线程或者递归调用时因为改变了该状态而导致逻辑出错，表明代码是不可重入的，不具备可重入性。常见的应用场景就是在遍历图形的算法中，可能会多次到达同一个节点，可重入性保证了遍历过程中是安全的。
 
-<p>　　那么，可重入带来了什么？可重入性是代码的一种属性，指其没有共享状态，可以安全的在多个线程中或者递归地调用执行；换句话说，代码因为具备某些状态，在多个线程或者递归调用时因为改变了该状态而导致逻辑出错，表明代码是不可重入的，不具备可重入性。常见的应用场景就是在遍历图形的算法中，可能会多次到达同一个节点，可重入性保证了遍历过程中是安全的。</p>
+<p>　　具体实现，在 Fastify 官方文档的 <strong><a href="https://www.fastify.io/docs/latest/Encapsulation/">Encapsulation</a></strong> 章节有关于其基本特性 &quot;封装上下文（encapsulation context）&quot; 的介绍，示例代码形象易懂，核心是围绕 <code>register</code> API 构建的自上而下继承的上下文模型，并可以通过 <code>fastify-plugin</code> 模块打破这种限制完成特定场景下的应用。在 Fastify 中一切皆插件，形成的这种插件系统，也正是上面提到的可以将应用方便的拆分为微服务的基础。</p>
 <blockquote>
 <p><a href="https://github.com/fastify/middie">GitHub: <code>middie</code></a></p>
 <p><a href="https://github.com/fastify/avvio">GitHub: <code>avvio</code></a></p>
 <p><a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">Directed acyclic graph</a></p>
 <p><a href="https://stackoverflow.com/questions/1312259/what-is-the-re-entrant-lock-and-concept-in-general">What is the Re-entrant lock and concept in general?</a></p>
 </blockquote>
+<h3 id="其它方面">其它方面</h3>
+<p>　　除了上面所介绍的 Fastify 特点外，还有其它一些方面值得关注。</p>
+<p>　　第一个，<code>Decorators</code> API 提供了一个在整个应用的请求链路中共享数据的机制，此 API 也体现了 Fastify 对性能的关注，其与 V8 内部优化机制“隐藏类”和“内联缓存”相关。</p>
+<blockquote>
+<p><a href="https://mathiasbynens.be/notes/shapes-ics">JavaScript engine fundamentals: Shapes and Inline Caches</a></p>
+</blockquote>
+<p>　　第二个，<code>Hooks</code> API 允许监听一些应用生命周期事件，提供了更高的灵活性，给特定场景下的应用提供了较好的实现机制。</p>
+<p>　　第三个，内置了依赖于 <code>Pino</code> 模块实现的日志系统，日志作为后端应用针对错误分析、性能分析等的原始信息是相当重要的，可见 Fastify 团队关注点还是相当准确的。</p>
+<p>　　最后，Fastify 的插件生态目前可能还不算很丰富，但官方提供的核心插件基本上也覆盖了常见的各种场景，例如消息队列、WebSocket、鉴权、缓存等。</p>
 <h2 id="结语">结语</h2>
 <p>　　可以看得出来，Fastify 对性能的追求是极致的，涉及到很多 V8 内部对代码的优化机制，通过了解还是收获颇丰的。回过头来，Node.js Web 框架虽然层出不穷，但根据 NPM Trends 的下载量统计来看，Express 依然高居榜首，说明 Node.js Web 框架在重业务场景下的应用其实不多，更多的应该是作为一些小项目的后端或者类似 BFF 层这种轻量的场景下应用。从 Express 到 Koa 再到 Fastify，这是向更轻量更高性能的方向发展，技术的发展趋势也从侧面反映了该技术在业务场景中的价值体现。</p>
 <h2 id="其它参考资源">其它参考资源</h2>
@@ -178,3 +188,120 @@ b();
 <li><a href="https://www.webexpo.net/prague2017/talk/what-if-i-told-you-that-http-can-be-fast/">What if I told you that HTTP can be fast?</a></li>
 <li><a href="https://survivejs.com/blog/fastify-interview/">Fastify - Fast and low overhead web framework for Node.js - Interview with Tomas Della Vedova</a></li>
 </ul>
+<h2 id="附：对比表">附：对比表</h2>
+<table>
+<thead>
+<tr>
+<th>对比项(2021-06-01)</th>
+<th>express</th>
+<th>koa</th>
+<th>Fastify</th>
+<th>nestjs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>当前版本</td>
+<td>v4.17.1(2019-05-26)</td>
+<td>v2.13.1(2021-01-04)</td>
+<td>v3.17.0(2021-05-29)</td>
+<td>v7.6.17(2021-05-18)</td>
+</tr>
+<tr>
+<td>设计理念/哲学</td>
+<td>小型、强大的 HTTP 服务器工具</td>
+<td>更轻量、高性能、“洋葱模型”</td>
+<td>高性能、低开销，开发友好</td>
+<td>提供 Node Web 应用的”架构规范“</td>
+</tr>
+<tr>
+<td>技术架构</td>
+<td>核心简单，具备路由等常见功能，其它需依赖中间件扩展</td>
+<td>核心极简，不包含任何额外功能，路由等其它功能需要依赖中间件扩展</td>
+<td>核心简单，提供路由、日志等必要组件，其它依赖插件扩展</td>
+<td>底层核心可替换，上层 MVC 模型</td>
+</tr>
+<tr>
+<td>扩展机制</td>
+<td>中间件</td>
+<td>中间件</td>
+<td>插件</td>
+<td>插件</td>
+</tr>
+<tr>
+<td>项目活跃度（近一年平均每周 GitHub commits）</td>
+<td>0-2</td>
+<td>0-2</td>
+<td>5-10</td>
+<td>20</td>
+</tr>
+<tr>
+<td>维护团队的 roadmap</td>
+<td>4.x -&gt; 5.0（缓慢）</td>
+<td>2.x -&gt; 3.0（缓慢）</td>
+<td>3.x -&gt; 4.0（积极）</td>
+<td>v8.0 计划完成，待发布</td>
+</tr>
+<tr>
+<td>是否支持 ts</td>
+<td>社区维护 @types</td>
+<td>社区维护 @types</td>
+<td>官方维护 @types</td>
+<td>官方内置支持</td>
+</tr>
+<tr>
+<td>公开的基准测试</td>
+<td>QPS 最低</td>
+<td>QPS 高</td>
+<td>QPS 最高</td>
+<td></td>
+</tr>
+<tr>
+<td>技术生态（官方+社区）</td>
+<td>丰富</td>
+<td>丰富</td>
+<td>较丰富</td>
+<td>较丰富</td>
+</tr>
+<tr>
+<td>常见业务场景解决方案</td>
+<td>社区中间件</td>
+<td>社区中间件</td>
+<td>官方插件</td>
+<td>官方文档，内置适配器</td>
+</tr>
+<tr>
+<td>商业案例</td>
+<td>有</td>
+<td>有</td>
+<td>有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>上手难易程度</td>
+<td>容易</td>
+<td>容易</td>
+<td>容易</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>可查阅的资料</td>
+<td>多</td>
+<td>较多</td>
+<td>较多</td>
+<td>较多</td>
+</tr>
+<tr>
+<td>官网文档（中文）</td>
+<td>有</td>
+<td>有</td>
+<td>有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>OpenJS 基金会项目</td>
+<td>是</td>
+<td></td>
+<td>是</td>
+<td></td>
+</tr>
+</tbody></table>
