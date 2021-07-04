@@ -305,3 +305,115 @@ b();
 <td></td>
 </tr>
 </tbody></table>
+<h2 id="附：基准测试">附：基准测试</h2>
+<p>　　这里做了一个简单的基准测试，在 <em>windows 10</em> 平台下采用 <code>autocannon</code> 测试工具，依赖版本如下：</p>
+<pre><code class="language-js"><span class="hljs-string">"dependencies"</span>: {
+  <span class="hljs-string">"express"</span>: <span class="hljs-string">"4.17.1"</span>,
+  <span class="hljs-string">"fastify"</span>: <span class="hljs-string">"3.18.1"</span>,
+  <span class="hljs-string">"koa"</span>: <span class="hljs-string">"2.13.1"</span>
+},
+<span class="hljs-string">"devDependencies"</span>: {
+  <span class="hljs-string">"autocannon"</span>: <span class="hljs-string">"^7.3.0"</span>,
+},</code></pre>
+<p>　　测试代码如下：</p>
+<pre><code class="language-js"><span class="hljs-comment">// express</span>
+<span class="hljs-keyword">const</span> app = express()
+
+app.<span class="hljs-keyword">get</span>(<span class="hljs-string">'/'</span>, function (req, res) {
+    res.send({ hello: <span class="hljs-string">'world'</span> })
+})
+
+app.listen(<span class="hljs-number">3002</span>)
+
+<span class="hljs-comment">// koa</span>
+<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Koa()
+
+app.use(<span class="hljs-keyword">async</span> (ctx) =&gt; {
+    ctx.body = { hello: <span class="hljs-string">'world'</span> }
+})
+
+app.listen(<span class="hljs-number">3001</span>)
+
+<span class="hljs-comment">// fastify</span>
+<span class="hljs-keyword">const</span> fastify = Fastify({
+    <span class="hljs-comment">// logger: true,</span>
+})
+
+fastify.<span class="hljs-keyword">get</span>(<span class="hljs-string">'/'</span>, <span class="hljs-keyword">async</span> (request, reply) =&gt; {
+    reply.type(<span class="hljs-string">'application/json'</span>).code(<span class="hljs-number">200</span>)
+    <span class="hljs-keyword">return</span> { hello: <span class="hljs-string">'world'</span> }
+})
+
+fastify.listen(<span class="hljs-number">3000</span>, (err, address) =&gt; {
+    <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err
+})</code></pre>
+<p>　　测试结果如下：</p>
+<pre><code class="language-bash"># express
+&gt; <span class="hljs-built_in">auto</span>cannon http:<span class="hljs-comment">//127.0.0.1:3002/</span>
+
+Running <span class="hljs-number">10</span>s test @ http:<span class="hljs-comment">//127.0.0.1:3002/</span>
+<span class="hljs-number">10</span> connections
+
+┌─────────┬──────┬──────┬───────┬──────┬─────────┬─────────┬───────┐
+│ Stat    │ <span class="hljs-number">2.5</span>% │ <span class="hljs-number">50</span>%  │ <span class="hljs-number">97.5</span>% │ <span class="hljs-number">99</span>%  │ Avg     │ Stdev   │ Max   │
+├─────────┼──────┼──────┼───────┼──────┼─────────┼─────────┼───────┤
+│ Latency │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">1</span> ms │ <span class="hljs-number">2</span> ms  │ <span class="hljs-number">3</span> ms │ <span class="hljs-number">0.84</span> ms │ <span class="hljs-number">0.61</span> ms │ <span class="hljs-number">10</span> ms │
+└─────────┴──────┴──────┴───────┴──────┴─────────┴─────────┴───────┘
+┌───────────┬─────────┬─────────┬─────────┬────────┬─────────┬─────────┬─────────┐
+│ Stat      │ <span class="hljs-number">1</span>%      │ <span class="hljs-number">2.5</span>%    │ <span class="hljs-number">50</span>%     │ <span class="hljs-number">97.5</span>%  │ Avg     │ Stdev   │ Min     │
+├───────────┼─────────┼─────────┼─────────┼────────┼─────────┼─────────┼─────────┤
+│ Req/Sec   │ <span class="hljs-number">4675</span>    │ <span class="hljs-number">4675</span>    │ <span class="hljs-number">8199</span>    │ <span class="hljs-number">8287</span>   │ <span class="hljs-number">7838.37</span> │ <span class="hljs-number">1017.07</span> │ <span class="hljs-number">4672</span>    │
+├───────────┼─────────┼─────────┼─────────┼────────┼─────────┼─────────┼─────────┤
+│ Bytes/Sec │ <span class="hljs-number">1.07</span> MB │ <span class="hljs-number">1.07</span> MB │ <span class="hljs-number">1.88</span> MB │ <span class="hljs-number">1.9</span> MB │ <span class="hljs-number">1.79</span> MB │ <span class="hljs-number">233</span> kB  │ <span class="hljs-number">1.07</span> MB │
+└───────────┴─────────┴─────────┴─────────┴────────┴─────────┴─────────┴─────────┘
+
+Req/Bytes counts sampled once per second.
+
+<span class="hljs-number">86</span>k requests <span class="hljs-keyword">in</span> <span class="hljs-number">11.01</span>s, <span class="hljs-number">19.7</span> MB read
+
+# koa
+&gt; <span class="hljs-built_in">auto</span>cannon http:<span class="hljs-comment">//127.0.0.1:3001/</span>
+
+Running <span class="hljs-number">10</span>s test @ http:<span class="hljs-comment">//127.0.0.1:3001/</span>
+<span class="hljs-number">10</span> connections
+
+┌─────────┬──────┬──────┬───────┬──────┬─────────┬─────────┬──────┐
+│ Stat    │ <span class="hljs-number">2.5</span>% │ <span class="hljs-number">50</span>%  │ <span class="hljs-number">97.5</span>% │ <span class="hljs-number">99</span>%  │ Avg     │ Stdev   │ Max  │
+├─────────┼──────┼──────┼───────┼──────┼─────────┼─────────┼──────┤
+│ Latency │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">0</span> ms  │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">0.01</span> ms │ <span class="hljs-number">0.12</span> ms │ <span class="hljs-number">9</span> ms │
+└─────────┴──────┴──────┴───────┴──────┴─────────┴─────────┴──────┘
+┌───────────┬─────────┬─────────┬────────┬─────────┬────────┬────────┬─────────┐
+│ Stat      │ <span class="hljs-number">1</span>%      │ <span class="hljs-number">2.5</span>%    │ <span class="hljs-number">50</span>%    │ <span class="hljs-number">97.5</span>%   │ Avg    │ Stdev  │ Min     │
+├───────────┼─────────┼─────────┼────────┼─────────┼────────┼────────┼─────────┤
+│ Req/Sec   │ <span class="hljs-number">17743</span>   │ <span class="hljs-number">17743</span>   │ <span class="hljs-number">20111</span>  │ <span class="hljs-number">20335</span>   │ <span class="hljs-number">19496</span>  │ <span class="hljs-number">964.55</span> │ <span class="hljs-number">17731</span>   │
+├───────────┼─────────┼─────────┼────────┼─────────┼────────┼────────┼─────────┤
+│ Bytes/Sec │ <span class="hljs-number">2.91</span> MB │ <span class="hljs-number">2.91</span> MB │ <span class="hljs-number">3.3</span> MB │ <span class="hljs-number">3.33</span> MB │ <span class="hljs-number">3.2</span> MB │ <span class="hljs-number">159</span> kB │ <span class="hljs-number">2.91</span> MB │
+└───────────┴─────────┴─────────┴────────┴─────────┴────────┴────────┴─────────┘
+
+Req/Bytes counts sampled once per second.
+
+<span class="hljs-number">214</span>k requests <span class="hljs-keyword">in</span> <span class="hljs-number">11.01</span>s, <span class="hljs-number">35.2</span> MB read
+
+# fastify
+&gt; <span class="hljs-built_in">auto</span>cannon http:<span class="hljs-comment">//127.0.0.1:3000/</span>
+
+Running <span class="hljs-number">10</span>s test @ http:<span class="hljs-comment">//127.0.0.1:3000/</span>
+<span class="hljs-number">10</span> connections
+
+┌─────────┬──────┬──────┬───────┬──────┬─────────┬─────────┬───────┐
+│ Stat    │ <span class="hljs-number">2.5</span>% │ <span class="hljs-number">50</span>%  │ <span class="hljs-number">97.5</span>% │ <span class="hljs-number">99</span>%  │ Avg     │ Stdev   │ Max   │
+├─────────┼──────┼──────┼───────┼──────┼─────────┼─────────┼───────┤
+│ Latency │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">0</span> ms  │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">0.01</span> ms │ <span class="hljs-number">0.13</span> ms │ <span class="hljs-number">13</span> ms │
+└─────────┴──────┴──────┴───────┴──────┴─────────┴─────────┴───────┘
+┌───────────┬─────────┬─────────┬─────────┬─────────┬──────────┬─────────┬─────────┐
+│ Stat      │ <span class="hljs-number">1</span>%      │ <span class="hljs-number">2.5</span>%    │ <span class="hljs-number">50</span>%     │ <span class="hljs-number">97.5</span>%   │ Avg      │ Stdev   │ Min     │
+├───────────┼─────────┼─────────┼─────────┼─────────┼──────────┼─────────┼─────────┤
+│ Req/Sec   │ <span class="hljs-number">19759</span>   │ <span class="hljs-number">19759</span>   │ <span class="hljs-number">27631</span>   │ <span class="hljs-number">27903</span>   │ <span class="hljs-number">26960.73</span> │ <span class="hljs-number">2284.47</span> │ <span class="hljs-number">19752</span>   │
+├───────────┼─────────┼─────────┼─────────┼─────────┼──────────┼─────────┼─────────┤
+│ Bytes/Sec │ <span class="hljs-number">3.24</span> MB │ <span class="hljs-number">3.24</span> MB │ <span class="hljs-number">4.53</span> MB │ <span class="hljs-number">4.58</span> MB │ <span class="hljs-number">4.42</span> MB  │ <span class="hljs-number">375</span> kB  │ <span class="hljs-number">3.24</span> MB │
+└───────────┴─────────┴─────────┴─────────┴─────────┴──────────┴─────────┴─────────┘
+
+Req/Bytes counts sampled once per second.
+
+<span class="hljs-number">297</span>k requests <span class="hljs-keyword">in</span> <span class="hljs-number">11.01</span>s, <span class="hljs-number">48.6</span> MB read</code></pre>
+<p>　　根据测试结果来看，仅 <strong>Req/Sec</strong> 这一项的平均值（Avg），Express 只有 <strong>7838.37</strong>，Koa 有 <strong>19496</strong>，约为前者的 2.4 倍，而 Fastify 达到了 <strong>26960.73</strong>，是 Express 的约 3.4 倍，Koa 的约 1.4 倍。除此之外，<strong>Bytes/Sec</strong> 指标也有差距，综合起来 Koa 和 Fastify 的表现要好的多，而 Fastify 要比 Koa 表现更好一些。</p>
