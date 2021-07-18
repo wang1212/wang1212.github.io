@@ -2,11 +2,11 @@
 
     {
         "title": "Web 前端开发的心路历程",
-        "tags": ["Life", "Work", "Web", "Front End", "React.js", "Computer Technology"],
-        "keywords": ["Life", "Work", "Record", "Web", "Front End", "React.js"],
+        "tags": ["Life", "Work", "Web", "Front End"],
+        "keywords": ["Life", "Work", "Record", "Web", "Front End"],
         "summary": "眼看着从事 Web 前端开发已然快三年了，是该想想自己在这块已经获得的东西，和以后的选择了。",
         "ctime": "2020-03-15 22:43:00",
-        "mtime": "2020-03-15 22:43:00"
+        "mtime": "2021-07-19 01:26:00"
     }
 
 ---
