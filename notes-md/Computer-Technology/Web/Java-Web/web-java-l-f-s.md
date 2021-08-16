@@ -2,8 +2,8 @@
 
     {
 		"title": "监听器、过滤器、Servlet",
-		"tags": ["Computer Technology", "Web", "Back End", "Java"],
-        "keywords": ["Computer Technology", "Web", "Back End", "Java", "Listener", "Filter", "Servlet"],
+		"tags": ["计算机技术", "Web", "Back End", "Java"],
+        "keywords": ["计算机技术", "Web", "Back End", "Java", "Listener", "Filter", "Servlet"],
         "summary": "在 Java Web 开发过程中，监听器、过滤器、Servlet 这三大内容是很重要的组件，也是实现很多功能的根本所在。",
         "ctime": "2017-8-31 11:52:00",
         "mtime": "2017-8-31 11:52:00"
@@ -47,13 +47,13 @@
 　　在创建好监听器类后，需要在项目中设置才能起作用，可以在**web.xml**中去设置，也可以使用 `@WebListener` 注解注册。
 
 	package listener;
-
+	
 	@WebListener  // 此处使用了注解注册该监听器
 	public class AppListener implements ServletContextListener {
-
+	
 		@Override  // 销毁方法
 		public void contextDestroyed(ServletContextEvent arg0) { }
-
+	
 		@Override  // 初始化方法
 		public void contextInitialized(ServletContextEvent arg0) { }
 	}
@@ -108,21 +108,21 @@
 　　在创建好过滤器类后，需要在项目中设置才能起作用，可以在**web.xml**中去设置，也可以使用 `@WebFilter` 注解注册。
 
 	package filter;
-
+	
 	// 使用注解注册
 	@WebFilter(filterName="firstFilter", urlPatterns={"/servlet/GetAndPost"},
 			dispatcherTypes={DispatcherType.REQUEST})
 	public class firstFilter implements Filter {
-
+	
 		@Override  // 销毁方法
 		public void destroy() { }
-
+	
 		@Override  // 过滤方法
 		public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2) {
 			// 放行（必须）
 			arg2.doFilter(arg0, arg1);
 		}
-
+	
 		@Override  // 初始化方法
 		public void init(FilterConfig arg0) { }
 	}
@@ -156,7 +156,7 @@
 		chain.doFilter(request, response);
 		... // 执行顺序：4
 	}
-
+	
 	// 第二个 doFilter
 	public void doFilter(request, response, chain) {
 		... // 执行顺序：2
@@ -183,7 +183,7 @@
 　　在创建好过 Servlet 类后，需要在项目中设置才能起作用，可以在 **web.xml** 中去设置，也可以使用 `@WebServlet` 注解注册。
 
 	package servlet;
-
+	
 	// 使用注解注册
 	@WebServlet(name="ServletLife", loadOnStartup=1, urlPatterns={"/servlet/ServletLife"},
 				initParams={
@@ -191,16 +191,16 @@
 		@WebInitParam(name="password",value="1314")
 	})
 	public class ServletLife extends HttpServlet {
-
+	
 		@Override  // 初始化方法
 		public void init() { }
-
+	
 		@Override  // 销毁方法
 		public void destroy() { }
-
+	
 		@Override
 		protected void doGet(request, response) { }
-
+	
 		@Override
 		protected void doPost(request, response) { }
 	}

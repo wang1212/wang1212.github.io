@@ -2,8 +2,8 @@
 
     {
         "title": "金融经济学中的一些概念",
-        "tags": ["Finance", "Economics"],
-        "keywords": ["Finance", "Economics"],
+        "tags": ["金融", "经济学"],
+        "keywords": ["金融", "经济学"],
         "summary": "一些与日常生活相关的金融经济学概念。",
         "ctime": "2018-01-05 02:05:00",
         "mtime": "2020-02-17 15:17:00"

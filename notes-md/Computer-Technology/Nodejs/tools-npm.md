@@ -2,8 +2,8 @@
 
     {
         "title": "使用 npm",
-        "tags": ["Computer Technology", "Tools", "Web", "Node.js"],
-        "keywords": ["Computer Technology", "Tools", "Web", "Node.js", "npm"],
+        "tags": ["计算机技术", "工具", "Web", "Node.js"],
+        "keywords": ["计算机技术", "工具", "Web", "Node.js", "npm"],
         "summary": "npm 是 Node.js 的一个包管理器，Web 前端工程师也经常利用它来简化开发流程，来看看如何愉快的使用 npm。",
         "ctime": "2019-07-06 15:43:00",
         "mtime": "2020-03-15 22:34:00"

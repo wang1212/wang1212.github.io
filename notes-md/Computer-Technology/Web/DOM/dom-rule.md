@@ -2,11 +2,11 @@
 
     {
         "title": "DOM-元素节点几何量",
-        "tags": ["Computer Technology", "Web", "Front End", "DOM"],
-        "keywords": ["Computer Technology", "Web", "Front End", "DOM", "Rule"],
+        "tags": ["计算机技术", "Web", "Front End", "DOM"],
+        "keywords": ["计算机技术", "Web", "Front End", "DOM", "Rule"],
         "summary": "当我们在查看 HTML 文档时，每个元素节点被解析后，都画成了可视形状。我们可以获取每个元素节点的几何量（宽、高、偏移量）以及页面滚动距离。",
-        "ctime": "2016-5-19 14:54:00",
-        "mtime": "2016-5-19 14:54:00"
+        "ctime": "2016-05-19 14:54:00",
+        "mtime": "2016-05-19 14:54:00"
     }
 
 ---
@@ -54,7 +54,7 @@
         console.log(document.querySelector("#in").offsetParent);
         // 输出<div id="out">...</div>
         // 这是因为外部DIV的position="relative/absolute"
-
+    
         // 验证内部DIV的offsetTop与offsetParent的值
         console.log(document.querySelector("#in").offsetTop);  // 输出19
         console.log(document.querySelector("#in").offsetLeft);  // 输出19
@@ -92,7 +92,7 @@ exp：
         // 获取DIV的矩形盒子基本属性
         console.log(document.querySelector("div").getBoundingClientRect());
         // 输出ClientRect{top: 50, right: 330, bottom: 330, left: 50, width: 280, height: 280}
-
+    
         // 可以单独获得某项基本属性
         console.log(document.querySelector("div").getBoundingClientRect().top);
         // 输出50
@@ -130,7 +130,7 @@ exp：
         // 获取DIV的矩形盒子尺寸
         console.log(document.querySelector("div").offsetWidth);  // 输出280
         console.log(document.querySelector("div").offsetHeight);  // 输出280
-
+    
         console.log(document.querySelector("div").clientWidth);  // 输出260
         console.log(document.querySelector("div").clientHeight);  // 输出260
     </script>

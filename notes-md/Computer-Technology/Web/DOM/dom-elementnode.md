@@ -2,11 +2,11 @@
 
     {
         "title": "DOM-元素节点",
-        "tags": ["Computer Technology", "Web", "Front End", "DOM"],
-        "keywords": ["Computer Technology", "Web", "Front End", "DOM", "Element Node"],
+        "tags": ["计算机技术", "Web", "Front End", "DOM"],
+        "keywords": ["计算机技术", "Web", "Front End", "DOM", "Element Node"],
         "summary": "可以说，元素节点是 DOM 树中的核心部分，我们进行文档的操作通常都是建立在元素节点上的。",
-        "ctime": "2016-5-17 13:19:00",
-        "mtime": "2016-5-17 13:19:00"
+        "ctime": "2016-05-17 13:19:00",
+        "mtime": "2016-05-17 13:19:00"
     }
 
 ---
@@ -68,7 +68,7 @@ exp：
         // 获取属性列表/集合
         var attr=document.querySelector('input').attributes;
         console.log(attr);  // 输出 NamedNodeMap{...}
-
+    
         // 遍历取得属性名与值
         for (var i in attr) {
             console.log(attr[i].nodeName+':'+attr[i].nodeValue);
@@ -152,7 +152,7 @@ exp：
         // 给class属性列表中添加c
         document.querySelector('div').classList.add('c');
         console.log(document.querySelector('div').className);  // 输出 a b c
-
+    
         // 从class属性列表中移除b
         document.querySelector('div').classList.remove('b');
         console.log(document.querySelector('div').className);  // 输出 a c

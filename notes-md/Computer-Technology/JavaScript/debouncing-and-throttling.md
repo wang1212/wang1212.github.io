@@ -2,8 +2,8 @@
 
     {
 		"title": "解析函数节流与防抖的实现",
-		"tags": ["Computer Technology", "JavaScript", "Web", "Front End"],
-        "keywords": ["Computer Technology", "Web", "Front End", "JavaScript", "Throttle", "Debounce"],
+		"tags": ["计算机技术", "JavaScript", "Web", "Front End"],
+        "keywords": ["计算机技术", "Web", "Front End", "JavaScript", "节流", "防抖"],
         "summary": "前端开发中广泛采用的优化技巧，函数节流与防抖。",
         "ctime": "2021-04-25 22:56:00",
         "mtime": "2021-04-26 22:48:00"

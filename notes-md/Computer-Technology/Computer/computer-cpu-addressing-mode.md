@@ -2,11 +2,11 @@
 
     {
 		"title": "CPU 的七种寻址方式",
-		"tags": ["Computer Technology", "Computer"],
-        "keywords": ["Computer Technology", "Computer", "CPU"],
+		"tags": ["计算机技术", "计算机"],
+        "keywords": ["计算机技术", "计算机", "CPU"],
         "summary": "CPU 获取数据的方式不仅仅一种，多种方式也为不同数据的获取提供了不同的效率考量，保证了寻址效率与指令的灵活性。",
-        "ctime": "2016-5-5 1:53:00",
-        "mtime": "2016-5-5 1:53:00"
+        "ctime": "2016-05-05 01:53:00",
+        "mtime": "2016-05-05 01:53:00"
     }
 
 ---

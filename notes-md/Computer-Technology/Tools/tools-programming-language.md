@@ -2,8 +2,8 @@
 
     {
         "title": "理解编程语言的设计与实现",
-        "tags": ["Computer Technology", "Tools"],
-        "keywords": ["Computer Technology", "Tools"],
+        "tags": ["计算机技术", "工具"],
+        "keywords": ["计算机技术", "工具", "编程语言"],
         "summary": "编程语言为开发者提供了诸多便利，那么它是如何被发明的，不同的语言设计理念有什么不同呢？",
         "ctime": "2021-05-02 17:03:00",
         "mtime": "2021-06-18 01:48:00"

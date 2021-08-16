@@ -2,8 +2,8 @@
 
     {
         "title": "GIS-地图及其数据类型",
-        "tags": ["Computer Technology", "GIS"],
-        "keywords": ["Computer Technology", "GIS", "Map", "Data Type"],
+        "tags": ["计算机技术", "GIS"],
+        "keywords": ["计算机技术", "GIS", "地图", "数据类型"],
         "summary": "在 GIS 开发中，直接接触的就是地图及其数据类型，借此总结一下常见的地图类型，以及在开发过程中涉及到的数据类型。",
         "ctime": "2018-06-12 02:12:00",
         "mtime": "2019-06-08 07:18:00"

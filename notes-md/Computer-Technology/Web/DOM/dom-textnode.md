@@ -2,11 +2,11 @@
 
     {
         "title": "DOM-文本节点",
-        "tags": ["Computer Technology", "Web", "Front End", "DOM"],
-        "keywords": ["Computer Technology", "Web", "Front End", "DOM", "Text Node"],
+        "tags": ["计算机技术", "Web", "Front End", "DOM"],
+        "keywords": ["计算机技术", "Web", "Front End", "DOM", "Text Node"],
         "summary": "文本（Text）节点虽然很多时候我们直接用 innerHTML 去赋值替换，但当我们进行一些细微的修改时，了解一下 DOM 操作还是非常有用的。",
-        "ctime": "2016-5-24 21:50:00",
-        "mtime": "2016-5-24 21:50:00"
+        "ctime": "2016-05-24 21:50:00",
+        "mtime": "2016-05-24 21:50:00"
     }
 
 ---

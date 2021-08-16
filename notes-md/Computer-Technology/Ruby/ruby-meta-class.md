@@ -2,8 +2,8 @@
 
     {
         "title": "Ruby-元编程之类",
-        "tags": ["Computer Technology", "Ruby"],
-        "keywords": ["Computer Technology", "Ruby", "元编程", "Class"],
+        "tags": ["计算机技术", "Ruby"],
+        "keywords": ["计算机技术", "Ruby", "元编程", "Class"],
         "summary": "这篇文章讲述关于 Ruby 中类相关的知识，这也是面向对象语言的核心。事实上，有很多编程语言都具备元编程的能力，而 Ruby 则是将元编程发挥到极致的语言。元编程这个概念是模糊的，很多人都说是用代码生成代码的方式，不过我们不用去纠结这个概念。元编程最具有魅力的地方就是，原来我们还可以在程序运行时去操控代码。",
         "ctime": "2016-12-8 21:07:00",
         "mtime": "2016-12-8 21:07:00"
@@ -24,7 +24,7 @@
     result = class A
         self
     end
-
+    
     p result  # ==> A
 
 　　**特别的是，类也是一个对象，它是 `Class` 类的实例，充当当前对象 `self`；但此时的当前类我们更愿意定义为该 `self` 指向的类，而不是 `Class`，因为前者是有意义的。**
@@ -33,7 +33,7 @@
         def speak
         end
     end
-
+    
     p result.instance_methods(false)
     # ==> [:speak]
 
@@ -43,7 +43,7 @@
         define_method(name) do
         end
     end
-
+    
     p result.instance_methods(false)
     # ==> [:speak]
 
@@ -57,12 +57,12 @@
 
     class A
         @var1 = "class_instance_variable"
-
+    
         def initialize
             @var2 = "instance_variable"
         end
     end
-
+    
     p A.instance_variables
     # ==> [:@var1]
     p A.new.instance_variables
@@ -77,10 +77,10 @@
     class A
         @@var = "class_variable"
     end
-
+    
     class B < A
     end
-
+    
     p A.class_variables
     # ==> [:@@var]
     p B.class_variables
@@ -98,7 +98,7 @@
         def self.new_method
         end
     end
-
+    
     p A.singleton_methods
     # ==> [:new_method]
 
@@ -108,12 +108,12 @@
         def one_method
         end
     end
-
+    
     a = A.new
     b = A.new
     def b.other_method
     end
-
+    
     p a.public_methods(false)
     # ==> [:one_method]
     p b.public_methods(false)
@@ -131,7 +131,7 @@
         def name
             return @name
         end
-
+    
         def name=(new_name)
             @name = new_name
         end
@@ -154,13 +154,13 @@
                 define_method("#{var}=") { |value| instance_variable_set("@#{var}", value) }
             end
         end
-
+    
         attr_my_method :name
     end
-
+    
     p Person.instance_methods(false)
     # ==> [:name, :name=]
-
+    
     a = Person.new
     p a.instance_variables  # ==> []
     a.name = "MrWang"
@@ -177,13 +177,13 @@
         def self.new_method
         end
         p self.class
-
+    
         class << self
             p self.class
             p self.instance_methods(false)
         end
     end
-
+    
     # ==> Class
     # ==> Class
     # ==> [:new_method]
@@ -253,15 +253,15 @@
         def other_method
         end
     end
-
+    
     class MyClass1
         include MyModule
     end
-
+    
     class MyClass2
         prepend MyModule
     end
-
+    
     p MyClass1.ancestors
     # ==> [MyClass1, MyModule, Object, Kernel, BasicObject]
     p MyClass1.instance_methods.include?(:other_method)
@@ -282,7 +282,7 @@
             include MyModule
         end
     end
-
+    
     p MyClass1.singleton_class.ancestors
     # ==> [#&lt;Class:MyClass1&gt;, MyModule, #&lt;Class:Object&gt;, #&lt;Class:BasicObject&gt;, Class, ...]
     p MyClass1.singleton_class.instance_methods.include?(:other_method)
@@ -303,16 +303,16 @@
             p "Me was mixed into #{mixIn_class}"
         end
     end
-
+    
     class MyClass
         include MyModule
-
+    
         def self.inherited(sub_class)
             p "Me was inherited by #{sub_class}"
         end
     end
     # ==> "Me was mixed into MyClass"
-
+    
     class SubClass < MyClass
     end
     # ==> "Me was inherited by SubClass"
@@ -328,12 +328,12 @@
     class Object
         # 方法别名
         alias :original_to_s :to_s
-
+    
         def to_s
             "I will be changed to string --> " + original_to_s
         end
     end
-
+    
     p Object.new.to_s
     # ==> "I will be changed to string --> #&lt;Object:0x0000000283c320&gt;"
 
@@ -349,20 +349,20 @@
         def a_method
         end
     end
-
+    
     class B < A
         # 删除继承自A的方法
         undef :a_method
-
+    
         def b_method
         end
     end
-
+    
     class C < A
         def c_method
         end
     end
-
+    
     p B.instance_methods.include?(:a_method)
     # ==> false
     p C.instance_methods.include?(:a_method)

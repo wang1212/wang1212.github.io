@@ -2,8 +2,8 @@
 
     {
 		"title": "Web 性能核心概念",
-		"tags": ["Computer Technology", "Web", "Front End"],
-        "keywords": ["Computer Technology", "Web", "Front End", "性能优化"],
+		"tags": ["计算机技术", "Web", "Front End"],
+        "keywords": ["计算机技术", "Web", "Front End", "性能优化"],
         "summary": "在一些较为复杂的 Web 应用中可能会出现性能瓶颈，导致用户体验急剧下降，做优化之前更应该了解一下相关的核心概念，从而在出问题时确定优化路径。",
         "ctime": "2021-07-19 00:51:00",
         "mtime": "2021-07-24 21:56:00"

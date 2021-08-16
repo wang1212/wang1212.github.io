@@ -2,8 +2,8 @@
 
     {
         "title": "Fastify - 专注于性能和低内存消耗",
-        "tags": ["Computer Technology", "Node.js", "JavaScript", "Web"],
-        "keywords": ["Computer Technology", "Node.js", "JavaScript", "Web", "Fastify"],
+        "tags": ["计算机技术", "Node.js", "JavaScript", "Web"],
+        "keywords": ["计算机技术", "Node.js", "JavaScript", "Web", "Fastify"],
         "summary": "Fastify 作为一个 Node.js Web 框架，是如何实现高性能和低内存消耗的呢？",
         "ctime": "2021-06-27 16:28:00",
         "mtime": "2021-07-04 21:56:00"

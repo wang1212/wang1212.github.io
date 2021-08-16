@@ -2,8 +2,8 @@
 
     {
 		"title": "JS 跨域访问",
-		"tags": ["Computer Technology", "Web", "Front End"],
-        "keywords": ["Computer Technology", "Web", "Front End", "Cross-domain"],
+		"tags": ["计算机技术", "Web", "Front End"],
+        "keywords": ["计算机技术", "Web", "Front End", "Cross-domain"],
         "summary": "为了用户的安全，浏览器通常都会限制 JavaScript 跨域访问，也就是默认不允许不同域名下页面之间进行资源的传递，但很多时候我们又有跨域请求资源的需求。",
         "ctime": "2016-8-10 15:18:00",
         "mtime": "2016-8-10 15:18:00"
@@ -27,7 +27,7 @@
 
 	// 在服务器端的文件中加上以下响应头（允许所有域名跨域访问该资源）
 	header('Access-Control-Allow-Origin: *');
-
+	
 	// 只允许指定的域名跨域访问该资源
 	header('Access-Control-Allow-Origin: http://www.163.com');
 
@@ -70,7 +70,7 @@
 		$call = htmlspecialchars($_GET['call']);
 		// 要返回的 json 格式数据
 		$data = "['Name','Sex','Age']";
-
+	
 		echo $call."({$data})";
 	 ?>
 
@@ -151,12 +151,12 @@
 			// 移除该 iframe
 			document.body.removeChild(nIframe);
 		}
-
+	
 		var nIframe = document.createElement('iframe');
-
+	
 		nIframe.style.cssText = "display: none";
 		nIframe.src = "http://domain1.com:8081/info2.html";
-
+	
 		document.body.appendChild(nIframe);
 	</script>
 

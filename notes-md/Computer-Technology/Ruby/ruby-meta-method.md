@@ -2,8 +2,8 @@
 
     {
         "title": "Ruby-元编程之方法",
-        "tags": ["Computer Technology", "Ruby"],
-        "keywords": ["Computer Technology", "Ruby", "元编程", "Method"],
+        "tags": ["计算机技术", "Ruby"],
+        "keywords": ["计算机技术", "Ruby", "元编程", "Method"],
         "summary": "这篇文章讲述关于 Ruby 中方法相关的知识。事实上，有很多编程语言都具备元编程的能力，而 Ruby 则是将元编程发挥到极致的语言。元编程这个概念是模糊的，很多人都说是用代码生成代码的方式，不过我们不用去纠结这个概念。元编程最具有魅力的地方就是，原来我们还可以在程序运行时去操控代码。",
         "ctime": "2016-8-8 12:56:00",
         "mtime": "2016-8-8 12:56:00"
@@ -25,20 +25,20 @@
     class Test
         public
         # 这里定义公共方法
-
+    
         protected
         # 这里定义保护方法
-
+    
         private
         # 这里定义私有方法
     end
-
+    
     # 标记形式修饰方法
         class Test
         def method1 ; end
         def method2 ; end
         def method3 ; end
-
+    
         # 标记，可接受多个方法名参数
         protected :method2
         private :method3
@@ -53,17 +53,17 @@
             # 保护方法只能在实例方法中调用
             obj.m
         end
-
+    
         protected
-
+    
         def m
             p "1"
         end
     end
-
+    
     class SubClass < SuperClass
     end
-
+    
     # 同一个类的不同实例
     SuperClass.new.m1(SuperClass.new)  # ==> 1
     # 超类与子类实例
@@ -79,24 +79,24 @@
             ...
             puts "#{name}办卡"
         end
-
+    
         def check_out(name,book_id)
             ...
             puts "#{name}借书#{book_id}"
         end
-
+    
         def return_book(name,book_id)
             ...
             puts "#{name}还书#{book_id}"
         end
     end
-
+    
     class Manager
         def initialize
             @library = Library.new
             puts "现在受理业务"
         end
-
+    
         def controller(type,name,book_id=nil)
             # ...
             case type
@@ -109,11 +109,11 @@
             else
                 return puts "操作失败"
             end
-
+    
             puts "操作成功"
         end
     end
-
+    
     # 模拟管理员业务
     manager = Manager.new
     # ==> 现在受理业务
@@ -156,26 +156,26 @@
         def initialize
             puts "今天可以免费阅览部分书籍了"
         end
-
+    
         def book11
             puts "欢迎阅览本书，编号11"
             #...
             #return content
         end
-
+    
         def book22
             puts "欢迎阅览本书，编号22"
             #...
             #return content
         end
-
+    
         def book33
             puts "欢迎阅览本书，编号33"
             #...
             #return content
         end
     end
-
+    
     # 模拟免费阅览业务
     machine = Machine.new
     machine.book11
@@ -188,7 +188,7 @@
 
     class Machine
         @@free_id = [11,22,33]
-
+    
         def initialize
             @@free_id.each do |id|
                 # 动态定义
@@ -198,7 +198,7 @@
                     #return content
                 end
             end
-
+    
             puts "部分书籍今天可以免费阅览了"
         end
     end
@@ -227,7 +227,7 @@
         def initialize
             @collect = {}
         end
-
+    
         def method_missing(key, value=nil)
             key = key.to_s
             if key =~ /=$/
@@ -237,7 +237,7 @@
             end
         end
     end
-
+    
     obj = TestObject.new
     obj.a = 123
     obj.a  # ==> 123
@@ -254,18 +254,18 @@
     class Test
         def test1
         end
-
+    
         public
-
+    
         def test2
         end
-
+    
         private
-
+    
         def test3
         end
     end
-
+    
     t = Test.new
     t.respond_to?(:test1)  # ==> true
     t.respond_to?(:test2)  # ==> true
@@ -284,7 +284,7 @@
     def test(a, b)
         p a: a, b: b
     end
-
+    
     test(1, 2)
     # ==> {:a=>1, :b=>2}
 
@@ -293,13 +293,13 @@
     def test(a, b='b', c='c', d)
         p a: a, b: b, c: c, d: d
     end
-
+    
     test(1, 2)
     # ==> {:a=>1, :b=>"b", :c=>"c", :d=>2}
-
+    
     test(1, 2, 3)
     # ==> {:a=>1, :b=>2, :c=>"c", :d=>3}
-
+    
     test(1, 2, 3, 4)
     # ==> {:a=>1, :b=>2, :c=>3, :d=>4}
 
@@ -310,7 +310,7 @@
     def test(a:, b:'b', c:)
         p "#{a} #{b} #{c}"
     end
-
+    
     test(a:1, c:3)  # ==> "1 b 3"
     test(a:1, b:2, c:3)  # ==> "1 2 3"
 
@@ -321,13 +321,13 @@
     def test(a, *b)
         p a: a, b: b
     end
-
+    
     test(1)
     # ==> {:a=>1, :b=>[]}
-
+    
     test(1, 2)
     # ==> {:a=>1, :b=>[2]}
-
+    
     test(1, 2, 3)
     # ==> {:a=>1, :b=>[2, 3]}
 
@@ -336,7 +336,7 @@
     def test(**a)
         p a
     end
-
+    
     test()  # ==> {}
     test(a:1)  # ==> {:a=>1}
     test(a:1,b:2)  # ==> {:a=>1, :b=>2}
@@ -348,13 +348,13 @@
             p a: a, b: b, c: c, d: d
         end
     end
-
+    
     A.new.a(1, 2, 3)
     # ==> {:a=>1, :b=>2, :c=>nil, :d=>3}
-
+    
     A.new.a(1, [2, 3], 4)
     # ==> {:a=>1, :b=>2, :c=>3, :d=>4}
-
+    
     A.new.a(1, [2, 3, 4], 5)
     # ==> {:a=>1, :b=>2, :c=>3, :d=>5}
 
@@ -373,7 +373,7 @@
             self.each(&block)
         end
     end
-
+    
     [1, 2, 3].every { |value| puts value }
     # ==> 1
     # ==> 2

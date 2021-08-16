@@ -2,8 +2,8 @@
 
     {
         "title": "浏览器对象模型（BOM）",
-        "tags": ["Computer Technology", "Web", "Front End", "DOM"],
-        "keywords": ["Computer Technology", "Web", "Front End", "DOM", "BOM"],
+        "tags": ["计算机技术", "Web", "Front End", "DOM"],
+        "keywords": ["计算机技术", "Web", "Front End", "DOM", "BOM"],
         "summary": "在网页开发中，我们通常专注于内容的设计，而有些时候我们需要进行不同窗口之间的交互，这时候我们就需要学习如何运用 BOM 中的许多核心对象，及其属性、方法。",
         "ctime": "2016-5-15 12:02:00",
         "mtime": "2016-5-15 12:02:00"
@@ -49,7 +49,7 @@
     history     // History对象引用
     location    // Location对象引用
     document    // Document对象引用
-
+    
     // 例如
     window.document.title;
     window.location;
@@ -66,7 +66,7 @@
     alert()    // 警告对话框
     prompt()   // 输入对话框
     confirm()  // 确认对话框
-
+    
     // 例如
     window.alert(location);
     window.prompt("验证码","默认文本");
@@ -78,7 +78,7 @@
     clearInterval()  // 清除计时器
     setTimeout()     // 创建超时器
     clearTimeout()    // 清除计时器
-
+    
     // 例如
     setInterval("update()",1000);
 
@@ -116,7 +116,7 @@
 
     // 直接（精准）判断浏览器名称
     var ua = window.navigator.userAgent;
-
+    
     if (ua.search(/msie/i) >= 0){
         alert("你使用的是IE浏览器！");
     } else {
@@ -157,7 +157,7 @@
     back()     // 后退一个网页
     forward()  // 前进一个网页
     go()       // 按参数进行跳转
-
+    
     // 下面两个等价
     back();
     go(-1);
@@ -173,7 +173,7 @@
     hash       // 页面的锚(#)
     href       // 设置/获取完整URL
     search     // 设置/获取？后的URL部分
-
+    
     // 下面两个等价
     location.href = "http://wang1212.github.io/";
     location = "http://wang1212.github.io/";
@@ -185,7 +185,7 @@
     assign()     // 加载新页面
     reload()     // 页面重载/刷新
     replace()    // 替换当前页面，但不留历史记录
-
+    
     // 例如，导航栏没有历史记录
     location.replace("http://wang1212.github.io/");
 

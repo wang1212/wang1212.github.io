@@ -2,11 +2,11 @@
 
     {
 		"title": "JavaScript 异步编程",
-		"tags": ["Computer Technology", "JavaScript"],
-        "keywords": ["Computer Technology", "JavaScript", "Async"],
+		"tags": ["计算机技术", "JavaScript"],
+        "keywords": ["计算机技术", "JavaScript", "异步编程"],
         "summary": "JavaScript 作为一门在 Web 开发中的主流语言，常常涉及到交互事件方面的应用，这不可避免的用到了异步编程的方法，而它本身则是单线程运行的。在以往的开发中，异步编程正变得越来越难管理，新的 Promise 标准 API 将使得异步编程更加方便、安全。",
-        "ctime": "2017-3-22 15:48:00",
-        "mtime": "2018-6-3 13:46:00"
+        "ctime": "2017-03-22 15:48:00",
+        "mtime": "2018-06-03 13:46:00"
     }
 
 ---
@@ -34,7 +34,7 @@
 	function response(data){
 		// data 是一个大数组，并要进行遍历处理
 		var temp = data;
-
+	
 		temp.map(function(val){
 			return val * 2;
 		});
@@ -45,11 +45,11 @@
 	function response(data){
 		// 一次只处理 1000 个
 		var temp = data.splice(0, 1000);
-
+	
 		temp.map(function(val){
 			return val * 2;
 		});
-
+	
 		// 剩余的稍后继续处理
 		if(data.length > 0){
 			setTimeout(function(){
@@ -88,14 +88,14 @@
 　　举个简单的例子：
 
 	setTimeout(() => console.log(1));
-
+	
 	Promise.resolve(true)
 		.then(() => console.log(2))
 		.then(() => console.log(3))
 		.then(() => console.log(4));
-
+	
 	setTimeout(() => console.log(5));
-
+	
 	// console
 	2 3 4 1 5
 
@@ -111,7 +111,7 @@
 	ajax('', function(){
 		// do something
 	});
-
+	
 	// 事件也是一种异步编程的方式
 	$('#id').onclick = function(){
 		// do something
@@ -178,7 +178,7 @@
 	var p1 = new Promise(function(resolve, reject){
 		reject('error');
 	});
-
+	
 	var p2 = Promise.reject('error');
 
 　　`Promise.resolve()` 通常用来创建一个已完成的 Promise，可能失败也可能成功，根据传入的值来决定。
@@ -194,7 +194,7 @@
 	var p4 = new Promise(function(resolve, reject){
 		// do something
 	});
-
+	
 	p4.then(fulfilled, rejected).then(fulfilled, rejected);
 
 　　`then()` 方法的两个参数类似于构造器中回调方法的两个参数，代表着完成和拒绝操作。我们之所以可以进行链式操作，是因为每一个 Promise 的 API 都会最终返回一个 Promise 对象，这样我们就可以更灵活的进行编码。
@@ -202,7 +202,7 @@
 　　有时候，我们只希望单纯的进行错误处理，则可以使用以下的等价方式：
 
 	p4.then(null, rejected);
-
+	
 	p4.catch(rejected);
 
 　　这样并非是没有接收完成状态的决议值，而是将其传入下层的 Promise 对象中。
@@ -216,12 +216,12 @@
 	var p1 = Promise.resolve(42),
 		p2 = Promise.resolve('Hello World'),
 		p3 = Promise.reject('Error');
-
+	
 	Promise.all([p1, p2, p3])
 		.catch(function(err){
 			console.log(err);  // 'Error'
 		});
-
+	
 	Promise.all([p1, p2])
 		.then(function(msgs){
 			console.log(msgs);  // [42, 'Hello World']
@@ -258,17 +258,17 @@
 			}, 100);
 		});
 	}
-
+	
 	// 在此返回多个 Promise
 	function foo(bar, baz){
 		var x = bar * baz;
-
+	
 		return [
 			Promise.resolve(x),
 			getY(x)
 		];
 	}
-
+	
 	// 进行处理
 	Promise.all(
 		foo(10, 20)
@@ -301,13 +301,13 @@
 		// IE6, IE5 浏览器执行代码
 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
-
+	
 	xmlhttp.onreadystatechange = function(){
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
 			document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
 		}
 	}
-
+	
 	xmlhttp.open("GET", "/api/getData", true);
 	xmlhttp.send();
 
@@ -377,7 +377,7 @@ exp：
 	let formData = new FormData();
 	formData.append('username', 'mrwang');
 	formData.append('password', '123456');
-
+	
 	fetch('/api/postData', {
 		method: 'POST',
 		body: formData

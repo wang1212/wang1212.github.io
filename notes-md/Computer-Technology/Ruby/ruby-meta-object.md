@@ -2,8 +2,8 @@
 
     {
         "title": "Ruby-元编程之对象模型",
-        "tags": ["Computer Technology", "Ruby"],
-        "keywords": ["Computer Technology", "Ruby", "元编程", "Object", "Module"],
+        "tags": ["计算机技术", "Ruby"],
+        "keywords": ["计算机技术", "Ruby", "元编程", "Object", "Module"],
         "summary": "这篇文章讲述关于 Ruby 中对象模型相关的知识。事实上，有很多编程语言都具备元编程的能力，而 Ruby 则是将元编程发挥到极致的语言。元编程这个概念是模糊的，很多人都说是用代码生成代码的方式，不过我们不用去纠结这个概念。元编程最具有魅力的地方就是，原来我们还可以在程序运行时去操控代码。",
         "ctime": "2016-8-1 18:39:00",
         "mtime": "2016-8-1 18:39:00"
@@ -24,7 +24,7 @@
     class A
         # 这里定义一个类
     end
-
+    
     class B < A
         # 该类（B）继承自类A
     end
@@ -37,7 +37,7 @@
             @a = 1
         end
     end
-
+    
     a = A.new
 
 　　**`initialize()` 方法是对象实例化时默认调用的，于是我们可以在此方法内部完成一些事情（初始化变量，调用方法等），该方法是可以传递参数的。**看见了吧，Ruby 在创建实例对象时的方式也是不同的，是通过调用 `new()` 方法来完成的，这么做自有它的道理。
@@ -51,7 +51,7 @@
             p "Hello，World！"
         end
     end
-
+    
     "a".say  # ==> "Hello，World！"
 
 　　我们给 String 类添加了一个实例方法，这时所有的字符串都拥有这个 `say()` 方法了。**`class` 关键字的另一个作用就是，打开已经存在的一个类对其进行修改。**这是 Ruby 的特色，很方便我们开发者，但是我们不要频繁的打开类，因为到处打开同一个类并不方便我们进行后期维护，而且打开类很容易覆盖内建方法，极有可能导致 Ruby 崩溃。
@@ -64,16 +64,16 @@
         def speak
         end
     end
-
+    
     class B < A
         def initialize(n)
             @a = n
         end
-
+    
         def say
         end
     end
-
+    
     obj = B.new(5)
     obj.class  # ==> B
     obj.methods  # ==> [:speak,:say...]
@@ -103,11 +103,11 @@
         def say
         end
     end
-
+    
     class C
         include M
     end
-
+    
     c = C.new
     c.methods  # ==> [:say,...]
 
@@ -117,14 +117,14 @@
 
     module M
         CONST = "out"
-
+    
         class C
             CONST = "in"
             Module.nesting
         end
     end
     # ==> [M::C, M]
-
+    
     M::CONST  # ==> "out"
     M::C::CONST  #==> "in"
 
@@ -145,7 +145,7 @@
             p "Hello!"
         end
     end
-
+    
     class B
         a = A.new
         a.say
@@ -157,12 +157,12 @@
         def initialize(n)
             @a = n
         end
-
+    
         def say
             p @a
         end
     end
-
+    
     obj1 = A.new(10)
     obj2 = A.new(20)
     obj1.say  # ==> 10
@@ -175,7 +175,7 @@
     class A
         def A.say
         end
-
+    
         def self.say
         end
     end

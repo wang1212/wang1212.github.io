@@ -2,8 +2,8 @@
 
     {
         "title": "Web 前端架构设计",
-        "tags": ["Computer Technology", "Web", "Front End"],
-        "keywords": ["Computer Technology", "Web", "Front End", "架构设计"],
+        "tags": ["计算机技术", "Web", "Front End"],
+        "keywords": ["计算机技术", "Web", "Front End", "架构设计"],
         "summary": "Web 前端开发是一个零散化的过程，基本上没有专业的 IDE 来为我们提供一整套的自动化流程解决方案，如何从需求到实现一步步快速推进形成完整的工作流，在后期如何高效的进行测试和优化，让前端开发可持续化、可扩展显得极为重要。",
         "ctime": "2018-3-28 14:01:00",
         "mtime": "2018-7-1 1:29:00"
@@ -437,7 +437,7 @@
     .container {
         padding: 10px 20px;
     }
-
+    
     .content,
     .item:hover {
         color: orange;
@@ -476,7 +476,7 @@
 
     .container {
         padding: 10px 20px;
-
+    
         & > .content {
             border: 1px solid black;
         }
@@ -487,7 +487,7 @@
     .container {
         padding: 10px 20px;
     }
-
+    
     .container > .content {
         border: 1px solid black;
     }
@@ -510,28 +510,28 @@
     .item {
         // 1. 当前选择器样式属性
         font-size: .8em;
-
+    
         // 2. 父级选择器的伪类
         &：hover {
             color: orange;
         }
-
+    
         // 3. ::before && ::after
         &::before {
             content: attr("tip");
             display: block;
         }
-
+    
         // 4. 父级选择器声明样式
         &.selected {
             background-color: red;
         }
-
+    
         // 5. 上下文媒体查询
         @media screen and (min-width: 768px) {
             font-size: 1.2em;
         }
-
+    
         // 6. 子类选择器
         & > .text {
             font-weight: 400;
@@ -648,7 +648,7 @@
 　　JavaScript 中有声明提升的机制，因为不存在块作用域，在同一个作用域中不同代码块中声明的变量与函数最终都会被提升到作用域顶层声明。
 
     var a;
-
+    
     a = 1;
     if (a) {
         var b = 1;
@@ -658,7 +658,7 @@
 
     var a,
         b;
-
+    
     a = 1;
     if (a) {
         b = 1;
@@ -689,7 +689,7 @@
 　　**推荐：**
 
     function foo() {}
-
+    
     if(b){
         var bar = function() {};
         ...
@@ -768,7 +768,7 @@
 
     单行：
     // somethings
-
+    
     多行：
     /*
         somethings

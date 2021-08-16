@@ -2,11 +2,11 @@
 
     {
         "title": "DOM-元素节点属性",
-        "tags": ["Computer Technology", "Web", "Front End", "DOM"],
-        "keywords": ["Computer Technology", "Web", "Front End", "DOM", "Attribute"],
+        "tags": ["计算机技术", "Web", "Front End", "DOM"],
+        "keywords": ["计算机技术", "Web", "Front End", "DOM", "Attribute"],
         "summary": "元素节点上具有很多属性，这些属性我们通常可以很方便的获取，并进行简单的操作。",
-        "ctime": "2016-5-21 21:00:00",
-        "mtime": "2016-5-21 21:00:00"
+        "ctime": "2016-05-21 21:00:00",
+        "mtime": "2016-05-21 21:00:00"
     }
 
 ---
@@ -26,17 +26,17 @@ exp:
     <body>
     <script>
         var img_obj=document.querySelector("img");
-
+    
         // 用方法设置单个属性
         img_obj.setAttribute("src","123.png");
         img_obj.setAttribute("title","img");
         img_obj.setAttribute("alt","img");
-
+    
         // 用方法获取单个属性
         console.log(img_obj.getAttribute("src"));  // 输出 123.png
         console.log(img_obj.getAttribute("title"));  // 输出 img
         console.log(img_obj.getAttribute("alt"));  // 输出 img
-
+    
         // 用方法移除单个属性
         img_obj.removeAttribute("src");
         img_obj.removeAttribute("title");
@@ -49,7 +49,7 @@ exp:
         // 直接获取属性（绝对路径）
         console.log(img_obj.src);
         // 输出 file:///C:/Users/Administrator.USER-20141121ES/Desktop/html/123.png
-
+    
         // 用方法获取（原始值）
         console.log(img_obj.getAttribute("src"));
         // 输出 123.png
@@ -81,17 +81,17 @@ exp:
     <body>
     <script>
         var div_style=document.querySelector("div").style;
-
+    
         // 直接设置单个内联CSS属性
         div_style.width="200px";
         div_style.height="200px";
         div_style.backgroundColor="red";
-
+    
         // 直接获取单个内联CSS属性
         console.log(div_style.width); //输出200px
         console.log(div_style.height); //输出200px
         console.log(div_style.backgroundColor);  // 输出red
-
+    
         // 直接移除单个内联CSS属性
         div_style.width="";
         div_style.height="";
@@ -105,11 +105,11 @@ exp:
     font-size ---> fontSize
     border-bottom ---> borderBottom
     margin-top ---> marginTop
-
+    
     // 简写属性也可以
     border ---> border
     margin ---> margin
-
+    
     // 如果属性名为 javascript 关键字，则加前缀
     float ---> cssFloat
 
@@ -126,17 +126,17 @@ exp:
     <body>
     <script>
         var div_style=document.querySelector("div").style;
-
+    
         // 用方法设置单个内联CSS属性
         div_style.setProperty("width","200px");
         div_style.setProperty("height","200px");
         div_style.setProperty("background-color","red");
-
+    
         // 用方法获取单个内联CSS属性
         console.log(div_style.getPropertyValue("width"));  // 输出200px
         console.log(div_style.getPropertyValue("height"));  // 输出200px
         console.log(div_style.getPropertyValue("background-color"));  // 输出red
-
+    
         // 用方法移除单个内联CSS属性
         div_style.removeProperty("width");
         div_style.removeProperty("height");
@@ -156,7 +156,7 @@ exp:
     <body>
     <script>
         var div_obj=document.querySelector("div");
-
+    
         // 用内联style属性对象上的方法
         // 设置所有内联CSS属性
         div_obj.style.cssText="width: 200px;height: 200px;background-color: #ccc";
@@ -165,7 +165,7 @@ exp:
         // 输出 width: 200px; height: 200px; background-color: rgb(204, 204, 204);
         // 移除所有内联CSS属性
         div_obj.style.cssText="";
-
+    
         // 用元素自身的方法
         // 设置所有内联CSS属性
         div_obj.setAttribute("style","width: 200px;height: 200px;background-color: #ccc");
@@ -196,17 +196,17 @@ exp:
     </body>
     <script>
         var div_obj=document.querySelector("div");
-
+    
         // 此为内部样式表中的CSS属性
         console.log(window.getComputedStyle(div_obj).width);
         // 输出 200px
         console.log(window.getComputedStyle(div_obj).height);
         // 输出 200px
-
+    
         // 内联CSS属性覆盖了内部样式表中的CSS属性
         console.log(window.getComputedStyle(div_obj).backgroundColor);
         // 输出 rgb(255, 0, 0)
-
+    
         // 此为内联CSS属性
         console.log(window.getComputedStyle(div_obj).border);
         // 输出 1px solid rgb(0, 0, 255)
@@ -243,7 +243,7 @@ exp:
         console.log(div_obj.getAttribute("id"));  // 输出 a
         // 去掉ID
         div_obj.removeAttribute("id");
-
+    
         // 添加class,让DIV居中
         div_obj.classList.add("b2");
         // 获取class

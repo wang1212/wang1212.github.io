@@ -2,11 +2,11 @@
 
     {
         "title": "DOM-选取元素节点",
-        "tags": ["Computer Technology", "Web", "Front End", "DOM"],
-        "keywords": ["Computer Technology", "Web", "Front End", "DOM", "Selector"],
+        "tags": ["计算机技术", "Web", "Front End", "DOM"],
+        "keywords": ["计算机技术", "Web", "Front End", "DOM", "Selector"],
         "summary": "DOM 操作都是通过对文档树中节点的访问来实现的，如何选取特定的元素节点是关键，进而才能访问该元素节点实现修改、查看、移除、替换等操作。",
-        "ctime": "2016-5-17 22:10:00",
-        "mtime": "2016-5-17 22:10:00"
+        "ctime": "2016-05-17 22:10:00",
+        "mtime": "2016-05-17 22:10:00"
     }
 
 ---
@@ -33,7 +33,7 @@ exp：
         console.log(document.querySelector("ul>li"));
         console.log(document.querySelector("#Dog"));
         console.log(document.querySelector("#animal>#Dog"));
-
+    
         // getElementById()通过ID属性获取
         console.log(document.getElementById("Dog"));
     </script>
@@ -63,10 +63,10 @@ exp：
         console.log(document.querySelectorAll("li"));
         console.log(document.querySelectorAll("ul>li"));
         console.log(document.querySelectorAll("#animals>.animal"));
-
+    
         // getElementsByTagName()通过标签名称获取
         console.log(document.getElementsByTagName("li"));
-
+    
         // getElementsByClassName()通过class属性获取
         console.log(document.getElementsByClassName("animal"));
     </script>
@@ -103,7 +103,7 @@ exp：
             <li>Banana</li>
             <li>Pear</li>
         </ul>
-
+    
         <ul id="animals">
             <li>Dog</li>
             <li>Cat</li>
@@ -113,7 +113,7 @@ exp：
     <script>
         // 获取第二个<ul>元素中的所有<li>子元素
         console.log(document.querySelectorAll("#animals>li"));
-
+    
         // 这样也可以
         var li_animals=document.querySelector("#animals");
         console.log(li_animals.querySelectorAll("li"));
@@ -166,7 +166,7 @@ exp：
             <li>Banana</li>
             <li>Pear</li>
         </ul>
-
+    
         <ul id="animals">
             <li id="Dog">Dog</li>
             <li>Cat</li>

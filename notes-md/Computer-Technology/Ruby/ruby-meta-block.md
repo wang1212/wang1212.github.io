@@ -2,8 +2,8 @@
 
     {
         "title": "Ruby-元编程之代码块",
-        "tags": ["Computer Technology", "Ruby"],
-        "keywords": ["Computer Technology", "Ruby", "元编程", "Block"],
+        "tags": ["计算机技术", "Ruby"],
+        "keywords": ["计算机技术", "Ruby", "元编程", "Block"],
         "summary": "这篇文章讲述关于 Ruby 中代码块相关的知识，这也是 Ruby 的特色。事实上，有很多编程语言都具备元编程的能力，而 Ruby 则是将元编程发挥到极致的语言。元编程这个概念是模糊的，很多人都说是用代码生成代码的方式，不过我们不用去纠结这个概念。元编程最具有魅力的地方就是，原来我们还可以在程序运行时去操控代码。",
         "ctime": "2016-12-5 15:33:00",
         "mtime": "2016-12-5 15:33:00"
@@ -24,7 +24,7 @@
     [1, 2, 3].each { |item|
         puts item
     }
-
+    
     # ==> 1
     # ==> 2
     # ==> 3
@@ -34,7 +34,7 @@
     ["a", "b", "c"].each do |item|
         puts item
     end
-
+    
     # ==> a
     # ==> b
     # ==> c
@@ -58,12 +58,12 @@
             yield(element)
         end
     end
-
+    
     # 定义块
     each(1,2,3) do |item|
         puts item * 2
     end
-
+    
     # ==> 2
     # ==> 4
     # ==> 6
@@ -75,13 +75,13 @@
     # 定义方法
     def say(&block)
         puts "Do you like dogs?"
-
+    
         # 捕获块，回调执行
         block.call("yes")
         block.call("no")
         block.call()
     end
-
+    
     # 定义块
     say do |answer|
         if answer == "yes"
@@ -92,7 +92,7 @@
             puts "I don't know."
         end
     end
-
+    
     # ==> Do you like dogs?
     # ==> I like dogs.
     # ==> I like cats than dogs.
@@ -109,9 +109,9 @@
         return yield if block_given?
         puts "no block"
     end
-
+    
     test # ==> no block
-
+    
     test { puts "block is here" } # ==> block is here
 
 ## 作用域
@@ -124,13 +124,13 @@
 
     # 进入顶级独立作用域
     local_variable = 'a';
-
+    
     module Outter  # 进入模块独立作用域
         local_variable = 'b';
-
+    
         class Inner  # 进入类独立作用域
             local_variable = 'c';
-
+    
             def func  # 进入方法独立作用域
                 local_variable = 'd';
             end
@@ -152,17 +152,17 @@
         yield(y)
         puts "method_local_x=#{x}"
     end
-
+    
     x =10
     puts "main_local_x=#{x}"
-
+    
     test do |y|
         puts "block_x=#{x}"
         x += y
     end
-
+    
     puts "main_local_x=#{x}"
-
+    
     # ==> main_local_x=10
     # ==> method_local_x=100
     # ==> block_x=10
@@ -178,22 +178,22 @@
 　　在讨论完 Ruby 严格的作用域机制与块作用域之后，我们似乎可以干点什么。没错，利用块作用域来打破这种严格的作用域机制。
 
     local_variable = "a"
-
+    
     Outter = Module.new do
         puts "module->main:" + local_variable
-
+    
         Inner = Class.new do
             puts "class->main:" + local_variable
-
+    
             define_method :func do
                 puts "method->main:" + local_variable
             end
         end
     end
-
+    
     # ==> module->main:a
     # ==> class->main:a
-
+    
     Inner.new.func()
     # ==> method->main:a
 
@@ -213,14 +213,14 @@
             @age = age;
         end
     end
-
+    
     p = Person.new("MrWang",18);
     p.instance_eval do
         puts "#{@name} #{@age} 岁"
         @age = 20
         puts "#{@name} #{@age} 岁"
     end
-
+    
     # ==> MrWang 18 岁
     # ==> MrWang 20 岁
 
@@ -246,7 +246,7 @@
 
     inc = Proc.new { |x| puts x + 1 }
     add = proc { |a,b| puts a + b }
-
+    
     inc.call(2);  # ==> 3
     inc.call(5);  # ==> 6
     add.call(2,3)  # ==> 5
@@ -258,7 +258,7 @@
         return block
     end
     p = test { }
-
+    
     puts p.class  # ==> Proc
 
 　　其实与方法关联的块在使用尾部参数捕获后，去掉 `&` 操作符就是一个 `Proc` 对象，加上 `&` 又是一个块（可以传递给其他方法），这样可以相互转换。
@@ -269,7 +269,7 @@
 
     inc = lambda { |x| x + 1 }
     add = ->(a,b) { puts a+b }
-
+    
     inc.call(2);  # ==> 3
     add.call(2,3);  # ==> 5
     puts inc.class  # ==> Proc
@@ -298,11 +298,11 @@
         x = n
         return -> {x *= 10; puts "block_local_x=#{x}"}
     end
-
+    
     # 获取方法内块的引用
     closure_1 = closure(1)
     closure_2 = closure(2)
-
+    
     closure_1.call  # ==> block_local_x=10
     closure_2.call  # ==> block_local_x=20
     closure_1.call  # ==> block_local_x=100

@@ -2,8 +2,8 @@
 
     {
         "title": "HTTP 协议",
-        "tags": ["Computer Technology", "Protocol"],
-        "keywords": ["Computer Technology", "Protocol", "HTTP"],
+        "tags": ["计算机技术", "协议"],
+        "keywords": ["计算机技术", "协议", "HTTP"],
         "summary": "随着 Internet 的发展，使用 Web 浏览器获取网络数据信息已经成为一种习惯标准，而 HTTP 协议也因此成为了网络体系中最重要的应用层协议。",
         "ctime": "2016-6-24 14:59:00",
         "mtime": "2018-5-27 17:45:00"

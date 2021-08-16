@@ -2,8 +2,8 @@
 
     {
         "title": "文档对象模型（DOM）",
-        "tags": ["Computer Technology", "Web", "Front End", "DOM"],
-        "keywords": ["Computer Technology", "Web", "Front End", "DOM"],
+        "tags": ["计算机技术", "Web", "Front End", "DOM"],
+        "keywords": ["计算机技术", "Web", "Front End", "DOM"],
         "summary": "在网页设计中，有一个很重要的角色需要我们了解，DOM 帮助我们对页面元素进行增、删、改等全方位的操作，而且让 JavaScript 在客户端修改 HTML 文档成为一个很简单的事情，可以说 DOM 为我们操作 HTML 文档提供了强大的编程接口。",
         "ctime": "2016-5-16 14:04:00",
         "mtime": "2016-5-16 14:04:00"
@@ -38,7 +38,7 @@
             console.log(key,"=" + Node[key]);
         }
     </script>
-
+    
     // 控制台输出
     ELEMENT_NODE =1
     ATTRIBUTE_NODE =2
@@ -65,12 +65,12 @@
     </body>
     <script>
         var a_obj = document.querySelector("a");
-
+    
         for (var key in a_obj){
             document.write(key+"<br />");
         }
     </script>
-
+    
     // 输出
     target
     download
@@ -135,7 +135,7 @@
         p_obj=document.querySelector("p");
         document.write(p_obj.nodeType+"<br />"); // 输出1
         document.write(p_obj.nodeName+"<br />"); // 输出P
-
+    
         // 查看p标签内文本节点的nodeType和nodeName
         text_obj=document.querySelector("p").firstChild;
         document.write(text_obj.nodeType+"<br />"); // 输出3
@@ -187,20 +187,20 @@ exp：
             两个<li>元素节点，一个<em>元素节点，一个文本（Text）节点。
         这是因为第一个</li>后面的回车符也是文本字符。
         */
-
+    
         // 先找到一个目标节点<ul>
         var ul_obj=document.querySelector("ul");
-
+    
         // 获取它的父节点
         document.write(ul_obj.parentNode.nodeName+"<br />"); // 输出BODY
         // 获取它的第一个直属子节点
         document.write(ul_obj.firstChild.nodeName+"<br />"); // 输出LI
         // 获取它的最后一个直属子节点
         document.write(ul_obj.lastChild.nodeName+"<br />"); // 输出EM
-
+    
         // 重新找一个目标节点<li id="B">
         var B_obj=document.querySelector("#B");
-
+    
         // 获取它的上一个兄弟节点
         document.write(B_obj.previousSibling.nodeName+"<br />"); // 输出#text
         // 获取它的下一个兄弟节点
@@ -340,17 +340,17 @@ exp：
 
 
     // 我们随便打开一个页面，在控制台进行下列操作
-
+    
     // 下面这句会弹出&lt;html&gt;元素内的源代码，但不包括&lt;html&gt;标签
     alert(document.documentElement.innerHTML);
-
+    
     // 下面这句会弹出&lt;html&gt;元素内的源代码，包括&lt;html&gt;标签
     alert(document.documentElement.outerHTML);
-
+    
     // 下面两句会弹出&lt;html&gt;元素内的所有文本节点的字符串
     alert(document.documentElement.innerText);
     alert(document.documentElement.outerText);
-
+    
     // 下面这句也会弹出&lt;html&gt;元素内的所有文本节点的字符串，但稍不一样
     alert(document.documentElement.textContent);
 
@@ -377,7 +377,7 @@ exp：
     <script>
         // 创建<strong>元素节点和文本节点并插入DOM树
         document.querySelector("p").innerHTML="<strong>Hello</strong> World!";
-
+    
         // 创建文本节点并插入DOM树,下面两句效果一样
         document.querySelector("h1").textContent="China";
         document.querySelector("h1").innerText="China";
@@ -397,7 +397,7 @@ exp：
         // "afterbegin"    （开始标签后）
         // "beforeend"     （关闭标签前）
         // "afterend"      （关闭标签后）
-
+    
         // 创建<strong>元素节点和文本节点并插入到p节点开始标签后面
         document.querySelector("p").insertAdjacentHTML("afterbegin","<strong>Hello</strong>");
     </script>
@@ -419,7 +419,7 @@ exp：
     <script>
         // 移除<span>元素节点
         document.querySelector("span").outerHTML="";
-
+    
         // 替换<p>元素为<h1>元素,并替换文本节点
         document.querySelector("p").outerHTML="<h1>Hello,China!</h1>";
     </script>

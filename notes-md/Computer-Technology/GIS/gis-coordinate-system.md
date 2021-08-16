@@ -2,8 +2,8 @@
 
     {
         "title": "GIS-坐标系统",
-        "tags": ["Computer Technology", "GIS"],
-        "keywords": ["Computer Technology", "GIS", "Coordinate"],
+        "tags": ["计算机技术", "GIS"],
+        "keywords": ["计算机技术", "GIS", "坐标系统"],
         "summary": "GIS，地理信息系统（Geographic Information System），它是一种特定的十分重要的空间信息系统，坐标系统是 GIS 理论知识中最基本的而且最关键的一点。",
         "ctime": "2018-06-06 02:53:00",
         "mtime": "2019-07-12 03:20:00"

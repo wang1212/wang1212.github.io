@@ -2,8 +2,8 @@
 
     {
         "title": "使用 Git",
-        "tags": ["Computer Technology", "Tools"],
-        "keywords": ["Computer Technology", "Tools", "Git"],
+        "tags": ["计算机技术", "工具"],
+        "keywords": ["计算机技术", "工具", "Git"],
         "summary": "Git 是一个分布式的版本控制工具，类似的版本控制工具还有 SVN ；由于 GitHub 平台的盛行，也使得 git 更加受欢迎，在 Windows 平台使用 git 也是非常方便的。",
         "ctime": "2016-12-31 13:49:00",
         "mtime": "2021-05-18 16:12:00"
@@ -177,7 +177,7 @@ git commit -am "version_message"
 ####  调试技巧
 
 　　这里有一个小技巧，通常为了测试一些 hook 事件程序（例如 [husky](https://typicode.github.io/husky)），我们会做一下某些文件的细微改动然后提交来触发相应事件，但 `--allow-empty` 选项可以让我们更方便一些：
-  
+
 ```bash
 # 直接执行即可，不用改动任何文件
 git commit --allow-empty -m 'it works!'

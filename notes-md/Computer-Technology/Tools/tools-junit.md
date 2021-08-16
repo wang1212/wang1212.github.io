@@ -2,8 +2,8 @@
 
     {
         "title": "Junit 测试工具",
-        "tags": ["Computer Technology", "Tools"],
-        "keywords": ["Computer Technology", "Tools", "Java", "JUnit4", "Test"],
+        "tags": ["计算机技术", "工具"],
+        "keywords": ["计算机技术", "工具", "Java", "JUnit4", "测试"],
         "summary": "通常一个项目的代码量是比较大的，而且其中逻辑也较为复杂，在开发完成后再进行项目测试其实是比较耗费时间和精力的，因此边开发边测试是个很好的选择，而 JUnit 则为我们提供了这样的便利。",
         "ctime": "2017-8-30 23:42:00",
         "mtime": "2017-8-30 23:42:00"
@@ -128,13 +128,13 @@
             return a/b;
         }
     }
-
+    
     // 参数化设置的测试类
     @RunWith(Parameterized.class)
     public class ParameterTest {
         // 参数
         int expected, input1, input2;
-
+    
         // 用来返回一组参数
         @Parameters
         public static Collection<Object[]> params(){
@@ -144,14 +144,14 @@
                 {25, 625, 25}
             });
         }
-
+    
         // 构造器
         public ParameterTest(int expected, int input1, int input2) {
             this.expected = expected;
             this.input1 = input1;
             this.input2 = input2;
         }
-
+    
         // 测试方法
         @Test
         public void testDivide() {

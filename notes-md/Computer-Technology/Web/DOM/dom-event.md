@@ -2,11 +2,11 @@
 
     {
         "title": "DOM-事件",
-        "tags": ["Computer Technology", "Web", "Front End", "DOM"],
-        "keywords": ["Computer Technology", "Web", "Front End", "DOM", "Event"],
+        "tags": ["计算机技术", "Web", "Front End", "DOM"],
+        "keywords": ["计算机技术", "Web", "Front End", "DOM", "Event"],
         "summary": "JavaScript 的作用就是让 html 静态页面具备动态效果，而这些基本都是利用 DOM 事件来实现的。",
-        "ctime": "2016-5-23 12:18:00",
-        "mtime": "2016-5-23 12:18:00"
+        "ctime": "2016-05-23 12:18:00",
+        "mtime": "2016-05-23 12:18:00"
     }
 
 ---
@@ -24,22 +24,22 @@
     <body>
         <!-- 第一种：内联（html）事件 -->
         <div onclick="alert(-1)">这是个内联事件</div>
-
+    
         <div id="event0">这是个0级DOM事件</div>
-
+    
         <div id="event2">这是个2级DOM事件</div>
     </body>
     <script>
         // 第二种：属性（0级DOM）事件
         var div_obj0 = document.querySelector("#event0");
-
+    
         div_obj0.onclick = function(){
             alert(0);
         }
-
+    
         // 第三种：2级DOM事件（addEventListener 方法）
         var div_obj2 = document.querySelector("#event2");
-
+    
         div_obj2.addEventListener("click", function(){
             alert(1);
         }, false);
@@ -70,12 +70,12 @@
         document.body.addEventListener('click', function(){
             console.info("2：捕获目标中");
         }, true);
-
+    
         // 目标div
         document.querySelector('div').addEventListener('click', function(){
             console.info("3：找到目标div");
         }, false);
-
+    
         // 事件冒泡阶段
         document.body.addEventListener('click', function(){
             console.info("4：事件冒泡中");
@@ -176,7 +176,7 @@ exp：
         document.body.addEventListener('click', function(){
             alert("我是body");
         }, false);
-
+    
         // 定义input上的事件
         document.querySelector("input").addEventListener('click', function(event){
             this.value = "";
@@ -200,12 +200,12 @@ exp：
             alert(this.value);
             this.value="";
         }
-
+    
         // 定义input上的0级DOM事件
         document.querySelector("input").onclick = show;
         // 移除0级DOM事件（内联事件也一样）
         document.querySelector("input").onclick = "";
-
+    
         // 定义input上的2级DOM事件
         document.querySelector("input").addEventListener('click', show, false);
         // 移除2级DOM事件
