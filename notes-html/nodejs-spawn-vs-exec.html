@@ -1,0 +1,123 @@
+<p>　　利用 Node.js 编写一些命令行工具、一次性脚本是很方便的，而在这类场景下 child_process API 的 <code>spawn</code> 和 <code>exec</code> 方法的应用则非常常见。在我使用它们时，却不知道该如何进行选择，遂对此进行了探究。</p>
+<h2 id="child-process-api">Child process API</h2>
+<p>　　先来看看 <code>child_process</code> API，根据官方文档描述：</p>
+<blockquote>
+<p>The <code>child_process</code> module provides the ability to spawn subprocesses in a manner that is similar, but not identical, to <a href="http://man7.org/linux/man-pages/man3/popen.3.html"><code>popen(3)</code></a>. <strong>This capability is primarily provided by the <a href="https://nodejs.org/dist/latest/docs/api/child_process.html#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a> function:</strong></p>
+</blockquote>
+<p>　　其类似于 Linux 的 <code>popen</code> 命令行为，<code>spawn</code> 是其核心方法，通过创建一个管道（pipe），调用 fork 生成一个子进程，并执行 shell 命令。例如，通过该 API 就可以以编程的方式生成子进程并执行二进制文件，这在编写脚本工具时是一个非常常见的场景。</p>
+<p>　　在这里，主要讨论的是异步版本，当然 Node.js 为它们提供了相应的同步版本，例如 <code>spawnSync</code> 和 <code>execSync</code>。</p>
+<h3 id="spawn"><code>spawn</code></h3>
+<p>　　前面说到 <code>spawn</code> 是 Child process API 的核心方法，其实从源码可以一窥究竟：</p>
+<pre><code class="language-js"><span class="hljs-comment">// https://github.com/nodejs/node/blob/v16.8.0/lib/child_process.js</span>
+<span class="hljs-keyword">function</span> exec(command, options, callback) {
+  const opts = normalize<span class="hljs-constructor">ExecArgs(<span class="hljs-params">command</span>, <span class="hljs-params">options</span>, <span class="hljs-params">callback</span>)</span>;
+  return <span class="hljs-keyword">module</span>.exports.exec<span class="hljs-constructor">File(<span class="hljs-params">opts</span>.<span class="hljs-params">file</span>, <span class="hljs-params">opts</span>.<span class="hljs-params">options</span>, <span class="hljs-params">opts</span>.<span class="hljs-params">callback</span>)</span>;
+}
+
+<span class="hljs-keyword">function</span> exec<span class="hljs-constructor">File(<span class="hljs-params">file</span> <span class="hljs-operator">/</span><span class="hljs-operator">*</span> , <span class="hljs-params">args</span>, <span class="hljs-params">options</span>, <span class="hljs-params">callback</span> <span class="hljs-operator">*</span><span class="hljs-operator">/</span>)</span> {
+    <span class="hljs-comment">// ...</span>
+    const child = spawn<span class="hljs-literal">()</span>;
+    <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-comment">// ---</span>
+<span class="hljs-keyword">function</span> fork(modulePath <span class="hljs-comment">/* , args, options */</span>) {
+    <span class="hljs-comment">// ...</span>
+    return spawn(options.execPath, args, options);
+}</code></pre>
+<p>　　可见，<code>exec</code> 和 <code>fork</code> 最终还是依赖于 <code>spawn</code> 的实现。而对于后者的实现：</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> child_process = <span class="hljs-built_in">require</span>(<span class="hljs-string">'internal/child_process'</span>);
+<span class="hljs-keyword">const</span> { ChildProcess } = child_process;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">spawn</span>(<span class="hljs-params">file, args, options</span>) </span>{
+    <span class="hljs-comment">// ...</span>
+    <span class="hljs-keyword">const</span> child = <span class="hljs-keyword">new</span> ChildProcess();
+      child.spawn(options);
+    <span class="hljs-comment">// ...</span>
+}</code></pre>
+<p>　　依赖于底层的内部模块 <em>internal/child_process</em> 。</p>
+<p>　　<code>spawn</code> 的主要功能是生成一个子进程，并执行给定的命令，父子进程之间通过管道（pipe）传递 <code>stdio</code> 信息，而且默认不生成 shell。根据示例：</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> { spawn } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'child_process'</span>);
+<span class="hljs-keyword">const</span> ls = spawn(<span class="hljs-string">'ls'</span>, [<span class="hljs-string">'-lh'</span>, <span class="hljs-string">'/usr'</span>]);
+
+ls.stdout.on(<span class="hljs-string">'data'</span>, <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`stdout: <span class="hljs-subst">${data}</span>`</span>);
+});
+
+ls.stderr.on(<span class="hljs-string">'data'</span>, <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.error(<span class="hljs-string">`stderr: <span class="hljs-subst">${data}</span>`</span>);
+});
+
+ls.on(<span class="hljs-string">'close'</span>, <span class="hljs-function">(<span class="hljs-params">code</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`child process exited with code <span class="hljs-subst">${code}</span>`</span>);
+});</code></pre>
+<p>　　父进程通过监听子进程相应的 <code>stdio</code> 事件进行通信。</p>
+<h3 id="exec"><code>exec</code></h3>
+<p>　　前面根据源码可以看到 <code>exec</code> 的实现基于 <code>spawn</code>，但不同的是，前者在生成子进程的同时，会先生成一个 shell，然后在 shell 中执行给定的命令，子进程的输出信息会进行缓冲并最终传递给回调函数。根据示例：</p>
+<pre><code class="language-js">const { exec } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'child_process'</span>);
+exec(<span class="hljs-string">'cat *.js missing_file | wc -l'</span>, (<span class="hljs-built_in">error</span>, <span class="hljs-built_in">stdout</span>, <span class="hljs-built_in">stderr</span>) =&gt; {
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">error</span>) {
+    console.<span class="hljs-built_in">error</span>(`exec <span class="hljs-built_in">error</span>: ${<span class="hljs-built_in">error</span>}`);
+    <span class="hljs-keyword">return</span>;
+  }
+  console.<span class="hljs-built_in">log</span>(`<span class="hljs-built_in">stdout</span>: ${<span class="hljs-built_in">stdout</span>}`);
+  console.<span class="hljs-built_in">error</span>(`<span class="hljs-built_in">stderr</span>: ${<span class="hljs-built_in">stderr</span>}`);
+});</code></pre>
+<p>　　父进程并非通过监听子进程的  <code>stdio</code>  事件，而是给子进程传递一个回调函数来获取子进程的输出信息。</p>
+<p>　　这里有一个显著的区别，<code>exec</code> 会先生成一个 shell 在执行命令，而 <code>spawn</code> 则会直接执行命令，但考虑到前者基于后者实现，事实上后者可以通过传递 <code>options.shell</code> 选项来选择是否生成 shell。</p>
+<p>　　官方文档有一句话也值得留意：</p>
+<blockquote>
+<p>Unlike the <a href="http://man7.org/linux/man-pages/man3/exec.3.html"><code>exec(3)</code></a> POSIX system call, <code>child_process.exec()</code> does not replace the existing process and uses a shell to execute the command.</p>
+</blockquote>
+<p>　　<code>exec</code> 的 POSIX 系统调用的行为是，在当前进程中用新的进程映像（程序）替换旧的进程映像并执行，本质上并没有生成新的进程，也就不存在父子进程的概念。而在这里，Node.js 的 <code>exec</code> 方法的行为并不是替换进程映射，而是生成 shell 去执行命令。</p>
+<h3 id="spawn-vs-exec"><code>spawn</code> vs <code>exec</code></h3>
+<p>　　现在可以总结一下两者的显著区别：</p>
+<ul>
+<li><code>spawn</code> 默认不生成 shell，而 <code>exec</code> 必然会生成一个 shell</li>
+<li><code>spawn</code> 通过 stdio 事件流和父进程通信，而 <code>exec</code> 会对输出信息进行缓冲并通过回调函数将其传递给父进程，且后者默认有 1024 * 1024 字节的缓冲区限制</li>
+</ul>
+<p>　　对于第一点，如果要执行的命令依赖于 shell 的一些功能，比如管道、I/O 重定向则选择 <code>exec</code> 会更便捷。对于第二点，对比示例代码，可以很明显的看出来，<code>spawn</code> 适合长时间执行的命令，且有持续的输出信息；而后者更适合执行短时的命令，且在命令执行完后一次性获取输出结果。</p>
+<h2 id="工具库-execa">工具库 <code>execa</code></h2>
+<p>　　分析完它们两者的区别之后，这里推荐一个 npm 工具包 <code>execa</code>，其对 child_process 的方法进行了扩展和抽象，在很多常见的使用场景中大大减少了模板代码，也为调试提供了一定的便利性。看看文档中一段示例代码：</p>
+<pre><code class="language-js">const execa = <span class="hljs-built_in">require</span>(<span class="hljs-string">'execa'</span>);
+
+(async () =&gt; {
+    // Catching an <span class="hljs-built_in">error</span>
+    try {
+        await execa(<span class="hljs-string">'unknown'</span>, [<span class="hljs-string">'command'</span>]);
+    } catch (<span class="hljs-built_in">error</span>) {
+        console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">error</span>);
+        /*
+        {
+            message: <span class="hljs-string">'Command failed with ENOENT: unknown command spawn unknown ENOENT'</span>,
+            errno: <span class="hljs-number">-2</span>,
+            code: <span class="hljs-string">'ENOENT'</span>,
+            syscall: <span class="hljs-string">'spawn unknown'</span>,
+            <span class="hljs-built_in">path</span>: <span class="hljs-string">'unknown'</span>,
+            spawnargs: [<span class="hljs-string">'command'</span>],
+            originalMessage: <span class="hljs-string">'spawn unknown ENOENT'</span>,
+            shortMessage: <span class="hljs-string">'Command failed with ENOENT: unknown command spawn unknown ENOENT'</span>,
+            command: <span class="hljs-string">'unknown command'</span>,
+            escapedCommand: <span class="hljs-string">'unknown command'</span>,
+            <span class="hljs-built_in">stdout</span>: <span class="hljs-string">''</span>,
+            <span class="hljs-built_in">stderr</span>: <span class="hljs-string">''</span>,
+            all: <span class="hljs-string">''</span>,
+            failed: <span class="hljs-literal">true</span>,
+            timedOut: <span class="hljs-literal">false</span>,
+            isCanceled: <span class="hljs-literal">false</span>,
+            killed: <span class="hljs-literal">false</span>
+        }
+        */
+    }
+
+})();</code></pre>
+<p>　　上面的代码中，错误信息对于开发者来说是易读的，调试起来难度要小很多。</p>
+<p>　　更多的东西，建议直接看该 npm 包的文档进行详细了解。</p>
+<h2 id="参考资源">参考资源</h2>
+<ul>
+<li><a href="https://nodejs.org/dist/latest/docs/api/child_process.html">https://nodejs.org/dist/latest/docs/api/child_process.html</a></li>
+<li><a href="https://stackoverflow.com/questions/48698234/node-js-spawn-vs-execute">https://stackoverflow.com/questions/48698234/node-js-spawn-vs-execute</a></li>
+<li><a href="https://www.hacksparrow.com/nodejs/difference-between-spawn-and-exec-of-node-js-child-rocess.html">https://www.hacksparrow.com/nodejs/difference-between-spawn-and-exec-of-node-js-child-rocess.html</a></li>
+<li><a href="https://github.com/sindresorhus/execa">https://github.com/sindresorhus/execa</a></li>
+<li><a href="https://linuxhint.com/linux-exec-system-call/">https://linuxhint.com/linux-exec-system-call/</a></li>
+</ul>
