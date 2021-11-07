@@ -7,7 +7,7 @@
   "main": "scripts/index.js",
   "scripts": {
     "start": "set NODE_ENV=development && node scripts/index.js",
-    "build": "node scripts/index.js",
+    "build": "npm run md_2_html && node scripts/index.js",
     "test": "jest --config=./config/jest.config.js",
     "webpack": "npx webpack --config ./config/webpack.config.js",
     "flow": "flow",
