@@ -23,9 +23,9 @@
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
 　　<span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-　　<span class="hljs-keyword">var</span> textO = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">'Hello World!'</span>);
-    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'h1'</span>).appendChild(textO);
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+　　<span class="hljs-keyword">var</span> textO = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createTextNode</span>(<span class="hljs-string">&#x27;Hello World!&#x27;</span>);
+    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;h1&#x27;</span>).<span class="hljs-title function_">appendChild</span>(textO);
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><h3 id="获取节点的文本值">获取节点的文本值</h3>
 <p>　　文本节点的文本值是呈现出来给用户看的，但有些时候我们也需要让程序去获知被用户修改后的文本值。</p>
 <ul>
@@ -37,17 +37,17 @@
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello World!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-    <span class="hljs-keyword">var</span> textO = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'h1'</span>).firstChild;
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-keyword">var</span> textO = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;h1&#x27;</span>).<span class="hljs-property">firstChild</span>;
     <span class="hljs-comment">// 获取文本值</span>
-    <span class="hljs-built_in">console</span>.log(texto.data); <span class="hljs-comment">// Hello World!</span>
-    <span class="hljs-built_in">console</span>.log(textO.nodeValue); <span class="hljs-comment">// Hello World!</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(texto.<span class="hljs-property">data</span>); <span class="hljs-comment">// Hello World!</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(textO.<span class="hljs-property">nodeValue</span>); <span class="hljs-comment">// Hello World!</span>
     <span class="hljs-comment">// 获取文本值的长度</span>
-    <span class="hljs-built_in">console</span>.log(textO.length);
-    <span class="hljs-built_in">console</span>.log(textO.data.length);
-    <span class="hljs-built_in">console</span>.log(textO.nodeValue.length);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(textO.<span class="hljs-property">length</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(textO.<span class="hljs-property">data</span>.<span class="hljs-property">length</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(textO.<span class="hljs-property">nodeValue</span>.<span class="hljs-property">length</span>);
     <span class="hljs-comment">// 获取部分文本值（开始索引&lt;不包括&gt;，长度）</span>
-    <span class="hljs-built_in">console</span>.log(textO.substringData(<span class="hljs-number">6</span>,<span class="hljs-number">5</span>)); <span class="hljs-comment">// World</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(textO.<span class="hljs-title function_">substringData</span>(<span class="hljs-number">6</span>,<span class="hljs-number">5</span>)); <span class="hljs-comment">// World</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><h3 id="节点的文本值操作">节点的文本值操作</h3>
 <p>　　文本节点的文本值事实上也是重要的数据，这涉及到一些查看、增添、删除、修改等操作。</p>
 <ul>
@@ -61,23 +61,23 @@
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello World<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-    <span class="hljs-keyword">var</span> textO = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'h1'</span>).firstChild;
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-keyword">var</span> textO = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;h1&#x27;</span>).<span class="hljs-property">firstChild</span>;
     <span class="hljs-comment">// 添加（尾部附加）</span>
-    textO.appendData(<span class="hljs-string">'!'</span>);
-    <span class="hljs-built_in">console</span>.log(textO.data); <span class="hljs-comment">// Hello World!</span>
+    textO.<span class="hljs-title function_">appendData</span>(<span class="hljs-string">&#x27;!&#x27;</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(textO.<span class="hljs-property">data</span>); <span class="hljs-comment">// Hello World!</span>
     <span class="hljs-comment">// 删除（删除位置索引&lt;不包括&gt;，删除长度）</span>
-    textO.deleteData(<span class="hljs-number">7</span>,<span class="hljs-number">4</span>);
-    <span class="hljs-built_in">console</span>.log(textO.data); <span class="hljs-comment">// Hello W!</span>
+    textO.<span class="hljs-title function_">deleteData</span>(<span class="hljs-number">7</span>,<span class="hljs-number">4</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(textO.<span class="hljs-property">data</span>); <span class="hljs-comment">// Hello W!</span>
     <span class="hljs-comment">// 插入（插入位置索引&lt;其后插入&gt;，插入值）</span>
-    textO.insertData(<span class="hljs-number">7</span>,<span class="hljs-string">'orld'</span>);
-    <span class="hljs-built_in">console</span>.log(textO.data); <span class="hljs-comment">// Hello World!</span>
+    textO.<span class="hljs-title function_">insertData</span>(<span class="hljs-number">7</span>,<span class="hljs-string">&#x27;orld&#x27;</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(textO.<span class="hljs-property">data</span>); <span class="hljs-comment">// Hello World!</span>
     <span class="hljs-comment">// 替换（替换位置索引&lt;不包括&gt;，替换长度，替换值）</span>
-    textO.replaceData(<span class="hljs-number">6</span>,<span class="hljs-number">5</span>,<span class="hljs-string">'China'</span>)
-    <span class="hljs-built_in">console</span>.log(textO.data); <span class="hljs-comment">// Hello China!</span>
+    textO.<span class="hljs-title function_">replaceData</span>(<span class="hljs-number">6</span>,<span class="hljs-number">5</span>,<span class="hljs-string">&#x27;China&#x27;</span>)
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(textO.<span class="hljs-property">data</span>); <span class="hljs-comment">// Hello China!</span>
     <span class="hljs-comment">// 分割（分割位置索引&lt;不包括&gt;，分割长度）</span>
-    <span class="hljs-keyword">var</span> sText = textO.splitText(<span class="hljs-number">6</span>,<span class="hljs-number">5</span>);
-    <span class="hljs-built_in">console</span>.log(sText.data); <span class="hljs-comment">// China!</span>
+    <span class="hljs-keyword">var</span> sText = textO.<span class="hljs-title function_">splitText</span>(<span class="hljs-number">6</span>,<span class="hljs-number">5</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(sText.<span class="hljs-property">data</span>); <span class="hljs-comment">// China!</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><p>　　<code>splitText()</code> 方法会按要求将一个文本节点分割成多个文本节点，同时还会返回包含分割部分的文本节点对象。</p>
 <h3 id="多个文本节点的情况">多个文本节点的情况</h3>
 <p>　　当我们在一个元素节点内写了很多文本值时，只要它们没有被元素节点分割，所有相邻的文本值将被浏览器解析成一个文本节点。但是，当我们主动创建多个文本节点并插入到 DOM 树中时，浏览器却不会合并这些相邻的文本节点。</p>
@@ -90,13 +90,13 @@
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello <span class="hljs-tag">&lt;<span class="hljs-name">i</span>&gt;</span>World!<span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-    <span class="hljs-keyword">var</span> eleO = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'h1'</span>);
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-keyword">var</span> eleO = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;h1&#x27;</span>);
     <span class="hljs-comment">// 获取所有文本值</span>
-    <span class="hljs-built_in">console</span>.log(eleO.textContent); <span class="hljs-comment">// Hello World!</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(eleO.<span class="hljs-property">textContent</span>); <span class="hljs-comment">// Hello World!</span>
     <span class="hljs-comment">// 设置所有文本值</span>
-    eleO.textContent = <span class="hljs-string">'Hello World!'</span>;
-    <span class="hljs-built_in">console</span>.log(eleO.textContent); <span class="hljs-comment">// Hello World!</span>
+    eleO.<span class="hljs-property">textContent</span> = <span class="hljs-string">&#x27;Hello World!&#x27;</span>;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(eleO.<span class="hljs-property">textContent</span>); <span class="hljs-comment">// Hello World!</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><p>　　<strong>我们会发现，<code>textContent</code> 与 <code>innerHTML</code> 获取的值不同，但是它们在进行设置时行为却是一样的，也就是说会覆盖掉目标元素节点内的所有后代节点。</strong></p>
 <h4 id="合并多个文本节点">合并多个文本节点</h4>
 <p>　　当有多个相邻的文本节点存在时，我们可以让其合并成一个文本节点，只需要在它们的父元素节点上使用 <code>normalize()</code> 方法即可，这里不再做示例。</p>

@@ -17,9 +17,9 @@
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Hello,World!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
     <span class="hljs-comment">// 输出&lt;body&gt;元素节点的所有直属子节点集合</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.body.childNodes);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">childNodes</span>);
     <span class="hljs-comment">// 输出为 [text, p, text, script]</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><p>　　要注意的是，它并不是一个纯数组，而是类数组的集合。为什么有两个子节点是文本（Text）节点，是因为 <code>&lt;p&gt;</code> 标签前后都有回车符和空格。</p>
 <p>　　<code>childNodes</code> 属性返回的 <code>NodeList</code> 仅包含直属子节点；而且不仅包含元素（Element）节点，还包含其他所有类型节点，例如文本（Text）节点、注释（Comment）节点。</p>
@@ -49,28 +49,28 @@
 <h2 id="将节点集合转换成数组">将节点集合转换成数组</h2>
 <p>　　节点集合（NodeList 与 HTMLCollection）都是类数组，但并不是真正的数组，后者继承数组的方法。我们做以验证：</p>
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">""</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
     <span class="hljs-comment">// 验证 NodeList</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.isArray(<span class="hljs-built_in">document</span>.body.childNodes)); <span class="hljs-comment">// 输出false</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">childNodes</span>)); <span class="hljs-comment">// 输出false</span>
 
     <span class="hljs-comment">// 验证 HTMLCollection</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.isArray(<span class="hljs-built_in">document</span>.links)); <span class="hljs-comment">// 输出false</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">links</span>)); <span class="hljs-comment">// 输出false</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><p>　　如何将一个类数组列表转换成真正的 javascript 数组？</p>
 <p>　　我们只需要将类数组列表传给 <code>call()</code> 或者 <code>apply()</code>，在它们中调用一个数组方法，它们就会返回一个未经修改的真正的 javascript 数组。</p>
-<pre><code>&lt;body&gt;
-    &lt;a href=<span class="hljs-string">""</span>&gt;&lt;/a&gt;
-&lt;body&gt;
-&lt;script&gt;
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
     <span class="hljs-comment">// NodeList 转换成数组并验证</span>
-    console.log(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Array</span>.</span></span>is<span class="hljs-constructor">Array(Array.<span class="hljs-params">prototype</span>.<span class="hljs-params">slice</span>.<span class="hljs-params">call</span>(<span class="hljs-params">document</span>.<span class="hljs-params">body</span>.<span class="hljs-params">childNodes</span>)</span>));
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">slice</span>.<span class="hljs-title function_">call</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">childNodes</span>)));
     <span class="hljs-comment">// 输出true</span>
 
     <span class="hljs-comment">// HTMLCollection 转换成数组并验证</span>
-    console.log(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Array</span>.</span></span>is<span class="hljs-constructor">Array(Array.<span class="hljs-params">prototype</span>.<span class="hljs-params">slice</span>.<span class="hljs-params">call</span>(<span class="hljs-params">document</span>.<span class="hljs-params">links</span>)</span>));
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">slice</span>.<span class="hljs-title function_">call</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">links</span>)));
     <span class="hljs-comment">// 输出true</span>
-&lt;/script&gt;</code></pre><p>　　将其转换为真正的 javascript 数组有以下好处：</p>
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><p>　　将其转换为真正的 javascript 数组有以下好处：</p>
 <ul>
 <li><p>获取快照</p>
 <p>  　　NodeList、HTMLCollection 都是实时列表，这么做使我们能够获取该列表的快照，不与实时 DOM 绑定。</p>

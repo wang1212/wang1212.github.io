@@ -2,8 +2,8 @@
 
 // @flow
 
-module.paths.push('C:/Users/mrwang/AppData/Roaming/npm/node_modules');
-
+const hljs = require('highlight.js');
+// console.debug(hljs.getLanguage('ts'));
 // get start time
 const __START_TIME = Date.now();
 
@@ -15,7 +15,7 @@ const marked = require('marked');
 marked.setOptions({
 	renderer : new marked.Renderer(),
 	highlight: function (code) {
-		return require('highlight.js').highlightAuto(code).value;
+		return hljs.highlightAuto(code).value;
 	},
 	pedantic   : false,
 	gfm        : true,

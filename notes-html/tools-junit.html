@@ -7,13 +7,13 @@
 <p>　　在 eclipse 中新建一个 Java 项目，然后<kbd>右键</kbd>项目，选择 <strong>Build Path -&gt; Add Libraries</strong> ,然后选择 Junit 即可将其添加到项目中。接下来我们创建一个被测试的类，然后再创建一个测试类用来使用 JUnit4 对被测试类进行单元测试。</p>
 <h3 id="进行测试">进行测试</h3>
 <p>　　Junit4 相对于第 3 个版本来说使用起来更为方便了，只需在测试类的测试方法前面加一个 <code>@Test</code> 注解即可。这里有一个 <code>assertEquals()</code> 方法很有用，其可以帮助我们对程序的期望结果和运行结果进行比对。</p>
-<pre><code>@Test
-public void test<span class="hljs-constructor">XXX()</span>{
+<pre><code><span class="hljs-meta">@Test</span>
+<span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">testXXX</span>(<span class="hljs-params"></span>){
     <span class="hljs-comment">/**
      * obj1 : 期望值（我们指定）
      * obj2 : 运行值（调用被测试类）
      */</span>
-    <span class="hljs-keyword">assert</span><span class="hljs-constructor">Equals(Object <span class="hljs-params">obj1</span>, Object <span class="hljs-params">obj2</span>)</span>;
+    <span class="hljs-title function_">assertEquals</span>(<span class="hljs-title class_">Object</span> obj1, <span class="hljs-title class_">Object</span> obj2);
 }</code></pre><p>　　测试代码编写完成后，<strong>Run As -&gt; JUnit Test</strong> 即可，只要出现绿色的状态条则代表我们的测试全部成功，如果为红色说明我们有部分测试失败，在状态条下方的测试结果列表中，每一项前面都会标记出来，测试成功的则为对号，失败的为叉。</p>
 <h3 id="代码规范">代码规范</h3>
 <p>　　需要注意的是，我们应该将测试类和项目被测试类代码分开放置，通常会在项目下 <strong>New -&gt; Source Floder</strong> 命名为 <strong>test</strong> 将测试类代码放入其中，测试类和被测试类的包名应一致，在项目部署时删除这个目录即可。</p>
@@ -61,7 +61,7 @@ public void test<span class="hljs-constructor">XXX()</span>{
  * expected : 表明我们预期会发生的异常，使其不影响测试结果，类似于 throws 关键字
  * timeout : 指定测试的时间（ms），可以用来测试程序性能
  */</span>
-@<span class="hljs-keyword">Test</span>(<span class="hljs-keyword">expected</span>=<span class="hljs-keyword">ArithmeticException</span>.<span class="hljs-keyword">class</span>, timeout=<span class="hljs-number">2000</span>)</code></pre><p>　　<code>@Ignore</code> 注解标注一个测试方法被运行器忽略，同时可以标识一些忽略信息。<code>@RunWith</code> 注解用来更改测试运行器。</p>
+@<span class="hljs-constructor">Test(<span class="hljs-params">expected</span>=ArithmeticException.<span class="hljs-params">class</span>, <span class="hljs-params">timeout</span>=2000)</span></code></pre><p>　　<code>@Ignore</code> 注解标注一个测试方法被运行器忽略，同时可以标识一些忽略信息。<code>@RunWith</code> 注解用来更改测试运行器。</p>
 <h2 id="junit-深入使用">JUnit 深入使用</h2>
 <p>　　会利用 JUnit 进行基本的单元测试或许已经满足了我们的需求，然而 JUnit 为我们提供了更加便利的工具。</p>
 <h3 id="测试套件">测试套件</h3>
@@ -73,39 +73,39 @@ public class AllTests { }</code></pre><p>　　在创建测试套件时可以勾
 <h3 id="参数化设置">参数化设置</h3>
 <p>　　参数化设置可以帮助我们提高代码的重用度，减少类似的代码编写工作量。</p>
 <pre><code><span class="hljs-comment">//被测试类</span>
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-symbol">Calculate</span> {
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Calculate</span> </span>{
     <span class="hljs-comment">// 除法</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> divide(<span class="hljs-built_in">int</span> a, <span class="hljs-built_in">int</span> b){
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">divide</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span></span>{
         <span class="hljs-keyword">return</span> a/b;
     }
 }
 
 <span class="hljs-comment">// 参数化设置的测试类</span>
-@RunWith(Parameterized.class)
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-symbol">ParameterTest</span> {
+<span class="hljs-meta">@RunWith</span>(Parameterized.class)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ParameterTest</span> </span>{
     <span class="hljs-comment">// 参数</span>
-    <span class="hljs-built_in">int</span> expected, input1, input2;
+    <span class="hljs-keyword">int</span> expected, input1, input2;
 
     <span class="hljs-comment">// 用来返回一组参数</span>
-    @Parameters
-    <span class="hljs-keyword">public</span> static Collection&lt;Object[]&gt; params(){
-        <span class="hljs-keyword">return</span> Arrays.asList(new Object[][]{
+    <span class="hljs-meta">@Parameters</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Collection&lt;Object[]&gt; params(){
+        <span class="hljs-function"><span class="hljs-keyword">return</span> Arrays.<span class="hljs-title">asList</span><span class="hljs-params">(<span class="hljs-keyword">new</span> Object[][]{
             {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>},
             {<span class="hljs-number">3</span>,<span class="hljs-number">9</span>,<span class="hljs-number">3</span>},
             {<span class="hljs-number">25</span>, <span class="hljs-number">625</span>, <span class="hljs-number">25</span>}
-        });
+        })</span></span>;
     }
 
     <span class="hljs-comment">// 构造器</span>
-    <span class="hljs-keyword">public</span> ParameterTest(<span class="hljs-built_in">int</span> expected, <span class="hljs-built_in">int</span> input1, <span class="hljs-built_in">int</span> input2) {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ParameterTest</span><span class="hljs-params">(<span class="hljs-keyword">int</span> expected, <span class="hljs-keyword">int</span> input1, <span class="hljs-keyword">int</span> input2)</span> </span>{
         <span class="hljs-keyword">this</span>.expected = expected;
         <span class="hljs-keyword">this</span>.input1 = input1;
         <span class="hljs-keyword">this</span>.input2 = input2;
     }
 
     <span class="hljs-comment">// 测试方法</span>
-    @Test
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> testDivide() {
-        assertEquals(expected, new Calculate().divide(input1, input2));
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">testDivide</span><span class="hljs-params">()</span> </span>{
+        assertEquals(expected, <span class="hljs-keyword">new</span> Calculate().divide(input1, input2));
     }
 }</code></pre><p>　　参数化设置的测试类要使用 <code>@RunWith</code> 注解将运行器修改为 <strong>Parameterized.class</strong>。该类中要声明变量来存放预期值和结果值，声明一个 <code>@Parameters</code> 注解标注的返回值为 <code>Collection</code> 的公共静态方法来返回一组参数值，其次还要声明一个带参数的构造方法。</p>

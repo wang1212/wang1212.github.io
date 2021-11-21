@@ -10,15 +10,15 @@
 <h2 id="解析代码实现">解析代码实现</h2>
 <p>　　在这里，主要是分析一下如何用代码实现函数的节流和防抖功能。当然，并不打算自己手写实现，以目前比较成熟的工具库（<a href="https://lodash.com/">Lodash</a>）所提供的实现为基础来进行分析。</p>
 <p>　　大致的实现思路基本上一样，都是利用闭包，维护内部状态，根据内部状态来对函数调用做具体控制。如下所示：</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounce</span>(<span class="hljs-params">func, time_interval</span>) </span>{
+<pre><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">debounce</span>(<span class="hljs-params">func, time_interval</span>) {
     <span class="hljs-comment">// ...</span>
     <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-        func.apply(thisArg, <span class="hljs-built_in">arguments</span>)
+        func.apply(thisArg, arguments)
     }
 }
 
 <span class="hljs-comment">// 对函数进行防抖处理包装</span>
-<span class="hljs-keyword">const</span> debounced = debounce(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {}, <span class="hljs-number">1000</span>)
+const debounced = debounce(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {}, <span class="hljs-number">1000</span>)
 
 debounced() <span class="hljs-comment">// 调用 n 次</span></code></pre>
 <h3 id="防抖（debounce）">防抖（Debounce）</h3>
@@ -26,7 +26,7 @@ debounced() <span class="hljs-comment">// 调用 n 次</span></code></pre>
 <p><a href="https://github.com/lodash/lodash/blob/master/debounce.js">_.debounce 源码</a></p>
 </blockquote>
 <p>　　我们首先看一下其源码主体结构：</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span>  <span class="hljs-title">debounce</span><span class="hljs-params">(func, wait, options)</span>  </span>{
+<pre><code class="language-javascript"><span class="hljs-keyword">function</span>  <span class="hljs-title function_">debounce</span><span class="hljs-params">(func, wait, options)</span>  {
     <span class="hljs-comment">// 内部状态</span>
     let lastArgs, lastThis, <span class="hljs-comment">// 保存最后一次函数调用传入的参数列表和 this 指向</span>
         maxWait,
@@ -36,10 +36,10 @@ debounced() <span class="hljs-comment">// 调用 n 次</span></code></pre>
     <span class="hljs-comment">// ...</span>
 
     <span class="hljs-comment">// wait 没有指定时，默认利用 requestAnimationFrame API 做了性能优化</span>
-    <span class="hljs-keyword">const</span> useRAF = (!wait &amp;&amp; wait !== <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-keyword">typeof</span> root.requestAnimationFrame === <span class="hljs-string">'function'</span>)
+    <span class="hljs-keyword">const</span> useRAF = (!wait &amp;&amp; wait !== <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-keyword">typeof</span> root.requestAnimationFrame === <span class="hljs-string">&#x27;function&#x27;</span>)
 
     <span class="hljs-comment">// 闭包结构</span>
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounced</span><span class="hljs-params">(<span class="hljs-rest_arg">...args</span>)</span>  </span>{}
+    <span class="hljs-keyword">function</span> <span class="hljs-title function_">debounced</span><span class="hljs-params">(<span class="hljs-rest_arg">...args</span>)</span>  {}
 
     <span class="hljs-comment">// 工具方法</span>
     debounced.cancel = cancel
@@ -50,73 +50,73 @@ debounced() <span class="hljs-comment">// 调用 n 次</span></code></pre>
 }</code></pre>
 <p>　　这是符合利用闭包实现的思路的，其中还接受第三个参数 <code>options</code>，lodash 库对该防抖功能做了增强，同时也添加了三个工具方法 <code>cancel</code>、<code>flush</code>、<code>pending</code>。很有意思的是，lodash 默认利用 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame"><code>requestAnimationFrame</code> API</a> 做了性能优化。</p>
 <p>　　防抖的核心思想是：<strong>限制两次函数调用的时间间隔应大于一定时间</strong>。来看看具体的实现：</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounce</span><span class="hljs-params">(func, wait, options)</span>  </span>{
+<pre><code class="language-javascript"><span class="hljs-keyword">function</span> debounce(func, wait, options)  {
 
     <span class="hljs-comment">// 实际调用函数</span>
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">invokeFunc</span><span class="hljs-params">(time)</span> </span>{
-        <span class="hljs-keyword">const</span> args = lastArgs
-        <span class="hljs-keyword">const</span> thisArg = lastThis
+    <span class="hljs-keyword">function</span> invoke<span class="hljs-constructor">Func(<span class="hljs-params">time</span>)</span> {
+        const args = lastArgs
+        const thisArg = lastThis
 
-        lastArgs = lastThis = <span class="hljs-literal">undefined</span>
+        lastArgs = lastThis = undefined
         lastInvokeTime = time
         result = func.apply(thisArg, args) <span class="hljs-comment">// 关键：利用 apply 调用，保证 this 指向和参数列表正确</span>
 
-        <span class="hljs-keyword">return</span> result
+        return result
     }
 
     <span class="hljs-comment">// 关键：创建超时器，异步调用函数</span>
     <span class="hljs-comment">// 异步调用的目的是在两次调用之间时间间隔过短（不符合限制条件）时，延后调用直至满足条件</span>
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">startTimer</span><span class="hljs-params">(pendingFunc, wait)</span> </span>{
+    <span class="hljs-keyword">function</span> start<span class="hljs-constructor">Timer(<span class="hljs-params">pendingFunc</span>, <span class="hljs-params">wait</span>)</span> {
         <span class="hljs-keyword">if</span> (useRAF) {
-            root.cancelAnimationFrame(timerId)
-            <span class="hljs-keyword">return</span> root.requestAnimationFrame(pendingFunc)
+            root.cancel<span class="hljs-constructor">AnimationFrame(<span class="hljs-params">timerId</span>)</span>
+            return root.request<span class="hljs-constructor">AnimationFrame(<span class="hljs-params">pendingFunc</span>)</span>
         }
-        <span class="hljs-keyword">return</span> setTimeout(pendingFunc, wait)
+        return set<span class="hljs-constructor">Timeout(<span class="hljs-params">pendingFunc</span>, <span class="hljs-params">wait</span>)</span>
     }
 
     <span class="hljs-comment">// 判断是否可以调用函数</span>
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">shouldInvoke</span><span class="hljs-params">(time)</span> </span>{
-        <span class="hljs-keyword">const</span> timeSinceLastCall = time - lastCallTime
-        <span class="hljs-keyword">const</span> timeSinceLastInvoke = time - lastInvokeTime
+    <span class="hljs-keyword">function</span> should<span class="hljs-constructor">Invoke(<span class="hljs-params">time</span>)</span> {
+        const timeSinceLastCall = time - lastCallTime
+        const timeSinceLastInvoke = time - lastInvokeTime
 
         <span class="hljs-comment">// 关键：这一行的判断条件，限制两次函数调用的时间间隔应大于一定时间</span>
-        <span class="hljs-keyword">return</span> (lastCallTime === <span class="hljs-literal">undefined</span> || (timeSinceLastCall &gt;= wait) ||
-          (timeSinceLastCall &lt; <span class="hljs-number">0</span>) || (maxing &amp;&amp; timeSinceLastInvoke &gt;= maxWait))
+        return (lastCallTime<span class="hljs-operator"> === </span>undefined<span class="hljs-operator"> || </span>(timeSinceLastCall &gt;= wait)<span class="hljs-operator"> ||
+          </span>(timeSinceLastCall &lt; <span class="hljs-number">0</span>)<span class="hljs-operator"> || </span>(maxing<span class="hljs-operator"> &amp;&amp; </span>timeSinceLastInvoke &gt;= maxWait))
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">timerExpired</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">const</span> time = Date.now()
+    <span class="hljs-keyword">function</span> timer<span class="hljs-constructor">Expired()</span> {
+        const time = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Date</span>.</span></span>now<span class="hljs-literal">()</span>
 
         <span class="hljs-comment">// 关键：超时器到期后，需要再次检查是否满足条件</span>
-        <span class="hljs-keyword">if</span> (shouldInvoke(time)) {
-            <span class="hljs-keyword">return</span> trailingEdge(time)
+        <span class="hljs-keyword">if</span> (should<span class="hljs-constructor">Invoke(<span class="hljs-params">time</span>)</span>) {
+            return trailing<span class="hljs-constructor">Edge(<span class="hljs-params">time</span>)</span>
         }
-        timerId = startTimer(timerExpired, remainingWait(time))
+        timerId = start<span class="hljs-constructor">Timer(<span class="hljs-params">timerExpired</span>, <span class="hljs-params">remainingWait</span>(<span class="hljs-params">time</span>)</span>)
       }
 
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounced</span><span class="hljs-params">(<span class="hljs-rest_arg">...args</span>)</span>  </span>{
-        <span class="hljs-keyword">const</span> time = Date.now()
-        <span class="hljs-keyword">const</span> isInvoking = shouldInvoke(time)
+    <span class="hljs-keyword">function</span> debounced(...args)  {
+        const time = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Date</span>.</span></span>now<span class="hljs-literal">()</span>
+        const isInvoking = should<span class="hljs-constructor">Invoke(<span class="hljs-params">time</span>)</span>
 
         lastArgs = args <span class="hljs-comment">// 每次调用都更新保存的参数列表和 this 指向</span>
-        lastThis = <span class="hljs-keyword">this</span>
+        lastThis = this
         lastCallTime = time <span class="hljs-comment">// 关键：记录每次函数调用的时间，在下一次调用时对时间间隔进行判断</span>
 
         <span class="hljs-comment">// 关键：进行两次调用时间间隔判断，并创建超时器异步执行函数</span>
         <span class="hljs-keyword">if</span> (isInvoking) {
-            <span class="hljs-keyword">if</span> (timerId === <span class="hljs-literal">undefined</span>) {
-                <span class="hljs-keyword">return</span> leadingEdge(lastCallTime)
+            <span class="hljs-keyword">if</span> (timerId<span class="hljs-operator"> === </span>undefined) {
+                return leading<span class="hljs-constructor">Edge(<span class="hljs-params">lastCallTime</span>)</span>
             }
             <span class="hljs-keyword">if</span> (maxing) {
-                timerId = startTimer(timerExpired, wait)
-                <span class="hljs-keyword">return</span> invokeFunc(lastCallTime)
+                timerId = start<span class="hljs-constructor">Timer(<span class="hljs-params">timerExpired</span>, <span class="hljs-params">wait</span>)</span>
+                return invoke<span class="hljs-constructor">Func(<span class="hljs-params">lastCallTime</span>)</span>
             }
         }
-        <span class="hljs-keyword">if</span> (timerId === <span class="hljs-literal">undefined</span>) {
-            timerId = startTimer(timerExpired, wait)
+        <span class="hljs-keyword">if</span> (timerId<span class="hljs-operator"> === </span>undefined) {
+            timerId = start<span class="hljs-constructor">Timer(<span class="hljs-params">timerExpired</span>, <span class="hljs-params">wait</span>)</span>
         }
 
-        <span class="hljs-keyword">return</span> result
+        return result
     }
 }</code></pre>
 <p>　　源码中像 <code>trailingEdge()</code>、<code>leadingEdge()</code> 、<code>remainingWait()</code> 等可以暂时忽略掉，这些函数主要是 lodash 为结合 <code>options</code> 对防抖功能做的一些增强功能。</p>
@@ -140,7 +140,7 @@ debounced() <span class="hljs-comment">// 调用 n 次</span></code></pre>
     lastArgs = lastCallTime = lastThis = timerId = undefined
 }</code></pre>
 <p>　　<code>cancel()</code> 这个工具方法提供了<strong>将要执行的 <code>func()</code> 调用取消掉</strong>的功能，实现该功能也得益于其异步调用的实现方式。</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">trailingEdge</span>(<span class="hljs-params">time</span>) </span>{
+<pre><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">trailingEdge</span>(<span class="hljs-params">time</span>) {
     timerId = <span class="hljs-literal">undefined</span> <span class="hljs-comment">// 关键：虽然丢弃了引用，但没有清除超时器</span>
 
     <span class="hljs-keyword">if</span> (trailing &amp;&amp; lastArgs) { <span class="hljs-comment">// 关键：利用 lastArgs 在调用 func() 函数前做了判断</span>
@@ -151,13 +151,13 @@ debounced() <span class="hljs-comment">// 调用 n 次</span></code></pre>
     <span class="hljs-keyword">return</span> result
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">flush</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">flush</span>(<span class="hljs-params"></span>) {
     <span class="hljs-keyword">return</span> timerId === <span class="hljs-literal">undefined</span> ? result : trailingEdge(<span class="hljs-built_in">Date</span>.now())
 }</code></pre>
 <p>　　<code>flush()</code> 这个工具方法提供了<strong>立即调用 <code>func()</code> 函数</strong>的功能，但要注意的是其内部实现中只是丢掉了 <code>timerId</code> 对已经发起的超时器任务的引用，并没有清除超时器，那么会不会造成对 <code>func()</code> 函数的重复调用呢？根据源码来看，在超时器到期之后的 <code>func()</code> 函数调用之前用 <code>lastArgs</code> 做了判断，而在调用 <code>flush()</code> 过程中清除了 <code>lastArgs</code> 的值，也就避免了重复调用 <code>func()</code> 的问题。</p>
 <p>　　至于为何不直接清除掉超时器，而只是丢弃引用？不得而知。但我猜测应该是基于模块设计上的考虑，因为 <code>trailingEdge()</code> 函数被调用的时机就是超时器到期之后，所以它只负责清除掉 <code>timerId</code> 的值即可。</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pending</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-keyword">return</span> timerId !== <span class="hljs-literal">undefined</span>
+<pre><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title">pending</span>() {
+    <span class="hljs-keyword">return</span> <span class="hljs-type">timerId</span> !== undefined
 }</code></pre>
 <p>　　<code>pending()</code> 这个工具方法就比较简单了，仅提供了<strong>获取目前是否处于等待调用 <code>func()</code> 函数的状态</strong>的功能。</p>
 <p>　　接下来看看 <code>options</code> 这个参数带来了哪些功能上的增强。</p>
@@ -168,12 +168,12 @@ let <span class="hljs-keyword">trailing</span> = <span class="hljs-keyword">true
 
 <span class="hljs-keyword">if</span> (isObject(<span class="hljs-keyword">options</span>)) {
     <span class="hljs-keyword">leading</span> = !!<span class="hljs-keyword">options</span>.<span class="hljs-keyword">leading</span>
-    maxing = <span class="hljs-string">'maxWait'</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">options</span>
+    maxing = <span class="hljs-string">&#x27;maxWait&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">options</span>
     maxWait = maxing ? Math.max(+<span class="hljs-keyword">options</span>.maxWait || <span class="hljs-number">0</span>, wait) : maxWait // 关键：取 maxWait 和 wait 最大值
-    <span class="hljs-keyword">trailing</span> = <span class="hljs-string">'trailing'</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">options</span> ? !!<span class="hljs-keyword">options</span>.<span class="hljs-keyword">trailing</span> : <span class="hljs-keyword">trailing</span>
+    <span class="hljs-keyword">trailing</span> = <span class="hljs-string">&#x27;trailing&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">options</span> ? !!<span class="hljs-keyword">options</span>.<span class="hljs-keyword">trailing</span> : <span class="hljs-keyword">trailing</span>
 }</code></pre>
 <p>　　<code>{ leading, maxWait, trailing }</code> 有三个选项字段。先来看看 <code>maxWait</code> 选项：</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">remainingWait</span><span class="hljs-params">(time)</span> </span>{
+<pre><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">remainingWait</span><span class="hljs-params">(time)</span> {
     <span class="hljs-keyword">const</span> timeSinceLastCall = time - lastCallTime
     <span class="hljs-keyword">const</span> timeSinceLastInvoke = time - lastInvokeTime
     <span class="hljs-keyword">const</span> timeWaiting = wait - timeSinceLastCall
@@ -184,7 +184,7 @@ let <span class="hljs-keyword">trailing</span> = <span class="hljs-keyword">true
       : timeWaiting
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">shouldInvoke</span><span class="hljs-params">(time)</span> </span>{
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">shouldInvoke</span><span class="hljs-params">(time)</span> {
     <span class="hljs-keyword">const</span> timeSinceLastCall = time - lastCallTime
     <span class="hljs-keyword">const</span> timeSinceLastInvoke = time - lastInvokeTime
 
@@ -193,12 +193,12 @@ let <span class="hljs-keyword">trailing</span> = <span class="hljs-keyword">true
       (timeSinceLastCall &lt; <span class="hljs-number">0</span>) || (maxing &amp;&amp; timeSinceLastInvoke &gt;= maxWait))
 } 
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">timerExpired</span><span class="hljs-params">()</span> </span>{
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">timerExpired</span><span class="hljs-params">()</span> {
     <span class="hljs-comment">// ...</span>
     timerId = startTimer(timerExpired, remainingWait(time))
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounced</span><span class="hljs-params">(<span class="hljs-rest_arg">...args</span>)</span> </span>{
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">debounced</span><span class="hljs-params">(<span class="hljs-rest_arg">...args</span>)</span> {
     <span class="hljs-comment">// ...</span>
     <span class="hljs-keyword">const</span> isInvoking = shouldInvoke(time)
     <span class="hljs-comment">// ...</span>
@@ -215,7 +215,7 @@ let <span class="hljs-keyword">trailing</span> = <span class="hljs-keyword">true
 <p>　　虽然代码看起来很多，但实际 <code>maxWait</code> 只提供了一个很简单的功能：<strong>在对函数进行防抖处理中，两次 <code>func()</code> 函数实际调用间隔至多为 <code>maxWait</code>，也就是说只要两次调用时间间隔达到该时间，无论 <code>wait</code> 限制如何，均会执行 <code>func()</code> 函数调用。</strong></p>
 <p>　　这个其实解决了因为函数调用频率过高，<code>func()</code> 长时间得不到实际调用的业务问题。</p>
 <p>　　接下来，需要把 <code>leading</code> 和 <code>trailing</code> 两个选项放在一起看，因为它们刚好是对立的一组值，本质上解决的是同一个问题：<code>func()</code> 函数实际调用的时机。</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">leadingEdge</span><span class="hljs-params">(time)</span> </span>{
+<pre><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">leadingEdge</span><span class="hljs-params">(time)</span> {
     lastInvokeTime = time
 
     timerId = startTimer(timerExpired, wait)
@@ -223,7 +223,7 @@ let <span class="hljs-keyword">trailing</span> = <span class="hljs-keyword">true
     <span class="hljs-keyword">return</span> leading ? invokeFunc(time) : result
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">timerExpired</span><span class="hljs-params">()</span> </span>{
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">timerExpired</span><span class="hljs-params">()</span> {
     <span class="hljs-keyword">const</span> time = Date.now()
 
     <span class="hljs-keyword">if</span> (shouldInvoke(time)) {
@@ -233,7 +233,7 @@ let <span class="hljs-keyword">trailing</span> = <span class="hljs-keyword">true
     timerId = startTimer(timerExpired, remainingWait(time))
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">trailingEdge</span><span class="hljs-params">(time)</span> </span>{
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">trailingEdge</span><span class="hljs-params">(time)</span> {
     timerId = <span class="hljs-literal">undefined</span>
 
     <span class="hljs-comment">// 关键：利用 trailing 进行判断</span>
@@ -245,7 +245,7 @@ let <span class="hljs-keyword">trailing</span> = <span class="hljs-keyword">true
     <span class="hljs-keyword">return</span> result
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debounced</span><span class="hljs-params">(<span class="hljs-rest_arg">...args</span>)</span> </span>{
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">debounced</span><span class="hljs-params">(<span class="hljs-rest_arg">...args</span>)</span> {
     <span class="hljs-comment">// ...</span>
     <span class="hljs-keyword">if</span> (isInvoking) {
         <span class="hljs-keyword">if</span> (timerId === <span class="hljs-literal">undefined</span>) {
@@ -260,9 +260,9 @@ let <span class="hljs-keyword">trailing</span> = <span class="hljs-keyword">true
 <p>　　其实要搞懂其中的思路，只要理解了以上几个函数在实际调用中的执行顺序即可：</p>
 <pre><code class="language-javascript">debounced<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span> leadingEdge<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span> timerExpired<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span> trailingEdge<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span> debounced()</code></pre>
 <p>　　这里其实是一个调用循环，无论 <code>leading</code> 和 <code>trailing</code> 值如何，其相应的函数 <code>leadingEdge()</code> 和 <code>trailingEdge()</code> 都参与其中，只不过在不同值的情况下，这两个函数所扮演的角色不同而已。这里举一个简单的例子即可说明问题：</p>
-<pre><code class="language-javascript">// 当 leading=<span class="hljs-literal">true</span>，且 trailing=<span class="hljs-literal">false</span> 时：
-// leadingEdge() 函数主要作用是调用 invokeFunc() 函数来实际调用 <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span> 函数</span>
-// trailingEdge() 函数主要作用则是超时器到期后清除掉内部状态，主要是 timerId 的值</code></pre>
+<pre><code class="language-javascript"><span class="hljs-regexp">//</span> 当 leading=true，且 trailing=false 时：
+<span class="hljs-regexp">//</span> leadingEdge() 函数主要作用是调用 invokeFunc() 函数来实际调用 <span class="hljs-keyword">func</span>() 函数
+<span class="hljs-regexp">//</span> trailingEdge() 函数主要作用则是超时器到期后清除掉内部状态，主要是 timerId 的值</code></pre>
 <p>　　那么这里有个值得考虑的点，按照常规的实现思路不应将 <code>leadingEdge()</code> 和 <code>trailingEdge()</code> 函数放在一起同时处理逻辑，而应该按照条件判断独立成两条线去处理逻辑。根据源码分析来看，我猜测是因为 lodash 所提供的 <code>leading</code> 和 <code>trailing</code> 两个选项并非完全对立的一组值，可能存在它们同时为 <code>true</code> 的情况（在函数的顶部注释中有所说明）。当然这里不能同时为 <code>false</code>，因为分析下源码的实现，你会发现 <code>func()</code> 函数将永远得不到实际调用。</p>
 <h3 id="节流（throttle）">节流（Throttle）</h3>
 <blockquote>
@@ -273,19 +273,19 @@ let <span class="hljs-keyword">trailing</span> = <span class="hljs-keyword">true
     let <span class="hljs-keyword">leading</span> = <span class="hljs-keyword">true</span>
     let <span class="hljs-keyword">trailing</span> = <span class="hljs-keyword">true</span>
 
-    <span class="hljs-keyword">if</span> (typeoffunc !== <span class="hljs-string">'function'</span>) {
-        throw <span class="hljs-built_in">new</span> TypeError(<span class="hljs-string">'Expected a function'</span>)
+    <span class="hljs-keyword">if</span> (typeoffunc !== <span class="hljs-string">&#x27;function&#x27;</span>) {
+        throw <span class="hljs-built_in">new</span> TypeError(<span class="hljs-string">&#x27;Expected a function&#x27;</span>)
     }
 
     <span class="hljs-keyword">if</span> (isObject(<span class="hljs-keyword">options</span>)) {
-        <span class="hljs-keyword">leading</span> = <span class="hljs-string">'leading'</span>inoptions ? !!<span class="hljs-keyword">options</span>.<span class="hljs-keyword">leading</span> : <span class="hljs-keyword">leading</span>
-        <span class="hljs-keyword">trailing</span> = <span class="hljs-string">'trailing'</span>inoptions ? !!<span class="hljs-keyword">options</span>.<span class="hljs-keyword">trailing</span> : <span class="hljs-keyword">trailing</span>
+        <span class="hljs-keyword">leading</span> = <span class="hljs-string">&#x27;leading&#x27;</span>inoptions ? !!<span class="hljs-keyword">options</span>.<span class="hljs-keyword">leading</span> : <span class="hljs-keyword">leading</span>
+        <span class="hljs-keyword">trailing</span> = <span class="hljs-string">&#x27;trailing&#x27;</span>inoptions ? !!<span class="hljs-keyword">options</span>.<span class="hljs-keyword">trailing</span> : <span class="hljs-keyword">trailing</span>
     }
 
     <span class="hljs-keyword">return</span> debounce(func, wait, {
         <span class="hljs-keyword">leading</span>,
         <span class="hljs-keyword">trailing</span>,
-        <span class="hljs-string">'maxWait'</span>: wait
+        <span class="hljs-string">&#x27;maxWait&#x27;</span>: wait
     })
 }</code></pre>
 <p>　　<code>options: { leading, trailing, maxWait }</code> 选项中的 <code>leading</code> 和 <code>trailing</code> 不再细说，参考防抖的理解即可。而 <code>maxWait</code> 选项则是关键，它没有对外暴露，而是直接默认使用了 <code>wait</code> 的值（实际上这也是让节流可以利用防抖来实现的主要原因）。</p>

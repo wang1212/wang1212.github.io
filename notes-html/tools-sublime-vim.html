@@ -18,71 +18,71 @@
 <p>　　打开 Sublime Text 3，在菜单中选择 <strong>Preferences-&gt;Browse Packages</strong>，将下载好的 Vim 插件文件夹拷进打开的文件夹，关闭文件夹。</p>
 <h3 id="用户配置">用户配置</h3>
 <p>　　打开 Sublime Text 3，在菜单 <strong>Preferences</strong> 下选择 <strong>Settings-User</strong>，也就是用户设置。我们可以找到以下这句：</p>
-<pre><code><span class="hljs-string">"ignored_packages"</span>: [<span class="hljs-string">"Vintage"</span>]</code></pre><p>　　这句代码的意思就是，Sublime 默认是关闭 Vim 插件的。我们将其改为：</p>
-<pre><code><span class="hljs-string">"ignored_packages"</span>: <span class="hljs-string">[]</span></code></pre><p>　　然后，保存退出，关闭 Sublime Text 3重启即可。</p>
+<pre><code><span class="hljs-string">&quot;ignored_packages&quot;</span>: [<span class="hljs-string">&quot;Vintage&quot;</span>]</code></pre><p>　　这句代码的意思就是，Sublime 默认是关闭 Vim 插件的。我们将其改为：</p>
+<pre><code><span class="hljs-string">&quot;ignored_packages&quot;</span>: []</code></pre><p>　　然后，保存退出，关闭 Sublime Text 3重启即可。</p>
 <h2 id="vim-插件使用">Vim 插件使用</h2>
 <p>　　Vim 插件会有三个模式：插入模式（INSERT MODE）、命令模式（COMMAND MODE）、行末模式。</p>
 <h3 id="插入模式">插入模式</h3>
 <p>　　插入模式也就是编辑模式，我们写代码的时候用的模式。此模式下可以输入代码，和普通的编辑器一样，按键盘左上角<kbd>Esc</kbd>即可进入命令模式。</p>
 <h3 id="命令模令">命令模令</h3>
 <p>　　命令模式提供便捷强大的快捷键，是 Vim 插件的核心模式。此模式下，进入插入模式有八种方式：</p>
-<pre><code><span class="hljs-selector-tag">i</span>  <span class="hljs-comment">// 光标前插入</span>
-<span class="hljs-selector-tag">a</span>  <span class="hljs-comment">// 光标后插入</span>
-s  <span class="hljs-comment">// 替换插入（删除当前光标所在字符）</span>
-Shitf+I  <span class="hljs-comment">// 行首插入（光标所在行）</span>
-Shift+A  <span class="hljs-comment">// 行尾插入（光标所在行）</span>
-Shift+S  <span class="hljs-comment">// 行替换插入（删除光标所在行）</span>
-o  <span class="hljs-comment">// 下一行插入（光标所在行下添加一行）</span>
-Shift+O  <span class="hljs-comment">// 上一行插入（光标所在行上添加一行）</span></code></pre><p>　　然后，命令模式下进入行末模式的方式是：<kbd>Shift+;</kbd>，也就是冒号。</p>
+<pre><code>i  <span class="hljs-regexp">//</span> 光标前插入
+a  <span class="hljs-regexp">//</span> 光标后插入
+s  <span class="hljs-regexp">//</span> 替换插入（删除当前光标所在字符）
+Shitf+I  <span class="hljs-regexp">//</span> 行首插入（光标所在行）
+Shift+A  <span class="hljs-regexp">//</span> 行尾插入（光标所在行）
+Shift+S  <span class="hljs-regexp">//</span> 行替换插入（删除光标所在行）
+o  <span class="hljs-regexp">//</span> 下一行插入（光标所在行下添加一行）
+Shift+O  <span class="hljs-regexp">//</span> 上一行插入（光标所在行上添加一行）</code></pre><p>　　然后，命令模式下进入行末模式的方式是：<kbd>Shift+;</kbd>，也就是冒号。</p>
 <h4 id="常用快捷键">常用快捷键</h4>
 <p>　　命令模式下还有许多便捷而强大的快捷键，下面来了解一下。</p>
 <ul>
 <li><p>光标移动</p>
-<pre><code>  h  <span class="hljs-comment">// 光标左移</span>
-  j  <span class="hljs-comment">// 光标下移</span>
-  k  <span class="hljs-comment">// 光标上移</span>
-  l  <span class="hljs-comment">// 光标右移</span>
+<pre><code>  h  <span class="hljs-regexp">//</span> 光标左移
+  j  <span class="hljs-regexp">//</span> 光标下移
+  k  <span class="hljs-regexp">//</span> 光标上移
+  l  <span class="hljs-regexp">//</span> 光标右移
 
-  gg  <span class="hljs-comment">// 光标移动到文档开头</span>
-  Shift+G  <span class="hljs-comment">// 光标移动到文档结尾</span></code></pre></li>
+  gg  <span class="hljs-regexp">//</span> 光标移动到文档开头
+  Shift+G  <span class="hljs-regexp">//</span> 光标移动到文档结尾</code></pre></li>
 <li><p>复制、粘贴、剪切/删除、撤销/恢复（批量操作）</p>
-<pre><code>  yy  <span class="hljs-comment">// 复制光标所在整行</span>
-  <span class="hljs-number">2</span>+yy <span class="hljs-comment">// 复制光标所在行开始向下2（n）行</span>
+<pre><code>  yy  <span class="hljs-regexp">//</span> 复制光标所在整行
+  <span class="hljs-number">2</span>+yy <span class="hljs-regexp">//</span> 复制光标所在行开始向下<span class="hljs-number">2</span>（n）行
 
-  <span class="hljs-selector-tag">p</span>   <span class="hljs-comment">// 光标所在行下方添加一行并粘贴</span>
-  <span class="hljs-number">2</span>+<span class="hljs-selector-tag">p</span>  <span class="hljs-comment">// 光标所在行下方添加2（n）行并粘贴</span>
-  Shitf+P  <span class="hljs-comment">// 光标所在行上方添加一行并粘贴</span>
+  p   <span class="hljs-regexp">//</span> 光标所在行下方添加一行并粘贴
+  <span class="hljs-number">2</span>+p  <span class="hljs-regexp">//</span> 光标所在行下方添加<span class="hljs-number">2</span>（n）行并粘贴
+  Shitf+P  <span class="hljs-regexp">//</span> 光标所在行上方添加一行并粘贴
 
-  <span class="hljs-selector-tag">dd</span>  <span class="hljs-comment">// 删除、剪切光标所在整行</span>
-  <span class="hljs-number">2</span>+<span class="hljs-selector-tag">dd</span>  <span class="hljs-comment">// 删除、剪切光标所在行开始向下2（n）行</span>
+  dd  <span class="hljs-regexp">//</span> 删除、剪切光标所在整行
+  <span class="hljs-number">2</span>+dd  <span class="hljs-regexp">//</span> 删除、剪切光标所在行开始向下<span class="hljs-number">2</span>（n）行
 
-  u  <span class="hljs-comment">// 撤销</span>
-  Ctrl+Y  <span class="hljs-comment">// 恢复</span>
+  u  <span class="hljs-regexp">//</span> 撤销
+  Ctrl+Y  <span class="hljs-regexp">//</span> 恢复
 
-  r  <span class="hljs-comment">// 替换光标所在字符</span></code></pre></li>
+  r  <span class="hljs-regexp">//</span> 替换光标所在字符</code></pre></li>
 <li><p>其他删除/剪切方式</p>
-<pre><code>  d+gg  <span class="hljs-comment">// 光标所在行到文档开头之间全部删除、剪切</span>
-  d+Shift+G  <span class="hljs-comment">// 光标所在行到文档结尾之间全部删除、剪切</span>
+<pre><code>  d+gg  <span class="hljs-regexp">//</span> 光标所在行到文档开头之间全部删除、剪切
+  d+Shift+G  <span class="hljs-regexp">//</span> 光标所在行到文档结尾之间全部删除、剪切
 
-  d+<span class="hljs-number">2</span>+gg  <span class="hljs-comment">// 光标所在行到第2（n）行之间全部删除、剪切</span>
-  d+<span class="hljs-number">2</span>+Shift+G  <span class="hljs-comment">// 同上</span>
+  d+<span class="hljs-number">2</span>+gg  <span class="hljs-regexp">//</span> 光标所在行到第<span class="hljs-number">2</span>（n）行之间全部删除、剪切
+  d+<span class="hljs-number">2</span>+Shift+G  <span class="hljs-regexp">//</span> 同上
 
-  d+^  <span class="hljs-comment">// 光标所在字符到行首之间全部删除、剪切</span>
-  d+$  <span class="hljs-comment">// 光标所在字符到行尾之间全部删除、剪切</span>
-  Shift+D  <span class="hljs-comment">// 同上</span>
+  d+^  <span class="hljs-regexp">//</span> 光标所在字符到行首之间全部删除、剪切
+  d+$  <span class="hljs-regexp">//</span> 光标所在字符到行尾之间全部删除、剪切
+  Shift+D  <span class="hljs-regexp">//</span> 同上
 
-  d+w  <span class="hljs-comment">// 删除光标所在处一个单词、符号</span>
+  d+w  <span class="hljs-regexp">//</span> 删除光标所在处一个单词、符号
 
-  x  <span class="hljs-comment">// 删除光标所在字符</span>
-  <span class="hljs-number">2</span>+x <span class="hljs-comment">// 删除光标所在字符开始向后2（n）个字符</span></code></pre></li>
+  x  <span class="hljs-regexp">//</span> 删除光标所在字符
+  <span class="hljs-number">2</span>+x <span class="hljs-regexp">//</span> 删除光标所在字符开始向后<span class="hljs-number">2</span>（n）个字符</code></pre></li>
 </ul>
 <h3 id="行末模式">行末模式</h3>
 <p>　　行末模式也就是通常我们所说的菜单栏，提供文件保存等操作。</p>
-<pre><code>w  <span class="hljs-comment">// 保存当前文档</span>
-<span class="hljs-symbol">x</span>  <span class="hljs-comment">// 保存文档并关闭</span></code></pre><h2 id="结语">结语</h2>
+<pre><code>w  <span class="hljs-regexp">//</span> 保存当前文档
+x  <span class="hljs-regexp">//</span> 保存文档并关闭</code></pre><h2 id="结语">结语</h2>
 <p>　　Vim插件有三种模式，但是不能互相切换，命令模式是其切换枢纽。三者切换关系如下：</p>
 <blockquote>
 <p><strong>插入模式&lt;---&gt;命令模式&lt;---&gt;行末模式</strong></p>
 </blockquote>
 <p>　　为了方便、安全，我们通常将其初始化模式设置为 <strong>命令模式</strong>，方式：打开 Sublime Text 3，在菜单 <strong>Preferences</strong> 下选择 <strong>Settings-User</strong>，也就是用户设置；添加下面这句：</p>
-<pre><code><span class="hljs-attr">"vintage_start_in_command_mode":</span> <span class="hljs-literal">true</span></code></pre>
+<pre><code><span class="hljs-attr">&quot;vintage_start_in_command_mode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span></code></pre>

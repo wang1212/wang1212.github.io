@@ -29,35 +29,35 @@
 <p><a href="https://json-schema.org/">JSON Schema</a></p>
 </blockquote>
 <p>　　其中有两个细节我们值得注意。第一个便是项目 <em>README.md</em> 文件中提到的安全方面需要注意的问题，是由于 <strong>在初始化时利用 <code>Function</code> 构造函数预编译了函数体，以此达到优化性能的目的</strong>。</p>
-<pre><code class="language-js">result = (<span class="hljs-name">new</span> Function('schema', code))(<span class="hljs-name">root</span>)</code></pre>
+<pre><code class="language-js"><span class="hljs-keyword">result</span> = (<span class="hljs-keyword">new</span> <span class="hljs-function"><span class="hljs-keyword">Function</span><span class="hljs-params">(<span class="hljs-string">&#x27;schema&#x27;</span>, code)</span>)<span class="hljs-params">(root)</span></span></code></pre>
 <p>　　而这个原理其实也是比较好理解的，通过把一个函数体内包含循环迭代的代码预先“编译”成字符串再交给函数来执行，在函数的“运行时”就不需要再做额外的“解释翻译”以及迭代工作，从而提高性能。下面有一篇相关的比较有趣的文章可以看看：</p>
 <blockquote>
 <p><a href="https://github.com/felixge/faster-than-c">Faster than C? Parsing binary data in JavaScript.</a></p>
 </blockquote>
 <p>　　我们也可以通过以下示例代码来进行简单的测试：</p>
-<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>{
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">a</span>(<span class="hljs-params"></span>) {
   <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) {
-    <span class="hljs-built_in">console</span>.log(i);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i);
   }
 }
 
 
-<span class="hljs-keyword">const</span> code = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>].map(<span class="hljs-function"><span class="hljs-params">i</span> =&gt;</span> <span class="hljs-string">`console.log(<span class="hljs-subst">${i}</span>)`</span>);
+<span class="hljs-keyword">const</span> code = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>].<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">i</span> =&gt;</span> <span class="hljs-string">`console.log(<span class="hljs-subst">${i}</span>)`</span>);
 <span class="hljs-comment">// 函数体预编译后 b 等价于</span>
 <span class="hljs-comment">// function b() {</span>
 <span class="hljs-comment">//   console.log(0);</span>
 <span class="hljs-comment">//   console.log(1);</span>
 <span class="hljs-comment">//   console.log(2);</span>
 <span class="hljs-comment">// }</span>
-<span class="hljs-keyword">const</span> b = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Function</span>(code);
+<span class="hljs-keyword">const</span> b = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Function</span>(code);
 
-<span class="hljs-built_in">console</span>.time(<span class="hljs-string">'a'</span>);
-a();
-<span class="hljs-built_in">console</span>.timeEnd(<span class="hljs-string">'a'</span>); <span class="hljs-comment">// a: 0.136962890625 ms</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">time</span>(<span class="hljs-string">&#x27;a&#x27;</span>);
+<span class="hljs-title function_">a</span>();
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">timeEnd</span>(<span class="hljs-string">&#x27;a&#x27;</span>); <span class="hljs-comment">// a: 0.136962890625 ms</span>
 
-<span class="hljs-built_in">console</span>.time(<span class="hljs-string">'b'</span>);
-b();
-<span class="hljs-built_in">console</span>.timeEnd(<span class="hljs-string">'b'</span>); <span class="hljs-comment">// b: 0.05908203125 ms</span></code></pre>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">time</span>(<span class="hljs-string">&#x27;b&#x27;</span>);
+<span class="hljs-title function_">b</span>();
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">timeEnd</span>(<span class="hljs-string">&#x27;b&#x27;</span>); <span class="hljs-comment">// b: 0.05908203125 ms</span></code></pre>
 <p>　　第二个细节便是 <em>README.md</em> 文件中有提到可以和 <code>flatstr</code> 模块很好的配合使用，因为该模块会触发 V8 的优化机制，把字符串最终转换成了 <code>Buffer</code>。 其项目的 <em>README.md</em> 文件中 <strong>How does it work</strong> 段落详细解释了底层机制，简单的来说，V8 会在某些情况下针对 <code>String</code> 数据做特定优化，而该模块的主要作用就是主动去触发这种 V8 的优化机制以达到提高性能的目的。</p>
 <blockquote>
 <p><a href="https://github.com/davidmarkclements/flatstr">GitHub: <code>flatstr</code></a></p>
@@ -120,13 +120,13 @@ b();
 <p><a href="https://stackoverflow.com/questions/22894877/avoid-allocations-in-compiler-hot-paths-roslyn-coding-conventions">Avoid allocations in compiler hot paths” Roslyn Coding Conventions</a></p>
 </blockquote>
 <p>　　不过，在 <code>reusify</code> 模块给出的示例代码中有一个细节值得注意：</p>
-<pre><code class="language-js"><span class="hljs-comment">// ...</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyObject</span> <span class="hljs-params">()</span> </span>{
-  <span class="hljs-comment">// you need to define this property</span>
-  <span class="hljs-comment">// so V8 can compile MyObject into an</span>
-  <span class="hljs-comment">// hidden class</span>
-  <span class="hljs-keyword">this</span>.next = <span class="hljs-literal">null</span>
-  <span class="hljs-comment">// ...</span></code></pre>
+<pre><code class="language-js"><span class="hljs-regexp">//</span> ...
+<span class="hljs-keyword">function</span> MyObject () {
+  <span class="hljs-regexp">//</span> you need to define this property
+  <span class="hljs-regexp">//</span> so V8 can compile MyObject into an
+  <span class="hljs-regexp">//</span> hidden class
+  this.<span class="hljs-keyword">next</span> = null
+  <span class="hljs-regexp">//</span> ...</code></pre>
 <p>　　作者注释到你要重用的对象内部第一个属性应该定义为 <code>next</code>，因为可以触发 V8 的优化机制 <strong>“隐藏类（hidden class）”</strong>。首先，<strong>隐藏类是 V8 内部为了优化非整数索引属性（命名属性）的访问速度的机制，每一次对对象命名属性的增删操作都会导致新的隐藏类被创建，而具备同样的命名属性定义顺序的对象可以共享隐藏类，减少开销</strong>。接下来，通过查看 <code>reusify</code> 模块的源码便可知道，模块内部为了实现缓存队列给被重用的对象添加了一个 <code>next</code> 属性，由此便可以明白作者的注释是告诉我们如何利用好 V8 的内部优化机制 —— 隐藏类。</p>
 <blockquote>
 <p><a href="https://v8.dev/blog/fast-properties">Fast properties in V8</a></p>
@@ -136,16 +136,16 @@ b();
 </blockquote>
 <h3 id="插件模型（plugin-model）">插件模型（Plugin Model）</h3>
 <p>　　Fastify 的灵活扩展主要依赖于其插件系统，同时也支持 Express 中间件（需要 <code>middie</code> 插件），可以说是 Express 与 Hapi 的组合。在探究 Fastify 的插件模型之前，先来看看 Koa 的中间件模型的源码实现：</p>
-<pre><code class="language-js"><span class="hljs-comment">// https://github.com/koajs/compose/blob/25568a36509fefc58914bc2a7600f787b16aa0df/index.js#L42</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">compose</span> (<span class="hljs-params">middleware</span>) </span>{
-  <span class="hljs-comment">// ...</span>
-  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context, next</span>) </span>{
-    <span class="hljs-comment">// ...</span>
-    <span class="hljs-keyword">return</span> dispatch(<span class="hljs-number">0</span>)
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dispatch</span> (<span class="hljs-params">i</span>) </span>{
-      <span class="hljs-comment">// ...</span>
-      <span class="hljs-comment">// 遍历嵌套迭代（类递归）的方式执行</span>
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(fn(context, dispatch.bind(<span class="hljs-literal">null</span>, i + <span class="hljs-number">1</span>)));
+<pre><code class="language-js"><span class="hljs-regexp">//</span> https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/koajs/</span>compose<span class="hljs-regexp">/blob/</span><span class="hljs-number">25568</span>a36509fefc58914bc2a7600f787b16aa0df/index.js<span class="hljs-comment">#L42</span>
+<span class="hljs-keyword">function</span> compose (middleware) {
+  <span class="hljs-regexp">//</span> ...
+  return <span class="hljs-keyword">function</span> (context, <span class="hljs-keyword">next</span>) {
+    <span class="hljs-regexp">//</span> ...
+    return dispatch(<span class="hljs-number">0</span>)
+    <span class="hljs-keyword">function</span> dispatch (i) {
+      <span class="hljs-regexp">//</span> ...
+      <span class="hljs-regexp">//</span> 遍历嵌套迭代（类递归）的方式执行
+      return Promise.resolve(fn(context, dispatch.bind(null, i + <span class="hljs-number">1</span>)));
     }
   }
 }</code></pre>
@@ -307,20 +307,20 @@ b();
 </tbody></table>
 <h2 id="附：基准测试">附：基准测试</h2>
 <p>　　这里做了一个简单的基准测试，在 <em>windows 10</em> 平台下采用 <code>autocannon</code> 测试工具，依赖版本如下：</p>
-<pre><code class="language-js"><span class="hljs-string">"dependencies"</span>: {
-  <span class="hljs-string">"express"</span>: <span class="hljs-string">"4.17.1"</span>,
-  <span class="hljs-string">"fastify"</span>: <span class="hljs-string">"3.18.1"</span>,
-  <span class="hljs-string">"koa"</span>: <span class="hljs-string">"2.13.1"</span>
-},
-<span class="hljs-string">"devDependencies"</span>: {
-  <span class="hljs-string">"autocannon"</span>: <span class="hljs-string">"^7.3.0"</span>,
-},</code></pre>
+<pre><code class="language-js"><span class="hljs-attr">&quot;dependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;express&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;4.17.1&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;fastify&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;3.18.1&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;koa&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2.13.1&quot;</span>
+<span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+<span class="hljs-attr">&quot;devDependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;autocannon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^7.3.0&quot;</span><span class="hljs-punctuation">,</span>
+<span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></code></pre>
 <p>　　测试代码如下：</p>
 <pre><code class="language-js"><span class="hljs-comment">// express</span>
 <span class="hljs-keyword">const</span> app = express()
 
-app.<span class="hljs-keyword">get</span>(<span class="hljs-string">'/'</span>, function (req, res) {
-    res.send({ hello: <span class="hljs-string">'world'</span> })
+app.<span class="hljs-keyword">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, function (req, res) {
+    res.send({ hello: <span class="hljs-string">&#x27;world&#x27;</span> })
 })
 
 app.listen(<span class="hljs-number">3002</span>)
@@ -329,7 +329,7 @@ app.listen(<span class="hljs-number">3002</span>)
 <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Koa()
 
 app.use(<span class="hljs-keyword">async</span> (ctx) =&gt; {
-    ctx.body = { hello: <span class="hljs-string">'world'</span> }
+    ctx.body = { hello: <span class="hljs-string">&#x27;world&#x27;</span> }
 })
 
 app.listen(<span class="hljs-number">3001</span>)
@@ -339,28 +339,28 @@ app.listen(<span class="hljs-number">3001</span>)
     <span class="hljs-comment">// logger: true,</span>
 })
 
-fastify.<span class="hljs-keyword">get</span>(<span class="hljs-string">'/'</span>, <span class="hljs-keyword">async</span> (request, reply) =&gt; {
-    reply.type(<span class="hljs-string">'application/json'</span>).code(<span class="hljs-number">200</span>)
-    <span class="hljs-keyword">return</span> { hello: <span class="hljs-string">'world'</span> }
+fastify.<span class="hljs-keyword">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-keyword">async</span> (request, reply) =&gt; {
+    reply.type(<span class="hljs-string">&#x27;application/json&#x27;</span>).code(<span class="hljs-number">200</span>)
+    <span class="hljs-keyword">return</span> { hello: <span class="hljs-string">&#x27;world&#x27;</span> }
 })
 
 fastify.listen(<span class="hljs-number">3000</span>, (err, address) =&gt; {
     <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err
 })</code></pre>
 <p>　　测试结果如下：</p>
-<pre><code class="language-bash"># express
-&gt; <span class="hljs-built_in">auto</span>cannon http:<span class="hljs-comment">//127.0.0.1:3002/</span>
+<pre><code class="language-bash"><span class="hljs-comment"># express</span>
+&gt; autocannon http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">3002</span>/
 
-Running <span class="hljs-number">10</span>s test @ http:<span class="hljs-comment">//127.0.0.1:3002/</span>
+Running <span class="hljs-number">10s</span> test @ http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">3002</span>/
 <span class="hljs-number">10</span> connections
 
 ┌─────────┬──────┬──────┬───────┬──────┬─────────┬─────────┬───────┐
 │ Stat    │ <span class="hljs-number">2.5</span>% │ <span class="hljs-number">50</span>%  │ <span class="hljs-number">97.5</span>% │ <span class="hljs-number">99</span>%  │ Avg     │ Stdev   │ Max   │
 ├─────────┼──────┼──────┼───────┼──────┼─────────┼─────────┼───────┤
-│ Latency │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">1</span> ms │ <span class="hljs-number">2</span> ms  │ <span class="hljs-number">3</span> ms │ <span class="hljs-number">0.84</span> ms │ <span class="hljs-number">0.61</span> ms │ <span class="hljs-number">10</span> ms │
+│ Latency │ <span class="hljs-number">0</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 1</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 2</span> <span class="hljs-keyword">ms</span>  <span class="hljs-title">│ 3</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 0</span>.<span class="hljs-number">84</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 0</span>.<span class="hljs-number">61</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 10</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│
 └─────────┴──────┴──────┴───────┴──────┴─────────┴─────────┴───────┘
 ┌───────────┬─────────┬─────────┬─────────┬────────┬─────────┬─────────┬─────────┐
-│ Stat      │ <span class="hljs-number">1</span>%      │ <span class="hljs-number">2.5</span>%    │ <span class="hljs-number">50</span>%     │ <span class="hljs-number">97.5</span>%  │ Avg     │ Stdev   │ Min     │
+│ Stat</span>      │ <span class="hljs-number">1</span>%      │ <span class="hljs-number">2.5</span>%    │ <span class="hljs-number">50</span>%     │ <span class="hljs-number">97.5</span>%  │ Avg     │ Stdev   │ Min     │
 ├───────────┼─────────┼─────────┼─────────┼────────┼─────────┼─────────┼─────────┤
 │ Req/Sec   │ <span class="hljs-number">4675</span>    │ <span class="hljs-number">4675</span>    │ <span class="hljs-number">8199</span>    │ <span class="hljs-number">8287</span>   │ <span class="hljs-number">7838.37</span> │ <span class="hljs-number">1017.07</span> │ <span class="hljs-number">4672</span>    │
 ├───────────┼─────────┼─────────┼─────────┼────────┼─────────┼─────────┼─────────┤
@@ -369,21 +369,21 @@ Running <span class="hljs-number">10</span>s test @ http:<span class="hljs-comme
 
 Req/Bytes counts sampled once per second.
 
-<span class="hljs-number">86</span>k requests <span class="hljs-keyword">in</span> <span class="hljs-number">11.01</span>s, <span class="hljs-number">19.7</span> MB read
+<span class="hljs-number">86</span>k requests <span class="hljs-keyword">in</span> <span class="hljs-number">11.01s</span>, <span class="hljs-number">19.7</span> MB <span class="hljs-keyword">read</span>
 
-# koa
-&gt; <span class="hljs-built_in">auto</span>cannon http:<span class="hljs-comment">//127.0.0.1:3001/</span>
+<span class="hljs-comment"># koa</span>
+&gt; autocannon http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">3001</span>/
 
-Running <span class="hljs-number">10</span>s test @ http:<span class="hljs-comment">//127.0.0.1:3001/</span>
+Running <span class="hljs-number">10s</span> test @ http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">3001</span>/
 <span class="hljs-number">10</span> connections
 
 ┌─────────┬──────┬──────┬───────┬──────┬─────────┬─────────┬──────┐
 │ Stat    │ <span class="hljs-number">2.5</span>% │ <span class="hljs-number">50</span>%  │ <span class="hljs-number">97.5</span>% │ <span class="hljs-number">99</span>%  │ Avg     │ Stdev   │ Max  │
 ├─────────┼──────┼──────┼───────┼──────┼─────────┼─────────┼──────┤
-│ Latency │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">0</span> ms  │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">0.01</span> ms │ <span class="hljs-number">0.12</span> ms │ <span class="hljs-number">9</span> ms │
+│ Latency │ <span class="hljs-number">0</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 0</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 0</span> <span class="hljs-keyword">ms</span>  <span class="hljs-title">│ 0</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 0</span>.<span class="hljs-number">01</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 0</span>.<span class="hljs-number">12</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 9</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│
 └─────────┴──────┴──────┴───────┴──────┴─────────┴─────────┴──────┘
 ┌───────────┬─────────┬─────────┬────────┬─────────┬────────┬────────┬─────────┐
-│ Stat      │ <span class="hljs-number">1</span>%      │ <span class="hljs-number">2.5</span>%    │ <span class="hljs-number">50</span>%    │ <span class="hljs-number">97.5</span>%   │ Avg    │ Stdev  │ Min     │
+│ Stat</span>      │ <span class="hljs-number">1</span>%      │ <span class="hljs-number">2.5</span>%    │ <span class="hljs-number">50</span>%    │ <span class="hljs-number">97.5</span>%   │ Avg    │ Stdev  │ Min     │
 ├───────────┼─────────┼─────────┼────────┼─────────┼────────┼────────┼─────────┤
 │ Req/Sec   │ <span class="hljs-number">17743</span>   │ <span class="hljs-number">17743</span>   │ <span class="hljs-number">20111</span>  │ <span class="hljs-number">20335</span>   │ <span class="hljs-number">19496</span>  │ <span class="hljs-number">964.55</span> │ <span class="hljs-number">17731</span>   │
 ├───────────┼─────────┼─────────┼────────┼─────────┼────────┼────────┼─────────┤
@@ -392,21 +392,21 @@ Running <span class="hljs-number">10</span>s test @ http:<span class="hljs-comme
 
 Req/Bytes counts sampled once per second.
 
-<span class="hljs-number">214</span>k requests <span class="hljs-keyword">in</span> <span class="hljs-number">11.01</span>s, <span class="hljs-number">35.2</span> MB read
+<span class="hljs-number">214</span>k requests <span class="hljs-keyword">in</span> <span class="hljs-number">11.01s</span>, <span class="hljs-number">35.2</span> MB <span class="hljs-keyword">read</span>
 
-# fastify
-&gt; <span class="hljs-built_in">auto</span>cannon http:<span class="hljs-comment">//127.0.0.1:3000/</span>
+<span class="hljs-comment"># fastify</span>
+&gt; autocannon http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">3000</span>/
 
-Running <span class="hljs-number">10</span>s test @ http:<span class="hljs-comment">//127.0.0.1:3000/</span>
+Running <span class="hljs-number">10s</span> test @ http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">3000</span>/
 <span class="hljs-number">10</span> connections
 
 ┌─────────┬──────┬──────┬───────┬──────┬─────────┬─────────┬───────┐
 │ Stat    │ <span class="hljs-number">2.5</span>% │ <span class="hljs-number">50</span>%  │ <span class="hljs-number">97.5</span>% │ <span class="hljs-number">99</span>%  │ Avg     │ Stdev   │ Max   │
 ├─────────┼──────┼──────┼───────┼──────┼─────────┼─────────┼───────┤
-│ Latency │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">0</span> ms  │ <span class="hljs-number">0</span> ms │ <span class="hljs-number">0.01</span> ms │ <span class="hljs-number">0.13</span> ms │ <span class="hljs-number">13</span> ms │
+│ Latency │ <span class="hljs-number">0</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 0</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 0</span> <span class="hljs-keyword">ms</span>  <span class="hljs-title">│ 0</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 0</span>.<span class="hljs-number">01</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 0</span>.<span class="hljs-number">13</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│ 13</span> <span class="hljs-keyword">ms</span> <span class="hljs-title">│
 └─────────┴──────┴──────┴───────┴──────┴─────────┴─────────┴───────┘
 ┌───────────┬─────────┬─────────┬─────────┬─────────┬──────────┬─────────┬─────────┐
-│ Stat      │ <span class="hljs-number">1</span>%      │ <span class="hljs-number">2.5</span>%    │ <span class="hljs-number">50</span>%     │ <span class="hljs-number">97.5</span>%   │ Avg      │ Stdev   │ Min     │
+│ Stat</span>      │ <span class="hljs-number">1</span>%      │ <span class="hljs-number">2.5</span>%    │ <span class="hljs-number">50</span>%     │ <span class="hljs-number">97.5</span>%   │ Avg      │ Stdev   │ Min     │
 ├───────────┼─────────┼─────────┼─────────┼─────────┼──────────┼─────────┼─────────┤
 │ Req/Sec   │ <span class="hljs-number">19759</span>   │ <span class="hljs-number">19759</span>   │ <span class="hljs-number">27631</span>   │ <span class="hljs-number">27903</span>   │ <span class="hljs-number">26960.73</span> │ <span class="hljs-number">2284.47</span> │ <span class="hljs-number">19752</span>   │
 ├───────────┼─────────┼─────────┼─────────┼─────────┼──────────┼─────────┼─────────┤
@@ -415,5 +415,5 @@ Running <span class="hljs-number">10</span>s test @ http:<span class="hljs-comme
 
 Req/Bytes counts sampled once per second.
 
-<span class="hljs-number">297</span>k requests <span class="hljs-keyword">in</span> <span class="hljs-number">11.01</span>s, <span class="hljs-number">48.6</span> MB read</code></pre>
+<span class="hljs-number">297</span>k requests <span class="hljs-keyword">in</span> <span class="hljs-number">11.01s</span>, <span class="hljs-number">48.6</span> MB <span class="hljs-keyword">read</span></code></pre>
 <p>　　根据测试结果来看，仅 <strong>Req/Sec</strong> 这一项的平均值（Avg），Express 只有 <strong>7838.37</strong>，Koa 有 <strong>19496</strong>，约为前者的 2.4 倍，而 Fastify 达到了 <strong>26960.73</strong>，是 Express 的约 3.4 倍，Koa 的约 1.4 倍。除此之外，<strong>Bytes/Sec</strong> 指标也有差距，综合起来 Koa 和 Fastify 的表现要好的多，而 Fastify 要比 Koa 表现更好一些。</p>

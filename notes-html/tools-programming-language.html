@@ -38,9 +38,9 @@
 <h5 id="词法分析">词法分析</h5>
 <p>　　词法分析器构成了现代处理中编译器前端的第一阶段。词法分析（Lexical analysis）简单来说就是“将源代码由字符序列转换为有意义的单词（token）序列”的工序。将只是字符串的源代码整理为有些许意义的单词序列，后续阶段的处理就会变得简单。</p>
 <p>　　以 C 语言为例说明：</p>
-<pre><code class="language-c"><span class="hljs-attribute">x</span> = a + b * 2;</code></pre>
+<pre><code class="language-c"><span class="hljs-attr">x</span> = a + b * <span class="hljs-number">2</span><span class="hljs-comment">;</span></code></pre>
 <p>　　上面的表达式经过词法分析后生成如下内容：</p>
-<pre><code>[(identifier, x), (operator, =), (identifier, a), (operator, +), (identifier, b), (operator, *), (literal, <span class="hljs-number">2</span>), (separator, ;)]</code></pre><p>　　我们可以借助 <a href="https://en.wikipedia.org/wiki/Lex_(software)">lex</a> 工具根据编写单词的规则自动生成词法分析函数。</p>
+<pre><code>[<span class="hljs-comment">(identifier, x)</span>, <span class="hljs-comment">(operator, =)</span>, <span class="hljs-comment">(identifier, a)</span>, <span class="hljs-comment">(operator, +)</span>, <span class="hljs-comment">(identifier, b)</span>, <span class="hljs-comment">(operator, *)</span>, <span class="hljs-comment">(literal, 2)</span>, <span class="hljs-comment">(separator, ;)</span>]</code></pre><p>　　我们可以借助 <a href="https://en.wikipedia.org/wiki/Lex_(software)">lex</a> 工具根据编写单词的规则自动生成词法分析函数。</p>
 <h5 id="语法分析">语法分析</h5>
 <p>　　语法分析（Syntax analysis）是检查在词法分析阶段准备好的单词是否符合语法，并进行符合语法的处理的工序，最终结果是生成一个解析树（parse tree）数据结构。语法分析的方法有好几种，其中最有名、最简单的方法是使用别名为“生成编译器的编译器”的语法分析函数生成工具，比如 <a href="https://en.wikipedia.org/wiki/Yacc">yacc</a>（yet another compiler compiler）。</p>
 <h5 id="抽象语法树">抽象语法树</h5>

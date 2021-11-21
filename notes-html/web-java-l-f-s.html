@@ -35,16 +35,16 @@
 <p>　　绑定到 HttpSession 中对象的状态变化由相应接口的实现类来处理，<code>HttpSessionBindingListener</code> 接口中规范了 <code>valueBound()</code> 和 <code>valueUnbound()</code> 方法完成监听对象的绑定和解除绑定；而 <code>HttpSessionActivationListener</code> 接口中规范了 <code>sessionWillPassivate()</code> 和 <code>sessionDidActivate()</code> 方法来完成监听对象的钝化和活化。所谓的钝化就是将对象序列化到存储设备中去，而活化则是将对象从存储设备中反序列化到内存当中去。</p>
 <h3 id="注册">注册</h3>
 <p>　　在创建好监听器类后，需要在项目中设置才能起作用，可以在<strong>web.xml</strong>中去设置，也可以使用 <code>@WebListener</code> 注解注册。</p>
-<pre><code><span class="hljs-keyword">package</span> listener;
+<pre><code><span class="hljs-selector-tag">package</span> <span class="hljs-selector-tag">listener</span>;
 
-<span class="hljs-meta">@WebListener</span>  <span class="hljs-comment">// 此处使用了注解注册该监听器</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppListener</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ServletContextListener</span> </span>{
+@<span class="hljs-selector-tag">WebListener</span>  <span class="hljs-comment">// 此处使用了注解注册该监听器</span>
+<span class="hljs-selector-tag">public</span> <span class="hljs-selector-tag">class</span> <span class="hljs-selector-tag">AppListener</span> <span class="hljs-selector-tag">implements</span> <span class="hljs-selector-tag">ServletContextListener</span> {
 
-    <span class="hljs-meta">@Override</span>  <span class="hljs-comment">// 销毁方法</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">contextDestroyed</span><span class="hljs-params">(ServletContextEvent arg0)</span> </span>{ }
+    <span class="hljs-variable">@Override</span>  <span class="hljs-comment">// 销毁方法</span>
+    public void contextDestroyed(ServletContextEvent arg0) { }
 
-    <span class="hljs-meta">@Override</span>  <span class="hljs-comment">// 初始化方法</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">contextInitialized</span><span class="hljs-params">(ServletContextEvent arg0)</span> </span>{ }
+    <span class="hljs-variable">@Override</span>  <span class="hljs-comment">// 初始化方法</span>
+    public void contextInitialized(ServletContextEvent arg0) { }
 }</code></pre><hr>
 <pre><code><span class="hljs-comment">&lt;!-- 也可以在 web.xml 文件中注册该监听器 --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">listener</span>&gt;</span>
@@ -78,24 +78,24 @@
 <p>　　所有类型的过滤器均是 <code>Filter</code> 接口的实现类。</p>
 <h3 id="注册-1">注册</h3>
 <p>　　在创建好过滤器类后，需要在项目中设置才能起作用，可以在<strong>web.xml</strong>中去设置，也可以使用 <code>@WebFilter</code> 注解注册。</p>
-<pre><code><span class="hljs-keyword">package</span> filter;
+<pre><code>package filter;
 
 <span class="hljs-comment">// 使用注解注册</span>
-<span class="hljs-meta">@WebFilter</span>(filterName=<span class="hljs-string">"firstFilter"</span>, urlPatterns={<span class="hljs-string">"/servlet/GetAndPost"</span>},
-        dispatcherTypes={DispatcherType.REQUEST})
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">firstFilter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Filter</span> </span>{
+<span class="hljs-meta">@WebFilter</span>(filterName=<span class="hljs-string">&quot;firstFilter&quot;</span>, urlPatterns={<span class="hljs-string">&quot;/servlet/GetAndPost&quot;</span>},
+        dispatcherTypes={<span class="hljs-title class_">DispatcherType</span>.<span class="hljs-property">REQUEST</span>})
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">firstFilter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Filter</span> {
 
     <span class="hljs-meta">@Override</span>  <span class="hljs-comment">// 销毁方法</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">destroy</span><span class="hljs-params">()</span> </span>{ }
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">destroy</span>(<span class="hljs-params"></span>) { }
 
     <span class="hljs-meta">@Override</span>  <span class="hljs-comment">// 过滤方法</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doFilter</span><span class="hljs-params">(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)</span> </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">doFilter</span>(<span class="hljs-params">ServletRequest arg0, ServletResponse arg1, FilterChain arg2</span>) {
         <span class="hljs-comment">// 放行（必须）</span>
-        arg2.doFilter(arg0, arg1);
+        arg2.<span class="hljs-title function_">doFilter</span>(arg0, arg1);
     }
 
     <span class="hljs-meta">@Override</span>  <span class="hljs-comment">// 初始化方法</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(FilterConfig arg0)</span> </span>{ }
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">init</span>(<span class="hljs-params">FilterConfig arg0</span>) { }
 }</code></pre><hr>
 <pre><code><span class="hljs-comment">&lt;!-- 也可以在 web.xml 文件中注册该过滤器 --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">filter</span>&gt;</span>
@@ -132,27 +132,27 @@ public void <span class="hljs-keyword">do</span><span class="hljs-constructor">F
 <p>　　另外，Servlet 不一定是在用户首次请求后才进行实例化，可以在注册时进行配置，当应用启动时就进行实例化。而且，当 Servlet 类文件被更改后，服务器会重新装载 Servlet，此时也会销毁原来的实例，重新实例化新的 Servlet 并初始化。</p>
 <h3 id="注册-2">注册</h3>
 <p>　　在创建好过 Servlet 类后，需要在项目中设置才能起作用，可以在 <strong>web.xml</strong> 中去设置，也可以使用 <code>@WebServlet</code> 注解注册。</p>
-<pre><code><span class="hljs-keyword">package</span> servlet;
+<pre><code>package servlet;
 
 <span class="hljs-comment">// 使用注解注册</span>
-<span class="hljs-meta">@WebServlet</span>(name=<span class="hljs-string">"ServletLife"</span>, loadOnStartup=<span class="hljs-number">1</span>, urlPatterns={<span class="hljs-string">"/servlet/ServletLife"</span>},
+<span class="hljs-meta">@WebServlet</span>(name=<span class="hljs-string">&quot;ServletLife&quot;</span>, loadOnStartup=<span class="hljs-number">1</span>, urlPatterns={<span class="hljs-string">&quot;/servlet/ServletLife&quot;</span>},
             initParams={
-    <span class="hljs-meta">@WebInitParam</span>(name=<span class="hljs-string">"username"</span>,value=<span class="hljs-string">"MrWang"</span>),
-    <span class="hljs-meta">@WebInitParam</span>(name=<span class="hljs-string">"password"</span>,value=<span class="hljs-string">"1314"</span>)
+    <span class="hljs-meta">@WebInitParam</span>(name=<span class="hljs-string">&quot;username&quot;</span>,value=<span class="hljs-string">&quot;MrWang&quot;</span>),
+    <span class="hljs-meta">@WebInitParam</span>(name=<span class="hljs-string">&quot;password&quot;</span>,value=<span class="hljs-string">&quot;1314&quot;</span>)
 })
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ServletLife</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>{
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ServletLife</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">HttpServlet</span> {
 
     <span class="hljs-meta">@Override</span>  <span class="hljs-comment">// 初始化方法</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>{ }
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">init</span>(<span class="hljs-params"></span>) { }
 
     <span class="hljs-meta">@Override</span>  <span class="hljs-comment">// 销毁方法</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">destroy</span><span class="hljs-params">()</span> </span>{ }
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">destroy</span>(<span class="hljs-params"></span>) { }
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(request, response)</span> </span>{ }
+    <span class="hljs-keyword">protected</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">doGet</span>(<span class="hljs-params">request, response</span>) { }
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doPost</span><span class="hljs-params">(request, response)</span> </span>{ }
+    <span class="hljs-keyword">protected</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">doPost</span>(<span class="hljs-params">request, response</span>) { }
 }</code></pre><hr>
 <pre><code><span class="hljs-comment">&lt;!-- 也可以在 web.xml 文件中注册该 Servlet --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span>

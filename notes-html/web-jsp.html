@@ -146,7 +146,7 @@
 <p>　　JSP 指令用来设置整个页面相关的属性，如网页的编码方式和所使用的脚本语言。JSP 内置了三大指令，下面就来一一介绍：</p>
 <h3 id="page-1">Page</h3>
 <p>　　Page 指令为容器提供当前页面的使用说明，如使用的脚本语言和所需要引入的类等，一个 JSP 页面可以包含多个 page 指令。其语法格式如下：</p>
-<pre><code>&lt;%@<span class="hljs-built_in"> page </span><span class="hljs-attribute">attribute</span>=<span class="hljs-string">""</span> %&gt;</code></pre><p>　　page 指令的常用属性有以下：</p>
+<pre><code>&lt;<span class="hljs-meta">%</span>@ page attribute=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-meta">%</span>&gt;</code></pre><p>　　page 指令的常用属性有以下：</p>
 <ul>
 <li><p>language</p>
 <p>  指定页面所使用的脚本语言，默认为 Java</p>
@@ -163,9 +163,9 @@
 </ul>
 <h3 id="include">Include</h3>
 <p>　　Include 指令用来在当前 JSP 页面包含其它文件，JSP、HTML、文本文件均可以。被包含的文件会在当前 JSP 页面编译期间执行，最终只转换成一个 Servlet，编译效率较低，但执行很快，可以称之为静态包含。语法格式如下：</p>
-<pre><code>&lt;%@ include <span class="hljs-keyword">file</span>=<span class="hljs-string">"文件的相对 url 地址"</span> %&gt;</code></pre><h3 id="taglib">Taglib</h3>
+<pre><code>&lt;%@ include <span class="hljs-keyword">file</span>=<span class="hljs-string">&quot;文件的相对 url 地址&quot;</span> %&gt;</code></pre><h3 id="taglib">Taglib</h3>
 <p>　　Taglib 指令是为了让用户可以引入自定义的标签库，其语法格式如下：</p>
-<pre><code>&lt;<span class="hljs-meta">%</span>@ taglib uri=<span class="hljs-string">"库文件的 uri 地址"</span> prefix=<span class="hljs-string">"标签库前缀"</span> <span class="hljs-meta">%</span>&gt;</code></pre><h2 id="动作">动作</h2>
+<pre><code>&lt;<span class="hljs-meta">%</span>@ taglib uri=<span class="hljs-string">&quot;库文件的 uri 地址&quot;</span> prefix=<span class="hljs-string">&quot;标签库前缀&quot;</span> <span class="hljs-meta">%</span>&gt;</code></pre><h2 id="动作">动作</h2>
 <p>　　JSP 动作元素是在请求阶段执行的，利用其可以动态的插入文件、重用 JavaBean 组件、页面重定向等。JSP 提供了多个动作元素，且每个动作元素都两个常用的属性，下面来看看：</p>
 <ul>
 <li><p>动作元素常见的共有属性</p>
@@ -181,22 +181,22 @@
 </ul>
 <h3 id="include-1">include</h3>
 <p>　　include 动作元素的作用与 Include 指令一样，可以将 JSP、HTML、文本文件包含到当前页面中，不同的是后者在页面编译期间就将文件包含进去，生成一个 Servlet，而 include 动作则是在请求阶段才将文件包含到当前页面中，最终将会生成两个 Servlet，编译效率高，但执行较慢，可以称之为动态包含。其语法格式如下：</p>
-<pre><code>&lt;jsp:include <span class="hljs-attribute">page</span>=<span class="hljs-string">"文件相对 url 地址"</span> <span class="hljs-attribute">flush</span>=<span class="hljs-string">"是否刷新缓冲区"</span> /&gt;</code></pre><h3 id="usebean">useBean</h3>
+<pre><code>&lt;jsp:include <span class="hljs-attribute">page</span>=<span class="hljs-string">&quot;文件相对 url 地址&quot;</span> <span class="hljs-attribute">flush</span>=<span class="hljs-string">&quot;是否刷新缓冲区&quot;</span> /&gt;</code></pre><h3 id="usebean">useBean</h3>
 <p>　　useBean 动作用来加载一个将在 JSP 页面中使用的 JavaBean，它使得我们可以发挥 Java 组件复用的优势。其语法格式为：</p>
-<pre><code>&lt;jsp:useBean <span class="hljs-built_in">id</span>=<span class="hljs-string">"对象name"</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"包含包名的完整类路径"</span> /&gt;</code></pre><p>　　其等价为：</p>
+<pre><code>&lt;jsp:useBean <span class="hljs-built_in">id</span>=<span class="hljs-string">&quot;对象name&quot;</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">&quot;包含包名的完整类路径&quot;</span> /&gt;</code></pre><p>　　其等价为：</p>
 <pre><code><span class="hljs-built_in">Object</span> obj = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();</code></pre><h3 id="setproperty">setProperty</h3>
 <p>　　setProperty 动作用来设置已经实例化的 Bean 对象的属性，其语法格式如下：</p>
 <pre><code><span class="hljs-comment">&lt;!-- 手动指定属性值 --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">jsp:setProperty</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"对象name"</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"属性名"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"属性值"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">jsp:setProperty</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;对象name&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;属性名&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;属性值&quot;</span> /&gt;</span>
 <span class="hljs-comment">&lt;!-- 与请求参数匹配 --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">jsp:setProperty</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"对象name"</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"属性名"</span> <span class="hljs-attr">param</span>=<span class="hljs-string">"参数名"</span> /&gt;</span></code></pre><p>　　需要注意的是，以上两种方式只能选择一种，不能同时出现 <code>value</code> 和 <code>param</code> 属性。如果 setProperty 动作作为 useBean 动作元素的子元素，只有在实例化一个新的 Bean 时才有效，引用已存在的 Bean 实例是无效的。</p>
+<span class="hljs-tag">&lt;<span class="hljs-name">jsp:setProperty</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;对象name&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;属性名&quot;</span> <span class="hljs-attr">param</span>=<span class="hljs-string">&quot;参数名&quot;</span> /&gt;</span></code></pre><p>　　需要注意的是，以上两种方式只能选择一种，不能同时出现 <code>value</code> 和 <code>param</code> 属性。如果 setProperty 动作作为 useBean 动作元素的子元素，只有在实例化一个新的 Bean 时才有效，引用已存在的 Bean 实例是无效的。</p>
 <h3 id="getproperty">getProperty</h3>
 <p>　　getProperty 动作用来获取已经实例化的 Bean 对象的属性，其语法格式如下：</p>
-<pre><code>&lt;jsp:getProperty <span class="hljs-built_in">name</span>=<span class="hljs-string">"对象name"</span> <span class="hljs-keyword">property</span>=<span class="hljs-string">"属性名"</span> /&gt;</code></pre><h3 id="forward">forward</h3>
+<pre><code>&lt;jsp:getProperty <span class="hljs-built_in">name</span>=<span class="hljs-string">&quot;对象name&quot;</span> <span class="hljs-keyword">property</span>=<span class="hljs-string">&quot;属性名&quot;</span> /&gt;</code></pre><h3 id="forward">forward</h3>
 <p>　　forward 动作用来将请求转发到另一个页面，其本质为请求转发，而不是请求重定向。其语法格式为：</p>
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">jsp:forward</span> <span class="hljs-attr">page</span>=<span class="hljs-string">"相对URL"</span> /&gt;</span></code></pre><p>　　其等价为：</p>
-<pre><code><span class="hljs-built_in">request</span>.getRequestDispatcher(<span class="hljs-string">"URL"</span>).forward(<span class="hljs-built_in">request</span>, <span class="hljs-built_in">response</span>);</code></pre><h3 id="param">param</h3>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">jsp:forward</span> <span class="hljs-attr">page</span>=<span class="hljs-string">&quot;相对URL&quot;</span> /&gt;</span></code></pre><p>　　其等价为：</p>
+<pre><code><span class="hljs-built_in">request</span>.getRequestDispatcher(<span class="hljs-string">&quot;URL&quot;</span>).forward(<span class="hljs-built_in">request</span>, <span class="hljs-built_in">response</span>);</code></pre><h3 id="param">param</h3>
 <p>　　param 动作元素是用来传递属性的，常作为 forward 动作元素的子元素存在。示例如下：</p>
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">jsp:forward</span> <span class="hljs-attr">page</span>=<span class="hljs-string">"相对URL"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">jsp:param</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"属性值"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"属性名"</span> /&gt;</span>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">jsp:forward</span> <span class="hljs-attr">page</span>=<span class="hljs-string">&quot;相对URL&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">jsp:param</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;属性值&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;属性名&quot;</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">jsp:forward</span>&gt;</span></code></pre><p>　　传递的参数值可以使用 <code>request.getParameter(name)</code> 获取，也可以覆盖掉已有参数的值。</p>

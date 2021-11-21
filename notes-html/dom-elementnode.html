@@ -1,12 +1,12 @@
 <h2 id="元素节点">元素节点</h2>
 <p>　　&gt;元素节点（Element Node）是我们最常用的 DOM 节点，不同类型的节点都有其自己的构造方法，并且它们身上还有许多属性和方法（包括继承的）来帮助我们完成 DOM 操作。</p>
-<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+<pre><code><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).constructor);
-    <span class="hljs-comment">// 输出 function HTMLDivElement() </span></span></span><span class="hljs-template-variable">{ [native code] }</span><span class="xml"><span class="undefined">
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span></code></pre><p>　　DOM中每一个元素节点都是从唯一的 Javascript 接口/构造器构建的。<strong>对于任何节点（不仅是元素节点），我们可以通过 <code>constructor</code> 属性来获知它们的构造方法。</strong></p>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">constructor</span>);
+    <span class="hljs-comment">// 输出 function HTMLDivElement() </span></span></span><span class="hljs-template-variable">{ [native code] }</span><span class="language-xml">
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span></code></pre><p>　　DOM中每一个元素节点都是从唯一的 Javascript 接口/构造器构建的。<strong>对于任何节点（不仅是元素节点），我们可以通过 <code>constructor</code> 属性来获知它们的构造方法。</strong></p>
 <h2 id="元素节点-dom-操作">元素节点 DOM 操作</h2>
 <p>　　前面在介绍 DOM 时元素节点（Element Node）的部分属性与方法已做过示例，在此仅简单的提及。</p>
 <h3 id="创建节点">创建节点</h3>
@@ -14,19 +14,19 @@
 <li>document.createElement()</li>
 </ul>
 <p>exp：</p>
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
     <span class="hljs-comment">// 创建一个DIV节点</span>
-    <span class="hljs-keyword">var</span> new_div=<span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'div'</span>);
+    <span class="hljs-keyword">var</span> new_div=<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;div&#x27;</span>);
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><h3 id="获取标签名">获取标签名</h3>
 <ul>
 <li>tagName</li>
 <li>nodeName</li>
 </ul>
 <p>exp：</p>
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
     <span class="hljs-comment">// 获取DIV元素的标签名</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).tagName);  <span class="hljs-comment">// 输出 "DIV"</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).nodeName);  <span class="hljs-comment">// 输出 "DIV"</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">tagName</span>);  <span class="hljs-comment">// 输出 &quot;DIV&quot;</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">nodeName</span>);  <span class="hljs-comment">// 输出 &quot;DIV&quot;</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><h3 id="获取属性列表集合">获取属性列表/集合</h3>
 <p>　　每个元素节点身上都有很多属性（包括继承自 Node），我们可以取得一个由当前元素定义的 Attr（属性）节点组成的集合。</p>
 <ul>
@@ -34,16 +34,16 @@
 </ul>
 <p>exp：</p>
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"id"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"class"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"input"</span> <span class="hljs-attr">data-foo</span>=<span class="hljs-string">"dataFoo"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"123"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;class&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;input&quot;</span> <span class="hljs-attr">data-foo</span>=<span class="hljs-string">&quot;dataFoo&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;123&quot;</span>/&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
     <span class="hljs-comment">// 获取属性列表/集合</span>
-    <span class="hljs-keyword">var</span> attr=<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'input'</span>).attributes;
-    <span class="hljs-built_in">console</span>.log(attr);  <span class="hljs-comment">// 输出 NamedNodeMap{...}</span>
+    <span class="hljs-keyword">var</span> attr=<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;input&#x27;</span>).<span class="hljs-property">attributes</span>;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(attr);  <span class="hljs-comment">// 输出 NamedNodeMap{...}</span>
 
     <span class="hljs-comment">// 遍历取得属性名与值</span>
     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i <span class="hljs-keyword">in</span> attr) {
-        <span class="hljs-built_in">console</span>.log(attr[i].nodeName+<span class="hljs-string">':'</span>+attr[i].nodeValue);
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(attr[i].<span class="hljs-property">nodeName</span>+<span class="hljs-string">&#x27;:&#x27;</span>+attr[i].<span class="hljs-property">nodeValue</span>);
     }
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><p>　　我们使用元素节点的 <code>attributes</code> 属性获取的是一个包含其所有属性与相应值的属性节点对象集合（NamedNodeMap），因为每一个属性事实上也是一个属性节点对象（Attr 节点）。<strong>我们要知道的是，<code>NamedNodeMap</code> 是一个实时数组，会随元素节点属性的变化而变化。</strong></p>
 <h3 id="属性操作">属性操作</h3>
@@ -53,28 +53,28 @@
 <li>removeAttribute()</li>
 </ul>
 <p>exp：</p>
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
     <span class="hljs-comment">// 设置属性</span>
-    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'img'</span>).setAttribute(<span class="hljs-string">'src'</span>,<span class="hljs-string">'123.png'</span>);
+    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;img&#x27;</span>).<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;src&#x27;</span>,<span class="hljs-string">&#x27;123.png&#x27;</span>);
     <span class="hljs-comment">// 获取属性</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'img'</span>).getAttribute(<span class="hljs-string">'src'</span>));  <span class="hljs-comment">// 输出 123.png</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;img&#x27;</span>).<span class="hljs-title function_">getAttribute</span>(<span class="hljs-string">&#x27;src&#x27;</span>));  <span class="hljs-comment">// 输出 123.png</span>
     <span class="hljs-comment">// 移除属性</span>
-    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'img'</span>).removeAttribute(<span class="hljs-string">'src'</span>);
+    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;img&#x27;</span>).<span class="hljs-title function_">removeAttribute</span>(<span class="hljs-string">&#x27;src&#x27;</span>);
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><h3 id="属性检测">属性检测</h3>
 <p>　　有时候，我们可能想知道一个元素节点身上是否有某个特定属性时，我们也可以通过下面的方法获知。</p>
 <ul>
 <li>hasAttributes</li>
 </ul>
 <p>exp：</p>
-<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">""</span> <span class="hljs-attr">checked</span>&gt;</span>
-</span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-</span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<pre><code><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">checked</span>&gt;</span>
+</span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+</span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
     <span class="hljs-comment">// 查看input元素是否有title属性</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'input'</span>).hasAttribute(<span class="hljs-string">'title'</span>));  <span class="hljs-comment">// 输出 true</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;input&#x27;</span>).<span class="hljs-title function_">hasAttribute</span>(<span class="hljs-string">&#x27;title&#x27;</span>));  <span class="hljs-comment">// 输出 true</span>
     <span class="hljs-comment">// 查看input元素是否有checked属性</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'input'</span>).hasAttribute(<span class="hljs-string">'checked'</span>));  <span class="hljs-comment">// 输出 true</span>
-</span></span><span class="xml"><span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined"></span></span></span></span></code></pre><p>　　<strong>从上述示例可以看出，当元素节点具有该属性，即使该属性值为空也是存在的。</strong></p>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;input&#x27;</span>).<span class="hljs-title function_">hasAttribute</span>(<span class="hljs-string">&#x27;checked&#x27;</span>));  <span class="hljs-comment">// 输出 true</span>
+</span></span><span class="language-xml"><span class="language-handlebars"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span></span></span></code></pre><p>　　<strong>从上述示例可以看出，当元素节点具有该属性，即使该属性值为空也是存在的。</strong></p>
 <h3 id="class-属性">class 属性</h3>
 <p>　　一个元素节点可以包含多个定义的类样式，这些 <code>className</code> 均被放在 <code>class</code> 属性中用空格分割，而我们可以对它们进行单独操作。</p>
 <h4 id="获取-class-列表">获取 class 列表</h4>
@@ -83,13 +83,13 @@
 </ul>
 <p>exp：</p>
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"a b c"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;a b c&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
     <span class="hljs-comment">// 获取div元素的class属性列表</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).classList);  <span class="hljs-comment">// 输出 ['a','b','c']</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">classList</span>);  <span class="hljs-comment">// 输出 [&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;]</span>
     <span class="hljs-comment">// 获取div元素的class属性值</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).className);  <span class="hljs-comment">// 输出 a b c</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">className</span>);  <span class="hljs-comment">// 输出 a b c</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><p>　　<strong>因为 <code>class</code> 是 JavaScript 的关键字，所以获取 class 属性的值时使用 <code>className</code> 代替。</strong></p>
 <h4 id="class-值操作">class 值操作</h4>
 <p>　　我们可以对 <code>class</code> 属性列表中的值进行单独修改，添加或者移除某一个 class 值。</p>
@@ -99,26 +99,26 @@
 </ul>
 <p>exp：</p>
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"a b"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;a b&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
     <span class="hljs-comment">// 给class属性列表中添加c</span>
-    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).classList.add(<span class="hljs-string">'c'</span>);
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).className);  <span class="hljs-comment">// 输出 a b c</span>
+    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">classList</span>.<span class="hljs-title function_">add</span>(<span class="hljs-string">&#x27;c&#x27;</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">className</span>);  <span class="hljs-comment">// 输出 a b c</span>
 
     <span class="hljs-comment">// 从class属性列表中移除b</span>
-    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).classList.remove(<span class="hljs-string">'b'</span>);
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).className);  <span class="hljs-comment">// 输出 a c</span>
+    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">classList</span>.<span class="hljs-title function_">remove</span>(<span class="hljs-string">&#x27;b&#x27;</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">className</span>);  <span class="hljs-comment">// 输出 a c</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><h4 id="class-值检测">class 值检测</h4>
 <p>　　当然，我们也可以检测 <code>classList</code> 中是否包含某一特定的 class 值。</p>
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"a b"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;a b&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
     <span class="hljs-comment">// 查看class属性列表中是否包含b</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).classList.contains(<span class="hljs-string">'b'</span>));  <span class="hljs-comment">// 输出 true</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">classList</span>.<span class="hljs-title function_">contains</span>(<span class="hljs-string">&#x27;b&#x27;</span>));  <span class="hljs-comment">// 输出 true</span>
     <span class="hljs-comment">// 查看class属性列表中是否包含c</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).classList.contains(<span class="hljs-string">'c'</span>));  <span class="hljs-comment">// 输出 false</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">classList</span>.<span class="hljs-title function_">contains</span>(<span class="hljs-string">&#x27;c&#x27;</span>));  <span class="hljs-comment">// 输出 false</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><h4 id="toggle-自动化">toggle 自动化</h4>
 <p>　　当我们要实现特效时，可能要经历查看某个 <code>class</code> 样式是否存在，不存在时添加，存在时移除这个过程。然而，我们可以自动地一步来完成这三个过程。</p>
 <ul>
@@ -126,31 +126,31 @@
 </ul>
 <p>exp：</p>
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"a b"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;a b&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).classList.toggle(<span class="hljs-string">'b'</span>);
-    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).classList.toggle(<span class="hljs-string">'c'</span>);
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">classList</span>.<span class="hljs-title function_">toggle</span>(<span class="hljs-string">&#x27;b&#x27;</span>);
+    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">classList</span>.<span class="hljs-title function_">toggle</span>(<span class="hljs-string">&#x27;c&#x27;</span>);
     <span class="hljs-comment">// 查看class属性值</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).className);  <span class="hljs-comment">// 输出 a c</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">className</span>);  <span class="hljs-comment">// 输出 a c</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><h3 id="data-属性">data-*属性</h3>
 <p>　　元素节点上经常会出现一些类似 <code>data-*</code> 形式的属性，这些属性是为了让我们实现某些目的而进行数据保存的属性。</p>
 <ul>
 <li>dataset</li>
 </ul>
 <p>exp：</p>
-<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">data-foo-foo</span>=<span class="hljs-string">"foo"</span> <span class="hljs-attr">data-bar-bar</span>=<span class="hljs-string">"bar"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<pre><code><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">data-foo-foo</span>=<span class="hljs-string">&quot;foo&quot;</span> <span class="hljs-attr">data-bar-bar</span>=<span class="hljs-string">&quot;bar&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
     <span class="hljs-comment">// 获取DIV元素上的数据集合</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).dataset);  <span class="hljs-comment">// 输出 DOMStringMap </span></span></span><span class="hljs-template-variable">{...}</span><span class="xml"><span class="javascript">
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">dataset</span>);  <span class="hljs-comment">// 输出 DOMStringMap </span></span></span><span class="hljs-template-variable">{...}</span><span class="language-xml"><span class="language-javascript">
     <span class="hljs-comment">// 获取一个数据</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).dataset.fooFoo);  <span class="hljs-comment">// 输出foo</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">dataset</span>.<span class="hljs-property">fooFoo</span>);  <span class="hljs-comment">// 输出foo</span>
     <span class="hljs-comment">// 设置一个数据</span>
-    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).dataset.gooGoo = <span class="hljs-string">'goo'</span>;
+    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">dataset</span>.<span class="hljs-property">gooGoo</span> = <span class="hljs-string">&#x27;goo&#x27;</span>;
     <span class="hljs-comment">// 删除一个数据</span>
-    <span class="hljs-keyword">delete</span> <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'div'</span>).dataset.barBar
+    <span class="hljs-keyword">delete</span> <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">dataset</span>.<span class="hljs-property">barBar</span>
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span></code></pre><p>　　<strong>要注意的是，对单个数据引用时不需要加 <code>data</code> 前缀，并且当属性名中有 <code>-</code> 时应采用驼峰式命名方式书写（例如 foo-foo ==&gt; fooFoo）。</strong></p>
 <h2 id="结语">结语</h2>
 <p>　　除此之外，元素节点的插入、替换、遍历等等我们在 DOM 介绍时均已经说过，它们适用于任何类型的节点对象，我们不在此赘述。</p>

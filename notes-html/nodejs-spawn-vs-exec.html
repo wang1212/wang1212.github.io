@@ -26,36 +26,36 @@
     return spawn(options.execPath, args, options);
 }</code></pre>
 <p>　　可见，<code>exec</code> 和 <code>fork</code> 最终还是依赖于 <code>spawn</code> 的实现。而对于后者的实现：</p>
-<pre><code class="language-js"><span class="hljs-keyword">const</span> child_process = <span class="hljs-built_in">require</span>(<span class="hljs-string">'internal/child_process'</span>);
-<span class="hljs-keyword">const</span> { ChildProcess } = child_process;
+<pre><code class="language-js"><span class="hljs-keyword">const</span> child_process = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;internal/child_process&#x27;</span>);
+<span class="hljs-keyword">const</span> { <span class="hljs-title class_">ChildProcess</span> } = child_process;
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">spawn</span>(<span class="hljs-params">file, args, options</span>) </span>{
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">spawn</span>(<span class="hljs-params">file, args, options</span>) {
     <span class="hljs-comment">// ...</span>
-    <span class="hljs-keyword">const</span> child = <span class="hljs-keyword">new</span> ChildProcess();
-      child.spawn(options);
+    <span class="hljs-keyword">const</span> child = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ChildProcess</span>();
+      child.<span class="hljs-title function_">spawn</span>(options);
     <span class="hljs-comment">// ...</span>
 }</code></pre>
 <p>　　依赖于底层的内部模块 <em>internal/child_process</em> 。</p>
 <p>　　<code>spawn</code> 的主要功能是生成一个子进程，并执行给定的命令，父子进程之间通过管道（pipe）传递 <code>stdio</code> 信息，而且默认不生成 shell。根据示例：</p>
-<pre><code class="language-js"><span class="hljs-keyword">const</span> { spawn } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'child_process'</span>);
-<span class="hljs-keyword">const</span> ls = spawn(<span class="hljs-string">'ls'</span>, [<span class="hljs-string">'-lh'</span>, <span class="hljs-string">'/usr'</span>]);
+<pre><code class="language-js"><span class="hljs-keyword">const</span> { spawn } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;child_process&#x27;</span>);
+<span class="hljs-keyword">const</span> ls = <span class="hljs-title function_">spawn</span>(<span class="hljs-string">&#x27;ls&#x27;</span>, [<span class="hljs-string">&#x27;-lh&#x27;</span>, <span class="hljs-string">&#x27;/usr&#x27;</span>]);
 
-ls.stdout.on(<span class="hljs-string">'data'</span>, <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`stdout: <span class="hljs-subst">${data}</span>`</span>);
+ls.<span class="hljs-property">stdout</span>.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`stdout: <span class="hljs-subst">${data}</span>`</span>);
 });
 
-ls.stderr.on(<span class="hljs-string">'data'</span>, <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
-  <span class="hljs-built_in">console</span>.error(<span class="hljs-string">`stderr: <span class="hljs-subst">${data}</span>`</span>);
+ls.<span class="hljs-property">stderr</span>.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">`stderr: <span class="hljs-subst">${data}</span>`</span>);
 });
 
-ls.on(<span class="hljs-string">'close'</span>, <span class="hljs-function">(<span class="hljs-params">code</span>) =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`child process exited with code <span class="hljs-subst">${code}</span>`</span>);
+ls.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;close&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">code</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`child process exited with code <span class="hljs-subst">${code}</span>`</span>);
 });</code></pre>
 <p>　　父进程通过监听子进程相应的 <code>stdio</code> 事件进行通信。</p>
 <h3 id="exec"><code>exec</code></h3>
 <p>　　前面根据源码可以看到 <code>exec</code> 的实现基于 <code>spawn</code>，但不同的是，前者在生成子进程的同时，会先生成一个 shell，然后在 shell 中执行给定的命令，子进程的输出信息会进行缓冲并最终传递给回调函数。根据示例：</p>
-<pre><code class="language-js">const { exec } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'child_process'</span>);
-exec(<span class="hljs-string">'cat *.js missing_file | wc -l'</span>, (<span class="hljs-built_in">error</span>, <span class="hljs-built_in">stdout</span>, <span class="hljs-built_in">stderr</span>) =&gt; {
+<pre><code class="language-js">const { exec } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;child_process&#x27;</span>);
+exec(<span class="hljs-string">&#x27;cat *.js missing_file | wc -l&#x27;</span>, (<span class="hljs-built_in">error</span>, <span class="hljs-built_in">stdout</span>, <span class="hljs-built_in">stderr</span>) =&gt; {
   <span class="hljs-keyword">if</span> (<span class="hljs-built_in">error</span>) {
     console.<span class="hljs-built_in">error</span>(`exec <span class="hljs-built_in">error</span>: ${<span class="hljs-built_in">error</span>}`);
     <span class="hljs-keyword">return</span>;
@@ -79,29 +79,29 @@ exec(<span class="hljs-string">'cat *.js missing_file | wc -l'</span>, (<span cl
 <p>　　对于第一点，如果要执行的命令依赖于 shell 的一些功能，比如管道、I/O 重定向则选择 <code>exec</code> 会更便捷。对于第二点，对比示例代码，可以很明显的看出来，<code>spawn</code> 适合长时间执行的命令，且有持续的输出信息；而后者更适合执行短时的命令，且在命令执行完后一次性获取输出结果。</p>
 <h2 id="工具库-execa">工具库 <code>execa</code></h2>
 <p>　　分析完它们两者的区别之后，这里推荐一个 npm 工具包 <code>execa</code>，其对 child_process 的方法进行了扩展和抽象，在很多常见的使用场景中大大减少了模板代码，也为调试提供了一定的便利性。看看文档中一段示例代码：</p>
-<pre><code class="language-js">const execa = <span class="hljs-built_in">require</span>(<span class="hljs-string">'execa'</span>);
+<pre><code class="language-js">const execa = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;execa&#x27;</span>);
 
 (async () =&gt; {
     // Catching an <span class="hljs-built_in">error</span>
     try {
-        await execa(<span class="hljs-string">'unknown'</span>, [<span class="hljs-string">'command'</span>]);
+        await execa(<span class="hljs-string">&#x27;unknown&#x27;</span>, [<span class="hljs-string">&#x27;command&#x27;</span>]);
     } catch (<span class="hljs-built_in">error</span>) {
         console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">error</span>);
         /*
         {
-            message: <span class="hljs-string">'Command failed with ENOENT: unknown command spawn unknown ENOENT'</span>,
+            message: <span class="hljs-string">&#x27;Command failed with ENOENT: unknown command spawn unknown ENOENT&#x27;</span>,
             errno: <span class="hljs-number">-2</span>,
-            code: <span class="hljs-string">'ENOENT'</span>,
-            syscall: <span class="hljs-string">'spawn unknown'</span>,
-            <span class="hljs-built_in">path</span>: <span class="hljs-string">'unknown'</span>,
-            spawnargs: [<span class="hljs-string">'command'</span>],
-            originalMessage: <span class="hljs-string">'spawn unknown ENOENT'</span>,
-            shortMessage: <span class="hljs-string">'Command failed with ENOENT: unknown command spawn unknown ENOENT'</span>,
-            command: <span class="hljs-string">'unknown command'</span>,
-            escapedCommand: <span class="hljs-string">'unknown command'</span>,
-            <span class="hljs-built_in">stdout</span>: <span class="hljs-string">''</span>,
-            <span class="hljs-built_in">stderr</span>: <span class="hljs-string">''</span>,
-            all: <span class="hljs-string">''</span>,
+            code: <span class="hljs-string">&#x27;ENOENT&#x27;</span>,
+            syscall: <span class="hljs-string">&#x27;spawn unknown&#x27;</span>,
+            <span class="hljs-built_in">path</span>: <span class="hljs-string">&#x27;unknown&#x27;</span>,
+            spawnargs: [<span class="hljs-string">&#x27;command&#x27;</span>],
+            originalMessage: <span class="hljs-string">&#x27;spawn unknown ENOENT&#x27;</span>,
+            shortMessage: <span class="hljs-string">&#x27;Command failed with ENOENT: unknown command spawn unknown ENOENT&#x27;</span>,
+            command: <span class="hljs-string">&#x27;unknown command&#x27;</span>,
+            escapedCommand: <span class="hljs-string">&#x27;unknown command&#x27;</span>,
+            <span class="hljs-built_in">stdout</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+            <span class="hljs-built_in">stderr</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+            all: <span class="hljs-string">&#x27;&#x27;</span>,
             failed: <span class="hljs-literal">true</span>,
             timedOut: <span class="hljs-literal">false</span>,
             isCanceled: <span class="hljs-literal">false</span>,

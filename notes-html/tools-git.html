@@ -12,30 +12,30 @@
 <p>　　我们首先可以对 Git 进行简单的配置，使用 SSH 来避免重复提交时每次都要输入密码。</p>
 <h4 id="个人信息">个人信息</h4>
 <p>　　进行用户名和邮箱的全局配置：</p>
-<pre><code class="language-bash">git<span class="hljs-built_in"> config </span>--global user.name <span class="hljs-string">"wang1212"</span>
-git<span class="hljs-built_in"> config </span>--global user.email <span class="hljs-string">"mrwang1212@126.com"</span></code></pre>
+<pre><code class="language-bash">git config <span class="hljs-attr">--global</span> user<span class="hljs-selector-class">.name</span> <span class="hljs-string">&quot;wang1212&quot;</span>
+git config <span class="hljs-attr">--global</span> user<span class="hljs-selector-class">.email</span> <span class="hljs-string">&quot;mrwang1212@126.com&quot;</span></code></pre>
 <p>　　查看配置信息：</p>
-<pre><code class="language-bash">git<span class="hljs-built_in"> config </span>--global -l</code></pre>
+<pre><code class="language-bash">git <span class="hljs-built_in">config</span> <span class="hljs-comment">--global -l</span></code></pre>
 <h4 id="ssh-密钥">SSH 密钥</h4>
 <p>　　安装 SSH 密钥可以在我们进行项目提交时避免重复输入用户名密码，也更安全。可以直接查看 GitHub 官方文档：</p>
 <blockquote>
 <p><strong>Help：</strong><a href="https://help.github.com/articles/generating-an-ssh-key/">https://help.github.com/articles/generating-an-ssh-key/</a></p>
 </blockquote>
 <p>　　检查是否已有 SSH 密钥文件：</p>
-<pre><code class="language-bash"><span class="hljs-keyword">ls</span> -al ~<span class="hljs-string">/.ssh</span></code></pre>
+<pre><code class="language-bash"><span class="hljs-built_in">ls</span> -al ~/.ssh</code></pre>
 <p>　　如果不存在（或者想覆盖），可以生成一个新的 SSH 密钥文件：</p>
-<pre><code class="language-bash">ssh-keygen -t rsa -<span class="hljs-selector-tag">b</span> <span class="hljs-number">4096</span> -C <span class="hljs-string">"wangyuan230@163.com"</span></code></pre>
+<pre><code class="language-bash"><span class="hljs-attribute">ssh</span>-keygen -t rsa -b <span class="hljs-number">4096</span> -C <span class="hljs-string">&quot;wangyuan230@163.com&quot;</span></code></pre>
 <p>　　这里使用你的邮箱作为 SSH 密钥标签，该过程中直接全按回车即可。</p>
 <p>　　得到 SSH 密钥文件后，接下来应该将该密钥添加到 ssh-agent ：</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 启动 ssh-agent</span>
 eval $(ssh-agent -s)
 <span class="hljs-comment"># 添加 SSH</span>
-ssh-<span class="hljs-keyword">add</span><span class="bash"> ~/.ssh/id_rsa</span></code></pre>
+ssh-add ~<span class="hljs-regexp">/.ssh/i</span>d_rsa</code></pre>
 <p>　　最后将 SSH 添加到你的 GitHub 账户即可，先将密钥文件复制到剪切板：</p>
 <pre><code class="language-bash">clip &lt; ~<span class="hljs-regexp">/.ssh/i</span>d_rsa.pub</code></pre>
 <p>　　然后，打开 <a href="https://github.com/login" target="_blank">GitHub</a> 网站登录你的帐户，右上角头像进入 <strong>Settings</strong>，左边导航选择 <strong>SSH and GPG keys</strong>，点击 <strong>New SSH key</strong>，自己命名一个 title，然后将 SSH 文件复制到 key 框中，然后需要输入你的 github 账户密码。</p>
 <p>　　最后，可以测试一下：</p>
-<pre><code class="language-bash"><span class="hljs-selector-tag">ssh</span> <span class="hljs-selector-tag">-T</span> <span class="hljs-selector-tag">git</span>@<span class="hljs-keyword">github</span>.<span class="hljs-keyword">com</span></code></pre>
+<pre><code class="language-bash"><span class="hljs-attribute">ssh</span> -T git<span class="hljs-variable">@github</span>.com</code></pre>
 <p>　　回车后输入 <strong>yes</strong>，如果看到 <strong>Hi {你的用户名}</strong> 一串信息，就说明添加 SSH 密钥成功了。</p>
 <h4 id="https">HTTPS</h4>
 <p>　　SSH 虽然安全方便，但配置略显复杂。自从大部分网站从 HTTP 升级到 HTTPS 协议后，信息传输安全性也大大提高了，GitHub 目前全站采用了 HTTPS 协议。因此，现在 GitHub 推荐我们使用 HTTPS，即便捷又安全。</p>
@@ -49,68 +49,68 @@ credential.<span class="hljs-attribute">helper</span>=manager</code></pre>
 <ul>
 <li><code>core.ignorecase=false</code>，开启文件名大小写检查。</li>
 </ul>
-<pre><code class="language-bash">git<span class="hljs-built_in"> config </span>--global core.ignorecase <span class="hljs-literal">false</span></code></pre>
+<pre><code class="language-bash">git config --global core.ignorecase <span class="hljs-literal">false</span></code></pre>
 <p>　　由于多个平台（Win/Mac/Linux）对于文件是否相同判断机制不同，部分平台认为文件名大小写不同仍然是同一个文件，而 Linux 却认为是不同的文件，Git 为了兼容默认是忽略掉文件名大小写检查的，这就导致我们重命名（仅修改大小写）文件之后发现提交到远程仓库没有变化，重命名未生效，更改该配置即可。</p>
 <ul>
 <li><code>fetch.prune=true</code>，保持干净的本地分支列表。</li>
 </ul>
-<pre><code class="language-bash">git<span class="hljs-built_in"> config </span>--global fetch.prune <span class="hljs-literal">true</span></code></pre>
+<pre><code class="language-bash">git config --global fetch.prune <span class="hljs-literal">true</span></code></pre>
 <p>　　通常，我们会在本地进行多分支开发，其中某些分支只是<strong>暂时的</strong>，后续会合并到其它分支（例如 <code>master</code>），尤其是一般提交的 PR 被合并后会自动删除远程仓库的被合并分支，那么对应的本地分支必须要手动删除，为了自动完成这一过程，保持本地分支列表干净可以配置此选项。</p>
 <h2 id="使用-git">使用 Git</h2>
 <p>　　下面来看看 git bash 中一些常用的 git 命令，介绍一下其简单的用法，利用 git 来管理我们的代码。</p>
 <h3 id="初始化">初始化</h3>
 <p>　　在创建好一个新文件夹之后，进入该空白文件夹，我们在 git bash 中输入 <code>init</code> 命令即可初始化该文件夹为一个新的 git 仓库。</p>
-<pre><code class="language-bash"><span class="hljs-comment"># 初始化仓库</span>
-<span class="hljs-attribute">git</span> init</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta"># 初始化仓库</span>
+git <span class="hljs-keyword">init</span></code></pre>
 <p>　　初始化完成后，该文件夹会出现一个隐藏的 <strong>.git</strong> 文件夹，可以使用 <code>ls</code> 命令查看是否已生成该文件夹：</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 查看文件</span>
-<span class="hljs-keyword">ls</span> -a</code></pre>
+<span class="hljs-built_in">ls</span> -a</code></pre>
 <p>　　该文件夹为仓库管理文件，并且是隐藏，一般情况下不要修改其中的文件。</p>
 <h3 id="添加与提交">添加与提交</h3>
 <p>　　Git 的工作状态有3个，分别为 <strong>工作区（working directory）</strong>、<strong>暂存区（staging index）</strong> 和 <strong>版本库（Repository）</strong>。我们在个人仓库（本地文件夹）中修改代码时，就处于工作区中；修改完成后，需要使用 <code>add</code> 命令将修改好的文件添加到暂存区中；随后，确认无误后我们可以使用 <code>commit</code> 命令将已添加到暂存区的文件提交到版本库中。</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 第一步：添加文件到暂存区</span>
-git <span class="hljs-builtin-name">add</span> file_name  # 例如 git <span class="hljs-builtin-name">add</span> index.html
+git <span class="hljs-built_in">add</span> file_name  # 例如 git <span class="hljs-built_in">add</span> index.html
 <span class="hljs-comment"># 第二步：将暂存区文件提交到版本库中</span>
-git commit -m <span class="hljs-string">"version_message"</span>  
-<span class="hljs-comment"># 例如 git commit -m "1.0"</span></code></pre>
+git commit -m <span class="hljs-string">&quot;version_message&quot;</span>  
+<span class="hljs-comment"># 例如 git commit -m &quot;1.0&quot;</span></code></pre>
 <p>　　另外地，为了方便我们可以一次性将当前文件夹（工作区）的所有文件都添加到暂存区中：</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 添加工作区所有文件到暂存区</span>
-git <span class="hljs-keyword">add</span><span class="bash"> .</span></code></pre>
+git <span class="hljs-built_in">add</span> .</code></pre>
 <p>　　当然了，我们还可以将添加与提交操作合二为一，跳过暂存区：</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 一次性添加与提交工作区文件到版本库</span>
-<span class="hljs-attribute">git</span> commit -am <span class="hljs-string">"version_message"</span></code></pre>
+<span class="hljs-attribute">git</span> commit -am <span class="hljs-string">&quot;version_message&quot;</span></code></pre>
 <h4 id="调试技巧">调试技巧</h4>
 <p>　　这里有一个小技巧，通常为了测试一些 hook 事件程序（例如 <a href="https://typicode.github.io/husky">husky</a>），我们会做一下某些文件的细微改动然后提交来触发相应事件，但 <code>--allow-empty</code> 选项可以让我们更方便一些：</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 直接执行即可，不用改动任何文件</span>
-<span class="hljs-string">git </span><span class="hljs-string">commit </span><span class="hljs-built_in">--allow-empty</span> -m <span class="hljs-string">'it works!'</span></code></pre>
+<span class="hljs-string">git</span> <span class="hljs-string">commit</span> <span class="hljs-built_in">--allow-empty</span> -<span class="hljs-string">m</span> <span class="hljs-string">&#x27;it works!&#x27;</span></code></pre>
 <h3 id="查看信息">查看信息</h3>
 <p>　　如果能随时查看仓库中文件的修改情况以及与版本库中文件进行对比的结果可以方便很多，其实使用 <code>status</code> 和 <code>log</code> 命令即可查看所需要的信息。</p>
-<pre><code class="language-bash"><span class="hljs-comment"># 查看目前文件修改情况（是否已添加、提交）</span>
-<span class="hljs-attr">git</span> <span class="hljs-string">status</span>
-<span class="hljs-comment"># 查看已提交的文件日志</span>
-<span class="hljs-attr">git</span> <span class="hljs-string">log</span></code></pre>
+<pre><code class="language-bash"><span class="hljs-meta"># 查看目前文件修改情况（是否已添加、提交）</span>
+git status
+<span class="hljs-meta"># 查看已提交的文件日志</span>
+git <span class="hljs-built_in">log</span></code></pre>
 <h3 id="撤销操作">撤销操作</h3>
 <p>　　当我们将文件修改后，如果发现更改并不恰当，需要回滚到修改之前的状态时，可以撤销我们的更改操作。</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 撤销工作区改动，将暂存区文件覆盖到工作区</span>
 git checkout <span class="hljs-comment">-- file_name</span></code></pre>
 <p>　　这个命令所做的就是用暂存区中的文件来覆盖工作区已被修改的文件，从而实现撤销工作区的修改操作。</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 撤销暂存区改动，将版本库文件覆盖到暂存区</span>
-git <span class="hljs-keyword">reset</span> <span class="hljs-keyword">HEAD</span> <span class="hljs-comment">-- file_name</span></code></pre>
+git reset HEAD <span class="hljs-comment">-- file_name</span></code></pre>
 <p>　　而这个命令所做的则是用版本库中的文件来覆盖暂存区中已被修改的文件，从而实现撤销暂存区的修改操作。这里的 <strong>HEAD</strong> 指的是最近一次提交操作，可以将其更换为你需要撤销的提交操作的ID号，可以使用 <code>log</code> 命令查看提交信息中的ID。</p>
 <p>　　实际上，先撤销暂存区改动，再撤销工作区改动，就可以将版本库中的文件恢复到工作区中。另外，还可以撤销提交操作并重新进行提交，这个命令可以用来修改提交信息和内容。</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 第一次提交</span>
-git <span class="hljs-keyword">commit</span> -m <span class="hljs-string">"version 1.0"</span>
+git commit -m <span class="hljs-string">&quot;version 1.0&quot;</span>
 <span class="hljs-comment"># 撤销上次提交修改提交信息并重新提交</span>
-git <span class="hljs-keyword">commit</span> <span class="hljs-comment">--amend</span></code></pre>
+git commit <span class="hljs-comment">--amend</span></code></pre>
 <h3 id="删除操作">删除操作</h3>
 <p>　　有时候我们可能把不需要添加到暂存区的文件给添加到了暂存区，这时候可以使用以下命令将其在暂存区中删除：</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 仅删除暂存区中的文件</span>
 git rm <span class="hljs-comment">--cached file_name</span></code></pre>
 <p>　　当然，也有可能我们想直接删除掉工作区和暂存区中的文件：</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 同时删除工作区与暂存区中的文件</span>
-<span class="hljs-attribute">git</span> rm -f file_name</code></pre>
+git <span class="hljs-built_in">rm</span> <span class="hljs-operator">-f</span> file_name</code></pre>
 <p>　　除此之外，还有一种情况就是我们在工作区将同一个文件重命名后，需要删除原有在暂存区中的文件，添加新的文件到暂存区中，但是它们的文件内容是相同的。所以，直接可以进行重命名操作：</p>
-<pre><code class="language-bash">git mv old<span class="hljs-number">_f</span>ilename <span class="hljs-keyword">new</span><span class="hljs-number">_f</span>ilename</code></pre>
+<pre><code class="language-bash">git <span class="hljs-built_in">mv</span> old_filename new_filename</code></pre>
 <h3 id="远程仓库">远程仓库</h3>
 <p>　　通常，我们会将代码库推送到远程的代码托管平台上进行管理，例如：</p>
 <ul>
@@ -134,9 +134,9 @@ git <span class="hljs-keyword">branch </span>-vv
 git push [<span class="hljs-keyword">origin] </span>[current_branch]</code></pre>
 <p>　　如果是通过 <code>git clone</code> 从远程仓库拉取到本地的，可以看到会有一个默认的 <code>origin</code> 远程仓库；但是，如果是在本地建立的仓库，没有与远程仓库关联，可以先添加一个远程仓库，然后在推送时指定一个远程仓库，或者将本地仓库与远程仓库关联：</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 添加远程仓库</span>
-<span class="hljs-string">git </span><span class="hljs-string">remote </span><span class="hljs-built_in">set-url</span> &lt;<span class="hljs-string">name&gt;</span> &lt;<span class="hljs-string">rep_url&gt;</span>
+<span class="hljs-string">git</span> <span class="hljs-string">remote</span> <span class="hljs-built_in">set-url</span> &lt;<span class="hljs-string">name</span>&gt; &lt;<span class="hljs-string">rep_url</span>&gt;
 <span class="hljs-comment"># or</span>
-<span class="hljs-string">git </span><span class="hljs-string">remote </span><span class="hljs-string">add </span>&lt;<span class="hljs-string">name&gt;</span> &lt;<span class="hljs-string">rep_url&gt;</span></code></pre>
+<span class="hljs-string">git</span> <span class="hljs-string">remote</span> <span class="hljs-string">add</span> &lt;<span class="hljs-string">name</span>&gt; &lt;<span class="hljs-string">rep_url</span>&gt;</code></pre>
 <ul>
 <li>在推送时指定一个远程仓库</li>
 </ul>
@@ -148,7 +148,7 @@ git push [<span class="hljs-keyword">origin] </span>[current_branch]</code></pre
 <h3 id="多仓库同步">多仓库同步</h3>
 <p>　　鉴于一个平台可能存在风险，可以将代码托管在多个平台上，例如国外 Github，国内 Gitee，实现的具体方式就是将本地仓库同时与多个远程仓库关联，即可实现在 <code>push</code> 时给多个远程仓库同步推送更新：</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 在某个 remote 下添加额外一个远程仓库</span>
-<span class="hljs-string">git </span><span class="hljs-string">remote </span><span class="hljs-built_in">set-url</span> <span class="hljs-built_in">--add</span> &lt;<span class="hljs-string">name&gt;</span> &lt;<span class="hljs-string">new_rep_url&gt;</span></code></pre>
+<span class="hljs-string">git</span> <span class="hljs-string">remote</span> <span class="hljs-built_in">set-url</span> <span class="hljs-built_in">--add</span> &lt;<span class="hljs-string">name</span>&gt; &lt;<span class="hljs-string">new_rep_url</span>&gt;</code></pre>
 <h2 id="分支管理">分支管理</h2>
 <p>　　Git 是一个版本控制工具，可以实现多人协作处理同一个项目的代码，同时又互不发生冲突。而要实现多人协作互不发生冲突，团队成员就不能同时操作同一个文件，于是 Git 中有一个分支（branch）的概念需要我们弄清楚，因为就是它解决了这个关键的问题。</p>
 <p>　　当首次提交文件到版本库时，会自动创建一个 <strong>主分支（master）</strong>，多人协作时我们不能同时在主分支上操作，因为会发生冲突。所以，我们可以从主分支（master）上分出多个副分支来，就像从一颗树的主干上长出多个分叉枝节一样，我们在这些副分支上进行修改操作。当修改完成后，我们再将副分支上的更改合并到主分支（master）上即可，这样就不会出现多人同时操作同一个文件的冲突。</p>
@@ -191,16 +191,16 @@ git <span class="hljs-keyword">diff </span>other_branchname</code></pre>
 <h3 id="保存工作区状态">保存工作区状态</h3>
 <p>　　当我们在一个分支上改动了工作区的文件，没有添加到暂存区并提交到版本库时，使用 <code>checkout</code> 切换分支时就会失败，因为这样会丢失工作区的更改。我们可以提交后再切换分支，当然也可以使用 <code>stash</code> 命令将此分支的工作区状态保存下来再切换到别的分支，之后回到该分支可以还原工作区的状态。</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 保存当前分支工作区状态</span>
-<span class="hljs-attr">git</span> <span class="hljs-string">stash</span>
+<span class="hljs-attribute">git</span> stash
 <span class="hljs-comment"># 查看所有分支已保存的工作区状态及其序号</span>
-<span class="hljs-attr">git</span> <span class="hljs-string">stash list</span></code></pre>
+git stash list</code></pre>
 <p>　　保存了工作区状态之后，我们可以在任意分支下将保存的工作区状态与当前工作区状态合并，先查看保存的工作区状态序号：</p>
-<pre><code class="language-bash"><span class="hljs-meta"># 合并当前工作区与已保存工作区，不删除已保存状态</span>
-git stash apply stash@{num}  
-<span class="hljs-meta"># 例如 git stash apply stash@{0}</span></code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># 合并当前工作区与已保存工作区，不删除已保存状态</span>
+git stash apply stash<span class="hljs-meta">@{num}</span>  
+<span class="hljs-comment"># 例如 git stash apply stash@{0}</span></code></pre>
 <p>　　合并之后，可以删除掉已保存的工作区状态，同样地先查看保存的工作区状态序号：</p>
-<pre><code class="language-bash"><span class="hljs-comment"># 删除已保存的工作区状态</span>
-git stash <span class="hljs-keyword">drop</span> stash@{<span class="hljs-keyword">num</span>}</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta"># 删除已保存的工作区状态</span>
+git stash <span class="hljs-built_in">drop</span> stash<span class="hljs-comment">@{num}</span></code></pre>
 <p>　　当然，为了方便我们可以一次性完成合并工作区与删除已保存的工作区状态：</p>
 <pre><code class="language-bash"><span class="hljs-comment"># 合并工作区状态，并删除已保存的工作区状态</span>
 git stash <span class="hljs-keyword">pop</span> stash@{num}</code></pre>

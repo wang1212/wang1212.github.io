@@ -83,22 +83,24 @@
 
 　　开启 gzip 压缩可以在客户端请求文本文件时，将传输大小压缩至少**70%**左右，可以获得非常好的优化效果，通常都会开启 gzip 压缩配置。
 
-    http {
-        ...
-    
-        # gzip
-        gzip                on;
-        gzip_min_length     20;
-        gzip_buffers        4 16k;
-        gzip_comp_level     6;
-        gzip_types          text/plain text/xml text/css text/javascript application/x-javascript application/javascript application/json;
-        gzip_http_version   1.0;
-        gzip_disable        "MSIE [1-6]\.";
-        gzip_proxied        off;
-        gzip_vary           on;
-    
-        ...
-    }
+```nginx
+http {
+    # ...
+
+    # gzip
+    gzip                on;
+    gzip_min_length     20;
+    gzip_buffers        4 16k;
+    gzip_comp_level     6;
+    gzip_types          text/plain text/xml text/css text/javascript application/x-javascript application/javascript application/json;
+    gzip_http_version   1.0;
+    gzip_disable        "MSIE [1-6]\.";
+    gzip_proxied        off;
+    gzip_vary           on;
+
+    # ...
+}
+```
 
 　　其中有几个配置需要特别注意：
 
@@ -136,26 +138,28 @@
 
 　　匹配顺序：**首先检查精确匹配，匹配到则终止；其次，检查前缀字符串匹配，匹配到时，若是以 `^~` 开头的则终止，否则继续进行正则匹配；最后，检查正则匹配，顺序为配置文件中书写顺序（从上到下），匹配到第一条则终止，若没匹配到，则以匹配到的前缀匹配规则为最终结果。**
 
-    # 精确匹配，加速 / 请求的处理
-    location = / {
-        ...
-    }
-    
-    # 前缀匹配，处理一些需要缓存的静态资源
-    location ^~ /static/ {
-        root    /Data/static/;
-        expires 7d;
-    }
-    
-    # 正则匹配，处理静态资源
-    location ~* \.(html|js|css|png|jpg|jpeg|gif|json|ico|otf|eot|svg|ttf|woff|woff2|map)$ {
-        root /Data/webapps/;
-    }
-    
-    # 前缀匹配，默认处理（可以做反向代理，处理动态资源请求）
-    location / {
-        proxy_pass  http://127.0.0.1:8080;
-    }
+```nginx
+# 精确匹配，加速 / 请求的处理
+location = / {
+    # ...
+}
+
+# 前缀匹配，处理一些需要缓存的静态资源
+location ^~ /static/ {
+    root    /Data/static/;
+    expires 7d;
+}
+
+# 正则匹配，处理静态资源
+location ~* \.(html|js|css|png|jpg|jpeg|gif|json|ico|otf|eot|svg|ttf|woff|woff2|map)$ {
+    root /Data/webapps/;
+}
+
+# 前缀匹配，默认处理（可以做反向代理，处理动态资源请求）
+location / {
+    proxy_pass  http://127.0.0.1:8080;
+}
+```
 
 　　在非精确匹配的规则内部是可以嵌套 `location` 规则的。
 

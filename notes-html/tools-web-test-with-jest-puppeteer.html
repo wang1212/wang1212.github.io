@@ -23,8 +23,8 @@
 <p><a href="https://github.com/buildkite/docker-puppeteer">https://github.com/buildkite/docker-puppeteer</a></p>
 </blockquote>
 <p>　　由于我们用的是 <strong>node:lts-alpine</strong> 基础镜像，所以根据 <a href="https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-on-alpine">Puppeteer 官方文档</a>安装了相应依赖，但依赖包在国外所以更换了镜像源，这里要注意的是刚开始换的是 HTTP 源，发现安装总是失败，最终换了 HTTPS 源后，安装几秒完成：</p>
-<pre><code class="language-bash"><span class="hljs-comment"># https://mirrors.ustc.edu.cn/help/alpine.html</span>
-<span class="hljs-keyword">RUN</span><span class="bash"> sed -i <span class="hljs-string">'s/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ustc.edu.cn/g'</span> /etc/apk/repositories</span></code></pre>
+<pre><code class="language-bash"># https:<span class="hljs-comment">//mirrors.ustc.edu.cn/help/alpine.html</span>
+RUN sed -i <span class="hljs-string">&#x27;s/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ustc.edu.cn/g&#x27;</span> <span class="hljs-regexp">/etc/</span>apk/<span class="hljs-keyword">repositories</span></code></pre>
 <p>　　安装好环境后，运行测试又出现了问题，参考<a href="https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-on-alpine">官方文档</a>在启动参数中添加了 <code>--no-sandbox</code> 参数后在 <strong>root</strong> 用户下测试可以运行成功，但因为安全原因，很少会在 docker 中使用 root 用户运行程序，换成非 root 用户运行测试也是成功的。但是，官方文档提到在 root 用户环境下 必须使用<code>--no-sandbox</code> 禁用沙箱，而且是有安全风险的，想着在非 root 用户环境下去掉该启动参数应该就行了，发现测试会运行失败，根据官方文档的解决方案和调研，发现很多人都遇到该问题，而且最终没有很好的解决方案，暂时就把这个问题搁置了。</p>
 <p>　　接下来，第二个技术难点在于运行用户提交的测试脚本是有风险的，所以在运行测试脚本代码时必须有沙箱机制保证一定的安全。刚开始发现社区有人使用了 <code>vm2</code> 这个 npm 包来解决运行不可信任代码的安全问题，而且恰好也有人用该模块来尝试结合 Docker 在云端运行 puppeteer 测试：</p>
 <blockquote>
@@ -56,10 +56,10 @@
 <span class="hljs-keyword">FROM</span> node:lts-alpine
 
 <span class="hljs-comment"># https://mirrors.ustc.edu.cn/help/alpine.html</span>
-<span class="hljs-keyword">RUN</span><span class="bash"> sed -i <span class="hljs-string">'s/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ustc.edu.cn/g'</span> /etc/apk/repositories</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> sed -i <span class="hljs-string">&#x27;s/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ustc.edu.cn/g&#x27;</span> /etc/apk/repositories</span>
 
 <span class="hljs-comment"># install dependencies</span>
-<span class="hljs-keyword">RUN</span><span class="bash"> apk update \
+<span class="hljs-keyword">RUN</span><span class="language-bash"> apk update \
     &amp;&amp; apk add --no-cache --virtual .build-deps curl \
     &amp;&amp; curl -sf https://gobinaries.com/tj/node-prune | sh \
     &amp;&amp; apk del .build-deps</span>
@@ -67,14 +67,14 @@
 <span class="hljs-comment"># https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#handling-kernel-signals</span>
 <span class="hljs-comment"># https://github.com/krallin/tini#using-tini</span>
 <span class="hljs-comment"># Add Tini</span>
-<span class="hljs-keyword">RUN</span><span class="bash"> apk add --no-cache tini</span>
-<span class="hljs-keyword">ENTRYPOINT</span><span class="bash"> [<span class="hljs-string">"/sbin/tini"</span>, <span class="hljs-string">"--"</span>]</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> apk add --no-cache tini</span>
+<span class="hljs-keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="hljs-string">&quot;/sbin/tini&quot;</span>, <span class="hljs-string">&quot;--&quot;</span>]</span>
 
 <span class="hljs-comment"># puppeteer start --------------------------------</span>
 
 <span class="hljs-comment"># https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-on-alpine</span>
 <span class="hljs-comment"># https://github.com/puppeteer/puppeteer#q-which-chromium-version-does-puppeteer-use</span>
-<span class="hljs-keyword">RUN</span><span class="bash"> apk add --no-cache \
+<span class="hljs-keyword">RUN</span><span class="language-bash"> apk add --no-cache \
       chromium \
       nss \
       freetype \
@@ -82,14 +82,14 @@
       ca-certificates \
       ttf-freefont</span>
 
-<span class="hljs-comment"># Tell Puppeteer to skip installing Chrome. We'll be using the installed package.</span>
+<span class="hljs-comment"># Tell Puppeteer to skip installing Chrome. We&#x27;ll be using the installed package.</span>
 <span class="hljs-keyword">ENV</span> PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 <span class="hljs-comment"># # Puppeteer v6.0.0 works with Chromium 89.</span>
 <span class="hljs-comment"># RUN yarn add puppeteer@6.0.0</span>
 
-<span class="hljs-comment"># # Add user so we don't need --no-sandbox.</span>
+<span class="hljs-comment"># # Add user so we don&#x27;t need --no-sandbox.</span>
 <span class="hljs-comment"># RUN addgroup -S pptruser &amp;&amp; adduser -S -g pptruser pptruser \</span>
 <span class="hljs-comment">#     &amp;&amp; mkdir -p /home/pptruser/Downloads /app \</span>
 <span class="hljs-comment">#     &amp;&amp; chown -R pptruser:pptruser /home/pptruser \</span>
@@ -104,24 +104,24 @@
 <span class="hljs-keyword">ENV</span> WS_RUNNER_PORT=<span class="hljs-number">8081</span>
 <span class="hljs-keyword">EXPOSE</span> <span class="hljs-number">8081</span>
 
-<span class="hljs-keyword">WORKDIR</span><span class="bash"> /home/node/app</span>
+<span class="hljs-keyword">WORKDIR</span><span class="language-bash"> /home/node/app</span>
 
-<span class="hljs-keyword">COPY</span><span class="bash"> package.json package-lock.json ./</span>
-<span class="hljs-keyword">RUN</span><span class="bash"> npm ci --production --registry=https://registry.npm.taobao.org/ &amp;&amp; npm cache clean --force</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> package.json package-lock.json ./</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> npm ci --production --registry=https://registry.npm.taobao.org/ &amp;&amp; npm cache clean --force</span>
 
-<span class="hljs-keyword">RUN</span><span class="bash"> node-prune</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> node-prune</span>
 
-<span class="hljs-keyword">COPY</span><span class="bash"> . .</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> . .</span>
 
-<span class="hljs-keyword">RUN</span><span class="bash"> chown -R node:node /home/node/app/</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">chown</span> -R node:node /home/node/app/</span>
 
 <span class="hljs-comment"># https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#non-root-user</span>
 <span class="hljs-keyword">USER</span> node
 
 <span class="hljs-comment"># https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#cmd</span>
-<span class="hljs-keyword">CMD</span><span class="bash"> [ <span class="hljs-string">"node"</span>, <span class="hljs-string">"index.js"</span> ]</span></code></pre>
+<span class="hljs-keyword">CMD</span><span class="language-bash"> [ <span class="hljs-string">&quot;node&quot;</span>, <span class="hljs-string">&quot;index.js&quot;</span> ]</span></code></pre>
 <p>　　此外，在 Node 项目中我们采用了 <code>ECMAScript modules</code> 编写整个项目代码，而 <code>jest-puppeteer</code> npm 包不支持 ES Module，最终发现可以配置环境变量指定配置文件来解决：</p>
-<pre><code class="language-bash">JEST_PUPPETEER_CONFIG=jest-puppeteer<span class="hljs-selector-class">.config</span><span class="hljs-selector-class">.cjs</span></code></pre>
+<pre><code class="language-bash"><span class="hljs-attr">JEST_PUPPETEER_CONFIG</span>=jest-puppeteer.config.cjs</code></pre>
 <p>　　而且，目前 Jest 默认也是以 CommonJS 方式运行的，需要额外指定 Node 参数（flag）才行，这个官方文档也有提及：</p>
 <pre><code class="language-bash"><span class="hljs-keyword">node</span> <span class="hljs-title">--experimental-vm-modules</span> node_modules/.bin/jest</code></pre>
 <p>　　其次为了日志管理和处理的方便，生成结构化数据才是比较理想的，可以通过 Jest 的 <code>--json</code> 命令行选项将其输出的日志由纯文本更改为 JSON 格式；加上 <code>--passWithNoTests</code> 选项可以保证没有测试可运行时不报错。</p>

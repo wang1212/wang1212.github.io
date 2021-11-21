@@ -6,14 +6,14 @@
 <li>createDocumentFragment()</li>
 </ul>
 <p>exp：</p>
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-    <span class="hljs-keyword">var</span> docFrag = <span class="hljs-built_in">document</span>.createDocumentFragment();
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-keyword">var</span> docFrag = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createDocumentFragment</span>();
 
-    [<span class="hljs-string">'blue'</span>,<span class="hljs-string">'green'</span>,<span class="hljs-string">'red'</span>,<span class="hljs-string">'pink'</span>].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>)</span>{
-        <span class="hljs-keyword">var</span> li = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'li'</span>);
-        li.textContent = e;
-        li.style.backgroundColor = e;
-        docFrag.appendChild(li);
+    [<span class="hljs-string">&#x27;blue&#x27;</span>,<span class="hljs-string">&#x27;green&#x27;</span>,<span class="hljs-string">&#x27;red&#x27;</span>,<span class="hljs-string">&#x27;pink&#x27;</span>].<span class="hljs-title function_">forEach</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>){
+        <span class="hljs-keyword">var</span> li = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;li&#x27;</span>);
+        li.<span class="hljs-property">textContent</span> = e;
+        li.<span class="hljs-property">style</span>.<span class="hljs-property">backgroundColor</span> = e;
+        docFrag.<span class="hljs-title function_">appendChild</span>(li);
     });
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><p>　　这样，我们就创建好了一个文档片段，其中包含了四个 <code>li</code> 元素，我们并把它们各自的背景色设置为了其文本内容。</p>
 <h3 id="更新到-dom-树">更新到 DOM 树</h3>
@@ -24,9 +24,9 @@
 </ul>
 <p>exp：</p>
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"container"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'container'</span>).appendChild(docFrag);
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+        <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;container&#x27;</span>).<span class="hljs-title function_">appendChild</span>(docFrag);
     </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></code></pre><p>　　这样我们就将刚才创建的文档片段插入到了 DOM 树中，在页面上的效果也是我们预期的。<strong>要清楚的是，文档片段被插入 DOM 树中时，自身会被选中的 DOM 元素替代，也就是文档片段内的元素全都作为选中元素的子元素插入；而且，在插入 DOM 树后，文档片段自身也不再存在，不会发生内存泄漏的问题。</strong></p>
 <h3 id="更灵活的做法">更灵活的做法</h3>
@@ -35,16 +35,16 @@
 <li>innerHTML</li>
 </ul>
 <p>exp：</p>
-<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    </span><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-        <span class="hljs-keyword">var</span> docFrag = <span class="hljs-built_in">document</span>.createDocumentFragment();
-        <span class="hljs-keyword">var</span> divO = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'div'</span>);
+<pre><code><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+        <span class="hljs-keyword">var</span> docFrag = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createDocumentFragment</span>();
+        <span class="hljs-keyword">var</span> divO = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;div&#x27;</span>);
 
-        docFrag.appendChild(divO);
-        docFrag.querySelector(<span class="hljs-string">'div'</span>).innerHTML = <span class="hljs-string">"</span></span></span><span class="xml"><span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></span></span></span><span class="xml"><span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span></span><span class="xml"><span class="undefined"></span></span><span class="xml"><span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span></span><span class="xml"><span class="undefined"></span></span><span class="xml"><span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span></span><span class="xml"><span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span></span></span><span class="xml"><span class="undefined">";
+        docFrag.<span class="hljs-title function_">appendChild</span>(divO);
+        docFrag.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;div&#x27;</span>).<span class="hljs-property">innerHTML</span> = <span class="hljs-string">&quot;</span></span></span><span class="language-xml"><span class="language-handlebars"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></span></span></span><span class="language-xml"><span class="language-handlebars"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span></span><span class="language-xml"><span class="language-handlebars"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span></span><span class="language-xml"><span class="language-handlebars"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span></span><span class="language-xml"><span class="language-handlebars"><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span></span></span><span class="language-xml">&quot;;
 
-        document.getElementById('container').appendChild(docFrag);
-    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><span class="xml">
+        document.getElementById(&#x27;container&#x27;).appendChild(docFrag);
+    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><span class="language-xml">
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span></code></pre><p>　　该方法用来创建更复杂的 DOM 结构的代码量是很少的，所以说创建文档片段可以混合不同的方法来提高效率，当然该方法可能更耗性能一些。</p>
 <h3 id="重复利用">重复利用</h3>
 <p>　　我们前面说过，文档片段在更新到 DOM 树中时会自动消失，如果我们想重复利用文档片段的话，在插入 DOM 树时将其副本插入就可以了。</p>
