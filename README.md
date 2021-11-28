@@ -2,7 +2,7 @@
 
 分享与交流是我获得提升的最佳途径。
 
-<small>Sharing and communication is the best way to get my promotion.<small>
+<small>Sharing and communication are the best way for me to improve.<small>
 
 ## Tools
 
