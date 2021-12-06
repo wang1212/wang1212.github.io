@@ -1,4 +1,4 @@
-<p>　　基于 React.js 的 Web 应用如何完成状态管理？社区主流方案是 <strong>react-redux</strong>，其本质上基于 React 的 <code>Context</code> 特性实现，如果应用足够简单，实际上用 <code>Context</code> 手写一个简单的状态管理工具倒也并不难。不过，考虑到工具的完善性、项目的健壮性，通过采用较好的、成熟的社区方案，尤其是在移动端场景下，<strong>react-redux</strong> 略显臃肿，通过了解 <strong>zustand</strong> 倒是一个不错的方案。</p>
+<p>　　基于 React.js 的 Web 应用如何完成状态管理？社区主流方案是 <strong>react-redux</strong>，其本质上基于 React 的 <code>Context</code> 特性实现，如果应用足够简单，实际上用 <code>Context</code> 手写一个简单的状态管理工具倒也并不难。不过，考虑到工具的完善性、项目的健壮性，通常采用较好的、成熟的社区方案。在移动端场景下，<strong>react-redux</strong> 略显臃肿，轻量级状态管理工具  <strong>zustand</strong> 倒是一个不错的替代方案。</p>
 <h2 id="轻量级状态管理方案">轻量级状态管理方案</h2>
 <p>　　Web 优化中，资源大小的优化是重中之重，而且也是成本最低，收益最高的优化方式，在移动端场景下尤为突出。每在项目中引入一个工具库，都要考虑是否有更轻量级的替代品。众所周知，<strong>moment</strong> 就是一个典型的例子，我通常采用 <strong>dayjs</strong> 作为替代方案。而在应用状态管理工具的选择中，可以利用 Bundlephobia 首先评估一下社区主流方案 <strong>react-redux</strong>。</p>
 <table>
