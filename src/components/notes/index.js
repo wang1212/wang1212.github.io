@@ -2,40 +2,49 @@
 
 // @flow
 
-import './style.scss'
-import category from 'utils/category.json'
-import _ from 'lodash'
-import WordCloud from 'wordcloud'
+import './style.scss';
+import category from 'utils/category.json';
+import _ from 'lodash';
+import WordCloud from 'wordcloud';
 
-const TAGS_WITH_NUM = _.map(category.tags, (file_indexs, tag) => [tag, file_indexs.length])
+const TAGS_WITH_NUM = _.map(category.tags, (file_indexs, tag) => [tag, file_indexs.length]);
 
 /* utils */
 function get_color(num) {
-	return num >= 10 ? 'primary' : num >= 5 ? 'info' : 'light'
+	return num >= 10 ? 'primary' : num >= 5 ? 'info' : 'light';
 }
 
 /* views */
 const Tags = TAGS_WITH_NUM.sort((a, b) => b[1] - a[1])
 	.map(
-		(item) => `
+		item => `
 	<a class="btn btn-${get_color(item[1])} mr-2 mb-2" href="#/notes/${item[0]}">
 		${item[0]}
 		<span class="badge badge-light ml-2">${item[1]}</span>
 	</a>
 `
 	)
-	.join('')
+	.join('');
 
-const TagNotesListContent = (state) => {
-	let Content = ''
+const TagNotesListContent = state => {
+	let Content = '';
 
-	if (state.length <= 1) return Content
+	let _files = category.data;
+	let _tag = `${_files.length} 篇`;
 
-	let _tag = decodeURI(state[1]),
-		_files = category.tags[_tag].map((file_index) => category.data[file_index])
+	if (state.length <= 1) {
+		_files.sort((a, b) => {
+			return (
+				new Date(b.ctime[0].join('/') + ' ' + b.ctime[1].join(':')).getTime() - new Date(a.ctime[0].join('/') + ' ' + a.ctime[1].join(':')).getTime()
+			);
+		});
+	} else {
+		_tag = decodeURI(state[1]);
+		_files = category.tags[_tag].map(file_index => category.data[file_index]);
+	}
 
 	/* temp */
-	let _tmp_ctime_year = ''
+	let _tmp_ctime_year = '';
 
 	/* eslint-disable */
 	Content = `
@@ -44,14 +53,14 @@ const TagNotesListContent = (state) => {
 		<div class="notes-list">
 			${_files
 				.map(
-					(file) => `
+					file => `
 					${(file.ctime[0][0] !== _tmp_ctime_year && ((_tmp_ctime_year = file.ctime[0][0]), `<h4 class="time-year-break">${_tmp_ctime_year}</h4>`)) || ''}
 					<div class="note-item">
 						<a class="item-title h5 mb-2" href="#/note-content/${file.name}">${file.title}</a>
 						<div>
 							${file.keywords
 								.map(
-									(keyword) =>
+									keyword =>
 										(file.tags.includes(keyword) &&
 											`<a class="btn btn-outline-dark btn-sm mr-2 mb-2" href="#/notes/${keyword}">${keyword}</a>`) ||
 										`<span class="btn btn-outline-dark btn-sm mr-2 mb-2">${keyword}</span>`
@@ -65,11 +74,11 @@ const TagNotesListContent = (state) => {
 				)
 				.join('')}
 		</div>
-	`
+	`;
 	/* eslint-enable */
 
-	return Content
-}
+	return Content;
+};
 
 const Notes = (context: any) => {
 	//
@@ -87,7 +96,7 @@ const Notes = (context: any) => {
 				${TagNotesListContent(context.state)}
 			</section>
 		</main>
-	`
+	`;
 
 	setTimeout(() => {
 		//
@@ -101,13 +110,13 @@ const Notes = (context: any) => {
 			fontFamily: 'Impact',
 			color: 'random-light',
 			// color: '#aaa',
-			click: function (item) {
-				location.hash = `#/notes/${item[0]}`
-			},
-		})
-	}, 300)
+			click: function(item) {
+				location.hash = `#/notes/${item[0]}`;
+			}
+		});
+	}, 300);
 
-	return view
-}
+	return view;
+};
 
-export default Notes
+export default Notes;

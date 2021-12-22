@@ -4,9 +4,8 @@
 
 import './style.scss';
 
-
 /* utils */
-function insert_code_line_num () {
+function insert_code_line_num() {
 	Array.from(document.querySelectorAll('.page-note-content pre > code')).forEach(elem => {
 		const _height = elem.offsetHeight,
 			_lh = +getComputedStyle(elem)['line-height'].match(/[\d.]+/);
@@ -23,11 +22,10 @@ function insert_code_line_num () {
 	});
 }
 
-
 let h_datas = [],
 	elem_h;
 
-function generate_navigation () {
+function generate_navigation() {
 	h_datas = [];
 
 	Array.from(document.querySelectorAll('h1, h2, h3, h4')).forEach(elem => {
@@ -78,7 +76,7 @@ function generate_navigation () {
 			elem.onclick = () => (document.documentElement.scrollTop = document.body.scrollTop = elem.getAttribute('top') - 20);
 		});
 
-		elem_h.querySelector('.hide').onclick = function () {
+		elem_h.querySelector('.hide').onclick = function() {
 			if (elem_h.classList.contains('hide')) {
 				elem_h.classList.remove('hide');
 				this.textContent = 'close';
@@ -88,14 +86,11 @@ function generate_navigation () {
 			}
 		};
 	}, 300);
-
 }
-
 
 /* views */
 /* eslint-disable */
 const NoteContent = ({ file, html }) => {
-
 	const view = `
 		<main class="page-note-content note-content">
 			<header class="container-fluid jumbotron">
@@ -104,13 +99,14 @@ const NoteContent = ({ file, html }) => {
 					<p class="lead">${file.summary}</p>
 					<hr class="my-4">
 					<div class="mb-3">
-						${
-							file.keywords.map(keyword => (
-								file.tags.includes(keyword)
-								&& `<a class="btn btn-outline-dark btn-sm mr-2 mb-2" href="#/notes/${keyword}">${keyword}</a>`
-								|| `<span class="btn btn-outline-dark btn-sm mr-2 mb-2">${keyword}</span>`
-							)).join('')
-						}
+						${file.keywords
+							.map(
+								keyword =>
+									(file.tags.includes(keyword) &&
+										`<a class="btn btn-outline-dark btn-sm mr-2 mb-2" href="#/notes/${keyword}">${keyword}</a>`) ||
+									`<span class="btn btn-outline-dark btn-sm mr-2 mb-2">${keyword}</span>`
+							)
+							.join('')}
 					</div>
 					<div>
 						<span class="badge badge-pill badge-light mr-3">${file.ctime[0].join('-')}  ${file.ctime[1].slice(0, 2).join(':')} 添加</span>
@@ -131,17 +127,17 @@ const NoteContent = ({ file, html }) => {
 	}, 300);
 
 	return view;
-
 };
 /* eslint-enable */
 
-
 /* events */
 window.addEventListener('scroll', () => {
+	if (!elem_h) return;
+
 	const scrollTop = document.documentElement.scrollTop || document.body.scrollTop,
 		doc_width = document.body.getBoundingClientRect().width;
 
-	if (doc_width > 768 && scrollTop > 376 || doc_width < 768 && scrollTop > 290) {
+	if ((doc_width > 768 && scrollTop > 376) || (doc_width < 768 && scrollTop > 290)) {
 		elem_h.classList.add('scroll');
 	} else {
 		elem_h.classList.remove('scroll');
@@ -160,7 +156,5 @@ window.addEventListener('scroll', () => {
 		}
 	});
 });
-
-
 
 export default NoteContent;
