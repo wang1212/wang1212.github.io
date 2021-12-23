@@ -103,28 +103,30 @@
 		-->
 		<!-- 访问统计 -->
 		<script>
-			if (!sessionStorage.getItem('_swa') && document.referrer.indexOf(location.protocol + '//' + location.host) !== 0) {
-				fetch(
-					'https://counter.dev/track?' +
-						new URLSearchParams({ referrer: document.referrer, screen: screen.width + 'x' + screen.height, user: 'mrwang1212', utcoffset: '8' })
-				)
+			if (location.hostname !== 'localhost') {
+				if (!sessionStorage.getItem('_swa') && document.referrer.indexOf(location.protocol + '//' + location.host) !== 0) {
+					fetch(
+						'https://counter.dev/track?' +
+							new URLSearchParams({ referrer: document.referrer, screen: screen.width + 'x' + screen.height, user: 'mrwang1212', utcoffset: '8' })
+					);
+				}
+				sessionStorage.setItem('_swa', '1');
 			}
-			sessionStorage.setItem('_swa', '1')
 		</script>
 		<script>
 			// 判断是不是 IE 8 以下
-			var _lte_IE_8 = !!(navigator.appName == 'Microsoft Internet Explorer' && +navigator.appVersion.split(';')[1].match(/\d+/)[0] < 9)
+			var _lte_IE_8 = !!(navigator.appName == 'Microsoft Internet Explorer' && +navigator.appVersion.split(';')[1].match(/\d+/)[0] < 9);
 		</script>
 		<script>
 			// Check that service workers are registered
 			if (location.protocol != 'file:' && 'serviceWorker' in navigator) {
 				// Use the window load event to keep the page load performant
-				window.addEventListener('load', function () {
-					navigator.serviceWorker.register('build/service-worker.js')
-				})
+				window.addEventListener('load', function() {
+					navigator.serviceWorker.register('build/service-worker.js');
+				});
 			}
 		</script>
-	<link href="build/app.e20d7f09dad758d1c63a.css" rel="stylesheet"></head>
+	<link href="build/app.d597aeb335dcfdbdea67.css" rel="stylesheet"></head>
 	<body>
 		<div id="App" class="App">
 			<div class="page-loading_container">
