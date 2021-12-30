@@ -3,12 +3,10 @@
 // @flow
 
 import './style.scss';
-
-import _ from 'lodash';
-
+import { debounce } from '../../utils/helper';
 
 /* views */
-const Nav = () => (`
+const Nav = () => `
 	<nav id="Nav" class="page-nav">
 		<div class="menu">
 			<div class="item-list">
@@ -20,33 +18,27 @@ const Nav = () => (`
 		</div>
 		<i id="nav-go-top" class="go-top main-btn btn btn-dark material-icons mt-3 _hide" title="返回页面顶部">arrow_upward</i>
 	</nav>
-`);
-
-
-let elem_go_top = null;
+`;
 
 /* go top */
-window.addEventListener('scroll', _.debounce(
-	() => {
+let elem_go_top = null;
+const onScroll = debounce(() => {
+	const scroll_top = document.documentElement.scrollTop || document.body.scrollTop;
 
-		const scroll_top = document.documentElement.scrollTop || document.body.scrollTop;
+	if (!elem_go_top) {
+		elem_go_top = document.getElementById('nav-go-top');
 
-		if (!elem_go_top) {
-			elem_go_top = document.getElementById('nav-go-top');
+		// event: go top
+		elem_go_top.onclick = () => (document.documentElement.scrollTop = 0) || (document.body.scrollTop = 0);
+	}
 
-			// event: go top
-			elem_go_top.onclick = () => (document.documentElement.scrollTop = 0) || (document.body.scrollTop = 0);
-		}
+	if (scroll_top > 0) {
+		elem_go_top.classList.remove('_hide');
+	} else {
+		elem_go_top.classList.add('_hide');
+	}
+}, 300);
 
-		if (scroll_top > 0) {
-			elem_go_top.classList.remove('_hide');
-		} else {
-			elem_go_top.classList.add('_hide');
-		}
-
-	},
-	300
-));
-
+window.addEventListener('scroll', onScroll, { passive: true });
 
 export default Nav;

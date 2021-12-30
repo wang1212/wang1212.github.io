@@ -2,13 +2,12 @@
 
 // @flow
 
-import './style.scss'
-import blog from 'utils/blog_data.json'
-import category from 'utils/category.json'
-import _ from 'lodash'
-import WordCloud from 'wordcloud'
+import './style.scss';
+import blog from 'utils/blog_data.json';
+import category from 'utils/category.json';
+import WordCloud from 'wordcloud';
 
-const TAGS_WITH_NUM = _.map(category.tags, (file_indexs, tag) => [tag, file_indexs.length])
+const TAGS_WITH_NUM = Object.entries(category.tags).map(([tag, file_indexs]) => [tag, file_indexs.length]);
 
 const Index = () => {
 	const view = `
@@ -28,7 +27,7 @@ const Index = () => {
 				</a>
 			</div>
 		</main>
-	`
+	`;
 
 	setTimeout(() => {
 		//
@@ -42,13 +41,13 @@ const Index = () => {
 			fontFamily: 'Impact',
 			// color: 'random-light',
 			color: '#eee',
-			click: function (item) {
-				location.hash = `#/notes/${item[0]}`
-			},
-		})
-	}, 1e3 * 4)
+			click: function(item) {
+				location.hash = `#/notes/${item[0]}`;
+			}
+		});
+	}, 1e3 * 4);
 
-	return view
-}
+	return view;
+};
 
-export default Index
+export default Index;

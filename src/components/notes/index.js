@@ -4,10 +4,9 @@
 
 import './style.scss';
 import category from 'utils/category.json';
-import _ from 'lodash';
 import WordCloud from 'wordcloud';
 
-const TAGS_WITH_NUM = _.map(category.tags, (file_indexs, tag) => [tag, file_indexs.length]);
+const TAGS_WITH_NUM = Object.entries(category.tags).map(([tag, file_indexs]) => [tag, file_indexs.length]);
 
 /* utils */
 function get_color(num) {
