@@ -28,7 +28,7 @@ const Tags = TAGS_WITH_NUM.sort((a, b) => b[1] - a[1])
 const TagNotesListContent = state => {
 	let Content = '';
 
-	let _files = category.data;
+	let _files = category.data.slice();
 	let _tag = `${_files.length} 篇`;
 
 	if (state.length <= 1) {
