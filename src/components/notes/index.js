@@ -33,9 +33,9 @@ const TagNotesListContent = state => {
   let _tag = `${_files.length} 篇`;
 
   /* temp */
-  let _tmp_by_sort = 'ctime';
+  let _tmp_by_sort = 'mtime';
 
-  function generate_html(by_sort = 'ctime') {
+  function generate_html(by_sort = 'mtime') {
     if (state.length > 1) {
       _tag = decodeURI(state[1]);
       _files = category.tags[_tag]
