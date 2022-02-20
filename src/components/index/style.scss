@@ -1,138 +1,116 @@
 /*! page index style */
 
 .page-index {
-	overflow: hidden;
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: 100vw;
-	height: 100vh;
-	transition: all 2s ease-in-out;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  transition: all 2s ease-in-out;
 
-	&.scroll {
-		height: 0;
-	}
+  &.scroll {
+    height: 0;
+  }
 
-	/**
-	 * - words cloud
-	 */
-	.word-cloud {
-		position: absolute !important;
-		top: 0;
-		left: 0;
-		margin: 7.5vh 0;
-		width: 100vw;
-		height: 75vh;
+  .index-name {
+    position: relative;
+    padding: 0.25rem 0.8rem;
+    margin-bottom: 3rem;
 
-		.word {
-			opacity: 0.35;
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 25%;
+      height: 25%;
+      transition: all 1s ease-in;
+      animation: anim_index_name 2s ease-out;
+    }
 
-			&:hover {
-				opacity: 1;
-				color: #333 !important;
-				cursor: pointer;
-			}
-		}
-	}
+    &::before {
+      left: 0;
+      top: 0;
+      border-top: 1px solid black;
+      border-left: 1px solid black;
+    }
 
-	.index-name {
-		position: relative;
-		padding: 0.25rem 0.8rem;
-		margin-bottom: 3rem;
+    &::after {
+      right: 0;
+      bottom: 0;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
 
-		&::before,
-		&::after {
-			content: '';
-			position: absolute;
-			width: 25%;
-			height: 25%;
-			transition: all 1s ease-in;
-			animation: anim_index_name 2s ease-out;
-		}
+    &:hover {
+      &::before,
+      &::after {
+        width: 100%;
+        height: 100%;
+        border-width: 2px;
+      }
+    }
+  }
 
-		&::before {
-			left: 0;
-			top: 0;
-			border-top: 1px solid black;
-			border-left: 1px solid black;
-		}
+  @keyframes anim_index_name {
+    from {
+      width: 100%;
+      height: 100%;
+      border-width: 2px;
+    }
+    to {
+      width: 25%;
+      height: 25%;
+      border-width: 1px;
+    }
+  }
 
-		&::after {
-			right: 0;
-			bottom: 0;
-			border-bottom: 1px solid black;
-			border-right: 1px solid black;
-		}
+  .index-title {
+    position: relative;
+    padding: 0 2rem;
+    margin-bottom: 10rem;
+    line-height: 1.8;
+    font-weight: lighter;
+    text-align: center;
+    opacity: 1;
+    animation: anim_index_title 4s linear;
+  }
 
-		&:hover {
-			&::before,
-			&::after {
-				width: 100%;
-				height: 100%;
-				border-width: 2px;
-			}
-		}
-	}
+  @keyframes anim_index_title {
+    0% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
-	@keyframes anim_index_name {
-		from {
-			width: 100%;
-			height: 100%;
-			border-width: 2px;
-		}
-		to {
-			width: 25%;
-			height: 25%;
-			border-width: 1px;
-		}
-	}
+  .go-down {
+    position: absolute;
+    bottom: 2vh;
+    width: 100%;
+    color: black;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    opacity: 1;
+    animation: anim_go_down 6s;
+  }
 
-	.index-title {
-		position: relative;
-		padding: 0 2rem;
-		margin-bottom: 10rem;
-		line-height: 1.8;
-		font-weight: lighter;
-		text-align: center;
-		opacity: 1;
-		animation: anim_index_title 4s linear;
-	}
-
-	@keyframes anim_index_title {
-		0% {
-			opacity: 0;
-		}
-		40% {
-			opacity: 0;
-		}
-		100% {
-			opacity: 1;
-		}
-	}
-
-	.go-down {
-		position: absolute;
-		bottom: 2vh;
-		width: 100%;
-		color: black;
-		text-align: center;
-		font-size: 1.5rem;
-		font-weight: bolder;
-		opacity: 1;
-		animation: anim_go_down 6s;
-	}
-
-	@keyframes anim_go_down {
-		0% {
-			opacity: 0;
-		}
-		40% {
-			opacity: 0;
-		}
-		100% {
-			opacity: 1;
-		}
-	}
+  @keyframes anim_go_down {
+    0% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 }
