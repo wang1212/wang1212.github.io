@@ -15,7 +15,7 @@ importScripts("wb-assets/workbox-v4.3.1/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "wb-assets/workbox-v4.3.1"});
 
 importScripts(
-  "wb-assets/precache-manifest.b5ac4a8362397ea9132192ed261154ac.js"
+  "wb-assets/precache-manifest.ddc805fdae71eebf8971ff29d461908e.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -32,11 +32,11 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "vendor-manifest.json",
-    "revision": "06c4836cd7dd4ac7bfb853710500d756"
+    "revision": "b3626d11e54fb5e3ac5cd4f29492b525"
   },
   {
     "url": "vendor.js",
-    "revision": "4e7bb97d307205f8313030fdef099e36"
+    "revision": "fe34aada6aaa68c06c2bb69c6a985811"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});

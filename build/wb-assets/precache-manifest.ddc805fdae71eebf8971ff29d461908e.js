@@ -1,24 +1,22 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f791c780931bfcf49292467b3fffc06b",
+    "revision": "4e05ada6d3b292760dee9b843fe18436",
     "url": "../index.html"
   },
   {
-    "url": "app.2abc7cfb9b58412a792e.js"
-  },
-  {
-    "url": "app.414a7e0ea46f71ab469c.css"
+    "revision": "9a36a0ad7841a0e9b566",
+    "url": "app.js"
   },
   {
     "revision": "9b053b121e306b1e6199b35935593451",
     "url": "favicon.ico"
   },
   {
-    "revision": "269906e94c697f6fbc3a60b15b10ef0a",
+    "revision": "19162796999c3a19ab37daa53e56b1ce",
     "url": "favicon.png"
   },
   {
-    "revision": "e0c61ef21b27bd2bbfa594a9038449ef",
+    "revision": "948883b9f387776fdd1b655476a23fed",
     "url": "favicon_512.png"
   },
   {
@@ -86,7 +84,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "vendors/libs/material-design-icons-3.0.1/webfonts/MaterialIcons-Regular.ijmap"
   },
   {
-    "revision": "770d425844e796efd306626264ab1e27",
+    "revision": "60b333913565d0fd467d8616af325557",
     "url": "vendors/libs/material-design-icons-3.0.1/webfonts/MaterialIcons-Regular.svg"
   },
   {

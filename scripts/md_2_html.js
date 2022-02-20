@@ -1,9 +1,9 @@
 /*! transfrom markdown to html file */
 
 // @flow
-
+const dayjs = require('dayjs');
 const hljs = require('highlight.js');
-// console.debug(hljs.getLanguage('ts'));
+
 // get start time
 const __START_TIME = Date.now();
 
@@ -30,8 +30,8 @@ marked.setOptions({
 /**
  * Markdown to HTML
  */
-const fs = require('fs'),
-  path = require('path');
+const fs = require('fs');
+const path = require('path');
 
 const SOURCE_DIR = 'notes-md/',
   TARGET_DIR = 'notes-html/';
@@ -92,21 +92,15 @@ function dir_display(dir_path) {
       );
 
       /* File Data */
-      let _ctime = (_doc_info.ctime || _stats.ctime.toLocaleString()).match(
-          /\d+/g
-        ),
-        _mtime = (_doc_info.mtime || _stats.mtime.toLocaleString()).match(
-          /\d+/g
-        );
-
-      _ctime = [_ctime.slice(0, 3), _ctime.slice(3)];
-      _mtime = [_mtime.slice(0, 3), _mtime.slice(3)];
-
       const _file_data = {
         name: path.basename(new_filepath_name),
         title: _doc_info.title || '无标题文档',
-        ctime: _ctime,
-        mtime: _mtime,
+        ctime: dayjs(_doc_info.ctime || _stats.ctime).format(
+          'YYYY-MM-DD HH:mm:ss'
+        ),
+        mtime: dayjs(_doc_info.mtime || _stats.mtime).format(
+          'YYYY-MM-DD HH:mm:ss'
+        ),
         tags: _doc_info.tags || [],
         keywords: _doc_info.keywords || [],
         summary: _doc_info.summary || ''
@@ -161,17 +155,10 @@ dir_display(SOURCE_DIR);
 /* Sort tags file indexs by time */
 Object.keys(category.tags).forEach(tag => {
   category.tags[tag].sort((a, b) => {
-    let _file_a = category.data[a],
-      _file_b = category.data[b];
+    let _file_a = category.data[a];
+    let _file_b = category.data[b];
 
-    return (
-      new Date(
-        _file_b.ctime[0].join('/') + ' ' + _file_b.ctime[1].join(':')
-      ).getTime() -
-      new Date(
-        _file_a.ctime[0].join('/') + ' ' + _file_a.ctime[1].join(':')
-      ).getTime()
-    );
+    return dayjs(_file_b.ctime).valueOf() - dayjs(_file_a.ctime).valueOf();
   });
 });
 
@@ -184,5 +171,5 @@ fs.writeFile(
   JSON.stringify(category),
   err =>
     !err &&
-    console.log(`The category json file has been saved in ${__ALL_TIMES} s!`)
+    console.log(`The category json file has been saved in ${__ALL_TIMES}s!`)
 );
