@@ -17,6 +17,7 @@
     "m_2_h": "node scripts/md_2_html.js"
   },
   "dependencies": {
+    "dayjs": "^1.10.7",
     "wordcloud": "^1.2.2"
   },
   "devDependencies": {

@@ -1,1 +1,1 @@
-{"name":"vendor_lib_aec76fb828be25a06865","content":{"./node_modules/wordcloud/src/wordcloud2.js":{"id":1,"buildMeta":{"providedExports":true}}}}
+{"name":"vendor_lib_287c347927cf821696e8","content":{"./node_modules/dayjs/dayjs.min.js":{"id":1,"buildMeta":{"providedExports":true}},"./node_modules/wordcloud/src/wordcloud2.js":{"id":2,"buildMeta":{"providedExports":true}}}}
