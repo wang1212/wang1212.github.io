@@ -29,62 +29,84 @@ const Tags = TAGS_WITH_NUM.sort((a, b) => b[1] - a[1])
   .join('');
 
 const TagNotesListContent = state => {
-  let Content = '';
-
   let _files = category.data.slice();
   let _tag = `${_files.length} 篇`;
 
-  if (state.length <= 1) {
+  /* temp */
+  let _tmp_by_sort = 'ctime';
+
+  function generate_html(by_sort = 'ctime') {
+    if (state.length > 1) {
+      _tag = decodeURI(state[1]);
+      _files = category.tags[_tag]
+        .map(file_index => category.data[file_index])
+        .slice();
+    }
+
     _files.sort((a, b) => {
-      return dayjs(b.ctime).valueOf() - dayjs(a.ctime).valueOf();
+      return dayjs(b[by_sort]).valueOf() - dayjs(a[by_sort]).valueOf();
     });
-  } else {
-    _tag = decodeURI(state[1]);
-    _files = category.tags[_tag].map(file_index => category.data[file_index]);
+
+    let _tmp_time_year = '';
+
+    // prettier-ignore
+    /* eslint-disable */
+    return `
+			<h3>${_tag}</h3>
+			<hr/>
+			<div id="_js-notes-list" class="notes-list">
+				<p class="text-right mb-2">
+					<button class="btn btn-sm btn-outline-secondary ${by_sort === 'ctime' && 'active'}" onclick="_onChangeBySort('ctime');">添加时间</button>
+					<button class="btn btn-sm btn-outline-secondary ${by_sort === 'mtime' && 'active'}" onclick="_onChangeBySort('mtime');">更新时间</button>
+				</p>
+				${_files
+					.map(
+						file => `
+							${(dayjs(file[by_sort]).year() !== _tmp_time_year &&
+								((_tmp_time_year = dayjs(file[by_sort]).year()),
+								`<h4 class="time-year-break">${_tmp_time_year}</h4>`)) ||
+								''}
+							<div class="note-item">
+								<a class="item-title h5 mb-2" href="#/note-content/${file.name}">${
+									file.title
+								}</a>
+								<div>
+									${file.keywords
+										.map(
+											keyword =>
+												(file.tags.includes(keyword) &&
+													`<a class="btn btn-outline-dark btn-sm mr-2 mb-2" href="#/notes/${keyword}">${keyword}</a>`) ||
+												`<span class="btn btn-outline-dark btn-sm mr-2 mb-2">${keyword}</span>`
+										)
+										.join('')}
+								</div>
+								<p class="text-muted mb-1">${file.summary}</p>
+								<span class="badge badge-light">${dayjs(file.ctime).format(
+									'YYYY-MM-DD HH:mm'
+								)} 添加</span>
+								<span class="badge badge-light">${dayjs(file.mtime).format(
+									'YYYY-MM-DD HH:mm'
+								)} 最后更新</span>
+							</div>
+						`
+					)
+					.join('')
+				}
+			</div>
+		`;
+    /* eslint-enable */
   }
 
-  /* temp */
-  let _tmp_ctime_year = '';
+  window._onChangeBySort = function(by_sort) {
+    if (by_sort === _tmp_by_sort) return;
+    _tmp_by_sort = by_sort;
 
-  /* eslint-disable */
-  Content = `
-		<h3>${_tag}</h3>
-		<hr/>
-		<div class="notes-list">
-			${_files
-        .map(
-          file => `
-					${(dayjs(file.ctime).year() !== _tmp_ctime_year &&
-            ((_tmp_ctime_year = dayjs(file.ctime).year()),
-            `<h4 class="time-year-break">${_tmp_ctime_year}</h4>`)) ||
-            ''}
-					<div class="note-item">
-						<a class="item-title h5 mb-2" href="#/note-content/${file.name}">${
-            file.title
-          }</a>
-						<div>
-							${file.keywords
-                .map(
-                  keyword =>
-                    (file.tags.includes(keyword) &&
-                      `<a class="btn btn-outline-dark btn-sm mr-2 mb-2" href="#/notes/${keyword}">${keyword}</a>`) ||
-                    `<span class="btn btn-outline-dark btn-sm mr-2 mb-2">${keyword}</span>`
-                )
-                .join('')}
-						</div>
-						<p class="text-muted mb-1">${file.summary}</p>
-						<span class="badge badge-light">${dayjs(file.mtime).format(
-              'YYYY-MM-DD HH:mm'
-            )} 最后更新</span>
-					</div>
-				`
-        )
-        .join('')}
-		</div>
-	`;
-  /* eslint-enable */
+    document.getElementById(
+      '_js-notes-list'
+    ).parentElement.innerHTML = generate_html(by_sort);
+  };
 
-  return Content;
+  return generate_html();
 };
 
 const Notes = context => {
