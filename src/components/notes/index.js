@@ -98,7 +98,7 @@ const Notes = (context: any) => {
 	`;
 
 	setTimeout(() => {
-		//
+		// 标签云
 		WordCloud(document.getElementById('word-cloud'), {
 			list: TAGS_WITH_NUM,
 			classes: 'word',

@@ -1,29 +1,26 @@
 {
-	"env": {
-		"node": true,
-		"browser": true,
-		"es6": true,
-		"jest": true
-	},
-	"extends": ["eslint:recommended"],
-	"parser": "babel-eslint",
-	"parserOptions": {
-		"ecmaFeatures": {
-			"experimentalObjectRestSpread": true
-		},
-		"sourceType": "module"
-	},
-	"plugins": [],
-	"rules": {
-		"no-console": [
-			"error",
-			{
-				"allow": ["warn", "error"]
-			}
-		],
-		"indent": ["error", "tab"],
-		"linebreak-style": ["error", "windows"],
-		"quotes": ["error", "single"]
-	},
-	"globals": {}
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "extends": ["eslint:recommended"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": [],
+  "rules": {
+    "no-console": [
+      "warn",
+      {
+        "allow": ["warn", "error"]
+      }
+    ]
+  },
+  "globals": {}
 }
