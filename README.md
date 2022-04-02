@@ -1,5 +1,10 @@
 # My Blog - 不如怀念
 
+<p>
+    <img src="https://badgen.net/github/license/wang1212/wang1212.github.io" alt="LICENSE" />
+    <img src="https://badgen.net/github/last-commit/wang1212/wang1212.github.io?label=last%20update" alt="LAST UPDATE" />
+</p>
+
 分享与交流是我获得提升的最佳途径。
 
 <small>Sharing and communication are the best way for me to improve.<small>
@@ -17,3 +22,11 @@ _Open source tools used in my blog._
 - [highlight.js](https://highlightjs.org/)
 - [Marked](https://marked.js.org/)
 - [Counter](https://counter.dev/) - [See my info ?](https://counter.dev/dashboard.html?user=mrwang1212&token=crq1TWS5OR%2FR0ksf)
+
+## License
+
+[![Creative Commons License](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
+
+这些文章根据 [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/) 获得许可。
+
+_These articles are licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/)._
