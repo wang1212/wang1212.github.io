@@ -1,0 +1,154 @@
+<h2 id="odm">ODM</h2>
+<p>　　<a href="https://www.opendronemap.org/">OpenDroneMap</a> 是开源的无人机航片处理工具套件，其构建维护了丰富的解决方案生态系统，基本上已成为该领域内开源的事实标准。</p>
+<p>　　ODM 团队提供了丰富的工具，包括命令行工具包，具有可视化、存储和数据分析的 Web 应用程序，轻量级 REST API，Python SDK，集群支持等，而这些资源全部开源，支持本地部署和构建。其中，WebODM 是一个提供可视化、存储、数据分析的无人机影像处理平台，采用了 Docker 容器化部署方案。</p>
+<h2 id="webodm-本地部署">WebODM 本地部署</h2>
+<p>　　ODM 团队一直在致力于维护庞大的 ODM 技术生态，同时也在不断的完善官方文档，下面为官方的本地化部署指南：</p>
+<blockquote>
+<p><a href="https://docs.opendronemap.org/installation.html#installation">WebODM 本地化部署指南（官方文档）</a></p>
+</blockquote>
+<p>　　官方文档目前相比较之前已改善很多，步骤也相当清晰，在这里只是梳理一下部署过程，并记录了一些要注意的细节。</p>
+<p>　　WebODM 的整体架构设计很清晰，分解成了不同的模块：</p>
+<pre><code>ODM（算法处理，底层 API） -&gt; N<span class="hljs-function"><span class="hljs-title">odeODM</span>（轻量级 REST API） -&gt;</span> C<span class="hljs-function"><span class="hljs-title">lusterODM</span>（集群支持，负载均衡） -&gt;</span> WebODM（Web 应用）
+</code></pre>
+<p>　　各个模块已由 ODM 团队制作成了 Docker 镜像发布到了 Docker Hub 上面，最简单的方案就是直接利用镜像进行部署，当然也支持自己构建，此处采用镜像部署。</p>
+<p>　　官方推荐的环境是 Ubuntu 16.04 操作系统，64 位多核 CPU，至少 4GB 内存，20GB 磁盘空间。在这里，我们采用 Ubuntu 18.04 Server 宿主操作系统环境，不建议在 Windows 上部署，耗时且容易出错。</p>
+<h3 id="安装-ubuntu">安装 Ubuntu</h3>
+<p>　　可以直接在物理机安装 <a href="https://ubuntu.com/download/server">Ubuntu 18.04 Server</a> 操作系统，也可以利用虚拟机安装。</p>
+<p>　　安装完成后进入系统，首先创建 <code>root</code> 用户，Ubuntu 默认没有 <code>root</code> 用户。执行：</p>
+<pre><code><span class="hljs-attribute">sudo</span> passwd root  <span class="hljs-comment"># 该命令会要求先输入当前登录用户命令，再输入两遍要设置的 root 用户命令</span>
+</code></pre>
+<p>　　其次，换源。<code>apt</code> 是 Ubuntu 官方的软件包管理器，其仓库地址在国外，安装软件容易出错且速度缓慢，换为国内仓库地址（中科大、阿里云、网易云等等），网上搜索即可。主要改动的文件是 <code>/etc/apt/sources.list</code>，改动前注意备份。换掉仓库地址之后更新源，执行：</p>
+<pre><code>sudo apt-<span class="hljs-built_in">get</span> update
+sudo apt-<span class="hljs-built_in">get</span> upgrade
+</code></pre>
+<p>　　推荐使用 <a href="https://winscp.net/">WinSCP</a> 和 <a href="https://www.putty.org/">PuTTY</a> 利用 SSH 协议远程管理 Linux 操作系统。Ubuntu 默认不支持 <code>root</code> 用户远程登录，需修改 SSH 配置。先检查 ssh 服务是否已安装并在运行，执行：</p>
+<pre><code>sudo <span class="hljs-keyword">ps</span> -<span class="hljs-keyword">e</span> | <span class="hljs-keyword">grep</span> ssh
+</code></pre>
+<p>　　大部分情况下应该是已存在的，如果不存在则安装，执行：</p>
+<pre><code>sudo apt-<span class="hljs-keyword">get</span> install openssh-<span class="hljs-keyword">server</span>
+</code></pre>
+<p>　　然后，修改 <code>/etc/ssh/sshd_config</code> 配置文件，将其中的 <code>PermitRootLogin prohibit-password</code> 修改为 <code>PermitRootLogin yes</code> 即可，保存后需重启服务，执行：</p>
+<pre><code><span class="hljs-attribute">service ssh restart</span>
+</code></pre>
+<p>　　这样就可以利用 WinSCP 和 PuTTY 使用 <code>root</code> 用户远程管理多个 Linux 操作系统了。查看系统的 IP 地址，执行：</p>
+<pre><code>ifconfig -<span class="hljs-keyword">a</span>  <span class="hljs-comment"># eth 开头的为以太网卡地址</span>
+</code></pre>
+<h3 id="安装-git">安装 Git</h3>
+<p>　　安装前先看看是不是已经安装了 Git，执行：</p>
+<pre><code>git <span class="hljs-comment">--version</span>
+</code></pre>
+<p>　　大部分情况下，Ubuntu 系统都会在安装时自动安装 Git，如未安装，执行：</p>
+<pre><code>sudo apt-<span class="hljs-built_in">get</span> install git
+</code></pre>
+<h3 id="安装-python3">安装 Python3</h3>
+<p>　　这里其实安装 Python2 或者 Python3 都可以，建议安装 Python3。检查是否已安装：</p>
+<pre><code>pytho<span class="hljs-symbol">n3</span> -V
+pip<span class="hljs-number">3</span> -V
+</code></pre>
+<p>　　如未安装，则执行：</p>
+<pre><code>sudo apt-<span class="hljs-built_in">get</span> install <span class="hljs-keyword">python3</span>
+sudo apt-<span class="hljs-built_in">get</span> install <span class="hljs-keyword">python3</span>-pip  # 注意，pip 不要安装错，必须为 <span class="hljs-keyword">python3</span>-pip
+</code></pre>
+<p>　　安装完成后，上网搜索将 pip 的源换为国内源（中科大、阿里云、网易云等等）。默认情况下配置文件不存在，新建一个即可：</p>
+<pre><code><span class="hljs-built_in">mkdir</span> ~/.pip
+<span class="hljs-built_in">touch</span> ~/.pip/pip.conf
+</code></pre>
+<h3 id="安装-docker">安装 Docker</h3>
+<p>　　这里必需要注意的是，不要使用 <code>apt</code> 安装 Docker，因为更新不及时，也不要查看网络上的教程，容易出错，直接根据官方文档进行安装：</p>
+<blockquote>
+<p><a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/">Docker 安装指南（官方文档）</a></p>
+</blockquote>
+<p>　　安装过程中遇到以下步骤时，进行换源：</p>
+<pre><code>sudo<span class="hljs-built_in"> add-apt-repository </span>\
+<span class="hljs-string">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) \
+stable&quot;</span>
+</code></pre>
+<p>　　其中，<code>deb [arch=amd64] https://download.docker.com/linux/ubuntu</code> 为 Docker 官方地址，在国外，基本很难安装成功，上网搜索换为国内地址（中科大、阿里云、网易云等等）再安装。顺利安装完成后，根据官方文档，测试 <code>hello-world</code> 镜像是否能运行成功。</p>
+<p>　　Docker Hub 是 Docker 官方提供的镜像文件托管仓库，在国内访问速度较慢，上网搜索换为国内源（中科大、阿里云、网易云等等）。默认情况下配置文件应该是不存在的，创建一个即可：</p>
+<pre><code>touch <span class="hljs-regexp">/etc/</span>docker/daemon.json
+</code></pre>
+<p>　　换掉源之后，重启 Docker 服务，执行：</p>
+<pre><code><span class="hljs-attribute">service docker restart</span>
+</code></pre>
+<p>　　WebODM 所要用到的 Docker 镜像文件国内仓库均没有，所以稍后安装时将会耗费较长时间。不过，第一次安装之后，镜像会下载到本地，执行：</p>
+<pre><code><span class="hljs-attribute">docker images</span>
+</code></pre>
+<p>　　列出在本地已存在的所有镜像文件，可以利用 <code>docker save</code> 命令将要用的镜像文件导出，稍后便可利用 <code>docker load</code> 命令在其它系统中导入镜像文件，这样就不需要多次下载了，节省时间。</p>
+<blockquote>
+<p><a href="https://docs.docker.com/engine/reference/commandline/save/">docker save（官方文档）</a></p>
+</blockquote>
+<h3 id="安装-docker-compose">安装 docker-compose</h3>
+<p>　　<code>docker-compose</code> 是 Docker 的一个命令行工具，提供管理由多个 docker 容器组成的一个应用程序的能力，前面说过 WebODM 由几个模块组成，每个模块运行在不同的 Docker 容器中，所以要借助该工具。先检查是否已安装：</p>
+<pre><code>docker-compose <span class="hljs-comment">--version</span>
+</code></pre>
+<p>　　如未安装，执行：</p>
+<pre><code>sudo pip3 <span class="hljs-keyword">install</span> docker-compose
+</code></pre>
+<h3 id="安装-webodm">安装 WebODM</h3>
+<p>　　其实，前面所有的步骤都只是为这一步自动化完成 WebODM 安装提供所必要的运行环境。ODM 团队编写了 Bash 脚本，提供了很多命令，可以通过几条命令完成 WebODM 的安装、后期更新、重启，方便很多。</p>
+<p>　　首先，利用 Git 下载仓库代码：</p>
+<pre><code>git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/OpenDroneMap/</span>WebODM
+</code></pre>
+<p>　　下载比较耗时，约有上百兆甚至 1GB 多文件，运气好的话，10 多分钟就可以完成。如果实在缓慢，可以申请一个 <a href="https://gitee.com/">Gitee</a> 帐号，将 GitHub 上的该仓库导入你的 Gitee 仓库，然后从 Gitee 下载会非常快，几分钟即可完成。</p>
+<p>　　下载完成后，进入目录，开始安装 WebODM，执行 Bash 脚本：</p>
+<pre><code><span class="hljs-built_in">cd</span> WebODM
+./webodm.sh start
+</code></pre>
+<p>　　这个过程中，因为要从 Docker Hub 拉取几个镜像文件（约 7GB），会异常缓慢，运气好的话半个小时到一小时就能完成，否则只能等。</p>
+<p>　　安装完成后，命令行会提示你该应用程序已经运行在 <code>localhost:8000</code> 上了，打开另一个命令行窗口，利用 <code>curl</code> 命令测试一下：</p>
+<pre><code><span class="hljs-attribute">curl</span> localhost:<span class="hljs-number">8000</span> -L <span class="hljs-comment"># 看到页面代码输出后，说明已成功安装</span>
+</code></pre>
+<p>　　成功后，可以在（内网中）其它拥有 GUI 的操作系统中用浏览器打开 <code>ip:8000</code> 来访问 WebODM 管理页面了，用 <code>ifconfig -a</code> 命令可查看 ip 地址（<code>eth</code> 开头的，<code>inet</code> 信息即为 ipv4 地址）。</p>
+<h3 id="设置系统静态-ip">设置系统静态 IP</h3>
+<p>　　为了方便管理多个 Linux 系统，将其设置为静态 IP 会更方便，如果是在虚拟机中安装的，将虚拟机和宿主机的网络配置为桥接模式，物理机直接安装的则不需要。</p>
+<p>　　然后，配置静态 IP，Ubuntu 18.04 Server 使用 <a href="https://netplan.io/">netplan</a> 来管理配置网络。编辑 <code>/etc/netplan/50-cloud-init.yaml</code> 文件：</p>
+<pre><code><span class="hljs-attr">network:</span>
+    <span class="hljs-attr">ethernets:</span>
+        <span class="hljs-attr">eth0:</span>
+            <span class="hljs-attr">addresses:</span> [<span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.120</span><span class="hljs-string">/24</span>]
+            <span class="hljs-attr">dhcp4:</span> <span class="hljs-literal">false</span>
+            <span class="hljs-attr">dhcp6:</span> <span class="hljs-literal">false</span>
+            <span class="hljs-attr">gateway4:</span> <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.1</span>
+            <span class="hljs-attr">nameservers:</span>
+                <span class="hljs-attr">addresses:</span> [<span class="hljs-number">114.114</span><span class="hljs-number">.114</span><span class="hljs-number">.114</span>, <span class="hljs-number">8.8</span><span class="hljs-number">.8</span><span class="hljs-number">.8</span>]
+                <span class="hljs-attr">search:</span> []
+    <span class="hljs-attr">version:</span> <span class="hljs-number">2</span>
+</code></pre>
+<p>　　静态 IP 的配置大致如上，其中 <code>addresses</code> 为要配置的 IP 地址，务必设置 <code>dhcp4</code> 和 <code>dhcp6</code> 为 <code>false</code>，否则会出错。编辑保存之后，执行：</p>
+<pre><code>sudo netplan <span class="hljs-built_in">apply</span>
+</code></pre>
+<p>　　更新了网络配置之后，测试网络是否正常：</p>
+<pre><code><span class="hljs-built_in">ping</span> www.baidu.com <span class="hljs-meta"># 测试是否能访问外网</span>
+<span class="hljs-built_in">ping</span> &lt;local_net_ip&gt; <span class="hljs-meta"># 测试是否能访问局域网中其它主机</span>
+</code></pre>
+<h2 id="部署更多处理节点">部署更多处理节点</h2>
+<p>　　这样安装的 WebODM 只有一个 NodeODM 处理节点，但具备所有的功能。其架构大致为：</p>
+<pre><code>ODM（算法处理，底层 API） -&gt; NodeODM（处理节点，轻量级 REST API） -&gt; WebODM（Web 应用）
+</code></pre>
+<p>　　而我们可以在其它服务器上部署多个 NodeODM 节点添加到 WebODM 中，即可实现多节点并行处理多个任务，现在也支持利用<a href="https://docs.opendronemap.org/large.html#">拆分合并</a>实现多节点处理同一个任务。其架构大致为：</p>
+<pre><code>ODM（算法处理，底层 API） -&gt; N<span class="hljs-function"><span class="hljs-title">odeODM</span>（多个处理节点，轻量级 REST API） -&gt;</span> C<span class="hljs-function"><span class="hljs-title">lusterODM</span>（集群支持，负载均衡） -&gt;</span> WebODM（Web 应用）
+</code></pre>
+<h3 id="部署-nodeodm">部署 NodeODM</h3>
+<p>　　安装多个 <a href="https://github.com/OpenDroneMap/NodeODM">NodeODM</a> 处理节点非常简单，在其它多个内网服务器上配置好必要的运行环境（Ubuntu、Git、Python3、Docker），利用 <code>docker save</code> 和 <code>docker load</code> 命令，将安装 WebODM 时下载的 <code>opendronemap/nodeodm</code> 复制到其它服务器上，这样就不用再从 Docker Hub 下载，节省大量时间。</p>
+<p>　　执行：</p>
+<pre><code><span class="hljs-attribute">docker images</span>
+</code></pre>
+<p>　　查看是否本地已成功导入 <code>opendronemap/nodeodm</code> 镜像文件，已成功则直接执行：</p>
+<pre><code>docker run <span class="hljs-attr">--rm</span> -it -<span class="hljs-selector-tag">p</span> <span class="hljs-number">3000</span>:<span class="hljs-number">3000</span> opendronemap/nodeodm -<span class="hljs-selector-tag">q</span> <span class="hljs-number">1</span> <span class="hljs-attr">--token</span> &lt;secret&gt;
+</code></pre>
+<p>　　其中 <code>&lt;secret&gt;</code> 为要连接该处理节点时的密钥，可省略 <code>--token</code> 选项。运行成功后，可访问 <code>localhost:3000/?token=&lt;secret&gt;</code> 查看，页面成功显示则部署成功，设置好该服务器的静态 IP 后，即可在 WebODM 管理页面将该节点加入队列中，提供并行处理多个任务的能力。</p>
+<h3 id="部署-clusterodm">部署 ClusterODM</h3>
+<p>　　NodeODM 只能支持一个节点处理一个任务，要缩短时间，提高效率，必然有多个 NodeODM 节点处理同一个任务的需求，而 ODM 团队近期（2019年 6 月）宣布了<a href="https://docs.opendronemap.org/large.html#">拆分合并</a>的新特性，并在不断优化，而其设计也非常简洁，只需使用 <a href="https://github.com/OpenDroneMap/ClusterODM">ClusterODM</a> 来自动管理多个 NodeODM 节点即可。</p>
+<p>　　同样的，任意找一台内网中的服务器配置好必要的运行环境（Ubuntu、Git、Python3、Docker），执行：</p>
+<pre><code><span class="hljs-attribute">docker</span> run -ti -p <span class="hljs-number">3001</span>:<span class="hljs-number">3000</span> -p <span class="hljs-number">8080</span>:<span class="hljs-number">8080</span> -p <span class="hljs-number">10000</span>:<span class="hljs-number">10000</span> opendronemap/clusterodm
+</code></pre>
+<p>　　此时会从 Docker Hub 下载 <code>opendronemap/clusterodm</code> 镜像文件（约 1GB），如果宿主机 <code>3001</code> 端口已被占用换成其它端口即可。运行成功后，可访问 <code>localhost:10000</code> 查看已加入的 NodeODM 节点信息。ClusterODM 对 NodeODM 的管理操作（添加、删除、查看），都是通过 telnet 协议完成：</p>
+<pre><code><span class="hljs-attribute">telnet</span> localhost <span class="hljs-number">8080</span>
+</code></pre>
+<p>　　连接成功后，即可管理 NodeODM 节点，输入 <code>HELP</code> 可查看所有命令。</p>
+<p>　　此时将需要作为集群部署的 NodeODM 节点从 WebODM 管理页面中删除，而是直接添加 ClusterODM，这样在 WebODM 中创建的任务如果选择了 ClusterODM 作为处理节点，其会自动协调连接到 ClusterODM 的所有空闲 NodeODM 节点并行处理该任务。</p>
+<p>　　这里还需要注意的是，如果要让集群生效，需要在创建任务的时候将 <code>sm-cluster</code> 选项设置为 <code>true</code>，同时调整 <code>split</code> 和 <code>split-overlap</code> 选项，如果失败，说明 <code>split</code> 和 <code>split-overlap</code> 选项参数有问题，调整后再试。具体设置项参考以下文档：</p>
+<blockquote>
+<p><a href="https://docs.opendronemap.org/arguments.html">ODM 配置项（官方文档）</a></p>
+</blockquote>

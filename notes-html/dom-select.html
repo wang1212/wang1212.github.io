@@ -1,0 +1,154 @@
+<h2 id="选取特定单一元素节点">选取特定单一元素节点</h2>
+<p>　　取得某一特定单一元素节点的引用最常用的方式如下：</p>
+<ul>
+<li>querySelector()</li>
+<li>getElementById()</li>
+</ul>
+<p>exp：</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;animal&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span>    <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;Dog&quot;</span>&gt;</span>Dog<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;Cat&quot;</span>&gt;</span>Cat<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;Pig&quot;</span>&gt;</span>Pig<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-comment">// querySecletor()方法可通过多种途径获取第一个&lt;li&gt;</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;li&quot;</span>));
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;ul&gt;li&quot;</span>));
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#Dog&quot;</span>));
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#animal&gt;#Dog&quot;</span>));
+
+    <span class="hljs-comment">// getElementById()通过ID属性获取</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;Dog&quot;</span>));
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p>　　<strong><code>getElementById()</code> 方法仅能通过节点的 id 属性获取目标节点的引用；而 <code>querySelector()</code> 方法更强大，它可以接受一个 CSS 选择器语法格式（例如 ul &gt; li）的参数，而且它只会返回第一个符合条件的节点的引用。</strong></p>
+<h2 id="选取特定元素节点集合">选取特定元素节点集合</h2>
+<p>　　取得某一特定元素节点集合最常用的方式如下：</p>
+<ul>
+<li>querySelectorAll()</li>
+<li>getElementsByTagName()</li>
+<li>getElementsByClassName()</li>
+<li>getElementsByName()</li>
+</ul>
+<p>exp：</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;animals&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;animal&quot;</span>&gt;</span>Dog<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;animal&quot;</span>&gt;</span>Cat<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;animal&quot;</span>&gt;</span>Pig<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-comment">// querySecletorAll()方法可通过多种途径获取第三个&lt;li&gt;集合</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&quot;li&quot;</span>));
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&quot;ul&gt;li&quot;</span>));
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&quot;#animals&gt;.animal&quot;</span>));
+
+    <span class="hljs-comment">// getElementsByTagName()通过标签名称获取</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsByTagName</span>(<span class="hljs-string">&quot;li&quot;</span>));
+
+    <span class="hljs-comment">// getElementsByClassName()通过class属性获取</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsByClassName</span>(<span class="hljs-string">&quot;animal&quot;</span>));
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p>　　同样地，<code>querySelectorAll()</code> 方法更强大一些，它可以接受一个 CSS 选择器语法格式（例如 ul &gt; li）的参数。<code>getElementsByName()</code> 方法可以通过节点的 <code>name</code> 属性获取特定节点集合的引用，但是它并不常用。</p>
+<p>　　<strong><code>querySelectorAll()</code> 方法获取的节点集合是静态的，也就是说是非实时的，它只是创建该节点集合时文档的快照；而其他的方法获取的节点集合都是实时的，会及时反映文档的当前状态。</strong></p>
+<h2 id="选取所有的直属子元素节点">选取所有的直属子元素节点</h2>
+<p>　　使用<strong>元素节点</strong>上的 <code>children</code> 属性，我们可以获取该元素节点的所有直属（第一代）子元素节点。</p>
+<pre><code><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Dog<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Cat<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Pig<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><span class="language-xml">
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-comment">// 获取</span></span></span><span class="language-xml"><span class="language-handlebars"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>元素内的所有</span></span></span><span class="language-xml"><span class="language-javascript">&lt;li&gt;子元素
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;ul&quot;</span>).<span class="hljs-property">children</span>);
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+</code></pre>
+<p>　　<strong>获取的该节点集合是实时的，文档中任何改动都将会动态反映到集合中。</strong></p>
+<h2 id="选取与上下文有关的元素节点">选取与上下文有关的元素节点</h2>
+<p>　　虽然 <code>querySelector()</code>、<code>querySelectorAll()</code>、<code>getElementsByTagName()</code>、<code>getElementsByClassName()</code> 这些方法一般都通过 <code>document</code> 对象访问，其实在元素节点上也有定义。这样我们可以将这些方法的查找范围缩小到文档树中某一特定分支（或者分支集）。</p>
+<pre><code><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;fruits&quot;</span>&gt;</span>
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Apple<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Banana<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Pear<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><span class="language-xml">
+
+    </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;animals&quot;</span>&gt;</span>
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Dog<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Cat<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Pig<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><span class="language-xml">
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-comment">// 获取第二个</span></span></span><span class="language-xml"><span class="language-handlebars"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>元素中的所有</span></span></span><span class="language-xml"><span class="language-javascript">&lt;li&gt;子元素
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&quot;#animals&gt;li&quot;</span>));
+
+    <span class="hljs-comment">// 这样也可以</span>
+    <span class="hljs-keyword">var</span> li_animals=<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#animals&quot;</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(li_animals.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&quot;li&quot;</span>));
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+</code></pre>
+<h2 id="预定义的元素节点选取">预定义的元素节点选取</h2>
+<p>　　有一些很方便的预定义的元素集合，如下所示：</p>
+<ul>
+<li><p>document.all</p>
+<p>  获取HTML文档中所有元素节点的集合。</p>
+</li>
+<li><p>document.forms</p>
+<p>  获取HTML文档中所有（from）元素。</p>
+</li>
+<li><p>document.images</p>
+<p>  获取HTML文档中所有（img）元素。</p>
+</li>
+<li><p>document.links</p>
+<p>  获取HTML文档中所有（a）元素。</p>
+</li>
+<li><p>document.scripts</p>
+<p>  获取HTML文档中所有（script）元素。</p>
+</li>
+<li><p>document.styleSheets</p>
+<p>  获取HTML文档中所有（link、style）元素。</p>
+</li>
+</ul>
+<p>　　以上类数组列表中，<code>document.all</code> 构建自 HTMLAllCollection；<code>styleSheets</code> 构建自 StyleSheetList；其他的均构建自 HTMLCollection，并且都是实时的。</p>
+<h2 id="验证特定元素节点">验证特定元素节点</h2>
+<p>　　使用 <code>matchesSelector()</code> 方法，我们可以判断一个元素是否匹配某个选择器字符串。但是该方法在不同内核的浏览器中实现不一样，分别加了前缀：</p>
+<ul>
+<li>mozMatchesSelector()</li>
+<li>webkitMatchesSelector()</li>
+<li>msMatchesSelector()</li>
+<li>oMatchesSelector()</li>
+</ul>
+<p>exp：</p>
+<pre><code><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;fruits&quot;</span>&gt;</span>
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Apple<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Banana<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Pear<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><span class="language-xml">
+
+    </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;animals&quot;</span>&gt;</span>
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;Dog&quot;</span>&gt;</span>Dog<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Cat<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+        </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Pig<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="language-xml">
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><span class="language-xml">
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-comment">// 验证id为Dog的</span></span></span><span class="language-xml"><span class="language-handlebars"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>元素是否是第二个</span></span></span><span class="language-xml"><span class="language-javascript">&lt;ul&gt;元素的子元素节点
+    <span class="hljs-keyword">var</span> a=<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#Dog&quot;</span>).<span class="hljs-title function_">webkitMatchesSelector</span>(<span class="hljs-string">&quot;#animals&gt;li&quot;</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a);
+    <span class="hljs-comment">// 输出true</span>
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+</code></pre>
+<h2 id="结语">结语</h2>
+<p>　　<code>querySelector()</code> 与 <code>querySelectorAll()</code> 方法相对来说要功能强大一些，但要特别注意的是后者获取的节点集合不是实时的。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li>《DOM启蒙》，Cody Lindley，陈养剑 译</li>
+</ul>

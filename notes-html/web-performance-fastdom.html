@@ -1,0 +1,136 @@
+<p>　　利用 JS 开发的原生应用与依赖于 React.js/Vue 开发的框架/库应用，性能孰高孰低？这两者最显著的区别在于原生应用需要手动操作 DOM 完成业务，而框架/库应用是基于数据变化响应式的应用，后者只需要关注数据如何变化，至于体现在 DOM 上的变化皆由框架/库内部自动完成。所以，要搞清楚两者的性能优劣，可能<strong>批量</strong>的 DOM 操作是一个不可忽略的核心因素。从代码执行的角度分析，框架/库也是基于原生 API 进行的封装抽象，因此代码执行时的路径更长、堆栈更深，由此可见原生 API 的操作性能应该是最高的。但是，现实情况是业务通常来说是复杂的，代码实现中 DOM 操作的逻辑分散在各处，那么多个 DOM 操作之间是否会产生影响从而不利于性能？这个时候就要关注宿主浏览器的渲染机制是如何理解批量的 DOM 操作的，这里引入的概念就是<strong>关键渲染路径（Critical rendering path）</strong>。</p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path">https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path</a>
+<a href="https://developers.google.com/web/fundamentals/performance/rendering">https://developers.google.com/web/fundamentals/performance/rendering</a></p>
+</blockquote>
+<p>　　简单的来说，浏览器逐帧渲染的机制每次都需要经历一个<strong>先计算后布局再渲染</strong>的过程，DOM API 可以分为读和写两类，如果把一些批量的 DOM 操作先按读和写分为两组，统一先执行读操作，然后再执行写操作，这样就能实现最高的性能。这里的问题就在于如果高频率的进行 DOM 读写的交替操作会加重浏览器的负担，浏览器无法在一次渲染路径内完成所有的 DOM 操作，因此产生严重的性能问题。</p>
+<p>　　那么，现在问题就很明朗了，一个复杂的业务场景中，如何实现批量 DOM 操作合理的调度才是实现高性能的关键，原生应用依赖于开发者自主对于代码的规划，要将分散在各处的 DOM 操作进行合理的调度并不是一件容易的事情，反而可能因此搞乱项目架构；而现在的类似 React.js 的框架/库则基于此，以一种数据驱动的响应式应用的理念，将复杂的 DOM 操作封装在内部，设计一种优化的调度机制实现高性能的应用。</p>
+<pre><code><span class="hljs-comment">// 批量的 DOM 操作</span>
+-&gt; DOM 读 <span class="hljs-number">1</span>
+-&gt; DOM 写 <span class="hljs-number">1</span>
+-&gt; DOM 读 <span class="hljs-number">2</span>
+-&gt; DOM 写 <span class="hljs-number">2</span>
+
+<span class="hljs-comment">// 优化调度</span>
+-&gt; DOM 读 <span class="hljs-number">1</span>
+-&gt; DOM 读 <span class="hljs-number">2</span>
+-&gt; DOM 写 <span class="hljs-number">1</span>
+-&gt; DOM 写 <span class="hljs-number">2</span>
+</code></pre>
+<h2 id="真实的业务场景">真实的业务场景</h2>
+<p>　　以上，讨论了原生应用与框架/库应用在性能方面的关键所在，批量 DOM 操作的调度至关重要。虽然说框架/库在底层帮助我们完成了 DOM 操作和调度，但在日常的业务开发过程中难免会遇到需要开发者与 DOM 交互的场景，而我此前就遇到一个真实的业务场景。</p>
+<p>　　在一个优化过的虚拟列表中，需要针对列表项中一些 DOM 元素进行缩放处理，而实现的具体思路是先要在渲染完成后测量 DOM 尺寸进行计算，再加样式进行 DOM 的缩放。以 DOM 结构说明：</p>
+<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;virtual-list&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;width-50 js-scale&quot;</span>&gt;</span>some text too long.<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;width-50 js-scale&quot;</span>&gt;</span>some text too long.<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;width-50 js-scale&quot;</span>&gt;</span>some text too long.<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;width-50 js-scale&quot;</span>&gt;</span>some text too long.<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p>　　在列表滚动渲染的过程中，需要针对 <strong>js-scale</strong> DOM 元素进行缩放处理，不允许自动换行的文本过长时（超过指定宽度时），利用 <code>transform: scale(n);</code> 样式进行缩放。那么，这里就涉及一次 DOM 的读和写操作，本身虚拟列表对性能要求比较高，虚拟化的实现过程中有性能损耗，缩放的实现对性能的影响要降到最低。</p>
+<p>　　最简单的实现就是以 <strong>row</strong> 为单位，在每次渲染初始化后就进行缩放处理，由于 <strong>row</strong> 是逐个渲染的，所以缩放的处理过程实际上为：</p>
+<pre><code>-&gt; row1 DOM 读
+-&gt; row1 DOM 写
+-&gt; row2 DOM 读
+-&gt; row2 DOM 写
+...
+</code></pre>
+<p>　　实际上，这就是前面所分析的，DOM 的读和写操作高频的交替发生，性能影响非常明显。以 <strong>row</strong> 为单位进行缩放处理降低了实现的复杂度，但要将所有 <strong>row</strong> 的 DOM 操作统一调度起来会麻烦一些，不过并不是很难。实现的思路就是用两个数组分别收集对 DOM 的读和写操作函数，然后再统一先执行所有的读操作，再执行写操作，为了保证 UI 交互的及时响应，要动态的每隔一段时间就统一把收集到的 DOM 操作执行一遍再重新收集。</p>
+<h3 id="fastdom">FastDOM</h3>
+<p>　　不过，不必造轮子，在 Google 的 Web 性能文档中提及一个 npm 工具库 <a href="https://github.com/wilsonpage/fastdom">FastDOM</a>，正如其名，该工具库的目的就是加速 DOM 的批量处理以提高性能。</p>
+<blockquote>
+<p><a href="https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing">https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing</a></p>
+</blockquote>
+<p>　　在利用 FastDOM 验证以上真实业务场景中所遇到的性能问题时，效果还是比较理想的。</p>
+<p>　　那么，我们接下来就看看其实现机制，其工作原理文档中也有所提及：</p>
+<blockquote>
+<p><a href="https://github.com/wilsonpage/fastdom#how-it-works">https://github.com/wilsonpage/fastdom#how-it-works</a></p>
+</blockquote>
+<p>　　简单的来说，与之前设想的实现思路一致，用 <code>window.requestAnimationFrame()</code> API 来动态控制以提高对 UI 交互的及时响应。事实上，其源码实现也并不难，可以简单的来分析一下。其提供了两个最主要的 API：</p>
+<ul>
+<li><code>fastdom.measure()</code> - 对应 DOM 的读操作</li>
+<li><code>fastdom.mutate()</code> - 对应 DOM 的写操作</li>
+</ul>
+<p>　　在其内部，用两个数组分别收集 DOM 的读和写函数：</p>
+<pre><code class="hljs language-js"><span class="hljs-comment">// https://github.com/wilsonpage/fastdom/blob/master/fastdom.js#L39</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">FastDom</span>(<span class="hljs-params"></span>) { 
+  <span class="hljs-keyword">var</span> self = <span class="hljs-variable language_">this</span>; 
+  self.<span class="hljs-property">reads</span> = []; 
+  self.<span class="hljs-property">writes</span> = [];
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-comment">// https://github.com/wilsonpage/fastdom/blob/master/fastdom.js#L71</span>
+<span class="hljs-attr">measure</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">fn, ctx</span>) { 
+  <span class="hljs-keyword">var</span> task = !ctx ? fn : fn.<span class="hljs-title function_">bind</span>(ctx); 
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">reads</span>.<span class="hljs-title function_">push</span>(task); 
+  <span class="hljs-title function_">scheduleFlush</span>(<span class="hljs-variable language_">this</span>); 
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-comment">// https://github.com/wilsonpage/fastdom/blob/master/fastdom.js#L88</span>
+<span class="hljs-attr">mutate</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">fn, ctx</span>) { 
+  <span class="hljs-keyword">var</span> task = !ctx ? fn : fn.<span class="hljs-title function_">bind</span>(ctx); 
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">writes</span>.<span class="hljs-title function_">push</span>(task); 
+  <span class="hljs-title function_">scheduleFlush</span>(<span class="hljs-variable language_">this</span>); 
+  <span class="hljs-comment">// ...</span>
+}
+</code></pre>
+<p>　　短短几行代码就已经完成了对批量 DOM 操作调度的初步实现，在这里需要重点关注 <code>scheduleFlush()</code> 的实现，其决定了所收集的 DOM 操作何时执行，并且是如何保证  UI 交互响应的及时性的。</p>
+<pre><code class="hljs language-js"><span class="hljs-comment">// https://github.com/wilsonpage/fastdom/blob/master/fastdom.js#L28</span>
+<span class="hljs-keyword">var</span> raf = win.<span class="hljs-property">requestAnimationFrame</span> 
+  || win.<span class="hljs-property">webkitRequestAnimationFrame</span> 
+  || win.<span class="hljs-property">mozRequestAnimationFrame</span> 
+  || win.<span class="hljs-property">msRequestAnimationFrame</span> 
+  || <span class="hljs-keyword">function</span>(<span class="hljs-params">cb</span>) { <span class="hljs-keyword">return</span> <span class="hljs-built_in">setTimeout</span>(cb, <span class="hljs-number">16</span>); }; 
+
+<span class="hljs-comment">// https://github.com/wilsonpage/fastdom/blob/master/fastdom.js#L168</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">scheduleFlush</span>(<span class="hljs-params">fastdom</span>) { 
+  <span class="hljs-keyword">if</span> (!fastdom.<span class="hljs-property">scheduled</span>) { 
+    fastdom.<span class="hljs-property">scheduled</span> = <span class="hljs-literal">true</span>; 
+    fastdom.<span class="hljs-title function_">raf</span>(flush.<span class="hljs-title function_">bind</span>(<span class="hljs-literal">null</span>, fastdom)); 
+  } 
+} 
+ 
+<span class="hljs-comment">// https://github.com/wilsonpage/fastdom/blob/master/fastdom.js#L185</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">flush</span>(<span class="hljs-params">fastdom</span>) { 
+  <span class="hljs-keyword">var</span> writes = fastdom.<span class="hljs-property">writes</span>; 
+  <span class="hljs-keyword">var</span> reads = fastdom.<span class="hljs-property">reads</span>; 
+  <span class="hljs-keyword">var</span> error; 
+    
+  <span class="hljs-keyword">try</span> { 
+    fastdom.<span class="hljs-title function_">runTasks</span>(reads); 
+    fastdom.<span class="hljs-title function_">runTasks</span>(writes); 
+  } <span class="hljs-keyword">catch</span> (e) { error = e; } 
+    
+  fastdom.<span class="hljs-property">scheduled</span> = <span class="hljs-literal">false</span>; 
+    
+  <span class="hljs-comment">// If the batch errored we may still have tasks queued </span>
+  <span class="hljs-keyword">if</span> (reads.<span class="hljs-property">length</span> || writes.<span class="hljs-property">length</span>) <span class="hljs-title function_">scheduleFlush</span>(fastdom); 
+  <span class="hljs-comment">// ...</span>
+ } 
+
+<span class="hljs-comment">// https://github.com/wilsonpage/fastdom/blob/master/fastdom.js#L58</span>
+<span class="hljs-attr">runTasks</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">tasks</span>) { 
+  <span class="hljs-keyword">var</span> task; <span class="hljs-keyword">while</span> (task = tasks.<span class="hljs-title function_">shift</span>()) <span class="hljs-title function_">task</span>(); 
+}
+</code></pre>
+<p>　　对于调度的实现过程略微复杂，但代码看起来还是很简单的，利用 <code>requestAnimationFrame()</code> API 刷新 DOM 操作队列，尽最大可能保证帧率的稳定性，利用 <code>fastdom.scheduled</code> 标志位控制刷新队列的操作定期执行，防止短时间内出现“长任务”对帧渲染产生不利影响，而 <code>requestAnimationFrame()</code> API 的兼容性也做了特殊处理，回退到 <code>setTimeout(cb, 16)</code> 以保证实现尽可能接近原生 API。</p>
+<p>　　除此之外，FastDOM 还提供了一些其它的 API 增强开发的便利性和实用性，比如 <code>clear()</code> API 可以在必要时清空 DOM 操作队列，而 <code>catch()</code> 则可以统一处理捕获到的异常。</p>
+<h2 id="结语">结语</h2>
+<p>　　本文主要基于原生应用和框架/库应用在性能方面的差异进行分析，针对其核心因素批量 DOM 操作的合理调度，借一个真实的业务场景来说明如何手动调度 DOM 批量操作以实现高性能。本着不造轮子的原则，对 Google 文档中提及的 FastDOM 工具库的源码实现做了简单分析，以验证设想的实现思路。</p>
+<h2 id="参考资源">参考资源</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Performance">https://developer.mozilla.org/en-US/docs/Web/Performance</a></li>
+<li><a href="https://developers.google.com/web/fundamentals">https://developers.google.com/web/fundamentals</a></li>
+<li><a href="https://github.com/wilsonpage/fastdom">https://github.com/wilsonpage/fastdom</a></li>
+<li><a href="https://web.dev/user-centric-performance-metrics/">https://web.dev/user-centric-performance-metrics/</a></li>
+<li><a href="https://caniuse.com/">https://caniuse.com/</a></li>
+</ul>

@@ -1,0 +1,120 @@
+<h2 id="vim">Vim</h2>
+<p>　　Vim 是基于 Linux 下 Vi 编辑器的升级版，经过多年来的不断更新，功能也越来越强大，Vim 除过具备常用文本编辑器的编辑操作以及颜色高亮特性外，还支持自动补全、多行批量操作、指定跳转等等功能，其中代码颜色高亮特性更利于我们在命令行中进行信息的阅览和查看。而且，Vim 支持大多数操作系统，只是我们经常在 Linux 下使用它而已。当然，在 Linux 下还有一款很著名的编辑器 Emacs 。</p>
+<p>　　Vim 太过强大，导致学习曲线也是非常陡峭的，不过作为一个工具，我们首先只要掌握它的基本操作就行了，至于其他功能待我们在使用过程中去发掘就行了。首先，我们应该知道 Vim 有三种模式，即<strong>命令模式</strong>、<strong>插入模式</strong>、<strong>EX模式</strong>。</p>
+<ul>
+<li><p>命令模式</p>
+<p>  　　此模式是 Vim 的默认模式，我们可以做一些非输入操作，例如删除、复制等等，在此模式下可以进入插入模式和 EX 模式。</p>
+</li>
+<li><p>插入模式</p>
+<p>  　　此模式就是编辑模式，我们主要进行输入操作。</p>
+</li>
+<li><p>EX模式</p>
+<p>  　　此模式则是当我们完成编辑后，可以进行退出、保存等操作。</p>
+</li>
+</ul>
+<h2 id="常用命令">常用命令</h2>
+<p>　　接下来，就介绍一些常用的命令，通过这些命令我们可以很方便的快速完成大多数常用操作。</p>
+<h3 id="模式切换">模式切换</h3>
+<pre><code><span class="hljs-comment"># 命令模式进入插入模式</span>
+i  <span class="hljs-regexp">//</span> 在当前字符前开始编辑
+a  <span class="hljs-regexp">//</span> 在当前字符后开始编辑
+I  <span class="hljs-regexp">//</span> 在当前行首开始编辑（Shift + I ，或者开启大写）
+A  <span class="hljs-regexp">//</span> 在当前行尾开始编辑（Shift + A ，或者开启大写）
+o  <span class="hljs-regexp">//</span> 在当前行下添加新行开始编辑
+O  <span class="hljs-regexp">//</span> 在当前行上添加新行开始编辑（Shift + O ，或者开启大写）
+
+<span class="hljs-comment"># 命令模式进入EX模式</span>
+:  <span class="hljs-regexp">//</span> （Shift + ;）
+
+<span class="hljs-comment"># 插入模式或EX模式返回到命令模式</span>
+Esc  <span class="hljs-regexp">//</span> 至少按一次 Esc 即可返回命令模式
+</code></pre>
+<h3 id="命令模式">命令模式</h3>
+<p>　　命令模式是 Vim 的核心模式，大多数强大的功能命令都需要在此模式下完成，常用的命令则有复制、删除、粘贴、移动等等。<strong>而且，只有在命令模式下才能进入插入模式或者EX模式。</strong></p>
+<h4 id="移动光标">移动光标</h4>
+<pre><code>h  <span class="hljs-regexp">//</span> 光标左移
+j  <span class="hljs-regexp">//</span> 光标下移
+k  <span class="hljs-regexp">//</span> 光标上移
+l  <span class="hljs-regexp">//</span> 光标右移
+
+fx  <span class="hljs-regexp">//</span> 移动光标到当前行的下一个 x（任意字母）处（; 重复上一个f命令）
+Fx  <span class="hljs-regexp">//</span> 移动光标到当前行的上一个 x（任意字母）处（; 重复上一个F命令）
+tx  <span class="hljs-regexp">//</span> 移动光标到当前行的下一个 x（任意字母）左边（; 重复上一个t命令）
+Tx  <span class="hljs-regexp">//</span> 移动光标到当前行的上一个 x（任意字母）左边（; 重复上一个T命令）
+
+
+w  <span class="hljs-regexp">//</span> 光标后移一个单词到词首（W 也行）
+e  <span class="hljs-regexp">//</span> 光标后移一个单词到词尾（E 也行）
+b  <span class="hljs-regexp">//</span> 光标前移一个单词到词首（B 也行）
+
+*  <span class="hljs-regexp">//</span> 向下匹配当前光标所在字符串
+<span class="hljs-comment">#  // 向上匹配当前光标所在字符串</span>
+
+^  <span class="hljs-regexp">//</span> 光标移动到行首（数字 <span class="hljs-number">0</span> 也行）
+$  <span class="hljs-regexp">//</span> 光标移动到行尾
+
+gg  <span class="hljs-regexp">//</span> 光标移动到文件首行行首（ngg 第n行行首）
+G   <span class="hljs-regexp">//</span> 光标移动到文件末行行首（nG 第n行行首）（Shift + G ，或者开启大写）
+
+`.  <span class="hljs-regexp">//</span> 光标返回到上次编辑的位置
+`a  <span class="hljs-regexp">//</span> 光标移动到书签a处
+
+%  <span class="hljs-regexp">//</span> 光标在 ()、[]、{} 等符号之间左右移动
+
+H  <span class="hljs-regexp">//</span> 光标移动到当前屏顶端行首
+M  <span class="hljs-regexp">//</span> 光标移动到当前屏中部行首
+L  <span class="hljs-regexp">//</span> 光标移动到当前屏底部行首
+
+Ctrl + F  <span class="hljs-regexp">//</span> 向下移动一屏
+Ctrl + D  <span class="hljs-regexp">//</span> 向下滚动半屏
+Ctrl + B  <span class="hljs-regexp">//</span> 向上滚动一屏
+Ctrl + U  <span class="hljs-regexp">//</span> 向上滚动半屏
+</code></pre>
+<h4 id="复制、粘贴、剪切删除">复制、粘贴、剪切/删除</h4>
+<pre><code><span class="hljs-comment"># 复制</span>
+yy  <span class="hljs-regexp">//</span> 复制光标所在整行
+nyy <span class="hljs-regexp">//</span> 复制光标所在行开始向下 n 行，例如 <span class="hljs-number">2</span>yy
+
+<span class="hljs-comment"># 粘贴</span>
+p   <span class="hljs-regexp">//</span> 光标所在行下方添加一行并粘贴剪贴板或该行
+np  <span class="hljs-regexp">//</span> 光标所在行下方添加 n 行并粘贴剪贴板或该行，例如 <span class="hljs-number">2</span>p
+P   <span class="hljs-regexp">//</span> 光标所在行上方添加一行并粘贴剪贴板或该行
+nP  <span class="hljs-regexp">//</span> 光标所在行上方添加 n 行并粘贴剪贴板或该行，例如 <span class="hljs-number">2</span>P
+
+<span class="hljs-comment"># 删除/剪切</span>
+dd  <span class="hljs-regexp">//</span> 删除/剪切光标所在整行，D 亦可
+ndd <span class="hljs-regexp">//</span> 删除/剪切光标所在行开始向下 n 行，nD 亦可，例如 <span class="hljs-number">2</span>dd
+
+dgg <span class="hljs-regexp">//</span> 光标所在行到文档开头之间全部删除/剪切
+dG  <span class="hljs-regexp">//</span> 光标所在行到文档结尾之间全部删除/剪切
+
+dngg    <span class="hljs-regexp">//</span> 光标所在行到第 n 行之间全部删除/剪切，dnG 亦可，例如 d2gg
+
+d+^ <span class="hljs-regexp">//</span> 光标所在字符到行首之间全部删除/剪切
+d+$ <span class="hljs-regexp">//</span> 光标所在字符到行尾之间全部删除/剪切，D 亦可
+
+dw  <span class="hljs-regexp">//</span> 删除光标所在处一个单词、符号
+
+x   <span class="hljs-regexp">//</span> 删除光标所在字符
+nx  <span class="hljs-regexp">//</span> 删除光标所在字符开始向后 n 个字符，例如 <span class="hljs-number">2</span>x
+nX  <span class="hljs-regexp">//</span> 删除光标所在字符开始向前 n 个字符，例如 <span class="hljs-number">2</span>X
+</code></pre>
+<h4 id="撤销、恢复">撤销、恢复</h4>
+<pre><code>u   <span class="hljs-regexp">//</span> 撤销
+
+Ctrl+r   <span class="hljs-regexp">//</span> 恢复
+</code></pre>
+<h3 id="插入模式">插入模式</h3>
+<p>　　插入模式其实就是我们所说的编辑模式，输入模式，进行字符输入操作。在该模式下，可以按 <kbd>Esc</kbd> 即可退回到命令模式。</p>
+<h3 id="ex-模式">EX 模式</h3>
+<p>　　EX模式可以在我们编辑完之后，进行一些保存、退出操作；也可以在我们编辑中途进行一些额外的操作。</p>
+<pre><code>:w  // 保存当前修改
+:q  // 退出
+:q!  // 强制退出，不保存修改
+<span class="hljs-meta">:x  // 保存并退出（等价 :wq）</span>
+<span class="hljs-meta">:set nu // 显示行号（全写 :set_number）</span>
+<span class="hljs-meta">:set nonu // 隐藏行号（全写 :set_nonumber）</span>
+:! [命令]  // 执行一个命令并显示结果
+:sh  // 切换到命令行，使用 Ctrl+D 切换回 vim
+</code></pre>
+<h2 id="配置">配置</h2>

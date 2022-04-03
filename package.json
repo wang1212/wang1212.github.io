@@ -15,8 +15,6 @@
   },
   "dependencies": {
     "dayjs": "^1.10.7",
-    "highlight.js": "^11.5.0",
-    "marked": "^4.0.12",
     "wordcloud": "^1.2.2"
   },
   "devDependencies": {
@@ -37,11 +35,13 @@
     "docdash": "^1.1.0",
     "eslint": "^5.16.0",
     "file-loader": "^3.0.1",
+    "highlight.js": "^11.5.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.8.0",
     "jsdoc": "^3.6.2",
     "jsdoc-babel": "^0.5.0",
+    "marked": "^4.0.12",
     "mini-css-extract-plugin": "^0.6.0",
     "node-sass": "^4.12.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",

@@ -13,7 +13,7 @@ import Notes from 'components/notes/index.js';
 import NoteContent from 'components/note-content/index.js';
 import Footer from 'components/footer/index.js';
 
-import marked from './utils/parse-markdown';
+const HTML_DIRECTORY = 'notes-html/';
 
 /**
  * register routs
@@ -54,12 +54,19 @@ R.add(/.*(\.html)$/, (elem_app) => {
 
   document.title = `${blog.index_name}-${file.title}`;
 
-  fetch(category.html_2_markdown[file_name])
-    .then((response) => response.text())
-    .then((markdown) => {
-      // ! remove json head info
-      const html = marked.parse(markdown.replace(/---[\s\S]*?---/, ''));
+  // fetch(category.html_2_markdown[file_name])
+  //   .then((response) => response.text())
+  //   .then((markdown) => {
+  //     // ! remove json head info
+  //     const html = marked.parse(markdown.replace(/---[\s\S]*?---/, ''));
 
+  //     elem_app.querySelector('#Content').innerHTML =
+  //       NoteContent({ file, html }) + Footer();
+  //   });
+
+  fetch(HTML_DIRECTORY + file_name)
+    .then((response) => response.text())
+    .then((html) => {
       elem_app.querySelector('#Content').innerHTML =
         NoteContent({ file, html }) + Footer();
     });

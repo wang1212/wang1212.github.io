@@ -1,7 +1,11 @@
 /*! transfrom markdown to html file */
 
 // @flow
+const fs = require('fs');
+const path = require('path');
 const dayjs = require('dayjs');
+const { marked } = require('marked');
+const hljs = require('highlight.js');
 
 // get start time
 const __START_TIME = Date.now();
@@ -9,15 +13,27 @@ const __START_TIME = Date.now();
 /**
  * Markdown to HTML
  */
-const fs = require('fs');
-const path = require('path');
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  highlight: function (code, lang) {
+    if (lang) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+    }
+
+    return hljs.highlightAuto(code).value;
+  },
+  langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
+  smartLists: true,
+});
 
 const MARKDOWN_DIRECTORY = 'notes-md/';
+const HTML_DIRECTORY = 'notes-html/';
 
 /* init */
 let category = {
   data: [],
-  html_2_markdown: {},
+  // html_2_markdown: {},
   dirs: {},
   tags: {},
 };
@@ -55,7 +71,20 @@ function dir_display(dir_path) {
         _doc_info = {};
       }
 
+      // * Markdown to HTML
+      _content = marked(_content);
+
       const html_file_name = path.basename(file_name, '.md') + '.html';
+      const html_file_path = path.join(
+        path.dirname(path.join(HTML_DIRECTORY, file_name)),
+        html_file_name
+      );
+
+      fs.writeFile(
+        html_file_path,
+        _content,
+        (err) => err && console.log(err.message)
+      );
 
       // * File Data
       const _file_data = {
@@ -86,11 +115,11 @@ function dir_display(dir_path) {
       });
 
       // * html 2 markdown path
-      if (category.html_2_markdown[path.basename(html_file_name)]) {
-        throw new Error('"file_name" duplicate!');
-      }
+      // if (category.html_2_markdown[path.basename(html_file_name)]) {
+      //   throw new Error('"file_name" duplicate!');
+      // }
 
-      category.html_2_markdown[path.basename(html_file_name)] = _file_path;
+      // category.html_2_markdown[path.basename(html_file_name)] = _file_path;
     } else if (_stats.isDirectory()) {
       /* dirs */
       category.dirs[file_name] = [];
@@ -103,6 +132,26 @@ function dir_display(dir_path) {
   });
 }
 
+/**
+ * Clear directory
+ *
+ * @param {any} dir_path
+ */
+function dir_clear(dir_path) {
+  fs.readdirSync(dir_path).forEach((fileName) => {
+    const _file_path = path.join(dir_path, fileName);
+    /* Type of judgment */
+    const _stats = fs.statSync(_file_path);
+    if (_stats.isFile()) {
+      fs.unlinkSync(_file_path);
+    } else if (_stats.isDirectory()) {
+      /* Recursive */
+      return dir_clear(_file_path) || fs.rmdirSync(_file_path);
+    }
+  });
+}
+
+dir_clear(HTML_DIRECTORY);
 dir_display(MARKDOWN_DIRECTORY);
 
 /* Sort tags file indexs by time */
