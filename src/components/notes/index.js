@@ -3,13 +3,13 @@
 // @flow
 
 import './style.scss';
-import category from 'utils/category.json';
+import category from '../../assets/category.json';
 import WordCloud from 'wordcloud';
 import * as dayjs from 'dayjs';
 
-const TAGS_WITH_NUM = Object.entries(
-  category.tags
-).map(([tag, file_indexs]) => [tag, file_indexs.length]);
+const TAGS_WITH_NUM = Object.entries(category.tags).map(
+  ([tag, file_indexs]) => [tag, file_indexs.length]
+);
 
 /* utils */
 function get_color(num) {
@@ -19,7 +19,7 @@ function get_color(num) {
 /* views */
 const Tags = TAGS_WITH_NUM.sort((a, b) => b[1] - a[1])
   .map(
-    item => `
+    (item) => `
 	<a class="btn btn-${get_color(item[1])} mr-2 mb-2" href="#/notes/${item[0]}">
 		${item[0]}
 		<span class="badge badge-light ml-2">${item[1]}</span>
@@ -28,7 +28,7 @@ const Tags = TAGS_WITH_NUM.sort((a, b) => b[1] - a[1])
   )
   .join('');
 
-const TagNotesListContent = state => {
+const TagNotesListContent = (state) => {
   let _files = category.data.slice();
   let _tag = `${_files.length} 篇`;
 
@@ -39,7 +39,7 @@ const TagNotesListContent = state => {
     if (state.length > 1) {
       _tag = decodeURI(state[1]);
       _files = category.tags[_tag]
-        .map(file_index => category.data[file_index])
+        .map((file_index) => category.data[file_index])
         .slice();
     }
 
@@ -48,6 +48,7 @@ const TagNotesListContent = state => {
     });
 
     let _tmp_time_year = '';
+    let _tmp_time_month = '';
 
     // prettier-ignore
     /* eslint-disable */
@@ -63,8 +64,13 @@ const TagNotesListContent = state => {
 					.map(
 						file => `
 							${(dayjs(file[by_sort]).year() !== _tmp_time_year &&
-								((_tmp_time_year = dayjs(file[by_sort]).year()),
-								`<h4 class="time-year-break">${_tmp_time_year}</h4>`)) ||
+								(([_tmp_time_year, _tmp_time_month] = [dayjs(file[by_sort]).year(), dayjs(file[by_sort]).month()]),
+								`<h4 class="time-year-break">${ _tmp_time_year }</h4>` +
+								`<h5 class="time-month-break">${_tmp_time_year}, ${String(_tmp_time_month + 1).padStart(2, '0')}</h5>`)) ||
+								''}
+							${(dayjs(file[by_sort]).month() !== _tmp_time_month &&
+								((_tmp_time_month = dayjs(file[by_sort]).month()),
+								`<h5 class="time-month-break">${_tmp_time_year}, ${String(_tmp_time_month + 1).padStart(2, '0')}</h5>`)) ||
 								''}
 							<div class="note-item">
 								<a class="item-title h5 mb-2" href="#/note-content/${file.name}">${
@@ -97,19 +103,18 @@ const TagNotesListContent = state => {
     /* eslint-enable */
   }
 
-  window._onChangeBySort = function(by_sort) {
+  window._onChangeBySort = function (by_sort) {
     if (by_sort === _tmp_by_sort) return;
     _tmp_by_sort = by_sort;
 
-    document.getElementById(
-      '_js-notes-list'
-    ).parentElement.innerHTML = generate_html(by_sort);
+    document.getElementById('_js-notes-list').parentElement.innerHTML =
+      generate_html(by_sort);
   };
 
   return generate_html();
 };
 
-const Notes = context => {
+const Notes = (context) => {
   //
   const view = `
 		<main class="page-notes container">
@@ -139,9 +144,9 @@ const Notes = context => {
       fontFamily: 'Impact',
       color: 'random-light',
       // color: '#aaa',
-      click: function(item) {
+      click: function (item) {
         location.hash = `#/notes/${item[0]}`;
-      }
+      },
     });
   }, 300);
 

@@ -23,20 +23,22 @@ const Nav = () => `
 /* go top */
 let elem_go_top = null;
 const onScroll = debounce(() => {
-	const scroll_top = document.documentElement.scrollTop || document.body.scrollTop;
+  const scroll_top =
+    document.documentElement.scrollTop || document.body.scrollTop;
 
-	if (!elem_go_top) {
-		elem_go_top = document.getElementById('nav-go-top');
+  if (!elem_go_top) {
+    elem_go_top = document.getElementById('nav-go-top');
 
-		// event: go top
-		elem_go_top.onclick = () => (document.documentElement.scrollTop = 0) || (document.body.scrollTop = 0);
-	}
+    // event: go top
+    elem_go_top.onclick = () =>
+      document.body.scrollIntoView({ behavior: 'smooth' });
+  }
 
-	if (scroll_top > 0) {
-		elem_go_top.classList.remove('_hide');
-	} else {
-		elem_go_top.classList.add('_hide');
-	}
+  if (scroll_top > 0) {
+    elem_go_top.classList.remove('_hide');
+  } else {
+    elem_go_top.classList.add('_hide');
+  }
 }, 300);
 
 window.addEventListener('scroll', onScroll, { passive: true });

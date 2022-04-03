@@ -2,30 +2,9 @@
 
 // @flow
 const dayjs = require('dayjs');
-const hljs = require('highlight.js');
 
 // get start time
 const __START_TIME = Date.now();
-
-/**
- * Config tools
- */
-const marked = require('marked');
-
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  highlight: function(code) {
-    return hljs.highlightAuto(code).value;
-  },
-  pedantic: false,
-  gfm: true,
-  tables: true,
-  breaks: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false,
-  xhtml: false
-});
 
 /**
  * Markdown to HTML
@@ -33,14 +12,14 @@ marked.setOptions({
 const fs = require('fs');
 const path = require('path');
 
-const SOURCE_DIR = 'notes-md/',
-  TARGET_DIR = 'notes-html/';
+const MARKDOWN_DIRECTORY = 'notes-md/';
 
 /* init */
 let category = {
   data: [],
+  html_2_markdown: {},
   dirs: {},
-  tags: {}
+  tags: {},
 };
 
 let _temp_prev_dir = [];
@@ -48,17 +27,14 @@ let _temp_prev_dir = [];
 /**
  * Dispaly directory
  *
- * @param {any} dir_path
+ * @param {string} dir_path
  */
 function dir_display(dir_path) {
-  fs.readdirSync(dir_path).forEach(fileName => {
-    const _file_path = path.join(dir_path, fileName),
-      _target_path = path.join(TARGET_DIR, fileName);
-
-    /* Type of judgment */
+  fs.readdirSync(dir_path).forEach((file_name) => {
+    const _file_path = path.join(dir_path, file_name);
     const _stats = fs.statSync(_file_path);
 
-    if (_stats.isFile() && path.extname(fileName) === '.md') {
+    if (_stats.isFile() && path.extname(file_name) === '.md') {
       let _content = fs.readFileSync(_file_path, 'utf-8');
 
       /* Get document basic information */
@@ -66,34 +42,24 @@ function dir_display(dir_path) {
 
       try {
         _doc_info = _content.match(/---[\s\S]*?(\{[\s\S]*?\})[\s\S]*?---/);
-        (_doc_info &&
-          (_content = _content.replace(/---[\s\S]*?---/, '')) &&
-          (_doc_info = JSON.parse(_doc_info[1]))) ||
-          (_doc_info = {});
+
+        if (_doc_info) {
+          _content = _content.replace(/---[\s\S]*?---/, '');
+          _doc_info = JSON.parse(_doc_info[1]);
+        } else {
+          _doc_info = {};
+        }
       } catch (err) {
         console.log(err.message);
         console.log(_file_path + ': no document info !');
         _doc_info = {};
       }
 
-      /* Markdown to HTML */
-      _content = marked(_content);
+      const html_file_name = path.basename(file_name, '.md') + '.html';
 
-      const new_filepath_name = path.join(
-        path.dirname(_target_path),
-        path.basename(_target_path, '.md') + '.html'
-      );
-
-      /* Create new file */
-      fs.writeFile(
-        new_filepath_name,
-        _content,
-        err => err && console.log(err.message)
-      );
-
-      /* File Data */
+      // * File Data
       const _file_data = {
-        name: path.basename(new_filepath_name),
+        name: html_file_name,
         title: _doc_info.title || '无标题文档',
         ctime: dayjs(_doc_info.ctime || _stats.ctime).format(
           'YYYY-MM-DD HH:mm:ss'
@@ -103,13 +69,13 @@ function dir_display(dir_path) {
         ),
         tags: _doc_info.tags || [],
         keywords: _doc_info.keywords || [],
-        summary: _doc_info.summary || ''
+        summary: _doc_info.summary || '',
       };
 
       const _file_index = category.data.push(_file_data) - 1;
 
-      /* tags */
-      _file_data.tags.forEach(tag => {
+      // * tags
+      _file_data.tags.forEach((tag) => {
         let _file_indexs = category.tags[tag] || (category.tags[tag] = []),
           _dir_tags = category.dirs[_temp_prev_dir[_temp_prev_dir.length - 1]];
 
@@ -118,11 +84,18 @@ function dir_display(dir_path) {
         /* push dir */
         !_dir_tags.includes(tag) && _dir_tags.push(tag);
       });
+
+      // * html 2 markdown path
+      if (category.html_2_markdown[path.basename(html_file_name)]) {
+        throw new Error('"file_name" duplicate!');
+      }
+
+      category.html_2_markdown[path.basename(html_file_name)] = _file_path;
     } else if (_stats.isDirectory()) {
       /* dirs */
-      category.dirs[fileName] = [];
+      category.dirs[file_name] = [];
 
-      _temp_prev_dir.push(fileName);
+      _temp_prev_dir.push(file_name);
 
       /* Recursive */
       return dir_display(_file_path) || _temp_prev_dir.pop();
@@ -130,30 +103,10 @@ function dir_display(dir_path) {
   });
 }
 
-/**
- * Clear directory
- *
- * @param {any} dir_path
- */
-function dir_clear(dir_path) {
-  fs.readdirSync(dir_path).forEach(fileName => {
-    const _file_path = path.join(dir_path, fileName);
-    /* Type of judgment */
-    const _stats = fs.statSync(_file_path);
-    if (_stats.isFile()) {
-      fs.unlinkSync(_file_path);
-    } else if (_stats.isDirectory()) {
-      /* Recursive */
-      return dir_clear(_file_path) || fs.rmdirSync(_file_path);
-    }
-  });
-}
-
-dir_clear(TARGET_DIR);
-dir_display(SOURCE_DIR);
+dir_display(MARKDOWN_DIRECTORY);
 
 /* Sort tags file indexs by time */
-Object.keys(category.tags).forEach(tag => {
+Object.keys(category.tags).forEach((tag) => {
   category.tags[tag].sort((a, b) => {
     let _file_a = category.data[a];
     let _file_b = category.data[b];
@@ -167,9 +120,9 @@ const __ALL_TIMES = (Date.now() - __START_TIME) / 1000;
 
 /* Create category json file */
 fs.writeFile(
-  './src/utils/category.json',
+  './src/assets/category.json',
   JSON.stringify(category),
-  err =>
+  (err) =>
     !err &&
     console.log(`The category json file has been saved in ${__ALL_TIMES}s!`)
 );

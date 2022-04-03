@@ -9,11 +9,15 @@ import * as dayjs from 'dayjs';
 function insert_code_line_num() {
   Array.from(
     document.querySelectorAll('.page-note-content pre > code')
-  ).forEach(elem => {
-    const _height = elem.offsetHeight,
-      _lh = +getComputedStyle(elem)['line-height'].match(/[\d.]+/);
+  ).forEach((elem) => {
+    const styles = getComputedStyle(elem);
+    const _height =
+      elem.scrollHeight -
+      Number(styles.paddingTop.slice(0, -2)) -
+      Number(styles.paddingBottom.slice(0, -2));
+    const _lh = +styles['line-height'].slice(0, -2);
 
-    let _num = Math.ceil(_height / _lh);
+    let _num = Math.round(_height / _lh);
 
     let _line_number = [];
 
@@ -31,11 +35,11 @@ let h_datas = [],
 function generate_navigation() {
   h_datas = [];
 
-  Array.from(document.querySelectorAll('h1, h2, h3, h4')).forEach(elem => {
+  Array.from(document.querySelectorAll('h1, h2, h3, h4')).forEach((elem) => {
     h_datas.push({
       type: elem.tagName.toLowerCase(),
       top: elem.offsetTop,
-      text: elem.textContent
+      text: elem.textContent,
     });
   });
 
@@ -46,7 +50,7 @@ function generate_navigation() {
 
   elem_h.classList.add('H');
 
-  h_datas.forEach(h => {
+  h_datas.forEach((h) => {
     let _text = h.text;
 
     if (h.type === 'h2') {
@@ -75,13 +79,16 @@ function generate_navigation() {
 
   /* events */
   setTimeout(() => {
-    Array.from(elem_h.querySelectorAll('p')).forEach(elem => {
-      elem.onclick = () =>
-        (document.documentElement.scrollTop = document.body.scrollTop =
-          elem.getAttribute('top') - 20);
+    Array.from(elem_h.querySelectorAll('p')).forEach((elem) => {
+      elem.onclick = () => {
+        window.scrollTo({
+          top: elem.getAttribute('top') - 20,
+          behavior: 'smooth',
+        });
+      };
     });
 
-    elem_h.querySelector('.hide').onclick = function() {
+    elem_h.querySelector('.hide').onclick = function () {
       if (elem_h.classList.contains('hide')) {
         elem_h.classList.remove('hide');
         this.textContent = 'close';
@@ -106,7 +113,7 @@ const NoteContent = ({ file, html }) => {
 					<div class="mb-3">
 						${file.keywords
               .map(
-                keyword =>
+                (keyword) =>
                   (file.tags.includes(keyword) &&
                     `<a class="btn btn-outline-dark btn-sm mr-2 mb-2" href="#/notes/${keyword}">${keyword}</a>`) ||
                   `<span class="btn btn-outline-dark btn-sm mr-2 mb-2">${keyword}</span>`
@@ -156,7 +163,7 @@ window.addEventListener('scroll', () => {
     elem_h.classList.remove('scroll');
   }
 
-  Array.from(elem_h.querySelectorAll('p')).forEach(elem => {
+  Array.from(elem_h.querySelectorAll('p')).forEach((elem) => {
     elem.classList.remove('active');
   });
 
@@ -164,7 +171,7 @@ window.addEventListener('scroll', () => {
     if (scrollTop < h.top - 21) {
       Array.from(
         elem_h.querySelectorAll(`p[top="${h_datas[Math.max(0, i - 1)].top}"]`)
-      ).forEach(elem => {
+      ).forEach((elem) => {
         elem.classList.add('active');
       });
       return true;
