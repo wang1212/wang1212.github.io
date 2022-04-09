@@ -318,7 +318,7 @@ function debounced(...args) {
 }
 ```
 
-　　首先说结论：**`leading=true` 时决定对 `func()` 函数的实际调用在创建超时器时（提前调用），而 `trailing=true` 时决定对 `func()` 函数的实际调用在创建的超时器到期后（延后调用）。**
+　　首先说结论：**当 `leading=true` 时决定对 `func()` 函数的实际调用在创建超时器时（提前调用），而 `trailing=true` 时决定对 `func()` 函数的实际调用在创建的超时器到期后（延后调用）。**
 
 　　其实要搞懂其中的思路，只要理解了以上几个函数在实际调用中的执行顺序即可：
 
@@ -328,7 +328,7 @@ debounced() -> leadingEdge() -> timerExpired() -> trailingEdge() -> debounced()
 
 　　这里其实是一个调用循环，无论 `leading` 和 `trailing` 值如何，其相应的函数 `leadingEdge()` 和 `trailingEdge()` 都参与其中，只不过在不同值的情况下，这两个函数所扮演的角色不同而已。这里举一个简单的例子即可说明问题：
 
-```javascript
+```
 // 当 leading=true，且 trailing=false 时：
 // leadingEdge() 函数主要作用是调用 invokeFunc() 函数来实际调用 func() 函数
 // trailingEdge() 函数主要作用则是超时器到期后清除掉内部状态，主要是 timerId 的值
@@ -347,7 +347,7 @@ function throttle(func, wait, options) {
     let leading = true
     let trailing = true
 
-    if (typeoffunc !== 'function') {
+    if (typeof func !== 'function') {
         throw new TypeError('Expected a function')
     }
 

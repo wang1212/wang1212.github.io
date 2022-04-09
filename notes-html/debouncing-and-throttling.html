@@ -265,14 +265,14 @@
     <span class="hljs-keyword">return</span> result
 }
 </code></pre>
-<p>　　首先说结论：**<code>leading=true</code> 时决定对 <code>func()</code> 函数的实际调用在创建超时器时（提前调用），而 <code>trailing=true</code> 时决定对 <code>func()</code> 函数的实际调用在创建的超时器到期后（延后调用）。**</p>
+<p>　　首先说结论：<strong>当 <code>leading=true</code> 时决定对 <code>func()</code> 函数的实际调用在创建超时器时（提前调用），而 <code>trailing=true</code> 时决定对 <code>func()</code> 函数的实际调用在创建的超时器到期后（延后调用）。</strong></p>
 <p>　　其实要搞懂其中的思路，只要理解了以上几个函数在实际调用中的执行顺序即可：</p>
 <pre><code class="hljs language-javascript"><span class="hljs-title function_">debounced</span>() -&gt; <span class="hljs-title function_">leadingEdge</span>() -&gt; <span class="hljs-title function_">timerExpired</span>() -&gt; <span class="hljs-title function_">trailingEdge</span>() -&gt; <span class="hljs-title function_">debounced</span>()
 </code></pre>
 <p>　　这里其实是一个调用循环，无论 <code>leading</code> 和 <code>trailing</code> 值如何，其相应的函数 <code>leadingEdge()</code> 和 <code>trailingEdge()</code> 都参与其中，只不过在不同值的情况下，这两个函数所扮演的角色不同而已。这里举一个简单的例子即可说明问题：</p>
-<pre><code class="hljs language-javascript"><span class="hljs-comment">// 当 leading=true，且 trailing=false 时：</span>
-<span class="hljs-comment">// leadingEdge() 函数主要作用是调用 invokeFunc() 函数来实际调用 func() 函数</span>
-<span class="hljs-comment">// trailingEdge() 函数主要作用则是超时器到期后清除掉内部状态，主要是 timerId 的值</span>
+<pre><code><span class="hljs-regexp">//</span> 当 leading=true，且 trailing=false 时：
+<span class="hljs-regexp">//</span> leadingEdge() 函数主要作用是调用 invokeFunc() 函数来实际调用 <span class="hljs-keyword">func</span>() 函数
+<span class="hljs-regexp">//</span> trailingEdge() 函数主要作用则是超时器到期后清除掉内部状态，主要是 timerId 的值
 </code></pre>
 <p>　　那么这里有个值得考虑的点，按照常规的实现思路不应将 <code>leadingEdge()</code> 和 <code>trailingEdge()</code> 函数放在一起同时处理逻辑，而应该按照条件判断独立成两条线去处理逻辑。根据源码分析来看，我猜测是因为 lodash 所提供的 <code>leading</code> 和 <code>trailing</code> 两个选项并非完全对立的一组值，可能存在它们同时为 <code>true</code> 的情况（在函数的顶部注释中有所说明）。当然这里不能同时为 <code>false</code>，因为分析下源码的实现，你会发现 <code>func()</code> 函数将永远得不到实际调用。</p>
 <h3 id="节流（throttle）">节流（Throttle）</h3>
@@ -284,7 +284,7 @@
     <span class="hljs-keyword">let</span> leading = <span class="hljs-literal">true</span>
     <span class="hljs-keyword">let</span> trailing = <span class="hljs-literal">true</span>
 
-    <span class="hljs-keyword">if</span> (typeoffunc !== <span class="hljs-string">&#x27;function&#x27;</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> func !== <span class="hljs-string">&#x27;function&#x27;</span>) {
         <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypeError</span>(<span class="hljs-string">&#x27;Expected a function&#x27;</span>)
     }
 
