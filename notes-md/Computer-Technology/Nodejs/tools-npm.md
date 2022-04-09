@@ -6,7 +6,7 @@
         "keywords": ["计算机技术", "工具", "Web", "Node.js", "npm"],
         "summary": "npm 是 Node.js 的一个包管理器，Web 前端工程师也经常利用它来简化开发流程，来看看如何愉快的使用 npm。",
         "ctime": "2019-07-06 15:43:00",
-        "mtime": "2020-03-15 22:34:00"
+        "mtime": "2022-04-09 11:34:00"
     }
 
 ---
@@ -202,3 +202,11 @@
 ```
 npm logout [--registry=url] [--scope=@orgname]
 ```
+
+## 更好的开发一个 npm 模块
+
+　　以上，是使用 npm 工具本身的过程，但 npm 工具本质上是为维护和发布 npm 模块服务的，开发一个 npm 模块有一些很好的社区实践，将一些优秀的文章资料补充在这里，方便后续查阅和参考学习。
+
+- https://github.com/sarbbottam/write-an-open-source-js-lib
+- https://2ality.com/2017/04/setting-up-multi-platform-packages.html
+- https://overreacted.io/how-does-the-development-mode-work/
