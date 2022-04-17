@@ -9,7 +9,7 @@
 
 <small>Sharing and communication are the best way for me to improve.<small>
 
-## Tools
+## 构建工具
 
 我的博客中使用的开源工具。
 
@@ -39,7 +39,7 @@ npm run commit
 
 _这种约束依赖于社区提供的工具 [commitizen](http://commitizen.github.io/cz-cli/) 和 [commitlint](https://commitlint.js.org/)。_
 
-## License
+## 许可
 
 [![Creative Commons License](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
 
