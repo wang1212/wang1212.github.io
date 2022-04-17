@@ -3,6 +3,7 @@
 <p>
     <img src="https://badgen.net/github/license/wang1212/wang1212.github.io" alt="LICENSE" />
     <img src="https://badgen.net/github/last-commit/wang1212/wang1212.github.io?label=last%20update" alt="LAST UPDATE" />
+    <img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt="Commitizen friendly">
 </p>
 
 分享与交流是我获得提升的最佳途径。
