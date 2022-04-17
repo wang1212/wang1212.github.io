@@ -19,18 +19,18 @@ function insert_code_line_num() {
 
     let _num = Math.round(_height / _lh);
 
-    let _line_number = [];
+    const _line_number = [];
 
     while (_num--) {
-      _line_number.push(_num + 1 + '\n');
+      _line_number.push(`${_num + 1}\n`);
     }
 
     elem.setAttribute('line-number', _line_number.reverse().join(' '));
   });
 }
 
-let h_datas = [],
-  elem_h;
+let h_datas = [];
+let elem_h;
 
 function generate_navigation() {
   h_datas = [];
@@ -45,8 +45,8 @@ function generate_navigation() {
 
   elem_h = document.createElement('section');
 
-  let _prefix = [-1, '.', -1, ' '],
-    elem_h_childs = [];
+  const _prefix = [-1, '.', -1, ' '];
+  const elem_h_childs = [];
 
   elem_h.classList.add('H');
 
@@ -54,12 +54,12 @@ function generate_navigation() {
     let _text = h.text;
 
     if (h.type === 'h2') {
-      _prefix[0] = _prefix[0] + 1;
+      _prefix[0] += 1;
       _prefix[2] = -1;
 
-      _text = _prefix[0] + ' ' + _text;
+      _text = `${_prefix[0]} ${_text}`;
     } else if (h.type === 'h3') {
-      _prefix[2] = _prefix[2] + 1;
+      _prefix[2] += 1;
 
       _text = _prefix.join('') + _text;
     }
@@ -151,8 +151,8 @@ window.addEventListener('scroll', () => {
   if (!elem_h) return;
 
   const scrollTop =
-      document.documentElement.scrollTop || document.body.scrollTop,
-    doc_width = document.body.getBoundingClientRect().width;
+    document.documentElement.scrollTop || document.body.scrollTop;
+  const doc_width = document.body.getBoundingClientRect().width;
 
   if (
     (doc_width > 768 && scrollTop > 376) ||

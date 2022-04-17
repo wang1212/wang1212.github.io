@@ -6,7 +6,7 @@ import './style.scss';
 import blog from 'utils/blog_data.json';
 
 const Index = () => {
-  const view = `
+  return `
 		<main class="page-index">
 			<div class="index-name display-4">${blog.index_name}</div>
 			<p class="index-title h4">${
@@ -31,8 +31,6 @@ const Index = () => {
 			</div>
 		</main>
 	`;
-
-  return view;
 };
 
 export default Index;

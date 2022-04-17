@@ -54,13 +54,13 @@ const Router = {
    * @param {string} mode 模式，['hash', 'in']
    * @returns
    */
-  set_mode: function(mode) {
+  set_mode(mode) {
     if (['hash', 'in'].indexOf(mode) === -1) {
       return false;
     }
 
     if (mode === 'hash') {
-      window.onhashchange = function() {
+      window.onhashchange = function () {
         Router._apply(Router.get_state());
       };
     } else if (mode === 'in') {
@@ -68,8 +68,8 @@ const Router = {
 
       const _routers = [].slice.call(document.getElementsByClassName('router'));
 
-      _routers.forEach(function(router) {
-        router.onclick = function() {
+      _routers.forEach(function (router) {
+        router.onclick = function () {
           Router.switch(this.getAttribute('router'));
         };
       });
@@ -85,7 +85,7 @@ const Router = {
    * @param {Function} callback 回调
    * @returns
    */
-  add: function(state, callback) {
+  add(state, callback) {
     // 回调不存在
     if (Object.prototype.toString.call(callback) !== '[object Function]') {
       return;
@@ -93,14 +93,14 @@ const Router = {
 
     // state 是否是多个数组元素
     if (Object.prototype.toString.call(state) === '[object Array]') {
-      return state.forEach(function(sub_state) {
+      return state.forEach(function (sub_state) {
         // 递归
         Router.add(sub_state, callback);
       });
     }
 
     // 获取数据
-    var _routing = Router._states[state];
+    const _routing = Router._states[state];
 
     // 未注册的情况下
     if (!_routing) {
@@ -122,7 +122,7 @@ const Router = {
    * @param {string} state 状态
    * @returns
    */
-  _apply: function(state) {
+  _apply(state) {
     // 回调开关
     if (!Router.callback_switch) {
       return (Router.callback_switch = true);
@@ -130,10 +130,10 @@ const Router = {
 
     state = state || Router.get_state();
 
-    var _routing = [];
+    let _routing = [];
 
     // 先遍历模糊匹配（可配置过滤器）
-    Router._fuzzy_states.forEach(function(fuzzy_state) {
+    Router._fuzzy_states.forEach(function (fuzzy_state) {
       _routing = _routing.concat(
         state.match(fuzzy_state) ? Router._states[fuzzy_state] : []
       );
@@ -161,7 +161,7 @@ const Router = {
    * @param {Function} callback
    * @returns
    */
-  switch: function(state, callback) {
+  switch(state, callback) {
     if (!state) {
       return;
     }
@@ -195,8 +195,8 @@ const Router = {
    *
    * @returns
    */
-  get_state: function() {
-    var _state = Router._state;
+  get_state() {
+    let { _state } = Router;
 
     if (Router._mode === 'hash') {
       _state = location.hash.slice(1);
@@ -216,24 +216,24 @@ const Router = {
    * @param {string} state
    * @returns
    */
-  get_state_array: function(state) {
+  get_state_array(state) {
     state = state || Router.get_state();
 
     // 去掉空字符元素
-    var url_array = state.split('/').filter(function(a) {
+    const url_array = state.split('/').filter(function (a) {
       return !!a;
     });
 
     return url_array || [];
   },
 
-  have: function(state) {
+  have(state) {
     state = state || Router.get_state();
 
-    var _routing = [];
+    let _routing = [];
 
     // 先遍历模糊匹配（可配置过滤器）
-    Router._fuzzy_states.forEach(function(fuzzy_state) {
+    Router._fuzzy_states.forEach(function (fuzzy_state) {
       _routing = _routing.concat(
         state.match(fuzzy_state) ? Router._states[fuzzy_state] : []
       );
@@ -242,11 +242,11 @@ const Router = {
     _routing = _routing.concat(Router._states[state] || []);
 
     return !!_routing.length;
-  }
+  },
 };
 
 /* 默认 hash 模式 */
-window.onhashchange = function() {
+window.onhashchange = function () {
   Router._apply(Router.get_state());
 };
 

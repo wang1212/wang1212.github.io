@@ -121,7 +121,7 @@
         } <span class="hljs-keyword">else</span> {
             <span class="hljs-comment">// 已注册</span>
             callback &amp;&amp; routings[url].<span class="hljs-title function_">push</span>(callback);
-        }    
+        }	
     }
 
     <span class="hljs-comment">/* 执行回调 */</span>
@@ -139,7 +139,7 @@
         <span class="hljs-comment">// 回调</span>
         routing &amp;&amp; routing.<span class="hljs-title function_">forEach</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">callback</span>){
             callback &amp;&amp; <span class="hljs-title function_">callback</span>(content);
-        });        
+        });		
     }
 
     <span class="hljs-comment">/* 主动切换路由  */</span>
@@ -162,7 +162,7 @@
         <span class="hljs-comment">// 查询字符串存在的话</span>
         hash_url = query_index == -<span class="hljs-number">1</span> ? hash_url : hash_url.<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, query_index);
 
-        <span class="hljs-keyword">return</span> hash_url;        
+        <span class="hljs-keyword">return</span> hash_url;		
     }
 
     <span class="hljs-comment">/* 检测自动加载  */</span>

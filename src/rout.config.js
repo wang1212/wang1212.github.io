@@ -2,16 +2,15 @@
 
 // @flow
 
-import R from './libs/Router.js';
-
 import blog from 'utils/blog_data.json';
-import category from './assets/category.json';
 
 import Loading from 'components/loading/index.js';
 import Index from 'components/index/index.js';
 import Notes from 'components/notes/index.js';
 import NoteContent from 'components/note-content/index.js';
 import Footer from 'components/footer/index.js';
+import category from './assets/category.json';
+import R from './libs/Router.js';
 
 const HTML_DIRECTORY = 'notes-html/';
 

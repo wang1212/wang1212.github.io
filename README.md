@@ -23,6 +23,22 @@ _Open source tools used in my blog._
 - [Marked](https://marked.js.org/)
 - [Counter](https://counter.dev/) - [See my info ?](https://counter.dev/dashboard.html?user=mrwang1212&token=crq1TWS5OR%2FR0ksf)
 
+## 开发准则
+
+### Git 提交信息格式
+
+采用[社区提交格式最佳实践](https://www.conventionalcommits.org/)：
+
+```bash
+# 以前
+git commit
+
+# 现在
+npm run commit
+```
+
+_这种约束依赖于社区提供的工具 [commitizen](http://commitizen.github.io/cz-cli/) 和 [commitlint](https://commitlint.js.org/)。_
+
 ## License
 
 [![Creative Commons License](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)

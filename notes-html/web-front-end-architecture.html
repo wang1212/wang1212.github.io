@@ -372,12 +372,24 @@
 <p>　　属性声明遵循一定顺序，同样地，选择器的嵌套也应该遵循一定的顺序以提高可读性。
 通常，应该遵循以下顺序（依次从上至下）：</p>
 <ol>
-<li>当前选择器的样式属性；</li>
-<li>父级选择器的伪类选择器 (:first-letter、:hover、:active 等)；</li>
-<li>伪类元素 (:before and :after)；</li>
-<li>父级选择器的声明样式 (.selected、.active、.enlarged 等)；</li>
-<li>用Sass的上下文媒体查询；</li>
-<li>子选择器作为最后的部分。</li>
+<li><pre><code>当前选择器的样式属性；
+</code></pre>
+</li>
+<li><pre><code>父级选择器的伪类选择器 (<span class="hljs-symbol">:first-letter</span>、<span class="hljs-symbol">:hover</span>、<span class="hljs-symbol">:active</span> 等)；
+</code></pre>
+</li>
+<li><pre><code>伪类元素 (:<span class="hljs-keyword">before</span> <span class="hljs-keyword">and</span> :<span class="hljs-keyword">after</span>)；
+</code></pre>
+</li>
+<li><pre><code>父级选择器的声明样式 <span class="hljs-comment">(.selected、.active、.enlarged 等)</span>；
+</code></pre>
+</li>
+<li><pre><code>用Sass的上下文媒体查询；
+</code></pre>
+</li>
+<li><pre><code>子选择器作为最后的部分。
+</code></pre>
+</li>
 </ol>
 <p>　　<strong>推荐：</strong></p>
 <pre><code><span class="hljs-selector-class">.item</span> {

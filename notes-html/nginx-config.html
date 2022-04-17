@@ -168,7 +168,7 @@ location <span class="hljs-regexp">/static/</span> {
 <h3 id="文件列表浏览">文件列表浏览</h3>
 <p>　　静态资源服务器一般允许用户查看服务器上的文件列表，例如 CDN、镜像站等。nginx 出于安全考虑，默认是不允许客户端浏览器查看服务器上的文件列表的，可以通过以下指令来进行配置：</p>
 <pre><code class="hljs language-nginx"><span class="hljs-section">location</span> /static/ {
-    <span class="hljs-attribute">autoindex</span> <span class="hljs-literal">on</span>;                <span class="hljs-comment"># 开启客户端文件列表浏览</span>
+    <span class="hljs-attribute">autoindex</span> <span class="hljs-literal">on</span>;				<span class="hljs-comment"># 开启客户端文件列表浏览</span>
     <span class="hljs-attribute">autoindex_exact_size</span> <span class="hljs-literal">off</span>;   <span class="hljs-comment"># 默认显示的文件确切大小，单位 b，关闭后自动计算 KB/MB/GB 等</span>
     <span class="hljs-attribute">autoindex_localtime</span> <span class="hljs-literal">on</span>;     <span class="hljs-comment"># 文件的改动时间以服务器时间为准</span>
 }

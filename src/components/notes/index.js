@@ -3,9 +3,9 @@
 // @flow
 
 import './style.scss';
-import category from '../../assets/category.json';
 import WordCloud from 'wordcloud';
 import * as dayjs from 'dayjs';
+import category from '../../assets/category.json';
 
 const TAGS_WITH_NUM = Object.entries(category.tags).map(
   ([tag, file_indexs]) => [tag, file_indexs.length]
@@ -144,7 +144,7 @@ const Notes = (context) => {
       fontFamily: 'Impact',
       color: 'random-light',
       // color: '#aaa',
-      click: function (item) {
+      click(item) {
         location.hash = `#/notes/${item[0]}`;
       },
     });
