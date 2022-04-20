@@ -7,7 +7,7 @@
   "license": "ISC",
   "main": "scripts/index.js",
   "scripts": {
-    "lint": "eslint src/ --config=.eslintrc.cjs --fix --quiet --cache --cache-location=node_modules/.cache/.eslintcache --format=pretty",
+    "lint": "eslint src/ --config=.eslintrc.cjs --ext .js,.cjs,.mjs --fix --quiet --cache --cache-location=node_modules/.cache/.eslintcache --format=pretty",
     "start": "set NODE_ENV=development && node scripts/index.js",
     "build": "npm run md_2_html && node scripts/index.js",
     "test": "jest --config=./config/jest.config.js",
@@ -25,7 +25,7 @@
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-flow": "^7.16.7",
-    "@wang1212/eslint-config": "^0.1.0",
+    "@wang1212/eslint-config": "^0.1.2",
     "autoprefixer": "^9.5.1",
     "babel-loader": "^8.0.5",
     "browser-sync": "^2.26.7",
