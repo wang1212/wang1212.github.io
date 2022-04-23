@@ -1,14 +1,20 @@
 ---
-
-    {
-        "title": "DOM-元素节点",
-        "tags": ["计算机技术", "Web", "Front End", "DOM"],
-        "keywords": ["计算机技术", "Web", "Front End", "DOM", "Element Node"],
-        "summary": "可以说，元素节点是 DOM 树中的核心部分，我们进行文档的操作通常都是建立在元素节点上的。",
-        "ctime": "2016-05-17 13:19:00",
-        "mtime": "2016-05-17 13:19:00"
-    }
-
+title: DOM-元素节点
+tags:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+keywords:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+  - Element Node
+summary: 可以说，元素节点是 DOM 树中的核心部分，我们进行文档的操作通常都是建立在元素节点上的。
+ctime: '2016-05-17 13:19:00'
+mtime: '2016-05-17 13:19:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## 元素节点

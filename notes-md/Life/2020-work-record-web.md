@@ -1,14 +1,20 @@
 ---
-
-    {
-        "title": "Web 前端开发的心路历程",
-        "tags": ["生活", "工作", "Web", "Front End"],
-        "keywords": ["生活", "工作", "记录", "Web", "Front End"],
-        "summary": "眼看着从事 Web 前端开发已然快三年了，是该想想自己在这块已经获得的东西，和以后的选择了。",
-        "ctime": "2020-03-15 22:43:00",
-        "mtime": "2021-07-19 01:26:00"
-    }
-
+title: Web 前端开发的心路历程
+tags:
+  - 生活
+  - 工作
+  - Web
+  - Front End
+keywords:
+  - 生活
+  - 工作
+  - 记录
+  - Web
+  - Front End
+summary: 眼看着从事 Web 前端开发已然快三年了，是该想想自己在这块已经获得的东西，和以后的选择了。
+ctime: '2020-03-15 22:43:00'
+mtime: '2021-07-19 01:26:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## Web 前端开发

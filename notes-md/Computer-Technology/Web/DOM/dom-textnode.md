@@ -1,14 +1,20 @@
 ---
-
-    {
-        "title": "DOM-文本节点",
-        "tags": ["计算机技术", "Web", "Front End", "DOM"],
-        "keywords": ["计算机技术", "Web", "Front End", "DOM", "Text Node"],
-        "summary": "文本（Text）节点虽然很多时候我们直接用 innerHTML 去赋值替换，但当我们进行一些细微的修改时，了解一下 DOM 操作还是非常有用的。",
-        "ctime": "2016-05-24 21:50:00",
-        "mtime": "2016-05-24 21:50:00"
-    }
-
+title: DOM-文本节点
+tags:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+keywords:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+  - Text Node
+summary: 文本（Text）节点虽然很多时候我们直接用 innerHTML 去赋值替换，但当我们进行一些细微的修改时，了解一下 DOM 操作还是非常有用的。
+ctime: '2016-05-24 21:50:00'
+mtime: '2016-05-24 21:50:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## 文本节点

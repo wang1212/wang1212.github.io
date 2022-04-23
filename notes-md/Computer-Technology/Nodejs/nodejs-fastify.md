@@ -1,14 +1,20 @@
 ---
-
-    {
-        "title": "Fastify - 专注于性能和低内存消耗",
-        "tags": ["计算机技术", "Node.js", "JavaScript", "Web"],
-        "keywords": ["计算机技术", "Node.js", "JavaScript", "Web", "Fastify"],
-        "summary": "Fastify 作为一个 Node.js Web 框架，是如何实现高性能和低内存消耗的呢？",
-        "ctime": "2021-06-27 16:28:00",
-        "mtime": "2021-07-04 21:56:00"
-    }
-
+title: Fastify - 专注于性能和低内存消耗
+tags:
+  - 计算机技术
+  - Node.js
+  - JavaScript
+  - Web
+keywords:
+  - 计算机技术
+  - Node.js
+  - JavaScript
+  - Web
+  - Fastify
+summary: Fastify 作为一个 Node.js Web 框架，是如何实现高性能和低内存消耗的呢？
+ctime: '2021-06-27 16:28:00'
+mtime: '2021-07-04 21:56:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 　　最近在做 Node.js 技术相关的调研，需要选定一个 Web 框架作为基础来构建业务。一般来说，首选开源方案，对于我来说，比较关注框架背后的开发团队情况、项目活跃度、是否有足够多的商业案例、文档是否完整可读、框架的设计理念、技术架构是否灵活可扩展、技术社区生态是否完整等方面。目前，我比较倾心的是 Fastify 这个新兴框架，根据官网介绍，其专注于高性能和低消耗，并且公开的基准测试表现相当不错，项目足够活跃，更重要的是属于 OpenJS 基金会的孵化项目。本文主要介绍 Fastify 的设计理念和探究其是如何提高性能和降低内存消耗的。

@@ -1,13 +1,22 @@
 ---
-
-    {
-		"title": "Web 应用的轻量级状态管理工具 zustand",
-		"tags": ["计算机技术", "Web", "Front End", "React.js"],
-        "keywords": ["计算机技术", "Web", "Front End", "Model", "React.js"],
-        "summary": "Web 网页向 Web 应用发展的过程中，势必会出现 Web 项目的复杂化问题，而在移动端场景，基于 React.js 的应用中如何管理状态？zustand 也许值得一试。",
-        "ctime": "2021-11-18 00:14:00",
-        "mtime": "2021-11-18 00:14:00"
-    }
+title: Web 应用的轻量级状态管理工具 zustand
+tags:
+  - 计算机技术
+  - Web
+  - Front End
+  - React.js
+keywords:
+  - 计算机技术
+  - Web
+  - Front End
+  - Model
+  - React.js
+summary: >-
+  Web 网页向 Web 应用发展的过程中，势必会出现 Web 项目的复杂化问题，而在移动端场景，基于 React.js 的应用中如何管理状态？zustand
+  也许值得一试。
+ctime: '2021-11-18 00:14:00'
+mtime: '2021-11-18 00:14:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 　　基于 React.js 的 Web 应用如何完成状态管理？社区主流方案是 **react-redux**，其本质上基于 React 的 `Context` 特性实现，如果应用足够简单，实际上用 `Context` 手写一个简单的状态管理工具倒也并不难。不过，考虑到工具的完善性、项目的健壮性，通常采用较好的、成熟的社区方案。在移动端场景下，**react-redux** 略显臃肿，轻量级状态管理工具  **zustand** 倒是一个不错的替代方案。

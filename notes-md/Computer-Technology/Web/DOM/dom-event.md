@@ -1,14 +1,20 @@
 ---
-
-    {
-        "title": "DOM-事件",
-        "tags": ["计算机技术", "Web", "Front End", "DOM"],
-        "keywords": ["计算机技术", "Web", "Front End", "DOM", "Event"],
-        "summary": "JavaScript 的作用就是让 html 静态页面具备动态效果，而这些基本都是利用 DOM 事件来实现的。",
-        "ctime": "2016-05-23 12:18:00",
-        "mtime": "2016-05-23 12:18:00"
-    }
-
+title: DOM-事件
+tags:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+keywords:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+  - Event
+summary: JavaScript 的作用就是让 html 静态页面具备动态效果，而这些基本都是利用 DOM 事件来实现的。
+ctime: '2016-05-23 12:18:00'
+mtime: '2016-05-23 12:18:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## 注册 DOM 事件

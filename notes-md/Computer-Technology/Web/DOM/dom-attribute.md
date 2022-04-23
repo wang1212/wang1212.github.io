@@ -1,14 +1,20 @@
 ---
-
-    {
-        "title": "DOM-元素节点属性",
-        "tags": ["计算机技术", "Web", "Front End", "DOM"],
-        "keywords": ["计算机技术", "Web", "Front End", "DOM", "Attribute"],
-        "summary": "元素节点上具有很多属性，这些属性我们通常可以很方便的获取，并进行简单的操作。",
-        "ctime": "2016-05-21 21:00:00",
-        "mtime": "2016-05-21 21:00:00"
-    }
-
+title: DOM-元素节点属性
+tags:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+keywords:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+  - Attribute
+summary: 元素节点上具有很多属性，这些属性我们通常可以很方便的获取，并进行简单的操作。
+ctime: '2016-05-21 21:00:00'
+mtime: '2016-05-21 21:00:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## 节点属性常用操作

@@ -1,14 +1,20 @@
 ---
-
-    {
-		"title": "CSS 清除浮动",
-		"tags": ["计算机技术", "Web", "Front End", "CSS"],
-        "keywords": ["计算机技术", "Web", "Front End", "CSS", "Float"],
-        "summary": "在浮动布局中，有时候会因为父元素没有设置高度而子元素浮动导致父元素坍塌，我们就需要清除浮动撑起父元素的高度，在这里总结一下常用方法。",
-        "ctime": "2016-05-21 18:25:00",
-        "mtime": "2016-05-21 18:25:00"
-    }
-
+title: CSS 清除浮动
+tags:
+  - 计算机技术
+  - Web
+  - Front End
+  - CSS
+keywords:
+  - 计算机技术
+  - Web
+  - Front End
+  - CSS
+  - Float
+summary: 在浮动布局中，有时候会因为父元素没有设置高度而子元素浮动导致父元素坍塌，我们就需要清除浮动撑起父元素的高度，在这里总结一下常用方法。
+ctime: '2016-05-21 18:25:00'
+mtime: '2016-05-21 18:25:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## 浮动

@@ -1,14 +1,20 @@
 ---
-
-    {
-        "title": "DOM-文档片段",
-        "tags": ["计算机技术", "Web", "Front End", "DOM"],
-        "keywords": ["计算机技术", "Web", "Front End", "DOM", "Fragment"],
-        "summary": "DOM 操作是非常消耗性能的，如果要进行大量的 DOM 操作，我们可以选择在内存中先构建一个文档片段然后一次性插入 DOM 树。",
-        "ctime": "2016-05-23 13:10:00",
-        "mtime": "2016-05-23 13:10:00"
-    }
-
+title: DOM-文档片段
+tags:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+keywords:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+  - Fragment
+summary: DOM 操作是非常消耗性能的，如果要进行大量的 DOM 操作，我们可以选择在内存中先构建一个文档片段然后一次性插入 DOM 树。
+ctime: '2016-05-23 13:10:00'
+mtime: '2016-05-23 13:10:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## 文档片段

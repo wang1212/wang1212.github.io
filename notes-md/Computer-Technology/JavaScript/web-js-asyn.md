@@ -1,14 +1,19 @@
 ---
-
-    {
-		"title": "JavaScript 异步编程",
-		"tags": ["计算机技术", "JavaScript"],
-        "keywords": ["计算机技术", "JavaScript", "异步编程"],
-        "summary": "JavaScript 作为一门在 Web 开发中的主流语言，常常涉及到交互事件方面的应用，这不可避免的用到了异步编程的方法，而它本身则是单线程运行的。在以往的开发中，异步编程正变得越来越难管理，新的 Promise 标准 API 将使得异步编程更加方便、安全。",
-        "ctime": "2017-03-22 15:48:00",
-        "mtime": "2018-06-03 13:46:00"
-    }
-
+title: JavaScript 异步编程
+tags:
+  - 计算机技术
+  - JavaScript
+keywords:
+  - 计算机技术
+  - JavaScript
+  - 异步编程
+summary: >-
+  JavaScript 作为一门在 Web
+  开发中的主流语言，常常涉及到交互事件方面的应用，这不可避免的用到了异步编程的方法，而它本身则是单线程运行的。在以往的开发中，异步编程正变得越来越难管理，新的
+  Promise 标准 API 将使得异步编程更加方便、安全。
+ctime: '2017-03-22 15:48:00'
+mtime: '2018-06-03 13:46:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## 异步与并行

@@ -1,13 +1,18 @@
 ---
-
-    {
-        "title": "Child process API: spawn vs exec",
-        "tags": ["计算机技术", "Node.js"],
-        "keywords": ["计算机技术", "Node.js", "child_process", "spawn", "exec"],
-        "summary": "使用 Node.js 编写一些脚本工具是非常方便的，而常用的 spawn 与 exec API 有什么不同呢？",
-        "ctime": "2021-08-25 00:21:00",
-        "mtime": "2021-08-30 00:03:00"
-    }　
+title: 'Child process API: spawn vs exec'
+tags:
+  - 计算机技术
+  - Node.js
+keywords:
+  - 计算机技术
+  - Node.js
+  - child_process
+  - spawn
+  - exec
+summary: 使用 Node.js 编写一些脚本工具是非常方便的，而常用的 spawn 与 exec API 有什么不同呢？
+ctime: '2021-08-25 00:21:00'
+mtime: '2021-08-30 00:03:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 　　利用 Node.js 编写一些命令行工具、一次性脚本是很方便的，而在这类场景下 child_process API 的 `spawn` 和 `exec` 方法的应用则非常常见。在我使用它们时，却不知道该如何进行选择，遂对此进行了探究。

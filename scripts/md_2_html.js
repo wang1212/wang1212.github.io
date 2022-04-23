@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /*! transfrom markdown to html file */
 
 // @flow
@@ -5,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const dayjs = require('dayjs');
 const { marked } = require('marked');
+const matter = require('gray-matter');
 const hljs = require('highlight.js');
 
 // get start time
@@ -15,7 +17,7 @@ const __START_TIME = Date.now();
  */
 marked.setOptions({
   renderer: new marked.Renderer(),
-  highlight: function (code, lang) {
+  highlight(code, lang) {
     if (lang) {
       const language = hljs.getLanguage(lang) ? lang : 'plaintext';
       return hljs.highlight(code, { language }).value;
@@ -31,122 +33,115 @@ const MARKDOWN_DIRECTORY = 'notes-md/';
 const HTML_DIRECTORY = 'notes-html/';
 
 /* init */
-let category = {
+const category = {
   data: [],
   // html_2_markdown: {},
   dirs: {},
   tags: {},
 };
 
-let _temp_prev_dir = [];
+const tempPrevDir = [];
 
 /**
  * Dispaly directory
  *
- * @param {string} dir_path
+ * @param {string} source
  */
-function dir_display(dir_path) {
-  fs.readdirSync(dir_path).forEach((file_name) => {
-    const _file_path = path.join(dir_path, file_name);
-    const _stats = fs.statSync(_file_path);
+function dir_display(source) {
+  fs.readdirSync(source).forEach((path_) => {
+    const source_ = path.join(source, path_);
+    const stats = fs.statSync(source_);
 
-    if (_stats.isFile() && path.extname(file_name) === '.md') {
-      let _content = fs.readFileSync(_file_path, 'utf-8');
+    if (stats.isDirectory()) {
+      /* dirs */
+      category.dirs[path_] = [];
 
-      /* Get document basic information */
-      let _doc_info = {};
+      tempPrevDir.push(path_);
 
-      try {
-        _doc_info = _content.match(/---[\s\S]*?(\{[\s\S]*?\})[\s\S]*?---/);
+      /* Recursive */
+      dir_display(source_);
 
-        if (_doc_info) {
-          _content = _content.replace(/---[\s\S]*?---/, '');
-          _doc_info = JSON.parse(_doc_info[1]);
-        } else {
-          _doc_info = {};
-        }
-      } catch (err) {
-        console.log(err.message);
-        console.log(_file_path + ': no document info !');
-        _doc_info = {};
+      tempPrevDir.pop();
+    }
+
+    if (stats.isFile() && path.extname(path_) === '.md') {
+      const mdContent = fs.readFileSync(source_, 'utf-8');
+      const fileMetadata = matter(mdContent);
+      let frontMatter = {};
+
+      if (fileMetadata.isEmpty) {
+        console.log(`${source_}: Empty document front-matter!`);
+      } else {
+        frontMatter = fileMetadata.data;
       }
 
       // * Markdown to HTML
-      _content = marked(_content);
+      const htmlContent = marked(fileMetadata.content);
 
-      const html_file_name = path.basename(file_name, '.md') + '.html';
-      const html_file_path = path.join(
-        path.dirname(path.join(HTML_DIRECTORY, file_name)),
-        html_file_name
+      const htmlFileName = `${path.basename(path_, '.md')}.html`;
+      const htmlFilePath = path.join(
+        path.dirname(path.join(HTML_DIRECTORY, path_)),
+        htmlFileName
       );
 
       fs.writeFile(
-        html_file_path,
-        _content,
+        htmlFilePath,
+        htmlContent,
         (err) => err && console.log(err.message)
       );
 
       // * File Data
-      const _file_data = {
-        name: html_file_name,
-        title: _doc_info.title || '无标题文档',
-        ctime: dayjs(_doc_info.ctime || _stats.ctime).format(
+      const fileData = {
+        name: htmlFileName,
+        title: frontMatter.title || '无标题文档',
+        ctime: dayjs(frontMatter.ctime || stats.ctime).format(
           'YYYY-MM-DD HH:mm:ss'
         ),
-        mtime: dayjs(_doc_info.mtime || _stats.mtime).format(
+        mtime: dayjs(frontMatter.mtime || stats.mtime).format(
           'YYYY-MM-DD HH:mm:ss'
         ),
-        tags: _doc_info.tags || [],
-        keywords: _doc_info.keywords || [],
-        summary: _doc_info.summary || '',
+        tags: frontMatter.tags || [],
+        keywords: frontMatter.keywords || [],
+        summary: frontMatter.summary || '',
       };
 
-      const _file_index = category.data.push(_file_data) - 1;
+      const fileIndex = category.data.push(fileData) - 1;
 
       // * tags
-      _file_data.tags.forEach((tag) => {
-        let _file_indexs = category.tags[tag] || (category.tags[tag] = []),
-          _dir_tags = category.dirs[_temp_prev_dir[_temp_prev_dir.length - 1]];
+      fileData.tags.forEach((tag) => {
+        const fileIndexes = category.tags[tag] || (category.tags[tag] = []);
+        const dirTags = category.dirs[tempPrevDir[tempPrevDir.length - 1]];
 
-        _file_indexs.push(_file_index);
+        fileIndexes.push(fileIndex);
 
         /* push dir */
-        !_dir_tags.includes(tag) && _dir_tags.push(tag);
+        if (!dirTags.includes(tag)) {
+          dirTags.push(tag);
+        }
       });
-
-      // * html 2 markdown path
-      // if (category.html_2_markdown[path.basename(html_file_name)]) {
-      //   throw new Error('"file_name" duplicate!');
-      // }
-
-      // category.html_2_markdown[path.basename(html_file_name)] = _file_path;
-    } else if (_stats.isDirectory()) {
-      /* dirs */
-      category.dirs[file_name] = [];
-
-      _temp_prev_dir.push(file_name);
-
-      /* Recursive */
-      return dir_display(_file_path) || _temp_prev_dir.pop();
     }
+
+    //
   });
 }
 
 /**
  * Clear directory
  *
- * @param {any} dir_path
+ * @param {any} source
  */
-function dir_clear(dir_path) {
-  fs.readdirSync(dir_path).forEach((fileName) => {
-    const _file_path = path.join(dir_path, fileName);
+function dir_clear(source) {
+  fs.readdirSync(source).forEach((fileName) => {
+    const source_ = path.join(source, fileName);
     /* Type of judgment */
-    const _stats = fs.statSync(_file_path);
-    if (_stats.isFile()) {
-      fs.unlinkSync(_file_path);
-    } else if (_stats.isDirectory()) {
+    const stats = fs.statSync(source_);
+    if (stats.isFile()) {
+      fs.unlinkSync(source_);
+    } else if (stats.isDirectory()) {
       /* Recursive */
-      return dir_clear(_file_path) || fs.rmdirSync(_file_path);
+      dir_clear(source_);
+
+      fs.rmdirSync(source_);
     }
   });
 }
@@ -157,8 +152,8 @@ dir_display(MARKDOWN_DIRECTORY);
 /* Sort tags file indexs by time */
 Object.keys(category.tags).forEach((tag) => {
   category.tags[tag].sort((a, b) => {
-    let _file_a = category.data[a];
-    let _file_b = category.data[b];
+    const _file_a = category.data[a];
+    const _file_b = category.data[b];
 
     return dayjs(_file_b.ctime).valueOf() - dayjs(_file_a.ctime).valueOf();
   });

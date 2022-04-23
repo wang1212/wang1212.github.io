@@ -1,12 +1,20 @@
 ---
-    {
-        "title": "解析基于 core-js 与 ESLint 的 Web 兼容方案",
-        "tags": ["计算机技术", "工具", "Web"],
-        "keywords": ["计算机技术", "工具", "Web", "Polyfill"],
-        "summary": "Web 网页为了保证在多个平台和低中高端设备上的体验稳定性和一致性，通常会做 Polyfill 以保证兼容性，当下社区的主流方案则是基于 core-js，而 ESLint 则可作为自动检测的辅助工具。",
-        "ctime": "2021-12-07 01:13:00",
-        "mtime": "2021-12-08 21:12:00"
-    }
+title: 解析基于 core-js 与 ESLint 的 Web 兼容方案
+tags:
+  - 计算机技术
+  - 工具
+  - Web
+keywords:
+  - 计算机技术
+  - 工具
+  - Web
+  - Polyfill
+summary: >-
+  Web 网页为了保证在多个平台和低中高端设备上的体验稳定性和一致性，通常会做 Polyfill 以保证兼容性，当下社区的主流方案则是基于 core-js，而
+  ESLint 则可作为自动检测的辅助工具。
+ctime: '2021-12-07 01:13:00'
+mtime: '2021-12-08 21:12:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 　　Web 网页为了保证在多个平台和低中高端设备上的体验稳定性和一致性，通常会做 Polyfill 以保证兼容性。

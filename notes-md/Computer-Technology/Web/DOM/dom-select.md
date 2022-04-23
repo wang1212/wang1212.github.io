@@ -1,14 +1,20 @@
 ---
-
-    {
-        "title": "DOM-选取元素节点",
-        "tags": ["计算机技术", "Web", "Front End", "DOM"],
-        "keywords": ["计算机技术", "Web", "Front End", "DOM", "Selector"],
-        "summary": "DOM 操作都是通过对文档树中节点的访问来实现的，如何选取特定的元素节点是关键，进而才能访问该元素节点实现修改、查看、移除、替换等操作。",
-        "ctime": "2016-05-17 22:10:00",
-        "mtime": "2016-05-17 22:10:00"
-    }
-
+title: DOM-选取元素节点
+tags:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+keywords:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+  - Selector
+summary: DOM 操作都是通过对文档树中节点的访问来实现的，如何选取特定的元素节点是关键，进而才能访问该元素节点实现修改、查看、移除、替换等操作。
+ctime: '2016-05-17 22:10:00'
+mtime: '2016-05-17 22:10:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## 选取特定单一元素节点

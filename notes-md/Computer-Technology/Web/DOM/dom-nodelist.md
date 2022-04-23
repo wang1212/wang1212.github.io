@@ -1,14 +1,22 @@
 ---
-
-    {
-        "title": "DOM-节点集合",
-        "tags": ["计算机技术", "Web", "Front End", "DOM"],
-        "keywords": ["计算机技术", "Web", "Front End", "DOM", "NodeList"],
-        "summary": "当从文档树中选取成组的节点或者使用预定义的节点集合时，这些节点都是放在 NodeList 或者一个 HTMLCollecton 之中，而不是一个数组（Array）中。",
-        "ctime": "2016-05-17 22:30:00",
-        "mtime": "2016-05-17 22:30:00"
-    }
-
+title: DOM-节点集合
+tags:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+keywords:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+  - NodeList
+summary: >-
+  当从文档树中选取成组的节点或者使用预定义的节点集合时，这些节点都是放在 NodeList 或者一个 HTMLCollecton
+  之中，而不是一个数组（Array）中。
+ctime: '2016-05-17 22:30:00'
+mtime: '2016-05-17 22:30:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## 节点集合

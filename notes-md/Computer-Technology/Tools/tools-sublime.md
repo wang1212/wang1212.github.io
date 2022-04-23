@@ -1,14 +1,19 @@
 ---
-
-    {
-        "title": "Sublime Text-常用插件",
-        "tags": ["计算机技术", "工具"],
-        "keywords": ["计算机技术", "工具", "Sublime Text", "插件"],
-        "summary": "Sumblime Text 是一个具有漂亮的界面和强大功能的文本编辑器，而且也支持许多丰富的插件。它是一个收费软件，但是允许开发人员无限期的免费试用。这篇文章介绍一下常用的插件。",
-        "ctime": "2016-5-19 13:38:00",
-        "mtime": "2016-5-19 13:38:00"
-    }
-
+title: Sublime Text-常用插件
+tags:
+  - 计算机技术
+  - 工具
+keywords:
+  - 计算机技术
+  - 工具
+  - Sublime Text
+  - 插件
+summary: >-
+  Sumblime Text
+  是一个具有漂亮的界面和强大功能的文本编辑器，而且也支持许多丰富的插件。它是一个收费软件，但是允许开发人员无限期的免费试用。这篇文章介绍一下常用的插件。
+ctime: '2016-05-19 13:38:00'
+mtime: '2016-05-19 13:38:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## 安装 Sublime Text

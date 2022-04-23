@@ -1,14 +1,17 @@
 ---
-
-    {
-        "title": "ODM 本地部署",
-        "tags": ["计算机技术", "GIS"],
-        "keywords": ["计算机技术", "GIS"],
-        "summary": "GIS，ODM（OpenDroneMap）是开源的无人机航片处理工具套件，基本上已成为该领域开源的事实标准，这篇文章主要记录如何在本地进行 ODM 工具套件的部署。",
-        "ctime": "2019-11-11 11:26:21",
-        "mtime": "2019-11-11 11:26:21"
-    }
-
+title: ODM 本地部署
+tags:
+  - 计算机技术
+  - GIS
+keywords:
+  - 计算机技术
+  - GIS
+summary: >-
+  GIS，ODM（OpenDroneMap）是开源的无人机航片处理工具套件，基本上已成为该领域开源的事实标准，这篇文章主要记录如何在本地进行 ODM
+  工具套件的部署。
+ctime: '2019-11-11 11:26:21'
+mtime: '2019-11-11 11:26:21'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## ODM

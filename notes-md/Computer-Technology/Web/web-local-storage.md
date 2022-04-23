@@ -1,14 +1,20 @@
 ---
-
-    {
-        "title": "Web 本地存储",
-        "tags": ["计算机技术", "Web", "Front End"],
-        "keywords": ["计算机技术", "Web", "Front End", "Cookie", "LocalStorage", "SessionStorage"],
-        "summary": "为了达到某些需求，我们通常需要在本地存储一些数据，方便我们进行用户个性化定制服务。",
-        "ctime": "2016-06-01 01:00:00",
-        "mtime": "2018-05-27 17:27:00"
-    }
-
+title: Web 本地存储
+tags:
+  - 计算机技术
+  - Web
+  - Front End
+keywords:
+  - 计算机技术
+  - Web
+  - Front End
+  - Cookie
+  - LocalStorage
+  - SessionStorage
+summary: 为了达到某些需求，我们通常需要在本地存储一些数据，方便我们进行用户个性化定制服务。
+ctime: '2016-06-01 01:00:00'
+mtime: '2018-05-27 17:27:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## Web 存储

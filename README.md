@@ -22,6 +22,7 @@ _Open source tools used in my blog._
 - [Google Material Icons](https://fonts.google.com/icons)
 - [highlight.js](https://highlightjs.org/)
 - [Marked](https://marked.js.org/)
+- [gray-matter](https://github.com/jonschlinkert/gray-matter)
 - [Counter](https://counter.dev/) - [See my info ?](https://counter.dev/dashboard.html?user=mrwang1212&token=crq1TWS5OR%2FR0ksf)
 
 ## 开发准则

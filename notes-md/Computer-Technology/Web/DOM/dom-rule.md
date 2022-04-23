@@ -1,14 +1,20 @@
 ---
-
-    {
-        "title": "DOM-元素节点几何量",
-        "tags": ["计算机技术", "Web", "Front End", "DOM"],
-        "keywords": ["计算机技术", "Web", "Front End", "DOM", "Rule"],
-        "summary": "当我们在查看 HTML 文档时，每个元素节点被解析后，都画成了可视形状。我们可以获取每个元素节点的几何量（宽、高、偏移量）以及页面滚动距离。",
-        "ctime": "2016-05-19 14:54:00",
-        "mtime": "2016-05-19 14:54:00"
-    }
-
+title: DOM-元素节点几何量
+tags:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+keywords:
+  - 计算机技术
+  - Web
+  - Front End
+  - DOM
+  - Rule
+summary: 当我们在查看 HTML 文档时，每个元素节点被解析后，都画成了可视形状。我们可以获取每个元素节点的几何量（宽、高、偏移量）以及页面滚动距离。
+ctime: '2016-05-19 14:54:00'
+mtime: '2016-05-19 14:54:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 ## 元素节点几何量

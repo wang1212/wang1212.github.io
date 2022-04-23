@@ -1,14 +1,21 @@
 ---
-
-    {
-		"title": "解析函数节流与防抖的实现",
-		"tags": ["计算机技术", "JavaScript", "Web", "Front End"],
-        "keywords": ["计算机技术", "Web", "Front End", "JavaScript", "节流", "防抖"],
-        "summary": "前端开发中广泛采用的优化技巧，函数节流与防抖。",
-        "ctime": "2021-04-25 22:56:00",
-        "mtime": "2021-04-26 22:48:00"
-    }
-
+title: 解析函数节流与防抖的实现
+tags:
+  - 计算机技术
+  - JavaScript
+  - Web
+  - Front End
+keywords:
+  - 计算机技术
+  - Web
+  - Front End
+  - JavaScript
+  - 节流
+  - 防抖
+summary: 前端开发中广泛采用的优化技巧，函数节流与防抖。
+ctime: '2021-04-25 22:56:00'
+mtime: '2021-04-26 22:48:00'
+author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
 　　前端开发中，有一个使用较为普遍的性能优化技巧，即函数节流（Throttle）和防抖（Debounce），其主要作用是根据时间对函数调用做以限制。最常见的业务场景是监听页面的 `scroll` 事件，浏览器可以在 1s 内触发该事件数次（甚至达数十次），如果事件处理程序在这 1s 内多次执行，必然会造成一定的性能问题，影响用户体验。
