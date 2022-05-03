@@ -1,0 +1,46 @@
+<p>　　最近在做前端可视化相关的东西，在完成动画效果时，遇到一个不是很好处理的问题，需要让一个元素在画布上以曲线的轨迹进行运动。因为动画这块之前基本也没有怎么接触过，做的也都是简单的线性动画效果，所以碰到这个需求点的时候觉得是有点难度的。</p>
+<p>　　其实，要真的实现按照一定曲线轨迹运动的效果倒也不难，毕竟圆、椭圆方程在平时做布局计算的时候用的也挺多的。但是，用圆或者椭圆计算曲线相当于是找了个特殊场景，不具备通用性；另一方面，说到曲线的绘制，贝塞尔曲线是绕不开的，这也是非常值得考虑的方案。</p>
+<h2 id="动画帧计算">动画帧计算</h2>
+<p>　　一段动画实际上是由多个静态帧组成的，当帧率达到人眼不可分辨的程度时（比如 60 FPS），就感觉像是一个无缝连续的视频在流畅的播放。而某一静态帧的状态用数学公式来表达如下：</p>
+<pre><code><span class="hljs-attribute">y</span> <span class="hljs-operator">=</span> F(t) (<span class="hljs-number">0</span> &lt;<span class="hljs-operator">=</span> t &lt;<span class="hljs-operator">=</span> <span class="hljs-number">1</span>)
+</code></pre>
+<p>　　那么对于一个物体从 <strong>x0</strong> 运动到 <strong>x1</strong>，如何计算 <strong>t</strong> 时刻的位置？按照我的思路来看，可以转化为以下数学公式：</p>
+<pre><code>F(<span class="hljs-name">t</span>) = (<span class="hljs-name">x1</span> - x0)*t + x0 (<span class="hljs-number">0</span> &lt;= <span class="hljs-literal">t</span> &lt;= <span class="hljs-number">1</span>)
+</code></pre>
+<p>　　这么算其实是没错的，但这个公式在数学建模的角度来看，其实是不好的，后面以计算贝塞尔曲线上一点的坐标为例解释为什么。这里先给出线性贝塞尔曲线数学公式：</p>
+<blockquote>
+<p>B(t) = (1 - t)<em>P0 + t</em>P1 (0 &lt;= t &lt;= 1)</p>
+</blockquote>
+<h2 id="贝塞尔曲线">贝塞尔曲线</h2>
+<p>　　贝塞尔曲线（Bézier curve）在工业设计领域是一个非常重要的存在，应用非常广泛，在计算机图形学领域中贝塞尔曲线也有很好的支持，例如 Canvas API 原生就有提供贝塞尔曲线的绘制接口。</p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo">CanvasRenderingContext2D.bezierCurveTo()</a></p>
+</blockquote>
+<p>　　贝塞尔曲线从概念上来看是很难理解的，如何转化为数学公式来计算贝塞尔曲线，而这个过程是什么样的，刚开始理解起来也是比较抽象的。先来看看其（二次贝塞尔曲线）数学定义：</p>
+<blockquote>
+<p><img src="https://raw.githubusercontent.com/wang1212/static-resources/dd604c85291dcdcc1ac677e8ad4c85d0aebcde12/images/Quadratic-Bezier-Curve-Formula.svg" alt="Quadratic Bezier Curve Formula" title="Quadratic Bezier Curve Formula"></p>
+</blockquote>
+<p>　　其中 <strong>P0</strong>、<strong>P1</strong>、<strong>P2</strong> 分别为起点、控制点、终点。</p>
+<p>　　那么，有了公式计算二次贝塞尔曲线上一点按理来说已经可以实现了，但在这里之所以用贝塞尔曲线这个比较难理解的数学模型来探讨，其实是为了最终得到一个简化的具有普适性的解决动画帧计算的数学模型。对于熟悉动画计算的人来说，很多文档中对于开头提出的问题给出的数学公式为以下：</p>
+<pre><code>F(<span class="hljs-name">t</span>) = (<span class="hljs-number">1</span> - <span class="hljs-literal">t</span>)*x0 + <span class="hljs-literal">t</span>*x1 (<span class="hljs-number">0</span> &lt;= <span class="hljs-literal">t</span> &lt;= <span class="hljs-number">1</span>)
+</code></pre>
+<p>　　这个时候，你会发现无论是以上公式，还是一次、二次或更高次的贝塞尔曲线公式中都有一个类似的元素即 <strong>1 - t</strong>。当然，公式都是相互推导以不同形式展现的，即：</p>
+<pre><code>F(<span class="hljs-name">t</span>) = (<span class="hljs-number">1</span> - <span class="hljs-literal">t</span>)*x0 + <span class="hljs-literal">t</span>*x1 = (<span class="hljs-name">x1</span> - x0)*t + x0 (<span class="hljs-number">0</span> &lt;= <span class="hljs-literal">t</span> &lt;= <span class="hljs-number">1</span>)
+</code></pre>
+<p>　　公式相等是本质，但不同的展现形式蕴含的思维模式不同（或者说有没有利用好数学建模来进行问题的抽象）。以上面的公式来分析，前者表达的是 <strong>x0</strong> 与 <strong>x1</strong> 分别在 <strong>t</strong> 时刻状态的叠加，后者则表达的是起始状态 <strong>x0</strong> 叠加从 <strong>x0</strong> 运动到 <strong>x1</strong> 过程中 <strong>t</strong> 时刻的状态。从其蕴含的思维模式来分析，<strong>前者关注的是结果，后者则先分析过程再得到结果。</strong></p>
+<p>　　其实，说到这里，我觉得一个好的数学建模思维的魅力已经体现出来了，动画帧计算应尽可能的简单且关注核心问题，不要被过程所迷惑，这也是为何很多文档中的公式包含 <strong>1 - t</strong> 元素的原因。</p>
+<h3 id="计算二次贝塞尔曲线上一点的坐标">计算二次贝塞尔曲线上一点的坐标</h3>
+<p>　　接下来，结合 <a href="https://zh.wikipedia.org/zh-cn/%E8%B2%9D%E8%8C%B2%E6%9B%B2%E7%B7%9A#%E4%BA%8C%E6%AC%A1%E6%9B%B2%E7%B7%9A">wiki 中构建贝塞尔曲线一节的动态图</a> 对二次贝塞尔曲线的形成过程有个直观的理解，利用以上思路对计算二次贝塞尔曲线上一点的坐标这个问题进行数学建模：</p>
+<p>　　给出 <strong>P0</strong>、<strong>P1</strong>、<strong>P2</strong> 分别为起点、控制点、终点，曲线上的点是控制点由 P0 运动到 P1 过程中点 P01 与终点由 P1 运动到 P2 过程中点 P12 连线上的点，转为数学公式如下：</p>
+<pre><code><span class="hljs-attr">P01</span> = (<span class="hljs-number">1</span> - t)P0 + tP1
+<span class="hljs-attr">P12</span> = (<span class="hljs-number">1</span> - t)P1 + tP2
+<span class="hljs-attr">P012</span> = (<span class="hljs-number">1</span> - t)P01 + tP12
+</code></pre>
+<p>　　这样就得到了 <strong>t</strong> 时刻曲线上的点坐标为 <strong>P012</strong>，根据推导 P012 其实就等于前面给出的二次贝塞尔曲线的公式 <strong>B(t)</strong> 。按照这个思路和数学建模的思维，计算三次、四次贝塞尔曲线上点的坐标就很简单，不断叠加 t 时刻的状态即可。</p>
+<h2 id="结语">结语</h2>
+<p>　　总结成一句话来说，用数学建模的思维把复杂问题高度抽象成简单问题，再用简单的方案去解决复杂的问题。对于动画帧计算来说，就要把问题高度抽象成起始状态与终止状态在 t 时刻状态的叠加，不应该关注过程，最终就可以得出线性轨迹和曲线轨迹的计算本质上都是一个线性插值的过程，无论多么复杂的轨迹问题都是要用线性插值的方案来解决。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://zh.wikipedia.org/zh-cn/%E8%B2%9D%E8%8C%B2%E6%9B%B2%E7%B7%9A">https://zh.wikipedia.org/zh-cn/%E8%B2%9D%E8%8C%B2%E6%9B%B2%E7%B7%9A</a></li>
+<li><a href="https://www.cnblogs.com/fangsmile/articles/11642607.html">https://www.cnblogs.com/fangsmile/articles/11642607.html</a></li>
+</ul>
