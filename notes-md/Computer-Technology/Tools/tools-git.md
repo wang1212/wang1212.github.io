@@ -7,11 +7,9 @@ keywords:
   - 计算机技术
   - 工具
   - Git
-summary: >-
-  Git 是一个分布式的版本控制工具，类似的版本控制工具还有 SVN ；由于 GitHub 平台的盛行，也使得 git 更加受欢迎，在 Windows
-  平台使用 git 也是非常方便的。
+summary: Git 是一个分布式的版本控制工具，类似的版本控制工具还有 SVN ；由于 GitHub 平台的盛行，也使得 git 更加受欢迎，在 Windows 平台使用 git 也是非常方便的。
 ctime: '2016-12-31 13:49:00'
-mtime: '2021-05-18 16:12:00'
+mtime: '2022-05-03 17:03:00'
 author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
@@ -417,3 +415,17 @@ git stash drop stash@{num}
 # 合并工作区状态，并删除已保存的工作区状态
 git stash pop stash@{num}
 ```
+
+## 参考资料
+
+　　以上是对使用 Git 最常见场景的一些指导，这里再记录一些非常好的学习资料，方便学习和查阅。
+  
+- Git 命令学习
+    - [Learning Git Branching](https://learngitbranching.js.org/) 
+    - [Git Command Explorer](https://gitexplorer.com/)
+- Git 工作流模型
+    - [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) 
+    - [GitLab Flow](https://docs.gitlab.com/ee/topics/gitlab_flow.html)
+    - [GitHub Flow](http://githubflow.github.io/)
+- GUI 客户端
+    - [Sourcetree](https://www.sourcetreeapp.com/)
