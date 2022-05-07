@@ -1,12 +1,15 @@
 ---
-title: Sublime Text-Vim 插件
+title: 编辑器：Sublime Text - Vim 插件
 tags:
   - 计算机技术
   - 工具
+  - 编辑器
 keywords:
   - 计算机技术
   - 工具
+  - 编辑器
   - Sublime Text
+  - 插件
   - Vim
 summary: Sumblime Text 是一个具有漂亮的界面和强大功能的文本编辑器，而且也支持许多丰富的插件。它是一个收费软件，但是允许开发人员无限期的免费试用。
 ctime: '2016-05-18 12:55:00'

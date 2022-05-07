@@ -1,15 +1,17 @@
 ---
-title: VS Code 配置同步
+title: IDE：VS Code 配置同步
 tags:
   - 计算机技术
   - 工具
-  - VS Code
+  - IDE
+  - 编辑器
 keywords:
   - 计算机技术
   - 工具
+  - IDE
+  - 编辑器
   - VS Code
-  - Setting
-  - Config
+  - 配置同步
 summary: 利用一款插件来同步 VS Code 的配置到 GitHub 的 gist 上，实现多个设备间共享一套配置。
 ctime: '2018-08-15 16:42:00'
 mtime: '2018-08-15 16:42:00'

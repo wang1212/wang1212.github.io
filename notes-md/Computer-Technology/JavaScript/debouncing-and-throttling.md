@@ -1,17 +1,17 @@
 ---
-title: 解析函数节流与防抖的实现
+title: Web 前端性能优化：解析函数节流与防抖的实现
 tags:
   - 计算机技术
-  - JavaScript
   - Web
   - Web 前端
+  - JavaScript
 keywords:
   - 计算机技术
   - Web
   - Web 前端
   - JavaScript
-  - 节流
-  - 防抖
+  - 性能优化
+  - 节流与防抖
 summary: 前端开发中广泛采用的优化技巧，函数节流与防抖。
 ctime: '2021-04-25 22:56:00'
 mtime: '2021-04-26 22:48:00'

@@ -1,17 +1,18 @@
 ---
-title: Web 性能优化之批量 DOM 操作 - FastDOM
+title: Web 前端性能优化：批量 DOM 操作 - FastDOM
 tags:
   - 计算机技术
   - Web
   - Web 前端
+  - DOM
 keywords:
   - 计算机技术
   - Web
   - Web 前端
   - 性能优化
-summary: >-
-  原生应用时代，DOM 操作一般借助类似 jQuery 的工具库手动完成，而在框架/库应用时代 DOM
-  操作退居幕后自动完成，原生应用与框架应用性能孰高孰低？DOM 批量操作对于性能有何影响？利用 FastDOM 库来解决这些性能问题。
+  - DOM
+  - FastDOM
+summary: 原生应用时代，DOM 操作一般借助类似 jQuery 的工具库手动完成，而在框架/库应用时代 DOM 操作退居幕后自动完成，原生应用与框架应用性能孰高孰低？DOM 批量操作对于性能有何影响？利用 FastDOM 库来解决这些性能问题。
 ctime: '2021-10-04 00:06:00'
 mtime: '2022-03-10 00:28:00'
 author: 不如怀念 ([@wang1212](https://github.com/wang1212))

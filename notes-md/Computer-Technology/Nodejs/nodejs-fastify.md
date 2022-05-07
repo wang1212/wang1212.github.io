@@ -2,14 +2,16 @@
 title: Fastify - 专注于性能和低内存消耗
 tags:
   - 计算机技术
+  - Web
+  - Web 后端
   - Node.js
   - JavaScript
-  - Web
 keywords:
   - 计算机技术
+  - Web
+  - Web 后端
   - Node.js
   - JavaScript
-  - Web
   - Fastify
 summary: Fastify 作为一个 Node.js Web 框架，是如何实现高性能和低内存消耗的呢？
 ctime: '2021-06-27 16:28:00'

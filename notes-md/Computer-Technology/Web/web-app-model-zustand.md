@@ -1,5 +1,5 @@
 ---
-title: Web 应用的轻量级状态管理工具 zustand
+title: Web 应用：轻量级状态管理工具 zustand
 tags:
   - 计算机技术
   - Web
@@ -9,11 +9,9 @@ keywords:
   - 计算机技术
   - Web
   - Web 前端
-  - Model
+  - 应用状态管理
   - React.js
-summary: >-
-  Web 网页向 Web 应用发展的过程中，势必会出现 Web 项目的复杂化问题，而在移动端场景，基于 React.js 的应用中如何管理状态？zustand
-  也许值得一试。
+summary: Web 网页向 Web 应用发展的过程中，势必会出现 Web 项目的复杂化问题，而在移动端场景，基于 React.js 的应用中如何管理状态？zustand 也许值得一试。
 ctime: '2021-11-18 00:14:00'
 mtime: '2021-11-18 00:14:00'
 author: 不如怀念 ([@wang1212](https://github.com/wang1212))
