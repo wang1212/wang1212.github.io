@@ -4,12 +4,10 @@ tags:
   - 计算机技术
   - 工具
   - TypeScript
-  - Web
 keywords:
   - 计算机技术
   - 工具
   - TypeScript
-  - Web
   - 类型定义
 summary: TypeScript 作为 JavaScript 的超集，为 Web 开发带来了强类型语言和类似代码智能提示这种良好的开发体验，如何对第三方依赖库的类型定义进行扩展呢？
 ctime: '2022-01-09 17:36:00'

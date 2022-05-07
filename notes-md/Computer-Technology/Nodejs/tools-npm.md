@@ -4,11 +4,15 @@ tags:
   - 计算机技术
   - 工具
   - Web
+  - Web 前端
+  - Web 后端
   - Node.js
 keywords:
   - 计算机技术
   - 工具
   - Web
+  - Web 前端
+  - Web 后端
   - Node.js
   - npm
 summary: npm 是 Node.js 的一个包管理器，Web 前端工程师也经常利用它构建前端工作流，来看看如何愉快的使用 npm。
