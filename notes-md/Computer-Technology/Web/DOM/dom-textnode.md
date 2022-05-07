@@ -3,12 +3,12 @@ title: DOM-文本节点
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
   - Text Node
 summary: 文本（Text）节点虽然很多时候我们直接用 innerHTML 去赋值替换，但当我们进行一些细微的修改时，了解一下 DOM 操作还是非常有用的。

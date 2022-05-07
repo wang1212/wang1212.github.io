@@ -7,7 +7,9 @@ keywords:
   - 计算机技术
   - 工具
   - Git
-summary: Git 是一个分布式的版本控制工具，类似的版本控制工具还有 SVN ；由于 GitHub 平台的盛行，也使得 git 更加受欢迎，在 Windows 平台使用 git 也是非常方便的。
+summary: >-
+  Git 是一个分布式的版本控制工具，类似的版本控制工具还有 SVN ；由于 GitHub 平台的盛行，也使得 git 更加受欢迎，在 Windows
+  平台使用 git 也是非常方便的。
 ctime: '2016-12-31 13:49:00'
 mtime: '2022-05-03 17:03:00'
 author: 不如怀念 ([@wang1212](https://github.com/wang1212))

@@ -3,11 +3,11 @@ title: Web 性能优化之批量 DOM 操作 - FastDOM
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - 性能优化
 summary: >-
   原生应用时代，DOM 操作一般借助类似 jQuery 的工具库手动完成，而在框架/库应用时代 DOM

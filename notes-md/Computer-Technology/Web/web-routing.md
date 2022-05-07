@@ -3,11 +3,11 @@ title: 路由-实现单页面应用
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - SPA
   - 路由
 summary: >-

@@ -3,11 +3,11 @@ title: Web 前端优化技巧
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - 优化
 summary: >-
   Web

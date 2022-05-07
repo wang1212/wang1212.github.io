@@ -4,16 +4,16 @@ tags:
   - 计算机技术
   - 工具
   - Web
-  - Front End
+  - Web 前端
 keywords:
   - 计算机技术
   - 工具
   - Web
-  - Front End
+  - Web 前端
   - Debug
 summary: Web 项目在生产环境发布的代码是经过混淆和压缩的，那么如何根据在生产环境收集的错误栈信息快速分析出问题的代码具体位置呢？
 ctime: '2021-11-28 22:31:00'
-mtime: '2021-11-28 22:31:00'
+mtime: '2022-05-07 21:57:00'
 author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 

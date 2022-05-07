@@ -3,12 +3,12 @@ title: 浏览器对象模型（BOM）
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
   - BOM
 summary: 在网页开发中，我们通常专注于内容的设计，而有些时候我们需要进行不同窗口之间的交互，这时候我们就需要学习如何运用 BOM 中的许多核心对象，及其属性、方法。

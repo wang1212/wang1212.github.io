@@ -3,11 +3,11 @@ title: Web 性能优化案例分析 1
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - 性能优化
 summary: Web 性能相关的概念很多，但如何落地在真实业务场景中，其实是一个比较难的事情，或者说机会鲜有，在这里记录一下真实业务案例做性能优化的过程。
 ctime: '2021-09-24 00:51:00'

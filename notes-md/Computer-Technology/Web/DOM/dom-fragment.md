@@ -3,12 +3,12 @@ title: DOM-文档片段
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
   - Fragment
 summary: DOM 操作是非常消耗性能的，如果要进行大量的 DOM 操作，我们可以选择在内存中先构建一个文档片段然后一次性插入 DOM 树。

@@ -3,12 +3,12 @@ title: DOM-元素节点
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
   - Element Node
 summary: 可以说，元素节点是 DOM 树中的核心部分，我们进行文档的操作通常都是建立在元素节点上的。

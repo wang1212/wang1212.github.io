@@ -4,11 +4,11 @@ tags:
   - 计算机技术
   - JavaScript
   - Web
-  - Front End
+  - Web 前端
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - JavaScript
   - 节流
   - 防抖

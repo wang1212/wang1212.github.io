@@ -3,12 +3,12 @@ title: DOM-节点集合
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
   - NodeList
 summary: >-

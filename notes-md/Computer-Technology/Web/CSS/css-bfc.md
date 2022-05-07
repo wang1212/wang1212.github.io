@@ -3,12 +3,12 @@ title: 块级格式化上下文（BFC）
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - CSS
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - CSS
   - BFC
 summary: 在进行页面布局时，通常有流式布局、定位布局、浮动布局这三种形式。而在布局过程中，各元素之间的影响却是一个很关键的问题。

@@ -3,12 +3,12 @@ title: Web 应用的轻量级状态管理工具 zustand
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - React.js
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - Model
   - React.js
 summary: >-

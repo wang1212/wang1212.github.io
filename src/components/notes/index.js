@@ -12,6 +12,10 @@ const TAGS_WITH_NUM = Object.entries(category.tags).map(
 );
 
 /* utils */
+/**
+ *
+ * @param num
+ */
 function get_color(num) {
   return num >= 10 ? 'primary' : num >= 5 ? 'info' : 'light';
 }
@@ -35,6 +39,10 @@ const TagNotesListContent = (state) => {
   /* temp */
   let _tmp_by_sort = 'mtime';
 
+  /**
+   *
+   * @param by_sort
+   */
   function generate_html(by_sort = 'mtime') {
     if (state.length > 1) {
       _tag = decodeURI(state[1]);
@@ -122,7 +130,7 @@ const Notes = (context) => {
 				<div id="word-cloud"></div>
 			</section>
 			<section class="tags-box mb-5">
-				<h2>Tags</h2>
+				<h2>标签</h2>
 				<hr/>
 				${Tags}
 			</section>

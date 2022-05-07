@@ -3,13 +3,13 @@ title: DOM-加载 JavaScript
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
   - JavaScript
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
   - JavaScript
 summary: 页面的动态交互离不开 Javascript，将 js 脚本引入页面时会阻塞页面加载，在某些时候我们则可以选择异步加载 js 脚本。

@@ -3,12 +3,12 @@ title: JSP 内置对象、指令与动作
 tags:
   - 计算机技术
   - Web
-  - Back End
+  - Web 后端
   - Java
 keywords:
   - 计算机技术
   - Web
-  - Back End
+  - Web 后端
   - Java
   - JSP
 summary: >-

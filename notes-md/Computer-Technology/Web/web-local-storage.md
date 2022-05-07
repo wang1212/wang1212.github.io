@@ -3,11 +3,11 @@ title: Web 本地存储
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - Cookie
   - LocalStorage
   - SessionStorage

@@ -3,12 +3,12 @@ title: 文档对象模型（DOM）
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - DOM
 summary: >-
   在网页设计中，有一个很重要的角色需要我们了解，DOM 帮助我们对页面元素进行增、删、改等全方位的操作，而且让 JavaScript 在客户端修改 HTML

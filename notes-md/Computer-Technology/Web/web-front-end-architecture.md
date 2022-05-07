@@ -3,11 +3,11 @@ title: Web 前端架构设计
 tags:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
 keywords:
   - 计算机技术
   - Web
-  - Front End
+  - Web 前端
   - 架构设计
 summary: >-
   Web 前端开发是一个零散化的过程，基本上没有专业的 IDE
