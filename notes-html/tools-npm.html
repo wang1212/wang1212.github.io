@@ -151,9 +151,8 @@ npm deprecate &lt;package_name&gt;[@&lt;version&gt;] &lt;message&gt;
 <pre><code class="hljs language-bash"><span class="hljs-comment"># https://docs.npmjs.com/cli/v6/commands/npm-logout</span>
 npm <span class="hljs-built_in">logout</span> [--registry=url] [--scope=@orgname]
 </code></pre>
-<h2 id="更好的开发一个模块并发布">更好的开发一个模块并发布</h2>
-<p>　　以上，是使用 npm 工具本身的过程，但 npm 工具本质上是为维护和发布 Node 模块/包服务的，开发 Node 模块/包有一些很好的社区实践，将一些优秀的文章资料补充在这里，方便后续查阅和参考学习。</p>
-<p>　　这里也大致记录一下开发 Node 模块/包过程中一些注意的关键点。</p>
+<h2 id="最佳实践">最佳实践</h2>
+<p>　　以上，是使用 npm 工具本身的过程，但 npm 工具本质上是为维护和发布 Node 模块/包服务的，开发 Node 模块/包有一些很好的社区实践，这里大致记录一下开发 Node 模块/包过程中一些注意的关键点。</p>
 <h3 id="模块包的类型">模块/包的类型</h3>
 <p>　　根据用途，模块/包的类型大致可以分为以下几种，不同的类型需要做对应的处理。</p>
 <ul>
@@ -177,7 +176,7 @@ npm <span class="hljs-built_in">logout</span> [--registry=url] [--scope=@orgname
 <blockquote>
 <p><a href="https://overreacted.io/how-does-the-development-mode-work/">https://overreacted.io/how-does-the-development-mode-work/</a></p>
 </blockquote>
-<h3 id="让模块包支持多个环境">让模块/包支持多个环境</h3>
+<h3 id="支持多个环境">支持多个环境</h3>
 <p>　　纵观 Node.js 的发展历史，其生态中出现过多种模式，例如 <a href="https://github.com/amdjs/amdjs-api/blob/master/AMD.md">AMD</a>、<a href="http://www.commonjs.org/">CommonJS</a>、ESM(ECMAScript modules)，以及 <a href="https://github.com/umdjs/umd">UMD</a>，这种情况给包的开发带来一定困难，不过经过多年的发展社区已经形成一个约定（共识），可以很方便的解决该问题从而同时支持所有环境。</p>
 <p>　　主要是通过对应字段导出不同的入口文件来实现，下面是一个示例：</p>
 <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
@@ -190,6 +189,27 @@ npm <span class="hljs-built_in">logout</span> [--registry=url] [--scope=@orgname
 <blockquote>
 <p><a href="https://2ality.com/2017/04/setting-up-multi-platform-packages.html">https://2ality.com/2017/04/setting-up-multi-platform-packages.html</a></p>
 </blockquote>
+<h4 id="新的方案">新的方案</h4>
+<p>　　 事实上，<code>main</code> 和 <code>browser</code> 字段在 npm 文档中有定义，查看文档：</p>
+<blockquote>
+<p><a href="https://docs.npmjs.com/cli/v6/configuring-npm/package-json#main">https://docs.npmjs.com/cli/v6/configuring-npm/package-json#main</a></p>
+</blockquote>
+<p> 　　而 <code>module</code> 字段后来并没有被 Node 社区采用，而是推出了新的模块入口点定义字段 <code>exports</code>，配合<strong>条件导出</strong>我们就可以实现支持多个环境。查看文档：</p>
+<blockquote>
+<p><a href="https://nodejs.org/dist/latest-v16.x/docs/api/packages.html#package-entry-points">https://nodejs.org/dist/latest-v16.x/docs/api/packages.html#package-entry-points</a></p>
+</blockquote>
+<h3 id="类型定义">类型定义</h3>
+<p>　　JavaScript 并不是一个强类型语言，所以 IDE 要做类型推断和代码智能提示是比较困难的，尤其是编译、压缩、混淆后的代码对于用户使用有诸多不便，要不断的查询文档。然而，<a href="https://www.typescriptlang.org/">TypeScript</a> 的出现使这一状况得到了改善，如果源代码直接使用 TypeScript 编写，最终编译时生成<strong>类型定义文件</strong>，在发布 npm 模块/包时指定一个 <code>types</code> 字段即可，查看文档：</p>
+<blockquote>
+<p><a href="https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html">https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html</a></p>
+</blockquote>
+<p>　　对于使用 JavaScript 编写的源代码，事实上也可以利用 TypeScript 工具生成相应的类型定义文件，并随之一起发布，查看文档：</p>
+<blockquote>
+<p><a href="https://www.typescriptlang.org/docs/handbook/declaration-files/dts-from-js.html">https://www.typescriptlang.org/docs/handbook/declaration-files/dts-from-js.html</a></p>
+</blockquote>
+<p>　　在使用第三方库时，如果作者发布时没有附带类型定义文件，我们则可以去社区维护的 <a href="https://github.com/DefinitelyTyped/DefinitelyTyped">DefinitelyTyped</a> 仓库中看看，使用 npm 命令即可查询：</p>
+<pre><code class="hljs language-bash">npm info @types/react
+</code></pre>
 <h3 id="参考资料">参考资料</h3>
 <ul>
 <li><a href="https://github.com/sarbbottam/write-an-open-source-js-lib">https://github.com/sarbbottam/write-an-open-source-js-lib</a></li>

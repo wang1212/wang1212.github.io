@@ -17,7 +17,7 @@ keywords:
   - npm
 summary: npm 是 Node.js 的一个包管理器，Web 前端工程师也经常利用它构建前端工作流，来看看如何愉快的使用 npm。
 ctime: '2019-07-06 15:43:00'
-mtime: '2022-04-17 18:01:00'
+mtime: '2022-05-08 01:04:00'
 author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
@@ -266,11 +266,9 @@ npm deprecate <package_name>[@<version>] <message>
 npm logout [--registry=url] [--scope=@orgname]
 ```
 
-## 更好的开发一个模块并发布
+## 最佳实践
 
-　　以上，是使用 npm 工具本身的过程，但 npm 工具本质上是为维护和发布 Node 模块/包服务的，开发 Node 模块/包有一些很好的社区实践，将一些优秀的文章资料补充在这里，方便后续查阅和参考学习。
-  
-　　这里也大致记录一下开发 Node 模块/包过程中一些注意的关键点。
+　　以上，是使用 npm 工具本身的过程，但 npm 工具本质上是为维护和发布 Node 模块/包服务的，开发 Node 模块/包有一些很好的社区实践，这里大致记录一下开发 Node 模块/包过程中一些注意的关键点。
   
 ### 模块/包的类型
 
@@ -303,12 +301,11 @@ if (process.env.NODE_ENV === 'production') {
 
 > https://overreacted.io/how-does-the-development-mode-work/
   
-### 让模块/包支持多个环境
+### 支持多个环境
 
 　　纵观 Node.js 的发展历史，其生态中出现过多种模式，例如 [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md)、[CommonJS](http://www.commonjs.org/)、ESM(ECMAScript modules)，以及 [UMD](https://github.com/umdjs/umd)，这种情况给包的开发带来一定困难，不过经过多年的发展社区已经形成一个约定（共识），可以很方便的解决该问题从而同时支持所有环境。
   
 　　主要是通过对应字段导出不同的入口文件来实现，下面是一个示例：
-  
 
 ```json
 {
@@ -322,6 +319,32 @@ if (process.env.NODE_ENV === 'production') {
   
   > https://2ality.com/2017/04/setting-up-multi-platform-packages.html
   
+  #### 新的方案
+  
+　　 事实上，`main` 和 `browser` 字段在 npm 文档中有定义，查看文档：
+   
+   > https://docs.npmjs.com/cli/v6/configuring-npm/package-json#main
+   
+ 　　而 `module` 字段后来并没有被 Node 社区采用，而是推出了新的模块入口点定义字段 `exports`，配合**条件导出**我们就可以实现支持多个环境。查看文档：
+  
+  > https://nodejs.org/dist/latest-v16.x/docs/api/packages.html#package-entry-points
+  
+### 类型定义
+
+　　JavaScript 并不是一个强类型语言，所以 IDE 要做类型推断和代码智能提示是比较困难的，尤其是编译、压缩、混淆后的代码对于用户使用有诸多不便，要不断的查询文档。然而，[TypeScript](https://www.typescriptlang.org/) 的出现使这一状况得到了改善，如果源代码直接使用 TypeScript 编写，最终编译时生成**类型定义文件**，在发布 npm 模块/包时指定一个 `types` 字段即可，查看文档：
+  
+  > https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html
+  
+　　对于使用 JavaScript 编写的源代码，事实上也可以利用 TypeScript 工具生成相应的类型定义文件，并随之一起发布，查看文档：
+  
+  > https://www.typescriptlang.org/docs/handbook/declaration-files/dts-from-js.html
+  
+　　在使用第三方库时，如果作者发布时没有附带类型定义文件，我们则可以去社区维护的 [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) 仓库中看看，使用 npm 命令即可查询：
+  
+```bash
+npm info @types/react
+```
+
 ### 参考资料
 
 - https://github.com/sarbbottam/write-an-open-source-js-lib
