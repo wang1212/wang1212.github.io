@@ -198,6 +198,16 @@ npm <span class="hljs-built_in">logout</span> [--registry=url] [--scope=@orgname
 <blockquote>
 <p><a href="https://nodejs.org/dist/latest-v16.x/docs/api/packages.html#package-entry-points">https://nodejs.org/dist/latest-v16.x/docs/api/packages.html#package-entry-points</a></p>
 </blockquote>
+<p> 　　示例：</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;exports&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> 
+    <span class="hljs-attr">&quot;import&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./index.esm.js&quot;</span><span class="hljs-punctuation">,</span> 
+    <span class="hljs-attr">&quot;require&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./index.cjs.js&quot;</span><span class="hljs-punctuation">,</span> 
+    <span class="hljs-attr">&quot;browser&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./index.umd.js&quot;</span> 
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> 
+  <span class="hljs-attr">&quot;main&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./index.cjs.js&quot;</span><span class="hljs-punctuation">,</span> 
+<span class="hljs-punctuation">}</span>
+</code></pre>
 <h3 id="类型定义">类型定义</h3>
 <p>　　JavaScript 并不是一个强类型语言，所以 IDE 要做类型推断和代码智能提示是比较困难的，尤其是编译、压缩、混淆后的代码对于用户使用有诸多不便，要不断的查询文档。然而，<a href="https://www.typescriptlang.org/">TypeScript</a> 的出现使这一状况得到了改善，如果源代码直接使用 TypeScript 编写，最终编译时生成<strong>类型定义文件</strong>，在发布 npm 模块/包时指定一个 <code>types</code> 字段即可，查看文档：</p>
 <blockquote>
@@ -213,4 +223,5 @@ npm <span class="hljs-built_in">logout</span> [--registry=url] [--scope=@orgname
 <h3 id="参考资料">参考资料</h3>
 <ul>
 <li><a href="https://github.com/sarbbottam/write-an-open-source-js-lib">https://github.com/sarbbottam/write-an-open-source-js-lib</a></li>
+<li><a href="https://reactjs.org/blog/2017/12/15/improving-the-repository-infrastructure.html">https://reactjs.org/blog/2017/12/15/improving-the-repository-infrastructure.html</a></li>
 </ul>

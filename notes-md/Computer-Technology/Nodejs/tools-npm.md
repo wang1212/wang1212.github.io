@@ -17,7 +17,7 @@ keywords:
   - npm
 summary: npm 是 Node.js 的一个包管理器，Web 前端工程师也经常利用它构建前端工作流，来看看如何愉快的使用 npm。
 ctime: '2019-07-06 15:43:00'
-mtime: '2022-05-08 01:04:00'
+mtime: '2022-05-14 14:27:00'
 author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
@@ -329,6 +329,19 @@ if (process.env.NODE_ENV === 'production') {
   
   > https://nodejs.org/dist/latest-v16.x/docs/api/packages.html#package-entry-points
   
+ 　　示例：
+   
+```json
+{
+  "exports": { 
+    "import": "./index.esm.js", 
+    "require": "./index.cjs.js", 
+    "browser": "./index.umd.js" 
+  }, 
+  "main": "./index.cjs.js", 
+}
+```
+  
 ### 类型定义
 
 　　JavaScript 并不是一个强类型语言，所以 IDE 要做类型推断和代码智能提示是比较困难的，尤其是编译、压缩、混淆后的代码对于用户使用有诸多不便，要不断的查询文档。然而，[TypeScript](https://www.typescriptlang.org/) 的出现使这一状况得到了改善，如果源代码直接使用 TypeScript 编写，最终编译时生成**类型定义文件**，在发布 npm 模块/包时指定一个 `types` 字段即可，查看文档：
@@ -348,3 +361,4 @@ npm info @types/react
 ### 参考资料
 
 - https://github.com/sarbbottam/write-an-open-source-js-lib
+- https://reactjs.org/blog/2017/12/15/improving-the-repository-infrastructure.html
