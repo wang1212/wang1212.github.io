@@ -1,0 +1,93 @@
+<p>　　对于 Web 的图表组件库来说，一些功能比较强大的开源库，渲染层可以支持 DOM、SVG、Canvas、WebGL 等多个平台的环境，而图表库的很多功能的实现都和渲染层紧密相关。</p>
+<p>　　最近，在参考学习一些开源的图表组件库时，发现在跨平台设计中，事件机制的实现很有意思，所以在这里以最简化的代码来解释和记录一下这个方案。如果要用经典的软件设计模式来解释，大概就是<strong>桥接模式</strong>了。</p>
+<p>　　<strong>桥接模式（Bridge Pattern）</strong> 将一个功能的实现拆分为抽象（Abstraction）和实现（Implementor），让其相互独立的扩展和定义，借助该模式可以设计一种平台无关的软件架构。</p>
+<h2 id="事件机制">事件机制</h2>
+<p>　　事件机制是软件设计中最基础、最为常见的一种设计，对于 Web 图表组件库来说要提供一些处理用户交互（例如点击、拖动、右键点击等）的机制。一个典型的事件模型类如下：</p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Event</span> {
+  _handlerMap = {}
+  <span class="hljs-title function_">on</span>(<span class="hljs-params">event, callback</span>) {}
+  <span class="hljs-title function_">off</span>(<span class="hljs-params">event, callback</span>) {}
+  <span class="hljs-title function_">trigger</span>(<span class="hljs-params">event, ...args</span>) {}
+}
+</code></pre>
+<p>　　对于用户来说，对外暴露 <code>on()</code> 和 <code>off()</code> 方法来注册和取消事件，而图表库内部需要完成事件触发（<code>trigger()</code>）的实现，而这里与渲染层耦合。以渲染层为 DOM 实现来举例，支持点击事件：</p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Chart</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-comment">// 渲染层为 DOM 实现</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">__renderer</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DOMRenderer</span>();
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">_handler</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Event</span>();
+  }
+    
+  <span class="hljs-title function_">on</span>(<span class="hljs-params">...args</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">_handler</span>.<span class="hljs-title function_">on</span>(...args);
+  }
+    
+  <span class="hljs-title function_">off</span>(<span class="hljs-params">...args</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">_handler</span>.<span class="hljs-title function_">off</span>(...args);
+  }
+    
+  <span class="hljs-title function_">__bindEvent</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-comment">// ! 事件触发（绑定）与渲染层耦合</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">__renderer</span>.<span class="hljs-property">domElem</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">_handler</span>.<span class="hljs-title function_">trigger</span>(<span class="hljs-string">&#x27;click&#x27;</span>, ...[event, ...otherArgs]);
+    });
+  }
+}
+</code></pre>
+<h3 id="跨平台实现">跨平台实现</h3>
+<p>　　参考<strong>桥接模式</strong>，这里可以把图表类中的事件机制实现拆分为抽象（<code>Handler</code>）和实现（<code>HandlerProxy</code>），前者管理用户注册的事件池，后者负责特定平台的事件触发实现。示例代码如下：</p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Handler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Event</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">handlerProxy</span>) {
+    <span class="hljs-variable language_">super</span>();
+    
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">__handlerProxy</span> = handlerProxy;
+    
+    <span class="hljs-comment">// 注册事件到代理类中</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">__handlerProxy</span>.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">event, ...args</span>) =&gt;</span> {
+      <span class="hljs-comment">// ! 触发用户注册的事件</span>
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">trigger</span>(event, ...args);
+    });
+  }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">DOMHandlerProxy</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Event</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">renderer</span>) {
+    <span class="hljs-variable language_">super</span>();
+    
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">__renderer</span> = renderer;
+  }
+    
+  <span class="hljs-title function_">__bindEvent</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-comment">// 根据渲染层的平台实现事件绑定，以 DOM 实现为例</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">renderer</span>.<span class="hljs-property">domElem</span>.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">event, ...args</span>) =&gt;</span> {
+      <span class="hljs-comment">// ! 触发 Handler 注册的事件</span>
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">trigger</span>(event, ...args);
+    });
+  }
+}
+</code></pre>
+<p>　　对于图表类来说，<code>Handler</code> 类提供了完整的事件机制，但其内部把具体平台相关的事件触发实现交给 <code>HandlerProxy</code> 类去实现。这样就完成了事件机制的实现与特定平台实现分离的目标，针对不同平台实现不同的<code>HandlerProxy</code> 类即可。现在图表类的代码应该如下：</p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Chart</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-comment">// 渲染层为 DOM 实现</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">__renderer</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DOMRenderer</span>();
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">_handler</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Handler</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">DOMHandlerProxy</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">__renderer</span>));
+  }
+    
+  <span class="hljs-title function_">on</span>(<span class="hljs-params">...args</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">_handler</span>.<span class="hljs-title function_">on</span>(...args);
+  }
+    
+  <span class="hljs-title function_">off</span>(<span class="hljs-params">...args</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">_handler</span>.<span class="hljs-title function_">off</span>(...args);
+  }
+}
+</code></pre>
+<p>　　现在来看，图表类中之前事件触发实现与平台相关的代码已经被独立出去，且可以根据不同的渲染层实现完成无缝衔接。</p>
+<h2 id="结语">结语</h2>
+<p>　　以上就是利用桥接模式对跨平台的事件机制的简化设计，解决此类问题时，最重要的是划分<strong>抽象</strong>和<strong>实现</strong>两部分。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Bridge_pattern">https://en.wikipedia.org/wiki/Bridge_pattern</a></li>
+<li><a href="https://refactoringguru.cn/design-patterns/bridge">https://refactoringguru.cn/design-patterns/bridge</a></li>
+</ul>
