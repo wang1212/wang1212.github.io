@@ -23,7 +23,7 @@ author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 　　事件机制是软件设计中最基础、最为常见的一种设计，对于 Web 图表组件库来说要提供一些处理用户交互（例如点击、拖动、右键点击等）的机制。一个典型的事件模型类如下：
   
 ```js
-class Event {
+class EventEmitter {
   _handlerMap = {}
   on(event, callback) {}
   off(event, callback) {}
@@ -38,7 +38,7 @@ class Chart {
   constructor() {
     // 渲染层为 DOM 实现
     this.__renderer = new DOMRenderer();
-    this._handler = new Event();
+    this._handler = new EventEmitter();
   }
     
   on(...args) {
@@ -63,7 +63,7 @@ class Chart {
 　　参考**桥接模式**，这里可以把图表类中的事件机制实现拆分为抽象（`Handler`）和实现（`HandlerProxy`），前者管理用户注册的事件池，后者负责特定平台的事件触发实现。示例代码如下：
   
 ```js
-class Handler extends Event {
+class Handler extends EventEmitter {
   constructor(handlerProxy) {
     super();
     
@@ -77,7 +77,7 @@ class Handler extends Event {
   }
 }
 
-class DOMHandlerProxy extends Event {
+class DOMHandlerProxy extends EventEmitter {
   constructor(renderer) {
     super();
     

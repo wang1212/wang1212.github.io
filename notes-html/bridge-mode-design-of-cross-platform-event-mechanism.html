@@ -3,7 +3,7 @@
 <p>　　<strong>桥接模式（Bridge Pattern）</strong> 将一个功能的实现拆分为抽象（Abstraction）和实现（Implementor），让其相互独立的扩展和定义，借助该模式可以设计一种平台无关的软件架构。</p>
 <h2 id="事件机制">事件机制</h2>
 <p>　　事件机制是软件设计中最基础、最为常见的一种设计，对于 Web 图表组件库来说要提供一些处理用户交互（例如点击、拖动、右键点击等）的机制。一个典型的事件模型类如下：</p>
-<pre><code class="hljs language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Event</span> {
+<pre><code class="hljs language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">EventEmitter</span> {
   _handlerMap = {}
   <span class="hljs-title function_">on</span>(<span class="hljs-params">event, callback</span>) {}
   <span class="hljs-title function_">off</span>(<span class="hljs-params">event, callback</span>) {}
@@ -15,7 +15,7 @@
   <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {
     <span class="hljs-comment">// 渲染层为 DOM 实现</span>
     <span class="hljs-variable language_">this</span>.<span class="hljs-property">__renderer</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DOMRenderer</span>();
-    <span class="hljs-variable language_">this</span>.<span class="hljs-property">_handler</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Event</span>();
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">_handler</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>();
   }
     
   <span class="hljs-title function_">on</span>(<span class="hljs-params">...args</span>) {
@@ -36,7 +36,7 @@
 </code></pre>
 <h3 id="跨平台实现">跨平台实现</h3>
 <p>　　参考<strong>桥接模式</strong>，这里可以把图表类中的事件机制实现拆分为抽象（<code>Handler</code>）和实现（<code>HandlerProxy</code>），前者管理用户注册的事件池，后者负责特定平台的事件触发实现。示例代码如下：</p>
-<pre><code class="hljs language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Handler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Event</span> {
+<pre><code class="hljs language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Handler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">EventEmitter</span> {
   <span class="hljs-title function_">constructor</span>(<span class="hljs-params">handlerProxy</span>) {
     <span class="hljs-variable language_">super</span>();
     
@@ -50,7 +50,7 @@
   }
 }
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">DOMHandlerProxy</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Event</span> {
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">DOMHandlerProxy</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">EventEmitter</span> {
   <span class="hljs-title function_">constructor</span>(<span class="hljs-params">renderer</span>) {
     <span class="hljs-variable language_">super</span>();
     
