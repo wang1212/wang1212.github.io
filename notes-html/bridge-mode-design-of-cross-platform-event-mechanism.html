@@ -7,10 +7,10 @@
   _handlerMap = {}
   <span class="hljs-title function_">on</span>(<span class="hljs-params">event, callback</span>) {}
   <span class="hljs-title function_">off</span>(<span class="hljs-params">event, callback</span>) {}
-  <span class="hljs-title function_">trigger</span>(<span class="hljs-params">event, ...args</span>) {}
+  <span class="hljs-title function_">emit</span>(<span class="hljs-params">event, ...args</span>) {}
 }
 </code></pre>
-<p>　　对于用户来说，对外暴露 <code>on()</code> 和 <code>off()</code> 方法来注册和取消事件，而图表库内部需要完成事件触发（<code>trigger()</code>）的实现，而这里与渲染层耦合。以渲染层为 DOM 实现来举例，支持点击事件：</p>
+<p>　　对于用户来说，对外暴露 <code>on()</code> 和 <code>off()</code> 方法来注册和取消事件，而图表库内部需要完成事件触发（<code>emit()</code>）的实现，而这里与渲染层耦合。以渲染层为 DOM 实现来举例，支持点击事件：</p>
 <pre><code class="hljs language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Chart</span> {
   <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {
     <span class="hljs-comment">// 渲染层为 DOM 实现</span>
@@ -29,7 +29,7 @@
   <span class="hljs-title function_">__bindEvent</span>(<span class="hljs-params"></span>) {
     <span class="hljs-comment">// ! 事件触发（绑定）与渲染层耦合</span>
     <span class="hljs-variable language_">this</span>.<span class="hljs-property">__renderer</span>.<span class="hljs-property">domElem</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {
-      <span class="hljs-variable language_">this</span>.<span class="hljs-property">_handler</span>.<span class="hljs-title function_">trigger</span>(<span class="hljs-string">&#x27;click&#x27;</span>, ...[event, ...otherArgs]);
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">_handler</span>.<span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;click&#x27;</span>, ...[event, ...otherArgs]);
     });
   }
 }
@@ -45,7 +45,7 @@
     <span class="hljs-comment">// 注册事件到代理类中</span>
     <span class="hljs-variable language_">this</span>.<span class="hljs-property">__handlerProxy</span>.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">event, ...args</span>) =&gt;</span> {
       <span class="hljs-comment">// ! 触发用户注册的事件</span>
-      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">trigger</span>(event, ...args);
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">emit</span>(event, ...args);
     });
   }
 }
@@ -61,7 +61,7 @@
     <span class="hljs-comment">// 根据渲染层的平台实现事件绑定，以 DOM 实现为例</span>
     <span class="hljs-variable language_">this</span>.<span class="hljs-property">renderer</span>.<span class="hljs-property">domElem</span>.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">event, ...args</span>) =&gt;</span> {
       <span class="hljs-comment">// ! 触发 Handler 注册的事件</span>
-      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">trigger</span>(event, ...args);
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">emit</span>(event, ...args);
     });
   }
 }

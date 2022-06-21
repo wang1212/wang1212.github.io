@@ -27,11 +27,11 @@ class EventEmitter {
   _handlerMap = {}
   on(event, callback) {}
   off(event, callback) {}
-  trigger(event, ...args) {}
+  emit(event, ...args) {}
 }
 ```
  
-　　对于用户来说，对外暴露 `on()` 和 `off()` 方法来注册和取消事件，而图表库内部需要完成事件触发（`trigger()`）的实现，而这里与渲染层耦合。以渲染层为 DOM 实现来举例，支持点击事件：
+　　对于用户来说，对外暴露 `on()` 和 `off()` 方法来注册和取消事件，而图表库内部需要完成事件触发（`emit()`）的实现，而这里与渲染层耦合。以渲染层为 DOM 实现来举例，支持点击事件：
   
 ```js
 class Chart {
@@ -52,7 +52,7 @@ class Chart {
   __bindEvent() {
     // ! 事件触发（绑定）与渲染层耦合
     this.__renderer.domElem.addEventListener('click', event => {
-      this._handler.trigger('click', ...[event, ...otherArgs]);
+      this._handler.emit('click', ...[event, ...otherArgs]);
     });
   }
 }
@@ -72,7 +72,7 @@ class Handler extends EventEmitter {
     // 注册事件到代理类中
     this.__handlerProxy.on('click', (event, ...args) => {
       // ! 触发用户注册的事件
-      this.trigger(event, ...args);
+      this.emit(event, ...args);
     });
   }
 }
@@ -88,7 +88,7 @@ class DOMHandlerProxy extends EventEmitter {
     // 根据渲染层的平台实现事件绑定，以 DOM 实现为例
     this.renderer.domElem.on('click', (event, ...args) => {
       // ! 触发 Handler 注册的事件
-      this.trigger(event, ...args);
+      this.emit(event, ...args);
     });
   }
 }
