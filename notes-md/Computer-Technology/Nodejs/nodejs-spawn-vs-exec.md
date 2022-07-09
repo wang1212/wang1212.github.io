@@ -11,7 +11,7 @@ keywords:
   - exec
 summary: 使用 Node.js 编写一些脚本工具是非常方便的，而常用的 spawn 与 exec API 有什么不同呢？
 ctime: '2021-08-25 00:21:00'
-mtime: '2021-08-30 00:03:00'
+mtime: '2022-07-09 15:38:00'
 author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
@@ -171,6 +171,7 @@ const execa = require('execa');
 - https://nodejs.org/dist/latest/docs/api/child_process.html
 - https://stackoverflow.com/questions/48698234/node-js-spawn-vs-execute
 - https://www.hacksparrow.com/nodejs/difference-between-spawn-and-exec-of-node-js-child-rocess.html
-- https://github.com/sindresorhus/execa
 - https://linuxhint.com/linux-exec-system-call/
+- https://2ality.com/2022/07/nodejs-child-process.html
+- https://github.com/sindresorhus/execa
 
