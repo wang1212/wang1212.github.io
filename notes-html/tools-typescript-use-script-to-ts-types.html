@@ -1,0 +1,44 @@
+<p>　　在发布 npm 包时添加对 TypeScript 类型定义文件的支持会让用户的使用体验增色不少，TypeScript 官方提供了 <code>tsc --emitDeclarationOnly</code> 命令用来生成类型定义文件（<code>.d.ts</code>）。但是，该命令会同时执行类型检查，遇到错误时会报错中断命令行进程，这就使其无法直接集成在 CI 环节在发布 npm 包时自动执行生成类型定义文件的操作。当然，一个解决办法就是解决掉代码中所有的类型检查错误即可，既然讨论到这个问题，必然不会花费额外精力去解决一些历史遗留问题。</p>
+<pre><code class="hljs language-bash">tsc --emitDeclarationOnly
+</code></pre>
+<p>　　怎么能让以上脚本在执行时不做类型检查（或者说忽略错误，例如类似 <code>silent</code> 标志位），在查阅了很多资料之后，显然 TypeScript 官方没有对其支持（因为他们认为忽略类型检查错误就失去了使用 TypeScript 的意义），但另一方面前端生态的很多工具链却都一致的推荐使用类 Babel 这种编译方案（不做类型检查），而且有很多开发者是有这样的需求的。在查阅很多资料无果后，突然想到前段时间学习了 Nodejs 的 <code>child_process</code> API，可以用其来写一些工具脚本，最终有了一个待实践的方案：利用 JS 脚本执行该命令，但忽略类型检查错误不让进程中断，这样就可以安全的集成到 CI 环节中。经过实践，确实能达到预期效果，贴出代码：</p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> { execSync } =   <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;node:child_process&#x27;</span>);
+
+<span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">const</span> args = process.<span class="hljs-property">argv</span>.<span class="hljs-title function_">slice</span>(<span class="hljs-number">2</span>);
+  <span class="hljs-keyword">let</span> isSilent = args.<span class="hljs-title function_">findIndex</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.<span class="hljs-title function_">trim</span>() === <span class="hljs-string">&#x27;--silent&#x27;</span>);
+  <span class="hljs-keyword">if</span> (isSilent &gt; -<span class="hljs-number">1</span>) {
+    args.<span class="hljs-title function_">splice</span>(isSilent, <span class="hljs-number">1</span>);
+    isSilent = <span class="hljs-literal">true</span>;
+  } <span class="hljs-keyword">else</span> {
+    isSilent = <span class="hljs-literal">false</span>;
+  }
+
+  <span class="hljs-keyword">if</span> (isSilent) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;[generate-types] silent mode&#x27;</span>);
+  }
+
+  <span class="hljs-comment">// see https://nodejs.org/dist/latest-v16.x/docs/api/child_process.html#optionsstdio</span>
+  <span class="hljs-keyword">const</span> result = <span class="hljs-title function_">execSync</span>(<span class="hljs-string">`npx tsc --emitDeclarationOnly <span class="hljs-subst">${args.join(<span class="hljs-string">&#x27; &#x27;</span>)}</span>`</span>, {
+    <span class="hljs-attr">cwd</span>: <span class="hljs-variable constant_">WORKING_DIRECTORY</span>,
+    <span class="hljs-attr">encoding</span>: <span class="hljs-string">&#x27;utf8&#x27;</span>,
+    <span class="hljs-attr">stdio</span>: isSilent ? <span class="hljs-string">&#x27;ignore&#x27;</span> : [<span class="hljs-string">&#x27;inherit&#x27;</span>, <span class="hljs-string">&#x27;inherit&#x27;</span>, <span class="hljs-string">&#x27;ignore&#x27;</span>]
+    <span class="hljs-comment">// stdio: [&#x27;inherit&#x27;, &#x27;inherit&#x27;, &#x27;ignore&#x27;]</span>
+  });
+} <span class="hljs-keyword">catch</span> (error) {
+  <span class="hljs-comment">// eslint-disable-next-line no-console</span>
+  <span class="hljs-comment">// console.error(error.stdout);</span>
+}
+</code></pre>
+<p>　　这里实际上是使用了 <code>stdio</code> 配置项去控制子进程的执行结果怎么交由父进程来处理，利用 <code>silent</code> 标志位将所有的输出信息忽略，或者仅忽略掉错误信息，类型检查的结果信息依然可以打印到控制台以做参考。</p>
+<pre><code class="hljs language-bash">node generate-types.cjs --silent
+
+node generate-types.cjs
+
+node generate-types.cjs --watch <span class="hljs-comment"># 等同于 tsc --emitDeclarationOnly --watch</span>
+</code></pre>
+<p>　　至此，利用脚本执行命令可以轻松解决无法控制程序命令行为的问题。</p>
+<h2 id="参考资源">参考资源</h2>
+<ul>
+<li><a href="https://www.typescriptlang.org/docs/handbook/declaration-files/dts-from-js.html">https://www.typescriptlang.org/docs/handbook/declaration-files/dts-from-js.html</a></li>
+</ul>

@@ -2,9 +2,13 @@
 title: JavaScript 异步编程
 tags:
   - 计算机技术
+  - Web
+  - Web 前端
   - JavaScript
 keywords:
   - 计算机技术
+  - Web
+  - Web 前端
   - JavaScript
   - 异步编程
 summary: >-
