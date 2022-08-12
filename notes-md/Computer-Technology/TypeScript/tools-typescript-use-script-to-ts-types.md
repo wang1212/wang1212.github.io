@@ -11,7 +11,7 @@ keywords:
   - 类型定义
 summary: TypeScript 作为一个强类型的语言，增强了 JavaScript 编程开发体验，类型定义文件为一个第三方模块的使用体验增色不少，现如今很多 npm 包的发布都内置了对类型定义文件的支持。
 ctime: '2022-08-06 17:33:00'
-mtime: '2022-08-06 17:33:00'
+mtime: '2022-08-13 02:46:00'
 author: 不如怀念 ([@wang1212](https://github.com/wang1212))
 ---
 
@@ -45,15 +45,13 @@ try {
     cwd: WORKING_DIRECTORY,
     encoding: 'utf8',
     stdio: isSilent ? 'ignore' : ['inherit', 'inherit', 'ignore']
-    // stdio: ['inherit', 'inherit', 'ignore']
   });
 } catch (error) {
-  // eslint-disable-next-line no-console
-  // console.error(error.stdout);
+  // console.error(error.message);
 }
 ```
 
-　　这里实际上是使用了 `stdio` 配置项去控制子进程的执行结果怎么交由父进程来处理，利用 `silent` 标志位将所有的输出信息忽略，或者仅忽略掉错误信息，类型检查的结果信息依然可以打印到控制台以做参考。
+　　这里实际上是利用 `try ... catch` 将错误捕获，防止其导致进程异常中断；另外，使用了 `stdio` 配置项去控制子进程的执行结果信息怎么交由父进程来处理，利用 `silent` 标志位将所有的输出信息忽略，或者仅忽略掉错误信息，类型检查的结果信息依然可以打印到控制台以做参考。
   
 ```bash
 node generate-types.cjs --silent
@@ -61,6 +59,18 @@ node generate-types.cjs --silent
 node generate-types.cjs
 
 node generate-types.cjs --watch # 等同于 tsc --emitDeclarationOnly --watch
+```
+
+　　在实际使用的过程中，发现 CI 环节的 Node 环境中会报错（`npx` 不存在），解决方案就是将要执行的命令写成 npm 脚本，在 js 脚本中运行 npm 脚本即可，例如：
+  
+```js
+// npm 脚本
+{
+    "tsc:types": "tsc --emitDeclarationOnly"
+}
+
+// js 脚本
+execSync(`npm run tsc:types`);
 ```
 
 　　至此，利用脚本执行命令可以轻松解决无法控制程序命令行为的问题。

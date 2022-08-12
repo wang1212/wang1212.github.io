@@ -23,19 +23,26 @@
     <span class="hljs-attr">cwd</span>: <span class="hljs-variable constant_">WORKING_DIRECTORY</span>,
     <span class="hljs-attr">encoding</span>: <span class="hljs-string">&#x27;utf8&#x27;</span>,
     <span class="hljs-attr">stdio</span>: isSilent ? <span class="hljs-string">&#x27;ignore&#x27;</span> : [<span class="hljs-string">&#x27;inherit&#x27;</span>, <span class="hljs-string">&#x27;inherit&#x27;</span>, <span class="hljs-string">&#x27;ignore&#x27;</span>]
-    <span class="hljs-comment">// stdio: [&#x27;inherit&#x27;, &#x27;inherit&#x27;, &#x27;ignore&#x27;]</span>
   });
 } <span class="hljs-keyword">catch</span> (error) {
-  <span class="hljs-comment">// eslint-disable-next-line no-console</span>
-  <span class="hljs-comment">// console.error(error.stdout);</span>
+  <span class="hljs-comment">// console.error(error.message);</span>
 }
 </code></pre>
-<p>　　这里实际上是使用了 <code>stdio</code> 配置项去控制子进程的执行结果怎么交由父进程来处理，利用 <code>silent</code> 标志位将所有的输出信息忽略，或者仅忽略掉错误信息，类型检查的结果信息依然可以打印到控制台以做参考。</p>
+<p>　　这里实际上是利用 <code>try ... catch</code> 将错误捕获，防止其导致进程异常中断；另外，使用了 <code>stdio</code> 配置项去控制子进程的执行结果信息怎么交由父进程来处理，利用 <code>silent</code> 标志位将所有的输出信息忽略，或者仅忽略掉错误信息，类型检查的结果信息依然可以打印到控制台以做参考。</p>
 <pre><code class="hljs language-bash">node generate-types.cjs --silent
 
 node generate-types.cjs
 
 node generate-types.cjs --watch <span class="hljs-comment"># 等同于 tsc --emitDeclarationOnly --watch</span>
+</code></pre>
+<p>　　在实际使用的过程中，发现 CI 环节的 Node 环境中会报错（<code>npx</code> 不存在），解决方案就是将要执行的命令写成 npm 脚本，在 js 脚本中运行 npm 脚本即可，例如：</p>
+<pre><code class="hljs language-js"><span class="hljs-comment">// npm 脚本</span>
+{
+    <span class="hljs-string">&quot;tsc:types&quot;</span>: <span class="hljs-string">&quot;tsc --emitDeclarationOnly&quot;</span>
+}
+
+<span class="hljs-comment">// js 脚本</span>
+<span class="hljs-title function_">execSync</span>(<span class="hljs-string">`npm run tsc:types`</span>);
 </code></pre>
 <p>　　至此，利用脚本执行命令可以轻松解决无法控制程序命令行为的问题。</p>
 <h2 id="参考资源">参考资源</h2>
