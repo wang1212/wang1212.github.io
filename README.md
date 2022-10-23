@@ -16,7 +16,7 @@
 
 _Open source tools used in my blog._
 
-- [Bootstrap](https://getbootstrap.com/)
+- [Docusaurus](https://docusaurus.io/)
 
 ## 开发准则
 
