@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[2240],{16379:a=>{a.exports=JSON.parse('{"label":"CPU","permalink":"/tags/cpu","allTagsPath":"/tags","count":1}')}}]);
