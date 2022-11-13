@@ -1,0 +1,18 @@
+.word {
+  cursor: pointer;
+}
+.word:hover {
+  /* font-weight: bold !important; */
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.tag-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.tag-list > * {
+  margin-right: 8px;
+  margin-bottom: 8px;
+  border-radius: 0;
+}

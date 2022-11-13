@@ -1,3 +1,4 @@
+import styles from './index.module.css';
 import React, { useEffect, useState } from 'react';
 import Link from '@docusaurus/Link';
 import { PageMetadata } from '@docusaurus/theme-common';
@@ -119,7 +120,7 @@ function YearsSection({ years }: { years: YearProps[] }) {
           {years
             .sort((a, b) => Number(b.year) - Number(a.year))
             .map((_props, idx) => (
-              <div key={idx} className="col col--4 margin-vert--lg">
+              <div key={idx} className="col col--4 margin-bottom--lg">
                 <Year {..._props} />
               </div>
             ))}
@@ -162,21 +163,22 @@ function getTagMap(blogPosts: readonly ArchiveBlogPost[]): TagMap {
 }
 
 export default function BlogArchivePageWrapper(props: Props) {
-  const years = listPostsByYear(props.archive.blogPosts);
+  const [years, setYears] = useState([]);
+  const [tag, setTag] = useState<string | null>(null);
   const title = customConfig.archive.title;
+  const tagMap = getTagMap(props.archive.blogPosts);
+  const tagList = Array.from(tagMap, ([tagName, tagData]) => [
+    tagName,
+    tagData.count,
+  ]);
 
   useEffect(() => {
     // ! 客户端代码中引入第三方库
     const WordCloud = require('wordcloud');
-    const tagMap = getTagMap(props.archive.blogPosts);
-    const tagList = Array.from(tagMap, ([tagName, tagData]) => [
-      tagName,
-      tagData.count,
-    ]);
 
     WordCloud(document.getElementById('wordcloud'), {
-      list: tagList,
-      // classes: 'word',
+      list: tagList.filter((tagItem) => tagItem[1] > 1),
+      classes: styles['word'],
       backgroundColor: 'transparent',
       shape: 'square',
       weightFactor: 2,
@@ -191,6 +193,7 @@ export default function BlogArchivePageWrapper(props: Props) {
       ),
       shrinkToFit: true,
       click(item) {
+        setTag(item[0]);
         // location.hash = `#/notes/${item[0]}`;
       },
     });
@@ -198,7 +201,17 @@ export default function BlogArchivePageWrapper(props: Props) {
     return () => {
       WordCloud.stop();
     };
-  }, []);
+  }, [setTag]);
+
+  useEffect(() => {
+    const posts = !tag
+      ? props.archive.blogPosts
+      : props.archive.blogPosts.filter((post) =>
+          post.metadata.frontMatter.tags.includes(tag)
+        );
+
+    setYears(listPostsByYear(posts));
+  }, [tag, setYears]);
 
   return (
     <>
@@ -216,14 +229,45 @@ export default function BlogArchivePageWrapper(props: Props) {
           </div>
         </header>
         <main>
-          <section className="margin-top--lg">
-            <div
-              id="wordcloud"
-              className="container"
-              style={{ height: '300px' }}
-            ></div>
-          </section>
-          {years.length > 0 ? <YearsSection years={years} /> : ''}
+          {props.archive.blogPosts.length > 0 ? (
+            <>
+              <section className="margin-top--lg">
+                <div
+                  id="wordcloud"
+                  className="container"
+                  style={{ height: '300px' }}
+                ></div>
+              </section>
+              <section className="margin-top--lg">
+                <div className="container">
+                  <hr className="margin-vert--lg" style={{ opacity: 0.25 }} />
+                  <ul className={styles['tag-list']}>
+                    {tagList
+                      .slice()
+                      .sort((a, b) => b[1] - a[1])
+                      .map((tagItem) => (
+                        <li
+                          key={tagItem[0]}
+                          className={`button button--sm button--outline button--secondary ${
+                            tag === tagItem[0] ? 'button--active' : ''
+                          }`}
+                          onClick={() =>
+                            setTag(
+                              tag === tagItem[0] ? null : (tagItem[0] as string)
+                            )
+                          }
+                        >
+                          {tagItem[0]} {tagItem[1]}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              </section>
+              {years.length ? <YearsSection years={years} /> : ''}
+            </>
+          ) : (
+            ''
+          )}
         </main>
       </Layout>
       {/* <BlogArchivePage {...props} /> */}
