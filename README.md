@@ -17,6 +17,7 @@
 _Open source tools used in my blog._
 
 - [Docusaurus](https://docusaurus.io/)
+- [wordcloud2.js](https://github.com/timdream/wordcloud2.js)
 
 ## 开发准则
 

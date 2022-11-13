@@ -4,7 +4,6 @@ import { PageMetadata } from '@docusaurus/theme-common';
 import Layout from '@theme/Layout';
 import type { ArchiveBlogPost, Props } from '@theme/BlogArchivePage';
 import BlogArchivePage from '@theme-original/BlogArchivePage';
-import WordCloud from 'wordcloud';
 
 /**
  * ! 覆盖内部实现
@@ -167,6 +166,8 @@ export default function BlogArchivePageWrapper(props: Props) {
   const title = customConfig.archive.title;
 
   useEffect(() => {
+    // ! 客户端代码中引入第三方库
+    const WordCloud = require('wordcloud');
     const tagMap = getTagMap(props.archive.blogPosts);
     const tagList = Array.from(tagMap, ([tagName, tagData]) => [
       tagName,
