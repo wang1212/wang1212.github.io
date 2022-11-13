@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from '@docusaurus/Link';
 import { PageMetadata } from '@docusaurus/theme-common';
 import Layout from '@theme/Layout';
 import type { ArchiveBlogPost, Props } from '@theme/BlogArchivePage';
 import BlogArchivePage from '@theme-original/BlogArchivePage';
+import WordCloud from 'wordcloud';
 
 /**
  * ! 覆盖内部实现
@@ -59,14 +60,15 @@ function Month({ year, month, posts }: MonthProps) {
               <small>
                 发布于 {formatterDate(post.metadata.frontMatter.date as string)}
               </small>{' '}
-              {(post.metadata.frontMatter.update !==
-                post.metadata.frontMatter.date && (
+              {post.metadata.frontMatter.update !==
+              post.metadata.frontMatter.date ? (
                 <small>
                   最后更新于{' '}
                   {formatterDate(post.metadata.frontMatter.update as string)}
                 </small>
-              )) ||
-                ''}
+              ) : (
+                ''
+              )}
             </div>
           </li>
         ))}
@@ -141,9 +143,61 @@ function listPostsByYear(blogPosts: readonly ArchiveBlogPost[]): YearProps[] {
   }));
 }
 
+type TagMap = Map<string, { item: unknown; count: number }>;
+
+function getTagMap(blogPosts: readonly ArchiveBlogPost[]): TagMap {
+  const tagMap: TagMap = new Map();
+
+  blogPosts.forEach((post) => {
+    (post.metadata.tags || []).forEach((tag) => {
+      let tagData = tagMap.get(tag.label);
+      if (!tagMap.has(tag.label)) {
+        tagData = { item: tag, count: 0 };
+      }
+      tagData.count++;
+      tagMap.set(tag.label, tagData);
+    });
+  });
+
+  return tagMap;
+}
+
 export default function BlogArchivePageWrapper(props: Props) {
   const years = listPostsByYear(props.archive.blogPosts);
   const title = customConfig.archive.title;
+
+  useEffect(() => {
+    const tagMap = getTagMap(props.archive.blogPosts);
+    const tagList = Array.from(tagMap, ([tagName, tagData]) => [
+      tagName,
+      tagData.count,
+    ]);
+
+    WordCloud(document.getElementById('wordcloud'), {
+      list: tagList,
+      // classes: 'word',
+      backgroundColor: 'transparent',
+      shape: 'square',
+      weightFactor: 2,
+      rotateRatio: 0.5,
+      rotationSteps: 2,
+      fontFamily: 'Impact',
+      color: 'random-light',
+      gridSize: Math.round(
+        (24 *
+          document.getElementById('wordcloud').getBoundingClientRect().width) /
+          1024
+      ),
+      shrinkToFit: true,
+      click(item) {
+        // location.hash = `#/notes/${item[0]}`;
+      },
+    });
+
+    return () => {
+      WordCloud.stop();
+    };
+  }, []);
 
   return (
     <>
@@ -160,7 +214,16 @@ export default function BlogArchivePageWrapper(props: Props) {
             </p>
           </div>
         </header>
-        <main>{years.length > 0 && <YearsSection years={years} />}</main>
+        <main>
+          <section className="margin-top--lg">
+            <div
+              id="wordcloud"
+              className="container"
+              style={{ height: '300px' }}
+            ></div>
+          </section>
+          {years.length > 0 ? <YearsSection years={years} /> : ''}
+        </main>
       </Layout>
       {/* <BlogArchivePage {...props} /> */}
     </>

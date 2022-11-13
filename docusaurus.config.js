@@ -81,7 +81,7 @@ const config = {
           //   label: 'Tutorial',
           // },
           { to: '/archive', label: '归档', position: 'left' },
-          { to: '/tags', label: '标签', position: 'left' },
+          // { to: '/tags', label: '标签', position: 'left' },
           {
             href: 'https://github.com/wang1212/wang1212.github.io',
             label: 'Source',
