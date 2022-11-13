@@ -51,8 +51,10 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/wang1212/wang1212.github.io/tree/master/',
-          blogSidebarCount: 'ALL',
-          blogSidebarTitle: '所有文章',
+          // blogSidebarCount: 'ALL',
+          // blogSidebarTitle: '所有文章',
+          blogSidebarCount: 10,
+          blogSidebarTitle: '近期文章',
           // postsPerPage: 10,
         },
         theme: {
@@ -78,8 +80,8 @@ const config = {
           //   position: 'left',
           //   label: 'Tutorial',
           // },
-          { to: '/archive', label: '文章归档', position: 'left' },
-          { to: '/tags', label: '标签分类', position: 'left' },
+          { to: '/archive', label: '归档', position: 'left' },
+          { to: '/tags', label: '标签', position: 'left' },
           {
             href: 'https://github.com/wang1212/wang1212.github.io',
             label: 'Source',
