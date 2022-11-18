@@ -163,6 +163,7 @@ function getTagMap(blogPosts: readonly ArchiveBlogPost[]): TagMap {
 }
 
 export default function BlogArchivePageWrapper(props: Props) {
+  const [description] = useState(customConfig.archive.description());
   const [years, setYears] = useState([]);
   const [tag, setTag] = useState<string | null>(null);
   const title = customConfig.archive.title;
@@ -217,15 +218,13 @@ export default function BlogArchivePageWrapper(props: Props) {
     <>
       <PageMetadata
         title={customConfig.archive.title}
-        description={customConfig.archive.description()}
+        description={description}
       />
       <Layout>
         <header className="hero hero--primary">
           <div className="container">
             <h1 className="hero__title">{title}</h1>
-            <p className="hero__subtitle">
-              {customConfig.archive.description()}
-            </p>
+            <p className="hero__subtitle">{description}</p>
           </div>
         </header>
         <main>
