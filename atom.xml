@@ -317,8 +317,6 @@
         <category label="计算机技术" term="计算机技术"/>
         <category label="Node.js" term="Node.js"/>
         <category label="child_process" term="child_process"/>
-        <category label="spawn" term="spawn"/>
-        <category label="exec" term="exec"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[黑客与画家]]></title>
