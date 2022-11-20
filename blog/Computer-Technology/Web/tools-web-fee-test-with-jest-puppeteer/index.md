@@ -35,7 +35,7 @@ Web 端到端自动化测试平台要求用户可以通过 Web UI 上传测试�
 
 搞清楚需求和相应的技术难点后，可以先看看业内有没有解决方案可以参考。
 
-![Web 端到端自动化测试平台功能需求.png](https://github.com/wang1212/static-resources/blob/main/images/web-test-with-jest-puppeteer_2021-08-15_16-42-05.png?raw=true)
+![Web 端到端自动化测试平台功能需求.png](web-test-with-jest-puppeteer_2021-08-15_16-42-05.jpg)
 Web 端到端自动化测试平台功能需求
 
 ### 市场调研
@@ -77,7 +77,7 @@ RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ustc.edu.cn/g' /
 
 在经过详细的市场调研后，最终确定了一个比较理想和完整的系统技术架构。
 
-![Web 端到端自动化测试平台系统技术架构.png](https://github.com/wang1212/static-resources/blob/main/images/web-test-with-jest-puppeteer-architecture_2021-08-15_18-20-03.png?raw=true)
+![Web 端到端自动化测试平台系统技术架构.png](web-test-with-jest-puppeteer-architecture_2021-08-15_18-20-03.jpg)
 Web 端到端自动化测试平台系统技术架构
 
 ## 系统实现

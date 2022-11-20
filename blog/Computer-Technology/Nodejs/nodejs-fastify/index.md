@@ -161,7 +161,7 @@ Fastify 内部优化之后，调用栈也小很多，作者利用 `0x` 工具进
 
 大多数 Web 框架的生命周期是相似的：服务器启动，路由处理程序注册，服务器侦听请求并调用适当的函数来处理它们。如下图所示，Fastify 做了特殊处理，在服务器启动之后执行预初始化阶段（preinitialisation ），该阶段做了一些优化工作，使用 `fast-json-stringify` 模块处理 JSON schemas，以及用 `reusify` 模块优化处理函数（handler functions）。
 
-![](https://www.nearform.com/wp-content/uploads/jekyllsite/blog/2017/08/diagram_fastify_lifecycle.png)
+![diagram_fastify_lifecycle](diagram_fastify_lifecycle.png)
 
 这里提及的 `reusify` 模块是如何来优化处理函数的呢？首先，请求的处理函数属于频繁被执行的代码块，也就是所谓的"热代码路径（hot code paths）"。`reusify` 的源码非常简单，主要作用是 **将对象或者函数进行缓存，降低高并发场景下热代码路径上的 GC 压力**。
 
@@ -217,12 +217,12 @@ function compose(middleware) {
 
 Fastify 依赖于 `avvio` 模块 **建立了一种基于可重入（reentrant ）和有向无环图（directed acyclic graph）的插件模型**，可以正确处理异步代码，保证插件的加载顺序，避免了前面提到的调用栈过大的问题。建立一个有向无环图的插件系统可以保证不会创建交叉依赖，并且实现了可以在应用程序的不同部分使用相同插件的不同版本。
 
-![有向无环图.png](https://survivejs.com/9f7ecd003147aad41c8b8c236c703db4.png)
+![有向无环图.png](survivejs.com_9f7ecd003147aad41c8b8c236c703db4.png.png)
 有向无环图
 
 由于这种架构模式，带来的另外一个好处就是很容易将应用拆分为多个微服务。
 
-![有向无环图服务.png](https://survivejs.com/6758771bb4590b09ac0780ceb3c51da9.png)
+![有向无环图服务.png](6758771bb4590b09ac0780ceb3c51da9.webp)
 有向无环图服务
 
 那么，可重入带来了什么？可重入性是代码的一种属性，指其没有共享状态，可以安全的在多个线程中或者递归地调用执行；换句话说，代码因为具备某些状态，在多个线程或者递归调用时因为改变了该状态而导致逻辑出错，表明代码是不可重入的，不具备可重入性。常见的应用场景就是在遍历图形的算法中，可能会多次到达同一个节点，可重入性保证了遍历过程中是安全的。

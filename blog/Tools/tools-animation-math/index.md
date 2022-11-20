@@ -45,7 +45,7 @@ F(t) = (x1 - x0)*t + x0 (0 <= t <= 1)
 
 贝塞尔曲线从概念上来看是很难理解的，如何转化为数学公式来计算贝塞尔曲线，而这个过程是什么样的，刚开始理解起来也是比较抽象的。先来看看其（二次贝塞尔曲线）数学定义：
 
-> ![Quadratic Bezier Curve Formula](https://raw.githubusercontent.com/wang1212/static-resources/dd604c85291dcdcc1ac677e8ad4c85d0aebcde12/images/Quadratic-Bezier-Curve-Formula.svg 'Quadratic Bezier Curve Formula')
+> ![Quadratic Bezier Curve Formula](Quadratic-Bezier-Curve-Formula.svg.png 'Quadratic Bezier Curve Formula')
 
 其中 **P0**、**P1**、**P2** 分别为起点、控制点、终点。
 
