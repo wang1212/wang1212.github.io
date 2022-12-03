@@ -8,6 +8,7 @@ tags: &ref_0
   - 工具
   - TypeScript
   - 类型定义
+  - 实践案例
 keywords: *ref_0
 description: TypeScript 作为 JavaScript 的超集，为 Web 开发带来了强类型语言和类似代码智能提示这种良好的开发体验，如何对第三方依赖库的类型定义进行扩展呢？
 ---

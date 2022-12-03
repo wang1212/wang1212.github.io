@@ -5,11 +5,11 @@ update: 2022-05-07 21:57:00
 authors: wang1212
 tags: &ref_0
   - 计算机技术
-  - 工具
-  - Web
   - Web 前端
+  - 工具
   - Debug
   - SourceMap
+  - 实践案例
 keywords: *ref_0
 description: Web 前端项目在生产环境发布的代码是经过混淆和压缩的，如何调试则成为了一个难题，SourceMap 文件则是一个解决该问题时可以利用的很好的工具。
 ---

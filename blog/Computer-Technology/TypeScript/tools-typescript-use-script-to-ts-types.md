@@ -8,6 +8,7 @@ tags: &ref_0
   - 工具
   - TypeScript
   - 类型定义
+  - 实践案例
 keywords: *ref_0
 description: TypeScript 作为一个强类型的语言，增强了 JavaScript 编程开发体验，类型定义文件为一个第三方模块的使用体验增色不少，现如今很多 npm 包的发布都内置了对类型定义文件的支持。
 ---

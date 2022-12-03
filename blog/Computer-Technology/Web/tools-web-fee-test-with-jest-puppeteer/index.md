@@ -10,6 +10,7 @@ tags: &ref_0
   - Web
   - Jest
   - Puppeteer
+  - 实践案例
 keywords: *ref_0
 description: 谷歌发布的 Puppeteer 工具和脸书发布的 Jest 测试工具为 Web 端到端测试提供了极大的便利，这里记录了如何使用它们构建一个 Web 自动化测试平台。
 ---

@@ -2,4 +2,6 @@ wang1212:
   name: 不如怀念
   title: Web 前端工程师 (Web Front-end Engineer)
   url: https://github.com/wang1212
-  image_url: https://github.com/wang1212.png
+  # image_url: https://github.com/wang1212.png
+  image_url: /img/authors/wang1212.png
+  email: mrwang1212@126.com

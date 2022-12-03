@@ -6,6 +6,7 @@ authors: wang1212
 tags: &ref_0
   - 计算机技术
   - GIS
+  - 实践案例
 keywords: *ref_0
 description: GIS，ODM（OpenDroneMap）是开源的无人机航片处理工具套件，基本上已成为该领域开源的事实标准，这篇文章主要记录如何在本地进行 ODM 工具套件的部署。
 ---
