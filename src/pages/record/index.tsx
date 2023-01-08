@@ -150,6 +150,7 @@ export default () => {
   const dataset = useMemo(() => {
     let dataset_: DayEventsData[] = [];
     if (!data) {
+      setDateEventsData(null);
       return dataset_;
     }
 
@@ -160,23 +161,10 @@ export default () => {
       });
     });
 
+    setDateEventsData(dataset_[0]);
+
     return dataset_;
   }, [data]);
-
-  useEffect(() => {
-    if (!dataset.length && dateEventsData) {
-      setDateEventsData(null);
-      return;
-    }
-    if (
-      !dataset.length ||
-      (dateEventsData && dataset[0].date === dateEventsData.date)
-    ) {
-      return;
-    }
-
-    setDateEventsData(dataset[0]);
-  }, [dataset, dateEventsData]);
 
   return (
     <Layout title="记录">
