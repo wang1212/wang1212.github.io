@@ -1,0 +1,74 @@
+.tooltip {
+  position: fixed;
+  z-index: 9999;
+}
+
+/**
+  * Coffee
+  * @link https://github.com/jh3y/whirl/blob/dist/css/coffee.css
+  * @author jh3y - jheytompkins.com
+*/
+@-webkit-keyframes coffee {
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-200%);
+    transform: translateY(-200%);
+  }
+}
+@keyframes coffee {
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-200%);
+    transform: translateY(-200%);
+  }
+}
+
+.loading-coffee {
+  /* background: #fff; */
+  background: var(--ifm-color-primary-lightest);
+  display: grid;
+  border-radius: 4px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  height: 40px;
+  position: relative;
+  width: 40px;
+  padding: 2px;
+  justify-items: center;
+}
+.loading-coffee:before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  content: '';
+  height: 26px;
+  width: 20px;
+  /* border: 4px solid #fff; */
+  border: 4px solid var(--ifm-color-primary-lightest);
+  position: absolute;
+  top: 50%;
+  margin-top: -13px;
+  margin-left: -10px;
+  left: 100%;
+  border-radius: 4px;
+}
+.loading-coffee div {
+  height: 20px;
+  width: 8px;
+  /* background: #fff; */
+  background: var(--ifm-color-primary-lightest);
+  opacity: 0.3;
+  -webkit-animation: coffee 2s infinite;
+  animation: coffee 2s infinite;
+}
+.loading-coffee div:nth-child(1) {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+.loading-coffee div:nth-child(2) {
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+}
+.loading-coffee div:nth-child(3) {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
