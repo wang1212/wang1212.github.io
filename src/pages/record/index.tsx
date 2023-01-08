@@ -30,7 +30,7 @@ function DayEventList({ metadata, eventsData }: DayEventListProps) {
   return (
     <section>
       <header>
-        <h3 style={{ display: 'flex', alignItems: 'flex-end' }}>
+        <h3 style={{ display: 'flex', alignItems: 'center' }}>
           {eventsData.date}{' '}
           <span className="margin-left--sm">
             {WEEKDAY_LABELS_2[new Date(eventsData.date).getDay()]}
