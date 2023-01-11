@@ -15,7 +15,7 @@ keywords: *ref_0
 description: npm 是 Node.js 的一个包管理器，Web 前端工程师也经常利用它构建前端工作流，来看看如何愉快的使用 npm。
 ---
 
-> _最后更新于 2022-10-24 01:51:00 _
+> _最后更新于 2022-10-24 01:51:00_
 
 npm 是 Node.js 的一个包管理器，Web 前端工程师也经常利用它来简化开发流程，看看如何愉快的使用 npm ，并且发布自己的包，让 npm 成为我们的开发利器。
 
@@ -23,7 +23,7 @@ npm 是 Node.js 的一个包管理器，Web 前端工程师也经常利用它来
 
 ## npm
 
-> **Node.js：**https://www.npmjs.com/ 
+> **Node.js：**https://www.npmjs.com/
 
 > **npm：**https://www.npmjs.com/
 

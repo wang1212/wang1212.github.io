@@ -11,7 +11,7 @@ keywords: *ref_0
 description: GIS，地理信息系统（Geographic Information System），它是一种特定的十分重要的空间信息系统，坐标系统是 GIS 理论知识中最基本的而且最关键的一点。
 ---
 
-> _最后更新于 2019-07-12 03:20:00 _
+> _最后更新于 2019-07-12 03:20:00_
 
 GIS，地理信息系统（Geographic Information System），它是一种特定的十分重要的空间信息系统，坐标系统是 GIS 理论知识中最基本的而且最关键的一点。
 

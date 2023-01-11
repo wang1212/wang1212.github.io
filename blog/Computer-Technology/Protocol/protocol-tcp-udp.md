@@ -12,7 +12,7 @@ keywords: *ref_0
 description: 传输层是网络分层模型中举足轻重的层，它是底层通信子网与高层资源子网的接口与桥梁，提供了面向连接的传输控制协议（Transmission Control Protocol，TCP）和无连接的用户数据报协议（User Datagram Protocol，UDP），负责提供端到端的数据传输服务。
 ---
 
-> _最后更新于 2016-06-20 17:21:00 _
+> _最后更新于 2016-06-20 17:21:00_
 
 传输层是网络分层模型中举足轻重的层，它是底层通信子网与高层资源子网的接口与桥梁，提供了面向连接的传输控制协议（Transmission Control Protocol，TCP）和无连接的用户数据报协议（User Datagram Protocol，UDP），负责提供端到端的数据传输服务。
 
