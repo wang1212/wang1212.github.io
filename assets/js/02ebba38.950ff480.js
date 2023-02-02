@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[10971],{40202:s=>{s.exports=JSON.parse('{"label":"GIS","permalink":"/tags/gis","allTagsPath":"/tags","count":3}')}}]);
