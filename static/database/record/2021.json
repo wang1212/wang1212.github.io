@@ -4,6 +4,18 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "10-08": [
+      {
+        "type": 0,
+        "labels": ["marriage certificate"]
+      }
+    ],
+    "10-04": [
+      {
+        "type": 0,
+        "labels": ["engagement"]
+      }
+    ],
     "05-12": [
       {
         "type": 0,
