@@ -4,11 +4,25 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "03-08": [
+      {
+        "type": 1,
+        "description": "今天花费几个小时查看了《JavaScript Weekly》上个月的订阅，了解一下 JavaScript 生态近期的动态，著名的包 core-js 作者因经济问题似乎准备放弃仓库的维护，开源项目的可持续性近些年一直备受关注。",
+        "labels": ["《JavaScript Weekly》", "4小时"]
+      }
+    ],
+    "03-07": [
+      {
+        "type": 1,
+        "description": "今天抽出时间来查看一下近一个月的《React Status》技术周刊的订阅，及时了解一下 React 生态近期的动态，偶然发现 wouter 这个轻量级路由库。",
+        "labels": ["《React Status》", "2小时"]
+      }
+    ],
     "03-06": [
       {
         "type": 1,
         "description": "很久之前就收藏了《设计原本》这本书，一直没有机会看，最近刚好比较空闲，就每天花点时间略读了该书。书中提到对我们大多数人熟知的软件开发流程，即理性模型，的批判还是很有道理的，根据现实情况来看，理性模型追求的过于理想化，不够灵活，。",
-        "labels": ["6小时"]
+        "labels": ["《设计原本》", "6小时"]
       }
     ],
     "03-05": [
@@ -29,14 +43,14 @@
       {
         "type": 1,
         "description": "近期的工作内容都是程序设计相关的，周末两天刚好有时间花了几个小时复读了《基于 MVC 的 JavaScript Web 富应用开发》，对于 Web 业务开发中的 MVC 设计模式有了一些不同的认识，而 Backbone 类库在没有 React.js、Vue.js 等 UI 库的时代为 Web 前端模式化的业务开发提供了很好的工具。",
-        "labels": ["6小时"]
+        "labels": ["《基于 MVC 的 JavaScript Web 富应用开发》", "6小时"]
       }
     ],
     "02-07": [
       {
         "type": 1,
         "description": "今天抽出时间来查看一下前三周的《React Status》技术周刊的订阅，及时了解一下 React 生态近期的动态，发现 Next.js 已经对 React 的异步函数组件做了支持。",
-        "labels": ["2小时"]
+        "labels": ["《React Status》", "2小时"]
       }
     ],
     "01-25": [
@@ -67,14 +81,14 @@
       {
         "type": 1,
         "description": "今天抽出时间来查看一下堆积了几个星期的《Node Weekly》技术周刊的订阅，及时了解一下 Node.js 生态近期的动态。",
-        "labels": ["4小时"]
+        "labels": ["《Node Weekly》", "4小时"]
       }
     ],
     "01-11": [
       {
         "type": 1,
         "description": "今天抽出时间来查看一下堆积了几个星期的《React Status》技术周刊的订阅，及时了解一下 React 生态近期的动态。",
-        "labels": ["3小时"]
+        "labels": ["《React Status》", "3小时"]
       }
     ],
     "01-09": [
