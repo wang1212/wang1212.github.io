@@ -16,8 +16,8 @@
     "commit": "cz"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.2.0",
-    "@docusaurus/preset-classic": "^2.2.0",
+    "@docusaurus/core": "^2.4.0",
+    "@docusaurus/preset-classic": "^2.4.0",
     "@easyops-cn/docusaurus-search-local": "^0.33.6",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.2.1",
@@ -29,7 +29,7 @@
     "wordcloud": "^1.2.2"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.2.0",
+    "@docusaurus/module-type-aliases": "^2.4.0",
     "@tsconfig/docusaurus": "^1.0.5",
     "commitizen": "^4.2.5",
     "cz-conventional-changelog": "3.3.0",
