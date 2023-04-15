@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[12759],{81587:e=>{e.exports=JSON.parse('{"label":"WebGL","permalink":"/tags/web-gl","allTagsPath":"/tags","count":2}')}}]);
