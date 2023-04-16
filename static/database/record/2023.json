@@ -4,6 +4,30 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "04-16": [
+      {
+        "type": 1,
+        "description": "快速浏览了《Node Weekly》上一周的订阅，Electron 发布了 v24 版本，依赖的 Chromium 也已更新到 v112，不过在前几天了解到 Chrome v113 版本已默认开启了 WebGPU 的支持，值得期待。",
+        "labels": ["《Node Weekly》", "1小时"]
+      },
+      {
+        "type": 1,
+        "description": "快速浏览了《Frontend Focus》四月上旬的订阅，最值得关注应该也是 Chrome v113 版本对 WebGPU 的默认支持。",
+        "labels": ["《Frontend Focus》", "1小时"]
+      },
+      {
+        "type": 1,
+        "description": "回顾《ES.next News》三月下旬至今约一个月的订阅，ESLint Community GitHub 组织官宣并成为后续 ESLint 生态插件包的维护和发布组织。",
+        "labels": ["《ES.next News》", "1小时"]
+      }
+    ],
+    "04-15": [
+      {
+        "type": 2,
+        "description": "今天总算抽空把之前在团队内部分享的有关 3D 开发中两种不同渲染技术介绍和差异对比的文章整理完成了。",
+        "labels": ["3D 开发", "2小时"]
+      }
+    ],
     "04-12": [
       {
         "type": 1,
