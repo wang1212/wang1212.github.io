@@ -4,6 +4,25 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "04-22": [
+      {
+        "type": 1,
+        "description": "查看《Node Weekly》上周的订阅时，了解到 Node v20 已经在 4 月 18 日发布，Node v14 也将很快停止维护，新版本的 Node 中加入的 test runner 模块已经稳定，v8 引擎也更新到 Chromium 113 所使用的版本。",
+        "labels": ["《Node Weekly》", "1小时"]
+      },
+      {
+        "type": 1,
+        "description": "根据《JSK Weekly》过去一个月的订阅来看，再结合过去一年多对其订阅的持续性了解，其更多的内容偏基础性，隔一段时间便会有重复性内容的出现，投稿的质量属于中等水平，想要日常了解更高质量的技术订阅内容的话，其不是一个好的选择。",
+        "labels": ["《JSK Weekly》", "2小时"]
+      }
+    ],
+    "04-21": [
+      {
+        "type": 1,
+        "description": "在查看《React Status》上周的订阅时发现了一个受欢迎的状态管理库 Easy Peasy，其基于 Redux 进行了抽象设计，API 更简单，有点类似 zustand 但功能更多，看来 Redux 的模板代码让开发人员很不舒服。不过，其在内部使用了 Immer 来代理状态对象，以便可以直接修改状态对象来达到更新状态的目的，这似乎与 Redux 本身的设计以及 React 的理念有点不同。",
+        "labels": ["《React Status》", "1小时"]
+      }
+    ],
     "04-16": [
       {
         "type": 1,
