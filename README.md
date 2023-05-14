@@ -20,6 +20,9 @@ _Open source tools used in my blog._
 - [wordcloud2.js](https://github.com/timdream/wordcloud2.js)
 - [react-calendar-heatmap](https://www.kevinqi.com/react-calendar-heatmap/)
 - [swr](https://swr.vercel.app/)
+- [Squoosh](https://squoosh.app/)
+- [Draw.io](https://app.diagrams.net/)
+- [Excalidraw](https://excalidraw.com/)
 
 ## 开发准则
 
