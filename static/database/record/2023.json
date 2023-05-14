@@ -4,6 +4,13 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "05-14": [
+      {
+        "type": 2,
+        "description": "在上周 Chrome 113 发布后，WebGPU API 正式在 Chrome 平台可用，根据以往所了解到测试案例来看，WebGPU 是对现代 GPU 架构的 Web 平台完美实现，相比于传统的 WebGL 技术性能提升空间很大，当然值得关注的还有一个方面，即 WebGPU API 正式为 Web 平台带来了 GPGPU 的一流支持，借周末的机会了解了一下 WebGL 和 WebGPU 的技术发展历史，以及 GPGPU 在 Web 平台的一些应用，对这些内容进行简单的记录。",
+        "labels": ["WebGPU", "GPGPU", "2小时"]
+      }
+    ],
     "05-12": [
       {
         "type": 1,
