@@ -176,3 +176,4 @@ fn main(
 - https://developer.chrome.com/blog/webgpu-io2023/
 - https://en.wikipedia.org/wiki/Single_instruction,_multiple_data
 - https://v8.dev/features/simd
+- https://codelabs.developers.google.com/your-first-webgpu-app
