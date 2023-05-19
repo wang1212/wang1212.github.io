@@ -5,6 +5,7 @@ import { PageMetadata } from '@docusaurus/theme-common';
 import Layout from '@theme/Layout';
 import type { ArchiveBlogPost, Props } from '@theme/BlogArchivePage';
 import BlogArchivePage from '@theme-original/BlogArchivePage';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 /**
  * ! 覆盖内部实现
@@ -31,13 +32,9 @@ const customConfig = {
   },
 };
 
-type MonthProps = {
-  year: string;
-  month: string;
-  posts: ArchiveBlogPost[];
-};
+// ------------------------------------------------------------------------------------
 
-function Month({ year, month, posts }: MonthProps) {
+function PostItem({ post }: { post: ArchiveBlogPost }) {
   const formatterDate = (date: string) =>
     date
       .split(/[^\d]+/)
@@ -46,32 +43,45 @@ function Month({ year, month, posts }: MonthProps) {
       .join('-');
 
   return (
+    <li>
+      <Link to={post.metadata.permalink}>
+        <div>{post.metadata.title}</div>
+      </Link>
+      <div style={{ opacity: 0.5 }}>
+        <small>
+          发布于 {formatterDate(post.metadata.frontMatter.date as string)}
+        </small>{' '}
+        {post.metadata.frontMatter.update !== post.metadata.frontMatter.date ? (
+          <small>
+            最后更新于{' '}
+            {formatterDate(post.metadata.frontMatter.update as string)}
+          </small>
+        ) : (
+          ''
+        )}
+      </div>
+    </li>
+  );
+}
+
+type MonthProps = {
+  year: string;
+  month: string;
+  posts: ArchiveBlogPost[];
+};
+
+function Month({ year, month, posts }: MonthProps) {
+  const [parent, enableAnimations] = useAutoAnimate();
+
+  return (
     <>
       <h4>
         <small style={{ color: 'var(--ifm-color-secondary)' }}>{year}</small>{' '}
         {month} 月
       </h4>
-      <ul>
+      <ul ref={parent}>
         {posts.map((post) => (
-          <li key={post.metadata.date}>
-            <Link to={post.metadata.permalink}>
-              <div>{post.metadata.title}</div>
-            </Link>
-            <div style={{ opacity: 0.5 }}>
-              <small>
-                发布于 {formatterDate(post.metadata.frontMatter.date as string)}
-              </small>{' '}
-              {post.metadata.frontMatter.update !==
-              post.metadata.frontMatter.date ? (
-                <small>
-                  最后更新于{' '}
-                  {formatterDate(post.metadata.frontMatter.update as string)}
-                </small>
-              ) : (
-                ''
-              )}
-            </div>
-          </li>
+          <PostItem key={post.metadata.date} post={post} />
         ))}
       </ul>
     </>
@@ -114,10 +124,12 @@ function Year({ year, posts }: YearProps) {
 }
 
 function YearsSection({ years }: { years: YearProps[] }) {
+  const [parent, enableAnimations] = useAutoAnimate();
+
   return (
     <section className="margin-vert--lg">
       <div className="container">
-        <div className="row">
+        <div ref={parent} className="row">
           {years
             .sort((a, b) => Number(b.year) - Number(a.year))
             .map((_props, idx) => (
@@ -169,10 +181,10 @@ export default function BlogArchivePageWrapper(props: Props) {
   const [tag, setTag] = useState<string | null>(null);
   const title = customConfig.archive.title;
   const tagMap = getTagMap(props.archive.blogPosts);
-  const tagList = Array.from(tagMap, ([tagName, tagData]) => [
-    tagName,
-    tagData.count,
-  ]);
+  const tagList: [string, number][] = Array.from(
+    tagMap,
+    ([tagName, tagData]) => [tagName, tagData.count]
+  );
 
   useEffect(() => {
     // ! 客户端代码中引入第三方库
