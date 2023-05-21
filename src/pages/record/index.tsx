@@ -14,6 +14,7 @@ import {
 } from './_const';
 import { useDataByYear, YearDataset, EventData } from './_data';
 import { dayOfYear } from './_util';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 type DayEventsData = { date: string; events: EventData[] };
 
@@ -142,10 +143,11 @@ function CalHeatmap({ year, dataset, onDateClick }: CalHeatmapProps) {
 }
 
 export default () => {
-  //
   const [currentYear, setCurrentYear] = useState(END_YEAR);
   const { data, isError, isLoading } = useDataByYear(currentYear);
   const [dateEventsData, setDateEventsData] = useState<DayEventsData>(null);
+  const [parent, enableAnimations] = useAutoAnimate();
+  const [eventParent, _enableAnimations] = useAutoAnimate();
 
   const dataset = useMemo(() => {
     let dataset_: DayEventsData[] = [];
@@ -167,9 +169,9 @@ export default () => {
   }, [data]);
 
   return (
-    <Layout title="记录">
+    <Layout title="记录" description="记录重要时刻">
       <div className="margin-vert--lg">
-        <div className="container">
+        <div ref={parent} className="container">
           {/* toolbar */}
           <section className="margin-bottom--lg">
             <div className="dropdown dropdown--hoverable">
@@ -196,6 +198,7 @@ export default () => {
               </ul>
             </div>
           </section>
+
           {/* loading */}
           {((isError || isLoading) && (
             <section
@@ -206,19 +209,21 @@ export default () => {
             </section>
           )) ||
             ''}
+
           {/* content */}
           {(!isError && !isLoading && (
-            <>
+            <section key={currentYear} ref={eventParent}>
               <CalHeatmap
                 year={currentYear}
                 dataset={dataset}
                 onDateClick={setDateEventsData}
               />
               <DayEventList
+                key={dateEventsData?.date}
                 metadata={data.metadata}
                 eventsData={dateEventsData}
               />
-            </>
+            </section>
           )) ||
             ''}
         </div>

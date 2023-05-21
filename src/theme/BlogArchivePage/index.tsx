@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from '@docusaurus/Link';
 import { PageMetadata } from '@docusaurus/theme-common';
 import Layout from '@theme/Layout';
+import BackToTopButton from '@theme/BackToTopButton';
 import type { ArchiveBlogPost, Props } from '@theme/BlogArchivePage';
 import BlogArchivePage from '@theme-original/BlogArchivePage';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
@@ -74,7 +75,7 @@ function Month({ year, month, posts }: MonthProps) {
   const [parent, enableAnimations] = useAutoAnimate();
 
   return (
-    <>
+    <section className="_js-month">
       <h4>
         <small style={{ color: 'var(--ifm-color-secondary)' }}>{year}</small>{' '}
         {month} 月
@@ -84,7 +85,7 @@ function Month({ year, month, posts }: MonthProps) {
           <PostItem key={post.metadata.date} post={post} />
         ))}
       </ul>
-    </>
+    </section>
   );
 }
 
@@ -110,16 +111,19 @@ type YearProps = {
 
 function Year({ year, posts }: YearProps) {
   const months = listPostsByMonth(posts);
+  const [parent, enableAnimations] = useAutoAnimate();
 
   return (
-    <>
+    <section className="_js-year col col--4 margin-bottom--lg">
       <h3>{year} 年</h3>
-      {months
-        .sort((a, b) => Number(b.month) - Number(a.month))
-        .map((_props, idx) => (
-          <Month key={idx} year={year} {..._props} />
-        ))}
-    </>
+      <div ref={parent}>
+        {months
+          .sort((a, b) => Number(b.month) - Number(a.month))
+          .map((props) => (
+            <Month key={props.month} year={year} {...props} />
+          ))}
+      </div>
+    </section>
   );
 }
 
@@ -132,10 +136,8 @@ function YearsSection({ years }: { years: YearProps[] }) {
         <div ref={parent} className="row">
           {years
             .sort((a, b) => Number(b.year) - Number(a.year))
-            .map((_props, idx) => (
-              <div key={idx} className="col col--4 margin-bottom--lg">
-                <Year {..._props} />
-              </div>
+            .map((props) => (
+              <Year key={props.year} {...props} />
             ))}
         </div>
       </div>
@@ -229,11 +231,9 @@ export default function BlogArchivePageWrapper(props: Props) {
 
   return (
     <>
-      <PageMetadata
-        title={customConfig.archive.title}
-        description={description}
-      />
-      <Layout>
+      <Layout title={customConfig.archive.title} description={description}>
+        <BackToTopButton />
+
         <header className="hero hero--primary">
           <div className="container">
             <h1 className="hero__title">{title}</h1>
