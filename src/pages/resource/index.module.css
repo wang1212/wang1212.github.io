@@ -1,0 +1,13 @@
+.row {
+  /* ! 虚拟列表的 margin 似乎不能为动态计算 */
+  margin: 0 1rem;
+}
+
+.card > .card__body {
+  /* font-size: 0.85rem; */
+}
+.card:hover {
+  /* shadow--md */
+  box-shadow: var(--ifm-global-shadow-md) !important;
+  transition: all 0.4s ease-in-out;
+}

@@ -83,6 +83,7 @@ const config = {
           { to: '/archive', label: '归档', position: 'left' },
           // { to: '/tags', label: '标签', position: 'left' },
           { to: '/record', label: '记录', position: 'left' },
+          // { to: '/resource', label: '资源', position: 'left' },
           {
             href: 'https://github.com/wang1212/wang1212.github.io',
             label: 'Source',
