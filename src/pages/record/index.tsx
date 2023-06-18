@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
-import styles from './index.module.css';
-import Loading from './_Loading';
+import styles from './styles.module.css';
+import Loading from '../../components/Loading';
 import {
   END_YEAR,
   YEARS,
@@ -13,7 +13,7 @@ import {
   WEEKDAY_LABELS_2,
 } from './_const';
 import { useDataByYear, YearDataset, EventData } from './_data';
-import { dayOfYear } from './_util';
+import { dayOfYear } from '../../utils/date';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 type DayEventsData = { date: string; events: EventData[] };
@@ -169,7 +169,7 @@ export default () => {
   }, [data]);
 
   return (
-    <Layout title="记录" description="记录重要时刻">
+    <Layout title="记录" description="记录日常小事">
       <div className="margin-vert--lg">
         <div ref={parent} className="container">
           {/* toolbar */}
