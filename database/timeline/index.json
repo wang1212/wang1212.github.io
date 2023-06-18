@@ -1,0 +1,111 @@
+{
+  "metadata": {},
+  "events": {
+    "2021-05-01": [
+      {
+        "title": "进入互联网金融行业",
+        "description": "结束长达 4 年的 GIS 行业工作后，开始新的工作进入一个新的行业：互联网金融。",
+        "labels": ["!互联网金融"]
+      }
+    ],
+    "2019-12-01": [
+      {
+        "title": "尝试 Web GIS 3D",
+        "description": "一方面，2D 视图下的 GIS 应用很难做出比较出彩的效果，尤其是数据分析可视化的场景，所以尝试了目前社区很受欢迎的 Web GIS 库 MapboxGL，在实际业务场景中来看，很受客户的欢迎。另一方面，鉴于一直在做航拍数据处理相关的业务，在实景 3D GIS 应用场景中基于 Cesium 做了一些简单的尝试。",
+        "labels": ["Mapbox", "Cesium"]
+      }
+    ],
+    "2019-10-01": [
+      {
+        "title": "WebODM 的简单应用",
+        "description": "基于开源的无人机航片处理工具套件项目做了一些业务上的尝试，也是在这个过程中了解了大量 Web 前端领域之外的技术。",
+        "labels": [
+          "!WebODM",
+          "Ubuntu",
+          "Docker",
+          "Node.JS",
+          "Python",
+          "PostgreSQL"
+        ]
+      }
+    ],
+    "2019-01-01": [
+      {
+        "title": "深入学习 Ruby，翻译教程书籍",
+        "description": "因为梦幻西游接触到 RPG Maker XP，也因此了解到了 Ruby 语言，在连续使用了几年该语言并看了几本相关的技术书籍后，亲身体会该语言的开发体验很好，遂兴趣驱使翻译了教程书籍《The Book Of Ruby》。",
+        "labels": ["Ruby"]
+      }
+    ],
+    "2018-12-01": [
+      {
+        "title": "尝试新的设计风格和 UI 库",
+        "description": "在过去的一年中，除了比较常用的 Bootstrap UI 库之外，在开发小项目时也尝试了新的设计风格 UI 库，例如谷歌的 Material Design 设计，其相对应的社区最受欢迎的 UI 库 Material UI（MUI）也为基于 React.js 开发应用提供了很大的便利，同时在这个过程中也了解到了 CSS-in-JS 的技术，并基于 JSS 库做了一些应用上的尝试。",
+        "labels": ["Bootstrap", "Material Design", "MUI", "JSS"]
+      },
+      {
+        "title": "轻量级 Web GIS 库 Leaflet 的应用",
+        "description": "经过一年多的时间，对 Web GIS 和 Web 前端优化相关技术知识有了更深入的理解，也对公司的核心业务有了初步了解，遂在一些简单业务场景尝试应用轻量级 Web GIS 库 Leaflet 来开发，一方面是降低 Web GIS 业务的开发门槛和技术学习成本，另一方面也对移动端场景性能友好。",
+        "labels": ["Leaflet"]
+      },
+      {
+        "title": "完全基于 Webpack 4 的前端工作流",
+        "description": "在对前端工具生态有了更深入的了解之后，原有基于 gulp + Webpack 3 架构构建的前端自动化工作流迁移到了完全基于 Webpack 4 的架构上来。",
+        "labels": ["Webpack"]
+      }
+    ],
+    "2018-06-01": [
+      {
+        "title": "尝试应用 React.js",
+        "description": "一直在关注前端技术的发展，基于组件化的思想来开发前端应用已经成为主流方案，在 React.js、Vue.js、Angular 中最终选择了 React.js，而且在当下 React.js 已经支持 Class 语法的情况下，学习成本进一步降低。React.js 的生态比较丰富，状态管理工具则直接选择了使用人数最多的 Redux，包括一些异步场景的处理也基于 redux-thunk 进行了尝试。",
+        "labels": ["React", "Redux", "!redux-thunk"]
+      }
+    ],
+    "2018-03-01": [
+      {
+        "title": "初步建立前端工作流",
+        "description": "通过平时对一些外部技术资料的学习了解，开始为团队内部引入一些新的技术，例如利用 Nginx 实现前后端分离的开发、部署方案。另一方面，也在开发阶段引入一些工程化工具提效，例如引入 CSS 预处理器 Sass 来处理样式兼容问题，以及借助 gulp 和 Webpack 3 建立简单的前端自动化工作流。",
+        "labels": ["NGINX", "Sass", "gulp", "Webpack"]
+      },
+      {
+        "title": "构建个人开发环境",
+        "description": "由于 Web 前端开发不像服务端开发、客户端开发一样有现成完整的开发环境工具链，所以积极了解社区的发展情况和尝试一些其它的选择，先是基于 Sublime Text 编辑器和其插件系统构建了自己高效的开发环境，后续迁移到了微软发布的开源编辑器 Visual Studio Code 的生态。",
+        "labels": ["Sublime Text", "Visual Studio Code"]
+      }
+    ],
+    "2017-09-01": [
+      {
+        "title": "进入 GIS 行业",
+        "description": "第一份工作所在公司的主要业务是 GIS 行业应用软件开发，在项目中接触到了 Web GIS 库 OpenLayers。",
+        "labels": ["!GIS", "OpenLayers"]
+      }
+    ],
+    "2016-09-01": [
+      {
+        "title": "探索 jQuery",
+        "description": "对 Web 前端的原生技术有了一定了解之后，进一步学习用来开发复杂项目的工具库 jQuery，开始在项目开发中使用该库，并结合一些学习资料了解其源码实现。",
+        "labels": ["jQuery"]
+      }
+    ],
+    "2016-02-01": [
+      {
+        "title": "确定 Web 前端开发为职业目标",
+        "description": "确定毕业后从事 Web 前端开发岗位工作，开始通过借阅图书馆相关书籍、网络社区教程等途径以较为系统化的方式学习相关技术知识，并进行一些简单项目开发尝试。",
+        "labels": ["HTML5", "CSS3", "JavaScript", "MDN Web Docs"]
+      }
+    ],
+    "2015-10-01": [
+      {
+        "title": "了解 Java 和服务端开发",
+        "description": "学习 Java 编程语言和一些服务器端开发的技术知识并尝试进行应用，这个过程中了解了 Java Server Pages 和 Apache Tomcat 的概念和技术原理。",
+        "labels": ["!Java", "!Java Server Pages", "Apache Tomcat"]
+      }
+    ],
+    "2015-07-01": [
+      {
+        "title": "游戏编程，初识 Ruby",
+        "description": "第一次尝试编写 RPG Maker XP 游戏脚本，并初次接触 Ruby 语言。",
+        "labels": ["Ruby"]
+      }
+    ]
+  }
+}
