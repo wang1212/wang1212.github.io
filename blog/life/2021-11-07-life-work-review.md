@@ -1,9 +1,10 @@
 ---
-title: 随笔
+title: 谈谈新工作
 date: 2021-11-07 14:16:00
 update: 2021-11-07 14:16:00
 authors: wang1212
 tags: &ref_0
+  - 随笔杂谈
   - 生活
   - 工作
 keywords: *ref_0
