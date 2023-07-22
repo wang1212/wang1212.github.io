@@ -135,10 +135,12 @@ function Year({ year, posts, sortBy }: YearProps) {
 function YearsSection({
   years,
   sortBy,
+  tag,
   updateSortBy,
 }: {
   years: YearProps[];
   sortBy: SortBy;
+  tag: string | null;
   updateSortBy: (sortBy: SortBy) => void;
 }) {
   const [parent, enableAnimations] = useAutoAnimate();
@@ -148,9 +150,16 @@ function YearsSection({
   }
 
   return (
-    <section className="margin-vert--lg">
+    <section className="margin-bottom--lg">
       <div className="container">
-        <div className="row margin-bottom--md padding-horiz--md">
+        <nav
+          className="margin-bottom--md"
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
+        >
           <button
             title="按发布时间排序"
             className={clsx(
@@ -172,7 +181,16 @@ function YearsSection({
           >
             更新时间
           </button>
-        </div>
+          {(tag && (
+            <span
+              className="badge badge--secondary"
+              style={{ marginLeft: 'auto' }}
+            >
+              {tag}
+            </span>
+          )) ||
+            ''}
+        </nav>
         <div ref={parent} className="row">
           {years
             .sort((a, b) => Number(b.year) - Number(a.year))
@@ -224,6 +242,7 @@ function getTagMap(blogPosts: readonly ArchiveBlogPost[]): TagMap {
 export default function BlogArchivePageWrapper(props: Props) {
   const [description] = useState(customConfig.archive.description());
   const title = customConfig.archive.title;
+  const [showTagCloud, setShowTagCloud] = useState(true);
   const [tag, setTag] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<SortBy>('date');
   const [years, setYears] = useState([]);
@@ -254,7 +273,7 @@ export default function BlogArchivePageWrapper(props: Props) {
       ),
       shrinkToFit: true,
       click(item) {
-        setTag(item[0]);
+        setTag((prev) => (prev === item[0] ? null : item[0]));
         // location.hash = `#/notes/${item[0]}`;
       },
     });
@@ -288,41 +307,56 @@ export default function BlogArchivePageWrapper(props: Props) {
         <main>
           {props.archive.blogPosts.length > 0 ? (
             <>
-              <section className="margin-top--lg">
-                <div
-                  id="wordcloud"
-                  className="container"
-                  style={{ height: '300px' }}
-                ></div>
-              </section>
-              <section className="margin-top--lg">
+              <section className="margin-vert--lg">
                 <div className="container">
+                  <nav className="margin-bottom--md">
+                    <button
+                      className={clsx(
+                        'button button--sm button--primary',
+                        !showTagCloud && 'button--outline'
+                      )}
+                      onClick={() => setShowTagCloud(!showTagCloud)}
+                    >
+                      标签云
+                    </button>
+                  </nav>
+                  <section className={clsx(!showTagCloud && styles['hide'])}>
+                    <div
+                      id="wordcloud"
+                      style={{ width: '100%', height: '400px' }}
+                    ></div>
+                  </section>
+                  <section className={clsx(showTagCloud && styles['hide'])}>
+                    <ul className={styles['tag-list']}>
+                      {tagList
+                        .slice()
+                        .sort((a, b) => b[1] - a[1])
+                        .map((tagItem) => (
+                          <li
+                            key={tagItem[0]}
+                            className={`button button--sm button--outline button--secondary ${
+                              tag === tagItem[0] ? 'button--active' : ''
+                            }`}
+                            onClick={() =>
+                              setTag(
+                                tag === tagItem[0]
+                                  ? null
+                                  : (tagItem[0] as string)
+                              )
+                            }
+                          >
+                            {tagItem[0]} {tagItem[1]}
+                          </li>
+                        ))}
+                    </ul>
+                  </section>
                   <hr className="margin-vert--lg" style={{ opacity: 0.25 }} />
-                  <ul className={styles['tag-list']}>
-                    {tagList
-                      .slice()
-                      .sort((a, b) => b[1] - a[1])
-                      .map((tagItem) => (
-                        <li
-                          key={tagItem[0]}
-                          className={`button button--sm button--outline button--secondary ${
-                            tag === tagItem[0] ? 'button--active' : ''
-                          }`}
-                          onClick={() =>
-                            setTag(
-                              tag === tagItem[0] ? null : (tagItem[0] as string)
-                            )
-                          }
-                        >
-                          {tagItem[0]} {tagItem[1]}
-                        </li>
-                      ))}
-                  </ul>
                 </div>
               </section>
               <YearsSection
                 sortBy={sortBy}
                 updateSortBy={setSortBy}
+                tag={tag}
                 years={years}
               />
             </>
