@@ -4,10 +4,23 @@
         <title>不如怀念 Blog</title>
         <link>https://wang1212.github.io/</link>
         <description>不如怀念 Blog</description>
-        <lastBuildDate>Sun, 28 May 2023 23:07:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 22 Jul 2023 23:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-Hans</language>
+        <item>
+            <title><![CDATA[谈谈笔记记录和知识管理工具]]></title>
+            <link>https://wang1212.github.io/2023/07/22/tools/notes-app</link>
+            <guid>https://wang1212.github.io/2023/07/22/tools/notes-app</guid>
+            <pubDate>Sat, 22 Jul 2023 23:00:00 GMT</pubDate>
+            <description><![CDATA[对于大部分人来说，有一个适合自己需求，同时免费又好用的笔记应用或者知识管理工具是很难得的。]]></description>
+            <content:encoded><![CDATA[<blockquote><p><em>最后更新于 2023-07-22 23:00:00</em></p></blockquote><p>不管是在学校还是工作后，记录一直是个很好的习惯，方便积累经验并阶段性进行回顾总结。因此，对于大部分人来说，有一个适合自己需求，同时免费又好用的笔记应用或者知识管理工具是很难得的。</p><p>从大学开始就一直在坚持更新博客，期间有相当长一段时间博客几乎没怎么更新过，不过终归还是坚持下来了。随着时间的推移，发现认真写一篇博文耗费的时间成本太高，要么只能在周末抽空，要么就断断续续几天才能写完，这也直接导致坚持更新博客的难度加大。其实这件事情的本质不是对于记录这个行为本身产生了懈怠，而是有很多可以用来记录的小事，但要将其发布成一篇篇博文的代价太大，追求效率就容易在质量上大打折扣，还不如不写。以至于现在每每回过头来看，积攒了大量的待完成的小任务，而整理这些小任务也不是那么容易。</p><p>说了这么多，问题的本质在于平时一些小的知识记录缺乏一个比较有效的管理工具应用，因为以前都是直接用 Markdown 编辑器和文件夹进行管理的，为了方便同步，还会用网易有道云笔记这类软件进行记录，但一直觉得不怎么好用。</p><p>最开始使用的是 <a href="https://www.typora.io/" target="_blank" rel="noopener noreferrer">typora</a> 的测试版，因为其可以免费使用，后来其正式版发布后收费了就弃用了。有很多人说可以用破解版，我倒觉得没有必要，如此良心的软件，付不起钱就换个免费的吧。后来换了 <a href="https://www.zettlr.com/" target="_blank" rel="noopener noreferrer">Zettlr</a>，用了相当长一段时间，其功能和 UI 交互体验一直觉得很别扭，有时候觉得甚至不如在 VSCode 里面直接写 Markdown 来得方便。后来又改用 <a href="https://github.com/marktext/marktext" target="_blank" rel="noopener noreferrer">MarkText</a>，体验要好很多，不过这个开源项目好像维护的频率很低了。以上都只是 Markdown 文件编辑器，后来就开始慢慢了解一些笔记应用了。</p><p>Notable、VNote、Anki 这些简单的笔记应用都了解过，但始终觉得不是自己想要的东西。后来了解到了 <a href="https://joplinapp.org/" target="_blank" rel="noopener noreferrer">Joplin</a>，发现其比较契合自己的需求，简单使用了之后，发现其同步功能使用起来太麻烦，还有一些其它细节上的问题不是很合意，就放弃长期使用了。在这期间，还了解过一个开源的知识管理工具 <a href="https://github.com/zadam/trilium" target="_blank" rel="noopener noreferrer">Trilium Notes</a>，其功能异常强大，但也相当复杂，上手成本太高，一直没怎么有时间去仔细研究，而且也不支持中文，看作者的意思短期内也不打算支持。折腾了一圈后，还是暂时回到 Markdown 编辑器了。</p><p>直到近期，在看 ThoughtWorks Technology Radar 时，不经意看到博文里提到了团队知识管理工具，其中简单对比了 <a href="https://obsidian.md/" target="_blank" rel="noopener noreferrer">Obsidian</a> 和 <a href="https://logseq.com/" target="_blank" rel="noopener noreferrer">Logseq</a> 这两个工具，一时间竟引起了我的兴趣。知识图谱这个概念这几年听的比较多，但从没想过个人笔记记录和这个会产生什么关联。在简单的了解了这两款工具应用后，就联想到了 Trilium Notes，不同的是，前两者可能上手成本低一些，用户体验应该也会更好一些。遂打算下载安装试用一下，在简单的试用过后，发现 Logseq 这个应用比较好用，而且也是个开源社区维护的软件，对于一直偏爱于开源软件的我来说最合适不过了。</p><p>Obsidian 是一个商业软件，但对个人用户免费，也提供一些收费的增值服务，简单调研过后发现用户群应该也不少，而且口碑也很好，但我倒不怎么喜欢在个人的事情上用一些商业软件。<strong>Obsidian 与 Logseq 有一个很大的不同点在于，前者是以大家熟悉的文件夹形式管理笔记的，但后者却是以块的形式和链接引用的方式来管理笔记，虽然它们都是基于图数据库的。</strong>在一直写博客的过程中遇到过基于文件夹管理的文章，有时候很难做文件夹分类，而 Logseq 这种模式就感觉很适合，尤其是记录平时一些零碎的事情的时候。在使用了一段时间后，也了解了一些其它人使用后的对比体验和总结，<strong>发现像 Logseq 这种基于块的模式，写以前那种具有上下文的完整的一篇文章倒不是那么容易。</strong></p><p>最终，在深度使用后，发现 Logseq 可以解决以前零散的知识记录不好管理的问题，博客可以继续坚持更新，博文像是对平时记录的一些知识的一个全方位的总结，更具有意义。另一方面，Logseq 自身的功能以及插件提供的一些功能很方便，例如绘图、任务管理等等，这些都是平时记录东西或者做规划很常用的功能。</p><h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="参考">参考<a href="#参考" class="hash-link" aria-label="参考的直接链接" title="参考的直接链接">​</a></h2><ul><li><a href="https://www.typora.io/" target="_blank" rel="noopener noreferrer">https://www.typora.io/</a></li><li><a href="https://www.zettlr.com/" target="_blank" rel="noopener noreferrer">https://www.zettlr.com/</a></li><li><a href="https://github.com/marktext/marktext" target="_blank" rel="noopener noreferrer">https://github.com/marktext/marktext</a></li><li><a href="https://joplinapp.org/" target="_blank" rel="noopener noreferrer">https://joplinapp.org/</a></li><li><a href="https://obsidian.md/" target="_blank" rel="noopener noreferrer">https://obsidian.md/</a></li><li><a href="https://logseq.com/" target="_blank" rel="noopener noreferrer">https://logseq.com/</a></li></ul>]]></content:encoded>
+            <author>mrwang1212@126.com (不如怀念)</author>
+            <category>工具</category>
+            <category>笔记</category>
+            <category>知识管理</category>
+            <category>随笔杂谈</category>
+        </item>
         <item>
             <title><![CDATA[通过 Node.js 自定义加载器运行代码]]></title>
             <link>https://wang1212.github.io/2023/05/28/computer-technology/nodejs/nodejs-loader</link>
