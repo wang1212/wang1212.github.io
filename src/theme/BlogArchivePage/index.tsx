@@ -7,6 +7,7 @@ import BackToTopButton from '@theme/BackToTopButton';
 import type { ArchiveBlogPost, Props } from '@theme/BlogArchivePage';
 import BlogArchivePage from '@theme-original/BlogArchivePage';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import clsx from 'clsx';
 
 /**
  * ! 覆盖内部实现
@@ -27,13 +28,15 @@ const descriptionSet = [
 /** ! custom config */
 const customConfig = {
   archive: {
-    title: '历史文章',
+    title: '文章归档',
     description: () =>
       descriptionSet[Math.floor(Math.random() * descriptionSet.length)],
   },
 };
 
 // ------------------------------------------------------------------------------------
+
+type SortBy = 'date' | 'update';
 
 function PostItem({ post }: { post: ArchiveBlogPost }) {
   const formatterDate = (date: string) =>
@@ -90,10 +93,11 @@ function Month({ year, month, posts }: MonthProps) {
 }
 
 function listPostsByMonth(
-  blogPosts: readonly ArchiveBlogPost[]
+  blogPosts: readonly ArchiveBlogPost[],
+  sortBy: SortBy
 ): Omit<MonthProps, 'year'>[] {
   const postsByMonth = blogPosts.reduceRight((posts, post) => {
-    const month = post.metadata.date.split('-')[1];
+    const month = (post.metadata.frontMatter[sortBy] as string).split('-')[1];
     const monthPosts = posts.get(month) ?? [];
     return posts.set(month, [post, ...monthPosts]);
   }, new Map<string, ArchiveBlogPost[]>());
@@ -107,10 +111,11 @@ function listPostsByMonth(
 type YearProps = {
   year: string;
   posts: ArchiveBlogPost[];
+  sortBy: SortBy;
 };
 
-function Year({ year, posts }: YearProps) {
-  const months = listPostsByMonth(posts);
+function Year({ year, posts, sortBy }: YearProps) {
+  const months = listPostsByMonth(posts, sortBy);
   const [parent, enableAnimations] = useAutoAnimate();
 
   return (
@@ -127,17 +132,52 @@ function Year({ year, posts }: YearProps) {
   );
 }
 
-function YearsSection({ years }: { years: YearProps[] }) {
+function YearsSection({
+  years,
+  sortBy,
+  updateSortBy,
+}: {
+  years: YearProps[];
+  sortBy: SortBy;
+  updateSortBy: (sortBy: SortBy) => void;
+}) {
   const [parent, enableAnimations] = useAutoAnimate();
+
+  if (years.length === 0) {
+    return null;
+  }
 
   return (
     <section className="margin-vert--lg">
       <div className="container">
+        <div className="row margin-bottom--md padding-horiz--md">
+          <button
+            title="按发布时间排序"
+            className={clsx(
+              'button button--sm button--primary',
+              sortBy !== 'date' && 'button--outline',
+              'margin-right--sm'
+            )}
+            onClick={() => updateSortBy('date')}
+          >
+            发布时间
+          </button>
+          <button
+            title="按更新时间排序"
+            className={clsx(
+              'button button--sm button--primary',
+              sortBy !== 'update' && 'button--outline'
+            )}
+            onClick={() => updateSortBy('update')}
+          >
+            更新时间
+          </button>
+        </div>
         <div ref={parent} className="row">
           {years
             .sort((a, b) => Number(b.year) - Number(a.year))
             .map((props) => (
-              <Year key={props.year} {...props} />
+              <Year key={props.year} sortBy={sortBy} {...props} />
             ))}
         </div>
       </div>
@@ -145,9 +185,12 @@ function YearsSection({ years }: { years: YearProps[] }) {
   );
 }
 
-function listPostsByYear(blogPosts: readonly ArchiveBlogPost[]): YearProps[] {
+function listPostsByYear(
+  blogPosts: readonly ArchiveBlogPost[],
+  sortBy: SortBy
+): YearProps[] {
   const postsByYear = blogPosts.reduceRight((posts, post) => {
-    const year = post.metadata.date.split('-')[0]!;
+    const year = (post.metadata.frontMatter[sortBy] as string).split('-')[0]!;
     const yearPosts = posts.get(year) ?? [];
     return posts.set(year, [post, ...yearPosts]);
   }, new Map<string, ArchiveBlogPost[]>());
@@ -155,6 +198,7 @@ function listPostsByYear(blogPosts: readonly ArchiveBlogPost[]): YearProps[] {
   return Array.from(postsByYear, ([year, posts]) => ({
     year,
     posts,
+    sortBy,
   }));
 }
 
@@ -179,9 +223,10 @@ function getTagMap(blogPosts: readonly ArchiveBlogPost[]): TagMap {
 
 export default function BlogArchivePageWrapper(props: Props) {
   const [description] = useState(customConfig.archive.description());
-  const [years, setYears] = useState([]);
-  const [tag, setTag] = useState<string | null>(null);
   const title = customConfig.archive.title;
+  const [tag, setTag] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<SortBy>('date');
+  const [years, setYears] = useState([]);
   const tagMap = getTagMap(props.archive.blogPosts);
   const tagList: [string, number][] = Array.from(
     tagMap,
@@ -226,8 +271,8 @@ export default function BlogArchivePageWrapper(props: Props) {
           post.metadata.frontMatter.tags.includes(tag)
         );
 
-    setYears(listPostsByYear(posts));
-  }, [tag, setYears]);
+    setYears(listPostsByYear(posts, sortBy));
+  }, [tag, sortBy, setYears]);
 
   return (
     <>
@@ -275,7 +320,11 @@ export default function BlogArchivePageWrapper(props: Props) {
                   </ul>
                 </div>
               </section>
-              {years.length ? <YearsSection years={years} /> : ''}
+              <YearsSection
+                sortBy={sortBy}
+                updateSortBy={setSortBy}
+                years={years}
+              />
             </>
           ) : (
             ''
