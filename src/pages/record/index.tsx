@@ -57,16 +57,36 @@ function DayEventList({ metadata, eventsData }: DayEventListProps) {
                 }}
               ></p>
             </div>
-            {(eventData.labels?.length && (
+            {((eventData.labels?.length || eventData.links?.length) && (
               <div className="card__footer">
-                {eventData.labels.map((label, index) => (
-                  <span
-                    key={index}
-                    className="badge badge--secondary margin-right--sm"
-                  >
-                    {label}
-                  </span>
-                ))}
+                <div
+                  style={{
+                    display: eventData.labels?.length ? 'block' : 'none',
+                  }}
+                >
+                  {eventData.labels?.map((label, index) => (
+                    <span
+                      key={index}
+                      className="badge badge--secondary margin-right--sm"
+                    >
+                      {label}
+                    </span>
+                  ))}
+                </div>
+                <div
+                  style={{
+                    display: eventData?.links?.length ? 'block' : 'none',
+                  }}
+                  className="margin-top--md"
+                >
+                  <ul style={{ margin: 0 }}>
+                    {eventData.links?.map((link, index) => (
+                      <li key={index}>
+                        <a href={link.url}>{link?.text ?? link.url}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             )) ||
               ''}

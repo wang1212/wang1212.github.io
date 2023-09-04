@@ -7,6 +7,7 @@ export type EventData = {
   type: number;
   description: string;
   labels?: string[];
+  links?: { url: string; text?: string }[];
 };
 
 export type YearDataset = {
