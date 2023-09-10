@@ -31,6 +31,11 @@ const config = {
     locales: ['zh-Hans'],
   },
 
+  // https://docusaurus.io/docs/markdown-features/diagrams
+  markdown: {
+    mermaid: true,
+  },
+
   presets: [
     [
       'classic',
@@ -128,6 +133,9 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      mermaid: {
+        theme: { light: 'default', dark: 'dark' },
+      },
     }),
 
   themes: [
@@ -140,6 +148,7 @@ const config = {
         blogRouteBasePath: '/',
       },
     ],
+    '@docusaurus/theme-mermaid',
   ],
 
   //
