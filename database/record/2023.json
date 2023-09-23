@@ -4,6 +4,28 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "09-23": [
+      {
+        "type": 1,
+        "description": "了解到的有关产品设计的四大风险：A. 价值风险、B. 可用性风险、C. 可行性风险、D. 生存风险。",
+        "labels": ["产品设计", "风险"]
+      },
+      {
+        "type": 1,
+        "description": "EP71 和 EP72 两期内容中比较有意思的是有关 CI/CD 内容的解释，以及视频介绍的 Git 合并代码的不同策略。",
+        "labels": ["《ByteByteGo》", "1小时"],
+        "links": [
+          {
+            "text": "EP71: CI/CD Pipeline Explained in Simple Terms",
+            "url": "https://blog.bytebytego.com/p/ep71-cicd-pipeline-explained-in-simple"
+          },
+          {
+            "text": "EP72: OAuth 2.0 Explained With Simple Terms",
+            "url": "https://blog.bytebytego.com/p/ep72-oauth-20-explained-with-simple"
+          }
+        ]
+      }
+    ],
     "09-07": [
       {
         "type": 1,
@@ -19,7 +41,7 @@
         "links": [
           {
             "text": "EP70: Cloud Services Cheat Sheet",
-            "url": "https://blog.bytebytego.com/p/ep70-cloud-services-cheat-sheet?utm_source=post-email-title&publication_id=817132&post_id=135537446&isFreemail=true"
+            "url": "https://blog.bytebytego.com/p/ep70-cloud-services-cheat-sheet"
           }
         ]
       }
