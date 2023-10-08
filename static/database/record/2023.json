@@ -4,6 +4,23 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "10-08": [
+      {
+        "type": 1,
+        "description": "EP73 中最精彩的莫过于关于负载均衡算法的视频讲述，其分为静态和动态类型，有 6 种常用算法实现，另外关于 HTTPS 协议握手的过程也唤醒了八股文的记忆。EP74 中关于云服务的演变也是值得关注的，以全球云市场领导者 AWS 的服务演进过程做了讲述。",
+        "labels": ["《ByteByteGo》", "1小时"],
+        "links": [
+          {
+            "text": "EP73: Cheat sheet of different databases in cloud services",
+            "url": "https://blog.bytebytego.com/p/ep73-cheat-sheet-of-different-databases"
+          },
+          {
+            "text": "EP74: The Evolution of AWS Services",
+            "url": "https://blog.bytebytego.com/p/ep74-the-evolution-of-aws-services"
+          }
+        ]
+      }
+    ],
     "10-07": [
       {
         "type": 1,
