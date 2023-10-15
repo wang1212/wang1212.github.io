@@ -24,6 +24,7 @@ _Open source tools used in my blog._
 - [Squoosh](https://squoosh.app/)
 - [Draw.io](https://app.diagrams.net/)
 - [Excalidraw](https://excalidraw.com/)
+- [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/)
 
 ## 开发准则
 

@@ -24,6 +24,7 @@
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.2.1",
     "flexsearch": "^0.7.31",
+    "overlayscrollbars": "^2.3.2",
     "plugin-image-zoom": "github:flexanalytics/plugin-image-zoom",
     "prism-react-renderer": "^1.3.5",
     "react": "^17.0.2",
