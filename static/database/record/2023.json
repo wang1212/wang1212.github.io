@@ -4,6 +4,40 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "10-15": [
+      {
+        "type": 1,
+        "description": "EP77 期中介绍了 5 种常用的缓存策略，也重点了解到缓存需要从读取和写入两个纬度进行考虑。E78 期中最值得关注的则是数据库的分片策略的介绍，其展示了垂直分片的 3 种策略。",
+        "labels": ["《ByteByteGo》", "1小时"],
+        "links": [
+          {
+            "text": "EP77: My Recommended Materials for Cracking Your Next Technical Interview",
+            "url": "https://blog.bytebytego.com/p/ep77-my-recommended-materials-for"
+          },
+          {
+            "text": "EP78: How to Crack Any System Design Interview",
+            "url": "https://blog.bytebytego.com/p/ep78-how-to-crack-any-system-design"
+          }
+        ]
+      }
+    ],
+    "10-13": [
+      {
+        "type": 1,
+        "description": "EP75 期内容让人比较感兴趣的是常用 5 种架构模式的介绍，对理解系统架构设计有很大的帮助。",
+        "labels": ["《ByteByteGo》", "2小时"],
+        "links": [
+          {
+            "text": "EP75: How Does A Password Manager Work",
+            "url": "https://blog.bytebytego.com/p/ep75-how-does-a-password-manager"
+          },
+          {
+            "text": "EP76: Netflix's Tech Stack",
+            "url": "https://blog.bytebytego.com/p/ep76-netflixs-tech-stack"
+          }
+        ]
+      }
+    ],
     "10-08": [
       {
         "type": 1,
