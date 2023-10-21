@@ -4,6 +4,49 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "10-20": [
+      {
+        "type": 1,
+        "description": "EP80 与 EP81 两期内容中比较有意思的是经典的八股文，从浏览器地址栏输入 URL 会发生什么，通过一张图描述了整个的大体过程，但也没有缺失一些关键性的细节，比如 HTTPS 协议的握手过程，和两次 key 交换过程。",
+        "labels": ["《ByteByteGo》", "1小时"],
+        "links": [
+          {
+            "text": "EP80: Explaining 8 Popular Network Protocols in 1 Diagram",
+            "url": "https://blog.bytebytego.com/p/ep80-explaining-8-popular-network"
+          },
+          {
+            "text": "EP81: How Companies Ship Code to Production",
+            "url": "https://blog.bytebytego.com/p/ep81-how-companies-ship-code-to-production"
+          }
+        ]
+      }
+    ],
+    "10-19": [
+      {
+        "type": 1,
+        "description": "今天又遇到一个老问题，桌面端和移动端事件兼容性处理的方案，看到一篇 web.dev 上很有用的文章，对触摸事件和鼠标事件做了较为详尽的探讨。",
+        "labels": ["web.dev"],
+        "links": [
+          {
+            "text": "Touch and mouse",
+            "url": "https://web.dev/articles/mobile-touchandmouse"
+          }
+        ]
+      }
+    ],
+    "10-16": [
+      {
+        "type": 1,
+        "description": "EP79 期恰好是国庆节前推出的，用一幅图很形象的描述了几种不同鉴权方案的流程和差异。",
+        "labels": ["《ByteByteGo》", "1小时"],
+        "links": [
+          {
+            "text": "Sessions, Tokens, JWT, SSO, and OAuth in One Diagram",
+            "url": "https://blog.bytebytego.com/p/sessions-tokens-jwt-sso-and-oauth"
+          }
+        ]
+      }
+    ],
     "10-15": [
       {
         "type": 1,
