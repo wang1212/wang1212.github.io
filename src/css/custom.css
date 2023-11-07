@@ -63,3 +63,9 @@
   align-items: center;
   justify-content: center;
 }
+
+/* fix */
+.os-scrollbar-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
