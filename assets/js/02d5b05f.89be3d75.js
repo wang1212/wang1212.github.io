@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[53913],{48191:a=>{a.exports=JSON.parse('{"label":"UDP","permalink":"/tags/udp","allTagsPath":"/tags","count":1}')}}]);

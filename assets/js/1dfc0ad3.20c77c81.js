@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[28973],{11331:s=>{s.exports=JSON.parse('{"label":"Vim","permalink":"/tags/vim","allTagsPath":"/tags","count":2,"unlisted":false}')}}]);

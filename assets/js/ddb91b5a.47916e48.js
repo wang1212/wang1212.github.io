@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[40930],{68375:s=>{s.exports=JSON.parse('{"label":"TCP/IP","permalink":"/tags/tcp-ip","allTagsPath":"/tags","count":1,"unlisted":false}')}}]);

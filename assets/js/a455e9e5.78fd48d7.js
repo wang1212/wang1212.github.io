@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[52654],{57422:s=>{s.exports=JSON.parse('{"label":"Fastify","permalink":"/tags/fastify","allTagsPath":"/tags","count":1,"unlisted":false}')}}]);
