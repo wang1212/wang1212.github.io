@@ -4,6 +4,204 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "12-03": [
+      {
+        "type": 1,
+        "description": "《ByteByteGo》的 EP88 期内容中比较感兴趣的是 Linux 的启动过程解释，以及联合 Postman 对 API 协议演变的一些探讨；查看《React Status》仅两期内容才得知 Rollup v4 版本已经发布，明显加快了大版本的发布速度。",
+        "labels": ["《ByteByteGo》", "《React Status》"],
+        "links": [
+          {
+            "text": "EP88: Linux Boot Process Explained",
+            "url": "https://blog.bytebytego.com/p/ep88-linux-boot-process-explained"
+          },
+          {
+            "text": "The evolving landscape of API protocols in 2023",
+            "url": "https://blog.postman.com/api-protocols-in-2023/"
+          }
+        ]
+      }
+    ],
+    "12-01": [
+      {
+        "type": 1,
+        "description": "《ByteByteGo》的 EP87 期内容中比较有意思的是关于系统设计中常见三个纬度的一些解析，即高可用、高吞吐量、高可扩展性。",
+        "labels": ["《ByteByteGo》"],
+        "links": [
+          {
+            "text": "EP87: ByteByteGo System Design Course Black Friday Deals",
+            "url": "https://blog.bytebytego.com/p/ep87-bytebytego-black-friday-deals"
+          }
+        ]
+      }
+    ],
+    "11-30": [
+      {
+        "type": 1,
+        "description": "今天在看谷歌机器学习课程时遇到了神经网络中“反向传播”这一概念，虽然课程中说不需要具体了解，但依然给出了一个链接，其中对这一概念的解释很有价值。",
+        "labels": ["《谷歌机器学习课程》", "反向传播"],
+        "links": [
+          {
+            "text": "反向传播算法",
+            "url": "https://developers-dot-devsite-v2-prod.appspot.com/machine-learning/crash-course/backprop-scroll?hl=zh-cn"
+          }
+        ]
+      }
+    ],
+    "11-25": [
+      {
+        "type": 4,
+        "description": "这周六恰好有时间去看看说了很久要去的绍兴，原计划是打算坐地铁两个小时直达鲁迅故居的，早上出发前发现高铁只有 19 分钟的车程也不贵，随即去东站坐了高铁，让人意想不到的是到达绍兴高铁站后打车去鲁迅故居景点却也花了足足接近一个小时的时间。绍兴是黄酒之乡，网红小吃含黄酒量百分百。",
+        "labels": ["绍兴", "鲁迅故居", "书圣故里"]
+      }
+    ],
+    "11-22": [
+      {
+        "type": 1,
+        "description": "近期在看谷歌机器学习课程，遇到了很多专业的概念，经过资料的检索，其中 L1 和 L2 正则化的对比，以及损失函数、成本函数、目标函数这几个概念的解释值得深究。",
+        "labels": ["正则化", "损失函数"],
+        "links": [
+          {
+            "text": "Fighting Overfitting With L1 or L2 Regularization: Which One Is Better?",
+            "url": "https://neptune.ai/blog/fighting-overfitting-with-l1-or-l2-regularization"
+          },
+          {
+            "text": "Objective function, cost function, loss function: are they the same thing?",
+            "url": "https://stats.stackexchange.com/questions/179026/objective-function-cost-function-loss-function-are-they-the-same-thing"
+          }
+        ]
+      }
+    ],
+    "11-20": [
+      {
+        "type": 1,
+        "description": "谷歌机器学习课程中关于神经网络这一概念推荐的博文非常有价值，值得一看。",
+        "labels": ["《谷歌机器学习课程》", "神经网络"],
+        "links": [
+          {
+            "text": "Neural Networks, Manifolds, and Topology",
+            "url": "https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/"
+          }
+        ]
+      }
+    ],
+    "11-19": [
+      {
+        "type": 1,
+        "description": "评估 AI 模型有一些指标，例如准确度和精确度，而这两个概念似乎让人有点迷糊，不过看到一篇短文对此的解释感觉非常好。",
+        "labels": ["《谷歌机器学习课程》", "准确度", "精确度"],
+        "links": [
+          {
+            "text": "Accuracy and Precision",
+            "url": "https://labwrite.ncsu.edu//Experimental%20Design/accuracyprecision.htm"
+          }
+        ]
+      }
+    ],
+    "11-16": [
+      {
+        "type": 1,
+        "description": "无聊看了下初代前端框架 Backbone，发现代码库近期还在维护更新，以前没有怎么细看过其源码，这次看了之后发现代码量比预想的少很多。",
+        "labels": ["Backbone"],
+        "links": [
+          {
+            "text": "GitHub: Backbone",
+            "url": "https://github.com/jashkenas/backbone"
+          }
+        ]
+      }
+    ],
+    "11-15": [
+      {
+        "type": 1,
+        "description": "早在 10 月底 ESLint 官方就宣布弃用代码格式化规则，相信这是迈出的一大步，以后也许不必再为 Prettier 和 ESLint 的规则冲突而烦恼？此外，ESLint V9 版本也已经提上日程，发现今年来前端基建工具的更新频率都加快了。",
+        "labels": ["ESLint"],
+        "links": [
+          {
+            "text": "What's coming in ESLint v9.0.0",
+            "url": "https://eslint.org/blog/2023/11/whats-coming-in-eslint-9.0.0/"
+          },
+          {
+            "text": "Deprecation of formatting rules",
+            "url": "https://eslint.org/blog/2023/10/deprecating-formatting-rules/"
+          }
+        ]
+      }
+    ],
+    "11-12": [
+      {
+        "type": 1,
+        "description": "EP83 和 EP85 两期内容中，有两点内容比较吸引人，其一是关于通过 C++、Python、Java 几种不同的语言工作机制很好的解释了性能和灵活性之间的权衡，另一个则是 6 个常用的 Linux 日志解析命令 `grep`, `cut`, `sed`, `awk`, `sort`, `uniq` 的用法和差异。",
+        "labels": ["《ByteByteGo》"],
+        "links": [
+          {
+            "text": "EP83: Explaining 9 Types of API Testing",
+            "url": "https://blog.bytebytego.com/p/ep83-explaining-9-types-of-api-testing"
+          },
+          {
+            "text": "EP85: Like LeetCode, but for improving debugging skills",
+            "url": "https://blog.bytebytego.com/p/ep85-top-9-http-request-methods"
+          }
+        ]
+      }
+    ],
+    "11-09": [
+      {
+        "type": 1,
+        "description": "头一次遇见了 `position: fixed` 和 `transform` 属性冲突的使用场景，以前为什么没这么用过呢？",
+        "labels": ["CSS3"],
+        "links": [
+          {
+            "text": "Position fixed doesn't work when using -webkit-transform",
+            "url": "https://stackoverflow.com/questions/2637058/position-fixed-doesnt-work-when-using-webkit-transform"
+          },
+          {
+            "text": "The uncanny relationship between position fixed and transform property",
+            "url": "https://dev.to/salilnaik/the-uncanny-relationship-between-position-fixed-and-transform-property-32f6"
+          }
+        ]
+      }
+    ],
+    "11-08": [
+      {
+        "type": 1,
+        "description": "看到一些比较好的关于“微内核”架构设计的文章。",
+        "labels": ["系统架构设计", "微内核"],
+        "links": [
+          {
+            "text": "What Is Microkernel Architecture Design?",
+            "url": "https://www.alibabacloud.com/blog/what-is-microkernel-architecture-design_597605"
+          },
+          {
+            "text": "What is a microkernel architecture, and is it right for you?",
+            "url": "https://www.techtarget.com/searchapparchitecture/tip/What-is-a-microkernel-architecture-and-is-it-right-for-you"
+          }
+        ]
+      }
+    ],
+    "11-07": [
+      {
+        "type": 1,
+        "description": "Vite 似乎被越来越多的前端项目所采用，而其官方团队正在致力于 Rollup 的 Rust 版本工具 Rolldown 的开发筹备工作。",
+        "labels": ["Vite"],
+        "links": [
+          {
+            "text": "IT RHYMES WITH FEETCONF",
+            "url": "https://bytes.dev/archives/229"
+          }
+        ]
+      },
+      {
+        "type": 3,
+        "description": "Docusaurus 的 3.0 版本已于近期发布，之前发现的 mermaid 一些不支持的特性也在该版本中被支持，当然是把博客的依赖升级到 3.0 尝鲜啦！",
+        "labels": ["Docusaurus V3"],
+        "links": [
+          {
+            "text": "Announcing Docusaurus 3.0",
+            "url": "https://docusaurus.io/blog/releases/3.0"
+          }
+        ]
+      }
+    ],
     "10-20": [
       {
         "type": 1,
