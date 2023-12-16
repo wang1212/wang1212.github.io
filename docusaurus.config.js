@@ -90,11 +90,11 @@ const config = {
           { to: '/record', label: '记录', position: 'left' },
           { to: '/timeline', label: '历程', position: 'left' },
           // { to: '/resource', label: '资源', position: 'left' },
-          {
-            href: 'https://github.com/wang1212/wang1212.github.io',
-            label: 'Source',
-            position: 'right',
-          },
+          // {
+          //   href: 'https://github.com/wang1212/wang1212.github.io',
+          //   label: 'Source',
+          //   position: 'right',
+          // },
         ],
         hideOnScroll: true,
       },

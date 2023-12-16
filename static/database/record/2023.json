@@ -7,7 +7,7 @@
     "12-03": [
       {
         "type": 1,
-        "description": "《ByteByteGo》的 EP88 期内容中比较感兴趣的是 Linux 的启动过程解释，以及联合 Postman 对 API 协议演变的一些探讨；查看《React Status》仅两期内容才得知 Rollup v4 版本已经发布，明显加快了大版本的发布速度。",
+        "description": "《ByteByteGo》的 EP88 期内容中比较感兴趣的是 Linux 的启动过程解释，以及联合 Postman 对 API 协议演变的一些探讨；查看《React Status》近两期内容才得知 Rollup v4 版本已经发布，明显加快了大版本的发布速度。",
         "labels": ["《ByteByteGo》", "《React Status》"],
         "links": [
           {
