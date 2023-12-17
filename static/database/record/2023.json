@@ -4,6 +4,63 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "12-17": [
+      {
+        "type": "2",
+        "description": "今天总算闲下心来，记录了一下之前去绍兴的一日游经历。"
+      }
+    ],
+    "12-15": [
+      {
+        "type": 1,
+        "description": "最近在排查业务问题用到了 Fiddle 工具的一个老版本，于是就看看有没有一些类似的开源工具可以使用，不经意间发现了一个惊喜，Chrome 在 v117 支持了对请求进行拦截并对响应内容以本地文件形式进行覆盖，同时支持 https 请求，这可是个很棒的特性，要知道 https 请求调试一直是个难点，用其它工具还得额外装证书。",
+        "labels": ["Chrome DevTools", "Https 代理"],
+        "links": [
+          {
+            "text": "What's New in DevTools (Chrome 117)",
+            "url": "https://developer.chrome.com/blog/new-in-devtools-117#xhr-fetch"
+          },
+          {
+            "text": "Override web content and HTTP response headers locally",
+            "url": "https://developer.chrome.com/docs/devtools/overrides"
+          }
+        ]
+      }
+    ],
+    "12-11": [
+      {
+        "type": 1,
+        "description": "接近年底了，又开始对投资蠢蠢欲动，近期业务相关的内容涉及到 10 年期美债，遂对其进行了学习了解，发现 10 年期国债收益率是每个国家金融系统很重要的一个的指标，其与货币政策遥相呼应。",
+        "labels": ["10 年期国债"],
+        "links": [
+          {
+            "text": "10-Year Treasury Bond Yield: What It Is and Why It Matters",
+            "url": "https://www.investopedia.com/articles/investing/100814/why-10-year-us-treasury-rates-matter.asp"
+          },
+          {
+            "text": "Understanding Treasury Yields and Interest Rates",
+            "url": "https://www.investopedia.com/articles/03/122203.asp"
+          },
+          {
+            "text": "Understanding Interest Rates, Inflation, and Bonds",
+            "url": "https://www.investopedia.com/articles/bonds/09/bond-market-interest-rates.asp"
+          }
+        ]
+      }
+    ],
+    "12-09": [
+      {
+        "type": 1,
+        "description": "最近想看看后端相关的东西，刚好就看到了微软的命令行工具 PowerShell 的文档，趁此机会也对 PowerShell 的进行了更深入的了解，其命令被称为 cmdlet，底层实际上是基于 .Net 运行时构建的。",
+        "labels": ["PowerShell"],
+        "links": [
+          {
+            "text": "PowerShell 101",
+            "url": "https://learn.microsoft.com/zh-cn/powershell/scripting/learn/ps101/00-introduction?view=powershell-7.4"
+          }
+        ]
+      }
+    ],
     "12-03": [
       {
         "type": 1,
