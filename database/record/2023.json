@@ -4,9 +4,52 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "12-28": [
+      {
+        "type": 1,
+        "description": "制定产品策略的 7 个步骤：目标、用户、超能力、愿景、支柱、影响、路线图。",
+        "labels": ["《Product Growth》"],
+        "links": [
+          {
+            "text": "How to Write a Product Strategy in 1 Day / 1 Week / 1 Month",
+            "url": "https://www.news.aakashg.com/p/strategy-in-1-day-week-month"
+          }
+        ]
+      }
+    ],
+    "12-25": [
+      {
+        "type": 1,
+        "description": "EP91 中干货比较多，垂直扩展与水平扩展的差异、对称加密和非对称加密、Redis 持久化数据的方式这几个内容都是非常经典的概念。",
+        "labels": ["《ByteByteGo》"],
+        "links": [
+          {
+            "text": "EP91: REST API Authentication Methods",
+            "url": "https://blog.bytebytego.com/p/ep91-rest-api-authentication-methods"
+          }
+        ]
+      }
+    ],
+    "12-18": [
+      {
+        "type": 1,
+        "description": "EP90 和 EP89 两期内容中关于 4 种 SQL 连接的概念图解非常清晰，还有数据库事务中 ACID 原则的讲述也是值得一看的。",
+        "labels": ["《ByteByteGo》"],
+        "links": [
+          {
+            "text": "EP90: How do SQL Joins Work?",
+            "url": "https://blog.bytebytego.com/p/ep90-how-do-sql-joins-work"
+          },
+          {
+            "text": "EP89: What does ACID mean?",
+            "url": "https://blog.bytebytego.com/p/ep89-what-does-acid-mean"
+          }
+        ]
+      }
+    ],
     "12-17": [
       {
-        "type": "2",
+        "type": 2,
         "description": "今天总算闲下心来，记录了一下之前去绍兴的一日游经历。"
       }
     ],
