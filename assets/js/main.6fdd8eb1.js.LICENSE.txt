@@ -3,7 +3,7 @@
 
 /*!
  * OverlayScrollbars
- * Version: 2.4.5
+ * Version: 2.4.7
  *
  * Copyright (c) Rene Haas | KingSora.
  * https://github.com/KingSora
