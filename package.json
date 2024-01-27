@@ -16,17 +16,17 @@
     "commit": "cz"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.0.1",
-    "@docusaurus/preset-classic": "^3.0.1",
-    "@docusaurus/theme-mermaid": "^3.0.1",
-    "@easyops-cn/docusaurus-search-local": "^0.39.0",
+    "@docusaurus/core": "^3.1.1",
+    "@docusaurus/preset-classic": "^3.1.1",
+    "@docusaurus/theme-mermaid": "^3.1.1",
+    "@easyops-cn/docusaurus-search-local": "^0.40.1",
     "@formkit/auto-animate": "^0.8.1",
     "@mdx-js/react": "^3.0.0",
-    "clsx": "^2.0.0",
-    "flexsearch": "^0.7.31",
-    "overlayscrollbars": "^2.4.5",
+    "clsx": "^2.1.0",
+    "flexsearch": "^0.7.43",
+    "overlayscrollbars": "^2.4.7",
     "plugin-image-zoom": "github:flexanalytics/plugin-image-zoom",
-    "prism-react-renderer": "^2.3.0",
+    "prism-react-renderer": "^2.3.1",
     "react": "^18.2.0",
     "react-calendar-heatmap": "^1.9.0",
     "react-dom": "^18.2.0",
@@ -34,9 +34,9 @@
     "wordcloud": "^1.2.2"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.0.1",
-    "@docusaurus/tsconfig": "^3.0.1",
-    "@docusaurus/types": "^3.0.1",
+    "@docusaurus/module-type-aliases": "^3.1.1",
+    "@docusaurus/tsconfig": "^3.1.1",
+    "@docusaurus/types": "^3.1.1",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "3.3.0",
     "typescript": "^5.3.3"
