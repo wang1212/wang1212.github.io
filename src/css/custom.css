@@ -14,13 +14,29 @@
   --ifm-color-primary-lighter: #359962;
   --ifm-color-primary-lightest: #3cad6e; */
 
-  --ifm-color-primary: #495057;
+  /* --ifm-color-primary: #495057;
   --ifm-color-primary-dark: #42484e;
   --ifm-color-primary-darker: #3e444a;
   --ifm-color-primary-darkest: #33383d;
   --ifm-color-primary-light: #505860;
   --ifm-color-primary-lighter: #545c64;
-  --ifm-color-primary-lightest: #5f6871;
+  --ifm-color-primary-lightest: #5f6871; */
+
+  /* --ifm-color-primary: #88ab8e;
+  --ifm-color-primary-dark: #769e7d;
+  --ifm-color-primary-darker: #6d9874;
+  --ifm-color-primary-darkest: #597e5f;
+  --ifm-color-primary-light: #9ab89f;
+  --ifm-color-primary-lighter: #a3bea8;
+  --ifm-color-primary-lightest: #bed1c1; */
+
+  --ifm-color-primary: #9babb8;
+  --ifm-color-primary-dark: #879aaa;
+  --ifm-color-primary-darker: #7d92a3;
+  --ifm-color-primary-darkest: #63798b;
+  --ifm-color-primary-light: #afbcc6;
+  --ifm-color-primary-lighter: #b9c4cd;
+  --ifm-color-primary-lightest: #d6dde2;
 
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
