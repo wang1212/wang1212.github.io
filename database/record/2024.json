@@ -4,6 +4,172 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "02-04": [
+      {
+        "type": 1,
+        "description": "了解网络安全，OSI 模型每层可能遭受的安全攻击。",
+        "labels": ["《ByteByteGo》"],
+        "links": [
+          {
+            "text": "EP97: 10 Good Coding Principles to Improve Code Quality",
+            "url": "https://blog.bytebytego.com/p/ep97-10-good-coding-principles-to"
+          }
+        ]
+      }
+    ],
+    "02-03": [
+      {
+        "type": 1,
+        "description": "很精彩的两篇文章，一篇是关于机器遗忘的主题，一篇是探讨大模型即压缩的想法。",
+        "labels": ["AI", "LLMs"],
+        "links": [
+          {
+            "text": "Learn to Unlearn Machines",
+            "url": "https://towardsdatascience.com/learn-to-unlearn-machines-6b0843dfc40f"
+          },
+          {
+            "text": "What's new with ML in production",
+            "url": "https://vickiboykis.com/2024/01/15/whats-new-with-ml-in-production/"
+          }
+        ]
+      }
+    ],
+    "02-02": [
+      {
+        "type": 1,
+        "description": "了解云灾难恢复策略中关注的两个指标，恢复时间目标（RTO）和恢复点目标（RPO）。",
+        "labels": ["《ByteByteGo》"],
+        "links": [
+          {
+            "text": "EP96: A cheat sheet for system design",
+            "url": "https://blog.bytebytego.com/p/ep96-a-cheat-sheet-for-system-design"
+          }
+        ]
+      }
+    ],
+    "01-27": [
+      {
+        "type": 1,
+        "description": "通过压缩算法了解为什么小写字母可以更节省存储空间。",
+        "labels": ["压缩算法"],
+        "links": [
+          {
+            "text": "Why lowercase letters save data?",
+            "url": "https://endtimes.dev/why-lowercase-letters-save-data/"
+          }
+        ]
+      }
+    ],
+    "01-21": [
+      {
+        "type": 1,
+        "description": "E95 期内容干货满满，Linux 文件系统、内存类型、防火墙用例都是值得一看的内容。",
+        "labels": ["《ByteByteGo》"],
+        "links": [
+          {
+            "text": "EP95: Linux File System Explained",
+            "url": "https://blog.bytebytego.com/p/ep95-linux-file-system-explained"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "前端焦点 626 期中第一篇就是有关设计目标尺寸的博文，内容非常专业。",
+        "labels": ["《Frontend Focus》"],
+        "links": [
+          {
+            "text": "Frontend Focus #626",
+            "url": "https://frontendfoc.us/issues/626"
+          },
+          {
+            "text": "Designing better target sizes",
+            "url": "https://ishadeed.com/article/target-size"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "习惯了利用 React、Vue 等前端框架开发应用的人还了解如何高效率的操作 DOM 吗？",
+        "labels": ["《JSK Weekly》"],
+        "links": [
+          {
+            "text": "JSK Weekly - 17 January, 2024",
+            "url": "https://javascriptkicks.com/articles/627515/jsk-weekly-17-january-2024"
+          },
+          {
+            "text": "JS DOM Manipulation Best Practices – with Examples",
+            "url": "https://www.freecodecamp.org/news/dom-manipulation-best-practices/"
+          },
+          {
+            "text": "The JavaScript DOM Manipulation Handbook",
+            "url": "https://www.freecodecamp.org/news/the-javascript-dom-manipulation-handbook/"
+          }
+        ]
+      }
+    ],
+    "01-16": [
+      {
+        "type": 1,
+        "description": "近一年来，AI 概念无数次被媒体热炒，有关 AI 要取代开发者的炒作也喧嚣尘上，不过 StackOverflow 一篇博文值得开发者们一看。",
+        "labels": ["AI", "开发者"],
+        "links": [
+          {
+            "text": "Three types of AI-assisted programmers",
+            "url": "https://stackoverflow.blog/2023/12/11/three-types-of-ai-assisted-programmers/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "春节将至，回头看过去的一年，前端领域也发生了很大的变化，一篇很不错的博文刚好记录了这些内容。",
+        "labels": ["Web 前端"],
+        "links": [
+          {
+            "text": "Frontend predictions for 2024",
+            "url": "https://buttondown.email/whatever_jamie/archive/frontend-predictions-for-2024/"
+          }
+        ]
+      }
+    ],
+    "01-14": [
+      {
+        "type": 1,
+        "description": "Dan Abramov 在离开 React 官方团队后又开始更新博客。",
+        "labels": ["React", "Dan Abramov"],
+        "links": [
+          {
+            "text": "overreacted.io",
+            "url": "https://overreacted.io/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "了解到一个关于产品的概念，即 PLG，产品主导增长，这是相对于过去销售主导和营销主导的增长时代的区别。",
+        "labels": ["Product-led growth (PLG)"],
+        "links": [
+          {
+            "text": "Product-Led Growth (PLG): A Definition, Examples, and Why it's Taking Off",
+            "url": "https://productled.com/blog/product-led-growth-definition"
+          },
+          {
+            "text": "What is product-led growth?",
+            "url": "https://www.productled.org/foundations/what-is-product-led-growth"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "E94 期内容中关于客户端架构的内容刚好与最近的业务比较契合。",
+        "labels": ["《ByteByteGo》"],
+        "links": [
+          {
+            "text": "EP94: REST API Cheatsheet",
+            "url": "https://blog.bytebytego.com/p/ep94-rest-api-cheatsheet"
+          }
+        ]
+      }
+    ],
     "01-07": [
       {
         "type": 1,
