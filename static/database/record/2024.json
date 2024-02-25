@@ -4,6 +4,138 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "02-23": [
+      {
+        "type": 1,
+        "description": "两篇关于 AI 领域的文章，一篇介绍了过去一年 AI 领域的四个发展阶段，另一篇则探讨了新的一年 LLMs 领域的可能发展趋势。",
+        "labels": ["AI", "LLMs"],
+        "links": [
+          {
+            "text": "The Four Wars of the AI Stack",
+            "url": "https://www.latent.space/p/dec-2023"
+          },
+          {
+            "text": "Worthwhile Research for building SOTA LLMs",
+            "url": "https://www.latent.space/p/jan-2024"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "React 团队目前正在进行的一项工作是如何更好的编写带样式的 React 组件，其项目目前为 React Strict DOM。",
+        "labels": ["React"],
+        "links": [
+          {
+            "text": "React Strict DOM",
+            "url": "https://github.com/facebook/react-strict-dom"
+          },
+          {
+            "text": "Worthwhile Research for building SOTA LLMs",
+            "url": "https://www.latent.space/p/jan-2024"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "一篇关于 Web 前端工具链中 HMR 即热更新的底层实现的探讨，比较有意义。",
+        "labels": ["Web 前端"],
+        "links": [
+          {
+            "text": "Hot Module Replacement is Easy",
+            "url": "https://bjornlu.com/blog/hot-module-replacement-is-easy"
+          }
+        ]
+      }
+    ],
+    "02-22": [
+      {
+        "type": 1,
+        "description": "一篇有关 2024 年 React 发展趋势的文章，以及一篇 React 官方团队发布的博文介绍了他们目前正在进行的工作。",
+        "labels": ["React"],
+        "links": [
+          {
+            "text": "React Trends in 2024",
+            "url": "https://www.robinwieruch.de/react-trends/"
+          },
+          {
+            "text": "React Labs: What We've Been Working On – February 2024",
+            "url": "https://react.dev/blog/2024/02/15/react-labs-what-we-have-been-working-on-february-2024"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "Rust 语言正以相当快的速度在各个领域的工具链中被应用，尤其是前端领域，Rome 工具开发团队推出了新的基于 Rust 编写的工具链 Biome。",
+        "labels": ["Rust", "Web 前端"],
+        "links": [
+          {
+            "text": "Biome, one toolchain for your web project",
+            "url": "https://biomejs.dev/"
+          }
+        ]
+      }
+    ],
+    "02-19": [
+      {
+        "type": 1,
+        "description": "Nginx 核心开发者与 F5 公司分道扬镳，宣布了免费 Nginx 的分支。",
+        "labels": ["Nginx"],
+        "links": [
+          {
+            "text": "announcing freenginx.org",
+            "url": "https://mailman.nginx.org/pipermail/nginx-devel/2024-February/K5IC6VYO2PB7N4HRP2FUQIBIBCGP4WAU.html"
+          }
+        ]
+      }
+    ],
+    "02-18": [
+      {
+        "type": 1,
+        "description": "EP99 期内容中比较值得关注的是介绍了几种代码即图表的工具，以及 SQL 语句的几种构成。",
+        "labels": ["《ByteByteGo》"],
+        "links": [
+          {
+            "text": "EP99: What is the best way to learn SQL?",
+            "url": "https://blog.bytebytego.com/p/ep99-what-is-the-best-way-to-learn"
+          }
+        ]
+      }
+    ],
+    "02-16": [
+      {
+        "type": 4,
+        "description": "今年的春节天气可谓是真好，白天十几度的温度很适合出游，假期接近尾声，忙完其它事情终于能闲下来一两天，遂又去了终南山南五台景区，已经是第二次来这里了，上一次是全程徒步，这一次则选择了坐摆渡车，毕竟太耗费时间。",
+        "labels": ["终南山", "南五台"]
+      }
+    ],
+    "02-07": [
+      {
+        "type": 1,
+        "description": "一篇解释 .git 文件的博客，可以了解一下。",
+        "labels": ["Git"],
+        "links": [
+          {
+            "text": "Inside .git",
+            "url": "https://jvns.ca/blog/2024/01/26/inside-git/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "Node.js 的导入属性特性最近迎来一次重大变化，另外可以了解下 Node.js 中的边车模式。",
+        "labels": ["Node.js"],
+        "links": [
+          {
+            "text": "Import attributes",
+            "url": "https://v8.dev/features/import-attributes"
+          },
+          {
+            "text": "Implementing The Sidecar Pattern in a Microservices Based Application",
+            "url": "https://blog.bitsrc.io/implementing-the-sidecar-pattern-in-nodejs-2ec3954fe9b6"
+          }
+        ]
+      }
+    ],
     "02-04": [
       {
         "type": 1,
