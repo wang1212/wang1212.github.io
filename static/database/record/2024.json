@@ -4,6 +4,80 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "03-04": [
+      {
+        "type": 1,
+        "description": "苹果为了报复欧盟的审查，有意在下个版本中将 PWA 应用进行削弱。",
+        "labels": ["iOS"],
+        "links": [
+          {
+            "text": "Apple effectively kills numerous browser games in the EU: unprecedented slap in the face of tech regulation",
+            "url": "https://gamesfray.com/apple-effectively-kills-numerous-browser-games-in-the-eu-unprecedented-slap-in-the-face-of-tech-regulation/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "削减功能也是产品增长的一个重点。",
+        "labels": ["Product growth"],
+        "links": [
+          {
+            "text": "Addition by Subtraction: The Art of Killing Features",
+            "url": "https://www.news.aakashg.com/p/addition-by-subtraction-the-art-of"
+          }
+        ]
+      }
+    ],
+    "03-03": [
+      {
+        "type": 1,
+        "description": "EP101 期内容中关于敏感数据和 ACID 的内容值得一看。",
+        "labels": ["《ByteByteGo》"],
+        "links": [
+          {
+            "text": "EP101: Top 3 Things You Should Know About Webhooks",
+            "url": "https://blog.bytebytego.com/p/ep101-top-3-things-you-should-know"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "JSDoc 中与 TypeScript 类型的对等写法。",
+        "labels": ["JSDoc", "TypeScript"],
+        "links": [
+          {
+            "text": "JSDoc as an alternative TypeScript syntax",
+            "url": "https://alexharri.com/blog/jsdoc-as-an-alternative-typescript-syntax"
+          }
+        ]
+      }
+    ],
+    "02-28": [
+      {
+        "type": 1,
+        "description": "一篇由参与 Node.js 项目的开发者发布的年博文，总结了 Node.js 过去的 2023 年发生的一些重要变化。",
+        "labels": ["Node.js"],
+        "links": [
+          {
+            "text": "Node.js 2023 Year in An Article",
+            "url": "https://blog.rafaelgss.dev/nodejs-2023-year-in-review"
+          }
+        ]
+      }
+    ],
+    "02-27": [
+      {
+        "type": 1,
+        "description": "Google 发起的 Web 核心指标更新，INP 正式替代 FID 成为最新的核心指标。",
+        "labels": ["web.dev", "INP"],
+        "links": [
+          {
+            "text": "Interaction to Next Paint becomes a Core Web Vital on March 12",
+            "url": "https://web.dev/blog/inp-cwv-march-12"
+          }
+        ]
+      }
+    ],
     "02-23": [
       {
         "type": 1,
