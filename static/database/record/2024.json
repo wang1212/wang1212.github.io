@@ -4,6 +4,34 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "03-08": [
+      {
+        "type": 1,
+        "description": "关于 React 的近期动态，一个是官方团队正在进行中的工作，有关跨平台 React 组件的设计，另一个则是生态社区对于 React Compiler 的探索。",
+        "labels": ["React"],
+        "links": [
+          {
+            "text": "'react-strict-dom', why it's so great?",
+            "url": "https://szymonrybczak.dev/blog/react-strict-dom"
+          },
+          {
+            "text": "React Unforget",
+            "url": "https://react-unforget.vercel.app/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "Node.js 过去一年重点更新，比如支持垃圾收集语言的 WebAssembly 编译，新的优化编译器。",
+        "labels": ["Node.js"],
+        "links": [
+          {
+            "text": "Top 8 Recent V8 in Node Updates",
+            "url": "https://blog.appsignal.com/2024/02/28/top-8-recent-v8-in-node-updates.html"
+          }
+        ]
+      }
+    ],
     "03-04": [
       {
         "type": 1,
