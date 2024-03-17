@@ -72,10 +72,17 @@ type MonthProps = {
   year: string;
   month: string;
   posts: ArchiveBlogPost[];
+  sortBy: SortBy;
 };
 
-function Month({ year, month, posts }: MonthProps) {
+function Month({ year, month, posts, sortBy }: MonthProps) {
   const [parent, enableAnimations] = useAutoAnimate();
+
+  posts.sort(
+    (a, b) =>
+      new Date(b.metadata.frontMatter[sortBy] as string).getTime() -
+      new Date(a.metadata.frontMatter[sortBy] as string).getTime()
+  );
 
   return (
     <section className="_js-month">
@@ -85,7 +92,7 @@ function Month({ year, month, posts }: MonthProps) {
       </h4>
       <ul ref={parent}>
         {posts.map((post) => (
-          <PostItem key={post.metadata.date} post={post} />
+          <PostItem key={post.metadata.permalink} post={post} />
         ))}
       </ul>
     </section>
@@ -105,6 +112,7 @@ function listPostsByMonth(
   return Array.from(postsByMonth, ([month, posts]) => ({
     month,
     posts,
+    sortBy,
   }));
 }
 
@@ -195,7 +203,7 @@ function YearsSection({
           {years
             .sort((a, b) => Number(b.year) - Number(a.year))
             .map((props) => (
-              <Year key={props.year} sortBy={sortBy} {...props} />
+              <Year key={props.year} {...props} />
             ))}
         </div>
       </div>
