@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>不如怀念 Blog</title>
-        <link>https://wang1212.github.io/</link>
+        <link>https://wang1212.github.io</link>
         <description>不如怀念 Blog</description>
         <lastBuildDate>Sat, 16 Dec 2023 22:10:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
@@ -329,7 +329,7 @@
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># 以前</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$ node --experimental-specifier-resolution=node index.js</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># 现在</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">$ node --experimental-loader=commonjs-extension-resolution-loader index.js</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="复制代码到剪贴板" title="复制" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>但需要注意的是，使用该自定义加载器运行代码，如果遇到第三方包是 ES Modules，且没有指定 <code>package.json</code> 文件中的 <code>main</code> 字段将会出现找不到模块的错误。这是因为 CommonJS 规范模块解析依赖 <code>main</code> 字段，而 ES Modules 规范则推荐使用 <code>exports</code> 字段指定模块入口文件，详见<a href="https://nodejs.org/docs/latest-v18.x/api/packages.html#package-entry-points" target="_blank" rel="noopener noreferrer">官方文档</a>。</p>
 <p>鉴于以上情况，如果是新项目，而且采用 ES Modules 编写代码，那还是带上文件扩展名遵循其规范比较好，放弃采用 flag 以及自定义加载器的方式运行代码，毕竟会带来一些额外的问题。</p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="参考资料">参考资料<a href="https://wang1212.github.io/2023/05/28/computer-technology/nodejs/nodejs-loader#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99" class="hash-link" aria-label="参考资料的直接链接" title="参考资�料的直接链接">​</a></h3>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="参考资料">参考资料<a href="https://wang1212.github.io/2023/05/28/computer-technology/nodejs/nodejs-loader#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99" class="hash-link" aria-label="参考资料的直接链接" title="参考资料的直接链接">​</a></h3>
 <ul>
 <li><a href="https://nodejs.org/en/blog/announcements/v19-release-announce" target="_blank" rel="noopener noreferrer">https://nodejs.org/en/blog/announcements/v19-release-announce</a></li>
 <li><a href="https://nodejs.org/docs/latest-v18.x/api/cli.html#--experimental-specifier-resolutionmode" target="_blank" rel="noopener noreferrer">https://nodejs.org/docs/latest-v18.x/api/cli.html#--experimental-specifier-resolutionmode</a></li>
@@ -655,7 +655,7 @@
 <br>
 <br></p>
 <p>疫情结束后的第一个春节，也是第一次春节假期出游，四天时间去了上海、苏州、杭州 3 个城市，领略了不同的风景。</p>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="春节出游">春节出游<a href="https://wang1212.github.io/2023/01/25/life/tourism/tourism#%E6%98%A5%E8%8A%82%E5%87%BA%E6%B8%B8" class="hash-link" aria-label="春节出游的直接链接" title="春节出游的直接链接">​</a></h2>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="春节出游">春节出游<a href="https://wang1212.github.io/2023/01/25/life/tourism/tourism#%EF%BF%BD%E6%98%A5%E8%8A%82%E5%87%BA%E6%B8%B8" class="hash-link" aria-label="春节出游的直接链接" title="春节出游的直接链接">​</a></h2>
 <p>这里说疫情“结束”似乎并不合理，因为用科学的角度来看，疫情是长期化的，总结一下就是“常伴你我身边，如影随形”。但在经历了过去三年防疫混乱的时代，用“结束”这个词语并不为过。</p>
 <p>过去的三年，每个人都在断断续续承受着不同程度的精神压力，面对疫情冲击的同时全球经济环境也在恶化，就业环境开始变差，大公司在裁员，小公司可能直接破产，个人每天上班的过程中还可能被防疫政策“误伤”。总之，相信这三年已经成为很多人一生中最灰暗的一段人生经历，面对着身体与精神层面的双重压力。最终，在 2022 年底我们还是等来了曙光和希望，疫情“突然”结束了，这个混乱的时代也跟着结束了，所有的一切都在慢慢恢复，向着 2019 年，我们希望的岁月里变好。</p>
 <p>2023 年的春节，年味慢慢也回来了，春运的数据也在恢复和高速增长，没有“核酸”的归途也畅通了不少。还记得四五年前就定了每年爬一座大山的目标，结果就坚持了两三年时间就遭遇了疫情这个黑天鹅事件，三年时间中几乎没有任何可以大胆出游爬山的机会。另一方面，现在工作也比以前要忙不少，很少有比较长的假期能出游。于是，在这样的背景下突发奇想准备在春节假期中挤压出 4 天时间出去游玩一下。</p>
@@ -1134,7 +1134,8 @@
 <li><a href="https://github.blog/2020-12-21-how-we-built-the-github-globe/" target="_blank" rel="noopener noreferrer">https://github.blog/2020-12-21-how-we-built-the-github-globe/</a></li>
 <li><a href="https://stripe.com/blog/globe" target="_blank" rel="noopener noreferrer">https://stripe.com/blog/globe</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/473982513" target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/473982513</a></li>
-</ul></video>]]></content:encoded>
+</ul>
+</video>]]></content:encoded>
             <author>mrwang1212@126.com (不如怀念)</author>
             <category>计算机技术</category>
             <category>Web</category>
