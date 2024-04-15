@@ -1,7 +1,7 @@
 ---
 title: Web 前端性能优化：核心概念与指标
 date: 2021-07-19 00:51:00
-update: 2021-07-24 21:56:00
+update: 2024-04-15 11:03:00
 authors: wang1212
 tags: &ref_0
   - 计算机技术
@@ -13,7 +13,7 @@ keywords: *ref_0
 description: 在一些较为复杂的 Web 应用中可能会出现性能瓶颈，导致用户体验急剧下降，做优化之前更应该了解一下相关的核心概念，从而在出问题时确定优化路径。
 ---
 
-> _最后更新于 2021-07-24 21:56:00_
+> _最后更新于 2024-04-15 11:03:00_
 
 说到 Web 的性能优化，可能很多时候我们采取了一些措施，看到了肉眼可见的改进，如果我们可以对其进行测量，确定我们改进的效率（百分比）是不是会更有意义？换句话说，如果我们了解性能瓶颈可能发生的位置，衡量用户体验好坏的指标，做到实时追踪性能变化，我们是不是可以更迅速的采取优化措施？在应用上线前，我们就可以做一些低成本而有高收益的优化工作，进一步提升用户体验。
 
@@ -38,7 +38,7 @@ Web 应用程序生命周期的四个方面：
 
 括号中表示推荐的性能目标，是我们在开发 Web 应用时务必要满足的，这样才能保证良好的用户体验。**RAIL 性能模型本质上是提出了一个简单而有效的衡量性能的方法，并给出一个推荐的目标，至于可能发生性能瓶颈的关键点和如何去达到优化目标则没有提及太多。**
 
-> https://web.dev/rail/
+> <https://web.dev/rail/>
 
 ## 关键渲染路径
 
@@ -53,9 +53,9 @@ Web 应用程序生命周期的四个方面：
 
 理解了有哪几个步骤之后就可以围绕这些来做优化了，各个步骤具体的内容以及可能带来的性能瓶颈看下方文档更能容易理解一些，在这里不再赘述。
 
-> https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path
->
-> https://developers.google.com/web/fundamentals/performance/critical-rendering-path
+> - <https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path>
+> - <https://developers.google.com/web/fundamentals/performance/critical-rendering-path>
+> - <https://angularindepth.com/posts/1498/101-javascript-critical-rendering-path>
 
 能深刻理解关键渲染路径的概念，就会对 Web 性能优化有了一个比较清晰的认识，因为页面完成初始化后，后续用户交互造成的页面结构布局发生的变化主要就体现在**布局（Layout ）计算**与**重绘（Repaint）**这两个方面，性能瓶颈也由此产生。
 
@@ -71,11 +71,9 @@ Web 应用程序生命周期的四个方面：
 
 以上步骤就是每一帧所要做的工作，优化的手段就是降低每个步骤的耗时。可以看出，实际上这是关键渲染路径中提到的布局与重绘更细化的表示。不过值得注意的是，**并不是每一帧都要历经以上所有的步骤，在某些情况下可以跳过某些步骤**，这就给了我们优化帧率的一个突破口。详细的内容查看下面谷歌开发者文档，图文介绍直观易懂，还有参考文档也值得收藏。
 
-> https://developers.google.com/web/fundamentals/performance/rendering#the_pixel_pipeline
->
-> https://csstriggers.com/
->
-> https://gist.github.com/paulirish/5d52fb081b3570c81e3a
+> - <https://developers.google.com/web/fundamentals/performance/rendering#the_pixel_pipeline>
+> - <https://csstriggers.com/>
+> - <https://gist.github.com/paulirish/5d52fb081b3570c81e3a>
 
 ### 动画性能
 
@@ -83,7 +81,7 @@ Web 应用程序生命周期的四个方面：
 
 CSS 实现动画较为简单，一般来说性能也最佳，有几个值得注意的地方：
 
-- 尽量用 `transform`（3d）和 `opacity ` 实现动画，在大多数渲染引擎中它们**不会触发布局和绘制**
+- 尽量用 `transform`（3d）和 `opacity` 实现动画，在大多数渲染引擎中它们**不会触发布局和绘制**
 - 可以利用 `will-change`（或者 `translateZ`）CSS 属性来**触发创建新的 GPU 层，优化性能，但不要滥用**
 - **减少绘制区域**和**降低绘制的复杂性**
 
@@ -96,17 +94,12 @@ CSS 实现动画较为简单，一般来说性能也最佳，有几个值得注�
 
 以上只是对一些核心要点的总结，具体的内容查看下列文章进行了解。
 
-> https://developer.mozilla.org/en-US/docs/Web/Performance/Animation_performance_and_frame_rate
->
-> https://developers.google.com/web/fundamentals/performance/rendering/simplify-paint-complexity-and-reduce-paint-areas
->
-> https://developer.mozilla.org/en-US/docs/Web/Performance/CSS_JavaScript_animation_performance
->
-> https://developers.google.com/web/fundamentals/performance/rendering/optimize-javascript-execution
->
-> https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing
->
-> https://developers.google.com/web/fundamentals/performance/rendering/debounce-your-input-handlers
+> - <https://developer.mozilla.org/en-US/docs/Web/Performance/Animation_performance_and_frame_rate>
+> - <https://developers.google.com/web/fundamentals/performance/rendering/simplify-paint-complexity-and-reduce-paint-areas>
+> - <https://developer.mozilla.org/en-US/docs/Web/Performance/CSS_JavaScript_animation_performance>
+> - <https://developers.google.com/web/fundamentals/performance/rendering/optimize-javascript-execution>
+> - <https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing>
+> - <https://developers.google.com/web/fundamentals/performance/rendering/debounce-your-input-handlers>
 
 ## Web Vitals
 
@@ -120,9 +113,8 @@ Web Vitals 是谷歌提出的一项计划，用来量化现代网站的用户体
 
 当然，谷歌不仅提出了分析指标，还提出了优化方案，以及提供了众多工具，详细内容查看下方官方文档即可。
 
-> https://web.dev/vitals/
->
-> https://github.com/GoogleChrome/web-vitals
+> - <https://web.dev/vitals/>
+> - <https://github.com/GoogleChrome/web-vitals>
 
 ## 布局偏移（LS）
 
@@ -132,9 +124,8 @@ Web Vitals 是谷歌提出的一项计划，用来量化现代网站的用户体
 
 CLS 相关的详细内容阅读下面的文章了解即可，文末也对如何改进 CLS 问题提供了一些建议。虽然目前提供了一些可以用来测量 LS 的 API，但终究还是调试起来不方便，好消息是 Chrome 88 版本在 DevTools 中加入了对 LS 现象的测量功能，查看下面第二篇文章了解。
 
-> https://web.dev/cls/
->
-> https://developer.chrome.com/blog/new-in-devtools-88/#web-vitals
+> - <https://web.dev/cls/>
+> - <https://developer.chrome.com/blog/new-in-devtools-88/#web-vitals>
 
 ## 缓存
 
@@ -148,23 +139,18 @@ Web 应用不像原生应用程序那样，用户安装到本地后，后续使�
 
 当然，以上列举的只是一些典型的缓存手段，针对不同的场景可以灵活运用多种缓存策略做优化。
 
-> https://developers.google.com/web/fundamentals/performance/get-started/httpcaching-6
->
-> https://web.dev/http-cache/
->
-> https://developers.google.com/web/fundamentals/performance/webpack/use-long-term-caching
->
-> https://developers.google.com/web/fundamentals/instant-and-offline/web-storage
+> - <https://developers.google.com/web/fundamentals/performance/get-started/httpcaching-6>
+> - <https://web.dev/http-cache/>
+> - <https://developers.google.com/web/fundamentals/performance/webpack/use-long-term-caching>
+> - <https://developers.google.com/web/fundamentals/instant-and-offline/web-storage>
 
 ## 渐进式 Web 应用
 
 渐进式 Web 应用（Progressive Web Apps，PWAs） 的目标是为跨平台的 Web 网络应用带来类似原生应用程序的用户体验，是一种应用的设计模式。其主要依赖于 `Service Worker` API 实现资源缓存，在离线的网络状况下也能正常为用户提供部分功能，且能将 Web 应用以类似原生应用的方式安装到用户桌面。一个复杂的 PWA 的资源缓存并不好处理，鉴于此 Chrome 团队开发了 Workbox 工具来简化这部分工作，以帮助开发者更容易的构建和管理 PWA。具体详细内容查看下方文档。
 
-> https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps
->
-> https://web.dev/progressive-web-apps/
->
-> https://developers.google.com/web/tools/workbox
+> - <https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps>
+> - <https://web.dev/progressive-web-apps/>
+> - <https://developers.google.com/web/tools/workbox>
 
 Workbox 工具的缓存策略值得探究，可以作为实现其它缓存方案的思想借鉴。
 
@@ -179,10 +165,10 @@ PRPL 模型是一种交互设计模式，目标是让网页加载的更快，其
 
 可以说，PRPL 模型是对整个 Web 站点生命周期中核心路径上所做优化的总结，对设计优化的 Web 站点具有指导意义。
 
-> https://web.dev/apply-instant-loading-with-prpl/
+> <https://web.dev/apply-instant-loading-with-prpl/>
 
 ## 参考资源
 
-- https://developer.mozilla.org/en-US/docs/Web/Performance
-- https://developers.google.com/web/fundamentals
-- https://web.dev/user-centric-performance-metrics/
+- <https://developer.mozilla.org/en-US/docs/Web/Performance>
+- <https://developers.google.com/web/fundamentals>
+- <https://web.dev/user-centric-performance-metrics/>
