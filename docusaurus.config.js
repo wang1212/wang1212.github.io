@@ -9,8 +9,6 @@ const config = {
   tagline: '记录 分享 交流 思考',
   url: 'https://wang1212.github.io',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 
   // GitHub pages deployment config.
@@ -19,6 +17,9 @@ const config = {
   projectName: 'wang1212.github.io', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
+
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -89,6 +90,11 @@ const config = {
           // { to: '/tags', label: '标签', position: 'left' },
           { to: '/record', label: '记录', position: 'left' },
           { to: '/timeline', label: '历程', position: 'left' },
+          {
+            href: 'https://wang1212.github.io/awesome-favorites-list',
+            label: '精选资源',
+            position: 'right',
+          },
           // { to: '/resource', label: '资源', position: 'left' },
           // {
           //   href: 'https://github.com/wang1212/wang1212.github.io',
@@ -101,31 +107,40 @@ const config = {
       footer: {
         style: 'dark',
         links: [
-          // {
-          //   title: '更多',
-          //   items: [
           {
-            label: '收藏列表',
-            href: 'https://github.com/wang1212/awesome-favorites-list',
+            title: '关于我',
+            items: [
+              {
+                label: 'Email',
+                href: 'mailto:mrwang1212@126.com',
+              },
+              {
+                label: 'GitHub',
+                href: 'https://github.com/wang1212',
+              },
+              {
+                label: 'Gitee',
+                href: 'https://gitee.com/i_wang1212',
+              },
+            ],
           },
           {
-            label: 'The Book Of Ruby(zh)',
-            href: 'https://wang1212.github.io/the-book-of-ruby/',
+            title: '更多',
+            items: [
+              {
+                label: '精选资源',
+                href: 'https://wang1212.github.io/awesome-favorites-list',
+              },
+              {
+                label: 'The Book Of Ruby (ZH)',
+                href: 'https://wang1212.github.io/the-book-of-ruby',
+              },
+              {
+                label: 'ECharts 开发深入探索',
+                href: 'https://wang1212.github.io/echarts-api-docs',
+              },
+            ],
           },
-          {
-            label: 'Email',
-            href: 'mailto:mrwang1212@126.com',
-          },
-          {
-            label: 'GitHub',
-            href: 'https://github.com/wang1212',
-          },
-          {
-            label: 'Gitee',
-            href: 'https://gitee.com/i_wang1212',
-          },
-          // ],
-          // },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} My Blog. Built with Docusaurus.`,
       },
