@@ -4,6 +4,261 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "04-19": [
+      {
+        "type": 1,
+        "description": "算法通常难以理解，如果能借助可视化手段辅助，将可以更好地理解算法的迭代过程。",
+        "labels": ["算法", "可视化"],
+        "links": [
+          {
+            "text": "Visualizing Algorithms",
+            "url": "https://bost.ocks.org/mike/algorithms/"
+          }
+        ]
+      }
+    ],
+    "04-18": [
+      {
+        "type": 1,
+        "description": "一篇关于命名的参考列表，对于变量、函数命名有困难的可以作为参考。",
+        "labels": ["Naming"],
+        "links": [
+          {
+            "text": "Naming things needn’t be hard",
+            "url": "https://classnames.paulrobertlloyd.com/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "MoE 架构是近期大语言模型领域技术发展的趋势，这篇文章解释了 MoE 架构是如何影响 Transformer 模型的。",
+        "labels": ["AI", "LLMs", "MoE"],
+        "links": [
+          {
+            "text": "How do mixture-of-experts layers affect transformer models?",
+            "url": "https://stackoverflow.blog/2024/04/04/how-do-mixture-of-experts-layers-affect-transformer-models/"
+          }
+        ]
+      }
+    ],
+    "04-15": [
+      {
+        "type": 1,
+        "description": "前段时间，Google 正式发布了 INP 核心指标以替换 FID 指标，这篇文章解释了它们之间的差异。",
+        "labels": ["Web 前端", "INP"],
+        "links": [
+          {
+            "text": "Understanding Interaction to Next Paint (INP)",
+            "url": "https://frontendmasters.com/blog/understanding-inp/"
+          }
+        ]
+      }
+    ],
+    "04-10": [
+      {
+        "type": 1,
+        "description": "V8 的沙盒机制已经开始进行测试。",
+        "labels": ["Node.js", "Sandbox"],
+        "links": [
+          {
+            "text": "The V8 Sandbox",
+            "url": "https://v8.dev/blog/sandbox"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "ESLint v9 正式发布了，新的配置项格式，更是带来了好用的配置文件调试器。",
+        "labels": ["Web 前端", "ESLint"],
+        "links": [
+          {
+            "text": "ESLint v9.0.0 released",
+            "url": "https://eslint.org/blog/2024/04/eslint-v9.0.0-released/"
+          },
+          {
+            "text": "Introducing ESLint Config Inspector",
+            "url": "https://eslint.org/blog/2024/04/eslint-config-inspector/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "很多时候也许不需要了解编程语言的底层实现机制，不过了解一下也许会对应用的性能优化有一定的帮助，看看对象结构在 JavaScript 引擎中是如何存储的。",
+        "labels": ["JavaScript"],
+        "links": [
+          {
+            "text": "Object structure in JavaScript engines",
+            "url": "https://blog.frontend-almanac.com/js-object-structure"
+          }
+        ]
+      }
+    ],
+    "04-05": [
+      {
+        "type": 4,
+        "description": "今天清明小长假高速免费，而且天气也还不错，遂打算在周边省市自驾游玩一番，仓促间选定了丹江口，没想到抖音上看的攻略没头没尾，去丹江口也耽搁了大量时间，晚上吃了丹江的翘嘴鱼，住店后决定第二天上武当山。武当山还是略显失望的，索道排队两小时无望后遂放弃上金顶，仓促的游览了其它重要景点就决定下山回家了。",
+        "labels": ["湖北", "十堰", "武当山", "丹江口"]
+      }
+    ],
+    "04-01": [
+      {
+        "type": 1,
+        "description": "104 期中有一部分内容是关于前端性能指标的，即 9 大网站性能指标，例如加载时间、第一个字节时间（TTFB）等等。",
+        "labels": ["《ByteByteGo》"],
+        "links": [
+          {
+            "text": "EP104: How do Search Engines Work?",
+            "url": "https://blog.bytebytego.com/p/ep104-how-do-search-engines-work"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "当一些技术概念难以理解时，借助可视化手段可以更直观一些，可视化 Promise 的执行。",
+        "labels": ["Web 前端", "Promise"],
+        "links": [
+          {
+            "text": "JavaScript Visualized: Promise Execution",
+            "url": "https://www.lydiahallie.com/blog/promise-execution"
+          }
+        ]
+      }
+    ],
+    "03-31": [
+      {
+        "type": 1,
+        "description": "用习惯了 commonjs 的 Node.js 用户对于 ESM 中文件路径的处理感觉到非常麻烦，好消息是 __dirname 将会被 ESM 支持。",
+        "labels": ["Node.js", "__dirname"],
+        "links": [
+          {
+            "text": "__dirname is back in Node.js with ES modules",
+            "url": "https://www.sonarsource.com/blog/dirname-node-js-es-modules/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "103 期中关于如何检测分布式系统中的节点故障的内容值得一看，不同的心跳机制。",
+        "labels": ["《ByteByteGo》"],
+        "links": [
+          {
+            "text": "EP103: Typical AWS Network Architecture in One Diagram",
+            "url": "https://blog.bytebytego.com/p/ep103-typical-aws-network-architecture"
+          }
+        ]
+      }
+    ],
+    "03-27": [
+      {
+        "type": 1,
+        "description": "ESM 是 Node.js 发展的正确方向，最新发布的特性支持在 commonjs 代码可以直接引用 ES 模块。",
+        "labels": ["Node.js", "Module"],
+        "links": [
+          {
+            "text": "require(esm) in Node.js",
+            "url": "https://joyeecheung.github.io/blog/2024/03/18/require-esm-in-node-js/"
+          }
+        ]
+      }
+    ],
+    "03-21": [
+      {
+        "type": 1,
+        "description": "React 编译器是个存在好几年的概念了，但是这部分工作却还处于开发中状态，先来了解下其中的类型系统。",
+        "labels": ["Web 前端", "React"],
+        "links": [
+          {
+            "text": "Type system of the React compiler",
+            "url": "https://www.recompiled.dev/blog/type-system/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "一篇值得读的文章，回顾前端发展的历史，探讨未来的发展方向。",
+        "labels": ["Web 前端"],
+        "links": [
+          {
+            "text": "Navigating the future of frontend",
+            "url": "https://frontendmastery.com/posts/navigating-the-future-of-frontend"
+          }
+        ]
+      }
+    ],
+    "03-19": [
+      {
+        "type": 1,
+        "description": "用动画的方式来理解 React 的渲染机制。",
+        "labels": ["Web 前端", "React"],
+        "links": [
+          {
+            "text": "The Interactive Guide to Rendering in React",
+            "url": "https://ui.dev/why-react-renders"
+          }
+        ]
+      }
+    ],
+    "03-16": [
+      {
+        "type": 1,
+        "description": "从模板技术这个角度来分析前端各个框架的差异。",
+        "labels": ["Web 前端", "template"],
+        "links": [
+          {
+            "text": "Comparing JavaScript Frameworks part 1: templates",
+            "url": "https://www.maartenhus.nl/blog/comparing-javascript-frameworks-part-1-templates/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "微服务技术的 10 个关键点。",
+        "labels": ["Web 后端", "微服务"],
+        "links": [
+          {
+            "text": "10 Challenges In Implementing Microservices",
+            "url": "https://blog.bitsrc.io/microservice-challenges-146badd013e3"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "事件架构是一个经典的程序设计，而近期前端又出现了“信号”这个概念，对其做一些简单的了解和对比。",
+        "labels": ["JavaScript", "事件架构", "信号模型"],
+        "links": [
+          {
+            "text": "Understanding The Difference Between Pub/Sub and Signals in JavaScript",
+            "url": "https://blog.bitsrc.io/difference-between-pub-sub-and-signals-in-javascript-f7d4c7c25960"
+          }
+        ]
+      }
+    ],
+    "03-15": [
+      {
+        "type": 1,
+        "description": "近年来，HTML 原生组件也在快速发展，而其底层技术 shadow DOM 值得预先了解一下。",
+        "labels": ["Web 前端", "shadow DOM"],
+        "links": [
+          {
+            "text": "A practical guide to using shadow DOM",
+            "url": "https://www.mayank.co/blog/declarative-shadow-dom-guide"
+          }
+        ]
+      }
+    ],
+    "03-14": [
+      {
+        "type": 1,
+        "description": "最近在思考有没有可能通过伪代码作为 AI 模型和实际代码之间交互的协议，遂查找了一些资料，发现一个有趣的东西，即 LLM 脚本。",
+        "labels": ["ai", "LLM"],
+        "links": [
+          {
+            "text": "LLMscript System",
+            "url": "https://gist.github.com/ruvnet/9119f53f50b06628981dfc9d4db0d74c"
+          }
+        ]
+      }
+    ],
     "03-10": [
       {
         "type": 4,
