@@ -70,6 +70,21 @@ const config = {
     ],
   ],
 
+  themes: [
+    [
+      '@easyops-cn/docusaurus-search-local',
+      {
+        language: ['en', 'zh'],
+        hashed: true,
+        indexDocs: false,
+        blogRouteBasePath: '/',
+      },
+    ],
+    '@docusaurus/theme-mermaid',
+  ],
+
+  plugins: ['plugin-image-zoom'],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -128,7 +143,7 @@ const config = {
             title: '更多',
             items: [
               {
-                label: '精选资源',
+                label: 'Awesome Favorites List',
                 href: 'https://wang1212.github.io/awesome-favorites-list',
               },
               {
@@ -136,7 +151,7 @@ const config = {
                 href: 'https://wang1212.github.io/the-book-of-ruby',
               },
               {
-                label: 'ECharts 开发深入探索',
+                label: 'Apache ECharts APIs Guide',
                 href: 'https://wang1212.github.io/echarts-api-docs',
               },
             ],
@@ -165,21 +180,6 @@ const config = {
         },
       },
     }),
-
-  themes: [
-    [
-      '@easyops-cn/docusaurus-search-local',
-      {
-        language: ['en', 'zh'],
-        hashed: true,
-        indexDocs: false,
-        blogRouteBasePath: '/',
-      },
-    ],
-    '@docusaurus/theme-mermaid',
-  ],
-
-  plugins: ['plugin-image-zoom'],
 
   //
 };
