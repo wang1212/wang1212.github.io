@@ -28,16 +28,36 @@ Web 前端发展至今，已成为一个非常复杂的领域，纷繁复杂的�
 
 ## Webpack
 
-:::note[技术原理解析]
+:::note[基础概念]
 
 - [Webpack 官网](https://webpack.js.org/)
 - [Webpack: Concepts](https://webpack.js.org/concepts/)
+
+模块联合（Module Federation）技术：
+
+- [Module Federation](https://webpack.js.org/concepts/module-federation/)
+- [Webpack 5 Module Federation: A game-changer in JavaScript architecture Webpack 5 Module](https://angularindepth.com/posts/1173/webpack-5-module-federation-a-game-changer-in-javascript-architecture)
+
+:::
+
+下面是一些关于实现细节的深度探索解析的内容。
+
+:::note[技术原理解析]
+
+简单的理解 Web 捆绑器的工作原理：
+
+- [Under-the-hood of web bundlers (e.g. Webpack)](https://angularindepth.com/posts/1209/under-the-hood-of-web-bundlers-e-g-webpack)
+
+了解 Webpack 打包的过程：
+
 - [An in-depth perspective on webpack's bundling process](https://angularindepth.com/posts/1482/an-in-depth-perspective-on-webpacks-bundling-process)
 - [Demistifying webpack's 'import' function: using dynamic arguments](https://angularindepth.com/posts/1483/demistifying-webpacks-import-function-using-dynamic-arguments)
 - [Webpack: An in-depth introduction to SplitChunksPlugin](https://angularindepth.com/posts/1490/webpack-an-in-depth-introduction-to-splitchunksplugin)
 - [This is how angular-cli/webpack delivers your CSS styles to the client](https://angularindepth.com/posts/1176/this-is-how-angular-cli-webpack-delivers-your-css-styles-to-the-client)
 
 :::
+
+了解一些可以提高调试效率的技巧。
 
 :::note[调试技巧]
 
