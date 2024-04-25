@@ -17,7 +17,7 @@
 <p><em>最后更新于 2024-04-24 18:33:00</em></p>
 </blockquote>
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>精选资源</div><div class="admonitionContent_BuS1"><p>这是一个系列，收集不同领域相关的精选（高价值）内容，包括深入分析文章、视频、工具等。</p><p><em>探索一项新兴技术出现的背景、动机，尤其是其背后的设计哲学，更甚的是在不断的版本演进过程中遇到了什么问题，产生了什么思考，以及是如何决策并得到最优解。</em></p></div></div>
-<p>自从 2022 年底 <a href="https://openai.com/blog/chatgpt" target="_blank" rel="noopener noreferrer">OpenAI 发布 ChatGPT</a> 以来，过去的一年（2023）AI 领域再度爆发热潮，这一次**大语言模型（Large Language Model, LLMs）**技术成为大家关注的核心。了解相关技术，探索其背后的技术原理和工程化技巧，为构建 AI 应用做好准备。</p>
+<p>自从 2022 年底 <a href="https://openai.com/blog/chatgpt" target="_blank" rel="noopener noreferrer">OpenAI 发布 ChatGPT</a> 以来，过去的一年（2023）AI 领域再度爆发热潮，这一次<strong>大语言模型（Large Language Model, LLMs）</strong> 技术成为大家关注的核心。了解相关技术，探索其背后的技术原理和工程化技巧，为构建 AI 应用做好准备。</p>
 <p>首先，什么是大语言模型（LLMs）？</p>
 <div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>LLM</div><div class="admonitionContent_BuS1"><p>维基百科：</p><ul>
 <li><a href="https://en.wikipedia.org/wiki/Large_language_model" target="_blank" rel="noopener noreferrer">Large language model</a></li>
@@ -68,7 +68,7 @@
 <li><a href="https://huggingface.co/blog/getting-started-with-embeddings" target="_blank" rel="noopener noreferrer">Getting Started With Embeddings</a></li>
 </ul></div></div>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="transformer">Transformer<a href="https://wang1212.github.io/2024/03/01/awesome/llm#transformer" class="hash-link" aria-label="Transformer的直接链接" title="Transformer的直接链接">​</a></h3>
-<p>目前，大语言模型（LLMs）基本上都属于 Transformer 模型，而 <strong>Transformer 是一种基于注意力机制的神经网络（neural network）架构</strong>，它在自然语言处理（NLP）任务中表现出色。</p>
+<p>目前，大语言模型基本上都属于 Transformer 模型，而 <strong>Transformer 是一种基于注意力机制的神经网络（neural network）架构</strong>，它在自然语言处理（NLP）任务中表现出色。</p>
 <div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>Transformer</div><div class="admonitionContent_BuS1"><p>维基百科：</p><ul>
 <li><a href="https://en.wikipedia.org/wiki/Transformer_(deep_learning_architecture)" target="_blank" rel="noopener noreferrer">Transformer (deep learning architecture)</a></li>
 </ul><p>更好理解一点的解释：</p><ul>
@@ -76,6 +76,95 @@
 <li><a href="https://ig.ft.com/generative-ai/" target="_blank" rel="noopener noreferrer">Generative AI exists because of the transformer</a></li>
 </ul><p>偏技术性的解释：</p><ul>
 <li><a href="https://huggingface.co/blog/andmholm/what-is-a-transformer" target="_blank" rel="noopener noreferrer">What is a Transformer?</a></li>
+</ul><p>业界论文：</p><ul>
+<li><a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener noreferrer">Attention Is All You Need</a></li>
+</ul></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="fine-tune">Fine-tune<a href="https://wang1212.github.io/2024/03/01/awesome/llm#fine-tune" class="hash-link" aria-label="Fine-tune的直接链接" title="Fine-tune的直接链接">​</a></h3>
+<p>大语言模型通常都是基于大量的数据集进行训练的预训练模型（Pre-trained models），出于保证合规的目的，为了过滤掉一些有害信息，通常都会对模型做进一步微调（fine-tune），以让其生成更符合预期的结果。同时，<strong>微调是基于通用模型训练专有模型的重要方式</strong>。</p>
+<p>微调的技术有很多，列举一些比较常见的。</p>
+<h4 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="sft">SFT<a href="https://wang1212.github.io/2024/03/01/awesome/llm#sft" class="hash-link" aria-label="SFT的直接链接" title="SFT的直接链接">​</a></h4>
+<p>通常，语言模型的初始训练是无监督的，但微调是有监督的。<strong>有监督微调（Supervised fine-tuning）意味着使用标记数据更新预先训练的语言模型来完成特定任务</strong>，所使用的数据已提前检查过。</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>SFT</div><div class="admonitionContent_BuS1"><ul>
+<li><a href="https://klu.ai/glossary/supervised-fine-tuning" target="_blank" rel="noopener noreferrer">What is supervised fine-tuning?</a></li>
+<li><a href="https://www.superannotate.com/blog/llm-fine-tuning" target="_blank" rel="noopener noreferrer">Fine-tuning large language models (LLMs) in 2024</a></li>
+<li><a href="https://www.run.ai/guides/generative-ai/lora-fine-tuning" target="_blank" rel="noopener noreferrer">Understanding LLM Fine Tuning with LoRA</a></li>
+</ul><p>偏技术性的：</p><ul>
+<li><a href="https://huggingface.co/blog/peft" target="_blank" rel="noopener noreferrer">PEFT: Parameter-Efficient Fine-Tuning of Billion-Scale Models on Low-Resource Hardware</a></li>
+</ul><p>一种特殊的微调技术，<strong>指令调优（Instruction Tuning）</strong>：</p><ul>
+<li><a href="https://www.ibm.com/topics/instruction-tuning" target="_blank" rel="noopener noreferrer">What is instruction tuning?</a></li>
+</ul><p>业界论文：</p><ul>
+<li><a href="https://arxiv.org/abs/2106.09685" target="_blank" rel="noopener noreferrer">LoRA: Low-Rank Adaptation of Large Language Models</a></li>
+<li><a href="https://arxiv.org/abs/2308.10792v5" target="_blank" rel="noopener noreferrer">Instruction Tuning for Large Language Models: A Survey</a></li>
+</ul></div></div>
+<h4 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="rlhf">RLHF<a href="https://wang1212.github.io/2024/03/01/awesome/llm#rlhf" class="hash-link" aria-label="RLHF的直接链接" title="RLHF的直接链接">​</a></h4>
+<p>通过训练奖励模型（reward model），以<strong>强化学习（Reinforcement Learning）</strong> 的方式对语言模型做进一步的微调是 ChatGPT 获得成功的重要因素。</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>RLHF</div><div class="admonitionContent_BuS1"><p>维基百科：</p><ul>
+<li><a href="https://en.wikipedia.org/wiki/Reinforcement_learning_from_human_feedback" target="_blank" rel="noopener noreferrer">Reinforcement learning from human feedback</a></li>
+</ul><p>偏技术性的解释：</p><ul>
+<li><a href="https://huggingface.co/blog/rlhf" target="_blank" rel="noopener noreferrer">Illustrating Reinforcement Learning from Human Feedback (RLHF)</a></li>
+</ul></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="moes">MoEs<a href="https://wang1212.github.io/2024/03/01/awesome/llm#moes" class="hash-link" aria-label="MoEs的直接链接" title="MoEs的直接链接">​</a></h3>
+<p>大部分大语言模型都属于密集模型（dense models），参数量级越大计算（推理）成本越高，速度越慢，消耗的硬件内存也更大，为了应对这类问题，出现了一种新的模型架构，即<strong>混合专家（Mixture of Experts, MoEs）架构</strong>。</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>MoEs</div><div class="admonitionContent_BuS1"><p>维基百科：</p><ul>
+<li><a href="https://en.wikipedia.org/wiki/Mixture_of_experts" target="_blank" rel="noopener noreferrer">Mixture of experts</a></li>
+</ul><p>偏技术性的解释：</p><ul>
+<li><a href="https://huggingface.co/blog/moe" target="_blank" rel="noopener noreferrer">Mixture of Experts Explained</a></li>
+<li><a href="https://developer.nvidia.com/blog/applying-mixture-of-experts-in-llm-architectures/" target="_blank" rel="noopener noreferrer">Applying Mixture of Experts in LLM Architectures</a></li>
+</ul><p>业界论文：</p><ul>
+<li><a href="https://arxiv.org/abs/2404.05567" target="_blank" rel="noopener noreferrer">Dense Training, Sparse Inference: Rethinking Training of Mixture-of-Experts Language Models</a></li>
+</ul></div></div>
+<p>最后，基于以上这些概念，可以了解下 ChatGPT 的工作原理。</p>
+<blockquote>
+<p><a href="https://www.assemblyai.com/blog/how-chatgpt-actually-works/" target="_blank" rel="noopener noreferrer">How ChatGPT actually works</a></p>
+</blockquote>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="应用技术">应用技术<a href="https://wang1212.github.io/2024/03/01/awesome/llm#%E5%BA%94%E7%94%A8%E6%8A%80%E6%9C%AF" class="hash-link" aria-label="应用技术的直接链接" title="应用技术的直接链接">​</a></h2>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="rag">RAG<a href="https://wang1212.github.io/2024/03/01/awesome/llm#rag" class="hash-link" aria-label="RAG的直接链接" title="RAG的直接链接">​</a></h3>
+<p><strong>检索增强生成（Retrieval-Augmented Generation, RAG）</strong> 是一种利用从外部来源获取的事实来提高生成式 AI 模型的准确性和可靠性的技术。简单的来说，现有的大语言模型基于静态数据进行预训练，在一些对数据实时性有要求的特定场景中无法获取最新数据信息，通过 RAG 技术则可以弥补这个缺陷，通过引入外部实时数据库的方式来增强大语言模型对实时数据的响应能力。</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>RAG</div><div class="admonitionContent_BuS1"><ul>
+<li><a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/" target="_blank" rel="noopener noreferrer">What Is Retrieval-Augmented Generation, aka RAG?</a></li>
+</ul><p>偏技术性的解释：</p><ul>
+<li><a href="https://stackoverflow.blog/2023/10/18/retrieval-augmented-generation-keeping-llms-relevant-and-current/" target="_blank" rel="noopener noreferrer">Retrieval augmented generation: Keeping LLMs relevant and current</a></li>
+</ul><p>业界论文：</p><ul>
+<li><a href="https://arxiv.org/abs/2312.10997" target="_blank" rel="noopener noreferrer">Retrieval-Augmented Generation for Large Language Models: A Survey</a></li>
+<li><a href="https://arxiv.org/abs/2404.10981v1" target="_blank" rel="noopener noreferrer">A Survey on Retrieval-Augmented Text Generation for Large Language Models</a></li>
+</ul></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="agent">Agent<a href="https://wang1212.github.io/2024/03/01/awesome/llm#agent" class="hash-link" aria-label="Agent的直接链接" title="Agent的直接链接">​</a></h3>
+<p><strong>人工智能代理（AI Agent）</strong> 是一种构建 AI 应用的架构，相比于仅利用 RAG 技术能更好的解决更具体的问题，也是目前 AI 应用发展的重要趋势。</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>Agent</div><div class="admonitionContent_BuS1"><p>维基百科：</p><ul>
+<li><a href="https://en.wikipedia.org/wiki/Intelligent_agent" target="_blank" rel="noopener noreferrer">Intelligent agent</a></li>
+</ul><p>一些更详细的解释：</p><ul>
+<li><a href="https://aws.amazon.com/what-is/ai-agents/" target="_blank" rel="noopener noreferrer">What are AI Agents?</a></li>
+<li><a href="https://www.leewayhertz.com/ai-agents/" target="_blank" rel="noopener noreferrer">Ai agents driving the next wave of digital transformation</a></li>
+</ul><p>偏技术性的：</p><ul>
+<li><a href="https://huggingface.co/blog/agents-js" target="_blank" rel="noopener noreferrer">Introducing Agents.js: Give tools to your LLMs using JavaScript</a></li>
+</ul><p>业界论文：</p><ul>
+<li><a href="https://arxiv.org/abs/2404.11584v1" target="_blank" rel="noopener noreferrer">The Landscape of Emerging AI Agent Architectures for Reasoning, Planning, and Tool Calling: A Survey</a></li>
+</ul></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="开发框架">开发框架<a href="https://wang1212.github.io/2024/03/01/awesome/llm#%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6" class="hash-link" aria-label="开发框架的直接链接" title="开发框架的直接链��接">​</a></h3>
+<p>一步一步开始构建 AI 应用可能是有趣的，但也是枯燥无聊的且需要耗费大量时间，还好有相应的框架工具可以学习借鉴和利用。</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>开发框架</div><div class="admonitionContent_BuS1"><ul>
+<li><a href="https://www.langchain.com/langchain" target="_blank" rel="noopener noreferrer">LangChain</a></li>
+<li><a href="https://haystack.deepset.ai/" target="_blank" rel="noopener noreferrer">Haystack</a></li>
+</ul><p>聊天应用：</p><ul>
+<li><a href="https://github.com/lobehub/lobe-chat" target="_blank" rel="noopener noreferrer">Lobe Chat</a></li>
+<li><a href="https://github.com/mckaywrigley/chatbot-ui" target="_blank" rel="noopener noreferrer">Chatbot UI</a></li>
+</ul><p>RAG 应用：</p><ul>
+<li><a href="https://www.llamaindex.ai/" target="_blank" rel="noopener noreferrer">LlamaIndex</a></li>
+<li><a href="https://github.com/embedchain/embedchain" target="_blank" rel="noopener noreferrer">Embedchain</a></li>
+</ul><p>低代码应用：</p><ul>
+<li><a href="https://flowiseai.com/" target="_blank" rel="noopener noreferrer">FlowiseAI</a></li>
+</ul><p>Agent 应用：</p><ul>
+<li><a href="https://microsoft.github.io/autogen/" target="_blank" rel="noopener noreferrer">AutoGen</a></li>
+<li><a href="https://github.com/TransformerOptimus/SuperAGI" target="_blank" rel="noopener noreferrer">SuperAGI</a></li>
+</ul></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="社区平台">社区平台<a href="https://wang1212.github.io/2024/03/01/awesome/llm#%E7%A4%BE%E5%8C%BA%E5%B9%B3%E5%8F%B0" class="hash-link" aria-label="社区平台的直接链接" title="社区平台的直接链接">​</a></h2>
+<p>要了解大语言模型技术发展的趋势，或者寻找相关技术资源，应该对常见的一些社区平台要有所了解。</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>社区平台</div><div class="admonitionContent_BuS1"><ul>
+<li><a href="https://huggingface.co/" target="_blank" rel="noopener noreferrer">Hugging Face</a></li>
+<li><a href="https://openai.com/research/overview" target="_blank" rel="noopener noreferrer">OpenAI Research</a></li>
+<li><a href="https://llama.meta.com/" target="_blank" rel="noopener noreferrer">Meta Llama</a></li>
+<li><a href="https://deepmind.google/technologies/gemini/#introduction" target="_blank" rel="noopener noreferrer">Google Gemini</a></li>
+<li><a href="https://www.anthropic.com/" target="_blank" rel="noopener noreferrer">Anthropic Claude</a></li>
 </ul></div></div>]]></content>
         <author>
             <name>不如怀念</name>
