@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[59506],{72287:s=>{s.exports=JSON.parse('{"label":"MPU","permalink":"/tags/mpu","allTagsPath":"/tags","count":1,"unlisted":false}')}}]);

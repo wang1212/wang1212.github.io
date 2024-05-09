@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[53871],{25732:s=>{s.exports=JSON.parse('{"label":"OSI","permalink":"/tags/osi","allTagsPath":"/tags","count":1,"unlisted":false}')}}]);

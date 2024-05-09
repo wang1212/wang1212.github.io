@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[2733],{6044:a=>{a.exports=JSON.parse('{"tag":{"label":"3D","permalink":"/tags/3-d","allTagsPath":"/tags","count":4,"unlisted":false},"listMetadata":{"permalink":"/tags/3-d","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

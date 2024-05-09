@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[54302],{69501:a=>{a.exports=JSON.parse('{"label":"LocalStorage","permalink":"/tags/local-storage","allTagsPath":"/tags","count":1,"unlisted":false}')}}]);
