@@ -82,7 +82,6 @@
 <li><a href="https://react-lm.github.io/" target="_blank" rel="noopener noreferrer">ReAct: Synergizing Reasoning and Acting in Language Models</a></li>
 <li><a href="https://docs.agpt.co/autogpt/" target="_blank" rel="noopener noreferrer">AutoGPT Agent</a></li>
 <li><a href="https://ar5iv.labs.arxiv.org/html/2303.17580" target="_blank" rel="noopener noreferrer">HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face</a></li>
-<li><a href="https://huggingface.co/blog/agents-js" target="_blank" rel="noopener noreferrer">Introducing Agents.js: Give tools to your LLMs using JavaScript</a></li>
 <li><a href="https://sdk.vercel.ai/docs/ai-sdk-core/tools-and-tool-calling" target="_blank" rel="noopener noreferrer">Vercel AI SDK: Tools and Tool Calling</a></li>
 <li><a href="https://js.langchain.com/docs/modules/agents/agent_types/" target="_blank" rel="noopener noreferrer">LangChain: Agent Types</a></li>
 </ul>]]></content:encoded>
