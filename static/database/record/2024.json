@@ -4,6 +4,116 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "05-17": [
+      {
+        "type": 1,
+        "description": "最近 React 圈子重点事件一个是 React Conf 的召开，另一个则是 Remix 官宣将与 React Query 合并。",
+        "labels": ["React", "react-query", "remix"],
+        "links": [
+          {
+            "text": "Merging Remix and React Router",
+            "url": "https://remix.run/blog/merging-remix-and-react-router"
+          }
+        ]
+      }
+    ],
+    "05-14": [
+      {
+        "type": 1,
+        "description": "第一次看到对缓存（cache）做了很好的解释的文章。",
+        "labels": ["cache"],
+        "links": [
+          {
+            "text": "Caching In: Defining, Optimizing, and Invalidating Your Cache",
+            "url": "https://stack.convex.dev/caching-in"
+          }
+        ]
+      }
+    ],
+    "05-11": [
+      {
+        "type": 1,
+        "description": "现在 AI 应用爆发，Agent 架构中最关键的外部存储主要是指向量数据库，而其提供的向量搜索为何这么快，这篇很好的解释了其中原因。",
+        "labels": ["AI", "Vector Search"],
+        "links": [
+          {
+            "text": "Why is Vector Search so fast?",
+            "url": "https://weaviate.io/blog/why-is-vector-search-so-fast"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "为什么使用 React Query 库的 React 应用那么多，作者专门写了一篇文章谈了这个问题，可以学习思考一下。",
+        "labels": ["React", "react-query"],
+        "links": [
+          {
+            "text": "Why react-query?",
+            "url": "https://ui.dev/why-react-query"
+          }
+        ]
+      }
+    ],
+    "05-03": [
+      {
+        "type": 1,
+        "description": "随着时代的发展，CSS 属性前缀已经消亡，新属性不再有前缀；另外，关于 HTML 属性（attributes）与 DOM 属性（properties）的一篇文章也很有意思。",
+        "labels": ["CSS", "HTML"],
+        "links": [
+          {
+            "text": "The slow death of CSS vendor prefixes",
+            "url": "https://fullystacked.net/prefix/"
+          },
+          {
+            "text": "HTML attributes vs DOM properties",
+            "url": "https://jakearchibald.com/2024/attributes-vs-properties/"
+          }
+        ]
+      }
+    ],
+    "04-25": [
+      {
+        "type": 1,
+        "description": "时隔许久，React 19 Beta 版本发布，详细信息关注官方博客。",
+        "labels": ["React"],
+        "links": [
+          {
+            "text": "React 19 Beta",
+            "url": "https://react.dev/blog/2024/04/25/react-19"
+          }
+        ]
+      }
+    ],
+    "04-24": [
+      {
+        "type": 1,
+        "description": "Node.js 发布 v22，其中对于 `esm` 和 `require` 互操作性的原生支持值得关注",
+        "labels": ["Node.js", "ES Module", "Commonjs"],
+        "links": [
+          {
+            "text": "Node.js 22 is now available!",
+            "url": "https://nodejs.org/en/blog/announcements/v22-release-announce"
+          },
+          {
+            "text": "Native Support for CJS/ESM Interoperability Begins in Node.js 22",
+            "url": "https://webdeveloper.beehiiv.com/p/native-support-cjsesm-interoperability-begins-nodejs-22"
+          }
+        ]
+      }
+    ],
+    "04-22": [
+      {
+        "type": 1,
+        "description": "一篇关于 RAG 技术的调研论文，详细解释了当前该技术的架构模式。",
+        "labels": ["AI", "LLMs", "RAG"],
+        "links": [
+          {
+            "text": "A Survey on Retrieval-Augmented Text Generation for Large Language Models",
+            "url": "https://arxiv.org/html/2404.10981v1"
+          }
+        ]
+      }
+    ],
     "04-19": [
       {
         "type": 1,
