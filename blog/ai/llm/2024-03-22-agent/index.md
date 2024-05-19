@@ -201,6 +201,5 @@ const result = await generateText({
 - [ReAct: Synergizing Reasoning and Acting in Language Models](https://react-lm.github.io/)
 - [AutoGPT Agent](https://docs.agpt.co/autogpt/)
 - [HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face](https://ar5iv.labs.arxiv.org/html/2303.17580)
-- [Introducing Agents.js: Give tools to your LLMs using JavaScript](https://huggingface.co/blog/agents-js)
 - [Vercel AI SDK: Tools and Tool Calling](https://sdk.vercel.ai/docs/ai-sdk-core/tools-and-tool-calling)
 - [LangChain: Agent Types](https://js.langchain.com/docs/modules/agents/agent_types/)
