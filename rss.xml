@@ -1244,7 +1244,6 @@
 <p>恰逢中秋节，有机会参与到一项中秋运营活动的项目中，负责为业务方提供一个移动端场景投放的 3D 月球组件。由于一直接触的是 2D 可视化开发，对于 3D 开发（WebGL）的技术未有深入了解和实践经验，基于对现有社区主流技术的简单了解和团队成员的技术背景，遂选定基于 Three.js 进行开发以降低风险。</p>
 <p>这篇文章是基于 3D 月球组件的开发实践，记录 3D 开发实践中了解的一些 Web 3D 技术知识和一些典型问题场景的解决方案。</p>
 <p>先看看最终线上效果：</p>
-<video src="/video/web-3d-practical-case-1_screenshot.mp4" width="280" controls="" autoplay="" loop="">
 <blockquote>
 <p><a href="https://eq.10jqka.com.cn/activepage/activeMidAutumn/#/home" target="_blank" rel="noopener noreferrer">线上活动链接</a></p>
 </blockquote>
@@ -1386,8 +1385,7 @@
 <li><a href="https://github.blog/2020-12-21-how-we-built-the-github-globe/" target="_blank" rel="noopener noreferrer">https://github.blog/2020-12-21-how-we-built-the-github-globe/</a></li>
 <li><a href="https://stripe.com/blog/globe" target="_blank" rel="noopener noreferrer">https://stripe.com/blog/globe</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/473982513" target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/473982513</a></li>
-</ul>
-</video>]]></content:encoded>
+</ul>]]></content:encoded>
             <author>mrwang1212@126.com (不如怀念)</author>
             <category>计算机技术</category>
             <category>Web</category>
