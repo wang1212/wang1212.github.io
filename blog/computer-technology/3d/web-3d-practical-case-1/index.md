@@ -25,7 +25,7 @@ description: 这篇文章是基于 3D 月球组件的开发实践，记录 3D �
 
 先看看最终线上效果：
 
-<video src="/video/web-3d-practical-case-1_screenshot.mp4" width="280" controls autoPlay loop />
+<!-- <video src="/video/web-3d-practical-case-1_screenshot.mp4" width="280" controls autoPlay loop /> -->
 
 > [线上活动链接](https://eq.10jqka.com.cn/activepage/activeMidAutumn/#/home)
 
@@ -294,7 +294,7 @@ this.scene.add(mesh);
 
 下面这个是利用该算法实现的一个非常漂亮的示例：
 
-> https://openprocessing.org/sketch/41142
+> <https://openprocessing.org/sketch/41142>
 
 算法的 JS 实现：
 
@@ -526,14 +526,14 @@ animate();
 
 ## 参考资料
 
-- https://threejs.org/
-- https://threejs.org/manual/#en/fundamentals
-- https://threejs.org/docs/index.html?q=OrbitControls#examples/en/controls/OrbitControls
-- https://stackoverflow.com/questions/29316832/three-js-how-to-check-if-object-is-behind-a-sphere-not-visible
-- https://sites.google.com/site/csc8820/educational/picking
-- https://ogldev.org/www/tutorial29/tutorial29.html
-- https://github.com/markuslerner/THREE.Interactive#readme
-- https://github.com/vasturiano/three-globe
-- https://github.blog/2020-12-21-how-we-built-the-github-globe/
-- https://stripe.com/blog/globe
-- https://zhuanlan.zhihu.com/p/473982513
+- <https://threejs.org/>
+- <https://threejs.org/manual/#en/fundamentals>
+- <https://threejs.org/docs/index.html?q=OrbitControls#examples/en/controls/OrbitControls>
+- <https://stackoverflow.com/questions/29316832/three-js-how-to-check-if-object-is-behind-a-sphere-not-visible>
+- <https://sites.google.com/site/csc8820/educational/picking>
+- <https://ogldev.org/www/tutorial29/tutorial29.html>
+- <https://github.com/markuslerner/THREE.Interactive#readme>
+- <https://github.com/vasturiano/three-globe>
+- <https://github.blog/2020-12-21-how-we-built-the-github-globe/>
+- <https://stripe.com/blog/globe>
+- <https://zhuanlan.zhihu.com/p/473982513>
