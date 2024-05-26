@@ -10,6 +10,7 @@ tags: &ref_0
   - 工具
   - ECharts
   - ZRender
+  - 源码分析
 keywords: *ref_0
 description: ECharts 的 UniversalTransition 动画提供了一些复杂场景下过渡动画的解决方案，这类场景的难点在于让不规则图形或者不同形状的图形之间如何完成一个比较流畅的过渡动画，在业内比较熟知的类似技术则是 SVG Morph 动画。
 ---

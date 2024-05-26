@@ -7,6 +7,7 @@ tags: &ref_0
   - 计算机技术
   - Node.js
   - child_process
+  - 源码分析
 keywords: *ref_0
 description: 使用 Node.js 编写一些脚本工具是非常方便的，而常用的 spawn 与 exec API 有什么不同呢？
 ---
@@ -137,26 +138,26 @@ const execa = require('execa');
   } catch (error) {
     console.log(error);
     /*
-		{
-			message: 'Command failed with ENOENT: unknown command spawn unknown ENOENT',
-			errno: -2,
-			code: 'ENOENT',
-			syscall: 'spawn unknown',
-			path: 'unknown',
-			spawnargs: ['command'],
-			originalMessage: 'spawn unknown ENOENT',
-			shortMessage: 'Command failed with ENOENT: unknown command spawn unknown ENOENT',
-			command: 'unknown command',
-			escapedCommand: 'unknown command',
-			stdout: '',
-			stderr: '',
-			all: '',
-			failed: true,
-			timedOut: false,
-			isCanceled: false,
-			killed: false
-		}
-		*/
+  {
+   message: 'Command failed with ENOENT: unknown command spawn unknown ENOENT',
+   errno: -2,
+   code: 'ENOENT',
+   syscall: 'spawn unknown',
+   path: 'unknown',
+   spawnargs: ['command'],
+   originalMessage: 'spawn unknown ENOENT',
+   shortMessage: 'Command failed with ENOENT: unknown command spawn unknown ENOENT',
+   command: 'unknown command',
+   escapedCommand: 'unknown command',
+   stdout: '',
+   stderr: '',
+   all: '',
+   failed: true,
+   timedOut: false,
+   isCanceled: false,
+   killed: false
+  }
+  */
   }
 })();
 ```
@@ -167,9 +168,9 @@ const execa = require('execa');
 
 ## 参考资源
 
-- https://nodejs.org/dist/latest/docs/api/child_process.html
-- https://stackoverflow.com/questions/48698234/node-js-spawn-vs-execute
-- https://www.hacksparrow.com/nodejs/difference-between-spawn-and-exec-of-node-js-child-rocess.html
-- https://linuxhint.com/linux-exec-system-call/
-- https://2ality.com/2022/07/nodejs-child-process.html
-- https://github.com/sindresorhus/execa
+- <https://nodejs.org/dist/latest/docs/api/child_process.html>
+- <https://stackoverflow.com/questions/48698234/node-js-spawn-vs-execute>
+- <https://www.hacksparrow.com/nodejs/difference-between-spawn-and-exec-of-node-js-child-rocess.html>
+- <https://linuxhint.com/linux-exec-system-call/>
+- <https://2ality.com/2022/07/nodejs-child-process.html>
+- <https://github.com/sindresorhus/execa>

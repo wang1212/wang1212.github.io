@@ -10,6 +10,7 @@ tags: &ref_0
   - 性能优化
   - DOM
   - FastDOM
+  - 源码分析
 keywords: *ref_0
 description: 原生应用时代，DOM 操作一般借助类似 jQuery 的工具库手动完成，而在框架/库应用时代 DOM 操作退居幕后自动完成，原生应用与框架应用性能孰高孰低？DOM 批量操作对于性能有何影响？利用 FastDOM 库来解决这些性能问题。
 ---
@@ -18,7 +19,7 @@ description: 原生应用时代，DOM 操作一般借助类似 jQuery 的工具�
 
 利用 JS 开发的原生应用与依赖于 React.js/Vue 开发的框架/库应用，性能孰高孰低？这两者最显著的区别在于原生应用需要手动操作 DOM 完成业务，而框架/库应用是基于数据变化响应式的应用，后者只需要关注数据如何变化，至于体现在 DOM 上的变化皆由框架/库内部自动完成。所以，要搞清楚两者的性能优劣，可能**批量**的 DOM 操作是一个不可忽略的核心因素。从代码执行的角度分析，框架/库也是基于原生 API 进行的封装抽象，因此代码执行时的路径更长、堆栈更深，由此可见原生 API 的操作性能应该是最高的。但是，现实情况是业务通常来说是复杂的，代码实现中 DOM 操作的逻辑分散在各处，那么多个 DOM 操作之间是否会产生影响从而不利于性能？这个时候就要关注宿主浏览器的渲染机制是如何理解批量的 DOM 操作的，这里引入的概念就是**关键渲染路径（Critical rendering path）**。
 
-> https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path > https://developers.google.com/web/fundamentals/performance/rendering
+> <https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path> > <https://developers.google.com/web/fundamentals/performance/rendering>
 
 <!-- truncate -->
 
@@ -80,13 +81,13 @@ description: 原生应用时代，DOM 操作一般借助类似 jQuery 的工具�
 
 不过，不必造轮子，在 Google 的 Web 性能文档中提及一个 npm 工具库 [FastDOM](https://github.com/wilsonpage/fastdom)，正如其名，该工具库的目的就是加速 DOM 的批量处理以提高性能。
 
-> https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing
+> <https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing>
 
 在利用 FastDOM 验证以上真实业务场景中所遇到的性能问题时，效果还是比较理想的。
 
 那么，我们接下来就看看其实现机制，其工作原理文档中也有所提及：
 
-> https://github.com/wilsonpage/fastdom#how-it-works
+> <https://github.com/wilsonpage/fastdom#how-it-works>
 
 简单的来说，与之前设想的实现思路一致，用 `window.requestAnimationFrame()` API 来动态控制以提高对 UI 交互的及时响应。事实上，其源码实现也并不难，可以简单的来分析一下。其提供了两个最主要的 API：
 
@@ -173,8 +174,8 @@ runTasks: function(tasks) {
 
 ## 参考资源
 
-- https://developer.mozilla.org/en-US/docs/Web/Performance
-- https://developers.google.com/web/fundamentals
-- https://github.com/wilsonpage/fastdom
-- https://web.dev/user-centric-performance-metrics/
-- https://caniuse.com/
+- <https://developer.mozilla.org/en-US/docs/Web/Performance>
+- <https://developers.google.com/web/fundamentals>
+- <https://github.com/wilsonpage/fastdom>
+- <https://web.dev/user-centric-performance-metrics/>
+- <https://caniuse.com/>
