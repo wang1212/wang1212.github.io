@@ -1,5 +1,5 @@
 ---
-title: 交互状态设计：探索 ECharts 与 ZRender 的设计模式
+title: 解析 ECharts 设计：交互状态系统
 date: 2023-01-09 23:37:00
 update: 2023-01-09 23:37:00
 authors: wang1212

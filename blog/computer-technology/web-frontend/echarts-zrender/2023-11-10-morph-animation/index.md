@@ -1,5 +1,5 @@
 ---
-title: 解析 ECharts 的 UniversalTransition 动画
+title: 解析 ECharts 设计：UniversalTransition 动画
 date: 2023-11-10 19:23:00
 update: 2023-11-11 21:56:00
 authors: wang1212

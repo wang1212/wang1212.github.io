@@ -15,7 +15,7 @@ description: 绘图引擎支持丰富交互的前提是拥有一套事件系统�
 
 > _最后更新于 2022-11-01 19:47:00_
 
-绘图引擎支持丰富交互的前提是拥有一套事件系统，而在画布中如何拾取元素是实现的关键，从 ZRender 的源码来看看其事件系统是如何设计的。
+绘图引擎支持丰富交互的前提是拥有一套事件系统，而在画布中如何拾取元素是实现的关键，从 [ZRender](https://ecomfe.github.io/zrender-doc/public/) 的源码来看看其事件系统是如何设计的。
 
 ```mermaid
 ---
@@ -317,7 +317,7 @@ export default class PathProxy {
     return new BoundingRect(
         min[0], min[1], max[0] - min[0], max[1] - min[1]
     );
-}
+  }
 }
 ```
 
@@ -339,7 +339,7 @@ export default class BoundingRect {
 }
 ```
 
-以上就是 ZRender 事件系统实现的大致原理。
+以上就是 ZRender 事件系统实现的大致原理，其采用了几何判断的方式实现了画布上的元素拾取。
 
 ## 延伸：碰撞检测
 
