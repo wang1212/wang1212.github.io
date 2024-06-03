@@ -19,6 +19,68 @@ description: 绘图引擎支持丰富交互的前提是拥有一套事件系统�
 
 _（之前分析过 ZRender 的源码实现，其采用了几何判断的方式来实现元素拾取，而 Konva.js 采用了不同的方案。）_
 
+```mermaid
+---
+title: Konva's Event System(v9.3.11)
+---
+flowchart BT
+    subgraph bind2dom
+        canvas["canvas (dom)"]
+
+        subgraph Stage
+            getIntersection("getIntersection()")
+        end
+
+        Stage -- addEventListener() --> canvas
+        canvas -- trigger() --> Stage
+    end
+
+    subgraph pick
+        subgraph Layer
+            SceneCanvas
+            HitCanvas
+            LayerGetIntersection("getIntersection()")
+
+            HitCanvas -. "fillStyle: colorKey" .-> SceneCanvas
+            LayerGetIntersection -- "getImageData()" --> HitCanvas
+        end
+
+        subgraph Shape
+            colorKey
+            shapes
+            sceneFunc("sceneFunc()")
+            hitFunc("hitFunc()")
+            Shape_FireAndBubble("_fireAndBubble()")
+
+            hitFunc -. "default" .-> sceneFunc
+            colorKey ---> shapes
+            shapes -. "find" .-> Shape_FireAndBubble
+        end
+
+        SceneCanvas ---> sceneFunc
+        HitCanvas ---> hitFunc
+        HitCanvas -.-> colorKey
+    end
+
+    User("User")
+
+    getIntersection --> pick
+
+    User -. on() .-> Shape
+    Shape -. trigger() .-> User
+
+    User -. interact .-> canvas
+
+    linkStyle 3,9,10 stroke: red,color: red;
+    linkStyle 5,6,11,12 stroke: green,color: green;
+    linkStyle 13 stroke: orange,color: orange;
+
+    style User fill: orange;
+    style pick fill: transparent,color: gray,stroke: gray,stroke-width: 2px,stroke-dasharray: 10 5;
+    style bind2dom fill: transparent,color: gray,stroke: gray,stroke-width: 2px,stroke-dasharray: 10 5;
+
+```
+
 <!-- truncate -->
 
 通常，画布（Canvas）元素作为原生 DOM 会提供相应的事件 APIs，但画布中绘制的内容由不同的绘图库进行抽象设计，基础元素（例如矩形、圆、线等）的事件由绘图库进行支持。
