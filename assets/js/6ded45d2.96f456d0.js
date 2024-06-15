@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[4408],{97357:a=>{a.exports=JSON.parse('{"tag":{"label":"Canvas","permalink":"/tags/canvas","allTagsPath":"/tags","count":2,"unlisted":false},"listMetadata":{"permalink":"/tags/canvas","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

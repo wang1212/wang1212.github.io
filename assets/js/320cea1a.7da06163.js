@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[2020],{18788:a=>{a.exports=JSON.parse('{"tag":{"label":"FastDOM","permalink":"/tags/fast-dom","allTagsPath":"/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/tags/fast-dom","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

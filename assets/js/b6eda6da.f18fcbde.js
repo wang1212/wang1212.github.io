@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[7970],{29960:a=>{a.exports=JSON.parse('{"tag":{"label":"BFC","permalink":"/tags/bfc","allTagsPath":"/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/tags/bfc","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

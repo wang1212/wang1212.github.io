@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[7651],{64641:a=>{a.exports=JSON.parse('{"tag":{"label":"Vim","permalink":"/tags/vim","allTagsPath":"/tags","count":2,"unlisted":false},"listMetadata":{"permalink":"/tags/vim","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

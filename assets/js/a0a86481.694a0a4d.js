@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[471],{63028:a=>{a.exports=JSON.parse('{"tag":{"label":"IDE","permalink":"/tags/ide","allTagsPath":"/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/tags/ide","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

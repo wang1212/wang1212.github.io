@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[8152],{73339:a=>{a.exports=JSON.parse('{"tag":{"label":"WebGL","permalink":"/tags/web-gl","allTagsPath":"/tags","count":3,"unlisted":false},"listMetadata":{"permalink":"/tags/web-gl","page":1,"postsPerPage":10,"totalPages":1,"totalCount":3,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

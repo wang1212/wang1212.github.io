@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[8219],{79961:a=>{a.exports=JSON.parse('{"tag":{"label":"Agent","permalink":"/tags/agent","allTagsPath":"/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/tags/agent","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
