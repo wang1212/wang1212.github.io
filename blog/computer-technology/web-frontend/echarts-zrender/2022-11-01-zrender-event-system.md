@@ -1,7 +1,7 @@
 ---
 title: 解析 ZRender 设计：事件系统
 date: 2022-11-01 19:47:00
-update: 2022-11-01 19:47:00
+update: 2024-06-16 16:09:00
 authors: wang1212
 tags: &ref_0
   - 计算机技术
@@ -13,7 +13,7 @@ keywords: *ref_0
 description: 绘图引擎支持丰富交互的前提是拥有一套事件系统，而在画布中如何拾取元素是实现的关键，从 ZRender 的源码来看看其事件系统是如何设计的。
 ---
 
-> _最后更新于 2022-11-01 19:47:00_
+> _最后更新于 2024-06-16 16:09:00_
 
 绘图引擎支持丰富交互的前提是拥有一套事件系统，而在画布中如何拾取元素是实现的关键，从 [ZRender](https://ecomfe.github.io/zrender-doc/public/) 的源码来看看其事件系统是如何设计的。
 
@@ -264,7 +264,51 @@ function isHover(displayable: Displayable, x: number, y: number) {
 
 第二阶段，是元素拾取的具体实现，ZRender 采用了**外接矩形（即包围盒，Bounding Box）** 的判定策略。
 
-元素实例包围盒的计算逻辑在关联的 `PathProxy` 实例中实现：
+```typescript title="https://github.com/ecomfe/zrender/blob/5.3.2/src/graphic/Path.ts#L392"
+class Path<Props extends PathProps = PathProps> extends Displayable<Props> {
+    contain(x: number, y: number): boolean {
+        const localPos = this.transformCoordToLocal(x, y);
+        const rect = this.getBoundingRect();
+        const style = this.style;
+        x = localPos[0];
+        y = localPos[1];
+
+        // highlight-next-line
+        if (rect.contain(x, y)) {
+            const pathProxy = this.path;
+            if (this.hasStroke()) {
+                let lineWidth = style.lineWidth;
+                let lineScale = style.strokeNoScale ? this.getLineScale() : 1;
+                // Line scale can't be 0;
+                if (lineScale > 1e-10) {
+                    // Only add extra hover lineWidth when there are no fill
+                    if (!this.hasFill()) {
+                        lineWidth = Math.max(lineWidth, this.strokeContainThreshold);
+                    }
+                    // highlight-start
+                    if (pathContain.containStroke(
+                        pathProxy, lineWidth / lineScale, x, y
+                    )) {
+                    // highlight-end
+                        return true;
+                    }
+                }
+            }
+            if (this.hasFill()) {
+                // highlight-next-line
+                return pathContain.contain(pathProxy, x, y);
+            }
+        }
+        return false;
+    }
+}
+```
+
+根据以上源码分析，在这个过程中，也分为两个步骤，**第一步先通过图形元素的整体包围盒粗略的进行判定，如果通过，则进行第二步即更细粒度的指令包含判定。**
+
+### 整体包围盒判定
+
+第一步，元素图形实例整体包围盒的计算逻辑在关联的 `PathProxy` 实例中实现：
 
 ```typescript title="https://github.com/ecomfe/zrender/blob/5.3.2/src/core/PathProxy.ts#L478"
 export default class PathProxy {
@@ -338,6 +382,68 @@ export default class BoundingRect {
   }
 }
 ```
+
+### 指令包含判定
+
+第二步则是更细粒度的判断，因为任意图形元素实例的包围盒都是一个矩形框，在遇到一些不规则图形（例如凹凸多边形）时误差较大，所以整体包围盒的判定策略粒度较粗。
+
+```typescript title="https://github.com/ecomfe/zrender/blob/5.3.2/src/contain/path.ts#L212"
+export function contain(pathProxy: PathProxy, x: number, y: number): boolean {
+    return containPath(pathProxy, 0, false, x, y);
+}
+
+export function containStroke(pathProxy: PathProxy, lineWidth: number, x: number, y: number): boolean {
+    return containPath(pathProxy, lineWidth, true, x, y);
+}
+
+function containPath(
+    path: PathProxy, lineWidth: number, isStroke: boolean, x: number, y: number
+): boolean {
+    const data = path.data;
+    const len = path.len();
+     let w = 0;
+
+    // ...
+
+    for (let i = 0; i < len;) {
+        const cmd = data[i++];
+
+        // ...
+
+        // highlight-start
+        switch (cmd) {
+            case CMD.M:
+                // ...
+                break;
+            case CMD.L:
+                // ...
+                break;
+            case CMD.C:
+                // ...
+                break;
+            case CMD.Q:
+                // ...
+                break;
+            case CMD.A:
+                // ...
+                break;
+            case CMD.R:
+                // ...
+                break;
+            case CMD.Z:
+                // ...
+                break;
+        }
+        // highlight-end
+    }
+
+    // ...
+
+    return w !== 0;
+}
+```
+
+根据源码实现来看，**第二步与第一步中计算包围盒的算法类似，都是根据绘制图形元素的指令逐条解析，不同的是，第一步仅计算绘制指令绘制的图形的包围盒，第二步则用更复杂的算法判断点坐标是否在绘制指令所绘制的图形路径中。**
 
 以上就是 ZRender 事件系统实现的大致原理，其采用了几何判断的方式实现了画布上的元素拾取。
 

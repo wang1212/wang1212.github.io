@@ -363,7 +363,7 @@ export class Layer extends Container<Group | Shape> {
 
 根据以上源码来看，**首先以拾取坐标为中心的 2×2 矩形中找出 5 个关键点（`INTERSECTION_OFFSETS`，中心和四个顶点）进行遍历，分别通过调用缓存画布（hitCanvas）的 `getImageData()` 来获取坐标点的像素值，然后在颜色与图形元素实例的映射表 `shapes` 中找到目标元素**。这个过程中，实际上也考虑了抗锯齿像素对元素拾取产生的影响。
 
-每一个元素实例都一个唯一的 `colorKey`：
+每一个元素实例都有一个唯一的 `colorKey`：
 
 ```typescript title="https://github.com/konvajs/konva/blob/9.3.11/src/Shape.ts#L184"
 export class Shape<Config extends ShapeConfig = ShapeConfig> extends Node<Config> {
