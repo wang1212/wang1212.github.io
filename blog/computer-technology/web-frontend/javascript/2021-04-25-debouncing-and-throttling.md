@@ -10,7 +10,7 @@ tags: &ref_0
   - JavaScript
   - 性能优化
   - 节流与防抖
-  - 源码分析
+  - 源码解析
 keywords: *ref_0
 description: 前端开发中广泛采用的优化技巧，函数节流与防抖。
 ---

@@ -7,7 +7,7 @@ tags: &ref_0
   - 计算机技术
   - Node.js
   - child_process
-  - 源码分析
+  - 源码解析
 keywords: *ref_0
 description: 使用 Node.js 编写一些脚本工具是非常方便的，而常用的 spawn 与 exec API 有什么不同呢？
 ---

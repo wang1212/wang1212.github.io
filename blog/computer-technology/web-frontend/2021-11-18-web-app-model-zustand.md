@@ -9,7 +9,7 @@ tags: &ref_0
   - Web 前端
   - 应用状态管理
   - React.js
-  - 源码分析
+  - 源码解析
 keywords: *ref_0
 description:
   Web 网页向 Web 应用发展的过程中，势必会出现 Web 项目的复杂化问题，而在移动端场景，基于 React.js 的应用中如何管理状态？zustand

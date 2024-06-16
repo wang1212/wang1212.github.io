@@ -10,7 +10,7 @@ tags: &ref_0
   - 性能优化
   - DOM
   - FastDOM
-  - 源码分析
+  - 源码解析
 keywords: *ref_0
 description: 原生应用时代，DOM 操作一般借助类似 jQuery 的工具库手动完成，而在框架/库应用时代 DOM 操作退居幕后自动完成，原生应用与框架应用性能孰高孰低？DOM 批量操作对于性能有何影响？利用 FastDOM 库来解决这些性能问题。
 ---

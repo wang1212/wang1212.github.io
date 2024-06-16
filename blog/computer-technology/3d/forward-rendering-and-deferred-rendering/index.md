@@ -5,6 +5,7 @@ update: 2023-03-18 14:30:00
 authors: wang1212
 tags: &ref_0
   - 计算机技术
+  - 计算机图形学
   - Web
   - Web 前端
   - 3D
@@ -104,11 +105,11 @@ description: 相对于 2D 开发，3D 开发由于有大量的概念需要进行
 
 ## 参考资料
 
-- https://en.wikipedia.org/wiki/Graphics_pipeline
-- https://www.khronos.org/opengl/wiki/Shader
-- https://en.wikipedia.org/wiki/Shader#Pixel_shaders
-- https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Introduction
-- https://gamedevelopment.tutsplus.com/articles/forward-rendering-vs-deferred-rendering--gamedev-12342
-- https://learnopengl.com/Advanced-Lighting/Deferred-Shading
-- https://www.klab.com/jp/blog/tech/2021/unitydeferredrendering.html
-- https://en.wikipedia.org/wiki/Deferred_shading
+- <https://en.wikipedia.org/wiki/Graphics_pipeline>
+- <https://www.khronos.org/opengl/wiki/Shader>
+- <https://en.wikipedia.org/wiki/Shader#Pixel_shaders>
+- <https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Introduction>
+- <https://gamedevelopment.tutsplus.com/articles/forward-rendering-vs-deferred-rendering--gamedev-12342>
+- <https://learnopengl.com/Advanced-Lighting/Deferred-Shading>
+- <https://www.klab.com/jp/blog/tech/2021/unitydeferredrendering.html>
+- <https://en.wikipedia.org/wiki/Deferred_shading>

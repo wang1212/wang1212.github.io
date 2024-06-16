@@ -5,7 +5,7 @@ update: 2016-04-28 01:42:00
 authors: wang1212
 tags: &ref_0
   - 计算机技术
-  - 计算机
+  - 计算机基础
   - MPU
 keywords: *ref_0
 description: 为什么内存不是越大越好，内存的大小受限于处理器的寻址范围。

@@ -5,7 +5,7 @@ update: 2016-05-05 01:53:00
 authors: wang1212
 tags: &ref_0
   - 计算机技术
-  - 计算机
+  - 计算机基础
   - CPU
 keywords: *ref_0
 description: CPU 获取数据的方式不仅仅一种，多种方式也为不同数据的获取提供了不同的效率考量，保证了寻址效率与指令的灵活性。

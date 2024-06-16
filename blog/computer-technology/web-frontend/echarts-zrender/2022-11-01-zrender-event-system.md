@@ -6,9 +6,10 @@ authors: wang1212
 tags: &ref_0
   - 计算机技术
   - Web 前端
+  - 数据可视化
   - ZRender
   - Canvas
-  - 源码分析
+  - 源码解析
 keywords: *ref_0
 description: 绘图引擎支持丰富交互的前提是拥有一套事件系统，而在画布中如何拾取元素是实现的关键，从 ZRender 的源码来看看其事件系统是如何设计的。
 ---
