@@ -226,7 +226,7 @@ function straightHachureLines(polygons: Polygon[], gap: number, hachureStepOffse
 
 该算法的工作原理可以描述为以下几个关键步骤：
 
-1. 初始化多边形的边数据表（Edge Table，其中需要计算出每条边的纵坐标极值，横坐标起始点以及斜率导数 4 个关键值）；
+1. 初始化多边形的边数据表（Edge Table，其中需要计算出每条边的纵坐标极值，横坐标起始点以及斜率倒数 4 个关键值）；
 2. 创建活跃边表（Active Edge Table, AET，存储当前扫描线与哪些边相交）；
 3. 以所有边中最小的纵坐标初始化扫描线 `y=ymin`，开始向上迭代 `y`；
 4. 更新活跃边表（收集与当前扫面线相交的所有边）；
