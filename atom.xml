@@ -47,7 +47,7 @@
 <p>根据<a href="https://en.wikipedia.org/wiki/Scanline_rendering" target="_blank" rel="noopener noreferrer">维基百科</a>，扫描线算法实际上是<strong>一种图形渲染技术</strong>，一开始其作为一种高效的图形渲染技术而出现，后被应用到多个不同场景，例如我们这里所说的图形的线填充场景。</p>
 <p>该算法的工作原理可以描述为以下几个关键步骤：</p>
 <ol>
-<li>初始化多边形的边数据表（Edge Table，其中需要计算出每条边的纵坐标极值，横坐标起始点以及斜率导数 4 个关键值）；</li>
+<li>初始化多边形的边数据表（Edge Table，其中需要计算出每条边的纵坐标极值，横坐标起始点以及斜率倒数 4 个关键值）；</li>
 <li>创建活跃边表（Active Edge Table, AET，存储当前扫描线与哪些边相交）；</li>
 <li>以所有边中最小的纵坐标初始化扫描线 <code>y=ymin</code>，开始向上迭代 <code>y</code>；</li>
 <li>更新活跃边表（收集与当前扫面线相交的所有边）；</li>
