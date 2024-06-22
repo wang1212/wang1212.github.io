@@ -25,7 +25,7 @@ description: 由于比较好奇 Rough.js 的手绘风格是如何实现的，遂
 
 ## 源码分析
 
-首先，从 `hachure-fill` 简洁的源代码实现来进行分析其实现思路。
+首先，从 `hachure-fill` 简洁的源代码（v0.5.2）实现来进行分析其实现思路。
 
 该库提供了以下 API：
 
@@ -239,7 +239,7 @@ function straightHachureLines(polygons: Polygon[], gap: number, hachureStepOffse
 
 如上图所示，纵坐标最小值为 A 点 `y` 值，从该位置依次向上迭代计算多条平行线（即 c、b、a 顺序），并在平行线的所有像素点处进行填充。
 
-扫描线算法原理比较简单，可查看[该文章中的动画示例](https://www.educative.io/answers/what-is-scanline-fill-algorithm) 来更好的理解其过程。另外，该算法实现时要注意一些特殊情况，例如与扫描线平行的边需要忽略掉。
+扫描线算法原理比较简单，可查看[该文章中的动画示例](https://www.educative.io/answers/what-is-scanline-fill-algorithm)来更好的理解其过程。另外，该算法实现时要注意一些特殊情况，例如与扫描线平行的边需要忽略掉。
 
 至此，可以解释为何一开始要执行图形顶点数据的旋转和逆旋转操作了，这是为了实现任意角度的填充线，因为经过旋转后在新的坐标系中可以利用扫描线算法进行迭代得到所有的水平填充线，再经过逆旋转操作可以将坐标系恢复最终得到预期角度的填充线数据。
 
