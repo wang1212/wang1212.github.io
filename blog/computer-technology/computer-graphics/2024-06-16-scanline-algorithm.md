@@ -235,7 +235,11 @@ function straightHachureLines(polygons: Polygon[], gap: number, hachureStepOffse
 7. 根据边的斜率倒数更新活跃边表中边的 `x` 坐标，为下一行扫描做准备；
 8. 重复步骤 4-8 直至所有边被迭代完成。
 
-扫描线算法原理比较简单，但要注意一些特殊情况，例如与扫描线平行的边需要忽略掉。
+![Scan-line_algorithm](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Scan-line_algorithm.svg/330px-Scan-line_algorithm.svg.png "维基百科示例图")
+
+如上图所示，纵坐标最小值为 A 点 `y` 值，从该位置依次向上迭代计算多条平行线（即 c、b、a 顺序），并在平行线的所有像素点处进行填充。
+
+扫描线算法原理比较简单，可查看[该文章中的动画示例](https://www.educative.io/answers/what-is-scanline-fill-algorithm) 来更好的理解其过程。另外，该算法实现时要注意一些特殊情况，例如与扫描线平行的边需要忽略掉。
 
 至此，可以解释为何一开始要执行图形顶点数据的旋转和逆旋转操作了，这是为了实现任意角度的填充线，因为经过旋转后在新的坐标系中可以利用扫描线算法进行迭代得到所有的水平填充线，再经过逆旋转操作可以将坐标系恢复最终得到预期角度的填充线数据。
 
