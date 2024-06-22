@@ -57,7 +57,9 @@
 <li>根据边的斜率倒数更新活跃边表中边的 <code>x</code> 坐标，为下一行扫描做准备；</li>
 <li>重复步骤 4-8 直至所有边被迭代完成。</li>
 </ol>
-<p>扫描线算法原理比较简单，但要注意一些特殊情况，例如与扫描线平行的边需要忽略掉。</p>
+<p><img decoding="async" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Scan-line_algorithm.svg/330px-Scan-line_algorithm.svg.png" alt="Scan-line_algorithm" title="维基百科示例图" class="img_ev3q"></p>
+<p>如上图所示，纵坐标最小值为 A 点 <code>y</code> 值，从该位置依次向上迭代计算多条平行线（即 c、b、a 顺序），并在平行线的所有像素点处进行填充。</p>
+<p>扫描线算法原理比较简单，可查看<a href="https://www.educative.io/answers/what-is-scanline-fill-algorithm" target="_blank" rel="noopener noreferrer">该文章中的动画示例</a> 来更好的理解其过程。另外，该算法实现时要注意一些特殊情况，例如与扫描线平行的边需要忽略掉。</p>
 <p>至此，可以解释为何一开始要执行图形顶点数据的旋转和逆旋转操作了，这是为了实现任意角度的填充线，因为经过旋转后在新的坐标系中可以利用扫描线算法进行迭代得到所有的水平填充线，再经过逆旋转操作可以将坐标系恢复最终得到预期角度的填充线数据。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="参考资料">参考资料<a class="hash-link" aria-label="参考资料的直接链接" title="参考资料的直接链接" href="https://wang1212.github.io/2024/06/16/computer-technology/computer-graphics/scanline-algorithm#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">​</a></h2>
 <ul>
