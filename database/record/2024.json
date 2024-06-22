@@ -4,6 +4,185 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "06-21": [
+      {
+        "type": 1,
+        "description": "著名的技术调查 State of JS (2023) 结果已经出炉。",
+        "labels": ["技术调查", "JavaScript"],
+        "links": [
+          {
+            "text": "State of JS (2023)",
+            "url": "https://2023.stateofjs.com/en-US"
+          }
+        ]
+      }
+    ],
+    "06-20": [
+      {
+        "type": 1,
+        "description": "最近，React 社区发生了一件大事，有人发现在 v19 版本中 Suspense 组件会导致子组件渲染变成瀑布流模式，而这在 v18 中是并行渲染的，最终 React 团队听取了社区的意见，决定推迟 v19 的版本发布，直至找到更好的解决方案。",
+        "labels": ["React", "Suspense"],
+        "links": [
+          {
+            "text": "How React 19 (Almost) Made the Internet Slower",
+            "url": "https://blog.codeminer42.com/how-react-19-almost-made-the-internet-slower/"
+          },
+          {
+            "text": "React 19 and Suspense - A Drama in 3 Acts",
+            "url": "https://tkdodo.eu/blog/react-19-and-suspense-a-drama-in-3-acts"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "一篇讲述在 WebGL 中利用有符号距离场（Signed Distance Fields）技术绘制不同形状的文章，值得一看。",
+        "labels": ["WebGL", "Signed Distance Fields"],
+        "links": [
+          {
+            "text": "Shape Lens Blur Effect with SDFs and WebGL",
+            "url": "https://tympanus.net/codrops/2024/06/12/shape-lens-blur-effect-with-sdfs-and-webgl/"
+          }
+        ]
+      }
+    ],
+    "06-18": [
+      {
+        "type": 2,
+        "description": "由于比较好奇 Rough.js 的手绘风格是如何实现的，遂准备看看其源码实现，在这个过程中发现了一个依赖项包 hachure-fill，类似铅笔线的图形填充依赖此包实现，其源码比较简洁，从其实现中了解到一个计算机图形学领域的概念-“扫描线算法”，遂进行简单的记录。",
+        "labels": ["Rough.js", "扫描线算法", "数据可视化"]
+      }
+    ],
+    "06-17": [
+      {
+        "type": 1,
+        "description": "今天在看 Hugging Face 官方博客的一篇博文时，其中提到他们在改进文档时参考了 Diátaxis，而在查看其内容后发现对写技术文档有很好的指导意义。",
+        "labels": ["技术文档", "指南"],
+        "links": [
+          {
+            "text": "Diátaxis: A systematic approach to technical documentation authoring.",
+            "url": "https://diataxis.fr/"
+          }
+        ]
+      }
+    ],
+    "06-16": [
+      {
+        "type": 1,
+        "description": "一篇线上问题分析的文章，原来 Node.js 中的 setTimeout 调用返回的是一个对象，而浏览器中该 API 返回的是一个数字 id，也正因为这个差异导致 Node.js 中如果保存了该对象的引用的情况下，只是简单的调用 clearTimeout 会导致内存泄露的问题。",
+        "labels": ["Node.js", "内存泄露"],
+        "links": [
+          {
+            "text": "Your Node is Leaking Memory? setTimeout Could be the Reason",
+            "url": "https://lucumr.pocoo.org/2024/6/5/node-timeout/"
+          }
+        ]
+      }
+    ],
+    "06-11": [
+      {
+        "type": 1,
+        "description": "一些精选的 AI 领域学术论文和视频资源。",
+        "labels": ["AI", "论文"],
+        "links": [
+          {
+            "text": "ICLR 2024 — Best Papers & Talks",
+            "url": "https://www.latent.space/p/iclr-2024-benchmarks-agents"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "一篇针对目前 RAG 技术架构缺陷提出的新范式，可通过自我反思提高语言模型（LM）的输出质量。",
+        "labels": ["AI", "RAG"],
+        "links": [
+          {
+            "text": "Self-RAG: Learning to Retrieve, Generate and Critique through Self-Reflections",
+            "url": "https://selfrag.github.io/"
+          }
+        ]
+      }
+    ],
+    "06-08": [
+      {
+        "type": 4,
+        "description": "端午节假期第一天就早早的起来，准备自驾去周边游玩一番，临时起意决定去安康的石泉老街，一天刚好有足够的时间往返。这种小镇子的景点实际上全国都差不多，可惜仅仅 3 天假期，时间太过紧张，只能去周边一二百公里左右的景区。运气不好的是，在去的途中在秦岭 1 号隧道出口处遇到了交通事故堵车，停留了将近一个小时，不过最后还算顺利。",
+        "labels": ["安康", "石泉老街"]
+      }
+    ],
+    "06-02": [
+      {
+        "type": 1,
+        "description": "虽然平时大多时候接触的都是 Web 开发相关的技术，但这一篇针对终端软件的探讨也非常有趣，可以了解下我们开发者每天使用的终端的一些相关知识。",
+        "labels": ["计算机软件", "Terminal"],
+        "links": [
+          {
+            "text": "State of the Terminal",
+            "url": "https://gpanders.com/blog/state-of-the-terminal/"
+          }
+        ]
+      }
+    ],
+    "06-01": [
+      {
+        "type": 1,
+        "description": "这个播客文章讲解了大语言模型（LLMs）长上下文的发展历史，工程侧的开发也可以多了解下相关技术发展路径。",
+        "labels": ["AI", "LLMs"],
+        "links": [
+          {
+            "text": "How to train a Million Context LLM — with Mark Huang of Gradient.ai",
+            "url": "https://www.latent.space/p/gradient"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "一篇针对 RAG 技术演变的调查概述论文，并简单探讨了未来可能的发展方向。",
+        "labels": ["AI", "RAG"],
+        "links": [
+          {
+            "text": "RAG and RAU: A Survey on Retrieval-Augmented Language Model in Natural Language Processing",
+            "url": "https://arxiv.org/abs/2404.19543"
+          }
+        ]
+      }
+    ],
+    "05-29": [
+      {
+        "type": 1,
+        "description": "一篇讲述使用 Chrome DevTools 进行 JavaScript 性能分析的实践文章，由于其结合真实优化场景，值得一读。",
+        "labels": ["Chrome", "DevTools"],
+        "links": [
+          {
+            "text": "Comprehensive guide to JavaScript performance analysis using Chrome DevTools",
+            "url": "https://blog.jiayihu.net/comprenhensive-guide-chrome-performance/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "一篇讲解游戏开发中脏标记（Dirty Flag）检查策略原理的文章，内容很长，但全部是干货非常值得一看，同时这篇文章实际上也是一本可以在线阅读的书籍中的一章节。",
+        "labels": ["游戏开发", "脏标记检查策略"],
+        "links": [
+          {
+            "text": "Dirty Flag",
+            "url": "https://gameprogrammingpatterns.com/dirty-flag.html"
+          }
+        ]
+      }
+    ],
+    "05-28": [
+      {
+        "type": 1,
+        "description": "一篇讲述提示词工程发展的文章，值得一读，可以了解目前业界提出一些提示词新范式。",
+        "labels": ["AI", "提示词工程"],
+        "links": [
+          {
+            "text": "Modern Advances in Prompt Engineering",
+            "url": "https://cameronrwolfe.substack.com/p/modern-advances-in-prompt-engineering"
+          }
+        ]
+      }
+    ],
     "05-17": [
       {
         "type": 1,
@@ -52,6 +231,13 @@
             "url": "https://ui.dev/why-react-query"
           }
         ]
+      }
+    ],
+    "05-06": [
+      {
+        "type": 4,
+        "description": "五一假期的前几天各种事情忙不停，假期的尾声终于有自己的时间来放松一下，自驾去了比较近的白鹿原影视城。这里主要还是人造景点为主，可能比较有特色的是一些演出节目，但对这些东西并不是很感兴趣就没有买票观看，只是坐了观光电梯和景交车相对放松的逛了一圈。",
+        "labels": ["白鹿原影视城"]
       }
     ],
     "05-03": [
@@ -271,6 +457,13 @@
         ]
       }
     ],
+    "03-22": [
+      {
+        "type": 2,
+        "description": "自 OpenAI 2022 年底发布了 ChatGPT 后不久就爆发了 AI 领域的技术热潮，经过一年多的迅速发展和迭代，当前（2024） Agent 已被认为是未来 AI 应用的主流形态，也在此时简单记录一下现阶段对 AI agent 技术架构的理解。",
+        "labels": ["AI", "Agent"]
+      }
+    ],
     "03-21": [
       {
         "type": 1,
@@ -360,7 +553,7 @@
       {
         "type": 1,
         "description": "最近在思考有没有可能通过伪代码作为 AI 模型和实际代码之间交互的协议，遂查找了一些资料，发现一个有趣的东西，即 LLM 脚本。",
-        "labels": ["ai", "LLM"],
+        "labels": ["ai", "LLMs"],
         "links": [
           {
             "text": "LLMscript System",
@@ -462,6 +655,13 @@
             "url": "https://alexharri.com/blog/jsdoc-as-an-alternative-typescript-syntax"
           }
         ]
+      }
+    ],
+    "03-01": [
+      {
+        "type": 2,
+        "description": "现在业内都在积极探索 AIGC 在业务中的落地前景，有关大语言模型（LLMs）技术的资讯也成了工程化开发必须了解的一部分前置知识，遂整理了一些比较精华的资源。",
+        "labels": ["AI", "LLMs"]
       }
     ],
     "02-28": [
