@@ -4,6 +4,19 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "06-23": [
+      {
+        "type": 1,
+        "description": "从如何聘用 AI 工程师来了解工程开发需要了解机器学习领域哪些知识和技能。",
+        "labels": ["AI", "工程师职业"],
+        "links": [
+          {
+            "text": "How To Hire AI Engineers",
+            "url": "https://www.latent.space/p/hiring"
+          }
+        ]
+      }
+    ],
     "06-21": [
       {
         "type": 1,
@@ -872,6 +885,13 @@
             "url": "https://endtimes.dev/why-lowercase-letters-save-data/"
           }
         ]
+      }
+    ],
+    "01-22": [
+      {
+        "type": 2,
+        "description": "记录一下自 2023 年中以来大概半年多时间中结合 AIGC 技术在可视化自动生成场景的探索尝试和实践经验。",
+        "labels": ["AL", "数据可视化"]
       }
     ],
     "01-21": [
