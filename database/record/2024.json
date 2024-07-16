@@ -4,6 +4,76 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "07-12": [
+      {
+        "type": 4,
+        "description": "借这一次换工作的间隙刚好能休息一周，顺便出去游玩一番，由于人比较多，选择了自驾游去周边城市，奈何天不遂人愿近期全国都在下雨，最后只能在不安中出发，还好山里的天气并不如天气预报“准确”，在 6 天的旅程中天气在晴天、阴天、小雨中交替，神农架和大峡谷景区也算没有白去，遗憾的是由于阴雨天雾太大，导致上到神农顶和大峡谷的七星寨时放眼向山下望去都是雾蒙蒙一片，但也似云海一般，别有一番风景。",
+        "labels": ["湖北", "神农架", "恩施", "恩施大峡谷", "重庆"]
+      }
+    ],
+    "07-01": [
+      {
+        "type": 1,
+        "description": "一篇讲述了作者如何为 TypeScript 贡献新特性类型推断谓词的过程，干货满满。",
+        "labels": ["TypeScript"],
+        "links": [
+          {
+            "text": "The Making of a TypeScript Feature: Inferring Type Predicates",
+            "url": "https://effectivetypescript.com/2024/04/16/inferring-a-type-predicate/"
+          },
+          {
+            "text": "Flow Nodes: How Type Inference Is Implemented",
+            "url": "https://effectivetypescript.com/2024/03/24/flownodes/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "一篇讲述了他们把 Rust 的事件循环和 Node.js 事件循环结合来解决问题 Node 中的性能问题的博文。",
+        "labels": ["Node.js", "Event Loop"],
+        "links": [
+          {
+            "text": "Putting an event loop in your event loop",
+            "url": "https://encore.dev/blog/event-loops"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "B 站利用端侧 AI 提升了视频弹幕的用户体验。",
+        "labels": ["AI", "TensorFlow.js"],
+        "links": [
+          {
+            "text": "Bilibili 利用 MediaPipe 的设备端 Web AI 解决方案，改善视频流用户体验并将会话时长延长 30%",
+            "url": "https://web.dev/case-studies/bilibili-web-ai-improvements"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "SVG 形变动画的原理",
+        "labels": ["SVG", "Morph Animation"],
+        "links": [
+          {
+            "text": "Morphing Arbitrary Paths in SVG",
+            "url": "https://minus-ze.ro/posts/morphing-arbitrary-paths-in-svg/"
+          }
+        ]
+      }
+    ],
+    "06-28": [
+      {
+        "type": 1,
+        "description": "一篇针对 React Compiler 最新进展及其实现进行分析的博文。",
+        "labels": ["React", "React Compiler"],
+        "links": [
+          {
+            "text": "Understanding React Compiler",
+            "url": "https://tonyalicea.dev/blog/understanding-react-compiler/"
+          }
+        ]
+      }
+    ],
     "06-23": [
       {
         "type": 1,
