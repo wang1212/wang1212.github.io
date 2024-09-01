@@ -62,6 +62,7 @@ const config = {
           blogSidebarCount: 10,
           blogSidebarTitle: '近期文章',
           // postsPerPage: 10,
+          onUntruncatedBlogPosts: 'throw',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
