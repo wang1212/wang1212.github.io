@@ -4,6 +4,236 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "10-23": [
+      {
+        "type": 1,
+        "description": "Facebook 支撑数十亿用户流量的架构设计。",
+        "labels": ["架构设计"],
+        "links": [
+          {
+            "text": "How Facebook Was Able to Support a Billion Users via Software Load Balancer ⚡",
+            "url": "https://newsletter.systemdesign.one/p/facebook-load-balancer"
+          }
+        ]
+      }
+    ],
+    "10-22": [
+      {
+        "type": 1,
+        "description": "探讨了我们在提升前端性能时，总是喜欢用其它语言来编写新的工具，实际上我们对 Javascript 自身的性能还利用的不够充分。",
+        "labels": ["JavaScript", "性能"],
+        "links": [
+          {
+            "text": "Why I’m skeptical of rewriting JavaScript tools in “faster” languages",
+            "url": "https://nolanlawson.com/2024/10/20/why-im-skeptical-of-rewriting-javascript-tools-in-faster-languages/"
+          }
+        ]
+      }
+    ],
+    "10-18": [
+      {
+        "type": 1,
+        "description": "Nodejs v23 发布，支持通过 `require` 加载 es 模块。",
+        "labels": ["Node.js"],
+        "links": [
+          {
+            "text": "Node.js 23 Now Available",
+            "url": "https://openjsf.org/blog/announcing-node.js-23-key-features-and-enhancement"
+          }
+        ]
+      }
+    ],
+    "10-03": [
+      {
+        "type": 1,
+        "description": "ESLint 现在开始支持对 JSON 和 Markdown 进行校验。",
+        "labels": ["ESLint"],
+        "links": [
+          {
+            "text": "ESLint now officially supports linting of JSON and Markdown",
+            "url": "https://eslint.org/blog/2024/10/eslint-json-markdown-support/"
+          }
+        ]
+      }
+    ],
+    "09-20": [
+      {
+        "type": 1,
+        "description": "一种在 JavaScript 中编译并运行 C 的方式，应对 WebAssembly 的限制性。",
+        "labels": ["JavaScript", "C"],
+        "links": [
+          {
+            "text": "Compile and run C in JavaScript",
+            "url": "https://bun.sh/blog/compile-and-run-c-in-js"
+          }
+        ]
+      }
+    ],
+    "09-19": [
+      {
+        "type": 1,
+        "description": "Web 剪贴版 API 的发展历史，以及现有的 Web 应用是如何使用的。",
+        "labels": ["Web", "APIs", "Clipboard"],
+        "links": [
+          {
+            "text": "The web's clipboard, and how it stores data of different types",
+            "url": "https://alexharri.com/blog/clipboard"
+          }
+        ]
+      }
+    ],
+    "09-14": [
+      {
+        "type": 1,
+        "description": "探讨了结构化输出为什么对于 AI 模型来说那么重要。",
+        "labels": ["AI", "LLMs"],
+        "links": [
+          {
+            "text": "From API to AGI: Structured Outputs",
+            "url": "https://www.latent.space/p/openai-api-and-o1"
+          }
+        ]
+      }
+    ],
+    "09-13": [
+      {
+        "type": 1,
+        "description": "TypeScript 官方在 5.5 版本发布时终于通过模板变量 ${configDir} 支持了共享配置中的路径相关配置。",
+        "labels": ["Web", "TypeScript"],
+        "links": [
+          {
+            "text": "The ${configDir} Template Variable for Configuration Files",
+            "url": "https://devblogs.microsoft.com/typescript/announcing-typescript-5-5/#the-$%7Bconfigdir%7D-template-variable-for-configuration-files"
+          }
+        ]
+      }
+    ],
+    "09-08": [
+      {
+        "type": 1,
+        "description": "针对 CSS 实现的监听器。",
+        "labels": ["Web", "CSS", "MutationObserver"],
+        "links": [
+          {
+            "text": "MutationObserver for CSS",
+            "url": "https://github.com/bramus/style-observer"
+          }
+        ]
+      }
+    ],
+    "09-06": [
+      {
+        "type": 1,
+        "description": "JavaScript 中生成器 API 的解释和用例。",
+        "labels": ["Web", "JavaScript", "Generators"],
+        "links": [
+          {
+            "text": "JavaScript Generators Explained, But On A Senior-Level",
+            "url": "https://www.reactsquad.io/blog/understanding-generators-in-javascript"
+          }
+        ]
+      }
+    ],
+    "08-26": [
+      {
+        "type": 1,
+        "description": "新的日期 API 解决了单纯的时间戳信息时区丢失等问题。",
+        "labels": ["Web", "JavaScript", "Date"],
+        "links": [
+          {
+            "text": "JS Dates Are About to Be Fixed",
+            "url": "https://docs.timetime.in/blog/js-dates-finally-fixed/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "React 的设计哲学之 Effect 心理模型。",
+        "labels": ["Web", "React"],
+        "links": [
+          {
+            "text": "From React to Effect",
+            "url": "https://effect.website/blog/from-react-to-effect"
+          }
+        ]
+      }
+    ],
+    "08-17": [
+      {
+        "type": 1,
+        "description": "e18e（生态系统性能）是一项将致力于提高 JS 包性能的人员和项目联系起来的倡议。",
+        "labels": ["Web", "JavaScript"],
+        "links": [
+          {
+            "text": "e18e Ecosystem Performance",
+            "url": "https://e18e.dev/"
+          }
+        ]
+      }
+    ],
+    "08-16": [
+      {
+        "type": 1,
+        "description": "实现 DOM 操作的并行化来加速 Web 性能。",
+        "labels": ["Web", "DOM"],
+        "links": [
+          {
+            "text": "Multiple DOM threads ? Yes!",
+            "url": "https://www.pdom.dev/"
+          }
+        ]
+      }
+    ],
+    "08-07": [
+      {
+        "type": 1,
+        "description": "了解前沿大模型的后训练细节，合成数据、RLHF 等等。",
+        "labels": ["AI", "LLMs"],
+        "links": [
+          {
+            "text": "A recipe for frontier model post-training",
+            "url": "https://www.interconnects.ai/p/frontier-model-post-training"
+          }
+        ]
+      }
+    ],
+    "08-06": [
+      {
+        "type": 1,
+        "description": "ESLint v9 将是重大变化的开始，新的配置，新的插件架构等等。",
+        "labels": ["Web", "ESLint"],
+        "links": [
+          {
+            "text": "What's coming next for ESLint",
+            "url": "https://eslint.org/blog/2024/07/whats-coming-next-for-eslint/"
+          }
+        ]
+      }
+    ],
+    "07-25": [
+      {
+        "type": 1,
+        "description": "React 的 2023 年度调查。",
+        "labels": ["Web", "React"],
+        "links": [
+          {
+            "text": "State Of React (2023)",
+            "url": "https://2023.stateofreact.com/en-US/"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "讲述了如何选择 Web 应用的渲染策略，涉及 SSG、ISR、SSR、CSR、PPR 等多种策略及其优缺点。",
+        "labels": ["Web", "Render"],
+        "links": [
+          {
+            "text": "How to choose the best rendering strategy for your app",
+            "url": "https://vercel.com/blog/how-to-choose-the-best-rendering-strategy-for-your-app"
+          }
+        ]
+      }
+    ],
     "07-12": [
       {
         "type": 4,
