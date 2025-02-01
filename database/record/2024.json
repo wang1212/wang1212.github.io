@@ -4,6 +4,184 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "12-09": [
+      {
+        "type": 1,
+        "description": "一种在大型 Web 应用中实现全文搜索的方法，构建完全静态的搜索库。",
+        "labels": ["Web 前端", "Search"],
+        "links": [
+          {
+            "text": "Pagefind",
+            "url": "https://pagefind.app/"
+          }
+        ]
+      }
+    ],
+    "12-07": [
+      {
+        "type": 1,
+        "description": "探讨人工智能助理解决了编码过程中的 70% 那些问题，而其它问题目前还需要人类完成。",
+        "labels": ["AI", "Coding"],
+        "links": [
+          {
+            "text": "The 70% problem: Hard truths about AI-assisted coding",
+            "url": "https://addyo.substack.com/p/the-70-problem-hard-truths-about"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "深入探讨了画布中抗锯齿效果的实现和历史发展路径。",
+        "labels": ["Canvas", "Analytical Anti-Aliasing"],
+        "links": [
+          {
+            "text": "AAA - Analytical Anti-Aliasing",
+            "url": "https://blog.frost.kiwi/analytical-anti-aliasing/"
+          }
+        ]
+      }
+    ],
+    "12-06": [
+      {
+        "type": 1,
+        "description": "React.js v19 正式发布，带来了架构上的升级，优化表单相关业务的开发体验，还有很多其它新功能，从源码来看，也是一次很大的变化。",
+        "labels": ["React", "v19"],
+        "links": [
+          {
+            "text": "React v19",
+            "url": "https://react.dev/blog/2024/12/05/react-19"
+          }
+        ]
+      }
+    ],
+    "11-24": [
+      {
+        "type": 1,
+        "description": "一种调试工具，自动检测到您的React应用中的性能问题的一种方案。",
+        "labels": ["React", "性能"],
+        "links": [
+          {
+            "text": "React Scan automatically detects performance issues in your React app",
+            "url": "https://github.com/aidenybai/react-scan"
+          }
+        ]
+      }
+    ],
+    "11-21": [
+      {
+        "type": 1,
+        "description": "一个工具库，利用 WebAssembly 的强大功能和可移植性，支持构建跨语言的应用。",
+        "labels": ["WebAssembly"],
+        "links": [
+          {
+            "text": "The cross-language framework for building with WebAssembly",
+            "url": "https://extism.org/"
+          }
+        ]
+      }
+    ],
+    "11-15": [
+      {
+        "type": 1,
+        "description": "一篇讲述如何实现六边形网格的技术博文，深入探讨了六边形网格的实现细节和一些应用场景。",
+        "labels": ["数据可视化", "六边形网格"],
+        "links": [
+          {
+            "text": "Hexagonal Grids",
+            "url": "https://www.redblobgames.com/grids/hexagons/"
+          }
+        ]
+      }
+    ],
+    "11-07": [
+      {
+        "type": 1,
+        "description": "关于矩阵相关问题最好的最简洁明了的解释。",
+        "labels": ["OpenGL", "矩阵"],
+        "links": [
+          {
+            "text": "Matrices can be your Friends.",
+            "url": "https://www.sjbaker.org/steve/omniv/matrices_can_be_your_friends.html"
+          }
+        ]
+      }
+    ],
+    "11-06": [
+      {
+        "type": 1,
+        "description": "这是一篇记录实践过程的博文，作者使用着色器为模型查看器制作后处理效果，添加轮廓以突出显示 3D CAD 模型中的细节。",
+        "labels": ["WebGL", "3D"],
+        "links": [
+          {
+            "text": "Rendering Outlines with a Post-processing Shader",
+            "url": "https://www.atomwolf.org/posts/rendering-outlines-with-a-post-processing-shader/"
+          }
+        ]
+      }
+    ],
+    "10-31": [
+      {
+        "type": 1,
+        "description": "React Compiler 终于在上周发布了 Beta 版本，据官方说明来看 meta 已在内部大量项目进行了测试，迁移成本较低。",
+        "labels": ["React", "React Compiler"],
+        "links": [
+          {
+            "text": "React Compiler Beta Release",
+            "url": "https://react.dev/blog/2024/10/21/react-compiler-beta-release"
+          }
+        ]
+      }
+    ],
+    "10-29": [
+      {
+        "type": 1,
+        "description": "记录了微软开发团队如何解决用 Git 管理 monorepo 时遇到项目越来越大导致 Git 操作变得缓慢的问题，而这应该是个比较普遍的问题。",
+        "labels": ["Git", "monorepo"],
+        "links": [
+          {
+            "text": "How we shrunk our Javascript monorepo git size by 94%",
+            "url": "https://www.jonathancreamer.com/how-we-shrunk-our-git-repo-size-by-94-percent/"
+          }
+        ]
+      }
+    ],
+    "10-28": [
+      {
+        "type": 1,
+        "description": "讲述组织大型 React 应用项目架构的文章，值得一看。",
+        "labels": ["React", "项目架构"],
+        "links": [
+          {
+            "text": "React Folder Structure in 5 Steps [2025]",
+            "url": "https://www.robinwieruch.de/react-folder-structure/"
+          }
+        ]
+      }
+    ],
+    "10-27": [
+      {
+        "type": 1,
+        "description": "React Native 现在发布了新架构的正式版本，比较感兴趣的是新架构中，完全消除了 React Native 对桥的依赖，取而代之的是使用 JSI 在 JavaScript 和本机代码之间进行直接、高效的通信。",
+        "labels": ["React Native", "架构设计"],
+        "links": [
+          {
+            "text": "New Architecture is here",
+            "url": "https://reactnative.dev/blog/2024/10/23/the-new-architecture-is-here"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "一篇讲述在 Next.js 中解决应用缓存问题过程的博文，很有学习意义。",
+        "labels": ["Next.js", "缓存", "架构设计"],
+        "links": [
+          {
+            "text": "Our Journey with Caching",
+            "url": "https://nextjs.org/blog/our-journey-with-caching"
+          }
+        ]
+      }
+    ],
     "10-23": [
       {
         "type": 1,

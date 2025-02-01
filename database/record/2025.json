@@ -1,7 +1,32 @@
 {
   "metadata": {
-    "year": 2024,
+    "year": 2025,
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
-  "events": {}
+  "events": {
+    "02-01": [
+      {
+        "type": 1,
+        "description": "一篇探讨推理模型为什么将会普及的博文，相对于标准模型来说，推理模型正成为一种趋势，并且成本更低，效果更好。",
+        "labels": ["AI", "推理模型"],
+        "links": [
+          {
+            "text": "Why reasoning models will generalize",
+            "url": "https://www.interconnects.ai/p/why-reasoning-models-will-generalize"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "Zod、Valibot 和 ArkType 库的作者们发起了 Schema 的标准规范并在各自的库中进行了实现，这为后续的生态发展提供了基础，以提升开发者体验为目标。",
+        "labels": ["JavaScript", "Data Schema", "数据校验"],
+        "links": [
+          {
+            "text": "Standard Schema",
+            "url": "https://standardschema.dev/"
+          }
+        ]
+      }
+    ]
+  }
 }
