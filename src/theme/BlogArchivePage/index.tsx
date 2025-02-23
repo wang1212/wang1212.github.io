@@ -252,9 +252,7 @@ export default function BlogArchivePageWrapper(props: Props) {
   const [description] = useState(customConfig.archive.description());
   const title = customConfig.archive.title;
   const [showTagCloud, setShowTagCloud] = useState(true);
-  const [tag, setTag] = useState<string | null>(
-    window.history?.state?.tag || null
-  );
+  const [tag, setTag] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<SortBy>('update');
   const [years, setYears] = useState([]);
   const tagMap = getTagMap(props.archive.blogPosts);
@@ -285,6 +283,10 @@ export default function BlogArchivePageWrapper(props: Props) {
     },
     [setTag]
   );
+
+  useEffect(() => {
+    setTag(window.history?.state?.tag || null);
+  }, [setTag]);
 
   useEffect(() => {
     // ! 客户端代码中引入第三方库
