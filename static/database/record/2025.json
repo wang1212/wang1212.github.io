@@ -4,6 +4,19 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "02-20": [
+      {
+        "type": 1,
+        "description": "一篇讲述推理模型及其与标准 LLM 的关系的文章，在推理模型大火的当下非常值得一看。",
+        "labels": ["AI", "推理模型"],
+        "links": [
+          {
+            "text": "Demystifying Reasoning Models",
+            "url": "https://cameronrwolfe.substack.com/p/demystifying-reasoning-models"
+          }
+        ]
+      }
+    ],
     "02-01": [
       {
         "type": 1,
@@ -24,6 +37,30 @@
           {
             "text": "Standard Schema",
             "url": "https://standardschema.dev/"
+          }
+        ]
+      }
+    ],
+    "01-14": [
+      {
+        "type": 1,
+        "description": "Docusaurus 3.7 发布，支持 react v19，相信很快 v4 将会发布。",
+        "labels": ["Docusaurus"],
+        "links": [
+          {
+            "text": "Docusaurus 3.7",
+            "url": "https://docusaurus.io/blog/releases/3.7"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "一篇对 2024 年 AI 大模型领域技术发展的总结",
+        "labels": ["AI", "LLMs"],
+        "links": [
+          {
+            "text": "Things we learned about LLMs in 2024",
+            "url": "https://simonwillison.net/2024/Dec/31/llms-in-2024/"
           }
         ]
       }
