@@ -1,5 +1,5 @@
 import styles from './index.module.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Link from '@docusaurus/Link';
 import { PageMetadata } from '@docusaurus/theme-common';
 import Layout from '@theme/Layout';
@@ -23,12 +23,13 @@ const descriptionSet = [
   '我们走过的每一步不一定是完美的，但每一步都有值得深思的意义。',
   '做生活的导演，不成；次之，做演员；再次之，做观众。',
   '软件只是一种帮助人们完成某些事情的工具——许多程序员从来不理解这一点。关注交付的价值，不要过分关注工具的细节 - John Carmack',
+  'const res = ["👨", "‍", "👩", "‍", "👧", "‍", "👦"].join(\'\'); console.log(res);',
 ];
 
 /** ! custom config */
 const customConfig = {
   archive: {
-    title: '文章归档',
+    title: '岁月留痕',
     description: () =>
       descriptionSet[Math.floor(Math.random() * descriptionSet.length)],
   },
@@ -251,13 +252,38 @@ export default function BlogArchivePageWrapper(props: Props) {
   const [description] = useState(customConfig.archive.description());
   const title = customConfig.archive.title;
   const [showTagCloud, setShowTagCloud] = useState(true);
-  const [tag, setTag] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<SortBy>('date');
+  const [tag, setTag] = useState<string | null>(
+    window.history?.state?.tag || null
+  );
+  const [sortBy, setSortBy] = useState<SortBy>('update');
   const [years, setYears] = useState([]);
   const tagMap = getTagMap(props.archive.blogPosts);
   const tagList: [string, number][] = Array.from(
     tagMap,
     ([tagName, tagData]) => [tagName, tagData.count]
+  );
+
+  const updateTag = useCallback(
+    (tag: string) => {
+      setTag((prevTag) => {
+        const urlParamsTemp = new URLSearchParams(window.location.search);
+        const newTag = prevTag === tag ? null : tag;
+
+        if (newTag === null) {
+          urlParamsTemp.delete('tag');
+        } else {
+          urlParamsTemp.set('tag', newTag);
+        }
+
+        window.history.replaceState(
+          { tag: newTag },
+          '',
+          `${window.location.pathname}?${urlParamsTemp.toString()}`
+        );
+        return newTag;
+      });
+    },
+    [setTag]
   );
 
   useEffect(() => {
@@ -281,15 +307,14 @@ export default function BlogArchivePageWrapper(props: Props) {
       ),
       shrinkToFit: true,
       click(item) {
-        setTag((prev) => (prev === item[0] ? null : item[0]));
-        // location.hash = `#/notes/${item[0]}`;
+        updateTag(item[0]);
       },
     });
 
     return () => {
       WordCloud.stop();
     };
-  }, [setTag]);
+  }, [updateTag]);
 
   useEffect(() => {
     const posts = !tag
@@ -345,15 +370,9 @@ export default function BlogArchivePageWrapper(props: Props) {
                             className={`button button--sm button--outline button--secondary ${
                               tag === tagItem[0] ? 'button--active' : ''
                             }`}
-                            onClick={() =>
-                              setTag(
-                                tag === tagItem[0]
-                                  ? null
-                                  : (tagItem[0] as string)
-                              )
-                            }
+                            onClick={() => updateTag(tagItem[0])}
                           >
-                            {tagItem[0]} {tagItem[1]}
+                            {tagItem[0]} {tagItem[1] > 1 && tagItem[1]}
                           </li>
                         ))}
                     </ul>
