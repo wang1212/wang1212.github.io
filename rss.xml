@@ -378,7 +378,7 @@
 <p><a href="https://www.assemblyai.com/blog/how-chatgpt-actually-works/" target="_blank" rel="noopener noreferrer">How ChatGPT actually works</a></p>
 </blockquote>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="应用技术">应用技术<a href="https://wang1212.github.io/2024/03/01/awesome/llm#%E5%BA%94%E7%94%A8%E6%8A%80%E6%9C%AF" class="hash-link" aria-label="应用技术的直接链接" title="应用技术的直接链接">​</a></h2>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="rag">RAG<a href="https://wang1212.github.io/2024/03/01/awesome/llm#rag" class="hash-link" aria-label="RAG的直接链接" title="RAG的直��接链接">​</a></h3>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="rag">RAG<a href="https://wang1212.github.io/2024/03/01/awesome/llm#rag" class="hash-link" aria-label="RAG的直接链接" title="RAG的直接链接">​</a></h3>
 <p><strong>检索增强生成（Retrieval-Augmented Generation, RAG）</strong> 是一种利用从外部来源获取的事实来提高生成式 AI 模型的准确性和可靠性的技术。简单的来说，现有的大语言模型基于静态数据进行预训练，在一些对数据实时性有要求的特定场景中无法获取最新数据信息，通过 RAG 技术则可以弥补这个缺陷，通过引入外部实时数据库的方式来增强大语言模型对实时数据的响应能力。</p>
 <div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>RAG</div><div class="admonitionContent_BuS1"><ul>
 <li><a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/" target="_blank" rel="noopener noreferrer">What Is Retrieval-Augmented Generation, aka RAG?</a></li>
@@ -581,7 +581,7 @@
 <blockquote>
 <p><a href="https://raw.githubusercontent.com/pmndrs/jotai/master/img/title.svg" target="_blank" rel="noopener noreferrer">https://raw.githubusercontent.com/pmndrs/jotai/master/img/title.svg</a></p>
 </blockquote>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="gsap-的-morphsvg-插件">GSAP 的 MorphSVG 插件<a href="https://wang1212.github.io/2023/11/10/computer-technology/web-frontend/echarts-zrender/morph-animation#gsap-%E7%9A%84-morphsvg-%E6%8F%92%E4%BB%B6" class="hash-link" aria-label="GSAP 的 MorphSVG 插件的直接链接" title="GSAP 的 MorphSVG 插��件的直接链接">​</a></h3>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="gsap-的-morphsvg-插件">GSAP 的 MorphSVG 插件<a href="https://wang1212.github.io/2023/11/10/computer-technology/web-frontend/echarts-zrender/morph-animation#gsap-%E7%9A%84-morphsvg-%E6%8F%92%E4%BB%B6" class="hash-link" aria-label="GSAP 的 MorphSVG 插件的直接链接" title="GSAP 的 MorphSVG 插件的直接链接">​</a></h3>
 <p>要实现效果比较好的形变动画并不容易，目前，业内功能比较强大的工具库则是 <a href="https://gsap.com/docs/v3/Plugins/MorphSVGPlugin/" target="_blank" rel="noopener noreferrer">GSAP 的 MorphSVG 插件</a>，我们在其官方文档中可以看到其中的技术难点。</p>
 <p><img decoding="async" loading="lazy" alt="gsap-svg-morph-plugin" src="https://wang1212.github.io/assets/images/gsap-svg-morph-plugin-7413a2b75c6b332db8698bbdacde2a58.webp" width="1396" height="437" class="img_ev3q"></p>
 <p>在处理两个不同的 SVG 图形之间的形变过渡时，要确保其 <code>d</code> 属性包含的<strong>点数量是一致</strong>的，为了实现这个目标，则需要对其数据进行插值和优化处理，将其转换和细分为多段<strong>贝塞尔曲线</strong>。</p>
@@ -1010,7 +1010,7 @@
 <p><img decoding="async" loading="lazy" alt="graphics-pipeline-2" src="https://wang1212.github.io/assets/images/graphics-pipeline-2-5beeac64796c5b122aed507361479500.webp" width="403" height="643" class="img_ev3q"></p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="渲染技术">渲染技术<a href="https://wang1212.github.io/computer-technology/3d/forward-rendering-and-deferred-rendering#%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF" class="hash-link" aria-label="渲染技术的直接链接" title="渲染技术的直接链接">​</a></h2>
 <p>在对前置概念渲染管线做了简单的了解之后，接下来便是本文的核心内容，两种不同的渲染技术。</p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="正向渲染">正向渲染<a href="https://wang1212.github.io/computer-technology/3d/forward-rendering-and-deferred-rendering#%E6%AD%A3%E5%90%91%E6%B8%B2%E6%9F%93" class="hash-link" aria-label="正向渲染的直�接链接" title="正向渲染的直接链接">​</a></h3>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="正向渲染">正向渲染<a href="https://wang1212.github.io/computer-technology/3d/forward-rendering-and-deferred-rendering#%E6%AD%A3%E5%90%91%E6%B8%B2%E6%9F%93" class="hash-link" aria-label="正向渲染的直接链接" title="正向渲染的直接链接">​</a></h3>
 <p>正（前）向渲染（Forward Rendering）又称正向着色，是大多数 3D 渲染引擎的默认渲染技术实现。</p>
 <p>**这是一种直接的方式，渲染一个对象并用场景中所有的光源照亮它。如果场景中有大量的对象，则为场景中的每个对象分别执行此操作。**这句话总结了正向渲染技术的实现思路和技术原理，其非常符合我们人类思考的方式。</p>
 <p>虽然很容易理解和实现，但它对性能的影响也很大，因为每个渲染对象都必须为每个渲染片段迭代每个光源，由于片段着色器输出被覆盖，正向渲染也往往会在深度复杂度高的场景（多个对象覆盖同一屏幕像素）中浪费大量片段着色器运行结果，导致大量的无效渲染。</p>
@@ -1279,7 +1279,7 @@
 <p>实际上，从苏州回杭州还得先到上海虹桥，再到杭州东站。高铁票是昨天晚上才买的，已经比较迟了，苏州直达杭州的高铁已经售罄了，而且就算有最后一趟的时间也比较早，没有晚上八点以后的列车。相对来说，苏州到上海的高铁每天都非常的方便。</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="杭州">杭州<a href="https://wang1212.github.io/2023/01/25/life/tourism/tourism#%E6%9D%AD%E5%B7%9E" class="hash-link" aria-label="杭州的直接链接" title="杭州的直接链接">​</a></h2>
 <p>虽然在杭州已经待了一年多的时间，但没有好好的逛过杭州的景区，这次春节出游恰好也是个契机。原本的打算是去绍兴一日游的，结果发现西湖今年一季度景区免门票，那还不如趁这个机会免费逛一逛西湖，何乐而不为呢？</p>
-<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="西湖飞来峰">西湖飞来峰<a href="https://wang1212.github.io/2023/01/25/life/tourism/tourism#%E8%A5%BF%E6%B9%96%E9%A3%9E%E6%9D%A5%E5%B3%B0" class="hash-link" aria-label="西湖飞来峰的直接�链接" title="西湖飞来峰的直接链接">​</a></h3>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="西湖飞来峰">西湖飞来峰<a href="https://wang1212.github.io/2023/01/25/life/tourism/tourism#%E8%A5%BF%E6%B9%96%E9%A3%9E%E6%9D%A5%E5%B3%B0" class="hash-link" aria-label="西湖飞来峰的直接链接" title="西湖飞来峰的直接链接">​</a></h3>
 <p>很多人逛西湖，实际上只是西湖边上看了看，湖对面的山上还有很多景点，好好的逛一圈至少也得个几天时间，今天就挑了一个最著名的景点飞来峰，顺便去灵隐寺看一看。</p>
 <p>早上出来的时候已经比较晚了，快十一点钟，打算直接乘公交到飞来峰的景点入口，虽然只有区区四站路，但到了西湖跟前时，最后两站路距离很长，而且异常的拥堵。眼看都要快下车了，但奈何堵车过于严重，一个小时过去了还没到达目的地。无奈之下，在最后堵在快到隧道出口时，人们纷纷都下了公交，直接沿路走出了隧道，然后步行到飞来峰景点。</p>
 <p>杭州西湖在全国来说应该算是一个热门景点，入口处果然是人挤人。入口进去后不远处便是灵隐寺，按杭州的免票政策是景点内第一道门票是免费的，那么飞来峰免票后，灵隐寺应该是要收费的，结果径直进去后，没有任何检票收费的环节。灵隐寺不愧是西湖的核心景点，内部修缮的很好，在全国的寺庙中应该是排名在前面的。简单的烧香祈福、游览完，出寺后去攀爬了飞来峰。</p>
