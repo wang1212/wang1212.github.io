@@ -4,6 +4,47 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "03-02": [
+      {
+        "type": 1,
+        "description": "在春节期间，DeepSeek 开源了一个基于 MoE 的大语言模型，在全球引起了很大的关注，然而当下大部分的大语言模型都是 MoE 架构的，这篇文章详细的探讨了 MoE 架构的设计和优缺点，对于想了解模型底层设计的人来说非常值得一读。",
+        "labels": ["AI", "MoEs"],
+        "links": [
+          {
+            "text": "Mixture-of-Experts (MoE) LLMs",
+            "url": "https://cameronrwolfe.substack.com/p/moe-llms"
+          }
+        ]
+      }
+    ],
+    "03-01": [
+      {
+        "type": 1,
+        "description": "2025 年建议 AI 工程师阅读的资源列表。",
+        "labels": ["AI", "Reading List"],
+        "links": [
+          {
+            "text": "The 2025 AI Engineer Reading List",
+            "url": "https://www.latent.space/p/2025-papers"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "使用 AI 模型通过自然语言对话的方式来控制浏览器，这是一个非常有潜力的方向。",
+        "labels": ["AI", "Serverless Browsers"],
+        "links": [
+          {
+            "text": "Open Operator, Serverless Browsers and the Future of Computer-Using Agents",
+            "url": "https://www.latent.space/p/browserbase"
+          },
+          {
+            "text": "Introducing Operator",
+            "url": "https://openai.com/index/introducing-operator/"
+          }
+        ]
+      }
+    ],
     "02-20": [
       {
         "type": 1,
