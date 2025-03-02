@@ -28,7 +28,7 @@
     "plugin-image-zoom": "github:flexanalytics/plugin-image-zoom",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.0.0",
-    "react-calendar-heatmap": "^1.9.0",
+    "react-calendar-heatmap": "^1.10.0",
     "react-dom": "^19.0.0",
     "swr": "^2.3.2",
     "wordcloud": "^1.2.3"
@@ -39,7 +39,7 @@
     "@docusaurus/types": "^3.7.0",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "3.3.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.2"
   },
   "browserslist": {
     "production": [
