@@ -4,6 +4,80 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "03-23": [
+      {
+        "type": 1,
+        "description": "全球风投机构发布的全球前 100 名 AI 应用榜单，每 6 个月更新一次，包含了对行业的分析，值得关注。",
+        "labels": ["AI", "App"],
+        "links": [
+          {
+            "text": "The Top 100 Gen AI Apps",
+            "url": "https://a16z.com/100-gen-ai-apps-4/"
+          }
+        ]
+      }
+    ],
+    "03-22": [
+      {
+        "type": 1,
+        "description": "布隆过滤器作为一个应用广泛的基础算法，一直不是很了解其作用和原理，在这篇通俗易懂的文章中总算知道了其大致原理和应用场景。",
+        "labels": ["算法", "布隆过滤器"],
+        "links": [
+          {
+            "text": "Bloom Filter: A Deep Dive",
+            "url": "https://www.kirupa.com/data_structures_algorithms/bloom_filter.htm"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "与 MCP 类似，agent.json 提出了如何定义传统的 API 以帮助 Agent 应用更好的识别和调用服务来获得更好的响应。",
+        "labels": ["AI", "Agent", "API", "agents.json"],
+        "links": [
+          {
+            "text": "Introducing agents.json",
+            "url": "https://docs.wild-card.ai/agentsjson/introduction"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "简单解释了为什么需要 MCP，以及与传统的 API 有什么差异。",
+        "labels": ["AI", "Agent", "MCP"],
+        "links": [
+          {
+            "text": "What is Model Context Protocol (MCP)? How it simplifies AI integrations compared to APIs",
+            "url": "https://norahsakal.com/blog/mcp-vs-api-model-context-protocol-explained/"
+          }
+        ]
+      }
+    ],
+    "03-16": [
+      {
+        "type": 1,
+        "description": "构建 AI 应用的开源技术栈资源列表。",
+        "labels": ["AI"],
+        "links": [
+          {
+            "text": "EP146: The Open Source AI Stack",
+            "url": "https://blog.bytebytego.com/p/ep146-the-open-source-ai-stack"
+          }
+        ]
+      }
+    ],
+    "03-15": [
+      {
+        "type": 1,
+        "description": "在 2025 年推荐学习软件架构设计的好的阅读资源列表。",
+        "labels": ["Software Architecture", "Reading List"],
+        "links": [
+          {
+            "text": "EP151: 24 Good Resources to Learn Software Architecture in 2025",
+            "url": "https://blog.bytebytego.com/p/ep151-24-good-resources-to-learn"
+          }
+        ]
+      }
+    ],
     "03-02": [
       {
         "type": 1,
