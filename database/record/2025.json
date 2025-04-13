@@ -4,6 +4,99 @@
     "type": ["里程碑", "阅读", "写作", "编程", "旅行", "看电影"]
   },
   "events": {
+    "04-14": [
+      {
+        "type": 1,
+        "description": "学习 APIs 开发需要了解的概念，例如协议、响应码等等。",
+        "labels": ["《ByteByteGo》"],
+        "links": [
+          {
+            "text": "EP158: How to Learn API Development",
+            "url": "https://blog.bytebytego.com/p/ep158-how-to-learn-api-development"
+          }
+        ]
+      }
+    ],
+    "04-13": [
+      {
+        "type": 1,
+        "description": "Dan Abramov 又一次针对 React 中两种概念，标签和组件的深入探讨，解释了 React 服务器组件的设计哲学。",
+        "labels": ["Web", "前端", "React.js"],
+        "links": [
+          {
+            "text": "React for Two Computers",
+            "url": "https://overreacted.io/react-for-two-computers/"
+          }
+        ]
+      }
+    ],
+    "04-12": [
+      {
+        "type": 1,
+        "description": "Anthropic 举办的一场探讨 MCP 的研讨会，视频有点长，不过有些讨论还是很是收获颇丰的。",
+        "labels": ["AI", "MCP"],
+        "links": [
+          {
+            "text": "Building Agents with Model Context Protocol - Full Workshop with Mahesh Murag of Anthropic",
+            "url": "https://www.youtube.com/watch?v=kQmXtrmQ5Zg"
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "description": "随着 styled-components 库的作者宣布其进入维护模式后，CSS-in-JS 的时代落幕了。",
+        "labels": ["Web", "前端", "CSS-in-JS"],
+        "links": [
+          {
+            "text": "styled-components  in \"maintenance mode\"",
+            "url": "https://opencollective.com/styled-components/updates/thank-you"
+          }
+        ]
+      }
+    ],
+    "04-10": [
+      {
+        "type": 1,
+        "description": "在 MCP 快速发展的同时，谷歌发布了 Agent 应用之间通信的标准协议 A2A，期望与 MCP 互为补充，而不是相互替代。",
+        "labels": ["AI", "Agent", "A2A"],
+        "links": [
+          {
+            "text": "Announcing the Agent2Agent Protocol (A2A)",
+            "url": "https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/"
+          }
+        ]
+      }
+    ],
+    "03-29": [
+      {
+        "type": 1,
+        "description": "探讨了构建 AI Agent 应用的工程化经验，结果过去一段时间不断发展的技术迭代过程，对 Agent 工程化的概念有了更好的理解。",
+        "labels": ["AI", "Agent"],
+        "links": [
+          {
+            "text": "Agent Engineering",
+            "url": "https://www.latent.space/p/agent"
+          }
+        ]
+      }
+    ],
+    "03-24": [
+      {
+        "type": 1,
+        "description": "MCP 正在快速发展，将有可能成为构建 AI 应用的标准协议，以下两篇文章对 MCP 进行了较为深入的讨论。",
+        "labels": ["AI", "MCP"],
+        "links": [
+          {
+            "text": "A Deep Dive Into MCP and the Future of AI Tooling",
+            "url": "https://a16z.com/a-deep-dive-into-mcp-and-the-future-of-ai-tooling/"
+          },
+          {
+            "text": "Why MCP Won",
+            "url": "https://www.latent.space/p/why-mcp-won"
+          }
+        ]
+      }
+    ],
     "03-23": [
       {
         "type": 1,
