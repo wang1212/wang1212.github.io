@@ -19,17 +19,17 @@
     "@docusaurus/core": "^3.7.0",
     "@docusaurus/preset-classic": "^3.7.0",
     "@docusaurus/theme-mermaid": "^3.7.0",
-    "@easyops-cn/docusaurus-search-local": "^0.49.1",
+    "@easyops-cn/docusaurus-search-local": "^0.49.2",
     "@formkit/auto-animate": "^0.8.2",
     "@mdx-js/react": "^3.1.0",
     "clsx": "^2.1.1",
-    "flexsearch": "^0.8.117",
+    "flexsearch": "^0.8.154",
     "overlayscrollbars": "^2.11.1",
     "plugin-image-zoom": "github:flexanalytics/plugin-image-zoom",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.0.0",
+    "react": "^19.1.0",
     "react-calendar-heatmap": "^1.10.0",
-    "react-dom": "^19.0.0",
+    "react-dom": "^19.1.0",
     "swr": "^2.3.3",
     "wordcloud": "^1.2.3"
   },
@@ -39,7 +39,7 @@
     "@docusaurus/types": "^3.7.0",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "3.3.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   },
   "browserslist": {
     "production": [
