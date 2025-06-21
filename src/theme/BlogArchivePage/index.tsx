@@ -1,4 +1,4 @@
-import styles from './index.module.css';
+import styles from './styles.module.css';
 import React, { useEffect, useState, useCallback } from 'react';
 import Link from '@docusaurus/Link';
 import { PageMetadata } from '@docusaurus/theme-common';
@@ -8,6 +8,7 @@ import type { ArchiveBlogPost, Props } from '@theme/BlogArchivePage';
 import BlogArchivePage from '@theme-original/BlogArchivePage';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import clsx from 'clsx';
+import { formatterDate } from '../../utils/date';
 
 /**
  * ! 覆盖内部实现
@@ -40,13 +41,6 @@ const customConfig = {
 type SortBy = 'date' | 'update';
 
 function PostItem({ post }: { post: ArchiveBlogPost }) {
-  const formatterDate = (date: string) =>
-    date
-      .split(/[^\d]+/)
-      .slice(0, 3)
-      .map((v) => v.padStart(2, '0'))
-      .join('-');
-
   return (
     <li>
       <Link to={post.metadata.permalink}>
