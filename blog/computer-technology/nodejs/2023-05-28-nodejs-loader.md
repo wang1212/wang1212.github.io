@@ -10,7 +10,6 @@ keywords: *ref_0
 description: 鉴于 Node.js 的诸多历史遗留原因，目前文件有多种扩展名，在文件引用时很多开发者习惯不写扩展名，这在 ES Modules 代码中需要额外的命令行 flag 才能实现。但在 Node.js v19 的版本发布后，其中 `--experimental-specifier-resolution` 命令行 flag 被删除，为了能继续运行无扩展名的 ES Modules 代码，就需要借助自定义加载器来实现。
 ---
 
-> _最后更新于 2023-05-28 23:07:00_
 
 鉴于 Node.js 的诸多历史遗留原因，目前文件有多种扩展名，在文件引用时很多开发者习惯不写扩展名，这在 ES Modules 代码中需要额外的命令行 flag 才能实现。但在 Node.js v19 的版本发布后，其中 `--experimental-specifier-resolution` 命令行 flag 被删除，为了能继续运行无扩展名的 ES Modules 代码，就需要借助自定义加载器来实现。
 
@@ -41,7 +40,7 @@ import * as foo from './foo'; // error, not work!
 为了实现用 ES Modules 编写代码，又不需要写文件扩展名，Node.js 在很久以前就给出了一个命令行的 flag 来应对这类问题。
 
 ```bash
-$ node --experimental-specifier-resolution=node index.js
+node --experimental-specifier-resolution=node index.js
 ```
 
 不过，近期在使用 Node.js v20 版本时，突然发现该 flag 失效了，导致写的没有扩展名的 ES Modules 代码无法运行。遂开始查阅官方文档，发现在 v18 的文档中该 flag 还可以索引，v20 的文档中已经无法索引了，在后续查阅资料的过程中终于从 [Node.js 的 v19 发布公告](https://nodejs.org/en/blog/announcements/v19-release-announce#custom-esm-resolution-adjustments)中发现了问题。
@@ -57,7 +56,7 @@ Node.js v18 将是最后一个可以使用 `--experimental-specifier-resolution`
 最终，为了解决这个问题，需要安装一个官方提供的[自定义加载器包](https://github.com/nodejs/loaders-test/tree/main/commonjs-extension-resolution-loader)：
 
 ```bash
-$ npm i commonjs-extension-resolution-loader
+npm i commonjs-extension-resolution-loader
 ```
 
 然后改变运行文件的命令：
@@ -76,7 +75,7 @@ $ node --experimental-loader=commonjs-extension-resolution-loader index.js
 
 ### 参考资料
 
-- https://nodejs.org/en/blog/announcements/v19-release-announce
-- https://nodejs.org/docs/latest-v18.x/api/cli.html#--experimental-specifier-resolutionmode
-- https://github.com/nodejs/loaders-test/tree/main/commonjs-extension-resolution-loader
-- https://nodejs.org/docs/latest-v18.x/api/packages.html#package-entry-points
+- <https://nodejs.org/en/blog/announcements/v19-release-announce>
+- <https://nodejs.org/docs/latest-v18.x/api/cli.html#--experimental-specifier-resolutionmode>
+- <https://github.com/nodejs/loaders-test/tree/main/commonjs-extension-resolution-loader>
+- <https://nodejs.org/docs/latest-v18.x/api/packages.html#package-entry-points>

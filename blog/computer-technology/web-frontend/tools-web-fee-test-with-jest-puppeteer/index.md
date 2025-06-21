@@ -15,7 +15,6 @@ keywords: *ref_0
 description: 谷歌发布的 Puppeteer 工具和脸书发布的 Jest 测试工具为 Web 端到端测试提供了极大的便利，这里记录了如何使用它们构建一个 Web 自动化测试平台。
 ---
 
-> _最后更新于 2021-08-15 14:54:00_
 
 测试为软件的稳定和完善提供了必要的支持，Web 前端开发领域相比于做单元测试，端到端测试更有意义和价值。谷歌发布的 Puppeteer 工具和脸书发布的 Jest 测试工具为 Web 端到端测试提供了极大的便利，这里记录了如何使用它们构建一个 Web 自动化测试平台。
 
@@ -45,7 +44,7 @@ Web 端到端自动化测试平台功能需求
 
 首先，解决如何构建 Jest 和 Puppeteer 的服务端测试运行环境（我称之为 Test Runner Server）。服务器的环境大多都是 Linux 系统，Puppeteer 官方文档也提供了如何在 Linux 中安装和使用，事实是要比在本地的 Windows 环境中麻烦得多，当然这个麻烦也源于另一个事实：[Puppeteer 版本和 Chromium 的版本严格相关](https://github.com/puppeteer/puppeteer/#q-why-doesnt-puppeteer-vxxx-work-with-chromium-vyyy)。那么问题又变得复杂了起来，如何构建支持多个 Puppeteer 版本的测试运行环境？隔离多个版本测试运行环境之间的影响可以利用虚拟机，在如今云的时代，Docker 则成了最佳选择，官方文档也有提及，谷歌官方也用 Docker 构建了 Puppeteer 的测试运行环境作为 CI/CD 的流程。在社区也找到了有人维护的 Puppeteer 的 Docker 镜像：
 
-> https://github.com/buildkite/docker-puppeteer
+> <https://github.com/buildkite/docker-puppeteer>
 
 由于我们用的是 **node:lts-alpine** 基础镜像，所以根据 [Puppeteer 官方文档](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-on-alpine)安装了相应依赖，但依赖包在国外所以更换了镜像源，这里要注意的是刚开始换的是 HTTP 源，发现安装总是失败，最终换了 HTTPS 源后，安装几秒完成：
 
@@ -58,13 +57,13 @@ RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ustc.edu.cn/g' /
 
 接下来，第二个技术难点在于运行用户提交的测试脚本是有风险的，所以在运行测试脚本代码时必须有沙箱机制保证一定的安全。刚开始发现社区有人使用了 `vm2` 这个 npm 包来解决运行不可信任代码的安全问题，而且恰好也有人用该模块来尝试结合 Docker 在云端运行 puppeteer 测试：
 
-> https://github.com/ebidel/try-puppeteer
+> <https://github.com/ebidel/try-puppeteer>
 
 但最终发现这并非最佳的解决方案，而且在编码上略显复杂，服务端代码与测试运行环境在同一个系统环境下，有安全风险，也耦合严重。所以，为了实现可以将多个版本的测试运行环境隔离，同时降低安全风险，采取将测试运行环境与后端服务拆分，采用 Node Server + Test Runner Server 的技术架构。这样的好处是，如果测试任务较多，可以很方便的横向扩展 Test Runner Server 节点，不同的节点也可以部署不同版本的 Puppeteer，方便后期维护迭代过程中不断升级测试运行环境又不影响已有的测试任务运行。
 
 这个过程中也了解了 Jest 运行测试的底层原理，实际上 Jest 运行测试时为了隔离上下文环境也利用了 Node.js 的核心模块 `vm`。
 
-> https://cpojer.net/posts/building-a-javascript-testing-framework
+> <https://cpojer.net/posts/building-a-javascript-testing-framework>
 
 接下来就是数据传输通信的协议选择，通常我们会用 HTTP(S) 的常规方案，但是经过分析，测试代码用户可能以文件的形式提交，后端服务需要将测试代码保存成文件，后续又需要把测试代码文件发送到 Test Runner Server 运行测试，最终又需要把运行日志发送到后端服务保存成文件，涉及到 `Buffer` 数据的传输，还有可能需要传输实时的日志到客户端（Web UI），看起来选用 WebSocket 是再合适不过了。
 
@@ -72,7 +71,7 @@ RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ustc.edu.cn/g' /
 
 在调研过程中，还发现一篇文章介绍了利用 `puppeteer-cluster` 这个 npm 包来搭建测试集群完成性能任务，对于我来说也很有参考价值。
 
-> https://stackchat.com/blog/puppeteer-cluster-performance-testing
+> <https://stackchat.com/blog/puppeteer-cluster-performance-testing>
 
 ### 技术架构
 
@@ -175,7 +174,7 @@ node --experimental-vm-modules node_modules/.bin/jest
 
 ## 其它参考资源
 
-- https://jestjs.io/
-- https://developers.google.com/web/tools/puppeteer/
-- https://github.com/smooth-code/jest-puppeteer
-- https://en.wikipedia.org/wiki/Cron
+- <https://jestjs.io/>
+- <https://developers.google.com/web/tools/puppeteer/>
+- <https://github.com/smooth-code/jest-puppeteer>
+- <https://en.wikipedia.org/wiki/Cron>

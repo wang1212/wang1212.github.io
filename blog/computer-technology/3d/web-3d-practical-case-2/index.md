@@ -15,7 +15,6 @@ keywords: *ref_0
 description: 这篇文章是基于 3D 地球组件的开发实践，记录了将 3D 空间中的物体投影到 2D 平面中时如何换算像素尺寸的解决方案。
 ---
 
-> _最后更新于 2022-12-20 00:09:00_
 
 这次是基于中秋节活动时开发 3D 月球组件的经验来开发 3D 地球组件，相比于上一次，这一次很多技术难点都有了现成的解决方案，可以说开发成本降低了三分之二之多，而这些额外的开发成本则花费在隐藏在需求细节中的技术难点。这篇文章主要用来记录开发过程中遇到的一个比较有意义的技术难点，即 3D 空间中的物体投影到 2D 平面中时如何换算像素尺寸，在探索解决该难点的过程中，对 3D 与 2D 空间之间的关系有了一个更深刻的认识。
 
@@ -113,10 +112,10 @@ rectPixelH = (radius / (2 * tan(fov / 2) * d)) * canvas.clientHeight
 
 ## 参考资料
 
-- https://threejs.org/manual/#en/cameras
-- https://en.wikipedia.org/wiki/3D_projection#Perspective_projection
-- https://en.wikipedia.org/wiki/Orthographic_projection
-- https://people.computing.clemson.edu/~dhouse/courses/405/notes/projections.pdf
-- https://discourse.threejs.org/t/functions-to-calculate-the-visible-width-height-at-a-given-z-depth-from-a-perspective-camera/269/18
-- https://gist.github.com/ayamflow/462190f13eeef04f01cb
-- https://stackoverflow.com/questions/13350875/three-js-width-of-view/13351534#13351534
+- <https://threejs.org/manual/#en/cameras>
+- <https://en.wikipedia.org/wiki/3D_projection#Perspective_projection>
+- <https://en.wikipedia.org/wiki/Orthographic_projection>
+- <https://people.computing.clemson.edu/~dhouse/courses/405/notes/projections.pdf>
+- <https://discourse.threejs.org/t/functions-to-calculate-the-visible-width-height-at-a-given-z-depth-from-a-perspective-camera/269/18>
+- <https://gist.github.com/ayamflow/462190f13eeef04f01cb>
+- <https://stackoverflow.com/questions/13350875/three-js-width-of-view/13351534#13351534>

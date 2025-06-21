@@ -15,7 +15,6 @@ keywords: *ref_0
 description: 在 Java Web 开发过程中，监听器、过滤器、Servlet 这三大内容是很重要的组件，也是实现很多功能的根本所在。
 ---
 
-> _最后更新于 2017-08-31 11:52:00_
 
 在 Java Web 开发过程中，监听器、过滤器、Servlet 这三大内容是很重要的组件，也是实现很多功能的根本所在。
 
@@ -61,18 +60,18 @@ Web 监听器（Listener）是由 Servlet 规范提供一种特殊类，用于�
     @WebListener  // 此处使用了注解注册该监听器
     public class AppListener implements ServletContextListener {
 
-    	@Override  // 销毁方法
-    	public void contextDestroyed(ServletContextEvent arg0) { }
+     @Override  // 销毁方法
+     public void contextDestroyed(ServletContextEvent arg0) { }
 
-    	@Override  // 初始化方法
-    	public void contextInitialized(ServletContextEvent arg0) { }
+     @Override  // 初始化方法
+     public void contextInitialized(ServletContextEvent arg0) { }
     }
 
 ---
 
     <!-- 也可以在 web.xml 文件中注册该监听器 -->
     <listener>
-    	<listener-class>listener.AppListener</listener-class>
+     <listener-class>listener.AppListener</listener-class>
     </listener>
 
 由上面的 AppListener 监听器类可以看出，实现了 ServletContextListener 接口中 `Initialized` 和 `Destroyed` 方法，分别在 application 创建也就是应用启动时执行和在应用关闭时执行。HttpSessionListener 和 ServletRequestListener 监听器接口中同样也规定了这两个方法。
@@ -121,33 +120,33 @@ Request 类型的过滤器将在用户直接访问页面或者发生请求重定
 
     // 使用注解注册
     @WebFilter(filterName="firstFilter", urlPatterns={"/servlet/GetAndPost"},
-    		dispatcherTypes={DispatcherType.REQUEST})
+      dispatcherTypes={DispatcherType.REQUEST})
     public class firstFilter implements Filter {
 
-    	@Override  // 销毁方法
-    	public void destroy() { }
+     @Override  // 销毁方法
+     public void destroy() { }
 
-    	@Override  // 过滤方法
-    	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2) {
-    		// 放行（必须）
-    		arg2.doFilter(arg0, arg1);
-    	}
+     @Override  // 过滤方法
+     public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2) {
+      // 放行（必须）
+      arg2.doFilter(arg0, arg1);
+     }
 
-    	@Override  // 初始化方法
-    	public void init(FilterConfig arg0) { }
+     @Override  // 初始化方法
+     public void init(FilterConfig arg0) { }
     }
 
 ---
 
     <!-- 也可以在 web.xml 文件中注册该过滤器 -->
     <filter>
-    	<filter-name>firstFilter</filter-name>
-    	<filter-class>filter.firstFilter</filter-class>
+     <filter-name>firstFilter</filter-name>
+     <filter-class>filter.firstFilter</filter-class>
     </filter>
     <filter-mapping>
-    	<filter-name>firstFilter</filter-name>
-    	<url-pattern>/servlet/GetAndPost</url-pattern>
-    	<dispatcher>REQUEST</dispatcher>
+     <filter-name>firstFilter</filter-name>
+     <url-pattern>/servlet/GetAndPost</url-pattern>
+     <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
 一个过滤器是可以映射多个路径的，只需在注解中多配置几个 `urlPatterns` 数组的元素或者在 web.xml 中多添加几组 `filter-mapping` 标签即可。
@@ -162,16 +161,16 @@ Request 类型的过滤器将在用户直接访问页面或者发生请求重定
 
     // 第一个 doFilter
     public void doFilter(request, response, chain) {
-    	... // 执行顺序：1
-    	chain.doFilter(request, response);
-    	... // 执行顺序：4
+     ... // 执行顺序：1
+     chain.doFilter(request, response);
+     ... // 执行顺序：4
     }
 
     // 第二个 doFilter
     public void doFilter(request, response, chain) {
-    	... // 执行顺序：2
-    	chain.doFilter(request, response);
-    	... // 执行顺序：3
+     ... // 执行顺序：2
+     chain.doFilter(request, response);
+     ... // 执行顺序：3
     }
 
 ## Servlet
@@ -196,36 +195,36 @@ Servlet 是在服务器上运行的小程序，并且可以通过“请求-响�
 
     // 使用注解注册
     @WebServlet(name="ServletLife", loadOnStartup=1, urlPatterns={"/servlet/ServletLife"},
-    			initParams={
-    	@WebInitParam(name="username",value="MrWang"),
-    	@WebInitParam(name="password",value="1314")
+       initParams={
+     @WebInitParam(name="username",value="MrWang"),
+     @WebInitParam(name="password",value="1314")
     })
     public class ServletLife extends HttpServlet {
 
-    	@Override  // 初始化方法
-    	public void init() { }
+     @Override  // 初始化方法
+     public void init() { }
 
-    	@Override  // 销毁方法
-    	public void destroy() { }
+     @Override  // 销毁方法
+     public void destroy() { }
 
-    	@Override
-    	protected void doGet(request, response) { }
+     @Override
+     protected void doGet(request, response) { }
 
-    	@Override
-    	protected void doPost(request, response) { }
+     @Override
+     protected void doPost(request, response) { }
     }
 
 ---
 
     <!-- 也可以在 web.xml 文件中注册该 Servlet -->
     <servlet>
-    	<servlet-name>ServletLife</servlet-name>
-    	<servlet-class>servlet.ServletLife</servlet-class>
-    	<load-on-startup>1</load-on-startup>
+     <servlet-name>ServletLife</servlet-name>
+     <servlet-class>servlet.ServletLife</servlet-class>
+     <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-    	<servlet-name>ServletLife</servlet-name>
-    	<url-pattern>/servlet/GetAndPost</url-pattern>
+     <servlet-name>ServletLife</servlet-name>
+     <url-pattern>/servlet/GetAndPost</url-pattern>
     </servlet-mapping>
 
 `doGet()` 与 `doPost()` 方法由 service 方法自动调用，具体调用哪个取决于用户提交请求的方式。`load-on-startup` 标签或者注解中的 `loadOnStartup` 属性可以设置 Servlet 在应用启动时就加载，数字越小代表优先级越高。

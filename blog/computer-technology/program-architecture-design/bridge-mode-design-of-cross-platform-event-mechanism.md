@@ -10,7 +10,6 @@ keywords: *ref_0
 description: 最近在做图表组件库的技术调研的架构方案设计，参考了很多开源库的源码，发现其中跨平台的事件机制设计很值得学习，如果要用软件设计模式来解释，那大概就是桥接模式了。
 ---
 
-> _最后更新于 2022-06-12 22:22:00_
 
 对于 Web 的图表组件库来说，一些功能比较强大的开源库，渲染层可以支持 DOM、SVG、Canvas、WebGL 等多个平台的环境，而图表库的很多功能的实现都和渲染层紧密相关。
 
@@ -124,5 +123,5 @@ class Chart {
 
 ## 参考
 
-- https://en.wikipedia.org/wiki/Bridge_pattern
-- https://refactoringguru.cn/design-patterns/bridge
+- <https://en.wikipedia.org/wiki/Bridge_pattern>
+- <https://refactoringguru.cn/design-patterns/bridge>

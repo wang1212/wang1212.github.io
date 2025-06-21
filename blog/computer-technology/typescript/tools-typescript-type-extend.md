@@ -13,7 +13,6 @@ keywords: *ref_0
 description: TypeScript 作为 JavaScript 的超集，为 Web 开发带来了强类型语言和类似代码智能提示这种良好的开发体验，如何对第三方依赖库的类型定义进行扩展呢？
 ---
 
-> _最后更新于 2022-01-09 17:36:00_
 
 TypeScript 作为 JavaScript 的超集，为 Web 开发带来了强类型语言和类似代码智能提示这种良好的开发体验，而代码提示依赖于类型定义文件。类型定义文件的发展也经历了一个逐步演变的过程，从最初基于 JavaScript 编写的 npm 包，通过[社区方案](https://github.com/DefinitelyTyped/DefinitelyTyped)来引入类型定义包，再到目前多数模块基于 TypeScript 编写并在发布时带上类型定义文件这种最佳方案，开发者体验得到进一步的提升。
 
@@ -42,6 +41,6 @@ declare module 'koa' {
 
 ## 参考资源
 
-- https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation
-- https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html#testing-your-types
-- https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-plugin-d-ts.html
+- <https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation>
+- <https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-d-ts.html#testing-your-types>
+- <https://www.typescriptlang.org/docs/handbook/declaration-files/templates/module-plugin-d-ts.html>

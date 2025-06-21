@@ -14,7 +14,6 @@ keywords: *ref_0
 description: 现在，Web 技术不仅仅是局限于页面的开发技术，在应用的开发方面也是一种潮流，B/S 架构的技术是一种趋势。而像一般的管理型 Web 应用，不注重 SEO，非常适合单页面应用（SPA）的实现方式，而路由功能则是单页面应用的核心技术。
 ---
 
-> _最后更新于 2017-10-25 21:56:00_
 
 现在，Web 技术不仅仅是局限于页面的开发技术，在应用的开发方面也是一种潮流，B/S 架构的技术是一种趋势。而像一般的管理型 Web 应用，不注重 SEO，非常适合单页面应用（SPA）的实现方式，而路由功能则是单页面应用的核心技术。
 
@@ -46,21 +45,21 @@ description: 现在，Web 技术不仅仅是局限于页面的开发技术，在
 // 引入 Router.js 后
 /*  路由注册（过滤）  */
 !function(){
-	// 根过滤
-	router('/*', function(content){
-		...
-	});
+ // 根过滤
+ router('/*', function(content){
+  ...
+ });
 }();
 
 /*  路由注册（业务）  */
 !function(){
-	// 首页
-	router('/index', function(content){
-		...
-	});
+ // 首页
+ router('/index', function(content){
+  ...
+ });
 
-	// 默认加载首页
-	switch_routing('/index');
+ // 默认加载首页
+ switch_routing('/index');
 }();
 ```
 
@@ -102,29 +101,29 @@ if (!Array.prototype.filter) {
 }
 
 /*
-	路由自动加载内容（单页面）
+ 路由自动加载内容（单页面）
 
-		---content : 将页面容器标签的 id 设置为 content
+  ---content : 将页面容器标签的 id 设置为 content
 
-		---使用方法
+  ---使用方法
 
-			router(url, function(content){ }) : 注册对应 url 需要执行的回调方法，content 参数为页面中 ID 为 content 的元素，可重复注册
+   router(url, function(content){ }) : 注册对应 url 需要执行的回调方法，content 参数为页面中 ID 为 content 的元素，可重复注册
 
-			-- url
+   -- url
 
-				单个模糊匹配 : "/*"  (可作为过滤器使用，回调执行顺序优先级 : 模糊匹配 > 精确匹配)
+    单个模糊匹配 : "/*"  (可作为过滤器使用，回调执行顺序优先级 : 模糊匹配 > 精确匹配)
 
-				单个精确匹配 : "/index"
+    单个精确匹配 : "/index"
 
-				多个混合匹配 : ["/*", "/index"]
+    多个混合匹配 : ["/*", "/index"]
 
-		---工具方法
+  ---工具方法
 
-			switch_routing(url, callback) : 手动切换 url 并执行回调
+   switch_routing(url, callback) : 手动切换 url 并执行回调
 
-			get_hash_url() : 获取当前的 hash_url
+   get_hash_url() : 获取当前的 hash_url
 
-			get_url_array(url) : 获取当前 hash_url 或者传入参数的 url 数组，例如 "/index/index1/index2/index3" => ["index", "index1", "index2", "index3"]
+   get_url_array(url) : 获取当前 hash_url 或者传入参数的 url 数组，例如 "/index/index1/index2/index3" => ["index", "index1", "index2", "index3"]
 
  */
 !(function (window) {

@@ -13,7 +13,6 @@ keywords: *ref_0
 description: JSP 全称为 Java Server Page，即 Java 服务器页面，基于简化的 Servlet 设计，是一种建立动态网页的技术标准。JSP 有九个内置对象，可以不加声明和创建就可以在 JSP 页面脚本中直接使用，同时还提供了动作与指令元素，为开发提供了极大地便利。
 ---
 
-> _最后更新于 2017-08-11 11:07:00_
 
 JSP 全称为 Java Server Page，即 Java 服务器页面，基于简化的 Servlet 设计，是一种建立动态网页的技术标准。JSP 有九个内置对象，可以不加声明和创建就可以在 JSP 页面脚本中直接使用，同时还提供了动作与指令元素，为开发提供了极大地便利。
 
@@ -284,7 +283,7 @@ forward 动作用来将请求转发到另一个页面，其本质为请求转发
 param 动作元素是用来传递属性的，常作为 forward 动作元素的子元素存在。示例如下：
 
     <jsp:forward page="相对URL">
-    	<jsp:param value="属性值" name="属性名" />
+     <jsp:param value="属性值" name="属性名" />
     </jsp:forward>
 
 传递的参数值可以使用 `request.getParameter(name)` 获取，也可以覆盖掉已有参数的值。

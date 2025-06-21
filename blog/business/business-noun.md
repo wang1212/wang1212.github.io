@@ -10,7 +10,6 @@ keywords: *ref_0
 description: 互联网时代创造了诸多名词，而这些与商业活动紧密相关，了解一下还是挺有趣的。
 ---
 
-> _最后更新于 2022-03-27 01:04:00_
 
 互联网时代是个新概念频出的时代，每年有相当多的新名词诞生，而诸多与商业活动紧密相关的词汇了解一下有助于我们熟悉日常工作中接触的东西。
 
@@ -214,7 +213,7 @@ description: 互联网时代创造了诸多名词，而这些与商业活动紧�
 
 ## 参考
 
-- http://www.woshipm.com/zhichang/1743064.html
-- https://wenku.baidu.com/view/4ebe697dce7931b765ce0508763231126fdb7762.html
-- https://wenku.baidu.com/view/6df81e405727a5e9846a6136.html
-- https://www.sohu.com/a/409413815_116126
+- <http://www.woshipm.com/zhichang/1743064.html>
+- <https://wenku.baidu.com/view/4ebe697dce7931b765ce0508763231126fdb7762.html>
+- <https://wenku.baidu.com/view/6df81e405727a5e9846a6136.html>
+- <https://www.sohu.com/a/409413815_116126>

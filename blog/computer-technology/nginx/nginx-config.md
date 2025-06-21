@@ -14,13 +14,12 @@ description:
   nginx 也支持 Windows 环境了，利用不同的配置可以满足我们不同的需求。
 ---
 
-> _最后更新于 2020-12-02 01:19:00_
 
 **<u>建议主要参考官网英文文档。</u>**
 
 具体指令直接可以在官网文档的 Alphabetical index of directives（按字母顺序排列的指令索引）中搜索即可。
 
-> 官方文档：http://nginx.org/en/docs/
+> 官方文档：<http://nginx.org/en/docs/>
 
 <!-- truncate -->
 
@@ -225,7 +224,7 @@ location /test/ {
 
 ```nginx
 location /static/ {
-    autoindex on;				# 开启客户端文件列表浏览
+    autoindex on;    # 开启客户端文件列表浏览
     autoindex_exact_size off;   # 默认显示的文件确切大小，单位 b，关闭后自动计算 KB/MB/GB 等
     autoindex_localtime on;     # 文件的改动时间以服务器时间为准
 }

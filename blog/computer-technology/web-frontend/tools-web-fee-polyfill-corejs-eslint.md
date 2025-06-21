@@ -12,7 +12,6 @@ keywords: *ref_0
 description: Web 网页为了保证在多个平台和低中高端设备上的体验稳定性和一致性，通常会做 Polyfill 以保证兼容性，当下社区的主流方案则是基于 core-js，而 ESLint 则可作为自动检测的辅助工具。
 ---
 
-> _最后更新于 2021-12-08 21:12:00_
 
 Web 网页为了保证在多个平台和低中高端设备上的体验稳定性和一致性，通常会做 Polyfill 以保证兼容性。
 
@@ -116,12 +115,12 @@ import 'regenerator-runtime/runtime';
 
 ## 参考资源
 
-- https://github.com/zloirock/core-js
-- https://developer.mozilla.org/
-- https://caniuse.com/
-- https://github.com/browserslist/browserslist
-- https://browserslist.dev/
-- https://eslint.org/
-- https://github.com/amilajack/eslint-plugin-compat
-- https://babeljs.io/
-- https://babeljs.io/docs/en/babel-polyfill/
+- <https://github.com/zloirock/core-js>
+- <https://developer.mozilla.org/>
+- <https://caniuse.com/>
+- <https://github.com/browserslist/browserslist>
+- <https://browserslist.dev/>
+- <https://eslint.org/>
+- <https://github.com/amilajack/eslint-plugin-compat>
+- <https://babeljs.io/>
+- <https://babeljs.io/docs/en/babel-polyfill/>

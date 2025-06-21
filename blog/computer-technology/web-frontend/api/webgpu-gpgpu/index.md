@@ -13,7 +13,6 @@ keywords: *ref_0
 description: 随着 Chrome v113 的发布，WebGPU API 已正式可用，预计其它平台也将很快发布正式支持，WebGPU 为 Web 平台现代 3D 图形化开发提供了一流的支持，不过相比于在 3D 图形开发领域的发展，其还有一个更值得关注的目标，即为 Web 平台带来通用计算 API 的一流支持。
 ---
 
-> _最后更新于 2023-05-14 15:42:00_
 
 随着 Chrome v113 的发布，WebGPU API 已正式可用，预计其它平台也将很快发布正式支持，WebGPU 为 Web 平台现代 3D 图形开发提供了一流的支持，不过相比于在 3D 图形开发领域的发展，其还有一个更值得关注的目标，即为 Web 平台带来通用计算 API 的一流支持。
 
@@ -159,21 +158,21 @@ fn main(
 
 ## 参考资料
 
-- https://developer.chrome.com/blog/new-in-chrome-113
-- https://en.wikipedia.org/wiki/WebGL
-- https://www.khronos.org/webgl/
-- https://en.wikipedia.org/wiki/WebGPU
-- https://www.w3.org/TR/webgpu/
-- https://en.wikipedia.org/wiki/OpenGL_ES
-- https://en.wikipedia.org/wiki/WebGL
-- https://blog.devgenius.io/will-webgpu-be-the-webgl-killer-60a49509b806
-- https://forum.babylonjs.com/t/i-have-an-important-question-about-webgpu/36896
-- https://webgpufundamentals.org/webgpu/lessons/webgpu-from-webgl.html
-- https://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units
-- https://turbo.js.org/
-- https://gpu.rocks/
-- https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API#basic_compute_pipeline
-- https://developer.chrome.com/blog/webgpu-io2023/
-- https://en.wikipedia.org/wiki/Single_instruction,_multiple_data
-- https://v8.dev/features/simd
-- https://codelabs.developers.google.com/your-first-webgpu-app
+- <https://developer.chrome.com/blog/new-in-chrome-113>
+- <https://en.wikipedia.org/wiki/WebGL>
+- <https://www.khronos.org/webgl/>
+- <https://en.wikipedia.org/wiki/WebGPU>
+- <https://www.w3.org/TR/webgpu/>
+- <https://en.wikipedia.org/wiki/OpenGL_ES>
+- <https://en.wikipedia.org/wiki/WebGL>
+- <https://blog.devgenius.io/will-webgpu-be-the-webgl-killer-60a49509b806>
+- <https://forum.babylonjs.com/t/i-have-an-important-question-about-webgpu/36896>
+- <https://webgpufundamentals.org/webgpu/lessons/webgpu-from-webgl.html>
+- <https://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units>
+- <https://turbo.js.org/>
+- <https://gpu.rocks/>
+- <https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API#basic_compute_pipeline>
+- <https://developer.chrome.com/blog/webgpu-io2023/>
+- <https://en.wikipedia.org/wiki/Single_instruction,_multiple_data>
+- <https://v8.dev/features/simd>
+- <https://codelabs.developers.google.com/your-first-webgpu-app>

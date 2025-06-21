@@ -11,7 +11,6 @@ keywords: *ref_0
 description: GIS，地理信息系统（Geographic Information System），它是一种特定的十分重要的空间信息系统，坐标系统是 GIS 理论知识中最基本的而且最关键的一点。
 ---
 
-> _最后更新于 2019-07-12 03:20:00_
 
 GIS，地理信息系统（Geographic Information System），它是一种特定的十分重要的空间信息系统，坐标系统是 GIS 理论知识中最基本的而且最关键的一点。
 
@@ -35,7 +34,7 @@ GIS 开发是当前一个前景很好的行业，尤其是 Web GIS 处于一个�
 
 目前已有的椭球体，投影坐标系等不同组合都对应着不同的 ID 号，这个号在 EPSG 中被称为 EPSG code，它代表特定的椭球体、单位、地理坐标系或投影坐标系等信息。例如，`EPSG:4326` 代表地理坐标系 WGS-84。
 
-> **epsg.io**：http://epsg.io/ <br /> > **Spatial Reference**：https://spatialreference.org/
+> **epsg.io**：<http://epsg.io/> <br /> > **Spatial Reference**：<https://spatialreference.org/>
 
 **WKT**，即 Well Known Text，是对相应空间参考系的文字性描述（定义），例如 `EPSG:4326` 的 WKT 为：
 

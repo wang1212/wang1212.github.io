@@ -14,7 +14,6 @@ keywords: *ref_0
 description: Sumblime Text 是一个具有漂亮的界面和强大功能的文本编辑器，而且也支持许多丰富的插件。它是一个收费软件，但是允许开发人员无限期的免费试用。
 ---
 
-> _最后更新于 2016-05-18 12:55:00_
 
 Sumblime Text 是一个具有漂亮的界面和强大功能的文本编辑器，而且也支持许多丰富的插件。它是一个收费软件，但是允许开发人员无限期的免费试用。
 
@@ -30,7 +29,7 @@ Vim 插件在目前的新版本中都是默认没有安装的，但是有了 Vim
 
 首先，我们要安装好 Sublime Text 3 和 Package Control 插件。
 
-> **Sublime Text：**http://www.sublimetext.com/ <br /> > **Package Control：**https://packagecontrol.io/installation
+> **Sublime Text：**<http://www.sublimetext.com/> <br /> > **Package Control：**<https://packagecontrol.io/installation>
 
 然后，我们安装 Vim 插件，这里有两种方法：在线安装和本地安装。
 
@@ -42,7 +41,7 @@ Vim 插件在目前的新版本中都是默认没有安装的，但是有了 Vim
 
 先下载 Vim 插件文件：
 
-> **Vintageous：**https://packagecontrol.io/packages/Vintageous
+> **Vintageous：**<https://packagecontrol.io/packages/Vintageous>
 
 打开 Sublime Text 3，在菜单中选择 **Preferences->Browse Packages**，将下载好的 Vim 插件文件夹拷进打开的文件夹，关闭文件夹。
 

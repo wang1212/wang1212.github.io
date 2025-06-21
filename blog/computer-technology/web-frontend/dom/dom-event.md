@@ -13,7 +13,6 @@ keywords: *ref_0
 description: JavaScript 的作用就是让 html 静态页面具备动态效果，而这些基本都是利用 DOM 事件来实现的。
 ---
 
-> _最后更新于 2016-05-23 12:18:00_
 
 JavaScript 的作用就是让 html 静态页面具备动态效果，而这些基本都是利用 DOM 事件来实现的。
 

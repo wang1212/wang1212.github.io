@@ -13,7 +13,6 @@ keywords: *ref_0
 description: 当从文档树中选取成组的节点或者使用预定义的节点集合时，这些节点都是放在 NodeList 或者一个 HTMLCollecton 之中，而不是一个数组（Array）中。
 ---
 
-> _最后更新于 2016-05-17 22:30:00_
 
 当从文档树中选取成组的节点或者使用预定义的节点集合时，这些节点都是放在 NodeList 或者一个 HTMLCollecton 之中，而不是一个数组（Array）中。
 

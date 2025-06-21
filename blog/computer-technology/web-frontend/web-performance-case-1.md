@@ -13,7 +13,6 @@ keywords: *ref_0
 description: Web 性能相关的概念很多，但如何落地在真实业务场景中，其实是一个比较难的事情，或者说机会鲜有，在这里记录一下真实业务案例做性能优化的过程。
 ---
 
-> _最后更新于 2022-03-06 23:28:00_
 
 能在真实业务场景中落地 Web 性能优化方案的机会鲜有，大多数时候业务是较为简单而且要求不高的，前段时间恰好有一个比较核心的业务，对稳定性和性能有一定的要求，在这个过程中也算是做了很多尝试和实践，在此作为案例记录一下分析的过程和最终解决的方案。
 
@@ -74,7 +73,7 @@ description: Web 性能相关的概念很多，但如何落地在真实业务场
 
 对于吸顶效果，在目前移动设备已足够先进的情况下，其实老旧机型兼容问题倒不是最大的问题，所以 CSS 能解决当然是最好的。首先 CSS 属性 [`position:sticky`](https://developer.mozilla.org/en-US/docs/Web/CSS/position) 则可以很方便的实现滚动吸顶效果，经过尝试在主流设备上确实效果不错。作为一个覆盖了数十万用户的 C 端业务，有必要保证一定的兼容性，结果发现在 IOS 和一些比较老的安卓机型会出现问题，而社区并没有提供一个很好的 Polyfill 方案，所以只能换个思路，用 JS 来实现。
 
-> https://caniuse.com/?search=sticky
+> <https://caniuse.com/?search=sticky>
 
 JS 实现滚动吸顶效果最简单的方式就是监听 `scroll` 事件，更改 `position: fixed; top: 0px;` 或者 `position: relative; top: npx;` 或者 `transform: translateY(npx);`，经过实践，第一种吸顶后滚动容器高度会塌陷，后两者则不会；但是，后两者这种方式在滚动过程中会很明显的发现有抖动现象，也就是说在滚动过程中不断的计算 `Y` 值然后更改，在视觉上给人一种很不稳定的感觉，体验并不好，而第一种的话可以给要吸顶的元素增加一个固定高度的父元素，保证吸顶后滚动容器高度不会塌陷。实现方式类似以下 DOM 结构：
 
@@ -112,7 +111,7 @@ JS 实现滚动吸顶效果最简单的方式就是监听 `scroll` 事件，更�
 
 经过简单的验证后，发现此方案行不通。首先，因为页面要调用客户端协议实现下拉刷新交互，发现页面容器固定高度为 100%，设置 `overflow: scroll;` 样式后下拉刷新的交互手势事件监听会出问题，客户端还不好解决；其次，整个页面作为虚拟列表，要把页面每个元素都作为列表项进行处理，反而还把问题变得复杂化了。于是，放弃此方案，寻找一种不固定滚动容器高度的虚拟列表方案。恰巧，发现 `react-virtualized` 有一个示例刚好符合这种场景：
 
-> https://bvaughn.github.io/react-virtualized/#/components/WindowScroller
+> <https://bvaughn.github.io/react-virtualized/#/components/WindowScroller>
 
 基于此，也快速做了验证，效果还不错，但是马上就要面临下一个问题，在这种场景下怎么做到列冻结的效果？似乎又陷入了一个僵局。这个时候，去看了一下该示例的源码，想探究一下实现的机制，发现主要还是依赖于监听 `scroll` 事件。
 
@@ -178,7 +177,7 @@ JS 实现滚动吸顶效果最简单的方式就是监听 `scroll` 事件，更�
 
 接下来就是在优化后的长列表中如何实现列冻结效果，上面提到的 `react-virtualized` 虚拟列表组件恰好也有一个相关的示例：
 
-> https://bvaughn.github.io/react-virtualized/#/components/MultiGrid
+> <https://bvaughn.github.io/react-virtualized/#/components/MultiGrid>
 
 该组件官方示例也没有提供将非固定高度滚动容器和行列冻结效果相结合的用例，可见这并不是一个容易实现的效果。在粗略的看了一下该示例的源码和实现机制后，也略微有了一点思路，然后在网上查找了一下实现行列冻结效果的案例，基本上较为容易实现和处理且效果最好的就是双层叠加方案。以 DOM 结构说明：
 
@@ -370,8 +369,8 @@ JS 实现滚动吸顶效果最简单的方式就是监听 `scroll` 事件，更�
 
 ## 参考资源
 
-- https://developer.mozilla.org/en-US/docs/Web/Performance
-- https://developers.google.com/web/fundamentals
-- https://web.dev/user-centric-performance-metrics/
-- https://developer.mozilla.org/en-US/
-- https://caniuse.com/
+- <https://developer.mozilla.org/en-US/docs/Web/Performance>
+- <https://developers.google.com/web/fundamentals>
+- <https://web.dev/user-centric-performance-metrics/>
+- <https://developer.mozilla.org/en-US/>
+- <https://caniuse.com/>

@@ -12,7 +12,6 @@ keywords: *ref_0
 description: 由于使用了第三方 Web 字体，产生了一个潜在的线上问题，苦于调试过程中一直没有考虑字体加载会对页面产生一定影响，浪费了大量时间和精力。
 ---
 
-> _最后更新于 2023-12-16 21:32:00_
 
 通常，在 Web UI 设计过程中会用到定制字体，页面开发过程中会使用 CSS 引用（[@font-face](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face)）该字体资源，不过**由于字体资源较大，通常会对页面性能造成一些不利影响。**
 

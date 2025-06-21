@@ -14,7 +14,6 @@ keywords: *ref_0
 description: 利用一款插件来同步 VS Code 的配置到 GitHub 的 gist 上，实现多个设备间共享一套配置。
 ---
 
-> _最后更新于 2018-08-15 16:42:00_
 
 利用一款插件来同步 VS Code 的配置到 GitHub 的 gist 上，实现多个设备间共享一套配置。
 

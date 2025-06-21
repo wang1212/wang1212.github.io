@@ -11,7 +11,6 @@ keywords: *ref_0
 description: 编程语言为开发者提供了诸多便利，那么它是如何被发明的，不同的语言设计理念有什么不同呢？
 ---
 
-> _最后更新于 2021-06-18 01:48:00_
 
 编程语言本质上是给开发者使用的工具，不同的业务领域使用不同的编程语言去实现具体的业务，是基于语言本身的设计理念与实现方式来做选择，那么作为开发者应该了解一下编程语言是如何被发明的，且其设计理念是什么。
 
@@ -148,10 +147,10 @@ CISC 是与 RISC 相对的一个词汇，是 Complex Instruction Set Computer（
 ## 参考
 
 - 《松本行弘：编程语言的设计与实现》，[日] 松本行弘，郑明智 译
-- https://en.wikipedia.org/wiki/Compiler
-- https://en.wikipedia.org/wiki/Ahead-of-time_compilation
-- https://en.wikipedia.org/wiki/Just-in-time_compilation
-- https://en.wikipedia.org/wiki/Abstract_syntax_tree
-- https://en.wikipedia.org/wiki/Library_(computing)
-- https://en.wikipedia.org/wiki/Runtime_system
-- https://en.wikipedia.org/wiki/Virtual_machine
+- <https://en.wikipedia.org/wiki/Compiler>
+- <https://en.wikipedia.org/wiki/Ahead-of-time_compilation>
+- <https://en.wikipedia.org/wiki/Just-in-time_compilation>
+- <https://en.wikipedia.org/wiki/Abstract_syntax_tree>
+- <https://en.wikipedia.org/wiki/Library_(computing)>
+- <https://en.wikipedia.org/wiki/Runtime_system>
+- <https://en.wikipedia.org/wiki/Virtual_machine>

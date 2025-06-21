@@ -11,7 +11,6 @@ keywords: *ref_0
 description: Git 是一个分布式的版本控制工具，类似的版本控制工具还有 SVN ；由于 GitHub 平台的盛行，也使得 git 更加受欢迎，在 Windows 平台使用 git 也是非常方便的。
 ---
 
-> _最后更新于 2022-05-03 17:03:00_
 
 Git 是一个分布式的版本控制工具，类似的版本控制工具还有 SVN ；由于 GitHub 平台的盛行，也使得 git 更加受欢迎，在 Windows 平台使用 git 也是非常方便的。
 
@@ -23,7 +22,7 @@ Git 是一个非常强大的版本控制工具，所谓的版本控制即就是�
 
 Git 源于 Linux ，但不仅仅限于 Linux 平台下的使用， Git for Windows 就是最好的选择：
 
-> **Git for Windows：**https://git-scm.com/
+> **Git for Windows：**<https://git-scm.com/>
 
 该网站的文档页面提供了很多有用的资源，例如 [Git 相关的书《Pro Git》](https://git-scm.com/book/)、[常用 Git 命令备忘单](https://training.github.com/)、[Git 命令可视化备忘单](https://ndpsoftware.com/git-cheatsheet.html)等等有用的免费资源。
 
@@ -56,7 +55,7 @@ git config --global -l
 
 安装 SSH 密钥可以在我们进行项目提交时避免重复输入用户名密码，也更安全。可以直接查看 GitHub 官方文档：
 
-> **Help：**https://help.github.com/articles/generating-an-ssh-key/
+> **Help：**<https://help.github.com/articles/generating-an-ssh-key/>
 
 检查是否已有 SSH 密钥文件：
 

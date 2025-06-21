@@ -16,7 +16,6 @@ keywords: *ref_0
 description: ECharts 的 UniversalTransition 动画提供了一些复杂场景下过渡动画的解决方案，这类场景的难点在于让不规则图形或者不同形状的图形之间如何完成一个比较流畅的过渡动画，在业内比较熟知的类似技术则是 SVG Morph 动画。
 ---
 
-> _最后更新于 2023-11-11 21:56:00_
 
 ECharts 的 [UniversalTransition 动画](https://echarts.apache.org/zh/option.html#series-line.universalTransition)提供了一些复杂场景下过渡动画的解决方案，这类场景的难点在于让**不规则图形**或者**不同形状的图形**之间如何完成一个比较流畅的过渡动画，在业内比较熟知的类似技术则是 SVG Morph 动画。
 

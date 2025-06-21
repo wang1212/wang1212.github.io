@@ -13,7 +13,6 @@ keywords: *ref_0
 description: 为了用户的安全，浏览器通常都会限制跨域（Cross-domain）访问，也就是默认不允许不同域名下页面之间进行资源的传递和信息交互，但很多时候我们又有跨域请求资源的需求。
 ---
 
-> _最后更新于 2016-08-10 15:18:00_
 
 为了用户的安全，浏览器通常都会限制跨域（Cross-domain）访问，也就是默认不允许不同域名下页面之间进行资源的传递和信息交互，但很多时候我们又有跨域请求资源的需求。
 
@@ -48,24 +47,24 @@ json 是一种很简单的数据格式，鉴于它的简单性以及 script 标�
 #### 客户端代码
 
     <script>
-    	// 在全局创建一个回调函数（result 参数为跨域访问到的资源）
-    	function callback(result){
-    		...
-    		// 在这里处理跨域访问到的资源（也可以保存在全局变量中）
-    		...
-    		// 最后销毁全局的回调函数
-    		window.callback = null;
-    		// 移除动态创建的 script
-    		document.body.removeChild(document.getElementById('nScript'));
-    	}
-    	// 自执行，避免污染全局空间
-    	(function(){
-    		// 动态创建 script 插入DOM树，实现跨域访问资源
-    		var nScript = document.createElement('script');
-    		nScript.id = "nScript";
-    		nScript.src = "http://www.163.com/info.php?call=callback";
-    		document.body.appendChild(nScript);
-    	})(window);
+     // 在全局创建一个回调函数（result 参数为跨域访问到的资源）
+     function callback(result){
+      ...
+      // 在这里处理跨域访问到的资源（也可以保存在全局变量中）
+      ...
+      // 最后销毁全局的回调函数
+      window.callback = null;
+      // 移除动态创建的 script
+      document.body.removeChild(document.getElementById('nScript'));
+     }
+     // 自执行，避免污染全局空间
+     (function(){
+      // 动态创建 script 插入DOM树，实现跨域访问资源
+      var nScript = document.createElement('script');
+      nScript.id = "nScript";
+      nScript.src = "http://www.163.com/info.php?call=callback";
+      document.body.appendChild(nScript);
+     })(window);
     </script>
 
 **注意这个回调函数必须在全局空间内，否则无法被新创建的 `<script>` 标签调用，该回调函数是在新创建的 script 标签的 `src` 属性值中以参数方式发送给服务器端的。**该函数执行完毕后，我们也可以自己销毁它，避免污染全局空间；当然，如果我们给动态创建的 script 标签指定一个 id 的话，我们也可以移除该 `script` 元素。
@@ -73,13 +72,13 @@ json 是一种很简单的数据格式，鉴于它的简单性以及 script 标�
 #### 服务器端代码
 
     <?php
-    	header('Content-type: application/json');
-    	// 获取回调方法名(注意与客户端参数名对应)
-    	$call = htmlspecialchars($_GET['call']);
-    	// 要返回的 json 格式数据
-    	$data = "['Name','Sex','Age']";
+     header('Content-type: application/json');
+     // 获取回调方法名(注意与客户端参数名对应)
+     $call = htmlspecialchars($_GET['call']);
+     // 要返回的 json 格式数据
+     $data = "['Name','Sex','Age']";
 
-    	echo $call."({$data})";
+     echo $call."({$data})";
      ?>
 
 事实上，所谓的 jsonp 就是通过客户端将回调函数名发送给服务器端，服务器端再把要返回的 json 数据当作参数与方法名拼接成一段 JavaScript 代码返回给客户端，客户端执行得到的 js 代码表达式（调用回调方法）就实现了跨域访问资源。
@@ -91,25 +90,25 @@ json 是一种很简单的数据格式，鉴于它的简单性以及 script 标�
 #### 客户端代码
 
     <sctipt>
-    	// 自执行，避免污染全局空间
-    	(function(){
-    		// 动态创建 iframe 插入DOM树，实现跨域访问资源
-    		var nIframe = document.createElement('iframe');
-    		nIframe.style.cssText = 'display: none';
-    		nIframe.src = 'http://www.163.com/info2.html';
-    		nIframe.onload = function(){
-    			// 修改 src 到同源域名下（空白页）
-    			this.src = 'about:blank';
-    			this.onload = function() {
-    				// 取得跨域访问资源，移除该 iframe
-    				var data = JSON.parse(this.contentWindow.name);
-    				document.body.removeChild(this);
-    				// 接下来就可以处理得到的资源了
-    				...
-    			}
-    		}
-    		document.body.appendChild(nIframe);
-    	})(window);
+     // 自执行，避免污染全局空间
+     (function(){
+      // 动态创建 iframe 插入DOM树，实现跨域访问资源
+      var nIframe = document.createElement('iframe');
+      nIframe.style.cssText = 'display: none';
+      nIframe.src = 'http://www.163.com/info2.html';
+      nIframe.onload = function(){
+       // 修改 src 到同源域名下（空白页）
+       this.src = 'about:blank';
+       this.onload = function() {
+        // 取得跨域访问资源，移除该 iframe
+        var data = JSON.parse(this.contentWindow.name);
+        document.body.removeChild(this);
+        // 接下来就可以处理得到的资源了
+        ...
+       }
+      }
+      document.body.appendChild(nIframe);
+     })(window);
     </script>
 
 **我们只是使用了一个 `<iframe>` 作为代理获取到跨域资源，但是 `<iframe>` 之间也是不允许跨域访问的，所以我们再次把它的 `src` 修改为同源页面或者空白页就可以获取到 `window.name` 的属性了，也就是我们需要的资源。**同样地，我们也可以在最后移除创建的 `iframe` 元素。
@@ -117,7 +116,7 @@ json 是一种很简单的数据格式，鉴于它的简单性以及 script 标�
 #### 资源页面代码
 
     <script>
-    	window.name = '["Name","Sex","Age"]';
+     window.name = '["Name","Sex","Age"]';
     </script>
 
 由于资源页面仅仅是为了传递数据，我们通常在动态创建 `iframe` 时设置 CSS 样式为 `display：none`，避免它影响客户端页面的布局。
@@ -128,11 +127,11 @@ json 是一种很简单的数据格式，鉴于它的简单性以及 script 标�
 
     // iframe1 ： www.163.com
     <script>
-    	document.domain = "163.com";
+     document.domain = "163.com";
     </script>
     // iframe2 ： study.163.com
     <script>
-    	document.domain = "163.com";
+     document.domain = "163.com";
     </script>
 
 这样设置好之后，我们则可以在全局范围内完成两个 `iframe` 跨子域的数据访问。
@@ -146,26 +145,26 @@ json 是一种很简单的数据格式，鉴于它的简单性以及 script 标�
 #### 客户端代码
 
     <script>
-    	// 注册 message 事件准备接受数据
-    	window.onmessage = function(e){
-    		// 可以先判断发送源再处理，保证安全
-    		// if e.origin == "http://study.163.com"
-    		// 获取跨域访问的数据
-    		var data = JSON.parse(e.data);
-    		// 处理数据
-    		...
-    		// 销毁该事件
-    		this.onmessage = null;
-    		// 移除该 iframe
-    		document.body.removeChild(nIframe);
-    	}
+     // 注册 message 事件准备接受数据
+     window.onmessage = function(e){
+      // 可以先判断发送源再处理，保证安全
+      // if e.origin == "http://study.163.com"
+      // 获取跨域访问的数据
+      var data = JSON.parse(e.data);
+      // 处理数据
+      ...
+      // 销毁该事件
+      this.onmessage = null;
+      // 移除该 iframe
+      document.body.removeChild(nIframe);
+     }
 
-    	var nIframe = document.createElement('iframe');
+     var nIframe = document.createElement('iframe');
 
-    	nIframe.style.cssText = "display: none";
-    	nIframe.src = "http://domain1.com:8081/info2.html";
+     nIframe.style.cssText = "display: none";
+     nIframe.src = "http://domain1.com:8081/info2.html";
 
-    	document.body.appendChild(nIframe);
+     document.body.appendChild(nIframe);
     </script>
 
 在进行数据接收和处理之前，我们可以使用 `event.origin` 来判断发送源是否已知，保证页面安全。
@@ -173,7 +172,7 @@ json 是一种很简单的数据格式，鉴于它的简单性以及 script 标�
 #### 资源页面代码
 
     <script>
-    	window.top.postMessage('["Name","Sex","Age"]', 'http://www.163.com');
+     window.top.postMessage('["Name","Sex","Age"]', 'http://www.163.com');
     </script>
 
 第二个参数规定了数据接受者的域限制，这个也是为了保证敏感数据不会发送给未知页面，确保数据安全。

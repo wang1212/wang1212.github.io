@@ -13,7 +13,6 @@ keywords: *ref_0
 description: 由于比较好奇 Rough.js 的手绘风格是如何实现的，遂准备看看其源码实现，在这个过程中发现了一个依赖项包 hachure-fill，类似铅笔线的图形填充依赖此包实现，其源码比较简洁，从其实现中了解到一个计算机图形学领域的概念-“扫描线算法”。
 ---
 
-> _最后更新于 2024-06-16 19:11:00_
 
 由于比较好奇 [Rough.js](https://roughjs.com/) 的手绘风格是如何实现的，遂准备看看其源码实现，在这个过程中发现了一个依赖项包 [`hachure-fill`](https://github.com/pshihn/hachure-fill)，类似铅笔线的图形填充依赖此包实现，其源码比较简洁，从其实现中了解到一个计算机图形学领域的概念-“扫描线算法（Scanline Algorithm）”。
 
