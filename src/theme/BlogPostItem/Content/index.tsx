@@ -9,7 +9,7 @@ type Props = WrapperProps<typeof ContentType>;
 
 export default function ContentWrapper(props: Props): ReactNode {
   const { metadata } = useBlogPost();
-  console.log(metadata.frontMatter.update);
+
   return (
     <>
       <blockquote>

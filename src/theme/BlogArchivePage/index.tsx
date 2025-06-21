@@ -1,5 +1,5 @@
 import styles from './styles.module.css';
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import Link from '@docusaurus/Link';
 import { PageMetadata } from '@docusaurus/theme-common';
 import Layout from '@theme/Layout';
@@ -67,17 +67,10 @@ type MonthProps = {
   year: string;
   month: string;
   posts: ArchiveBlogPost[];
-  sortBy: SortBy;
 };
 
-function Month({ year, month, posts, sortBy }: MonthProps) {
+function Month({ year, month, posts }: MonthProps) {
   const [parent, enableAnimations] = useAutoAnimate();
-
-  posts.sort(
-    (a, b) =>
-      new Date(b.metadata.frontMatter[sortBy] as string).getTime() -
-      new Date(a.metadata.frontMatter[sortBy] as string).getTime()
-  );
 
   return (
     <section className="_js-month">
@@ -106,9 +99,12 @@ function listPostsByMonth(
 
   return Array.from(postsByMonth, ([month, posts]) => ({
     month,
-    posts,
-    sortBy,
-  }));
+    posts: posts.sort(
+      (a, b) =>
+        new Date(b.metadata.frontMatter[sortBy] as string).getTime() -
+        new Date(a.metadata.frontMatter[sortBy] as string).getTime()
+    ),
+  })).sort((a, b) => Number(b.month) - Number(a.month));
 }
 
 type YearProps = {
@@ -118,19 +114,49 @@ type YearProps = {
 };
 
 function Year({ year, posts, sortBy }: YearProps) {
-  const months = listPostsByMonth(posts, sortBy);
-  const [parent, enableAnimations] = useAutoAnimate();
+  const POST_COLLAPSE_THRESHOLD = 10;
+  const [isExpanded, setIsExpanded] = useState(
+    posts.length <= POST_COLLAPSE_THRESHOLD
+  );
+
+  // 先对所有文章按月份排序
+  const allMonths = listPostsByMonth(posts, sortBy);
+
+  // 获取所有已排序的文章
+  const sortedPosts = allMonths.flatMap((month) => month.posts);
+
+  // 根据 isExpanded 决定显示多少篇文章
+  const displayedPosts = isExpanded
+    ? sortedPosts
+    : sortedPosts.slice(0, POST_COLLAPSE_THRESHOLD);
+
+  // 重新生成月份分组
+  const months = listPostsByMonth(displayedPosts, sortBy);
+
+  const [parent] = useAutoAnimate();
+
+  const handleToggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   return (
     <section className="_js-year col col--4 margin-bottom--lg">
       <h3>{year} 年</h3>
       <div ref={parent}>
-        {months
-          .sort((a, b) => Number(b.month) - Number(a.month))
-          .map((props) => (
-            <Month key={props.month} year={year} {...props} />
-          ))}
+        {months.map((props) => (
+          <Month key={props.month} year={year} {...props} />
+        ))}
       </div>
+      {posts.length > POST_COLLAPSE_THRESHOLD && (
+        <button
+          className="button button--sm button--outline button--primary margin-top--md"
+          onClick={handleToggleExpand}
+        >
+          {isExpanded
+            ? '收起部分文章'
+            : `展开其余 ${posts.length - POST_COLLAPSE_THRESHOLD} 篇...`}
+        </button>
+      )}
     </section>
   );
 }
@@ -140,11 +166,15 @@ function YearsSection({
   sortBy,
   tag,
   updateSortBy,
+  loadMoreRef,
+  hasMore,
 }: {
   years: YearProps[];
   sortBy: SortBy;
   tag: string | null;
   updateSortBy: (sortBy: SortBy) => void;
+  loadMoreRef: React.RefObject<HTMLDivElement>;
+  hasMore: boolean;
 }) {
   const [parent, enableAnimations] = useAutoAnimate();
 
@@ -195,12 +225,19 @@ function YearsSection({
             ''}
         </nav>
         <div ref={parent} className="row">
-          {years
-            .sort((a, b) => Number(b.year) - Number(a.year))
-            .map((props) => (
-              <Year key={props.year} {...props} />
-            ))}
+          {years.map((props) => (
+            <Year key={props.year} {...props} />
+          ))}
         </div>
+        {hasMore && (
+          <div
+            ref={loadMoreRef}
+            className="margin-vert--lg"
+            style={{ textAlign: 'center' }}
+          >
+            加载更多...
+          </div>
+        )}
       </div>
     </section>
   );
@@ -220,7 +257,7 @@ function listPostsByYear(
     year,
     posts,
     sortBy,
-  }));
+  })).sort((a, b) => Number(b.year) - Number(a.year));
 }
 
 type TagMap = Map<string, { item: unknown; count: number }>;
@@ -248,7 +285,13 @@ export default function BlogArchivePageWrapper(props: Props) {
   const [showTagCloud, setShowTagCloud] = useState(true);
   const [tag, setTag] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<SortBy>('update');
-  const [years, setYears] = useState([]);
+
+  const YEARS_PER_PAGE = 3;
+  const [allYears, setAllYears] = useState<YearProps[]>([]);
+  const [renderedYears, setRenderedYears] = useState<YearProps[]>([]);
+  const [page, setPage] = useState(1);
+  const observerRef = useRef<HTMLDivElement>(null);
+
   const tagMap = getTagMap(props.archive.blogPosts);
   const tagList: [string, number][] = Array.from(
     tagMap,
@@ -310,7 +353,7 @@ export default function BlogArchivePageWrapper(props: Props) {
     return () => {
       WordCloud.stop();
     };
-  }, [updateTag]);
+  }, [updateTag, tagList]);
 
   useEffect(() => {
     const posts = !tag
@@ -319,8 +362,45 @@ export default function BlogArchivePageWrapper(props: Props) {
           post.metadata.frontMatter.tags.includes(tag)
         );
 
-    setYears(listPostsByYear(posts, sortBy));
-  }, [tag, sortBy, setYears]);
+    const calculatedYears = listPostsByYear(posts, sortBy);
+    setAllYears(calculatedYears);
+    setRenderedYears(calculatedYears.slice(0, YEARS_PER_PAGE));
+    setPage(1);
+  }, [tag, sortBy, props.archive.blogPosts]);
+
+  const loadMoreYears = useCallback(() => {
+    setPage((prevPage) => {
+      const nextPage = prevPage + 1;
+      const newYears = allYears.slice(0, nextPage * YEARS_PER_PAGE);
+      setRenderedYears(newYears);
+      return nextPage;
+    });
+  }, [allYears]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (
+          entries[0].isIntersecting &&
+          renderedYears.length < allYears.length
+        ) {
+          loadMoreYears();
+        }
+      },
+      { rootMargin: '200px' } // Load a bit before it's visible
+    );
+
+    const currentObserverRef = observerRef.current;
+    if (currentObserverRef) {
+      observer.observe(currentObserverRef);
+    }
+
+    return () => {
+      if (currentObserverRef) {
+        observer.unobserve(currentObserverRef);
+      }
+    };
+  }, [renderedYears, allYears, loadMoreYears]);
 
   return (
     <>
@@ -380,7 +460,9 @@ export default function BlogArchivePageWrapper(props: Props) {
                 sortBy={sortBy}
                 updateSortBy={setSortBy}
                 tag={tag}
-                years={years}
+                years={renderedYears}
+                loadMoreRef={observerRef}
+                hasMore={renderedYears.length < allYears.length}
               />
             </>
           ) : (
