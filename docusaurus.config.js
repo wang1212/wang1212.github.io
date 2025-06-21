@@ -5,6 +5,11 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  future: {
+    v4: true,
+    experimental_faster: true,
+  },
+
   title: '不如怀念',
   tagline: '记录 分享 交流 思考',
   url: 'https://wang1212.github.io',
