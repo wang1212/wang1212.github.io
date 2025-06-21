@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([["9037"],{7331:function(a){a.exports=JSON.parse('{"tag":{"label":"CPU","permalink":"/tags/cpu","allTagsPath":"/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/tags/cpu","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

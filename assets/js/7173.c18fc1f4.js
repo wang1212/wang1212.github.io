@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([["7173"],{15141:function(e,c,s){s.d(c,{createInfoServices:()=>n.M});var n=s(84971);s(69904)}}]);

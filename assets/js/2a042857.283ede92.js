@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([[4682],{70393:t=>{t.exports=JSON.parse('{"tag":{"label":"JUnit4","permalink":"/tags/j-unit-4","allTagsPath":"/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/tags/j-unit-4","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
