@@ -1,14 +1,11 @@
-import styles from './styles.module.css';
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import Link from '@docusaurus/Link';
-import { PageMetadata } from '@docusaurus/theme-common';
 import Layout from '@theme/Layout';
 import BackToTopButton from '@theme/BackToTopButton';
 import type { ArchiveBlogPost, Props } from '@theme/BlogArchivePage';
 import BlogArchivePage from '@theme-original/BlogArchivePage';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import clsx from 'clsx';
-import { formatterDate } from '../../utils/date';
+import StatsViews, { type CalendarData } from './StatsViews';
+import PostList, { listPostsByYear, type YearProps } from './PostList';
 
 /**
  * ! 覆盖内部实现
@@ -40,225 +37,7 @@ const customConfig = {
 
 type SortBy = 'date' | 'update';
 
-function PostItem({ post }: { post: ArchiveBlogPost }) {
-  return (
-    <li>
-      <Link to={post.metadata.permalink}>
-        <div>{post.metadata.title}</div>
-      </Link>
-      <div style={{ opacity: 0.5 }}>
-        <small>
-          发布于 {formatterDate(post.metadata.frontMatter.date as string)}
-        </small>{' '}
-        {post.metadata.frontMatter.update !== post.metadata.frontMatter.date ? (
-          <small>
-            最后更新于{' '}
-            {formatterDate(post.metadata.frontMatter.update as string)}
-          </small>
-        ) : (
-          ''
-        )}
-      </div>
-    </li>
-  );
-}
-
-type MonthProps = {
-  year: string;
-  month: string;
-  posts: ArchiveBlogPost[];
-};
-
-function Month({ year, month, posts }: MonthProps) {
-  const [parent, enableAnimations] = useAutoAnimate();
-
-  return (
-    <section className="_js-month">
-      <h4>
-        <small style={{ color: 'var(--ifm-color-secondary)' }}>{year}</small>{' '}
-        {month} 月
-      </h4>
-      <ul ref={parent}>
-        {posts.map((post) => (
-          <PostItem key={post.metadata.permalink} post={post} />
-        ))}
-      </ul>
-    </section>
-  );
-}
-
-function listPostsByMonth(
-  blogPosts: readonly ArchiveBlogPost[],
-  sortBy: SortBy
-): Omit<MonthProps, 'year'>[] {
-  const postsByMonth = blogPosts.reduceRight((posts, post) => {
-    const month = (post.metadata.frontMatter[sortBy] as string).split('-')[1];
-    const monthPosts = posts.get(month) ?? [];
-    return posts.set(month, [post, ...monthPosts]);
-  }, new Map<string, ArchiveBlogPost[]>());
-
-  return Array.from(postsByMonth, ([month, posts]) => ({
-    month,
-    posts: posts.sort(
-      (a, b) =>
-        new Date(b.metadata.frontMatter[sortBy] as string).getTime() -
-        new Date(a.metadata.frontMatter[sortBy] as string).getTime()
-    ),
-  })).sort((a, b) => Number(b.month) - Number(a.month));
-}
-
-type YearProps = {
-  year: string;
-  posts: ArchiveBlogPost[];
-  sortBy: SortBy;
-};
-
-function Year({ year, posts, sortBy }: YearProps) {
-  const POST_COLLAPSE_THRESHOLD = 10;
-  const [isExpanded, setIsExpanded] = useState(
-    posts.length <= POST_COLLAPSE_THRESHOLD
-  );
-
-  // 先对所有文章按月份排序
-  const allMonths = listPostsByMonth(posts, sortBy);
-
-  // 获取所有已排序的文章
-  const sortedPosts = allMonths.flatMap((month) => month.posts);
-
-  // 根据 isExpanded 决定显示多少篇文章
-  const displayedPosts = isExpanded
-    ? sortedPosts
-    : sortedPosts.slice(0, POST_COLLAPSE_THRESHOLD);
-
-  // 重新生成月份分组
-  const months = listPostsByMonth(displayedPosts, sortBy);
-
-  const [parent] = useAutoAnimate();
-
-  const handleToggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  return (
-    <section className="_js-year col col--4 margin-bottom--lg">
-      <h3>{year} 年</h3>
-      <div ref={parent}>
-        {months.map((props) => (
-          <Month key={props.month} year={year} {...props} />
-        ))}
-      </div>
-      {posts.length > POST_COLLAPSE_THRESHOLD && (
-        <button
-          className="button button--sm button--outline button--primary margin-top--md"
-          onClick={handleToggleExpand}
-        >
-          {isExpanded
-            ? '收起部分文章'
-            : `展开其余 ${posts.length - POST_COLLAPSE_THRESHOLD} 篇...`}
-        </button>
-      )}
-    </section>
-  );
-}
-
-function YearsSection({
-  years,
-  sortBy,
-  tag,
-  updateSortBy,
-  loadMoreRef,
-  hasMore,
-}: {
-  years: YearProps[];
-  sortBy: SortBy;
-  tag: string | null;
-  updateSortBy: (sortBy: SortBy) => void;
-  loadMoreRef: React.RefObject<HTMLDivElement>;
-  hasMore: boolean;
-}) {
-  const [parent, enableAnimations] = useAutoAnimate();
-
-  if (years.length === 0) {
-    return null;
-  }
-
-  return (
-    <section className="margin-bottom--lg">
-      <div className="container">
-        <nav
-          className="margin-bottom--md"
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}
-        >
-          <button
-            title="按发布时间排序"
-            className={clsx(
-              'button button--sm button--primary',
-              sortBy !== 'date' && 'button--outline',
-              'margin-right--sm'
-            )}
-            onClick={() => updateSortBy('date')}
-          >
-            发布时间
-          </button>
-          <button
-            title="按更新时间排序"
-            className={clsx(
-              'button button--sm button--primary',
-              sortBy !== 'update' && 'button--outline'
-            )}
-            onClick={() => updateSortBy('update')}
-          >
-            更新时间
-          </button>
-          {(tag && (
-            <span
-              className="badge badge--secondary"
-              style={{ marginLeft: 'auto' }}
-            >
-              {tag}
-            </span>
-          )) ||
-            ''}
-        </nav>
-        <div ref={parent} className="row">
-          {years.map((props) => (
-            <Year key={props.year} {...props} />
-          ))}
-        </div>
-        {hasMore && (
-          <div
-            ref={loadMoreRef}
-            className="margin-vert--lg"
-            style={{ textAlign: 'center' }}
-          >
-            加载更多...
-          </div>
-        )}
-      </div>
-    </section>
-  );
-}
-
-function listPostsByYear(
-  blogPosts: readonly ArchiveBlogPost[],
-  sortBy: SortBy
-): YearProps[] {
-  const postsByYear = blogPosts.reduceRight((posts, post) => {
-    const year = (post.metadata.frontMatter[sortBy] as string).split('-')[0]!;
-    const yearPosts = posts.get(year) ?? [];
-    return posts.set(year, [post, ...yearPosts]);
-  }, new Map<string, ArchiveBlogPost[]>());
-
-  return Array.from(postsByYear, ([year, posts]) => ({
-    year,
-    posts,
-    sortBy,
-  })).sort((a, b) => Number(b.year) - Number(a.year));
-}
+// 移动到了 PostList.tsx
 
 type TagMap = Map<string, { item: unknown; count: number }>;
 
@@ -282,15 +61,79 @@ function getTagMap(blogPosts: readonly ArchiveBlogPost[]): TagMap {
 export default function BlogArchivePageWrapper(props: Props) {
   const [description] = useState(customConfig.archive.description());
   const title = customConfig.archive.title;
-  const [showTagCloud, setShowTagCloud] = useState(true);
+
   const [tag, setTag] = useState<string | null>(null);
+
+  const END_YEAR = new Date().getFullYear();
+  const YEARS = Array.from({ length: 5 }, (_, i) => END_YEAR - i);
   const [sortBy, setSortBy] = useState<SortBy>('update');
+
+  // 从文章数据中提取所有年份
+  const getAvailableYears = useCallback(
+    (posts: typeof props.archive.blogPosts) => {
+      const years = new Set<number>();
+      posts.forEach((post) => {
+        // 使用 frontMatter.update 或 frontMatter.date 作为日期源
+        const dateStr =
+          (post.metadata.frontMatter.update as string) ||
+          post.metadata.frontMatter.date;
+        if (dateStr) {
+          const date = new Date(dateStr);
+          if (!isNaN(date.getTime())) {
+            years.add(date.getFullYear());
+          }
+        }
+      });
+      return Array.from(years).sort((a, b) => b - a); // 降序排列
+    },
+    []
+  );
+
+  const availableYears = getAvailableYears(props.archive.blogPosts);
+  const [calendarYear, setCalendarYear] = useState<number>(
+    availableYears[0] || new Date().getFullYear()
+  );
+
+  // 生成日历数据
+  const generateCalendarData = useCallback(() => {
+    const data: CalendarData[] = [];
+    const dateCountMap = new Map<string, number>();
+
+    // 统计每天的博文数量（包括 update 字段）
+    props.archive.blogPosts.forEach((post) => {
+      const { date, update } = post.metadata.frontMatter;
+      [date, update].forEach((dateStr) => {
+        if (
+          dateStr &&
+          new Date(dateStr as string).toString() !== 'Invalid Date'
+        ) {
+          const dateKey = new Date(dateStr as string)
+            .toISOString()
+            .split('T')[0];
+          dateCountMap.set(dateKey, (dateCountMap.get(dateKey) || 0) + 1);
+        }
+      });
+    });
+
+    // 转换为日历数据格式
+    dateCountMap.forEach((count, date) => {
+      data.push({
+        date,
+        count,
+      });
+    });
+
+    return data;
+  }, [props.archive.blogPosts]);
+
+  const calendarData = generateCalendarData();
 
   const YEARS_PER_PAGE = 3;
   const [allYears, setAllYears] = useState<YearProps[]>([]);
   const [renderedYears, setRenderedYears] = useState<YearProps[]>([]);
   const [page, setPage] = useState(1);
   const observerRef = useRef<HTMLDivElement>(null);
+  const [contentRef] = useAutoAnimate<HTMLDivElement>();
 
   const tagMap = getTagMap(props.archive.blogPosts);
   const tagList: [string, number][] = Array.from(
@@ -326,36 +169,6 @@ export default function BlogArchivePageWrapper(props: Props) {
   }, [setTag]);
 
   useEffect(() => {
-    // ! 客户端代码中引入第三方库
-    const WordCloud = require('wordcloud');
-
-    WordCloud(document.getElementById('wordcloud'), {
-      list: tagList.filter((tagItem) => tagItem[1] > 1),
-      classes: styles['word'],
-      backgroundColor: 'transparent',
-      shape: 'square',
-      weightFactor: 2,
-      rotateRatio: 0.5,
-      rotationSteps: 2,
-      fontFamily: 'Impact',
-      color: 'random-light',
-      gridSize: Math.round(
-        (24 *
-          document.getElementById('wordcloud').getBoundingClientRect().width) /
-          1024
-      ),
-      shrinkToFit: true,
-      click(item) {
-        updateTag(item[0]);
-      },
-    });
-
-    return () => {
-      WordCloud.stop();
-    };
-  }, [updateTag, tagList]);
-
-  useEffect(() => {
     const posts = !tag
       ? props.archive.blogPosts
       : props.archive.blogPosts.filter((post) =>
@@ -366,7 +179,13 @@ export default function BlogArchivePageWrapper(props: Props) {
     setAllYears(calculatedYears);
     setRenderedYears(calculatedYears.slice(0, YEARS_PER_PAGE));
     setPage(1);
-  }, [tag, sortBy, props.archive.blogPosts]);
+
+    // 更新可用年份
+    const years = getAvailableYears(posts);
+    setCalendarYear((prev) =>
+      years.includes(prev) ? prev : years[0] || new Date().getFullYear()
+    );
+  }, [tag, sortBy, props.archive.blogPosts, getAvailableYears]);
 
   const loadMoreYears = useCallback(() => {
     setPage((prevPage) => {
@@ -418,45 +237,22 @@ export default function BlogArchivePageWrapper(props: Props) {
             <>
               <section className="margin-vert--lg">
                 <div className="container">
-                  <nav className="margin-bottom--md">
-                    <button
-                      className={clsx(
-                        'button button--sm button--primary',
-                        !showTagCloud && 'button--outline'
-                      )}
-                      onClick={() => setShowTagCloud(!showTagCloud)}
-                    >
-                      标签云
-                    </button>
-                  </nav>
-                  <section className={clsx(!showTagCloud && styles['hide'])}>
-                    <div
-                      id="wordcloud"
-                      style={{ width: '100%', height: '400px' }}
-                    ></div>
-                  </section>
-                  <section className={clsx(showTagCloud && styles['hide'])}>
-                    <ul className={styles['tag-list']}>
-                      {tagList
-                        .slice()
-                        .sort((a, b) => b[1] - a[1])
-                        .map((tagItem) => (
-                          <li
-                            key={tagItem[0]}
-                            className={`button button--sm button--outline button--secondary ${
-                              tag === tagItem[0] ? 'button--active' : ''
-                            }`}
-                            onClick={() => updateTag(tagItem[0])}
-                          >
-                            {tagItem[0]} {tagItem[1] > 1 && tagItem[1]}
-                          </li>
-                        ))}
-                    </ul>
-                  </section>
+                  <div ref={contentRef}>
+                    <StatsViews
+                      tagList={tagList}
+                      currentTag={tag}
+                      onTagClick={updateTag}
+                      calendarData={calendarData}
+                      calendarYear={calendarYear}
+                      availableYears={availableYears}
+                      onYearChange={setCalendarYear}
+                      initialMode="activityCalendar"
+                    />
+                  </div>
                   <hr className="margin-vert--lg" style={{ opacity: 0.25 }} />
                 </div>
               </section>
-              <YearsSection
+              <PostList
                 sortBy={sortBy}
                 updateSortBy={setSortBy}
                 tag={tag}

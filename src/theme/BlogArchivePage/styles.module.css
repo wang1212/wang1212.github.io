@@ -23,3 +23,26 @@
   margin-bottom: 8px;
   border-radius: 0;
 }
+
+/* Style the dropdown menu */
+:global(.dropdown--hoverable:hover .dropdown__menu) {
+  display: block;
+}
+
+:global(.dropdown__menu) {
+  cursor: pointer;
+}
+
+:global(.dropdown__menu .dropdown__link) {
+  cursor: pointer;
+  transition: background-color var(--ifm-transition-fast)
+    var(--ifm-transition-timing-default);
+}
+
+:global(.dropdown__menu .dropdown__link:hover) {
+  background-color: var(--ifm-dropdown-hover-background-color);
+}
+
+:global(.dropdown__menu .dropdown__link--active) {
+  background-color: var(--ifm-dropdown-hover-background-color);
+}
