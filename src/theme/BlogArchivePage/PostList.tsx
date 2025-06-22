@@ -139,15 +139,19 @@ export default function PostList({
   sortBy,
   tag,
   updateSortBy,
+  onTagClick,
   loadMoreRef,
   hasMore,
+  totalPosts,
 }: {
   years: Array<{ year: string; posts: ArchiveBlogPost[]; sortBy: SortBy }>;
   sortBy: SortBy;
   tag: string | null;
   updateSortBy: (sortBy: SortBy) => void;
+  onTagClick?: (tag: string | null) => void;
   loadMoreRef: React.RefObject<HTMLDivElement>;
   hasMore: boolean;
+  totalPosts: number;
 }) {
   const [parent] = useAutoAnimate();
 
@@ -187,14 +191,28 @@ export default function PostList({
           >
             更新时间
           </button>
-          {tag && (
-            <span
-              className="badge badge--secondary"
-              style={{ marginLeft: 'auto' }}
-            >
-              {tag}
-            </span>
-          )}
+          <div
+            style={{
+              marginLeft: 'auto',
+              display: 'flex',
+              gap: '8px',
+              alignItems: 'center',
+            }}
+          >
+            <span className="badge badge--secondary">{`${totalPosts} 篇`}</span>
+            {tag && (
+              <span
+                className="badge badge--secondary"
+                style={{ cursor: 'pointer' }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onTagClick?.(null);
+                }}
+              >
+                {tag} ×
+              </span>
+            )}
+          </div>
         </nav>
         <div ref={parent} className="row">
           {years.map((props) => (
@@ -226,9 +244,13 @@ export function listPostsByYear(
     return posts.set(year, [...yearPosts, post as ArchiveBlogPost]);
   }, new Map<string, ArchiveBlogPost[]>());
 
-  return Array.from(postsByYear, ([year, posts]) => ({
-    year,
-    posts,
-    sortBy,
-  } as YearProps)).sort((a, b) => Number(b.year) - Number(a.year));
+  return Array.from(
+    postsByYear,
+    ([year, posts]) =>
+      ({
+        year,
+        posts,
+        sortBy,
+      } as YearProps)
+  ).sort((a, b) => Number(b.year) - Number(a.year));
 }

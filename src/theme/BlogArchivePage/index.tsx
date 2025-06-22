@@ -134,6 +134,7 @@ export default function BlogArchivePageWrapper(props: Props) {
   const [page, setPage] = useState(1);
   const observerRef = useRef<HTMLDivElement>(null);
   const [contentRef] = useAutoAnimate<HTMLDivElement>();
+  const [filteredPostsCount, setFilteredPostsCount] = useState(0);
 
   const tagMap = getTagMap(props.archive.blogPosts);
   const tagList: [string, number][] = Array.from(
@@ -174,7 +175,8 @@ export default function BlogArchivePageWrapper(props: Props) {
       : props.archive.blogPosts.filter((post) =>
           post.metadata.frontMatter.tags.includes(tag)
         );
-
+    
+    setFilteredPostsCount(posts.length);
     const calculatedYears = listPostsByYear(posts, sortBy);
     setAllYears(calculatedYears);
     setRenderedYears(calculatedYears.slice(0, YEARS_PER_PAGE));
@@ -256,9 +258,11 @@ export default function BlogArchivePageWrapper(props: Props) {
                 sortBy={sortBy}
                 updateSortBy={setSortBy}
                 tag={tag}
+                onTagClick={updateTag}
                 years={renderedYears}
                 loadMoreRef={observerRef}
                 hasMore={renderedYears.length < allYears.length}
+                totalPosts={tag ? filteredPostsCount : props.archive.blogPosts.length}
               />
             </>
           ) : (
