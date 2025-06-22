@@ -3,6 +3,7 @@ import Layout from '@theme/Layout';
 import BackToTopButton from '@theme/BackToTopButton';
 import type { ArchiveBlogPost, Props } from '@theme/BlogArchivePage';
 import BlogArchivePage from '@theme-original/BlogArchivePage';
+import styles from './styles.module.css';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import StatsViews, { type CalendarData } from './StatsViews';
 import PostList, { listPostsByYear, type YearProps } from './PostList';
@@ -63,6 +64,7 @@ export default function BlogArchivePageWrapper(props: Props) {
   const title = customConfig.archive.title;
 
   const [tag, setTag] = useState<string | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   const END_YEAR = new Date().getFullYear();
   const YEARS = Array.from({ length: 5 }, (_, i) => END_YEAR - i);
@@ -94,23 +96,38 @@ export default function BlogArchivePageWrapper(props: Props) {
     availableYears[0] || new Date().getFullYear()
   );
 
+  // 将日期格式化为 YYYY-MM-DD 字符串，确保时区一致性
+  const formatDate = (date: Date | string) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   // 生成日历数据
   const generateCalendarData = useCallback(() => {
     const data: CalendarData[] = [];
     const dateCountMap = new Map<string, number>();
 
-    // 统计每天的博文数量（包括 update 字段）
+    // 统计每天的博文数量（处理 date 和 update 字段）
     props.archive.blogPosts.forEach((post) => {
       const { date, update } = post.metadata.frontMatter;
+      const processedDates = new Set<string>();
+      
+      // 处理 date 和 update
       [date, update].forEach((dateStr) => {
-        if (
-          dateStr &&
-          new Date(dateStr as string).toString() !== 'Invalid Date'
-        ) {
-          const dateKey = new Date(dateStr as string)
-            .toISOString()
-            .split('T')[0];
+        if (!dateStr || new Date(dateStr as string).toString() === 'Invalid Date') {
+          return;
+        }
+        
+        // 使用本地日期格式，与筛选逻辑保持一致
+        const dateKey = formatDate(dateStr as string);
+        
+        // 如果这个日期还没被处理过，则增加计数
+        if (!processedDates.has(dateKey)) {
           dateCountMap.set(dateKey, (dateCountMap.get(dateKey) || 0) + 1);
+          processedDates.add(dateKey);
         }
       });
     });
@@ -143,38 +160,140 @@ export default function BlogArchivePageWrapper(props: Props) {
   );
 
   const updateTag = useCallback(
-    (tag: string) => {
-      setTag((prevTag) => {
-        const urlParamsTemp = new URLSearchParams(window.location.search);
-        const newTag = prevTag === tag ? null : tag;
-
-        if (newTag === null) {
-          urlParamsTemp.delete('tag');
-        } else {
-          urlParamsTemp.set('tag', newTag);
-        }
-
-        window.history.replaceState(
-          { tag: newTag },
-          '',
-          `${window.location.pathname}?${urlParamsTemp.toString()}`
-        );
-        return newTag;
-      });
+    (newTag: string | null, event?: React.MouseEvent) => {
+      // 阻止事件冒泡
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      
+      // 如果点击的是当前选中的标签，则取消选择
+      const finalTag = tag === newTag ? null : newTag;
+      
+      // 更新状态
+      setTag(finalTag);
+      setSelectedDate(null);
+      
+      // 更新 URL 参数
+      const urlParamsTemp = new URLSearchParams(window.location.search);
+      
+      if (!finalTag) {
+        urlParamsTemp.delete('tag');
+      } else {
+        urlParamsTemp.set('tag', finalTag);
+      }
+      
+      // 清除日期参数
+      urlParamsTemp.delete('date');
+      
+      // 更新 URL 和历史状态
+      const newUrl = `${window.location.pathname}${urlParamsTemp.toString() ? '?' + urlParamsTemp.toString() : ''}`;
+      window.history.replaceState(
+        { tag: finalTag, date: null },
+        '',
+        newUrl
+      );
     },
-    [setTag]
+    [tag]  // 添加依赖
   );
+  
+  // 处理日期选择
+  const handleDateClick = useCallback((clickedDate: string | null, event?: React.MouseEvent) => {
+    // 阻止事件冒泡
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    
+    // 如果是取消选择，直接处理
+    if (!clickedDate) {
+      setSelectedDate(null);
+      const urlParamsTemp = new URLSearchParams(window.location.search);
+      urlParamsTemp.delete('date');
+      const newUrl = `${window.location.pathname}${urlParamsTemp.toString() ? '?' + urlParamsTemp.toString() : ''}`;
+      window.history.replaceState(
+        { tag, date: null },
+        '',
+        newUrl
+      );
+      return;
+    }
+    
+    // 清除标签选择
+    setTag(null);
+    
+    // 设置新选择的日期
+    setSelectedDate(clickedDate);
+    
+    // 更新 URL 参数
+    const urlParamsTemp = new URLSearchParams(window.location.search);
+    urlParamsTemp.set('date', clickedDate);
+    urlParamsTemp.delete('tag');
+    
+    // 更新 URL 和历史状态
+    const newUrl = `${window.location.pathname}${urlParamsTemp.toString() ? '?' + urlParamsTemp.toString() : ''}`;
+    window.history.replaceState(
+      { tag: null, date: clickedDate },
+      '',
+      newUrl
+    );
+  }, [tag]);  // 只依赖 tag
+
+  // 初始化状态
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tagParam = urlParams.get('tag');
+    const dateParam = urlParams.get('date');
+    
+    // 从 URL 参数初始化状态
+    if (tagParam) {
+      setTag(tagParam);
+      setSelectedDate(null);
+    } else if (dateParam) {
+      setSelectedDate(dateParam);
+      setTag(null);
+    } else {
+      // 从 history state 恢复
+      setTag(window.history?.state?.tag || null);
+      setSelectedDate(window.history?.state?.date || null);
+    }
+    
+    // 监听 popstate 事件，处理浏览器前进/后退
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state) {
+        setTag(event.state.tag || null);
+        setSelectedDate(event.state.date || null);
+      }
+    };
+    
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   useEffect(() => {
-    setTag(window.history?.state?.tag || null);
-  }, [setTag]);
-
-  useEffect(() => {
-    const posts = !tag
-      ? props.archive.blogPosts
-      : props.archive.blogPosts.filter((post) =>
-          post.metadata.frontMatter.tags.includes(tag)
-        );
+    let posts = [...props.archive.blogPosts];
+    
+    // 应用标签筛选
+    if (tag) {
+      posts = posts.filter(post => 
+        post.metadata.frontMatter.tags.includes(tag)
+      );
+    } 
+    // 应用日期筛选
+    else if (selectedDate) {
+      const targetDateStr = selectedDate; // selectedDate 已经是 YYYY-MM-DD 格式
+      
+      posts = posts.filter(post => {
+        const postDate = post.metadata.frontMatter.date as string;
+        const postUpdate = post.metadata.frontMatter.update as string | undefined;
+        
+        // 检查发布日期或更新日期是否匹配目标日期
+        return formatDate(postDate) === targetDateStr || 
+               (postUpdate && formatDate(postUpdate) === targetDateStr);
+      });
+    }
     
     setFilteredPostsCount(posts.length);
     const calculatedYears = listPostsByYear(posts, sortBy);
@@ -187,7 +306,7 @@ export default function BlogArchivePageWrapper(props: Props) {
     setCalendarYear((prev) =>
       years.includes(prev) ? prev : years[0] || new Date().getFullYear()
     );
-  }, [tag, sortBy, props.archive.blogPosts, getAvailableYears]);
+  }, [tag, selectedDate, sortBy, props.archive.blogPosts, getAvailableYears]);
 
   const loadMoreYears = useCallback(() => {
     setPage((prevPage) => {
@@ -228,7 +347,7 @@ export default function BlogArchivePageWrapper(props: Props) {
       <Layout title={customConfig.archive.title} description={description}>
         <BackToTopButton />
 
-        <header className="hero hero--primary">
+        <header className={`${styles.hero} hero hero--primary`}>
           <div className="container">
             <h1 className="hero__title">{title}</h1>
             <p className="hero__subtitle">{description}</p>
@@ -248,21 +367,24 @@ export default function BlogArchivePageWrapper(props: Props) {
                       calendarYear={calendarYear}
                       availableYears={availableYears}
                       onYearChange={setCalendarYear}
-                      initialMode="activityCalendar"
+                      currentDate={selectedDate}
+                      onDateClick={handleDateClick}
                     />
                   </div>
                   <hr className="margin-vert--lg" style={{ opacity: 0.25 }} />
                 </div>
               </section>
               <PostList
+                years={renderedYears}
                 sortBy={sortBy}
                 updateSortBy={setSortBy}
                 tag={tag}
+                selectedDate={selectedDate}
                 onTagClick={updateTag}
-                years={renderedYears}
+                onDateClick={handleDateClick}
                 loadMoreRef={observerRef}
-                hasMore={renderedYears.length < allYears.length}
-                totalPosts={tag ? filteredPostsCount : props.archive.blogPosts.length}
+                hasMore={allYears.length > renderedYears.length}
+                totalPosts={filteredPostsCount}
               />
             </>
           ) : (

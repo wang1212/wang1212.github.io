@@ -134,12 +134,34 @@ function Year({
 }
 
 // 主组件
+// 获取一年中的第几天
+const getDayOfYear = (date: Date): number => {
+  const start = new Date(date.getFullYear(), 0, 0);
+  const diff = date.getTime() - start.getTime();
+  const oneDay = 1000 * 60 * 60 * 24;
+  return Math.floor(diff / oneDay);
+};
+
+// 格式化日期显示
+const formatDateDisplay = (dateStr: string) => {
+  const date = new Date(dateStr);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
+  const weekday = weekdays[date.getDay()];
+  const dayOfYear = getDayOfYear(date);
+  return `${year}-${month}-${day} 周${weekday} 第${dayOfYear}天`;
+};
+
 export default function PostList({
   years,
   sortBy,
   tag,
+  selectedDate,
   updateSortBy,
   onTagClick,
+  onDateClick,
   loadMoreRef,
   hasMore,
   totalPosts,
@@ -147,8 +169,10 @@ export default function PostList({
   years: Array<{ year: string; posts: ArchiveBlogPost[]; sortBy: SortBy }>;
   sortBy: SortBy;
   tag: string | null;
+  selectedDate: string | null;
   updateSortBy: (sortBy: SortBy) => void;
   onTagClick?: (tag: string | null) => void;
+  onDateClick?: (date: string | null) => void;
   loadMoreRef: React.RefObject<HTMLDivElement>;
   hasMore: boolean;
   totalPosts: number;
@@ -208,8 +232,22 @@ export default function PostList({
                   e.preventDefault();
                   onTagClick?.(null);
                 }}
+                title="点击清除标签筛选"
               >
                 {tag} ×
+              </span>
+            )}
+            {selectedDate && (
+              <span
+                className="badge badge--secondary"
+                style={{ cursor: 'pointer' }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onDateClick?.(null);
+                }}
+                title="点击清除日期筛选"
+              >
+                {formatDateDisplay(selectedDate)} ×
               </span>
             )}
           </div>

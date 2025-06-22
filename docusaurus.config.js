@@ -109,7 +109,7 @@ const config = {
           // },
           { to: '/archive', label: '归档', position: 'left' },
           // { to: '/tags', label: '标签', position: 'left' },
-          { to: '/record', label: '记录', position: 'left' },
+          // { to: '/record', label: '记录', position: 'left' },
           { to: '/timeline', label: '历程', position: 'left' },
           {
             href: 'https://wang1212.github.io/awesome-favorites-list',

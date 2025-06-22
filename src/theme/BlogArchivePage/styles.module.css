@@ -46,3 +46,34 @@
 :global(.dropdown__menu .dropdown__link--active) {
   background-color: var(--ifm-dropdown-hover-background-color);
 }
+
+/* 归档页面标题样式 */
+.hero {
+  --ifm-hero-background-color: #f0f4f8;
+  --ifm-hero-text-color: #2d3748;
+  background-color: var(--ifm-hero-background-color) !important;
+}
+
+.hero :global(.hero__title),
+.hero :global(.hero__subtitle) {
+  color: var(--ifm-hero-text-color) !important;
+}
+
+[data-theme='dark'] .hero {
+  --ifm-hero-background-color: #1a202c;
+  --ifm-hero-text-color: #e2e8f0;
+}
+
+/* 日历热力图选中日期的样式 - 只添加边框 */
+:global(.react-calendar-heatmap .color-github-selected) {
+  stroke: #333; /* 深色边框 */
+  stroke-width: 1.5px;
+  stroke-opacity: 0.8;
+  rx: 2;
+  ry: 2;
+}
+
+:global(.react-calendar-heatmap .color-github-selected:hover) {
+  stroke-width: 2px;
+  stroke-opacity: 1;
+}
