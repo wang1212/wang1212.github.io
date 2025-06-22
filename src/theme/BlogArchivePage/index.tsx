@@ -99,9 +99,10 @@ export default function BlogArchivePageWrapper(props: Props) {
   // 将日期格式化为 YYYY-MM-DD 字符串，确保时区一致性
   const formatDate = (date: Date | string) => {
     const d = new Date(date);
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
+    // 使用 UTC 时间，与博客文章日期保持一致
+    const year = d.getUTCFullYear();
+    const month = String(d.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(d.getUTCDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
 
