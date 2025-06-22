@@ -4,7 +4,7 @@
         <title>不如怀念 Blog</title>
         <link>https://wang1212.github.io</link>
         <description>不如怀念 Blog</description>
-        <lastBuildDate>Sat, 21 Jun 2025 15:18:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 22 Jun 2025 22:18:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-Hans</language>
@@ -12,9 +12,12 @@
             <title><![CDATA[「每周回顾」EP2025W25：AI 编程趋势、React 发展与 AI 代理安全]]></title>
             <link>https://wang1212.github.io/2025/06/22/weekly/2025/weekly-review-ep2025w25</link>
             <guid>https://wang1212.github.io/2025/06/22/weekly/2025/weekly-review-ep2025w25</guid>
-            <pubDate>Sat, 21 Jun 2025 15:18:00 GMT</pubDate>
+            <pubDate>Sun, 22 Jun 2025 22:18:00 GMT</pubDate>
             <description><![CDATA[2025 年第 25 周的回顾，Motion AI 通过 MCP Server 实现自然语言生成动画代码，预示着开源库适应 AI 编程新模式的趋势；React 发布 12 周年，其声明式 UI 哲学对 Web 技术发展影响深远；文章强调 AI 代理面临私人数据、不可信内容和外部通信的安全挑战；此外，还有将复杂 TypeScript 类型解释为函数的实用工具 Type Buddy，以及 Google Gemini 和 LangGraph 构建全栈代理应用的快速入门指南。]]></description>
             <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>Motion AI 通过 MCP Server 实现自然语言生成动画代码，预示着开源库适应 AI 编程新模式的趋势；React 发布 12 周年，其声明式 UI 哲学对 Web 技术发展影响深远；文章强调 AI 代理面临私人数据、不可信内容和外部通信的安全挑战；此外，还有将复杂 TypeScript 类型解释为函数的实用工具 Type Buddy，以及 Google Gemini 和 LangGraph 构建全栈代理应用的快速入门指南。</p></div></div>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="why-i-write-about-ai"><a href="https://newsletter.victordibia.com/p/why-i-write-about-ai" target="_blank" rel="noopener noreferrer">Why I write about AI</a><a href="https://wang1212.github.io/2025/06/22/weekly/2025/weekly-review-ep2025w25#why-i-write-about-ai" class="hash-link" aria-label="why-i-write-about-ai的直接链接" title="why-i-write-about-ai的直接链接">​</a></h5>
+<p>Victor Dibia 分享了他写关于 AI 的原因，他认为 AI 会改变我们对技术的看法，改变我们对技术的使用方式，改变我们对技术的思考方式。只有我们亲自去实践、去思考，才能真正理解 AI 的力量。</p>
+<p><code>写作</code> <code>AI</code></p>
 <h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="motion-ai"><a href="https://motion.dev/docs/ai-llm-documentation" target="_blank" rel="noopener noreferrer">Motion AI</a><a href="https://wang1212.github.io/2025/06/22/weekly/2025/weekly-review-ep2025w25#motion-ai" class="hash-link" aria-label="motion-ai的直接链接" title="motion-ai的直接链接">​</a></h5>
 <p>动画库 motion 提供了 MCP Server，以便使用 AI IDE 的开发者现在能够通过自然语言来生成 motion 代码，更高效的实现动画效果。事实上，React 团队目前也在尝试构建 MCP Server 以实现自动优化代码。鉴于这种趋势，以后重要的开源社区库似乎都应用提供一个 MCP Server 来适应这种新的 AI 编程模式。</p>
 <p><code>AI</code> <code>动画</code> <code>Motion</code> <code>MCP Server</code></p>
@@ -56,6 +59,9 @@
 <h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="highlights-from-the-claude-4-system-prompt"><a href="https://simonwillison.net/2025/May/25/claude-4-system-prompt/" target="_blank" rel="noopener noreferrer">Highlights from the Claude 4 system prompt</a><a href="https://wang1212.github.io/2025/06/08/weekly/2025/weekly-review-ep2025w23#highlights-from-the-claude-4-system-prompt" class="hash-link" aria-label="highlights-from-the-claude-4-system-prompt的直接链接" title="highlights-from-the-claude-4-system-prompt的直接链接">​</a></h5>
 <p>Anthropic 将其聊天模型的大部分系统提示符作为发行说明的一部分发布，让我们有机会来了解 Anthropic 如何通过提示工程塑造模型行为。</p>
 <p><code>AI</code> <code>Anthropic</code> <code>Claude</code> <code>提示工程</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="rsc-for-lisp-developers"><a href="https://overreacted.io/rsc-for-lisp-developers/" target="_blank" rel="noopener noreferrer">RSC for LISP Developers</a><a href="https://wang1212.github.io/2025/06/08/weekly/2025/weekly-review-ep2025w23#rsc-for-lisp-developers" class="hash-link" aria-label="rsc-for-lisp-developers的直接链接" title="rsc-for-lisp-developers的直接链接">​</a></h5>
+<p>Dan Abramov 的新博文以类比论证（RSC ≈ LISP 引用）为中心，提出 RSC 作为现代 Web 开发的实用创新点，优点包括高效跨环境组合和流式处理。</p>
+<p><code>React.js</code> <code>RSC</code> <code>LISP</code></p>
 <h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="progressive-json"><a href="https://overreacted.io/progressive-json/" target="_blank" rel="noopener noreferrer">Progressive JSON</a><a href="https://wang1212.github.io/2025/06/08/weekly/2025/weekly-review-ep2025w23#progressive-json" class="hash-link" aria-label="progressive-json的直接链接" title="progressive-json的直接链接">​</a></h5>
 <p>Dan Abramov 带来了他新的一篇精彩的博文，通过类比 JPEG 渐进式加载的方式，提出渐进式 JSON，采用广度优先传输与占位符机制（如 $ 符号），使客户端能部分处理数据而无需全量加载，提升并行性。React Server Components (RSC) 的流式传输也应用了此模型。作者呼吁工具生态采纳渐进式流式传输，以解决单一慢操作拖累整体性能的工程瓶颈（如数据库延迟），并强调需编程模型（如 React 的 <code>&lt;Suspense&gt;</code>）优雅处理不完整数据。</p>
 <p><code>React.js</code> <code>渐进式 JSON</code></p>]]></content:encoded>
