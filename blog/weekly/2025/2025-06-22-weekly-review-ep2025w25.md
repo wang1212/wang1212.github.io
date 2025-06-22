@@ -1,17 +1,17 @@
 ---
-title: 「每周回顾」EP25：AI、前端技术与数据安全
+title: 「每周回顾」EP2025W25：AI 编程趋势、React 发展与 AI 代理安全
 date: 2025-06-21 15:18:00
 update: 2025-06-21 15:18:00
 authors: wang1212
 tags: &ref_0
   - 每周回顾
 keywords: *ref_0
-description: 第 25 期每周回顾，近期技术热点聚焦于 AI 编程模式和 AI 应用安全。动画库 Motion 的 MCP Server 预示着未来开源项目将整合 AI，实现自然语言生成代码，如 React 团队也在探索。然而，AI 代理在处理 私人数据、不可信内容和外部通信 时面临重大安全风险，提醒用户警惕数据泄露。同时，TypeScript 类型工具和 Google Gemini 全栈代理等新工具的发布，也为开发者带来了新的效率提升和学习机会。
+description: 2025 年第 25 周的回顾，Motion AI 通过 MCP Server 实现自然语言生成动画代码，预示着开源库适应 AI 编程新模式的趋势；React 发布 12 周年，其声明式 UI 哲学对 Web 技术发展影响深远；文章强调 AI 代理面临私人数据、不可信内容和外部通信的安全挑战；此外，还有将复杂 TypeScript 类型解释为函数的实用工具 Type Buddy，以及 Google Gemini 和 LangGraph 构建全栈代理应用的快速入门指南。
 ---
 
 :::note[AI 总结]
 
-近期技术热点聚焦于 AI 编程模式和 AI 应用安全。动画库 Motion 的 MCP Server 预示着未来开源项目将整合 AI，实现自然语言生成代码，如 React 团队也在探索。然而，AI 代理在处理 私人数据、不可信内容和外部通信 时面临重大安全风险，提醒用户警惕数据泄露。同时，TypeScript 类型工具和 Google Gemini 全栈代理等新工具的发布，也为开发者带来了新的效率提升和学习机会。
+Motion AI 通过 MCP Server 实现自然语言生成动画代码，预示着开源库适应 AI 编程新模式的趋势；React 发布 12 周年，其声明式 UI 哲学对 Web 技术发展影响深远；文章强调 AI 代理面临私人数据、不可信内容和外部通信的安全挑战；此外，还有将复杂 TypeScript 类型解释为函数的实用工具 Type Buddy，以及 Google Gemini 和 LangGraph 构建全栈代理应用的快速入门指南。
 
 :::
 
