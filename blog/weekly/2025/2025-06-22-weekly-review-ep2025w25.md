@@ -1,7 +1,7 @@
 ---
 title: 「每周回顾」EP2025W25：AI 编程趋势、React 发展与 AI 代理安全
-date: 2025-06-21 15:18:00
-update: 2025-06-21 15:18:00
+date: 2025-06-22 22:18:00
+update: 2025-06-22 22:18:00
 authors: wang1212
 tags: &ref_0
   - 每周回顾
@@ -16,6 +16,12 @@ Motion AI 通过 MCP Server 实现自然语言生成动画代码，预示着开�
 :::
 
 <!-- truncate -->
+
+##### [Why I write about AI](https://newsletter.victordibia.com/p/why-i-write-about-ai)
+
+Victor Dibia 分享了他写关于 AI 的原因，他认为 AI 会改变我们对技术的看法，改变我们对技术的使用方式，改变我们对技术的思考方式。只有我们亲自去实践、去思考，才能真正理解 AI 的力量。
+
+`写作` `AI`
 
 ##### [Motion AI](https://motion.dev/docs/ai-llm-documentation)
 

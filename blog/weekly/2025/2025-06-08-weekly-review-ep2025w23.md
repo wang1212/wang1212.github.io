@@ -23,6 +23,12 @@ Anthropic 将其聊天模型的大部分系统提示符作为发行说明的一�
 
 `AI` `Anthropic` `Claude` `提示工程`
 
+##### [RSC for LISP Developers](https://overreacted.io/rsc-for-lisp-developers/)
+
+Dan Abramov 的新博文以类比论证（RSC ≈ LISP 引用）为中心，提出 RSC 作为现代 Web 开发的实用创新点，优点包括高效跨环境组合和流式处理。
+
+`React.js` `RSC` `LISP`
+
 ##### [Progressive JSON](https://overreacted.io/progressive-json/)
 
 Dan Abramov 带来了他新的一篇精彩的博文，通过类比 JPEG 渐进式加载的方式，提出渐进式 JSON，采用广度优先传输与占位符机制（如 $ 符号），使客户端能部分处理数据而无需全量加载，提升并行性。React Server Components (RSC) 的流式传输也应用了此模型。作者呼吁工具生态采纳渐进式流式传输，以解决单一慢操作拖累整体性能的工程瓶颈（如数据库延迟），并强调需编程模型（如 React 的 `<Suspense>`）优雅处理不完整数据。
