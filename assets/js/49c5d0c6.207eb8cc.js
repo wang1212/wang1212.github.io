@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([["47814"],{1529:function(a){a.exports=JSON.parse('{"tag":{"label":"WebGPU","permalink":"/tags/web-gpu","allTagsPath":"/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/tags/web-gpu","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
