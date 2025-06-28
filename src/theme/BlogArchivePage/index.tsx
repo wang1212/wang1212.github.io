@@ -69,6 +69,31 @@ export default function BlogArchivePageWrapper(props: Props) {
   const END_YEAR = new Date().getFullYear();
   const YEARS = Array.from({ length: 5 }, (_, i) => END_YEAR - i);
   const [sortBy, setSortBy] = useState<SortBy>('update');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // 处理搜索输入变化
+  const handleSearchChange = useCallback((query: string) => {
+    setSearchQuery(query);
+    
+    // 更新 URL 参数
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    if (query) {
+      urlParams.set('search', query);
+    } else {
+      urlParams.delete('search');
+    }
+    
+    // 保留当前的 tag 和 date 状态
+    const currentTag = urlParams.get('tag');
+    const currentDate = urlParams.get('date');
+    
+    window.history.replaceState(
+      { tag: currentTag, date: currentDate, search: query || null },
+      '',
+      `${window.location.pathname}${urlParams.toString() ? '?' + urlParams.toString() : ''}`
+    );
+  }, []);
 
   // 从文章数据中提取所有年份
   const getAvailableYears = useCallback(
@@ -247,16 +272,25 @@ export default function BlogArchivePageWrapper(props: Props) {
     const dateParam = urlParams.get('date');
     
     // 从 URL 参数初始化状态
-    if (tagParam) {
+    const searchParam = urlParams.get('search');
+    
+    if (searchParam) {
+      setSearchQuery(searchParam);
+      setTag(null);
+      setSelectedDate(null);
+    } else if (tagParam) {
       setTag(tagParam);
       setSelectedDate(null);
+      setSearchQuery('');
     } else if (dateParam) {
       setSelectedDate(dateParam);
       setTag(null);
+      setSearchQuery('');
     } else {
       // 从 history state 恢复
       setTag(window.history?.state?.tag || null);
       setSelectedDate(window.history?.state?.date || null);
+      setSearchQuery(window.history?.state?.search || '');
     }
     
     // 监听 popstate 事件，处理浏览器前进/后退
@@ -276,7 +310,7 @@ export default function BlogArchivePageWrapper(props: Props) {
   useEffect(() => {
     let posts = [...props.archive.blogPosts];
     
-    // 应用标签筛选
+    // 先应用标签筛选
     if (tag) {
       posts = posts.filter(post => 
         post.metadata.frontMatter.tags.includes(tag)
@@ -296,6 +330,21 @@ export default function BlogArchivePageWrapper(props: Props) {
       });
     }
     
+    // 最后应用搜索筛选
+    if (searchQuery && searchQuery.trim() !== '') {
+      const query = searchQuery.trim().toLowerCase();
+      posts = posts.filter(post => {
+        const title = post.metadata.title?.toLowerCase() || '';
+        const description = (post.metadata.description || '').toLowerCase();
+        const tags = (post.metadata.tags || []).map(tag => tag.label.toLowerCase()).join(' ');
+        return (
+          title.includes(query) || 
+          description.includes(query) ||
+          tags.includes(query)
+        );
+      });
+    }
+    
     setFilteredPostsCount(posts.length);
     const calculatedYears = listPostsByYear(posts, sortBy);
     setAllYears(calculatedYears);
@@ -307,7 +356,7 @@ export default function BlogArchivePageWrapper(props: Props) {
     setCalendarYear((prev) =>
       years.includes(prev) ? prev : years[0] || new Date().getFullYear()
     );
-  }, [tag, selectedDate, sortBy, props.archive.blogPosts, getAvailableYears]);
+  }, [tag, selectedDate, searchQuery, sortBy, props.archive.blogPosts, getAvailableYears]);
 
   const loadMoreYears = useCallback(() => {
     setPage((prevPage) => {
@@ -370,6 +419,8 @@ export default function BlogArchivePageWrapper(props: Props) {
                       onYearChange={setCalendarYear}
                       currentDate={selectedDate}
                       onDateClick={handleDateClick}
+                      searchQuery={searchQuery}
+                      onSearchChange={handleSearchChange}
                     />
                   </div>
                   <hr className="margin-vert--lg" style={{ opacity: 0.25 }} />
@@ -381,8 +432,10 @@ export default function BlogArchivePageWrapper(props: Props) {
                 updateSortBy={setSortBy}
                 tag={tag}
                 selectedDate={selectedDate}
+                searchQuery={searchQuery}
                 onTagClick={updateTag}
                 onDateClick={handleDateClick}
+                onSearchClear={() => setSearchQuery('')}
                 loadMoreRef={observerRef}
                 hasMore={allYears.length > renderedYears.length}
                 totalPosts={filteredPostsCount}

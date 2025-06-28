@@ -159,9 +159,11 @@ export default function PostList({
   sortBy,
   tag,
   selectedDate,
+  searchQuery,
   updateSortBy,
   onTagClick,
   onDateClick,
+  onSearchClear,
   loadMoreRef,
   hasMore,
   totalPosts,
@@ -170,9 +172,11 @@ export default function PostList({
   sortBy: SortBy;
   tag: string | null;
   selectedDate: string | null;
+  searchQuery: string | null;
   updateSortBy: (sortBy: SortBy) => void;
   onTagClick?: (tag: string | null) => void;
   onDateClick?: (date: string | null) => void;
+  onSearchClear?: () => void;
   loadMoreRef: React.RefObject<HTMLDivElement>;
   hasMore: boolean;
   totalPosts: number;
@@ -248,6 +252,19 @@ export default function PostList({
                 title="点击清除日期筛选"
               >
                 {formatDateDisplay(selectedDate)} ×
+              </span>
+            )}
+            {searchQuery && (
+              <span
+                className="badge badge--secondary"
+                style={{ cursor: 'pointer' }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSearchClear?.();
+                }}
+                title="点击清除搜索"
+              >
+                关键字: {searchQuery} ×
               </span>
             )}
           </div>

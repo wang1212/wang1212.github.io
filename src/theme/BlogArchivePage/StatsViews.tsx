@@ -25,6 +25,10 @@ interface StatsViewsProps {
   currentDate: string | null;
   onDateClick: (date: string | null) => void;
 
+  // 搜索相关
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
+
   // 视图控制
   initialMode?: StatsDisplayMode;
 }
@@ -293,6 +297,8 @@ export default function StatsViews({
   onYearChange,
   currentDate,
   onDateClick,
+  searchQuery,
+  onSearchChange,
   initialMode = 'activityCalendar',
 }: StatsViewsProps) {
   const [displayMode, setDisplayMode] = useState<StatsDisplayMode>(initialMode);
@@ -301,79 +307,110 @@ export default function StatsViews({
     <>
       <div
         className="margin-bottom--md"
-        style={{ display: 'flex', gap: '8px' }}
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '8px',
+        }}
       >
-        <div className="dropdown dropdown--hoverable">
-          <button className="button button--primary">
-            {displayMode === 'tagCloud'
-              ? '标签云'
-              : displayMode === 'tagList'
-              ? '标签列表'
-              : '活动日历'}
-          </button>
-          <ul className="dropdown__menu">
-            <li>
-              <a
-                className={`dropdown__link ${
-                  displayMode === 'activityCalendar'
-                    ? 'dropdown__link--active'
-                    : ''
-                }`}
-                onClick={() => setDisplayMode('activityCalendar')}
-              >
-                活动日历
-              </a>
-            </li>
-            <li>
-              <a
-                className={`dropdown__link ${
-                  displayMode === 'tagCloud' ? 'dropdown__link--active' : ''
-                }`}
-                onClick={() => setDisplayMode('tagCloud')}
-              >
-                标签云
-              </a>
-            </li>
-            <li>
-              <a
-                className={`dropdown__link ${
-                  displayMode === 'tagList' ? 'dropdown__link--active' : ''
-                }`}
-                onClick={() => setDisplayMode('tagList')}
-              >
-                标签列表
-              </a>
-            </li>
-          </ul>
-        </div>
-        {displayMode === 'activityCalendar' && (
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <div className="dropdown dropdown--hoverable">
-            <button className="button button--outline button--secondary">
-              {calendarYear}年
+            <button className="button button--primary">
+              {displayMode === 'tagCloud'
+                ? '标签云'
+                : displayMode === 'tagList'
+                ? '标签列表'
+                : '活动日历'}
             </button>
             <ul className="dropdown__menu">
-              {availableYears.map((year) => (
-                <li key={year}>
-                  <a
-                    className={`dropdown__link ${
-                      calendarYear === year ? 'dropdown__link--active' : ''
-                    }`}
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onYearChange(year);
-                    }}
-                  >
-                    {year}年
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a
+                  className={`dropdown__link ${
+                    displayMode === 'activityCalendar'
+                      ? 'dropdown__link--active'
+                      : ''
+                  }`}
+                  onClick={() => setDisplayMode('activityCalendar')}
+                >
+                  活动日历
+                </a>
+              </li>
+              <li>
+                <a
+                  className={`dropdown__link ${
+                    displayMode === 'tagCloud' ? 'dropdown__link--active' : ''
+                  }`}
+                  onClick={() => setDisplayMode('tagCloud')}
+                >
+                  标签云
+                </a>
+              </li>
+              <li>
+                <a
+                  className={`dropdown__link ${
+                    displayMode === 'tagList' ? 'dropdown__link--active' : ''
+                  }`}
+                  onClick={() => setDisplayMode('tagList')}
+                >
+                  标签列表
+                </a>
+              </li>
             </ul>
           </div>
-        )}
+          {displayMode === 'activityCalendar' && (
+            <div className="dropdown dropdown--hoverable">
+              <button className="button button--outline button--secondary">
+                {calendarYear}年
+              </button>
+              <ul className="dropdown__menu">
+                {availableYears.map((year) => (
+                  <li key={year}>
+                    <a
+                      className={`dropdown__link ${
+                        calendarYear === year ? 'dropdown__link--active' : ''
+                      }`}
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onYearChange(year);
+                      }}
+                    >
+                      {year}年
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        {/* 搜索框 */}
+        <div className="navbar__search" style={{ minWidth: '200px' }}>
+          <input
+            type="search"
+            className="navbar__search-input"
+            placeholder="输入关键字搜索..."
+            value={searchQuery}
+            onChange={(e) => onSearchChange(e.target.value)}
+            style={{
+              padding: '0.5rem 1rem 0.5rem 2.5rem',
+              borderRadius: '20px',
+              border: '1px solid var(--ifm-color-emphasis-300)',
+              width: '100%',
+              outline: 'none',
+              fontSize: '0.9rem',
+              boxSizing: 'border-box',
+              backgroundPosition: '1rem center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: '1rem',
+            }}
+          />
+        </div>
       </div>
 
-      <div>
+      <div style={{ clear: 'both' }}>
         {displayMode === 'tagCloud' && (
           <TagCloudView
             tagList={tagList}
