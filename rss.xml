@@ -4,10 +4,38 @@
         <title>不如怀念 Blog</title>
         <link>https://wang1212.github.io</link>
         <description>不如怀念 Blog</description>
-        <lastBuildDate>Sun, 13 Jul 2025 13:43:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 20 Jul 2025 13:43:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-Hans</language>
+        <item>
+            <title><![CDATA[「每周回顾」EP2025W29：AI 工具进展与 WebAssembly 的十年]]></title>
+            <link>https://wang1212.github.io/2025/07/20/weekly/2025/weekly-review-ep2025w29</link>
+            <guid>https://wang1212.github.io/2025/07/20/weekly/2025/weekly-review-ep2025w29</guid>
+            <pubDate>Sun, 20 Jul 2025 13:43:00 GMT</pubDate>
+            <description><![CDATA[2025 年第 29  周的回顾，聚焦 AI 领域，Windsurf IDE 迎来重大更新，支持语音输入与历史对话引用。OpenAI 发布 ChatGPT Agent，整合交互、信息合成与对话能力。月之暗面推出开源大模型 Kimi-K2，强调规划与工具调用。此外，Stack Overflow 宣布转型，旨在重建高质量开发者社区并引入 AI 问答搜索，以应对生成式 AI 带来的挑战。WebAssembly 发展十年，仍待广泛成熟的应用场景。]]></description>
+            <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>聚焦 AI 领域，Windsurf IDE迎来重大更新，支持语音输入与历史对话引用。OpenAI 发布 ChatGPT Agent，整合交互、信息合成与对话能力。月之暗面推出开源大模型 Kimi-K2，强调规划与工具调用。此外，Stack Overflow 宣布转型，旨在重建高质量开发者社区并引入 AI 问答搜索，以应对生成式 AI 带来的挑战。WebAssembly 发展十年，仍待广泛成熟的应用场景。</p></div></div>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="windsurf-wave-11"><a href="https://windsurf.com/blog/windsurf-wave-11" target="_blank" rel="noopener noreferrer">Windsurf Wave 11</a><a href="https://wang1212.github.io/2025/07/20/weekly/2025/weekly-review-ep2025w29#windsurf-wave-11" class="hash-link" aria-label="windsurf-wave-11的直接链接" title="windsurf-wave-11的直接链接">​</a></h5>
+<p>过去的两周，AI IDE 领域发生了一些重大变化，主角便是 Windsurf，现在 Windsurf 的变化终于具有了确定性，也发布最新一次大更新，带来了语音输入支持，以及对历史对话的引用特性。</p>
+<p><code>Windsurf</code> <code>AI</code> <code>Code Agent</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="webassembly-yes-but-for-what"><a href="https://queue.acm.org/detail.cfm?id=3746171" target="_blank" rel="noopener noreferrer">WebAssembly: Yes, but for What?</a><a href="https://wang1212.github.io/2025/07/20/weekly/2025/weekly-review-ep2025w29#webassembly-yes-but-for-what" class="hash-link" aria-label="webassembly-yes-but-for-what的直接链接" title="webassembly-yes-but-for-what的直接链接">​</a></h5>
+<p>不知不觉间，WebAssembly 已经发展了十年，从最初的实验性技术，到如今已经成为成熟的 Web 技术之一。但就目前的发展来看，WebAssembly 还没有广泛且成熟的场景应用，可能最成功的场景之一便是 SQLite 的 WebAssembly 版本，使得 Chrome 放弃了 WebSQL 规范。除此之外，WebAssembly 最让大家觉得有潜力的便是高性能场景，毕竟 JavaScript 相对于 C++ 等语言来说，性能差距还是比较明显的，但即便如此这仍然不是一个成熟的应用场景。</p>
+<p><code>WebAssembly</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="introducing-chatgpt-agent-bridging-research-and-action"><a href="https://openai.com/index/introducing-chatgpt-agent/" target="_blank" rel="noopener noreferrer">Introducing ChatGPT agent: bridging research and action</a><a href="https://wang1212.github.io/2025/07/20/weekly/2025/weekly-review-ep2025w29#introducing-chatgpt-agent-bridging-research-and-action" class="hash-link" aria-label="introducing-chatgpt-agent-bridging-research-and-action的直接链接" title="introducing-chatgpt-agent-bridging-research-and-action的直接链接">​</a></h5>
+<p>OpenAI 发布了 ChatGPT Agent，这是一个基于 LLM 的智能体，可以与用户进行交互，并执行一些任务。据称，ChatGPT Agent 的性能在多个基准测试中都表现出色，它融合了先前突破的三大优势：Operator 与网站的交互能力、Deep Research 的信息合成能力，以及 ChatGPT 的智能和对话流畅性。</p>
+<p><code>ChatGPT Agent</code> <code>AI</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="kimi-k2"><a href="https://moonshotai.github.io/Kimi-K2/" target="_blank" rel="noopener noreferrer">Kimi-K2</a><a href="https://wang1212.github.io/2025/07/20/weekly/2025/weekly-review-ep2025w29#kimi-k2" class="hash-link" aria-label="kimi-k2的直接链接" title="kimi-k2的直接链接">​</a></h5>
+<p>月之暗面发布了迄今为止参数规模最大的开源 LLM，并在各个领域的基准测试取得优秀成绩，这是一个面向智能体的大模型，具备规划能力以及优秀的工具调用能力。</p>
+<p><code>Kimi K2</code> <code>LLM</code> <code>AI</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="a-new-era-of-stack-overflow"><a href="https://stackoverflow.blog/2025/07/10/a-new-era-of-stack-overflow/" target="_blank" rel="noopener noreferrer">A New Era of Stack Overflow</a><a href="https://wang1212.github.io/2025/07/20/weekly/2025/weekly-review-ep2025w29#a-new-era-of-stack-overflow" class="hash-link" aria-label="a-new-era-of-stack-overflow的直接链接" title="a-new-era-of-stack-overflow的直接链接">​</a></h5>
+<p>Stack Overflow 宣布了未来的发展方向以及使命和愿景，对于喜欢 Stack Overflow 的开发者来说，这是一个值得期待的消息。由于两三年前突然爆火的生成式 AI 浪潮，Stack Overflow 的用户数量急剧下降，似乎全世界都认为 Stack Overflow 将会衰退，但可能一个简单的真相被忽略了，那就是现有的 LLMs 训练数据依赖于高质量的数据集，而 Stack Overflow 的数据恰恰是高质量的数据集，当我们的时代不算发展，LLMs 所依赖的高质量数据集将会更加匮乏，而 Stack Overflow 的未来目标方向则是围绕如何使其社区重回开发者中心，并积累高质量的数据集。同时，Stack Overflow 也为开发者带来了自然语言问答搜索的功能，帮助开发者更快速的找到可信的答案。</p>
+<ul>
+<li><a href="https://stackoverflow.ai/" target="_blank" rel="noopener noreferrer">Stack Overflow AI</a></li>
+</ul>
+<p><code>Stack Overflow</code> <code>AI</code></p>]]></content:encoded>
+            <author>mrwang1212@126.com (不如怀念)</author>
+            <category>每周回顾</category>
+        </item>
         <item>
             <title><![CDATA[「每周回顾」EP2025W28：Grok 4 发布与 AI 企业服务转型]]></title>
             <link>https://wang1212.github.io/2025/07/13/weekly/2025/weekly-review-ep2025w28</link>
@@ -382,22 +410,6 @@
 <h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="react-v19"><a href="https://react.dev/blog/2024/12/05/react-19" target="_blank" rel="noopener noreferrer">React v19</a><a href="https://wang1212.github.io/2024/12/08/weekly/2024/weekly-review-ep2024w49#react-v19" class="hash-link" aria-label="react-v19的直接链接" title="react-v19的直接链接">​</a></h5>
 <p>React.js v19 正式发布，带来了架构上的升级，优化表单相关业务的开发体验，还有很多其它新功能，从源码来看，也是一次很大的变化。</p>
 <p><code>React</code> <code>v19</code></p>]]></content:encoded>
-            <author>mrwang1212@126.com (不如怀念)</author>
-            <category>每周回顾</category>
-        </item>
-        <item>
-            <title><![CDATA[「每周回顾」EP2024W47：React 性能检测与 WebAssembly 跨语言应用]]></title>
-            <link>https://wang1212.github.io/2024/11/24/weekly/2024/weekly-review-ep2024w47</link>
-            <guid>https://wang1212.github.io/2024/11/24/weekly/2024/weekly-review-ep2024w47</guid>
-            <pubDate>Thu, 21 Nov 2024 18:00:00 GMT</pubDate>
-            <description><![CDATA[2024 年第 47 周的回顾，React Scan，一款针对 React 应用的自动化性能检测工具，旨在帮助开发者识别并解决性能瓶颈；以及 Extism，一个利用 WebAssembly 的强大功能和可移植性，支持构建跨语言应用的工具库，为多语言环境下的开发提供了新的解决方案。]]></description>
-            <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>React Scan，一款针对 React 应用的自动化性能检测工具，旨在帮助开发者识别并解决性能瓶颈；以及 Extism，一个利用 WebAssembly 的强大功能和可移植性，支持构建跨语言应用的工具库，为多语言环境下的开发提供了新的解决方案。</p></div></div>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="react-scan-automatically-detects-performance-issues-in-your-react-app"><a href="https://github.com/aidenybai/react-scan" target="_blank" rel="noopener noreferrer">React Scan automatically detects performance issues in your React app</a><a href="https://wang1212.github.io/2024/11/24/weekly/2024/weekly-review-ep2024w47#react-scan-automatically-detects-performance-issues-in-your-react-app" class="hash-link" aria-label="react-scan-automatically-detects-performance-issues-in-your-react-app的直接链接" title="react-scan-automatically-detects-performance-issues-in-your-react-app的直接链接">​</a></h5>
-<p>一种调试工具，自动检测到您的React应用中的性能问题的一种方案。</p>
-<p><code>React</code> <code>性能</code></p>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="the-cross-language-framework-for-building-with-webassembly"><a href="https://extism.org/" target="_blank" rel="noopener noreferrer">The cross-language framework for building with WebAssembly</a><a href="https://wang1212.github.io/2024/11/24/weekly/2024/weekly-review-ep2024w47#the-cross-language-framework-for-building-with-webassembly" class="hash-link" aria-label="the-cross-language-framework-for-building-with-webassembly的直接链接" title="the-cross-language-framework-for-building-with-webassembly的直接链接">​</a></h5>
-<p>一个工具库，利用 WebAssembly 的强大功能和可移植性，支持构建跨语言的应用。</p>
-<p><code>WebAssembly</code></p>]]></content:encoded>
             <author>mrwang1212@126.com (不如怀念)</author>
             <category>每周回顾</category>
         </item>
