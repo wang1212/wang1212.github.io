@@ -1,17 +1,19 @@
-# LLM Summarizes Weekly Review Article Content
+# Task: Summarize the content of the weekly review article
 
-Summarizes the content of the input article, outputting a title and a paragraph of summary text.
+Summarize the content of the input article, output the title and a summary text.
 
 ## Output
 
-- The title of the generated article should be closely related to the content of the article, and should not be a general description, such as "Technology Trends" or "Summary" or "Review", etc. related to no specific meaning.
-- Generate a one-paragraph summary of the article of no more than 100 words
-- Generation style should be pragmatic, not flashy or full of marketing flavor
-- Generated content in Chinese
+- The article content is divided into multiple chapters based on the title, and there is no relationship between the chapters. This is actually an article that collects the more important news content in a week
+
+- The generated article title should be closely related to the article content and should not be a general description, such as "technical trends", "summary", "comments" and other descriptions without specific meanings.
+- Generate a summary of no more than 100 words.
+- The generated style should be pragmatic, not exaggerated or marketing style.
+- The generated result must be in Chinese
 
 ## Input
 
-Here's an entire paragraph of the article that needs to need to be summarized:
+The following is the entire text of the article to be summarized (markdown format):
 
 ```markdown
 
