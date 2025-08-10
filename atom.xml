@@ -2,11 +2,55 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wang1212.github.io</id>
     <title>不如怀念 Blog</title>
-    <updated>2025-07-27T19:21:00.000Z</updated>
+    <updated>2025-08-03T22:32:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wang1212.github.io"/>
     <subtitle>不如怀念 Blog</subtitle>
     <icon>https://wang1212.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[「每周回顾」EP2025W31：Node.js 新版本、Figma 成功上市、GLM-4.5 开源等]]></title>
+        <id>https://wang1212.github.io/2025/08/03/weekly/2025/weekly-review-ep2025w31</id>
+        <link href="https://wang1212.github.io/2025/08/03/weekly/2025/weekly-review-ep2025w31"/>
+        <updated>2025-08-03T22:32:00.000Z</updated>
+        <summary type="html"><![CDATA[2025 年第 31 周的回顾，Node.js v22.18.0 默认启用类型剥离，Parcel 增加 React Server Components 支持。MDN 迎来 20 周年，JavaScript 运行时发展历程回顾。Cline 获 3200 万美元融资，GitHub 推出新开源播客。Figma 成功 IPO 市值一度超 650 亿美元。新技术方面，DPO 对齐方法、Google LangExtract、智谱 GLM-4.5 模型均引发关注。]]></summary>
+        <content type="html"><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>本周发布的 Node.js v22.18.0 默认启用类型剥离，Parcel 增加 React Server Components 支持。MDN 迎来 20 周年，JavaScript 运行时发展历程回顾。Cline 获 3200 万美元融资，GitHub 推出新开源播客。Figma 成功 IPO 市值一度超 650 亿美元。新技术方面，DPO 对齐方法、Google LangExtract、智谱 GLM-4.5 模型均引发关注。</p></div></div>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="nodejs-v22180-lts"><a href="https://nodejs.org/en/blog/release/v22.18.0#type-stripping-is-enabled-by-default" target="_blank" rel="noopener noreferrer">Node.js v22.18.0 (LTS)</a><a href="https://wang1212.github.io/2025/08/03/weekly/2025/weekly-review-ep2025w31#nodejs-v22180-lts" class="hash-link" aria-label="nodejs-v22180-lts的直接链接" title="nodejs-v22180-lts的直接链接">​</a></h5>
+<p>Node.js v22.18.0 (LTS) 发布，类型剥离（type stripping）功能默认启用。</p>
+<p><code>Node.js</code> <code>LTS</code> <code>type stripping</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="celebrating-20-years-of-mdn"><a href="https://developer.mozilla.org/en-US/blog/mdn-turns-20/" target="_blank" rel="noopener noreferrer">Celebrating 20 years of MDN</a><a href="https://wang1212.github.io/2025/08/03/weekly/2025/weekly-review-ep2025w31#celebrating-20-years-of-mdn" class="hash-link" aria-label="celebrating-20-years-of-mdn的直接链接" title="celebrating-20-years-of-mdn的直接链接">​</a></h5>
+<p>MDN Web Docs 已经成立了 20 年。</p>
+<p><code>MDN</code> <code>Web Docs</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="how-parcel-bundles-react-server-components"><a href="https://devongovett.me/blog/parcel-rsc.html" target="_blank" rel="noopener noreferrer">How Parcel bundles React Server Components</a><a href="https://wang1212.github.io/2025/08/03/weekly/2025/weekly-review-ep2025w31#how-parcel-bundles-react-server-components" class="hash-link" aria-label="how-parcel-bundles-react-server-components的直接链接" title="how-parcel-bundles-react-server-components的直接链接">​</a></h5>
+<p>Parcel v2.14.0 新增了对 React Server Components 的支持，这篇文章介绍了构建工具是如何处理 React Server Components 的。</p>
+<p><code>Parcel</code> <code>React</code> <code>Server Components</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="the-many-many-many-javascript-runtimes-of-the-last-decade"><a href="https://buttondown.com/whatever_jamie/archive/the-many-many-many-javascript-runtimes-of-the-last-decade/" target="_blank" rel="noopener noreferrer">The many, many, many JavaScript runtimes of the last decade</a><a href="https://wang1212.github.io/2025/08/03/weekly/2025/weekly-review-ep2025w31#the-many-many-many-javascript-runtimes-of-the-last-decade" class="hash-link" aria-label="the-many-many-many-javascript-runtimes-of-the-last-decade的直接链接" title="the-many-many-many-javascript-runtimes-of-the-last-decade的直接链接">​</a></h5>
+<p>一篇介绍过去 10 年 JavaScript 运行时发展历程的文章，介绍不同的应用场景，例如边缘计算、函数计算、微控制器、移动设备、跨端渲染等等。</p>
+<p><code>JavaScript</code> <code>runtimes</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="cline-the-open-source-code-agent--with-saoud-rizwan-and-nik-pash"><a href="https://www.latent.space/p/cline" target="_blank" rel="noopener noreferrer">Cline: The Open Source Code Agent — with Saoud Rizwan and Nik Pash</a><a href="https://wang1212.github.io/2025/08/03/weekly/2025/weekly-review-ep2025w31#cline-the-open-source-code-agent--with-saoud-rizwan-and-nik-pash" class="hash-link" aria-label="cline-the-open-source-code-agent--with-saoud-rizwan-and-nik-pash的直接链接" title="cline-the-open-source-code-agent--with-saoud-rizwan-and-nik-pash的直接链接">​</a></h5>
+<p>Cline 宣布了他们的 3200 万美元种子与 A 轮融资，仅仅一个 VS Code 扩展就能获得资本青睐，可见 Code Agent 的市场潜力。</p>
+<p><code>Code Agent</code> <code>Cline</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="from-first-commits-to-big-ships-tune-into-our-new-open-source-podcast"><a href="https://github.blog/open-source/maintainers/from-first-commits-to-big-ships-tune-into-our-new-open-source-podcast/" target="_blank" rel="noopener noreferrer">From first commits to big ships: Tune into our new open source podcast</a><a href="https://wang1212.github.io/2025/08/03/weekly/2025/weekly-review-ep2025w31#from-first-commits-to-big-ships-tune-into-our-new-open-source-podcast" class="hash-link" aria-label="from-first-commits-to-big-ships-tune-into-our-new-open-source-podcast的直接链接" title="from-first-commits-to-big-ships-tune-into-our-new-open-source-podcast的直接链接">​</a></h5>
+<p>全新的 GitHub 播客，深入了解代码背后的故事：塑造开源生态系统的项目，人们和想法。</p>
+<p><code>GitHub</code> <code>podcast</code> <code>open source</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="figmas-ipo-design-is-everyones-business"><a href="https://www.figma.com/blog/figma-ipo-founder-letter/" target="_blank" rel="noopener noreferrer">Figma's IPO: Design is everyone's business</a><a href="https://wang1212.github.io/2025/08/03/weekly/2025/weekly-review-ep2025w31#figmas-ipo-design-is-everyones-business" class="hash-link" aria-label="figmas-ipo-design-is-everyones-business的直接链接" title="figmas-ipo-design-is-everyones-business的直接链接">​</a></h5>
+<p>Figma 于 2025 年 7 月 31 日在纽约证券交易所上市，股票代码为 FIG。其 IPO 发行价为每股 $33 美元。Figma 的股价在上市首日飙升，收盘时达到 $115.50 美元，是其 IPO 发行价的三倍多。其盘中一度触及 $124.63 美元的高点。这一强劲的首日表现使其市值一度超过 $650 亿美元，远高于 2022 年 Adobe 计划以 $200 亿美元收购时的估值。</p>
+<p><code>Figma</code> <code>IPO</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="direct-preference-optimization-dpo"><a href="https://cameronrwolfe.substack.com/p/direct-preference-optimization" target="_blank" rel="noopener noreferrer">Direct Preference Optimization (DPO)</a><a href="https://wang1212.github.io/2025/08/03/weekly/2025/weekly-review-ep2025w31#direct-preference-optimization-dpo" class="hash-link" aria-label="direct-preference-optimization-dpo的直接链接" title="direct-preference-optimization-dpo的直接链接">​</a></h5>
+<p>直接偏好优化（DPO）是一种对齐大语言模型的技术，相比于从人类反馈中学习（RLHF）的对齐方法，DPO 的成本更低且更简单，这篇文章对齐进行了详细的介绍。</p>
+<p><code>LLM</code> <code>DPO</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="introducing-langextract-a-gemini-powered-information-extraction-library"><a href="https://developers.googleblog.com/en/introducing-langextract-a-gemini-powered-information-extraction-library/" target="_blank" rel="noopener noreferrer">Introducing LangExtract: A Gemini powered information extraction library</a><a href="https://wang1212.github.io/2025/08/03/weekly/2025/weekly-review-ep2025w31#introducing-langextract-a-gemini-powered-information-extraction-library" class="hash-link" aria-label="introducing-langextract-a-gemini-powered-information-extraction-library的直接链接" title="introducing-langextract-a-gemini-powered-information-extraction-library的直接链接">​</a></h5>
+<p>Google 开源的文本信息提取库 LangExtract，可以结合 LLM 精准的提取长文本的关键信息，并支持可视化。</p>
+<p><code>Google</code> <code>LangExtract</code> <code>NER</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="glm-45-reasoning-coding-and-agentic-abililties"><a href="https://z.ai/blog/glm-4.5" target="_blank" rel="noopener noreferrer">GLM-4.5: Reasoning, Coding, and Agentic Abililties</a><a href="https://wang1212.github.io/2025/08/03/weekly/2025/weekly-review-ep2025w31#glm-45-reasoning-coding-and-agentic-abililties" class="hash-link" aria-label="glm-45-reasoning-coding-and-agentic-abililties的直接链接" title="glm-45-reasoning-coding-and-agentic-abililties的直接链接">​</a></h5>
+<p>智谱 AI 宣布开源 GLM-4.5 系列模型，擅长推理、编码和代理任务，提供复杂推理和即时响应模式，旨在通过一个统一的模型来满足不同领域复杂任务需求。</p>
+<p><code>ZAI</code> <code>GLM-4.5</code> <code>reasoning</code> <code>coding</code> <code>agentic abilities</code></p>]]></content>
+        <author>
+            <name>不如怀念</name>
+            <email>mrwang1212@126.com</email>
+            <uri>https://github.com/wang1212</uri>
+        </author>
+        <category label="每周回顾" term="每周回顾"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[「每周回顾」EP2025W30：GitHub Spark、React 编译器与千问 Qwen3 Coder]]></title>
         <id>https://wang1212.github.io/2025/07/27/weekly/2025/weekly-review-ep2025w30</id>
@@ -468,26 +512,6 @@
 <h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="standard-schema"><a href="https://standardschema.dev/" target="_blank" rel="noopener noreferrer">Standard Schema</a><a href="https://wang1212.github.io/2025/02/02/weekly/2025/weekly-review-ep2025w5#standard-schema" class="hash-link" aria-label="standard-schema的直接链接" title="standard-schema的直接链接">​</a></h5>
 <p>Zod、Valibot 和 ArkType 库的作者们发起了 Schema 的标准规范并在各自的库中进行了实现，这为后续的生态发展提供了基础，以提升开发者体验为目标。</p>
 <p><code>JavaScript</code> <code>Data Schema</code> <code>数据校验</code></p>]]></content>
-        <author>
-            <name>不如怀念</name>
-            <email>mrwang1212@126.com</email>
-            <uri>https://github.com/wang1212</uri>
-        </author>
-        <category label="每周回顾" term="每周回顾"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[「每周回顾」EP2025W3：Docusaurus 3.7 发布及 2024 大模型技术总结]]></title>
-        <id>https://wang1212.github.io/2025/01/19/weekly/2025/weekly-review-ep2025w3</id>
-        <link href="https://wang1212.github.io/2025/01/19/weekly/2025/weekly-review-ep2025w3"/>
-        <updated>2025-01-14T18:00:00.000Z</updated>
-        <summary type="html"><![CDATA[2025 年第 3 周的回顾，Docusaurus 3.7 已发布，新增对 React 19 的支持，预示着 Docusaurus 4 即将面世。同时，一篇文章总结了 2024 年大型语言模型（LLMs）领域的技术进展，涵盖了该年度 AI 大模型发展的重要经验和趋势。]]></summary>
-        <content type="html"><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>Docusaurus 3.7 已发布，新增对 React 19 的支持，预示着 Docusaurus 4 即将面世。同时，一篇文章总结了 2024 年大型语言模型（LLMs）领域的技术进展，涵盖了该年度 AI 大模型发展的重要经验和趋势。</p></div></div>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="docusaurus-37"><a href="https://docusaurus.io/blog/releases/3.7" target="_blank" rel="noopener noreferrer">Docusaurus 3.7</a><a href="https://wang1212.github.io/2025/01/19/weekly/2025/weekly-review-ep2025w3#docusaurus-37" class="hash-link" aria-label="docusaurus-37的直接链接" title="docusaurus-37的直接链接">​</a></h5>
-<p>Docusaurus 3.7 发布，支持 react v19，相信很快 v4 将会发布。</p>
-<p><code>Docusaurus</code></p>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="things-we-learned-about-llms-in-2024"><a href="https://simonwillison.net/2024/Dec/31/llms-in-2024/" target="_blank" rel="noopener noreferrer">Things we learned about LLMs in 2024</a><a href="https://wang1212.github.io/2025/01/19/weekly/2025/weekly-review-ep2025w3#things-we-learned-about-llms-in-2024" class="hash-link" aria-label="things-we-learned-about-llms-in-2024的直接链接" title="things-we-learned-about-llms-in-2024的直接链接">​</a></h5>
-<p>一篇对 2024 年 AI 大模型领域技术发展的总结</p>
-<p><code>AI</code> <code>LLMs</code></p>]]></content>
         <author>
             <name>不如怀念</name>
             <email>mrwang1212@126.com</email>
