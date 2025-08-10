@@ -4,10 +4,60 @@
         <title>不如怀念 Blog</title>
         <link>https://wang1212.github.io</link>
         <description>不如怀念 Blog</description>
-        <lastBuildDate>Sun, 03 Aug 2025 22:32:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 10 Aug 2025 14:32:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-Hans</language>
+        <item>
+            <title><![CDATA[「每周回顾」EP2025W32：GPT-5 发布、Gemini 新功能、gpt-oss 开源及多项开发者工具更新]]></title>
+            <link>https://wang1212.github.io/2025/08/10/weekly/2025/weekly-review-ep2025w32</link>
+            <guid>https://wang1212.github.io/2025/08/10/weekly/2025/weekly-review-ep2025w32</guid>
+            <pubDate>Sun, 10 Aug 2025 14:32:00 GMT</pubDate>
+            <description><![CDATA[2025 年第 32 周的回顾，OpenAI 发布统一系统 GPT-5 及开源模型集 gpt-oss；Google 推出 Gemini Storybook、“引导学习”模式及 Jules 正式版，并发布 Genie 3 世界模型；GitHub 强化 Copilot 代码审查与 Actions 自动化；V8 优化 JSON.stringify 性能；Chrome DevTools 新增 CSS 基线显示；ECharts 6 发布多项内置图表；Bytebytego 解析 LLM 世界观构建原理。]]></description>
+            <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>本周 OpenAI 发布统一系统 GPT-5 及开源模型集 gpt-oss；Google 推出 Gemini Storybook、“引导学习”模式及 Jules 正式版，并发布 Genie 3 世界模型；GitHub 强化 Copilot 代码审查与 Actions 自动化；V8 优化 JSON.stringify 性能；Chrome DevTools 新增 CSS 基线显示；ECharts 6 发布多项内置图表；Bytebytego 解析 LLM 世界观构建原理。</p></div></div>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="introducing-gpt-5"><a href="https://openai.com/index/introducing-gpt-5/" target="_blank" rel="noopener noreferrer">Introducing GPT-5</a><a href="https://wang1212.github.io/2025/08/10/weekly/2025/weekly-review-ep2025w32#introducing-gpt-5" class="hash-link" aria-label="introducing-gpt-5的直接链接" title="introducing-gpt-5的直接链接">​</a></h5>
+<p>OpenAI 发布了 GPT-5，现在它被定义为一个统一系统，具有智能的路由器，不再需要用户手动切换不同的模式，并在编码、写作等场景相比 GPT-4o 有显著提升。</p>
+<p><code>OpenAI</code> <code>GPT-5</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="introducing-gemini-storybook"><a href="https://gemini.google/overview/storybook/" target="_blank" rel="noopener noreferrer">Introducing Gemini Storybook</a><a href="https://wang1212.github.io/2025/08/10/weekly/2025/weekly-review-ep2025w32#introducing-gemini-storybook" class="hash-link" aria-label="introducing-gemini-storybook的直接链接" title="introducing-gemini-storybook的直接链接">​</a></h5>
+<p>Gemini 在本周发布了一个小功能，即支持生成故事书，目前来看效果还不错。另外，自上周 ChatGPT 发布学习模式后， Gemini 也推出了类似的功能，称为“引导学习”模式，用户可以通过互动式的方式循序渐进的学习某个知识。</p>
+<ul>
+<li><a href="https://openai.com/index/chatgpt-study-mode/" target="_blank" rel="noopener noreferrer">ChatGPT Study Mode</a></li>
+<li><a href="https://blog.google/outreach-initiatives/education/guided-learning/" target="_blank" rel="noopener noreferrer">Guided Learning</a></li>
+</ul>
+<p><code>Gemini</code> <code>Storybook</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="introducing-gpt-oss"><a href="https://openai.com/index/introducing-gpt-oss/" target="_blank" rel="noopener noreferrer">Introducing gpt-oss</a><a href="https://wang1212.github.io/2025/08/10/weekly/2025/weekly-review-ep2025w32#introducing-gpt-oss" class="hash-link" aria-label="introducing-gpt-oss的直接链接" title="introducing-gpt-oss的直接链接">​</a></h5>
+<p>OpenAI 宣布了 gpt-oss，一个开源的 AI 模型集合，其中 20B 模型可以在消费平台运行，仅需要 16GB 内存左右，据官方透露，其性能与 o4-mini 接近，这是 OpenAI 时隔多年后又一次为社区带来开源技术。与此同时，Google 也宣布了新的世界模型 Genie 3，相对于第二代提升很大，可以生成数分钟的视频。</p>
+<ul>
+<li><a href="https://deepmind.google/discover/blog/genie-3-a-new-frontier-for-world-models/" target="_blank" rel="noopener noreferrer">Genie 3: A New Frontier for World Models</a></li>
+</ul>
+<p><code>OpenAI</code> <code>gpt-oss</code> <code>Genie</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="how-to-use-github-copilot-to-level-up-your-code-reviews-and-pull-requests"><a href="https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-to-level-up-your-code-reviews-and-pull-requests/" target="_blank" rel="noopener noreferrer">How to use GitHub Copilot to level up your code reviews and pull requests</a><a href="https://wang1212.github.io/2025/08/10/weekly/2025/weekly-review-ep2025w32#how-to-use-github-copilot-to-level-up-your-code-reviews-and-pull-requests" class="hash-link" aria-label="how-to-use-github-copilot-to-level-up-your-code-reviews-and-pull-requests的直接链接" title="how-to-use-github-copilot-to-level-up-your-code-reviews-and-pull-requests的直接链接">​</a></h5>
+<p>GitHub 发布了文章介绍了如何使用 GitHub Copilot 来提升代码审查和 Pull Request 的质量。Google 的 Gemini 也发布了 Github Action 工具。</p>
+<ul>
+<li><a href="https://blog.google/technology/developers/introducing-gemini-cli-github-actions/" target="_blank" rel="noopener noreferrer">Introducing Gemini CLI and GitHub Actions</a></li>
+</ul>
+<p><code>GitHub</code> <code>Copilot</code> <code>Code Review</code> <code>Pull Request</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="how-we-made-jsonstringify-more-than-twice-as-fast"><a href="https://v8.dev/blog/json-stringify" target="_blank" rel="noopener noreferrer">How we made JSON.stringify more than twice as fast</a><a href="https://wang1212.github.io/2025/08/10/weekly/2025/weekly-review-ep2025w32#how-we-made-jsonstringify-more-than-twice-as-fast" class="hash-link" aria-label="how-we-made-jsonstringify-more-than-twice-as-fast的直接链接" title="how-we-made-jsonstringify-more-than-twice-as-fast的直接链接">​</a></h5>
+<p>V8 发布了文章介绍了 JSON.stringify 的优化，主要介绍了 V8 的优化策略和技术细节。</p>
+<p><code>V8</code> <code>JSON.stringify</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="jules-our-asynchronous-coding-agent-is-now-available-for-everyone"><a href="https://blog.google/technology/google-labs/jules-now-available/" target="_blank" rel="noopener noreferrer">Jules, our asynchronous coding agent, is now available for everyone.</a><a href="https://wang1212.github.io/2025/08/10/weekly/2025/weekly-review-ep2025w32#jules-our-asynchronous-coding-agent-is-now-available-for-everyone" class="hash-link" aria-label="jules-our-asynchronous-coding-agent-is-now-available-for-everyone的直接链接" title="jules-our-asynchronous-coding-agent-is-now-available-for-everyone的直接链接">​</a></h5>
+<p>Jules 是 Google Labs 发布的异步代码代理，现在结束了测试发布了正式版并对所有人开放。</p>
+<p><code>Google</code> <code>Jules</code> <code>Code Agent</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="automate-your-project-with-github-models-in-actions"><a href="https://github.blog/ai-and-ml/generative-ai/automate-your-project-with-github-models-in-actions/" target="_blank" rel="noopener noreferrer">Automate your project with GitHub Models in Actions</a><a href="https://wang1212.github.io/2025/08/10/weekly/2025/weekly-review-ep2025w32#automate-your-project-with-github-models-in-actions" class="hash-link" aria-label="automate-your-project-with-github-models-in-actions的直接链接" title="automate-your-project-with-github-models-in-actions的直接链接">​</a></h5>
+<p>前不久，GitHub 发布了 GitHub Models，现在可以在 GitHub Actions 中使用 GitHub Models 引入 AI 能力来自动化完成一些事情，比如 issues 分析、根据 PR 自动生成 changelog 等。</p>
+<p><code>GitHub</code> <code>Actions</code> <code>AI</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="baseline-for-css-properties-now-in-chrome-devtools"><a href="https://web.dev/blog/baseline-devtools-css" target="_blank" rel="noopener noreferrer">Baseline for CSS properties now in Chrome DevTools</a><a href="https://wang1212.github.io/2025/08/10/weekly/2025/weekly-review-ep2025w32#baseline-for-css-properties-now-in-chrome-devtools" class="hash-link" aria-label="baseline-for-css-properties-now-in-chrome-devtools的直接链接" title="baseline-for-css-properties-now-in-chrome-devtools的直接链接">​</a></h5>
+<p>Chrome DevTools 中的 Elements 面板现在支持显示 CSS 属性的基线值，以帮助开发者更方便的了解兼容性情况。</p>
+<p><code>Chrome</code> <code>DevTools</code> <code>CSS</code> <code>Baseline</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="how-llms-see-the-world"><a href="https://blog.bytebytego.com/p/how-llms-see-the-world" target="_blank" rel="noopener noreferrer">How LLMs See the World</a><a href="https://wang1212.github.io/2025/08/10/weekly/2025/weekly-review-ep2025w32#how-llms-see-the-world" class="hash-link" aria-label="how-llms-see-the-world的直接链接" title="how-llms-see-the-world的直接链接">​</a></h5>
+<p>Bytebytego 发布了文章介绍了 LLMs 了解世界的原理，主要介绍了文本 Tokenization 的过程和一些相关技术对比。</p>
+<p><code>LLM</code> <code>Tokenization</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="apache-echarts-6-new-features"><a href="https://echarts.apache.org/handbook/en/basics/release-note/v6-feature/" target="_blank" rel="noopener noreferrer">Apache ECharts 6 New Features</a><a href="https://wang1212.github.io/2025/08/10/weekly/2025/weekly-review-ep2025w32#apache-echarts-6-new-features" class="hash-link" aria-label="apache-echarts-6-new-features的直接链接" title="apache-echarts-6-new-features的直接链接">​</a></h5>
+<p>前不久，Apache ECharts 发布了 6.0 版本，带来了不少新特性，像一些过去需要我们自己开发图表已经内置支持，例如蜂群图。</p>
+<p><code>ECharts</code> <code>6.0</code></p>]]></content:encoded>
+            <author>mrwang1212@126.com (不如怀念)</author>
+            <category>每周回顾</category>
+        </item>
         <item>
             <title><![CDATA[「每周回顾」EP2025W31：Node.js 新版本、Figma 成功上市、GLM-4.5 开源等]]></title>
             <link>https://wang1212.github.io/2025/08/03/weekly/2025/weekly-review-ep2025w31</link>
@@ -421,22 +471,6 @@
 <h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="demystifying-reasoning-models"><a href="https://cameronrwolfe.substack.com/p/demystifying-reasoning-models" target="_blank" rel="noopener noreferrer">Demystifying Reasoning Models</a><a href="https://wang1212.github.io/2025/02/23/weekly/2025/weekly-review-ep2025w8#demystifying-reasoning-models" class="hash-link" aria-label="demystifying-reasoning-models的直接链接" title="demystifying-reasoning-models的直接链接">​</a></h5>
 <p>一篇讲述推理模型及其与标准 LLM 的关系的文章，在推理模型大火的当下非常值得一看。</p>
 <p><code>AI</code> <code>推理模型</code></p>]]></content:encoded>
-            <author>mrwang1212@126.com (不如怀念)</author>
-            <category>每周回顾</category>
-        </item>
-        <item>
-            <title><![CDATA[「每周回顾」EP2025W5：推理模型普及与数据验证标准]]></title>
-            <link>https://wang1212.github.io/2025/02/02/weekly/2025/weekly-review-ep2025w5</link>
-            <guid>https://wang1212.github.io/2025/02/02/weekly/2025/weekly-review-ep2025w5</guid>
-            <pubDate>Sat, 01 Feb 2025 18:00:00 GMT</pubDate>
-            <description><![CDATA[2025 年第 5 周的回顾，一篇文章探讨了推理模型相较于传统模型的优势，指出它们正成为主流趋势，因其更低的成本和更优的性能。此外，文中还提到了 Zod、Valibot 和 ArkType 库的作者们共同发起了 Schema 标准规范，旨在统一数据验证方法，从而提升开发者的体验和促进相关生态的发展。]]></description>
-            <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>一篇文章探讨了推理模型相较于传统模型的优势，指出它们正成为主流趋势，因其更低的成本和更优的性能。此外，文中还提到了 Zod、Valibot 和 ArkType 库的作者们共同发起了 Schema 标准规范，旨在统一数据验证方法，从而提升开发者的体验和促进相关生态的发展。</p></div></div>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="why-reasoning-models-will-generalize"><a href="https://www.interconnects.ai/p/why-reasoning-models-will-generalize" target="_blank" rel="noopener noreferrer">Why reasoning models will generalize</a><a href="https://wang1212.github.io/2025/02/02/weekly/2025/weekly-review-ep2025w5#why-reasoning-models-will-generalize" class="hash-link" aria-label="why-reasoning-models-will-generalize的直接链接" title="why-reasoning-models-will-generalize的直接链接">​</a></h5>
-<p>一篇探讨推理模型为什么将会普及的博文，相对于标准模型来说，推理模型正成为一种趋势，并且成本更低，效果更好。</p>
-<p><code>AI</code> <code>推理模型</code></p>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="standard-schema"><a href="https://standardschema.dev/" target="_blank" rel="noopener noreferrer">Standard Schema</a><a href="https://wang1212.github.io/2025/02/02/weekly/2025/weekly-review-ep2025w5#standard-schema" class="hash-link" aria-label="standard-schema的直接链接" title="standard-schema的直接链接">​</a></h5>
-<p>Zod、Valibot 和 ArkType 库的作者们发起了 Schema 的标准规范并在各自的库中进行了实现，这为后续的生态发展提供了基础，以提升开发者体验为目标。</p>
-<p><code>JavaScript</code> <code>Data Schema</code> <code>数据校验</code></p>]]></content:encoded>
             <author>mrwang1212@126.com (不如怀念)</author>
             <category>每周回顾</category>
         </item>
