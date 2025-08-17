@@ -2,11 +2,55 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wang1212.github.io</id>
     <title>不如怀念 Blog</title>
-    <updated>2025-08-10T14:32:00.000Z</updated>
+    <updated>2025-08-17T18:38:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wang1212.github.io"/>
     <subtitle>不如怀念 Blog</subtitle>
     <icon>https://wang1212.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[「每周回顾」EP2025W33：GitHub 并入微软、Cursor 调整收费、Google 推出 Gemma 3]]></title>
+        <id>https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33</id>
+        <link href="https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33"/>
+        <updated>2025-08-17T18:38:00.000Z</updated>
+        <summary type="html"><![CDATA[2025 年第 33 周的回顾，Google 推出轻量级开源模型 Gemma 3 和 AI 编码代理 Jules 更新；Windsurf 与 Devin 团队合作强化 IDE 功能；Cursor 推出 Agent CLI 并调整计费，引发社区不满；亚马逊的 AI IDE Kiro 正式上线并公布收费模式；智谱发布多模态模型 GLM-4.5V；pnpm 新版本支持多种 JS 运行时；GitHub CEO 宣布离职，公司将并入微软 CoreAI。]]></summary>
+        <content type="html"><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>Google 推出轻量级开源模型 Gemma 3 和 AI 编码代理 Jules 更新；Windsurf 与 Devin 团队合作强化 IDE 功能；Cursor 推出 Agent CLI 并调整计费，引发社区不满；亚马逊的 AI IDE Kiro 正式上线并公布收费模式；智谱发布多模态模型 GLM-4.5V；pnpm 新版本支持多种 JS 运行时；GitHub CEO 宣布离职，公司将并入微软 CoreAI。</p></div></div>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="codebase-to-llm-prompt-complete-with-file-tree-templating-token-count"><a href="https://www.opensourceprojects.dev/post/1956768219903185389" target="_blank" rel="noopener noreferrer">Codebase to LLM prompt, complete with file tree, templating, token count</a><a href="https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33#codebase-to-llm-prompt-complete-with-file-tree-templating-token-count" class="hash-link" aria-label="codebase-to-llm-prompt-complete-with-file-tree-templating-token-count的直接链接" title="codebase-to-llm-prompt-complete-with-file-tree-templating-token-count的直接链接">​</a></h5>
+<p>一个开源的 CLI 工具，可以把代码库转换为提示词，以便基于上下文来对代码库进行分析提问。类似的工具还有 Repomix，但对于大型代码库来说，打包后的提示词文件高达几 MB，对模型的上下文窗口大小形成挑战。</p>
+<p><code>Open Source</code> <code>Code2prompt</code> <code>Codebase</code> <code>LLM</code> <code>Prompt</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="introducing-gemma-3-270m-the-compact-model-for-hyper-efficient-ai"><a href="https://developers.googleblog.com/en/introducing-gemma-3-270m/" target="_blank" rel="noopener noreferrer">Introducing Gemma 3 270M: The compact model for hyper-efficient AI</a><a href="https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33#introducing-gemma-3-270m-the-compact-model-for-hyper-efficient-ai" class="hash-link" aria-label="introducing-gemma-3-270m-the-compact-model-for-hyper-efficient-ai的直接链接" title="introducing-gemma-3-270m-the-compact-model-for-hyper-efficient-ai的直接链接">​</a></h5>
+<p>Gemma 是 Google 的开源模型，以小规模移动设备优化为目标。现在发布了 Gemma 3，拥有 2.7 参数，具有强大的指导遵循和文本结构能力，支持微调。</p>
+<p><code>Google</code> <code>Gemini</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="jules-changelog"><a href="https://jules.google/docs/changelog/" target="_blank" rel="noopener noreferrer">jules Changelog</a><a href="https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33#jules-changelog" class="hash-link" aria-label="jules-changelog的直接链接" title="jules-changelog的直接链接">​</a></h5>
+<p>Google 的 AI 异步编码代理产品 Jules 发布了多项重要更新，现在支持 Web 搜索，任务执行过程中可以将代码导入 GitHub 实现人工介入，虚拟机存储增加到 20GB 上限以支持大型项目。</p>
+<p><code>Google</code> <code>jules</code> <code>Changelog</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="windsurf-wave-12-devin-features-in-windsurf"><a href="https://windsurf.com/blog/windsurf-wave-12" target="_blank" rel="noopener noreferrer">Windsurf Wave 12: Devin features in Windsurf</a><a href="https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33#windsurf-wave-12-devin-features-in-windsurf" class="hash-link" aria-label="windsurf-wave-12-devin-features-in-windsurf的直接链接" title="windsurf-wave-12-devin-features-in-windsurf的直接链接">​</a></h5>
+<p>Windsurf 发布了 Wave 12，带来重磅更新，推出了被构建 AI 程序员 Devin 的公司收购后联手合作构建的新功能，将 DeepWiki 导入了 AI IDE，让代码分析更简单快捷。</p>
+<p><code>Windsurf</code> <code>Wave 12</code> <code>Devin</code> <code>DeepWiki</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="cursor-agent-cli"><a href="https://cursor.com/ja/blog/cli" target="_blank" rel="noopener noreferrer">Cursor Agent CLI</a><a href="https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33#cursor-agent-cli" class="hash-link" aria-label="cursor-agent-cli的直接链接" title="cursor-agent-cli的直接链接">​</a></h5>
+<p>Cursor 发布了 Agent CLI，现在 Cursor 正从一个 AI 编码 IDE 转向一个 AI 编程平台，这包括 Web Agent、IDE、CLI 等多个产品。另外，Cursor 也公布了一项重要更新，Auto 模式将不再无限量，而是计入用户的账户额度，近期频繁的调整计费方案，社区已经对 Cursor 表达了不满，许多人都在寻找替代品。</p>
+<ul>
+<li><a href="https://cursor.com/ja/blog/aug-2025-pricing" target="_blank" rel="noopener noreferrer">Updates to Teams and Auto</a></li>
+</ul>
+<p><code>Cursor</code> <code>Agent</code> <code>CLI</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="kiro-pricing-update--waitlist-invites-coming-soon"><a href="https://kiro.dev/blog/pricing-waitlist-updates/" target="_blank" rel="noopener noreferrer">Kiro Pricing Update + Waitlist Invites Coming Soon</a><a href="https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33#kiro-pricing-update--waitlist-invites-coming-soon" class="hash-link" aria-label="kiro-pricing-update--waitlist-invites-coming-soon的直接链接" title="kiro-pricing-update--waitlist-invites-coming-soon的直接链接">​</a></h5>
+<p>亚马逊的 AI 编码 IDE 已经结束内测，正式开放给所有用户，并公布了产品计费方案，采用两种请求模型进行计费：Spec 请求和 Vibe 请求。</p>
+<p><code>Amazon</code> <code>Kiro</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="glm-45v"><a href="https://huggingface.co/zai-org/GLM-4.5V" target="_blank" rel="noopener noreferrer">GLM-4.5V</a><a href="https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33#glm-45v" class="hash-link" aria-label="glm-45v的直接链接" title="glm-45v的直接链接">​</a></h5>
+<p>智谱新发布了 GLM 4.5V 多模态推理模型，是 GLM 4.5 开源的延续。VLM 也是目前关注越来越多的领域，因为任务越来越复杂，多模态能力成为解决这些问题不可或缺的能力。</p>
+<p><code>Z.AI</code> <code>GLM</code> <code>4.5V</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="pnpm-1014"><a href="https://pnpm.io/blog/releases/10.14" target="_blank" rel="noopener noreferrer">pnpm 10.14</a><a href="https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33#pnpm-1014" class="hash-link" aria-label="pnpm-1014的直接链接" title="pnpm-1014的直接链接">​</a></h5>
+<p>pnpm 现在支持不同的 JS 运行时，例如 Deno、Bun 等等。</p>
+<p><code>pnpm</code> <code>10.14</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="auf-wiedersehen-github-️"><a href="https://github.blog/news-insights/company-news/goodbye-github/" target="_blank" rel="noopener noreferrer">Auf Wiedersehen, GitHub ♥️</a><a href="https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33#auf-wiedersehen-github-%EF%B8%8F" class="hash-link" aria-label="auf-wiedersehen-github-️的直接链接" title="auf-wiedersehen-github-️的直接链接">​</a></h5>
+<p>GitHub 现任 CEO Thomas Dohmke 宣布离职，将持续任职到 2025 年底。后续，GitHub 将不再作为独立主体存在，而是会被合并到微软的 CoreAI 团队。也许，是时候出现 GitHub 的下一个替代者了？</p>
+<p><code>GitHub</code> <code>Microsoft</code> <code>Thomas Dohmke</code></p>]]></content>
+        <author>
+            <name>不如怀念</name>
+            <email>mrwang1212@126.com</email>
+            <uri>https://github.com/wang1212</uri>
+        </author>
+        <category label="每周回顾" term="每周回顾"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[「每周回顾」EP2025W32：GPT-5 发布、Gemini 新功能、gpt-oss 开源及多项开发者工具更新]]></title>
         <id>https://wang1212.github.io/2025/08/10/weekly/2025/weekly-review-ep2025w32</id>
@@ -529,23 +573,6 @@
 <li><a href="https://openai.com/index/introducing-operator/" target="_blank" rel="noopener noreferrer">Introducing Operator</a></li>
 </ul>
 <p><code>AI</code> <code>Serverless Browsers</code></p>]]></content>
-        <author>
-            <name>不如怀念</name>
-            <email>mrwang1212@126.com</email>
-            <uri>https://github.com/wang1212</uri>
-        </author>
-        <category label="每周回顾" term="每周回顾"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[「每周回顾」EP2025W8：揭秘推理模型，超越传统 LLM]]></title>
-        <id>https://wang1212.github.io/2025/02/23/weekly/2025/weekly-review-ep2025w8</id>
-        <link href="https://wang1212.github.io/2025/02/23/weekly/2025/weekly-review-ep2025w8"/>
-        <updated>2025-02-20T18:00:00.000Z</updated>
-        <summary type="html"><![CDATA[2025 年第 8 周的回顾，一篇文章深入探讨了当前热门的推理模型，阐释了它们与标准**大型语言模型（LLM）**之间的关联。在推理模型备受关注的当下，理解其工作原理及与现有 AI 范式的整合方式至关重要，为读者提供了全面审视这一前沿 AI 技术视角的宝贵机会。]]></summary>
-        <content type="html"><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>一篇文章深入探讨了当前热门的推理模型，阐释了它们与标准**大型语言模型（LLM）**之间的关联。在推理模型备受关注的当下，理解其工作原理及与现有 AI 范式的整合方式至关重要，为读者提供了全面审视这一前沿 AI 技术视角的宝贵机会。</p></div></div>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="demystifying-reasoning-models"><a href="https://cameronrwolfe.substack.com/p/demystifying-reasoning-models" target="_blank" rel="noopener noreferrer">Demystifying Reasoning Models</a><a href="https://wang1212.github.io/2025/02/23/weekly/2025/weekly-review-ep2025w8#demystifying-reasoning-models" class="hash-link" aria-label="demystifying-reasoning-models的直接链接" title="demystifying-reasoning-models的直接链接">​</a></h5>
-<p>一篇讲述推理模型及其与标准 LLM 的关系的文章，在推理模型大火的当下非常值得一看。</p>
-<p><code>AI</code> <code>推理模型</code></p>]]></content>
         <author>
             <name>不如怀念</name>
             <email>mrwang1212@126.com</email>
