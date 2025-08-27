@@ -4,10 +4,54 @@
         <title>不如怀念 Blog</title>
         <link>https://wang1212.github.io</link>
         <description>不如怀念 Blog</description>
-        <lastBuildDate>Sun, 17 Aug 2025 18:38:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 24 Aug 2025 23:38:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-Hans</language>
+        <item>
+            <title><![CDATA[「每周回顾」EP2025W34：Google 系列产品更新，阿里开源图像模型]]></title>
+            <link>https://wang1212.github.io/2025/08/24/weekly/2025/weekly-review-ep2025w34</link>
+            <guid>https://wang1212.github.io/2025/08/24/weekly/2025/weekly-review-ep2025w34</guid>
+            <pubDate>Sun, 24 Aug 2025 23:38:00 GMT</pubDate>
+            <description><![CDATA[2025 年第 34 周的回顾，Google 推出 Gemini 2.5 Flash 图像模型与 Code Assist 新功能，进一步完善开发者工具矩阵；阿里开源 Qwen-Image-Edit，字节开源 Seed-OSS，DeepSeek 发布 3.1；英伟达提出小语言模型是 Agentic AI 的未来；OpenAI 发布 AGENTS.md 规范。Anthropic 推出高等教育 AI 课程，Windsurf SWE 模型转为免费。SimilarWeb 报告显示 AI 写作与陪伴领域持续下滑，客户支持场景出现增长。]]></description>
+            <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>Google 推出 Gemini 2.5 Flash 图像模型与 Code Assist 新功能，进一步完善开发者工具矩阵；阿里开源 Qwen-Image-Edit，字节开源 Seed-OSS，DeepSeek 发布 3.1；英伟达提出小语言模型是 Agentic AI 的未来；OpenAI 发布 AGENTS.md 规范。Anthropic 推出高等教育 AI 课程，Windsurf SWE 模型转为免费。SimilarWeb 报告显示 AI 写作与陪伴领域持续下滑，客户支持场景出现增长。</p></div></div>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="introducing-gemini-25-flash-image-our-state-of-the-art-image-model"><a href="https://developers.googleblog.com/en/introducing-gemini-2-5-flash-image/" target="_blank" rel="noopener noreferrer">Introducing Gemini 2.5 Flash Image, our state-of-the-art image model</a><a href="https://wang1212.github.io/2025/08/24/weekly/2025/weekly-review-ep2025w34#introducing-gemini-25-flash-image-our-state-of-the-art-image-model" class="hash-link" aria-label="introducing-gemini-25-flash-image-our-state-of-the-art-image-model的直接链接" title="introducing-gemini-25-flash-image-our-state-of-the-art-image-model的直接链接">​</a></h5>
+<p>图像生成与编辑领域最近火热，Google 也推出了 Gemini 2.5 Flash，新版本图像生成编辑模型，实测效果不错。</p>
+<p><code>Google</code> <code>Gemini Flash</code> <code>Image</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="whats-new-in-gemini-code-assist"><a href="https://developers.googleblog.com/en/new-in-gemini-code-assist/" target="_blank" rel="noopener noreferrer">What's new in Gemini Code Assist</a><a href="https://wang1212.github.io/2025/08/24/weekly/2025/weekly-review-ep2025w34#whats-new-in-gemini-code-assist" class="hash-link" aria-label="whats-new-in-gemini-code-assist的直接链接" title="whats-new-in-gemini-code-assist的直接链接">​</a></h5>
+<p>Google 为 Gemini Code Assist 引入了新的功能，智能体模式，可以更好的完成复杂的多步任务。智能体模式已经是多数 AI 编码代理插件的标配，Google 算是姗姗来迟，但总归是有了。</p>
+<p><code>Google</code> <code>Gemini Code Assist</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="qwen-image-edit"><a href="https://huggingface.co/Qwen/Qwen-Image-Edit" target="_blank" rel="noopener noreferrer">Qwen-Image-Edit</a><a href="https://wang1212.github.io/2025/08/24/weekly/2025/weekly-review-ep2025w34#qwen-image-edit" class="hash-link" aria-label="qwen-image-edit的直接链接" title="qwen-image-edit的直接链接">​</a></h5>
+<p>阿里现在开源了 Qwen-Image-Edit，一个图像编辑模型，支持阿里已经开源了图像生成和编辑模型。</p>
+<p><code>AI</code> <code>Qwen</code> <code>Image Edit</code> <code>OpenSource</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="small-language-models-are-the-future-of-agentic-ai"><a href="https://arxiv.org/abs/2506.02153v1" target="_blank" rel="noopener noreferrer">Small Language Models are the Future of Agentic AI</a><a href="https://wang1212.github.io/2025/08/24/weekly/2025/weekly-review-ep2025w34#small-language-models-are-the-future-of-agentic-ai" class="hash-link" aria-label="small-language-models-are-the-future-of-agentic-ai的直接链接" title="small-language-models-are-the-future-of-agentic-ai的直接链接">​</a></h5>
+<p>英伟达的新论文揭示了新的观点：SLM（小语言模型）才是 Agentic AI 的未来，经济高效。</p>
+<p>简单的来说，对于很多简单的任务直接用 LLM 不仅贵而且相当于“大炮打蚊子”，大材小用。随着现在 SLM 的发展不断成熟，小模型在指令跟随，工具调用，格式化输出等领域也不输于大模型。</p>
+<p>就自己在平时构建智能体的开发过程中感受来看，确实很多简单任务用 SLM 输出不仅更快，而且结果也不差。现在的 AI 智能体系统在处理任务时通常会包含多次 LLM 服务调用，导致响应非常慢，在部分节点换用 SLM 确实是个不错的选择。</p>
+<p>小模型只要性能不错，Token 输出足够快，完全是更好的选择。</p>
+<p><code>NVIDIA</code> <code>Small Language Models</code> <code>Agentic AI</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="anthropic-launches-higher-education-advisory-board-and-ai-fluency-courses"><a href="https://www.anthropic.com/news/anthropic-higher-education-initiatives" target="_blank" rel="noopener noreferrer">Anthropic launches higher education advisory board and AI Fluency courses</a><a href="https://wang1212.github.io/2025/08/24/weekly/2025/weekly-review-ep2025w34#anthropic-launches-higher-education-advisory-board-and-ai-fluency-courses" class="hash-link" aria-label="anthropic-launches-higher-education-advisory-board-and-ai-fluency-courses的直接链接" title="anthropic-launches-higher-education-advisory-board-and-ai-fluency-courses的直接链接">​</a></h5>
+<p>Anthropic 发布了一系列新的 AI 课程，来帮助学生和老师更好的了解 AI 以及 AI 教学。</p>
+<p><code>Anthropic</code> <code>Higher Education</code> <code>Cursor</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="seed-oss-open-source-models"><a href="https://huggingface.co/collections/ByteDance-Seed/seed-oss-68a609f4201e788db05b5dcd" target="_blank" rel="noopener noreferrer">Seed-OSS Open-Source Models</a><a href="https://wang1212.github.io/2025/08/24/weekly/2025/weekly-review-ep2025w34#seed-oss-open-source-models" class="hash-link" aria-label="seed-oss-open-source-models的直接链接" title="seed-oss-open-source-models的直接链接">​</a></h5>
+<p>字节跳动开源了 Seed-OSS 模型，该模型专为强大的长篇文本，推理，代理和一般功能以及多功能开发人员友好的功能而设计。</p>
+<p>另外，DeepSeek 也在近期低调发布了 3.1 版本。</p>
+<p><code>AI</code> <code>ByteDance</code> <code>Seed</code> <code>OpenSource</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="agentsmd"><a href="https://agents.md/" target="_blank" rel="noopener noreferrer">AGENTS.md</a><a href="https://wang1212.github.io/2025/08/24/weekly/2025/weekly-review-ep2025w34#agentsmd" class="hash-link" aria-label="agentsmd的直接链接" title="agentsmd的直接链接">​</a></h5>
+<p>OpenAI 发布了 AGENTS.md 开发规范，一个 AI 编码代理的配置文档，现在终于要终结混乱的规则、工作流、智能体配置文件了。</p>
+<p><code>AI</code> <code>CCode Agent</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="heres-which-google-ai-developer-tool-to-use-for-each-situation"><a href="https://cloud.google.com/blog/products/ai-machine-learning/choose-the-right-google-ai-developer-tool-for-your-workflow" target="_blank" rel="noopener noreferrer">Here’s which Google AI developer tool to use for each situation</a><a href="https://wang1212.github.io/2025/08/24/weekly/2025/weekly-review-ep2025w34#heres-which-google-ai-developer-tool-to-use-for-each-situation" class="hash-link" aria-label="heres-which-google-ai-developer-tool-to-use-for-each-situation的直接链接" title="heres-which-google-ai-developer-tool-to-use-for-each-situation的直接链接">​</a></h5>
+<p>Google 发布了官方的 AI 编码代理适用场景指南，帮助开发者选择合适的工具。自此，Google 已经构建起了完整的 AI 编码代理产品矩阵，包括 Jules、Gemini CLI、Gemini Code Assistant、Google AI Studio 等。</p>
+<p><code>Google</code> <code>AI</code> <code>Developer</code> <code>Code Agent</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="windsurf"><a href="https://windsurf.com/" target="_blank" rel="noopener noreferrer">Windsurf</a><a href="https://wang1212.github.io/2025/08/24/weekly/2025/weekly-review-ep2025w34#windsurf" class="hash-link" aria-label="windsurf的直接链接" title="windsurf的直接链接">​</a></h5>
+<p>Windsurf 已经取消了一直以来提供限免的 SWE 模型的 Lite 版本，好消息是 SWE 现在直接默认免费提供，对于一些简单的任务来说，SWE 模型表现已经足够了。</p>
+<p><code>AI IDE</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="global-ai-tracker"><a href="https://www.similarweb.com/corp/wp-content/uploads/2025/08/attachment-Global-AI-Tracker-8.18.pdf" target="_blank" rel="noopener noreferrer">Global AI Tracker</a><a href="https://wang1212.github.io/2025/08/24/weekly/2025/weekly-review-ep2025w34#global-ai-tracker" class="hash-link" aria-label="global-ai-tracker的直接链接" title="global-ai-tracker的直接链接">​</a></h5>
+<p>SimilarWeb 每半个月发布一期全球 AI 站点追踪分析报告，我们可以从中看出一些有趣的现象，比如在月初的报告中，AI 场景品类中仅 AI 旅游有了正增长，其它诸如 AI 写作、AI 陪伴等领域出现萎缩。现在新一期报告已经发布，可以看到 AI 写作、AI 陪伴领域仍然在持续下滑，而客户支持与体验领域则有了初步的增长迹象。</p>
+<p><code>AI</code> <code>SimilarWeb</code></p>]]></content:encoded>
+            <author>mrwang1212@126.com (不如怀念)</author>
+            <category>每周回顾</category>
+        </item>
         <item>
             <title><![CDATA[「每周回顾」EP2025W33：GitHub 并入微软、Cursor 调整收费、Google 推出 Gemma 3]]></title>
             <link>https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33</link>
@@ -19,7 +63,7 @@
 <p>一个开源的 CLI 工具，可以把代码库转换为提示词，以便基于上下文来对代码库进行分析提问。类似的工具还有 Repomix，但对于大型代码库来说，打包后的提示词文件高达几 MB，对模型的上下文窗口大小形成挑战。</p>
 <p><code>Open Source</code> <code>Code2prompt</code> <code>Codebase</code> <code>LLM</code> <code>Prompt</code></p>
 <h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="introducing-gemma-3-270m-the-compact-model-for-hyper-efficient-ai"><a href="https://developers.googleblog.com/en/introducing-gemma-3-270m/" target="_blank" rel="noopener noreferrer">Introducing Gemma 3 270M: The compact model for hyper-efficient AI</a><a href="https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33#introducing-gemma-3-270m-the-compact-model-for-hyper-efficient-ai" class="hash-link" aria-label="introducing-gemma-3-270m-the-compact-model-for-hyper-efficient-ai的直接链接" title="introducing-gemma-3-270m-the-compact-model-for-hyper-efficient-ai的直接链接">​</a></h5>
-<p>Gemma 是 Google 的开源模型，以小规模移动设备优化为目标。现在发布了 Gemma 3，拥有 2.7 参数，具有强大的指导遵循和文本结构能力，支持微调。</p>
+<p>Gemma 是 Google 的开源模型，以小规模移动设备优化为目标。现在发布了 Gemma 3，拥有 2.7 亿参数，具有强大的指令遵循和文本结构化能力，支持微调。</p>
 <p><code>Google</code> <code>Gemini</code></p>
 <h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="jules-changelog"><a href="https://jules.google/docs/changelog/" target="_blank" rel="noopener noreferrer">jules Changelog</a><a href="https://wang1212.github.io/2025/08/17/weekly/2025/weekly-review-ep2025w33#jules-changelog" class="hash-link" aria-label="jules-changelog的直接链接" title="jules-changelog的直接链接">​</a></h5>
 <p>Google 的 AI 异步编码代理产品 Jules 发布了多项重要更新，现在支持 Web 搜索，任务执行过程中可以将代码导入 GitHub 实现人工介入，虚拟机存储增加到 20GB 上限以支持大型项目。</p>
@@ -476,28 +520,6 @@
 <h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="ep151-24-good-resources-to-learn-software-architecture-in-2025"><a href="https://blog.bytebytego.com/p/ep151-24-good-resources-to-learn" target="_blank" rel="noopener noreferrer">EP151: 24 Good Resources to Learn Software Architecture in 2025</a><a href="https://wang1212.github.io/2025/03/16/weekly/2025/weekly-review-ep2025w11#ep151-24-good-resources-to-learn-software-architecture-in-2025" class="hash-link" aria-label="ep151-24-good-resources-to-learn-software-architecture-in-2025的直接链接" title="ep151-24-good-resources-to-learn-software-architecture-in-2025的直接链接">​</a></h5>
 <p>在 2025 年推荐学习软件架构设计的好的阅读资源列表。</p>
 <p><code>Software Architecture</code> <code>Reading List</code></p>]]></content:encoded>
-            <author>mrwang1212@126.com (不如怀念)</author>
-            <category>每周回顾</category>
-        </item>
-        <item>
-            <title><![CDATA[「每周回顾」EP2025W9：MoE 模型、AI 工程师阅读清单与浏览器控制代理]]></title>
-            <link>https://wang1212.github.io/2025/03/02/weekly/2025/weekly-review-ep2025w9</link>
-            <guid>https://wang1212.github.io/2025/03/02/weekly/2025/weekly-review-ep2025w9</guid>
-            <pubDate>Sat, 01 Mar 2025 18:00:00 GMT</pubDate>
-            <description><![CDATA[2025 年第 9 周的回顾，人工智能领域的最新进展，包括 DeepSeek 开源的 MoE 大语言模型，该模型因其架构设计和优缺点而备受关注。此外，文章还推荐了 2025 年 AI 工程师的必读资源，并探讨了利用 AI 模型通过自然语言对话控制浏览器的潜力，特别提到了 Operator 项目，预示着计算机使用代理的未来发展方向。]]></description>
-            <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>人工智能领域的最新进展，包括 DeepSeek 开源的 MoE 大语言模型，该模型因其架构设计和优缺点而备受关注。此外，文章还推荐了 2025 年 AI 工程师的必读资源，并探讨了利用 AI 模型通过自然语言对话控制浏览器的潜力，特别提到了 Operator 项目，预示着计算机使用代理的未来发展方向。</p></div></div>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="mixture-of-experts-moe-llms"><a href="https://cameronrwolfe.substack.com/p/moe-llms" target="_blank" rel="noopener noreferrer">Mixture-of-Experts (MoE) LLMs</a><a href="https://wang1212.github.io/2025/03/02/weekly/2025/weekly-review-ep2025w9#mixture-of-experts-moe-llms" class="hash-link" aria-label="mixture-of-experts-moe-llms的直接链接" title="mixture-of-experts-moe-llms的直接链接">​</a></h5>
-<p>在春节期间，DeepSeek 开源了一个基于 MoE 的大语言模型，在全球引起了很大的关注，然而当下大部分的大语言模型都是 MoE 架构的，这篇文章详细的探讨了 MoE 架构的设计和优缺点，对于想了解模型底层设计的人来说非常值得一读。</p>
-<p><code>AI</code> <code>MoEs</code></p>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="the-2025-ai-engineer-reading-list"><a href="https://www.latent.space/p/2025-papers" target="_blank" rel="noopener noreferrer">The 2025 AI Engineer Reading List</a><a href="https://wang1212.github.io/2025/03/02/weekly/2025/weekly-review-ep2025w9#the-2025-ai-engineer-reading-list" class="hash-link" aria-label="the-2025-ai-engineer-reading-list的直接链接" title="the-2025-ai-engineer-reading-list的直接链接">​</a></h5>
-<p>2025 年建议 AI 工程师阅读的资源列表。</p>
-<p><code>AI</code> <code>Reading List</code></p>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="open-operator-serverless-browsers-and-the-future-of-computer-using-agents"><a href="https://www.latent.space/p/browserbase" target="_blank" rel="noopener noreferrer">Open Operator, Serverless Browsers and the Future of Computer-Using Agents</a><a href="https://wang1212.github.io/2025/03/02/weekly/2025/weekly-review-ep2025w9#open-operator-serverless-browsers-and-the-future-of-computer-using-agents" class="hash-link" aria-label="open-operator-serverless-browsers-and-the-future-of-computer-using-agents的直接链接" title="open-operator-serverless-browsers-and-the-future-of-computer-using-agents的直接链接">​</a></h5>
-<p>使用 AI 模型通过自然语言对话的方式来控制浏览器，这是一个非常有潜力的方向。</p>
-<ul>
-<li><a href="https://openai.com/index/introducing-operator/" target="_blank" rel="noopener noreferrer">Introducing Operator</a></li>
-</ul>
-<p><code>AI</code> <code>Serverless Browsers</code></p>]]></content:encoded>
             <author>mrwang1212@126.com (不如怀念)</author>
             <category>每周回顾</category>
         </item>
