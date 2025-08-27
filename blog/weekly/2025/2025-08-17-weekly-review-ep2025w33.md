@@ -25,7 +25,7 @@ Google 推出轻量级开源模型 Gemma 3 和 AI 编码代理 Jules 更新；Wi
 
 ##### [Introducing Gemma 3 270M: The compact model for hyper-efficient AI](https://developers.googleblog.com/en/introducing-gemma-3-270m/)
 
-Gemma 是 Google 的开源模型，以小规模移动设备优化为目标。现在发布了 Gemma 3，拥有 2.7 参数，具有强大的指导遵循和文本结构能力，支持微调。
+Gemma 是 Google 的开源模型，以小规模移动设备优化为目标。现在发布了 Gemma 3，拥有 2.7 亿参数，具有强大的指令遵循和文本结构化能力，支持微调。
 
 `Google` `Gemini`
 
