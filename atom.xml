@@ -2,11 +2,47 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wang1212.github.io</id>
     <title>不如怀念 Blog</title>
-    <updated>2025-08-24T23:38:00.000Z</updated>
+    <updated>2025-08-31T23:38:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wang1212.github.io"/>
     <subtitle>不如怀念 Blog</subtitle>
     <icon>https://wang1212.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[「每周回顾」EP2025W35：Zed 集成 Gemini CLI、Claude Chrome 扩展测试及 AI 图像模型新进展]]></title>
+        <id>https://wang1212.github.io/2025/08/31/weekly/2025/weekly-review-ep2025w35</id>
+        <link href="https://wang1212.github.io/2025/08/31/weekly/2025/weekly-review-ep2025w35"/>
+        <updated>2025-08-31T23:38:00.000Z</updated>
+        <summary type="html"><![CDATA[2025 年第 35 周的回顾，Vercel 推出 Streamdown，优化流式聊天内容渲染；Zed 支持 Gemini CLI 并提出 Agent Client Protocol 规范，促进 IDE 智能体标准化；Anthropic 发布 Claude for Chrome 扩展，进入早期测试；a16z 公布生成式 AI 应用榜单，Google Gemini 等增长显著，ChatGPT 仍领先；Google 发布 Gemini 2.5 Flash Image 模型，支持图像编辑功能，千问团队开源 Qwen-Image-Edit 模型。这些进展反映了 AI、IDE 和浏览器扩展领域的快速创新。]]></summary>
+        <content type="html"><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>本周技术新闻亮点包括：Vercel 推出 Streamdown，优化流式聊天内容渲染；Zed 支持 Gemini CLI 并提出 Agent Client Protocol 规范，促进 IDE 智能体标准化；Anthropic 发布 Claude for Chrome 扩展，进入早期测试；a16z 公布生成式 AI 应用榜单，Google Gemini 等增长显著，ChatGPT 仍领先；Google 发布 Gemini 2.5 Flash Image 模型，支持图像编辑功能，千问团队开源 Qwen-Image-Edit 模型。这些进展反映了 AI、IDE 和浏览器扩展领域的快速创新。</p></div></div>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="streamdown"><a href="https://streamdown.ai/" target="_blank" rel="noopener noreferrer">Streamdown</a><a href="https://wang1212.github.io/2025/08/31/weekly/2025/weekly-review-ep2025w35#streamdown" class="hash-link" aria-label="streamdown的直接链接" title="streamdown的直接链接">​</a></h5>
+<p>Vercel 发布了 react-markdown 的替代品 Streamdown，专门为流式聊天内容渲染设计。</p>
+<p><code>Chat</code> <code>Markdown</code> <code>React</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="bring-your-own-agent-to-zed--featuring-gemini-cli"><a href="https://zed.dev/blog/bring-your-own-agent-to-zed" target="_blank" rel="noopener noreferrer">Bring Your Own Agent to Zed — Featuring Gemini CLI</a><a href="https://wang1212.github.io/2025/08/31/weekly/2025/weekly-review-ep2025w35#bring-your-own-agent-to-zed--featuring-gemini-cli" class="hash-link" aria-label="bring-your-own-agent-to-zed--featuring-gemini-cli的直接链接" title="bring-your-own-agent-to-zed--featuring-gemini-cli的直接链接">​</a></h5>
+<p>自从 Gemini CLI 宣布集成到 VS Code 后，现在 Zed 也支持 Gemini CLI 了，这次不同的是，Zed 团队提出了一个智能体客户端协议（Agent Client Protocol，ACP），并公布了 ACP 的规范，这将成为比 CLI 编码代理继承到 IDE 标准化模式。近期，CodeX CLI 也支持了与 VS Code 集成使用。</p>
+<ul>
+<li><a href="https://developers.openai.com/codex/ide/" target="_blank" rel="noopener noreferrer">Codex IDE extension</a></li>
+<li><a href="https://agentclientprotocol.com/overview/introduction" target="_blank" rel="noopener noreferrer">Agent Client Protocol</a></li>
+</ul>
+<p><code>AI</code> <code>Zed</code> <code>ACP</code> <code>OpenAI</code> <code>Codex</code> <code>IDE</code> <code>CLI Code Agent</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="piloting-claude-for-chrome"><a href="https://www.anthropic.com/news/claude-for-chrome" target="_blank" rel="noopener noreferrer">Piloting Claude for Chrome</a><a href="https://wang1212.github.io/2025/08/31/weekly/2025/weekly-review-ep2025w35#piloting-claude-for-chrome" class="hash-link" aria-label="piloting-claude-for-chrome的直接链接" title="piloting-claude-for-chrome的直接链接">​</a></h5>
+<p>Anthropic 发布了 Claude for Chrome，一个 Chrome 扩展，可以将 Claude 集成到 Chrome 浏览器中，目前还处于早期预览版，仅有部分用户被邀请测试。</p>
+<p><code>Anthropic</code> <code>Claude</code> <code>Chrome</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="the-top-100-gen-ai-consumer-apps"><a href="https://a16z.com/100-gen-ai-apps-5/" target="_blank" rel="noopener noreferrer">The Top 100 [Gen AI] Consumer Apps</a><a href="https://wang1212.github.io/2025/08/31/weekly/2025/weekly-review-ep2025w35#the-top-100-gen-ai-consumer-apps" class="hash-link" aria-label="the-top-100-gen-ai-consumer-apps的直接链接" title="the-top-100-gen-ai-consumer-apps的直接链接">​</a></h5>
+<p>风投机构发布了最新一期前 100 生成式应用的榜单（每 6 个月发布一次），Google 的 Gemini、NotebookLM、Flow 等产品获得了突破式增长，ChatGPT 仍然是聊天助手的霸主。</p>
+<p><code>AI</code> <code>Apps</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="introducing-gemini-25-flash-image-our-state-of-the-art-image-model"><a href="https://developers.googleblog.com/en/introducing-gemini-2-5-flash-image/" target="_blank" rel="noopener noreferrer">Introducing Gemini 2.5 Flash Image, our state-of-the-art image model</a><a href="https://wang1212.github.io/2025/08/31/weekly/2025/weekly-review-ep2025w35#introducing-gemini-25-flash-image-our-state-of-the-art-image-model" class="hash-link" aria-label="introducing-gemini-25-flash-image-our-state-of-the-art-image-model的直接链接" title="introducing-gemini-25-flash-image-our-state-of-the-art-image-model的直接链接">​</a></h5>
+<p>Goolge 发布了代号为 Nano-Banana 的最新版本图像生成模型 Gemini 2.5 Flash Image，可以实现图像编辑、图像融合等等功能，一时之间风靡社区，现在 Gemini App 免费提供给所有用户。另外，千问团队也宣布开源了图像编辑模型 Qwen-Image-Edit。</p>
+<ul>
+<li><a href="https://qwenlm.github.io/blog/qwen-image-edit/" target="_blank" rel="noopener noreferrer">Qwen-Image-Edit: Image Editing with Higher Quality and Efficiency</a></li>
+</ul>
+<p><code>AI</code> <code>Google</code> <code>Gemini</code> <code>Image</code> <code>Qwen</code></p>]]></content>
+        <author>
+            <name>不如怀念</name>
+            <email>mrwang1212@126.com</email>
+            <uri>https://github.com/wang1212</uri>
+        </author>
+        <category label="每周回顾" term="每周回顾"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[「每周回顾」EP2025W34：Google 系列产品更新，阿里开源图像模型]]></title>
         <id>https://wang1212.github.io/2025/08/24/weekly/2025/weekly-review-ep2025w34</id>
@@ -575,26 +611,6 @@
 <h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="what-is-model-context-protocol-mcp-how-it-simplifies-ai-integrations-compared-to-apis"><a href="https://norahsakal.com/blog/mcp-vs-api-model-context-protocol-explained/" target="_blank" rel="noopener noreferrer">What is Model Context Protocol (MCP)? How it simplifies AI integrations compared to APIs</a><a href="https://wang1212.github.io/2025/03/23/weekly/2025/weekly-review-ep2025w12#what-is-model-context-protocol-mcp-how-it-simplifies-ai-integrations-compared-to-apis" class="hash-link" aria-label="what-is-model-context-protocol-mcp-how-it-simplifies-ai-integrations-compared-to-apis的直接链接" title="what-is-model-context-protocol-mcp-how-it-simplifies-ai-integrations-compared-to-apis的直接链接">​</a></h5>
 <p>简单解释了为什么需要 MCP，以及与传统的 API 有什么差异。</p>
 <p><code>AI</code> <code>Agent</code> <code>MCP</code></p>]]></content>
-        <author>
-            <name>不如怀念</name>
-            <email>mrwang1212@126.com</email>
-            <uri>https://github.com/wang1212</uri>
-        </author>
-        <category label="每周回顾" term="每周回顾"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[「每周回顾」EP2025W11：2025 年软件架构与开源 AI 技术栈学习资源]]></title>
-        <id>https://wang1212.github.io/2025/03/16/weekly/2025/weekly-review-ep2025w11</id>
-        <link href="https://wang1212.github.io/2025/03/16/weekly/2025/weekly-review-ep2025w11"/>
-        <updated>2025-03-15T18:00:00.000Z</updated>
-        <summary type="html"><![CDATA[2025 年第 11 周的回顾，推荐 2025 年学习软件架构的优质阅读材料，并提供了构建 AI 应用的开源技术栈资源列表。它为希望在软件架构和 AI 领域提升技能的开发者提供了实用的学习路径和工具参考。]]></summary>
-        <content type="html"><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>推荐 2025 年学习软件架构的优质阅读材料，并提供了构建 AI 应用的开源技术栈资源列表。它为希望在软件架构和 AI 领域提升技能的开发者提供了实用的学习路径和工具参考。</p></div></div>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="ep146-the-open-source-ai-stack"><a href="https://blog.bytebytego.com/p/ep146-the-open-source-ai-stack" target="_blank" rel="noopener noreferrer">EP146: The Open Source AI Stack</a><a href="https://wang1212.github.io/2025/03/16/weekly/2025/weekly-review-ep2025w11#ep146-the-open-source-ai-stack" class="hash-link" aria-label="ep146-the-open-source-ai-stack的直接链接" title="ep146-the-open-source-ai-stack的直接链接">​</a></h5>
-<p>构建 AI 应用的开源技术栈资源列表。</p>
-<p><code>AI</code></p>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="ep151-24-good-resources-to-learn-software-architecture-in-2025"><a href="https://blog.bytebytego.com/p/ep151-24-good-resources-to-learn" target="_blank" rel="noopener noreferrer">EP151: 24 Good Resources to Learn Software Architecture in 2025</a><a href="https://wang1212.github.io/2025/03/16/weekly/2025/weekly-review-ep2025w11#ep151-24-good-resources-to-learn-software-architecture-in-2025" class="hash-link" aria-label="ep151-24-good-resources-to-learn-software-architecture-in-2025的直接链接" title="ep151-24-good-resources-to-learn-software-architecture-in-2025的直接链接">​</a></h5>
-<p>在 2025 年推荐学习软件架构设计的好的阅读资源列表。</p>
-<p><code>Software Architecture</code> <code>Reading List</code></p>]]></content>
         <author>
             <name>不如怀念</name>
             <email>mrwang1212@126.com</email>
