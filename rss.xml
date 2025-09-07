@@ -4,10 +4,47 @@
         <title>不如怀念 Blog</title>
         <link>https://wang1212.github.io</link>
         <description>不如怀念 Blog</description>
-        <lastBuildDate>Sun, 31 Aug 2025 23:38:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 07 Sep 2025 16:51:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-Hans</language>
+        <item>
+            <title><![CDATA[「每周回顾」EP2025W36：Atlassian 收购 AI 浏览器开发商]]></title>
+            <link>https://wang1212.github.io/2025/09/07/weekly/2025/weekly-review-ep2025w36</link>
+            <guid>https://wang1212.github.io/2025/09/07/weekly/2025/weekly-review-ep2025w36</guid>
+            <pubDate>Sun, 07 Sep 2025 16:51:00 GMT</pubDate>
+            <description><![CDATA[2025 年第 36 周的回顾，最新的 SimilarWeb 报告显示旅游类 AI 增长最快，Base44 编码代理逆势上扬；Atlassian 以 6.1 亿美元收购开发 AI 浏览器 Dia 和 Arc 的 The Browser Company；Zed 通过 ACP 协议支持 Claude Code；Google 发布提示词编写指南及 EmbeddingGemma 离线嵌入模型；Chrome迎来17周年历史回顾；Moonshot AI 升级 Kimi K2-Instruct-0905，支持 256K 上下文及更强编码性能。]]></description>
+            <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>最新的 SimilarWeb 报告显示旅游类 AI 增长最快，Base44 编码代理逆势上扬；Atlassian 以 6.1 亿美元收购开发 AI 浏览器 Dia 和 Arc 的 The Browser Company；Zed 通过 ACP 协议支持 Claude Code；Google 发布提示词编写指南及 EmbeddingGemma 离线嵌入模型；Chrome迎来17周年历史回顾；Moonshot AI 升级 Kimi K2-Instruct-0905，支持 256K 上下文及更强编码性能。</p></div></div>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="effective-learning-twenty-rules-of-formulating-knowledge"><a href="https://www.supermemo.com/en/blog/twenty-rules-of-formulating-knowledge" target="_blank" rel="noopener noreferrer">Effective learning: Twenty rules of formulating knowledge</a><a href="https://wang1212.github.io/2025/09/07/weekly/2025/weekly-review-ep2025w36#effective-learning-twenty-rules-of-formulating-knowledge" class="hash-link" aria-label="effective-learning-twenty-rules-of-formulating-knowledge的直接链接" title="effective-learning-twenty-rules-of-formulating-knowledge的直接链接">​</a></h5>
+<p>一篇关于有效学习构建知识体系的文章，介绍了 20 条黄金法则。</p>
+<p><code>Learn</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="global-ai-tracker"><a href="https://www.similarweb.com/corp/wp-content/uploads/2025/09/attachment-Global-AI-Tracker-8.29.pdf" target="_blank" rel="noopener noreferrer">Global AI Tracker</a><a href="https://wang1212.github.io/2025/09/07/weekly/2025/weekly-review-ep2025w36#global-ai-tracker" class="hash-link" aria-label="global-ai-tracker的直接链接" title="global-ai-tracker的直接链接">​</a></h5>
+<p>SimilarWeb 发布了最新的全球 AI 跟踪报告，与月初的版本数据较为一致，所有品类中，还是旅游相关的增长率最高。另外，编码代理产品基本都在全部下跌，只有 Base44 在异军突起，当然这可能是新产品效应。</p>
+<p><code>SimilarWeb</code> <code>AI</code> <code>Global AI Tracker</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="welcoming-the-browser-company-to-atlassian"><a href="https://www.atlassian.com/blog/announcements/atlassian-acquires-the-browser-company" target="_blank" rel="noopener noreferrer">Welcoming The Browser Company to Atlassian</a><a href="https://wang1212.github.io/2025/09/07/weekly/2025/weekly-review-ep2025w36#welcoming-the-browser-company-to-atlassian" class="hash-link" aria-label="welcoming-the-browser-company-to-atlassian的直接链接" title="welcoming-the-browser-company-to-atlassian的直接链接">​</a></h5>
+<p>Atlassian 以 6.1 亿美元收购了 The Browser Company，这家公司开发了两款 AI 浏览器：Dia 和 Arc。</p>
+<p><code>Atlassian</code> <code>Browser Company</code> <code>Dia</code> <code>Arc</code> <code>AI Browser</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="claude-code-now-in-beta-in-zed"><a href="https://zed.dev/blog/claude-code-via-acp" target="_blank" rel="noopener noreferrer">Claude Code: Now in Beta in Zed</a><a href="https://wang1212.github.io/2025/09/07/weekly/2025/weekly-review-ep2025w36#claude-code-now-in-beta-in-zed" class="hash-link" aria-label="claude-code-now-in-beta-in-zed的直接链接" title="claude-code-now-in-beta-in-zed的直接链接">​</a></h5>
+<p>两周前，Zed 发布了对 Gemini CLI 集成支持，同时也发布了智能体客户端协议（Agent Client Protocol，ACP），这次 Zed 发布了对 Claude Code 的支持，不同的是 Zed 这是发布的是一个适配器实现，通过调用 Claude Code 的 SDK 并通过 ACP 与 Zed 来实现通信。</p>
+<p><code>Zed</code> <code>ACP</code> <code>Claude Code</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="prompting-guide-101"><a href="https://services.google.com/fh/files/misc/gemini-for-google-workspace-prompting-guide-101.pdf" target="_blank" rel="noopener noreferrer">Prompting guide 101</a><a href="https://wang1212.github.io/2025/09/07/weekly/2025/weekly-review-ep2025w36#prompting-guide-101" class="hash-link" aria-label="prompting-guide-101的直接链接" title="prompting-guide-101的直接链接">​</a></h5>
+<p>Google 发布一个提示词编写指南的文档，想了解如何编写出更高效的提示词的值得一看。另外，最近也发布了一个最佳提示词库，可以参考。</p>
+<ul>
+<li><a href="https://cloud.google.com/vertex-ai/generative-ai/docs/prompt-gallery" target="_blank" rel="noopener noreferrer">Generative AI prompt samples</a></li>
+</ul>
+<p><code>Google</code> <code>prompt engineering</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="introducing-embeddinggemma-the-best-in-class-open-model-for-on-device-embeddings"><a href="https://developers.googleblog.com/en/introducing-embeddinggemma/" target="_blank" rel="noopener noreferrer">Introducing EmbeddingGemma: The Best-in-Class Open Model for On-Device Embeddings</a><a href="https://wang1212.github.io/2025/09/07/weekly/2025/weekly-review-ep2025w36#introducing-embeddinggemma-the-best-in-class-open-model-for-on-device-embeddings" class="hash-link" aria-label="introducing-embeddinggemma-the-best-in-class-open-model-for-on-device-embeddings的直接链接" title="introducing-embeddinggemma-the-best-in-class-open-model-for-on-device-embeddings的直接链接">​</a></h5>
+<p>Google 发布了 EmbeddingGemma，这是一个小规模的可在端侧运行的嵌入模型，可以在没有网络的情况下实现离线嵌入。</p>
+<p><code>Google</code> <code>Gemma</code> <code>Embedding</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="google-chrome-at-17---a-history-of-our-browser"><a href="https://addyosmani.com/blog/chrome-17th/" target="_blank" rel="noopener noreferrer">Google Chrome at 17 - A history of our browser</a><a href="https://wang1212.github.io/2025/09/07/weekly/2025/weekly-review-ep2025w36#google-chrome-at-17---a-history-of-our-browser" class="hash-link" aria-label="google-chrome-at-17---a-history-of-our-browser的直接链接" title="google-chrome-at-17---a-history-of-our-browser的直接链接">​</a></h5>
+<p>Chrome 已经发布了 17 年了，这是一篇非官方的对 Chrome  17 年发展历史的回顾。</p>
+<p><code>Chrome</code> <code>History</code> <code>Google</code></p>
+<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="kimi-k2-instruct-0905"><a href="https://huggingface.co/moonshotai/Kimi-K2-Instruct-0905" target="_blank" rel="noopener noreferrer">Kimi K2-Instruct-0905</a><a href="https://wang1212.github.io/2025/09/07/weekly/2025/weekly-review-ep2025w36#kimi-k2-instruct-0905" class="hash-link" aria-label="kimi-k2-instruct-0905的直接链接" title="kimi-k2-instruct-0905的直接链接">​</a></h5>
+<p>Moonshot AI 最新发布了 Kimi K2-Instruct-0905，这是对于2个月前发布的版本的升级，现在上下文支持 256K，且具有更强的编码性能。</p>
+<p><code>AI</code> <code>Moonshot</code> <code>Kimi</code> <code>oss</code></p>]]></content:encoded>
+            <author>mrwang1212@126.com (不如怀念)</author>
+            <category>每周回顾</category>
+        </item>
         <item>
             <title><![CDATA[「每周回顾」EP2025W35：Zed 集成 Gemini CLI、Claude Chrome 扩展测试及 AI 图像模型新进展]]></title>
             <link>https://wang1212.github.io/2025/08/31/weekly/2025/weekly-review-ep2025w35</link>
@@ -514,28 +551,6 @@
 <h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="agent-engineering"><a href="https://www.latent.space/p/agent" target="_blank" rel="noopener noreferrer">Agent Engineering</a><a href="https://wang1212.github.io/2025/03/30/weekly/2025/weekly-review-ep2025w13#agent-engineering" class="hash-link" aria-label="agent-engineering的直接链接" title="agent-engineering的直接链接">​</a></h5>
 <p>探讨了构建 AI Agent 应用的工程化经验，结果过去一段时间不断发展的技术迭代过程，对 Agent 工程化的概念有了更好的理解。</p>
 <p><code>AI</code> <code>Agent</code></p>]]></content:encoded>
-            <author>mrwang1212@126.com (不如怀念)</author>
-            <category>每周回顾</category>
-        </item>
-        <item>
-            <title><![CDATA[「每周回顾」EP2025W12：AI 应用与基础算法新进展]]></title>
-            <link>https://wang1212.github.io/2025/03/23/weekly/2025/weekly-review-ep2025w12</link>
-            <guid>https://wang1212.github.io/2025/03/23/weekly/2025/weekly-review-ep2025w12</guid>
-            <pubDate>Sat, 22 Mar 2025 18:00:00 GMT</pubDate>
-            <description><![CDATA[2025 年第 12 周的回顾，近期值得关注的技术动态，包括全球顶尖风投机构发布的最新生成式 AI 应用榜单，揭示了行业趋势。同时，深入探讨了布隆过滤器的基本原理与应用场景，并介绍了 agents.json 和模型上下文协议（MCP），这些新协议旨在简化 AI Agent 与服务的集成，提升 AI 应用的响应效率和表现。]]></description>
-            <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>近期值得关注的技术动态，包括全球顶尖风投机构发布的最新生成式 AI 应用榜单，揭示了行业趋势。同时，深入探讨了布隆过滤器的基本原理与应用场景，并介绍了 agents.json 和模型上下文协议（MCP），这些新协议旨在简化 AI Agent 与服务的集成，提升 AI 应用的响应效率和表现。</p></div></div>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="the-top-100-gen-ai-apps"><a href="https://a16z.com/100-gen-ai-apps-4/" target="_blank" rel="noopener noreferrer">The Top 100 Gen AI Apps</a><a href="https://wang1212.github.io/2025/03/23/weekly/2025/weekly-review-ep2025w12#the-top-100-gen-ai-apps" class="hash-link" aria-label="the-top-100-gen-ai-apps的直接链接" title="the-top-100-gen-ai-apps的直接链接">​</a></h5>
-<p>全球风投机构发布的全球前 100 名 AI 应用榜单，每 6 个月更新一次，包含了对行业的分析，值得关注。</p>
-<p><code>AI</code> <code>App</code></p>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="bloom-filter-a-deep-dive"><a href="https://www.kirupa.com/data_structures_algorithms/bloom_filter.htm" target="_blank" rel="noopener noreferrer">Bloom Filter: A Deep Dive</a><a href="https://wang1212.github.io/2025/03/23/weekly/2025/weekly-review-ep2025w12#bloom-filter-a-deep-dive" class="hash-link" aria-label="bloom-filter-a-deep-dive的直接链接" title="bloom-filter-a-deep-dive的直接链接">​</a></h5>
-<p>布隆过滤器作为一个应用广泛的基础算法，一直不是很了解其作用和原理，在这篇通俗易懂的文章中总算知道了其大致原理和应用场景。</p>
-<p><code>算法</code> <code>布隆过滤器</code></p>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="introducing-agentsjson"><a href="https://docs.wild-card.ai/agentsjson/introduction" target="_blank" rel="noopener noreferrer">Introducing agents.json</a><a href="https://wang1212.github.io/2025/03/23/weekly/2025/weekly-review-ep2025w12#introducing-agentsjson" class="hash-link" aria-label="introducing-agentsjson的直接链接" title="introducing-agentsjson的直接链接">​</a></h5>
-<p>与 MCP 类似，agent.json 提出了如何定义传统的 API 以帮助 Agent 应用更好的识别和调用服务来获得更好的响应。</p>
-<p><code>AI</code> <code>Agent</code> <code>API</code> <code>agents.json</code></p>
-<h5 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="what-is-model-context-protocol-mcp-how-it-simplifies-ai-integrations-compared-to-apis"><a href="https://norahsakal.com/blog/mcp-vs-api-model-context-protocol-explained/" target="_blank" rel="noopener noreferrer">What is Model Context Protocol (MCP)? How it simplifies AI integrations compared to APIs</a><a href="https://wang1212.github.io/2025/03/23/weekly/2025/weekly-review-ep2025w12#what-is-model-context-protocol-mcp-how-it-simplifies-ai-integrations-compared-to-apis" class="hash-link" aria-label="what-is-model-context-protocol-mcp-how-it-simplifies-ai-integrations-compared-to-apis的直接链接" title="what-is-model-context-protocol-mcp-how-it-simplifies-ai-integrations-compared-to-apis的直接链接">​</a></h5>
-<p>简单解释了为什么需要 MCP，以及与传统的 API 有什么差异。</p>
-<p><code>AI</code> <code>Agent</code> <code>MCP</code></p>]]></content:encoded>
             <author>mrwang1212@126.com (不如怀念)</author>
             <category>每周回顾</category>
         </item>
