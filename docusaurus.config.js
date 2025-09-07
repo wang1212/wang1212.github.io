@@ -64,7 +64,7 @@ const config = {
             'https://github.com/wang1212/wang1212.github.io/tree/master/',
           // blogSidebarCount: 'ALL',
           // blogSidebarTitle: '所有文章',
-          blogSidebarCount: 10,
+          blogSidebarCount: 0,
           blogSidebarTitle: '近期文章',
           // postsPerPage: 10,
           onUntruncatedBlogPosts: 'throw',
