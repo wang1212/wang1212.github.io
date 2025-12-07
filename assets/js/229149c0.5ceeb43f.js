@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([["49746"],{34665(t){t.exports=JSON.parse('{"tag":{"label":"TCP","permalink":"/tags/tcp","allTagsPath":"/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/tags/tcp","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
