@@ -19,6 +19,21 @@
 <p>上下文工程。</p>
 <ul>
 <li class=""><a href="https://developers.googleblog.com/en/architecting-efficient-context-aware-multi-agent-framework-for-production/" target="_blank" rel="noopener noreferrer" class="">Architecting efficient context-aware multi-agent framework for production</a></li>
+<li class=""><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener noreferrer" class="">Effective context engineering for AI agents</a></li>
+<li class=""><a href="https://www.anthropic.com/engineering/contextual-retrieval" target="_blank" rel="noopener noreferrer" class="">Introducing Contextual Retrieval</a></li>
+</ul>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="ai-agent">AI Agent<a href="https://wang1212.github.io/2025/12/07/awesome/build-agent#ai-agent" class="hash-link" aria-label="AI Agent的直接链接" title="AI Agent的直接链接" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://www.anthropic.com/engineering/multi-agent-research-system" target="_blank" rel="noopener noreferrer" class="">How we built our multi-agent research system</a></li>
+<li class=""><a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener noreferrer" class="">Building effective agents</a></li>
+</ul>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="agent-tools">Agent Tools<a href="https://wang1212.github.io/2025/12/07/awesome/build-agent#agent-tools" class="hash-link" aria-label="Agent Tools的直接链接" title="Agent Tools的直接链接" translate="no">​</a></h3>
+<ul>
+<li class=""><a href="https://www.anthropic.com/engineering/writing-tools-for-agents" target="_blank" rel="noopener noreferrer" class="">Writing effective tools for agents — with agents</a></li>
+</ul>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="agent-skills">Agent Skills<a href="https://wang1212.github.io/2025/12/07/awesome/build-agent#agent-skills" class="hash-link" aria-label="Agent Skills的直接链接" title="Agent Skills的直接链接" translate="no">​</a></h3>
+<ul>
+<li class=""><a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener noreferrer" class="">Equipping agents for the real world with Agent Skills</a></li>
 </ul>]]></content>
         <author>
             <name>不如怀念</name>
