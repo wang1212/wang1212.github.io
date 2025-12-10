@@ -1,7 +1,7 @@
 ---
 title: 精选资源：构建生产级 AI Agent
 date: 2025-12-07 21:17:00
-update: 2025-12-07 21:17:00
+update: 2025-12-10 09:47:00
 authors: wang1212
 tags: &ref_0
   - 精选资源
@@ -30,3 +30,18 @@ _探索一项新兴技术出现的背景、动机，尤其是其背后的设计�
 上下文工程。
 
 - [Architecting efficient context-aware multi-agent framework for production](https://developers.googleblog.com/en/architecting-efficient-context-aware-multi-agent-framework-for-production/)
+- [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+- [Introducing Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval)
+
+## AI Agent
+
+- [How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system)
+- [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)
+
+### Agent Tools
+
+- [Writing effective tools for agents — with agents](https://www.anthropic.com/engineering/writing-tools-for-agents)
+
+### Agent Skills
+
+- [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
