@@ -1,7 +1,7 @@
 ---
 title: 精选资源：Google Nano Banana 图像生成与编辑
 date: 2025-12-03 21:47:00
-update: 2025-12-03 21:47:00
+update: 2025-12-20 15:27:05
 authors: wang1212
 tags: &ref_0
   - 精选资源
@@ -38,3 +38,8 @@ Google Nano Banana 的发布让图像生成正式成为大家在日常工作与�
 - [Master Prompt: Make Infographics from Anything [Nano Banana Pro]](https://upwarddynamism.com/ai-use-cases-prompts/image-genai-infographic-blueprint/)
 - [System prompt of NotebookLM Infographic](https://baoyu.io/blog/system-prompt-of-notebooklm-infographic)
 - [NotebookLM Slide Deck System Prompt](https://baoyu.io/blog/notebooklm-slide-deck-system-prompt)
+
+特殊场景的使用技巧。
+
+- [How to Remove Watermarks from Images Using Nano Banana Pro: A Complete Step-by-Step Guide](https://www.glbgpt.com/hub/a-proven-method-to-remove-watermarks-using-nano-banana/ )
+- [Generating transparent background images with Nano Banana Pro 2](https://jidefr.medium.com/generating-transparent-background-images-with-nano-banana-pro-2-1866c88a33c5)
