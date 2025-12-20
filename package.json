@@ -28,10 +28,10 @@
     "overlayscrollbars": "^2.13.0",
     "plugin-image-zoom": "github:flexanalytics/plugin-image-zoom",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.1",
+    "react": "^19.2.3",
     "react-calendar-heatmap": "^1.10.0",
-    "react-dom": "^19.2.1",
-    "swr": "^2.3.7",
+    "react-dom": "^19.2.3",
+    "swr": "^2.3.8",
     "wordcloud": "^1.2.3"
   },
   "devDependencies": {
