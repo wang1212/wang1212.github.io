@@ -29,6 +29,11 @@
 </ul>
 <h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="agent-tools">Agent Tools<a href="https://wang1212.github.io/2025/12/07/awesome/build-agent#agent-tools" class="hash-link" aria-label="Agent Tools的直接链接" title="Agent Tools的直接链接" translate="no">​</a></h3>
 <ul>
+<li class=""><a href="https://www.anthropic.com/engineering/code-execution-with-mcp" target="_blank" rel="noopener noreferrer" class="">Code execution with MCP: Building more efficient agents</a>
+<ul>
+<li class=""><a href="https://www.anthropic.com/engineering/advanced-tool-use" target="_blank" rel="noopener noreferrer" class="">Introducing advanced tool use on the Claude Developer Platform</a></li>
+</ul>
+</li>
 <li class=""><a href="https://www.anthropic.com/engineering/writing-tools-for-agents" target="_blank" rel="noopener noreferrer" class="">Writing effective tools for agents — with agents</a></li>
 </ul>
 <h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="agent-skills">Agent Skills<a href="https://wang1212.github.io/2025/12/07/awesome/build-agent#agent-skills" class="hash-link" aria-label="Agent Skills的直接链接" title="Agent Skills的直接链接" translate="no">​</a></h3>
