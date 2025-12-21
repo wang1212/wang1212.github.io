@@ -40,6 +40,8 @@ _探索一项新兴技术出现的背景、动机，尤其是其背后的设计�
 
 ### Agent Tools
 
+- [Code execution with MCP: Building more efficient agents](https://www.anthropic.com/engineering/code-execution-with-mcp)
+  - [Introducing advanced tool use on the Claude Developer Platform](https://www.anthropic.com/engineering/advanced-tool-use)
 - [Writing effective tools for agents — with agents](https://www.anthropic.com/engineering/writing-tools-for-agents)
 
 ### Agent Skills
