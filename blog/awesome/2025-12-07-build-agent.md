@@ -1,7 +1,7 @@
 ---
 title: 精选资源：构建生产级 AI Agent
 date: 2025-12-07 21:17:00
-update: 2025-12-10 09:47:00
+update: 2025-12-21 18:47:00
 authors: wang1212
 tags: &ref_0
   - 精选资源
