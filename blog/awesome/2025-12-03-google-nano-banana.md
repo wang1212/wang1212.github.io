@@ -33,7 +33,7 @@ Google Nano Banana 的发布让图像生成正式成为大家在日常工作与�
 - [Complete Developer Tutorial for Nano Banana Pro](https://x.com/GoogleAIStudio/status/1992267030050083091)
 - [The Complete Guide to Nano Banana Pro: 10 Tips for Professional Asset Production](https://x.com/GoogleAIStudio/article/1994480371061469306)
 
-一些推荐的应用场景的系统提示词。
+一些应用场景的系统提示词。
 
 - [Master Prompt: Make Infographics from Anything [Nano Banana Pro]](https://upwarddynamism.com/ai-use-cases-prompts/image-genai-infographic-blueprint/)
 - [System prompt of NotebookLM Infographic](https://baoyu.io/blog/system-prompt-of-notebooklm-infographic)
@@ -43,3 +43,9 @@ Google Nano Banana 的发布让图像生成正式成为大家在日常工作与�
 
 - [How to Remove Watermarks from Images Using Nano Banana Pro: A Complete Step-by-Step Guide](https://www.glbgpt.com/hub/a-proven-method-to-remove-watermarks-using-nano-banana/ )
 - [Generating transparent background images with Nano Banana Pro 2](https://jidefr.medium.com/generating-transparent-background-images-with-nano-banana-pro-2-1866c88a33c5)
+- [Editing images using JSON](https://x.com/David_eficaz/status/2002329901022499040)
+
+### 精选提示词
+
+- [Awesome Nano Banana Pro](https://github.com/ZeroLu/awesome-nanobanana-pro)
+- [30 Nano Banana prompts for perfect infographics](https://www.reddit.com/r/Bard/comments/1placgk/heres_30_nano_banana_prompts_for_perfect/)
