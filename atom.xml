@@ -18,27 +18,29 @@
 <h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="context-engineering">Context Engineering<a href="https://wang1212.github.io/2025/12/07/awesome/build-agent#context-engineering" class="hash-link" aria-label="Context Engineering的直接链接" title="Context Engineering的直接链接" translate="no">​</a></h2>
 <p>上下文工程。</p>
 <ul>
-<li class=""><a href="https://developers.googleblog.com/en/architecting-efficient-context-aware-multi-agent-framework-for-production/" target="_blank" rel="noopener noreferrer" class="">Architecting efficient context-aware multi-agent framework for production</a></li>
-<li class=""><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener noreferrer" class="">Effective context engineering for AI agents</a></li>
-<li class=""><a href="https://www.anthropic.com/engineering/contextual-retrieval" target="_blank" rel="noopener noreferrer" class="">Introducing Contextual Retrieval</a></li>
+<li class=""><a href="https://developers.googleblog.com/en/architecting-efficient-context-aware-multi-agent-framework-for-production/" target="_blank" rel="noopener noreferrer" class="">Architecting efficient context-aware multi-agent framework for production</a> - 讨论生产级多代理框架的设计和效率。</li>
+<li class=""><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener noreferrer" class="">Effective context engineering for AI agents</a> - 介绍AI代理的有效上下文工程技术。</li>
+<li class=""><a href="https://www.anthropic.com/engineering/contextual-retrieval" target="_blank" rel="noopener noreferrer" class="">Introducing Contextual Retrieval</a> - 介绍上下文检索方法，提升检索准确性。</li>
 </ul>
 <h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="ai-agent">AI Agent<a href="https://wang1212.github.io/2025/12/07/awesome/build-agent#ai-agent" class="hash-link" aria-label="AI Agent的直接链接" title="AI Agent的直接链接" translate="no">​</a></h2>
 <ul>
-<li class=""><a href="https://www.anthropic.com/engineering/multi-agent-research-system" target="_blank" rel="noopener noreferrer" class="">How we built our multi-agent research system</a></li>
-<li class=""><a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener noreferrer" class="">Building effective agents</a></li>
+<li class=""><a href="https://www.anthropic.com/engineering/multi-agent-research-system" target="_blank" rel="noopener noreferrer" class="">How we built our multi-agent research system</a> - Anthropic多代理研究系统的构建过程。</li>
+<li class=""><a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener noreferrer" class="">Building effective agents</a> - 构建有效AI代理的指南和最佳实践。</li>
+<li class=""><a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank" rel="noopener noreferrer" class="">Effective harnesses for long-running agents</a> - 为长时间运行代理设计有效控制框架。</li>
 </ul>
 <h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="agent-tools">Agent Tools<a href="https://wang1212.github.io/2025/12/07/awesome/build-agent#agent-tools" class="hash-link" aria-label="Agent Tools的直接链接" title="Agent Tools的直接链接" translate="no">​</a></h3>
 <ul>
-<li class=""><a href="https://www.anthropic.com/engineering/code-execution-with-mcp" target="_blank" rel="noopener noreferrer" class="">Code execution with MCP: Building more efficient agents</a>
+<li class=""><a href="https://www.anthropic.com/engineering/code-execution-with-mcp" target="_blank" rel="noopener noreferrer" class="">Code execution with MCP: Building more efficient agents</a> - 使用 MCP 进行代码执行以构建高效代理。
 <ul>
-<li class=""><a href="https://www.anthropic.com/engineering/advanced-tool-use" target="_blank" rel="noopener noreferrer" class="">Introducing advanced tool use on the Claude Developer Platform</a></li>
+<li class=""><a href="https://www.anthropic.com/engineering/advanced-tool-use" target="_blank" rel="noopener noreferrer" class="">Introducing advanced tool use on the Claude Developer Platform</a> - Claude 平台上高级工具使用的介绍。</li>
 </ul>
 </li>
-<li class=""><a href="https://www.anthropic.com/engineering/writing-tools-for-agents" target="_blank" rel="noopener noreferrer" class="">Writing effective tools for agents — with agents</a></li>
+<li class=""><a href="https://www.anthropic.com/engineering/writing-tools-for-agents" target="_blank" rel="noopener noreferrer" class="">Writing effective tools for agents — with agents</a> - 使用代理编写有效工具的方法。</li>
+<li class=""><a href="https://vercel.com/blog/how-to-build-agents-with-filesystems-and-bash" target="_blank" rel="noopener noreferrer" class="">How to build agents with filesystems and bash</a> - 使用文件系统和 bash 构建 AI 代理的教程。</li>
 </ul>
 <h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="agent-skills">Agent Skills<a href="https://wang1212.github.io/2025/12/07/awesome/build-agent#agent-skills" class="hash-link" aria-label="Agent Skills的直接链接" title="Agent Skills的直接链接" translate="no">​</a></h3>
 <ul>
-<li class=""><a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener noreferrer" class="">Equipping agents for the real world with Agent Skills</a></li>
+<li class=""><a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener noreferrer" class="">Equipping agents for the real world with Agent Skills</a> - 为现实世界装备代理技能。</li>
 </ul>]]></content>
         <author>
             <name>不如怀念</name>
@@ -62,25 +64,25 @@
 <h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="nano-banana-pro">Nano Banana Pro<a href="https://wang1212.github.io/2025/12/03/awesome/google-nano-banana#nano-banana-pro" class="hash-link" aria-label="Nano Banana Pro的直接链接" title="Nano Banana Pro的直接链接" translate="no">​</a></h2>
 <p>官方推荐的开发指南和使用技巧。</p>
 <ul>
-<li class=""><a href="https://x.com/GoogleAIStudio/status/1992267030050083091" target="_blank" rel="noopener noreferrer" class="">Complete Developer Tutorial for Nano Banana Pro</a></li>
-<li class=""><a href="https://x.com/GoogleAIStudio/article/1994480371061469306" target="_blank" rel="noopener noreferrer" class="">The Complete Guide to Nano Banana Pro: 10 Tips for Professional Asset Production</a></li>
+<li class=""><a href="https://x.com/GoogleAIStudio/status/1992267030050083091" target="_blank" rel="noopener noreferrer" class="">Complete Developer Tutorial for Nano Banana Pro</a> - Nano Banana Pro 开发者完整教程。</li>
+<li class=""><a href="https://x.com/GoogleAIStudio/article/1994480371061469306" target="_blank" rel="noopener noreferrer" class="">The Complete Guide to Nano Banana Pro: 10 Tips for Professional Asset Production</a> - Nano Banana Pro 完整指南：专业资产生产的10个技巧。</li>
 </ul>
 <p>一些应用场景的系统提示词。</p>
 <ul>
-<li class=""><a href="https://upwarddynamism.com/ai-use-cases-prompts/image-genai-infographic-blueprint/" target="_blank" rel="noopener noreferrer" class="">Master Prompt: Make Infographics from Anything [Nano Banana Pro]</a></li>
-<li class=""><a href="https://baoyu.io/blog/system-prompt-of-notebooklm-infographic" target="_blank" rel="noopener noreferrer" class="">System prompt of NotebookLM Infographic</a></li>
-<li class=""><a href="https://baoyu.io/blog/notebooklm-slide-deck-system-prompt" target="_blank" rel="noopener noreferrer" class="">NotebookLM Slide Deck System Prompt</a></li>
+<li class=""><a href="https://upwarddynamism.com/ai-use-cases-prompts/image-genai-infographic-blueprint/" target="_blank" rel="noopener noreferrer" class="">Master Prompt: Make Infographics from Anything [Nano Banana Pro]</a> - 主提示词：从任何内容制作信息图 [Nano Banana Pro]。</li>
+<li class=""><a href="https://baoyu.io/blog/system-prompt-of-notebooklm-infographic" target="_blank" rel="noopener noreferrer" class="">System prompt of NotebookLM Infographic</a> - NotebookLM 信息图的系统提示词。</li>
+<li class=""><a href="https://baoyu.io/blog/notebooklm-slide-deck-system-prompt" target="_blank" rel="noopener noreferrer" class="">NotebookLM Slide Deck System Prompt</a> - NotebookLM 幻灯片系统提示词。</li>
 </ul>
 <p>特殊场景的使用技巧。</p>
 <ul>
-<li class=""><a href="https://www.glbgpt.com/hub/a-proven-method-to-remove-watermarks-using-nano-banana/" target="_blank" rel="noopener noreferrer" class="">How to Remove Watermarks from Images Using Nano Banana Pro: A Complete Step-by-Step Guide</a></li>
-<li class=""><a href="https://jidefr.medium.com/generating-transparent-background-images-with-nano-banana-pro-2-1866c88a33c5" target="_blank" rel="noopener noreferrer" class="">Generating transparent background images with Nano Banana Pro 2</a></li>
-<li class=""><a href="https://x.com/David_eficaz/status/2002329901022499040" target="_blank" rel="noopener noreferrer" class="">Editing images using JSON</a></li>
+<li class=""><a href="https://www.glbgpt.com/hub/a-proven-method-to-remove-watermarks-using-nano-banana/" target="_blank" rel="noopener noreferrer" class="">How to Remove Watermarks from Images Using Nano Banana Pro: A Complete Step-by-Step Guide</a> - 使用 Nano Banana Pro 移除图像水印的完整步骤指南。</li>
+<li class=""><a href="https://jidefr.medium.com/generating-transparent-background-images-with-nano-banana-pro-2-1866c88a33c5" target="_blank" rel="noopener noreferrer" class="">Generating transparent background images with Nano Banana Pro 2</a> - 使用 Nano Banana Pro 2 生成透明背景图像。</li>
+<li class=""><a href="https://x.com/David_eficaz/status/2002329901022499040" target="_blank" rel="noopener noreferrer" class="">Editing images using JSON</a> - 使用 JSON 编辑图像。</li>
 </ul>
 <h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="精选提示词">精选提示词<a href="https://wang1212.github.io/2025/12/03/awesome/google-nano-banana#%E7%B2%BE%E9%80%89%E6%8F%90%E7%A4%BA%E8%AF%8D" class="hash-link" aria-label="精选提示词的直接链接" title="精选提示词的直接链接" translate="no">​</a></h3>
 <ul>
-<li class=""><a href="https://github.com/ZeroLu/awesome-nanobanana-pro" target="_blank" rel="noopener noreferrer" class="">Awesome Nano Banana Pro</a></li>
-<li class=""><a href="https://www.reddit.com/r/Bard/comments/1placgk/heres_30_nano_banana_prompts_for_perfect/" target="_blank" rel="noopener noreferrer" class="">30 Nano Banana prompts for perfect infographics</a></li>
+<li class=""><a href="https://github.com/ZeroLu/awesome-nanobanana-pro" target="_blank" rel="noopener noreferrer" class="">Awesome Nano Banana Pro</a> - Awesome Nano Banana Pro（GitHub 资源合集）。</li>
+<li class=""><a href="https://www.reddit.com/r/Bard/comments/1placgk/heres_30_nano_banana_prompts_for_perfect/" target="_blank" rel="noopener noreferrer" class="">30 Nano Banana prompts for perfect infographics</a> - 30 个 Nano Banana 提示词用于完美信息图。</li>
 </ul>]]></content>
         <author>
             <name>不如怀念</name>
