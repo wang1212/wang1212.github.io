@@ -1,7 +1,7 @@
 ---
 title: 精选资源：构建生产级 AI Agent
 date: 2025-12-07 21:17:00
-update: 2026-01-11 21:41:55
+update: 2026-01-12 15:13:23
 authors: wang1212
 tags: &ref_0
   - 精选资源
@@ -35,9 +35,10 @@ _探索一项新兴技术出现的背景、动机，尤其是其背后的设计�
 
 ## AI Agent
 
-- [How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system) - Anthropic多代理研究系统的构建过程。
-- [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) - 构建有效AI代理的指南和最佳实践。
+- [How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system) - Anthropic 多代理研究系统的构建过程。
+- [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) - 构建有效 AI 代理的指南和最佳实践。
 - [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) - 为长时间运行代理设计有效控制框架。
+- [Agent-native Architectures: How to Build Apps After Code Ends](https://every.to/guides/agent-native) - 构建代理原生应用的架构指南，由 Dan Shipper 和 Claude 合著。
 
 ### Agent Tools
 
