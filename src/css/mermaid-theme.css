@@ -1,0 +1,693 @@
+/* 基于博客主色调 #4477ce 和 #8ecddd 设计 */
+
+/* 基础样式 */
+.mermaid1 {
+  font-family:
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Ubuntu,
+    Cantarell,
+    Noto Sans,
+    sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  background: transparent;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* 节点样式 */
+.node {
+  stroke: #4477ce;
+  stroke-width: 2px;
+  fill: #f0f8ff;
+  filter: drop-shadow(0 2px 4px rgba(68, 119, 206, 0.1));
+}
+
+/* 特殊节点样式 */
+.node.start {
+  fill: #e3f2fd;
+  stroke: #1976d2;
+}
+
+.node.end {
+  fill: #ffebee;
+  stroke: #c62828;
+}
+
+.node.rhomb {
+  fill: #f3e5f5;
+  stroke: #7b1fa2;
+}
+
+/* 箭头样式 */
+.edgePath .path {
+  stroke: #4477ce;
+  stroke-width: 2px;
+  fill: none;
+  stroke-linecap: round;
+}
+
+/* 箭头标记 */
+.edgePath .marker {
+  fill: #4477ce;
+  stroke: #4477ce;
+}
+
+/* 标签样式 */
+.label {
+  font-family:
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Ubuntu,
+    Cantarell,
+    Noto Sans,
+    sans-serif;
+  font-size: 13px;
+  fill: #333;
+  font-weight: 400;
+}
+
+/* 流程图样式 */
+.flowchart {
+  background: rgba(68, 119, 206, 0.02);
+  border: 1px solid rgba(68, 119, 206, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* 序列图样式 */
+.sequence {
+  background: rgba(142, 205, 221, 0.02);
+  border: 1px solid rgba(142, 205, 221, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* 甘特图样式 */
+.gantt {
+  background: rgba(68, 119, 206, 0.02);
+  border: 1px solid rgba(68, 119, 206, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* 状态图样式 */
+.state {
+  background: rgba(142, 205, 221, 0.02);
+  border: 1px solid rgba(142, 205, 221, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* 饼图样式 */
+.pie {
+  background: rgba(68, 119, 206, 0.02);
+  border: 1px solid rgba(68, 119, 206, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .mermaid {
+    font-size: 12px;
+  }
+
+  .node {
+    stroke-width: 1.5px;
+  }
+
+  .edgePath .path {
+    stroke-width: 1.5px;
+  }
+}
+
+/* 深色模式适配 */
+[data-theme="dark"] .mermaid {
+  background: rgba(68, 119, 206, 0.05);
+}
+
+[data-theme="dark"] .node {
+  stroke: #8ecddd;
+  fill: #1e2127;
+}
+
+[data-theme="dark"] .edgePath .path {
+  stroke: #8ecddd;
+}
+
+[data-theme="dark"] .label {
+  fill: #e0e0e0;
+}
+
+/* 代码高亮样式 */
+.mermaid code {
+  background: rgba(68, 119, 206, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family:
+    "Source Code Pro", SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  color: #4477ce;
+}
+
+/* 标题样式 */
+.mermaid-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background: rgba(68, 119, 206, 0.08);
+  border-radius: 4px 4px 0 0;
+}
+
+[data-theme="dark"] .mermaid-title {
+  color: #e0e0e0;
+  background: rgba(142, 205, 221, 0.1);
+}
+
+/* 图例样式 */
+.mermaid-legend {
+  font-size: 12px;
+  color: #666;
+  margin-top: 8px;
+  padding: 4px 8px;
+  background: rgba(68, 119, 206, 0.05);
+  border-radius: 4px;
+}
+
+/* 网格样式 */
+.mermaid-grid {
+  stroke: rgba(68, 119, 206, 0.1);
+  stroke-dasharray: 2, 2;
+}
+
+/* 选择框样式 */
+.mermaid-selection {
+  stroke: #4477ce;
+  stroke-dasharray: 4, 4;
+  fill: rgba(68, 119, 206, 0.1);
+  stroke-width: 1px;
+}
+
+/* 高亮样式 */
+.mermaid-highlight {
+  fill: rgba(68, 119, 206, 0.2);
+  stroke: #8ecddd;
+  stroke-width: 2px;
+}
+
+/* 工具提示样式 */
+.mermaid-tooltip {
+  background: rgba(68, 119, 206, 0.95);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family:
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Ubuntu,
+    Cantarell,
+    Noto Sans,
+    sans-serif;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 缩放控件样式 */
+.mermaid-zoom-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  border-radius: 4px;
+  padding: 4px;
+  border: 1px solid rgba(68, 119, 206, 0.2);
+}
+
+.mermaid-zoom-controls button {
+  background: #4477ce;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 1px;
+  font-size: 12px;
+}
+
+.mermaid-zoom-controls button:hover {
+  background: #8ecddd;
+}
+
+/* 打印样式 */
+@media print {
+  .mermaid {
+    background: white !important;
+    border: 1px solid #ddd !important;
+  }
+
+  .node {
+    stroke: #333 !important;
+    fill: #f5f5f5 !important;
+  }
+
+  .edgePath .path {
+    stroke: #333 !important;
+  }
+}
+
+/* 错误样式 */
+.mermaid-error {
+  background: #ffebee;
+  border: 1px solid #c62828;
+  color: #c62828;
+  padding: 12px;
+  border-radius: 8px;
+  font-family:
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Ubuntu,
+    Cantarell,
+    Noto Sans,
+    sans-serif;
+}
+
+.mermaid-error pre {
+  background: rgba(198, 40, 40, 0.1);
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 8px;
+  font-family:
+    "Source Code Pro", SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+/* 成功样式 */
+.mermaid-success {
+  background: #e8f5e8;
+  border: 1px solid #2e7d32;
+  color: #2e7d32;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+/* 警告样式 */
+.mermaid-warning {
+  background: #fff3e0;
+  border: 1px solid #f57c00;
+  color: #f57c00;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+/* 信息样式 */
+.mermaid-info {
+  background: #e3f2fd;
+  border: 1px solid #1976d2;
+  color: #1976d2;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+/* 节点样式 */
+transition: all 0.2s ease;
+
+.node:hover {
+  stroke: #8ecddd;
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(68, 119, 206, 0.2);
+}
+
+/* 特殊节点样式 */
+.node.start {
+  fill: #e3f2fd;
+  stroke: #1976d2;
+}
+
+.node.end {
+  fill: #ffebee;
+  stroke: #c62828;
+}
+
+.node.rhomb {
+  fill: #f3e5f5;
+  stroke: #7b1fa2;
+}
+
+/* 箭头样式 */
+.edgePath .path {
+  stroke: #4477ce;
+  stroke-width: 2px;
+  fill: none;
+  stroke-linecap: round;
+  transition: all 0.3s ease;
+}
+
+.edgePath:hover .path {
+  stroke: #8ecddd;
+  stroke-width: 2px;
+  opacity: 0.8;
+}
+
+/* 箭头标记 */
+.edgePath .marker {
+  fill: #4477ce;
+  stroke: #4477ce;
+}
+
+/* 标签样式 */
+.label {
+  font-family:
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Ubuntu,
+    Cantarell,
+    Noto Sans,
+    sans-serif;
+  font-size: 13px;
+  fill: #333;
+  font-weight: 400;
+}
+
+/* 流程图样式 */
+.flowchart {
+  background: rgba(68, 119, 206, 0.02);
+  border: 1px solid rgba(68, 119, 206, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* 序列图样式 */
+.sequence {
+  background: rgba(142, 205, 221, 0.02);
+  border: 1px solid rgba(142, 205, 221, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* 甘特图样式 */
+.gantt {
+  background: rgba(68, 119, 206, 0.02);
+  border: 1px solid rgba(68, 119, 206, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* 状态图样式 */
+.state {
+  background: rgba(142, 205, 221, 0.02);
+  border: 1px solid rgba(142, 205, 221, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* 饼图样式 */
+.pie {
+  background: rgba(68, 119, 206, 0.02);
+  border: 1px solid rgba(68, 119, 206, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .mermaid {
+    font-size: 12px;
+  }
+
+  .node {
+    stroke-width: 1.5px;
+  }
+
+  .edgePath .path {
+    stroke-width: 1.5px;
+  }
+}
+
+/* 深色模式适配 */
+[data-theme="dark"] .mermaid {
+  background: rgba(68, 119, 206, 0.05);
+}
+
+[data-theme="dark"] .node {
+  stroke: #8ecddd;
+  fill: #1e2127;
+}
+
+[data-theme="dark"] .edgePath .path {
+  stroke: #8ecddd;
+}
+
+[data-theme="dark"] .label {
+  fill: #e0e0e0;
+}
+
+/* 动画效果 */
+.mermaid {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 交互反馈 */
+.mermaid:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(68, 119, 206, 0.3);
+}
+
+/* 代码高亮样式 */
+.mermaid code {
+  background: rgba(68, 119, 206, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family:
+    "Source Code Pro", SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  color: #4477ce;
+}
+
+/* 标题样式 */
+.mermaid-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background: rgba(68, 119, 206, 0.08);
+  border-radius: 4px 4px 0 0;
+}
+
+[data-theme="dark"] .mermaid-title {
+  color: #e0e0e0;
+  background: rgba(142, 205, 221, 0.1);
+}
+
+/* 图例样式 */
+.mermaid-legend {
+  font-size: 12px;
+  color: #666;
+  margin-top: 8px;
+  padding: 4px 8px;
+  background: rgba(68, 119, 206, 0.05);
+  border-radius: 4px;
+}
+
+/* 网格样式 */
+.mermaid-grid {
+  stroke: rgba(68, 119, 206, 0.1);
+  stroke-dasharray: 2, 2;
+}
+
+/* 选择框样式 */
+.mermaid-selection {
+  stroke: #4477ce;
+  stroke-dasharray: 4, 4;
+  fill: rgba(68, 119, 206, 0.1);
+  stroke-width: 1px;
+}
+
+/* 高亮样式 */
+.mermaid-highlight {
+  fill: rgba(68, 119, 206, 0.2);
+  stroke: #8ecddd;
+  stroke-width: 2px;
+}
+
+/* 工具提示样式 */
+.mermaid-tooltip {
+  background: rgba(68, 119, 206, 0.95);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family:
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Ubuntu,
+    Cantarell,
+    Noto Sans,
+    sans-serif;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 缩放控件样式 */
+.mermaid-zoom-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  border-radius: 4px;
+  padding: 4px;
+  border: 1px solid rgba(68, 119, 206, 0.2);
+}
+
+.mermaid-zoom-controls button {
+  background: #4477ce;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 1px;
+  font-size: 12px;
+}
+
+.mermaid-zoom-controls button:hover {
+  background: #8ecddd;
+}
+
+/* 打印样式 */
+@media print {
+  .mermaid {
+    background: white !important;
+    border: 1px solid #ddd !important;
+  }
+
+  .node {
+    stroke: #333 !important;
+    fill: #f5f5f5 !important;
+  }
+
+  .edgePath .path {
+    stroke: #333 !important;
+  }
+}
+
+/* 动画加载样式 */
+.mermaid-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.mermaid-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(68, 119, 206, 0.3);
+  border-top: 4px solid #4477ce;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 错误样式 */
+.mermaid-error {
+  background: #ffebee;
+  border: 1px solid #c62828;
+  color: #c62828;
+  padding: 12px;
+  border-radius: 8px;
+  font-family:
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Ubuntu,
+    Cantarell,
+    Noto Sans,
+    sans-serif;
+}
+
+.mermaid-error pre {
+  background: rgba(198, 40, 40, 0.1);
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 8px;
+  font-family:
+    "Source Code Pro", SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+/* 成功样式 */
+.mermaid-success {
+  background: #e8f5e8;
+  border: 1px solid #2e7d32;
+  color: #2e7d32;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+/* 警告样式 */
+.mermaid-warning {
+  background: #fff3e0;
+  border: 1px solid #f57c00;
+  color: #f57c00;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+/* 信息样式 */
+.mermaid-info {
+  background: #e3f2fd;
+  border: 1px solid #1976d2;
+  color: #1976d2;
+  padding: 12px;
+  border-radius: 8px;
+}

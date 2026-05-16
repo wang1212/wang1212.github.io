@@ -1,30 +1,29 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-import { themes as prismThemes } from 'prism-react-renderer';
+import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   future: {
     v4: true,
-    experimental_faster: true,
+    faster: true,
   },
 
-  title: '不如怀念',
-  tagline: '记录 分享 交流 思考',
-  url: 'https://wang1212.github.io',
-  baseUrl: '/',
-  favicon: 'img/favicon.ico',
+  title: "不如怀念",
+  tagline: "记录 分享 交流 思考",
+  url: "https://wang1212.github.io",
+  baseUrl: "/",
+  favicon: "img/favicon.ico",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'wang1212', // Usually your GitHub org/user name.
-  projectName: 'wang1212.github.io', // Usually your repo name.
-  deploymentBranch: 'gh-pages',
+  organizationName: "wang1212", // Usually your GitHub org/user name.
+  projectName: "wang1212.github.io", // Usually your repo name.
+  deploymentBranch: "gh-pages",
   trailingSlash: false,
 
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: "throw",
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -32,19 +31,22 @@ const config = {
   i18n: {
     // defaultLocale: 'en',
     // locales: ['en'],
-    defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans'],
+    defaultLocale: "zh-Hans",
+    locales: ["zh-Hans"],
   },
 
   // https://docusaurus.io/docs/markdown-features/diagrams
   markdown: {
-    format: 'detect',
+    format: "detect",
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: "warn",
+    },
   },
 
   presets: [
     [
-      'classic',
+      "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         // docs: {
@@ -56,21 +58,24 @@ const config = {
         // },
         docs: false,
         blog: {
-          routeBasePath: '/', // Serve the blog at the site's root
+          routeBasePath: "/", // Serve the blog at the site's root
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/wang1212/wang1212.github.io/tree/master/',
+            "https://github.com/wang1212/wang1212.github.io/tree/master/",
           // blogSidebarCount: 'ALL',
           // blogSidebarTitle: '所有文章',
           blogSidebarCount: 0,
-          blogSidebarTitle: '近期文章',
+          blogSidebarTitle: "近期文章",
           // postsPerPage: 10,
-          onUntruncatedBlogPosts: 'throw',
+          onUntruncatedBlogPosts: "throw",
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: [
+            require.resolve("./src/css/custom.css"),
+            require.resolve("./src/css/mermaid-theme.css"),
+          ],
         },
       }),
     ],
@@ -78,24 +83,24 @@ const config = {
 
   themes: [
     [
-      '@easyops-cn/docusaurus-search-local',
+      "@easyops-cn/docusaurus-search-local",
       {
-        language: ['en', 'zh'],
         hashed: true,
+        language: ["en", "zh"],
         indexDocs: false,
-        blogRouteBasePath: '/',
+        blogRouteBasePath: "/",
       },
     ],
-    '@docusaurus/theme-mermaid',
+    "@docusaurus/theme-mermaid",
   ],
 
-  plugins: ['plugin-image-zoom'],
+  plugins: ["plugin-image-zoom"],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: '不如怀念',
+        title: "不如怀念",
         // logo: {
         //   alt: 'My Site Logo',
         //   src: 'img/logo.svg',
@@ -107,14 +112,14 @@ const config = {
           //   position: 'left',
           //   label: 'Tutorial',
           // },
-          { to: '/archive', label: '归档', position: 'left' },
+          { to: "/archive", label: "归档", position: "left" },
           // { to: '/tags', label: '标签', position: 'left' },
           // { to: '/record', label: '记录', position: 'left' },
-          { to: '/timeline', label: '历程', position: 'left' },
+          { to: "/timeline", label: "历程", position: "left" },
           {
-            href: 'https://wang1212.github.io/awesome-favorites-list',
-            label: '精选资源',
-            position: 'right',
+            href: "https://wang1212.github.io/awesome-favorites-list",
+            label: "精选资源",
+            position: "right",
           },
           // { to: '/resource', label: '资源', position: 'left' },
           // {
@@ -126,39 +131,39 @@ const config = {
         hideOnScroll: true,
       },
       footer: {
-        style: 'dark',
+        style: "dark",
         links: [
           {
-            title: '关于我',
+            title: "关于我",
             items: [
               {
-                label: 'Email',
-                href: 'mailto:mrwang1212@126.com',
+                label: "Email",
+                href: "mailto:mrwang1212@126.com",
               },
               {
-                label: 'GitHub',
-                href: 'https://github.com/wang1212',
+                label: "GitHub",
+                href: "https://github.com/wang1212",
               },
               {
-                label: 'Gitee',
-                href: 'https://gitee.com/i_wang1212',
+                label: "Gitee",
+                href: "https://gitee.com/i_wang1212",
               },
             ],
           },
           {
-            title: '更多',
+            title: "更多",
             items: [
               {
-                label: 'Awesome Favorites List',
-                href: 'https://wang1212.github.io/awesome-favorites-list',
+                label: "Awesome Favorites List",
+                href: "https://wang1212.github.io/awesome-favorites-list",
               },
               {
-                label: 'The Book Of Ruby (ZH)',
-                href: 'https://wang1212.github.io/the-book-of-ruby',
+                label: "The Book Of Ruby (ZH)",
+                href: "https://wang1212.github.io/the-book-of-ruby",
               },
               {
-                label: 'Apache ECharts APIs Guide',
-                href: 'https://wang1212.github.io/echarts-api-docs',
+                label: "Apache ECharts APIs Guide",
+                href: "https://wang1212.github.io/echarts-api-docs",
               },
             ],
           },
@@ -170,16 +175,16 @@ const config = {
         darkTheme: prismThemes.dracula,
       },
       mermaid: {
-        theme: { light: 'default', dark: 'dark' },
+        theme: { light: "default", dark: "dark" },
       },
       imageZoom: {
         // CSS selector to apply the plugin to, defaults to '.markdown img'
-        selector: '.markdown img',
+        selector: ".markdown img",
         // Optional medium-zoom options
         // see: https://www.npmjs.com/package/medium-zoom#options
         options: {
           margin: 24,
-          background: 'rgba(0,0,0,.75)',
+          background: "rgba(0,0,0,.75)",
           scrollOffset: 0,
           // container: '#zoom-container',
           // template: '#zoom-template',
