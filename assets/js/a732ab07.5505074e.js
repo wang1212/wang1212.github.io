@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([["11079"],{41575(a){a.exports=JSON.parse('{"tag":{"label":"Appwrite","permalink":"/tags/appwrite","allTagsPath":"/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/tags/appwrite","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

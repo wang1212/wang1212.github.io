@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([["58331"],{34667(a){a.exports=JSON.parse('{"tag":{"label":"WeaveFox","permalink":"/tags/weave-fox","allTagsPath":"/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/tags/weave-fox","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

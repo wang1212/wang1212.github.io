@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_blog=self.webpackChunkmy_blog||[]).push([["26599"],{67975(a){a.exports=JSON.parse('{"tag":{"label":"BaaS","permalink":"/tags/baa-s","allTagsPath":"/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/tags/baa-s","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

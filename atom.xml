@@ -2,11 +2,65 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wang1212.github.io</id>
     <title>不如怀念 Blog</title>
-    <updated>2026-01-31T23:40:00.000Z</updated>
+    <updated>2026-05-16T13:39:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wang1212.github.io"/>
     <subtitle>不如怀念 Blog</subtitle>
     <icon>https://wang1212.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[WeaveFox AI 全栈应用交付架构解析：Appwrite BaaS]]></title>
+        <id>https://wang1212.github.io/2026/05/16/computer-technology/ai/weavefox-appwrite-baas</id>
+        <link href="https://wang1212.github.io/2026/05/16/computer-technology/ai/weavefox-appwrite-baas"/>
+        <updated>2026-05-16T13:39:00.000Z</updated>
+        <summary type="html"><![CDATA[在 Weavefox 中，通过 Vibe Coding 方式可以构建 AI 全栈应用——即支持后端逻辑与持久化存储，实现从“一段前端代码”到“一个线上运行产品”的端到端交付，支撑这些实现的背后是 AI 时代的应用基建 BaaS（Backend as a Service）。]]></summary>
+        <content type="html"><![CDATA[<p>2023 年以来，AI 辅助开发经历了从 Copilot 式的“行级补全”到 v0、Lovable 式的“页面级生成”的跨越。一段提示词需求描述，AI 就能生成一个精美的 React 组件甚至是 Web 应用项目。然而，惊喜之后往往是冷峻的工程现实：<strong>一个只有前端 UI 的应用，只是一张华丽的“皮囊”</strong>。</p>
+<p>在 Weavefox 中，通过 Vibe Coding 方式可以构建 AI 全栈应用——即支持后端逻辑与持久化存储，实现从“一段前端代码”到“一个线上运行产品”的端到端交付，支撑这些实现的背后是 AI 时代的应用基建 BaaS（Backend as a Service）。</p>
+<p><img decoding="async" loading="lazy" alt="cloud" src="https://wang1212.github.io/assets/images/img-cloud-0ffa719f48b615c1d8dff0242049fded.png" width="3024" height="1552" class="img_ev3q"></p>
+<!-- -->
+<p>WeaveFox 目前已经深度接入 OceanBase 托管的 Appwrite 服务，并通过用户授权的方式集成 Supabase 服务。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="baas-是什么">BaaS 是什么？<a href="https://wang1212.github.io/2026/05/16/computer-technology/ai/weavefox-appwrite-baas#baas-%E6%98%AF%E4%BB%80%E4%B9%88" class="hash-link" aria-label="BaaS 是什么？的直接链接" title="BaaS 是什么？的直接链接" translate="no">​</a></h2>
+<blockquote>
+<p>后端即服务（BaaS）是一种云服务模式，开发者将应用的所有后端工作外包，只需编写和维护前端代码。BaaS 厂商为服务器上进行的活动提供预编写的服务接口，如用户认证、数据库管理、消息推送，以及云存储和托管。</p>
+<p><a href="https://www.cloudflare.com/learning/serverless/glossary/backend-as-a-service-baas/" target="_blank" rel="noopener noreferrer" class="">https://www.cloudflare.com/learning/serverless/glossary/backend-as-a-service-baas/</a></p>
+</blockquote>
+<p>后端逻辑通常需要复杂的运行时环境配置。通过使用 Appwrite 这样的 BaaS 服务，Agent 能够将“环境配置”转化为“API 调用”，让 AI 无需理解底层 Docker 或 K8s 即可部署全栈服务，Weavefox 也能够实现更快的构建和启动应用。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="核心能力解构baas-提供了什么">核心能力解构：BaaS 提供了什么？<a href="https://wang1212.github.io/2026/05/16/computer-technology/ai/weavefox-appwrite-baas#%E6%A0%B8%E5%BF%83%E8%83%BD%E5%8A%9B%E8%A7%A3%E6%9E%84baas-%E6%8F%90%E4%BE%9B%E4%BA%86%E4%BB%80%E4%B9%88" class="hash-link" aria-label="核心能力解构：BaaS 提供了什么？的直接链接" title="核心能力解构：BaaS 提供了什么？的直接链接" translate="no">​</a></h2>
+<p>在 WeaveFox 生成全栈应用的过程中，Appwrite 并非简单的数据库，而是作为 AI 的“工程化接口”， Appwrite 所具备的能力和使用说明作为 Skills 文档，并关联一系列调用 Appwrite 服务能力的工具（Tools）。同时，WeaveFox 也支持用户查看生成的应用使用的云服务状态。</p>
+<p><strong>持久化存储：数据库</strong></p>
+<p>AI Agent 生成的应用往往需要根据用户描述动态创建数据模型，Appwrite 的 Database 基于 Schema 来描述数据模型，数据库表的设计可以映射为一段 JSON 描述，Skill 文档只需要描述支持字段类型、索引类型、权限类型即可，通过调用工具（Tool）创建数据库表，并在工具中实现校验逻辑，返回可读的异常信息，允许 Agent 进行自我修复，形成反馈循环。</p>
+<p><img decoding="async" loading="lazy" alt="database" src="https://wang1212.github.io/assets/images/img-database-941a8418530da1f7c280a2bd85fbda59.png" width="3024" height="1552" class="img_ev3q"></p>
+<p><strong>身份认证：登录鉴权</strong></p>
+<p>Appwrite 提供内置的用户表与鉴权服务，无需创建业务用户表，Skill 文档会描述如何实现一个权限管理的模式，比如先规划用户角色权限，再调用工具创建角色权限表，然后创建其它业务表，并根据角色添加表级访问权限。</p>
+<p><img decoding="async" loading="lazy" alt="auth" src="https://wang1212.github.io/assets/images/img-auth-afb0518a07c2f69b75ef0e7cdfe08400.png" width="3024" height="1548" class="img_ev3q"></p>
+<p><strong>云函数：后端实时服务</strong></p>
+<p>对于超出 CRUD（增删改查）范畴的复杂逻辑，如支付回调、外部 API 集成，Appwrite Functions 充当了 AI 逻辑的“执行容器”。让 AI Agent 能够动态生成后端业务逻辑，动态部署与更新，将其封装在安全的后端环境运行，确保了整个应用架构的闭环。</p>
+<p><img decoding="async" loading="lazy" alt="functions" src="https://wang1212.github.io/assets/images/img-functions-f077e22b5449b6a1da6e75b9d57c272b.png" width="3024" height="1544" class="img_ev3q"></p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="如何确保应用的数据安全">如何确保应用的数据安全？<a href="https://wang1212.github.io/2026/05/16/computer-technology/ai/weavefox-appwrite-baas#%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E5%BA%94%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8" class="hash-link" aria-label="如何确保应用的数据安全？的直接链接" title="如何确保应用的数据安全？的直接链接" translate="no">​</a></h2>
+<p>当 AI Agent 生成全栈应用的代码变得更加简单，却依然逃不过一个工程问题，应用的数据安全如何保障？BaaS 服务提供了数据表的行级安全策略来实现数据隔离，WeaveFox 通过应用云服务的可视化状态信息，让用户可以明确看到数据表的权限配置情况，并可通过对话的方式进行修复。</p>
+<p><strong>数据表的行级安全策略（RLS）</strong></p>
+<p>BaaS 服务通常提供客户端 SDK，并通过连接凭证可以直接访问后端服务，包括用户登录鉴权、数据的 CRUD（增删改查），这些凭证信息都直接暴露在前端代码中，极不安全。BaaS 提供了数据表的行级安全策略（RLS），<strong>任何人拿到数据库连接的凭证仅能访问自己创建的数据，其它用户的数据默认不可见，需要给予明确的权限后才能访问。</strong></p>
+<p><strong>数据表权限的可视化管理</strong></p>
+<p>AI Agent 在生成全栈应用的代码后，用户可以在应用的云服务页面以可视化的方式查看数据表的权限配置，并通过对话的方式修复不符合预期的情况。</p>
+<p><img decoding="async" loading="lazy" alt="table-permissions" src="https://wang1212.github.io/assets/images/img-table-permissions-50d80fd40344e72c7c913ca0eb63443e.png" width="3024" height="1552" class="img_ev3q"></p>
+<p>未来，WeaveFox 还会加入安全检测的功能，结合 AI 检测项目中的漏洞，帮助用户实时发现潜在的安全问题。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="vibe-coding-的局限性">Vibe Coding 的局限性<a href="https://wang1212.github.io/2026/05/16/computer-technology/ai/weavefox-appwrite-baas#vibe-coding-%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7" class="hash-link" aria-label="Vibe Coding 的局限性的直接链接" title="Vibe Coding 的局限性的直接链接" translate="no">​</a></h2>
+<p>虽然 Vibe Coding 极大地加速了交付，但 BaaS 并非银弹，它无法完全规避传统工程中“有状态应用”的复杂性。在多轮对话迭代中，WeaveFox 引入了类似 Git 的版本管理机制，支持代码级的秒级回滚。然而，数据库 Schema 的调整通常具有“破坏性”和“不可逆性”。
+为了确保版本切换后的系统稳定性，WeaveFox <strong>采取了“只增不减”的影子演进策略</strong>：AI Agent 被禁止执行删除表（Drop）或修改字段（Update）等破坏性操作。这种对数据库变更的约束，确保了每一份历史代码在回滚后，依然能找到其对应的底层结构支撑，从而实现真正意义上的“版本闭环”。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="baas-是-ai-应用规模化的加速器">BaaS 是 AI 应用规模化的加速器<a href="https://wang1212.github.io/2026/05/16/computer-technology/ai/weavefox-appwrite-baas#baas-%E6%98%AF-ai-%E5%BA%94%E7%94%A8%E8%A7%84%E6%A8%A1%E5%8C%96%E7%9A%84%E5%8A%A0%E9%80%9F%E5%99%A8" class="hash-link" aria-label="BaaS 是 AI 应用规模化的加速器的直接链接" title="BaaS 是 AI 应用规模化的加速器的直接链接" translate="no">​</a></h2>
+<p><strong>BaaS 的本质是将成熟的工业级后端能力“接口化”，让 AI 能够像搭积木一样组装出完整的、可生产的软件生态。</strong> WeaveFox 通过集成行业标准的 BaaS 服务，不断持续优化全栈应用生成的效果，覆盖更多高级场景，例如构建支持空间协作功能的应用。</p>
+<p><a href="https://www.weavefox.cn/" target="_blank" rel="noopener noreferrer" class="">你的创意，值的让全世界看到！</a> WeaveFox 用 Vibe Coding 的方式让你的灵感创意快速落地，成为一个可运行的全栈 Web 应用。</p>]]></content>
+        <author>
+            <name>不如怀念</name>
+            <email>mrwang1212@126.com</email>
+            <uri>https://github.com/wang1212</uri>
+        </author>
+        <category label="计算机技术" term="计算机技术"/>
+        <category label="AI" term="AI"/>
+        <category label="Vibe Coding" term="Vibe Coding"/>
+        <category label="WeaveFox" term="WeaveFox"/>
+        <category label="Appwrite" term="Appwrite"/>
+        <category label="BaaS" term="BaaS"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[为 Web 环境 Agent 设计 Claude Skills 扩展系统]]></title>
         <id>https://wang1212.github.io/2026/01/31/computer-technology/ai/web-agent-claude-skill</id>
@@ -776,24 +830,6 @@
 <h5 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="v8-explicit-compile-hints"><a href="https://v8.dev/blog/explicit-compile-hints" target="_blank" rel="noopener noreferrer" class="">V8: Explicit Compile Hints</a><a href="https://wang1212.github.io/2025/05/11/weekly/2025/weekly-review-ep2025w19#v8-explicit-compile-hints" class="hash-link" aria-label="v8-explicit-compile-hints的直接链接" title="v8-explicit-compile-hints的直接链接" translate="no">​</a></h5>
 <p>JavaScript 启动时的解析编译延迟影响网页加载性能，V8 需在即时编译（eager）与延迟编译（lazy）间抉择，开发者可以通过添加魔术注释标记关键 JS 文件，主动控制编译时机，相当于给 V8 引擎提了个醒。</p>
 <p><code>V8</code> <code>编译器</code> <code>性能优化</code></p>]]></content>
-        <author>
-            <name>不如怀念</name>
-            <email>mrwang1212@126.com</email>
-            <uri>https://github.com/wang1212</uri>
-        </author>
-        <category label="每周回顾" term="每周回顾"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[「每周回顾」EP2025W17：React Compiler RC 发布，自动记忆优化 React 应用性能]]></title>
-        <id>https://wang1212.github.io/2025/04/27/weekly/2025/weekly-review-ep2025w17</id>
-        <link href="https://wang1212.github.io/2025/04/27/weekly/2025/weekly-review-ep2025w17"/>
-        <updated>2025-04-27T18:00:00.000Z</updated>
-        <summary type="html"><![CDATA[2025 年第 17 周的回顾，React 团队已发布 React Compiler 的候选版本，预示着稳定版即将推出。这个构建时工具旨在通过自动记忆功能，显著优化 React 应用程序的性能。]]></summary>
-        <content type="html"><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>AI 总结</div><div class="admonitionContent_BuS1"><p>React 团队已发布 React Compiler 的候选版本，预示着稳定版即将推出。这个构建时工具旨在通过自动记忆功能，显著优化 React 应用程序的性能。</p></div></div>
-<!-- -->
-<h5 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="react-compiler-rc"><a href="https://react.dev/blog/2025/04/21/react-compiler-rc" target="_blank" rel="noopener noreferrer" class="">React Compiler RC</a><a href="https://wang1212.github.io/2025/04/27/weekly/2025/weekly-review-ep2025w17#react-compiler-rc" class="hash-link" aria-label="react-compiler-rc的直接链接" title="react-compiler-rc的直接链接" translate="no">​</a></h5>
-<p>React 团队发布了 React Compiler 特性的候选版本，接下来即将发布稳定版本。React Compiler 是一个构建时工具，它通过自动记忆来优化你的 React 应用程序。</p>
-<p><code>React</code> <code>React Compiler</code> <code>性能优化</code></p>]]></content>
         <author>
             <name>不如怀念</name>
             <email>mrwang1212@126.com</email>
