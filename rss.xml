@@ -196,8 +196,14 @@
 <ul>
 <li class=""><a href="https://www.anthropic.com/engineering/multi-agent-research-system" target="_blank" rel="noopener noreferrer" class="">How we built our multi-agent research system</a> - Anthropic 多代理研究系统的构建过程。</li>
 <li class=""><a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener noreferrer" class="">Building effective agents</a> - 构建有效 AI 代理的指南和最佳实践。</li>
-<li class=""><a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank" rel="noopener noreferrer" class="">Effective harnesses for long-running agents</a> - 为长时间运行代理设计有效控制框架。</li>
 <li class=""><a href="https://every.to/guides/agent-native" target="_blank" rel="noopener noreferrer" class="">Agent-native Architectures: How to Build Apps After Code Ends</a> - 构建代理原生应用的架构指南，由 Dan Shipper 和 Claude 合著。</li>
+<li class="">harness-engineering
+<ul>
+<li class=""><a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank" rel="noopener noreferrer" class="">Effective harnesses for long-running agents</a> - 为长时间运行代理设计有效控制框架。</li>
+<li class=""><a href="https://www.anthropic.com/engineering/harness-design-long-running-apps" target="_blank" rel="noopener noreferrer" class="">Harness design for long-running application development</a> - 用于长期应用开发的工程设计。</li>
+<li class=""><a href="https://openai.com/index/harness-engineering/" target="_blank" rel="noopener noreferrer" class="">Harness engineering: leveraging Codex in an agent-first world</a> - 在以代理为先的世界中利用 Codex。</li>
+</ul>
+</li>
 </ul>
 <h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="agent-tools">Agent Tools<a href="https://wang1212.github.io/2025/12/07/awesome/build-agent#agent-tools" class="hash-link" aria-label="Agent Tools的直接链接" title="Agent Tools的直接链接" translate="no">​</a></h3>
 <ul>
