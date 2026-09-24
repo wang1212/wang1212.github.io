@@ -1,6 +1,13 @@
 {
   "metadata": {},
   "events": {
+    "2026-03-01": [
+      {
+        "title": "WeaveFox 2.0 — Vibe Coding 产品与编码 Agent",
+        "description": "开始作为 WeaveFox 2.0 的产品技术负责人，主导这款类似 Lovable 的 Vibe Coding 产品的升级迭代。WeaveFox 是蚂蚁集团推出的 AI 应用创作平台，从 1.0 阶段的图生代码、意图生码和 AI 质检能力，向多智能体协同（Agentic）方向全面升级。重点负责核心编码 Agent 的架构设计与工具链建设，包括基于 Vercel AI SDK 的 Agent 系统、NPM 依赖探索工具、Web 标准 API 检索工具等，同时兼顾产品设计，打造面向普通创作者、个人开发者与非技术用户的零门槛全栈应用创作体验。",
+        "labels": ["!AI", "!Agent", "!Vibe Coding", "!WeaveFox", "!编码Agent"]
+      }
+    ],
     "2025-12-20": [
       {
         "title": "AI 智能生成手绘地图",
