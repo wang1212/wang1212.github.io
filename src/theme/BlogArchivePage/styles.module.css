@@ -49,9 +49,11 @@
 
 /* 归档页面标题样式 */
 .hero {
-  --ifm-hero-background-color: #f0f4f8;
-  --ifm-hero-text-color: #2d3748;
-  background-color: var(--ifm-hero-background-color) !important;
+  --ifm-hero-background-color: transparent;
+  --ifm-hero-text-color: var(--ifm-heading-color);
+  background-color: transparent !important;
+  padding: 2rem 0 1rem 0;
+  text-align: left;
 }
 
 .hero :global(.hero__title),
@@ -59,9 +61,30 @@
   color: var(--ifm-hero-text-color) !important;
 }
 
-[data-theme='dark'] .hero {
-  --ifm-hero-background-color: #1a202c;
-  --ifm-hero-text-color: #e2e8f0;
+.terminalTitle {
+  font-family: var(--ifm-font-family-monospace) !important;
+  font-size: 2.2rem !important;
+  font-weight: 700;
+  min-height: 2.2rem;
+}
+
+.terminalCursor {
+  color: var(--ifm-color-primary-light);
+  font-weight: 400;
+  animation: cursor-blink-soft 1s steps(2) infinite;
+}
+
+.terminalDesc {
+  font-family: var(--ifm-font-family-monospace) !important;
+  font-size: 1.1rem !important;
+  color: var(--ifm-font-color-secondary) !important;
+  min-height: 1.5rem;
+  margin-top: 0.5rem !important;
+}
+
+@keyframes cursor-blink-soft {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
 /* 日历热力图选中日期的样式 - 只添加边框 */
@@ -76,4 +99,40 @@
 :global(.react-calendar-heatmap .color-github-selected:hover) {
   stroke-width: 2px;
   stroke-opacity: 1;
+}
+
+/* 归档页文章链接：终端光标 hover 效果 */
+:global(._js-year ul li a) {
+  position: relative;
+  padding-left: 1.5rem;
+  border-radius: var(--ifm-global-radius);
+  transition: background-color 0.15s ease;
+}
+
+:global(._js-year ul li a::before) {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.6em;
+  height: 1.1em;
+  background-color: var(--ifm-color-primary-light);
+  opacity: 0;
+  border-radius: 1px;
+}
+
+:global(._js-year ul li a:hover) {
+  text-decoration: none !important;
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+:global(._js-year ul li a:hover::before) {
+  opacity: 1;
+  animation: cursor-blink 1s steps(2) infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }

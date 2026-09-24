@@ -60,8 +60,35 @@ function getTagMap(blogPosts: readonly ArchiveBlogPost[]): TagMap {
 }
 
 export default function BlogArchivePageWrapper(props: Props) {
-  const [description] = useState(customConfig.archive.description());
   const title = customConfig.archive.title;
+
+  // 终端打字机效果 — 随机描述循环播放
+  const [typedDesc, setTypedDesc] = useState('');
+  const [currentDesc, setCurrentDesc] = useState(() => customConfig.archive.description());
+
+  useEffect(() => {
+    let descIdx = 0;
+    let timer: ReturnType<typeof setTimeout>;
+
+    const typeNext = () => {
+      if (descIdx <= currentDesc.length) {
+        setTypedDesc(currentDesc.slice(0, descIdx));
+        descIdx++;
+        timer = setTimeout(typeNext, 40);
+      } else {
+        // 打完后停顿 8 秒，换下一句重新打
+        timer = setTimeout(() => {
+          setCurrentDesc(customConfig.archive.description());
+          setTypedDesc('');
+          descIdx = 0;
+          timer = setTimeout(typeNext, 100);
+        }, 8000);
+      }
+    };
+
+    timer = setTimeout(typeNext, 200);
+    return () => clearTimeout(timer);
+  }, [currentDesc]);
 
   const [tag, setTag] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -394,13 +421,18 @@ export default function BlogArchivePageWrapper(props: Props) {
 
   return (
     <>
-      <Layout title={customConfig.archive.title} description={description}>
+      <Layout title={customConfig.archive.title} description={currentDesc}>
         <BackToTopButton />
 
         <header className={`${styles.hero} hero hero--primary`}>
           <div className="container">
-            <h1 className="hero__title">{title}</h1>
-            <p className="hero__subtitle">{description}</p>
+            <h1 className={`hero__title ${styles.terminalTitle}`}>
+              {title}
+            </h1>
+            <p className={`hero__subtitle ${styles.terminalDesc}`}>
+              {typedDesc}
+              <span className={styles.terminalCursor}>█</span>
+            </p>
           </div>
         </header>
         <main>

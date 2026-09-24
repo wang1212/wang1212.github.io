@@ -1,0 +1,17 @@
+.footer {
+  margin-top: 1.5rem;
+}
+
+.tagsRow {
+  margin-bottom: 0.3rem;
+}
+
+.editRow {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.8em;
+  opacity: 0.6;
+}
+
+.footerList {
+  margin-top: 0.5rem;
+}

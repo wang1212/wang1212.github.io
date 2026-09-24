@@ -2,7 +2,8 @@ import React, { useRef } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import clsx from 'clsx';
 import type { ArchiveBlogPost } from '@theme/BlogArchivePage';
-import { formatterDate } from '../../utils/date';
+
+
 
 type SortBy = 'date' | 'update';
 
@@ -13,53 +14,39 @@ export interface YearProps {
 }
 
 // 文章项组件
-function PostItem({ post }: { post: ArchiveBlogPost }) {
-  return (
-    <li>
-      <a href={post.metadata.permalink}>
-        <div>{post.metadata.title}</div>
-      </a>
-      <div style={{ opacity: 0.5 }}>
-        <small>
-          发布于 {formatterDate(post.metadata.frontMatter.date as string)}
-        </small>{' '}
-        {post.metadata.frontMatter.update !== post.metadata.frontMatter.date ? (
-          <small>
-            最后更新于{' '}
-            {formatterDate(post.metadata.frontMatter.update as string)}
-          </small>
-        ) : (
-          ''
-        )}
-      </div>
-    </li>
-  );
+function formatDateTime(dateStr: string): string {
+  const parts = dateStr.split(/[^\d]+/).slice(0, 5);
+  const datePart = parts.slice(0, 3).map((v) => v.padStart(2, '0')).join('-');
+  const timePart = parts.slice(3, 5).map((v) => v.padStart(2, '0')).join(':');
+  return timePart ? `${datePart} ${timePart}` : datePart;
 }
 
-// 月份部分组件
-function Month({
-  year,
-  month,
-  posts,
-}: {
-  year: string;
-  month: string;
-  posts: ArchiveBlogPost[];
-}) {
-  const [parent] = useAutoAnimate();
+function PostItem({ post, sortBy }: { post: ArchiveBlogPost; sortBy: SortBy }) {
+  const dateStr = (post.metadata.frontMatter[sortBy] as string) ||
+    (post.metadata.frontMatter.date as string) ||
+    '';
+  const date = dateStr ? formatDateTime(dateStr) : '';
 
   return (
-    <section className="_js-month">
-      <h4>
-        <small style={{ color: 'var(--ifm-color-secondary)' }}>{year}</small>{' '}
-        {month} 月
-      </h4>
-      <ul ref={parent}>
-        {posts.map((post) => (
-          <PostItem key={post.metadata.permalink} post={post} />
-        ))}
-      </ul>
-    </section>
+    <li>
+      <a href={post.metadata.permalink} style={{ display: 'flex', gap: '0.8rem', alignItems: 'baseline', textDecoration: 'none' }}>
+        <span style={{
+          fontFamily: 'var(--ifm-font-family-monospace)',
+          fontSize: '0.8em',
+          color: 'var(--ifm-font-color-tertiary)',
+          flexShrink: 0,
+          whiteSpace: 'nowrap',
+        }}>
+          {date}
+        </span>
+        <span style={{
+          fontFamily: 'var(--ifm-font-family-monospace)',
+          fontSize: '0.92em',
+        }}>
+          {post.metadata.title}
+        </span>
+      </a>
+    </li>
   );
 }
 
@@ -79,50 +66,45 @@ function Year({
   );
   const [parent] = useAutoAnimate();
 
-  // 按月份分组文章
-  const listPostsByMonth = (blogPosts: readonly ArchiveBlogPost[]) => {
-    const postsByMonth = blogPosts.reduceRight((posts, post) => {
-      const month = (post.metadata.frontMatter[sortBy] as string).split('-')[1];
-      const monthPosts = posts.get(month) ?? [];
-      return posts.set(month, [post, ...monthPosts]);
-    }, new Map<string, ArchiveBlogPost[]>());
+  // 按日期排序
+  const sortedPosts = [...posts].sort((a, b) => {
+    const dateA = (a.metadata.frontMatter[sortBy] as string) || '';
+    const dateB = (b.metadata.frontMatter[sortBy] as string) || '';
+    return dateB.localeCompare(dateA);
+  });
 
-    return Array.from(postsByMonth, ([month, posts]) => ({
-      month,
-      posts: posts.sort(
-        (a, b) =>
-          new Date(b.metadata.frontMatter[sortBy] as string).getTime() -
-          new Date(a.metadata.frontMatter[sortBy] as string).getTime()
-      ),
-    })).sort((a, b) => Number(b.month) - Number(a.month));
-  };
-
-  // 获取所有月份的文章
-  const allMonths = listPostsByMonth(posts);
-
-  // 获取所有已排序的文章
-  const sortedPosts = allMonths.flatMap((month) => month.posts);
-
-  // 根据 isExpanded 决定显示多少篇文章
   const displayedPosts = isExpanded
     ? sortedPosts
     : sortedPosts.slice(0, POST_COLLAPSE_THRESHOLD);
 
-  // 重新生成月份分组
-  const months = listPostsByMonth(displayedPosts);
-
   return (
-    <section className="_js-year col col--4 margin-bottom--lg">
-      <h3>{year} 年</h3>
-      <div ref={parent}>
-        {months.map((props) => (
-          <Month key={props.month} year={year} {...props} />
+    <section className="_js-year margin-bottom--lg">
+      <h3 style={{
+        fontFamily: 'var(--ifm-font-family-monospace)',
+        fontSize: '1.1em',
+        fontWeight: 700,
+        marginBottom: '0.3rem',
+      }}>
+        {year}
+      </h3>
+      <ul ref={parent} style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+        {displayedPosts.map((post) => (
+          <PostItem key={post.metadata.permalink} post={post} sortBy={sortBy} />
         ))}
-      </div>
+      </ul>
       {posts.length > POST_COLLAPSE_THRESHOLD && (
         <button
-          className="button button--sm button--outline button--primary margin-top--md"
+          className="button button--sm margin-top--md"
           onClick={() => setIsExpanded(!isExpanded)}
+          style={{
+            background: 'transparent',
+            border: 'none',
+            color: 'var(--ifm-color-primary)',
+            fontFamily: 'var(--ifm-font-family-monospace)',
+            fontSize: '0.85rem',
+            cursor: 'pointer',
+            padding: '0.3rem 0 0.3rem 1.5rem',
+          }}
         >
           {isExpanded
             ? '收起部分文章'
@@ -269,7 +251,7 @@ export default function PostList({
             )}
           </div>
         </nav>
-        <div ref={parent} className="row">
+        <div ref={parent} className="">
           {years.map((props) => (
             <Year key={props.year} {...props} />
           ))}

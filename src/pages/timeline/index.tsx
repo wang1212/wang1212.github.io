@@ -16,7 +16,7 @@ function IconLabelItem({ label }: IconLabelItemProps) {
   return (
     <div
       className={clsx(
-        'badge badge--secondary padding-vert--none margin--xs',
+        'badge badge--secondary padding-vert--none',
         styles['icon-label-item']
       )}
     >
@@ -44,20 +44,15 @@ type TimelineBlockItemProps = {
 
 function TimelineBlockItem({ data }: TimelineBlockItemProps) {
   return (
-    <div
-      className={clsx(
-        'card margin-top--md',
-        styles['timeline-block-content-item']
+    <div className={styles.commit}>
+      <div className={styles.commitHeader}>
+        <span className={styles.commitTitle}>{data.title}</span>
+      </div>
+      {data.description && (
+        <p className={styles.commitBody}>{data.description}</p>
       )}
-    >
-      <div className="card__header">
-        <h4>{data.title}</h4>
-      </div>
-      <div className="card__body">
-        <p>{data.description}</p>
-      </div>
       {(data.labels.length && (
-        <div className={clsx('card__footer', styles['icon-label-list'])}>
+        <div className={clsx(styles.commitLabels, styles['icon-label-list'])}>
           {data.labels.map((label) => (
             <IconLabelItem key={label} label={label} />
           ))}
@@ -73,19 +68,21 @@ type TimelineBlockProps = {
   items: EventData[];
 };
 
-function TimelineBlock({ date, items }: TimelineBlockProps) {
-  const year = new Date(date).getFullYear();
-  const month = new Date(date).getMonth() + 1;
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
 
+function TimelineBlock({ date, items }: TimelineBlockProps) {
   return (
     <div className={styles['timeline-block']}>
-      <i className={clsx('margin-right--lg', styles['timeline-block-line'])} />
-      <div
-        className={clsx('padding-vert--md', styles['timeline-block-content'])}
-      >
-        <h3>
-          {year}.{String(month).padStart(2, '0')}
-        </h3>
+      <div className={styles['timeline-date']}>
+        {formatDate(date)}
+      </div>
+      <div className={styles['timeline-items']}>
         {items.map((item, index) => (
           <TimelineBlockItem key={index} data={item} />
         ))}

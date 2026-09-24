@@ -1,0 +1,43 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.prompt {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.82em;
+  display: flex;
+  align-items: baseline;
+  gap: 0.15rem;
+}
+
+.promptUser {
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+}
+
+.promptSep {
+  color: var(--ifm-font-color-tertiary);
+}
+
+.promptPath {
+  color: var(--ifm-font-color-secondary);
+}
+
+.meta {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78em;
+  color: var(--ifm-font-color-tertiary);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+@media (min-width: 768px) {
+  .meta {
+    flex-direction: row;
+    gap: 0.6rem;
+  }
+}

@@ -1,69 +1,425 @@
 /**
- * Any CSS included here will be global. The classic template
+ * Any CSS included here will global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * work well with content-centric websites.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+/* ========== 字体 ========== */
 
-/* You can override the default Infima variables here. */
+@import url('https://fonts.googleapis.cn/css2?family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
 :root {
-  /* --ifm-font-family-base: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
-    Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica,
-    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  --ifm-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace; */
-
-  --ifm-font-family-base: 'Noto Sans SC', system-ui, -apple-system, Segoe UI,
-    Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont,
-    'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+  /* 正文：中文用 Noto Sans SC，英文/数字回退到 JetBrains Mono */
+  --ifm-font-family-base: 'Noto Sans SC', 'JetBrains Mono', system-ui, -apple-system,
+    Segoe UI, Roboto, Ubuntu, Cantarell, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol';
-  --ifm-font-family-monospace: 'Source Code Pro', SFMono-Regular, Menlo, Monaco,
+  /* 代码/标题：JetBrains Mono 优先 */
+  --ifm-font-family-monospace: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco,
     Consolas, 'Liberation Mono', 'Courier New', monospace;
 
-  /* --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e; */
+  /* ========== 浅色色板 ========== */
 
-  --ifm-color-primary: #4477ce;
-  --ifm-color-primary-dark: #3368c3;
-  --ifm-color-primary-darker: #3063b9;
-  --ifm-color-primary-darkest: #285198;
-  --ifm-color-primary-light: #5a87d4;
-  --ifm-color-primary-lighter: #658fd7;
-  --ifm-color-primary-lightest: #85a6df;
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f6f8fa;
+  --ifm-color-emphasis-0: #ffffff;
+  --ifm-color-emphasis-100: #f0f3f6;
+  --ifm-color-emphasis-200: #d6dce3;
+  --ifm-color-emphasis-300: #b1bac4;
+  --ifm-color-emphasis-400: #8c959f;
+  --ifm-color-emphasis-600: #57606a;
+  --ifm-color-emphasis-800: #3b3f44;
+  --ifm-color-emphasis-900: #2f3338;
+  --ifm-heading-color: #1f2328;
+  --ifm-font-color-base: #3b3f44;
+  --ifm-font-color-secondary: #656d76;
+  --ifm-font-color-tertiary: #8c959f;
+  --ifm-border-color: #d0d7de;
+  --ifm-code-color: #1f2328;
 
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-color-primary: #0969da;
+  --ifm-color-primary-dark: #0858bd;
+  --ifm-color-primary-darker: #0750b0;
+  --ifm-color-primary-darkest: #054099;
+  --ifm-color-primary-light: #2188e0;
+  --ifm-color-primary-lighter: #3a97e4;
+  --ifm-color-primary-lightest: #6db4ec;
+
+  --ifm-code-font-size: 90%;
+  --ifm-global-radius: 3px;
+  --ifm-global-spacing: 0.6rem;
+  --ifm-spacing-vertical: 0.6rem;
+  --ifm-font-size-base: 0.92rem;
+  --ifm-line-height-base: 1.65;
+  --docusaurus-highlighted-code-line-bg: rgba(9, 105, 218, 0.08);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  /* --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf; */
+  /* ========== 暗色色板 — GitHub Dark 风 ========== */
 
-  --ifm-color-primary: #8ecddd;
-  --ifm-color-primary-dark: #72c1d5;
-  --ifm-color-primary-darker: #64bad0;
-  --ifm-color-primary-darkest: #3ba8c3;
-  --ifm-color-primary-light: #aad9e5;
-  --ifm-color-primary-lighter: #b8e0ea;
-  --ifm-color-primary-lightest: #e2f2f6;
+  --ifm-background-color: #0d1117;
+  --ifm-background-surface-color: #161b22;
+  --ifm-color-emphasis-0: #0d1117;
+  --ifm-color-emphasis-100: #1f242c;
+  --ifm-color-emphasis-200: #2a313a;
+  --ifm-color-emphasis-300: #3a4350;
+  --ifm-color-emphasis-400: #5a6573;
+  --ifm-color-emphasis-600: #8b949e;
+  --ifm-color-emphasis-800: #c9d1d9;
+  --ifm-color-emphasis-900: #e6edf3;
+  --ifm-heading-color: #e6edf3;
+  --ifm-font-color-base: #c9d1d9;
+  --ifm-font-color-secondary: #8b949e;
+  --ifm-font-color-tertiary: #6e7681;
+  --ifm-border-color: #30363d;
+  --ifm-code-color: #e6edf3;
 
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #7ee787;
+  --ifm-color-primary-dark: #5fd96f;
+  --ifm-color-primary-darker: #50d160;
+  --ifm-color-primary-darkest: #3bb04c;
+  --ifm-color-primary-light: #97ef9f;
+  --ifm-color-primary-lighter: #a8f3af;
+  --ifm-color-primary-lightest: #cdf9d3;
+
+  --docusaurus-highlighted-code-line-bg: rgba(126, 231, 135, 0.08);
 }
 
-/* custom --- */
+/* ========== 布局 — 更紧凑更窄 ========== */
+
+.markdown {
+  --ifm-spacing-horizontal: var(--ifm-global-spacing);
+}
+
+/* 文章内容栏收窄 */
+.blog-post-page .container--max-width {
+  max-width: 700px;
+}
+
+/* ========== 标题 — 全等宽 ========== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.blog-post-page article header h1,
+.blog-list-page article header h2 {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* 文章标题更紧凑 */
+.blog-post-page article header h1 {
+  margin-bottom: 0.3rem;
+}
+
+/* ========== 元信息 — mono + 更小 ========== */
+
+.blog-post-page .blog-post-page__metadata,
+.blog-list-page .blog-list-page__metadata {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78em;
+  color: var(--ifm-font-color-tertiary);
+  margin-bottom: 0.3rem;
+}
+
+/* ========== Navbar ========== */
+
+.navbar {
+  height: 60px;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid var(--ifm-border-color);
+  box-shadow: none;
+  background-color: #ffffff;
+}
+
+.navbar__title {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 1.1rem;
+}
+
+.navbar__title::before {
+  content: '>_ ';
+  color: var(--ifm-color-primary);
+  font-weight: 700;
+}
+
+.navbar__link {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 1rem;
+  transition: color 0.15s ease;
+}
+
+.navbar__link:hover {
+  color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .navbar {
+  background-color: var(--ifm-background-surface-color);
+  box-shadow: none;
+}
+
+.navbar__search-input {
+  background-color: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 2rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.9rem;
+}
+
+.navbar__search-input:focus {
+  background-color: var(--ifm-background-color) !important;
+  border-color: var(--ifm-color-primary-light) !important;
+  border-width: 2px !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ========== 文章列表 — 去装饰 ========== */
+
+.blog-list-page article {
+  box-shadow: none;
+  margin-bottom: calc(var(--ifm-spacing-vertical) * 1.2);
+  padding: 0.5rem 0;
+}
+
+.blog-list-page article header {
+  margin-bottom: 0.2rem;
+}
+
+/* ========== 链接 ========== */
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.navbar__link:hover,
+.navbar__title:hover,
+.navbar__brand:hover,
+.table-of-contents__link:hover,
+.dropdown__link:hover,
+.menu__link:hover,
+.pagination-nav__link:hover {
+  text-decoration: none !important;
+}
+
+/* ========== 引用块 — 仅竖线 ========== */
+
+blockquote {
+  border-left: 3px solid var(--ifm-color-primary);
+  border-radius: 0;
+  background-color: var(--ifm-background-surface-color);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.88em;
+  color: var(--ifm-font-color-secondary);
+  padding: 0.4rem 0.8rem;
+}
+
+/* ========== 表格 — 去斑马纹 ========== */
+
+table tr:nth-child(2n) {
+  background-color: transparent;
+}
+
+table th {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 700;
+  font-size: 0.88em;
+  background-color: var(--ifm-color-emphasis-100);
+  border-bottom: 1px solid var(--ifm-border-color);
+}
+
+table td {
+  border-bottom: 1px solid var(--ifm-border-color);
+  font-size: 0.92em;
+}
+
+/* ========== 标签 — chip 风格 ========== */
+
+.tag {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72em;
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: var(--ifm-global-radius);
+  background: transparent;
+  color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .tag {
+  border-color: var(--ifm-color-primary);
+  background: rgba(126, 231, 135, 0.05);
+}
+
+/* ========== 代码块 ========== */
+
+code {
+  font-family: var(--ifm-font-family-monospace);
+  font-feature-settings: 'liga' 1, 'calt' 1;
+}
+
+/* 行内代码 */
+:not(pre) > code {
+  border: 1px solid var(--ifm-border-color);
+  border-radius: var(--ifm-global-radius);
+  font-size: 0.82em;
+  padding: 0.1em 0.3em;
+}
+
+[data-theme='dark'] :not(pre) > code {
+  background-color: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-200);
+}
+
+/* 代码块 — 去边框，仅靠背景区分 */
+.theme-code-block {
+  border: none;
+  border-radius: var(--ifm-global-radius);
+}
+
+[data-theme='dark'] .theme-code-block {
+  border: none;
+}
+
+/* 代码行号调暗 */
+.theme-code-block .token-line-number {
+  opacity: 0.35;
+}
+
+/* ========== 卡片 ========== */
+
+.card {
+  border: 1px solid var(--ifm-border-color);
+  border-radius: var(--ifm-global-radius);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .card {
+  border-color: var(--ifm-color-emphasis-200);
+  box-shadow: none;
+}
+
+/* ========== 内联图标缩小 ========== */
+
+.theme-edit-this-page svg,
+.edit-this-page svg,
+.pagination-nav__link svg,
+.iconExternalLink_nPIU {
+  width: 0.9em;
+  height: 0.9em;
+}
+
+/* ========== Footer — 减重 ========== */
+
+.footer {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.footer__title {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85em;
+}
+
+.footer__link-item {
+  font-size: 0.88em;
+}
+
+[data-theme='dark'] .footer--dark {
+  background-color: var(--ifm-background-surface-color);
+  border-top: 1px solid var(--ifm-border-color);
+}
+
+/* ========== 按钮 — 扁平 mono 风格 ========== */
+
+.button {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  border-radius: 2rem;
+  border: none;
+}
+
+.button--outline {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  background: transparent;
+}
+
+.button--outline:hover {
+  background: transparent;
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.button--sm {
+  font-size: 0.8rem;
+}
+
+/* ========== Badge — mono 风格 ========== */
+
+.badge {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.75em;
+  border-radius: 2rem;
+}
+
+.badge--secondary {
+  background-color: var(--ifm-color-emphasis-100);
+  border: none;
+  color: var(--ifm-font-color-secondary);
+}
+
+/* ========== 文章翻页 — 扁平 mono 风格 ========== */
+
+.pagination-nav__link {
+  border: none;
+  border-radius: 2rem;
+  box-shadow: none;
+  font-family: var(--ifm-font-family-monospace);
+  transition: background-color 0.15s ease;
+}
+
+.pagination-nav__link:hover {
+  box-shadow: none;
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.pagination-nav__sublabel {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78em;
+  color: var(--ifm-font-color-tertiary);
+}
+
+.pagination-nav__label {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.92em;
+}
+
+/* ========== 选中文本 ========== */
+
+::selection {
+  background: rgba(126, 231, 135, 0.25);
+  color: #e6edf3;
+}
+
+/* ========== 滚动条 ========== */
+
+.os-scrollbar {
+  --os-size: 6px;
+}
+
+[data-theme='dark'] .os-scrollbar {
+  --os-handle-bg: rgba(126, 231, 135, 0.2);
+  --os-handle-bg-active: rgba(126, 231, 135, 0.4);
+  --os-handle-bg-hover: rgba(126, 231, 135, 0.3);
+}
+
+/* ========== 正文段落缩进 ========== */
 
 .blog-list-page article .markdown > p,
 .blog-post-page article .markdown > p,
@@ -80,7 +436,8 @@
   justify-content: center;
 }
 
-/* 3rd fix */
+/* ========== 3rd fix ========== */
+
 .os-scrollbar-visible {
   opacity: 1 !important;
   visibility: visible !important;

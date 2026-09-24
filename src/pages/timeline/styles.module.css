@@ -1,55 +1,113 @@
 .timeline-block {
+  margin-bottom: 1.2rem;
+}
+
+/* git log 风格的日期分组标题 */
+.timeline-date {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.82em;
+  font-weight: 500;
+  color: var(--ifm-font-color-tertiary);
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--ifm-color-emphasis-200);
+  margin-bottom: 0.4rem;
+}
+
+/* commit 列表 */
+.timeline-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* 单条 commit */
+.commit {
+  padding: 0.4rem 0.6rem 0.4rem 1.5rem;
+  border-left: 2px solid;
+  border-left-color: color-mix(in srgb, var(--ifm-color-primary) 60%, transparent);
+  border-radius: 0 var(--ifm-global-radius) var(--ifm-global-radius) 0;
+  position: relative;
+  transition: background-color 0.15s ease, border-left-color 0.15s ease;
+}
+
+.commit::before {
+  content: '';
+  position: absolute;
+  left: 0.3rem;
+  top: 0.6rem;
+  width: 0.6em;
+  height: 1.1em;
+  background-color: var(--ifm-color-primary-light);
+  opacity: 0;
+  border-radius: 1px;
+}
+
+.commit:hover {
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.commit:hover::before {
+  opacity: 1;
+  animation: cursor-blink 1s steps(2) infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* commit 头部：标题 */
+.commitHeader {
+  margin-bottom: 0.2rem;
+}
+
+.commitTitle {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+}
+
+/* commit body：描述 */
+.commitBody {
+  font-size: 1em;
+  line-height: 1.7;
+  color: var(--ifm-font-color-base);
+  margin: 0 0 0.4rem 0;
+}
+
+/* commit labels */
+.commitLabels {
   display: flex;
   flex-direction: row;
-  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 0.3rem;
 }
 
-.timeline-block > .timeline-block-line {
-  flex-shrink: 0;
-  width: 0.25rem;
-  background-color: var(--ifm-color-primary-light);
-}
-.timeline-block:first-child > .timeline-block-content {
-  padding-top: 0 !important;
-  margin-top: -0.5rem;
-}
-
-.timeline-block > .timeline-block-content {
-  flex: 1;
-  width: 0;
-}
-.timeline-block > .timeline-block-content > h3 {
-  position: relative;
-  color: var(--ifm-color-primary-light);
-}
-.timeline-block > .timeline-block-content > h3::before {
-  content: ' ';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  background-color: var(--ifm-color-primary-light);
-  transform: translate(calc(-2rem - (1rem + 0.25rem) / 2), -50%) rotate(45deg);
-}
-
+/* 标签样式 — 保持 Infima badge，覆盖全局大圆角 */
 .icon-label-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+.icon-label-list :global(.badge) {
+  border-radius: var(--ifm-global-radius);
+}
+
 .icon-label-list > .icon-label-item {
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   height: 24px;
 }
+
 .icon-label-list > .icon-label-item > .divider {
   height: 50%;
   width: 0;
   border-right: 1px solid gray;
 }
+
 .icon-label-list > .icon-label-item > span {
   text-transform: capitalize;
 }
